@@ -2,6 +2,12 @@ from SimulationTest import *
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
 
+from StreetAgent import StreetAgent
+from Walkway import Walkway
+from House import House
+from Vision import Vision
+from Goodie import Goodie
+
 
 _COLORS = [
     "Aqua",

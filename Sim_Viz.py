@@ -64,9 +64,12 @@ def agent_portrayal(agent):
     elif type(agent) is Goodie:
         portrayal["Shape"] = "rect"
         portrayal["Filled"] = "true"
-        portrayal["Color"] = "yellow"
-        portrayal["w"] = 0.1
-        portrayal["h"] = 0.1
+        if agent.target_of == None:
+            portrayal["Color"] = "teal"
+        else:
+            portrayal["Color"] = "black"
+        portrayal["w"] = 0.5
+        portrayal["h"] = 0.5
         portrayal["Layer"] = 3
 
 
@@ -74,16 +77,26 @@ def agent_portrayal(agent):
         portrayal["Shape"] = "circle"
         portrayal["Filled"] = "false"
         portrayal["Color"] = ["blue"]
-        portrayal["r"] = 8
+        portrayal["r"] = agent.radius*2
         portrayal["Layer"] = 1
         portrayal["opacity"] = 0.4
 
     return portrayal
 
 grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)
+
+
+server = ModularServer(StolenLaptop,
+                       [grid],
+                       "Stolen Laptop",
+                       {"N_agents":2, "N_houses":2, "width":16, "height":9})
+
+'''
 server = ModularServer(Street,
                        [grid],
                        "Street Model",
                        {"N_agents":2, "N_houses":2, "width":16, "height":9})
+'''
+
 server.port = 8521 # The default
 server.launch()

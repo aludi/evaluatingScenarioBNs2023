@@ -1,6 +1,7 @@
 from mesa import Agent, Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
+import random
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -84,7 +85,7 @@ class Goodie(Agent):
     def __init__(self, unique_id, model, agent, position):
         super().__init__(unique_id, model)
         self.type_ = "laptop"
-        self.value = 1000
+        self.value = 500
         self.owner = agent
         (a, b) = position
         self.position = (a, b)
@@ -114,6 +115,7 @@ class StreetAgent(Agent):
         self.owns_house = None
         self.seen_objects = None
         self.target = None # target for stealing
+        self.risk_threshold = random.randint(0, 1000)
         self.goal = "WALK ROAD"
         self.goodies = []
         self.objects_seen = {}
@@ -132,10 +134,14 @@ class StreetAgent(Agent):
         print(obj.type_, obj.value, owner, self.unique_id)
         if owner != self.unique_id: # potential steal
             # calculate stealing
-            if (obj.value*1) > 500:  # Probability of getting away with it is 1 :) interesting C/B calculation here
+            print("RISKY", obj.value, self.risk_threshold)
+            if (obj.value*1) > self.risk_threshold:  # Probability of getting away with it is 1 :) interesting C/B calculation here
                 self.goal = "STEAL"
                 self.target = obj
                 obj.set_is_target_of(self)
+            else:
+                print("TOO RISKY")
+                self.goal = "GO HOME"
 
 
 
@@ -217,14 +223,8 @@ class StreetAgent(Agent):
                 self.goal = "GO HOME"
 
         elif goal == "FLEE":
-            print("in here")
-
             (new_x, new_y) = self.move_step_to_goal((13, 4))
-            print(new_x, new_y)
             self.move_agent_and_attributes(new_x, new_y)
-
-
-
 
 
 class Walkway(Agent):

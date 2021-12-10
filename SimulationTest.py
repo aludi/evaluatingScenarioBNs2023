@@ -32,7 +32,6 @@ class StolenLaptop(Model):
             self.grid.place_agent(a, (a.x, a.y))
             self.houses.append(a)
 
-        print(self.houses)
 
         road = Walkway(self.next_id(), self)
         self.schedule.add(road)
@@ -41,26 +40,33 @@ class StolenLaptop(Model):
 
         # house owner
         a = StreetAgent(self.next_id(), self)
-        a.goal = "STAY STILL"
+        a.goal = "STAND STILL"
+        a.set_name("watson")
         self.schedule.add(a)
-        x = self.grid.width - 1
-        y = self.grid.height - 1
+        #x = self.grid.width - 1
+        #y = self.grid.height - 1
+        x = self.random.randrange(self.grid.width)
+        y = self.grid.height-1
         self.grid.place_agent(a, (x, y))
         self.agents.append(a)
         self.houses[0 % 2].set_owner(a)
         a.set_vision(radius=0)
         a.set_goodie(pos=(a.owns_house.x, a.owns_house.y))
+        a.goodies = []
 
         # thief
         a = StreetAgent(self.next_id(), self)
         a.goal = "WALK ROAD"
         self.schedule.add(a)
-        x = self.grid.width - 1
-        y = road.y
+        a.set_name("moriaty")
+        #x = self.grid.width - 1
+        #y = road.y
+        x = self.random.randrange(self.grid.width)
+        y = self.random.randrange(self.grid.height)
         self.grid.place_agent(a, (x, y))
         self.agents.append(a)
         self.houses[1 % 2].set_owner(a)
-        a.set_vision(radius=4)
+        a.set_vision(radius=3)
 
     def step(self):
         '''Advance the model by one step.'''

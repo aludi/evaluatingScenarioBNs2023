@@ -38,18 +38,30 @@ def agent_portrayal(agent):
     if type(agent) is StreetAgent:
         if agent.seen_goodie == 0:
             portrayal["Color"] = ["yellow", "orange"]
+            if agent.observed is True:
+                portrayal["Color"] = ["fuchsia"]
+
         else:
             portrayal["Color"] = ["yellow", "orange", "red"]
             portrayal["r"] = 0.2
         portrayal["Layer"] = 2
-        portrayal["text"] = "hi im agent"
+
+        if agent.target is None:
+            portrayal["text"] = "agent"
+            portrayal["text_color"] = "black"
+        else:
+            portrayal["text"] = "thief"
+            portrayal["text_color"] = "black"
 
 
 
     elif type(agent) is House:
         portrayal["Shape"] = "rect"
         portrayal["Filled"] = "true"
-        portrayal["Color"] = "brown"
+        if agent.compromised is False:
+            portrayal["Color"] = "brown"
+        else:
+            portrayal["Color"] = "red"
         portrayal["stroke_color"] = "red"
         portrayal["Filled"] = "false"
         portrayal["w"] = agent.width
@@ -59,11 +71,12 @@ def agent_portrayal(agent):
     elif type(agent) is Walkway:
         portrayal["Shape"] = "rect"
         portrayal["Filled"] = "true"
-        portrayal["Color"] = "silver"
+        portrayal["Color"] = ["silver"]
         portrayal["stroke_color"] = "grey"
         portrayal["Filled"] = "false"
         portrayal["w"] = agent.width*2
         portrayal["h"] = agent.height
+        portrayal["opacity"] = 0.01
         portrayal["Layer"] = 0
 
 
@@ -74,8 +87,8 @@ def agent_portrayal(agent):
             portrayal["Color"] = "teal"
         else:
             portrayal["Color"] = "black"
-        portrayal["w"] = 0.5
-        portrayal["h"] = 0.5
+        portrayal["w"] = 0.25
+        portrayal["h"] = 0.25
         portrayal["Layer"] = 3
 
 

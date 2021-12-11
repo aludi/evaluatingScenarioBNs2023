@@ -1,5 +1,7 @@
 from SimulationTest import *
 from mesa.visualization.modules import CanvasGrid
+from mesa.visualization.modules import TextElement
+
 from mesa.visualization.ModularVisualization import ModularServer
 
 from StreetAgent import StreetAgent
@@ -7,6 +9,7 @@ from Walkway import Walkway
 from House import House
 from Vision import Vision
 from Goodie import Goodie
+from Reporters import Reporters
 
 
 _COLORS = [
@@ -102,13 +105,18 @@ def agent_portrayal(agent):
 
     return portrayal
 
+class Test(TextElement):
+    def render(self, model):
+        return str(model.reporters.pure_frequency_event_dict)
+
 grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)
+text = Test()
 
 
 server = ModularServer(StolenLaptop,
-                       [grid],
+                       [grid, text],
                        "Stolen Laptop",
-                       {"N_agents":2, "N_houses":2, "width":16, "height":9})
+                       {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":Reporters()})
 
 '''
 server = ModularServer(Street,

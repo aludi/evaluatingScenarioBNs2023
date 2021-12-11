@@ -5,22 +5,26 @@ import random
 from StreetAgent import StreetAgent
 from Walkway import Walkway
 from House import House
+from Reporters import Reporters
 import numpy as np
 import matplotlib.pyplot as plt
 
 
 class StolenLaptop(Model):
 
-    def __init__(self, N_agents, N_houses, width, height):
+    def __init__(self, N_agents, N_houses, width, height, reporters):
         self.running = True
         self.current_id = -1
         self.num_agents = N_agents
         self.num_houses = N_houses
-        self.grid = MultiGrid(width, height, torus=True)
+        self.grid = MultiGrid(width, height, torus=False)
         self.schedule = RandomActivation(self)
         self.houses = []
         self.agents = []
         self.walkways = []
+
+        # reporters -> meta
+        self.reporters = reporters
 
         '''
         I want a house that belongs to 1 agent,
@@ -89,6 +93,7 @@ class Street(Model):
         self.walkways = []
 
 
+
         # Create agents
         for i in range(self.num_agents):
             a = House(self.next_id(), self)
@@ -120,8 +125,6 @@ class Street(Model):
 
 
         # make agents walk towards their own house
-
-
 
 
     def step(self):

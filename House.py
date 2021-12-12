@@ -10,6 +10,8 @@ class House(Agent):
         self.height = 2
         self.x = (unique_id*10 + 3)
         self.y = 2
+        self.door_location = (unique_id*10 + 3, 3)
+        self.door_adjacent = self.circle_around_door()
         self.owner = None
         self.compromised = False    # if the stealing agent has compromised the house, they can get in.
         self.covers_pos = self.position_covered_by_house()
@@ -37,6 +39,18 @@ class House(Agent):
         for i in range(min_x, max_x):
             for j in range(min_y, max_y):
                 list_of_positions.append((i, j))
+
+        return list_of_positions
+
+    def circle_around_door(self):
+        door_x, door_y = self.door_location
+        min_x = door_x - 1
+        max_x = door_x + 1
+
+        list_of_positions = []
+
+        for i in range(min_x, max_x):
+            list_of_positions.append((i, door_y + 1))
 
         return list_of_positions
 

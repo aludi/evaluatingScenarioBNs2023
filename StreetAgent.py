@@ -15,8 +15,8 @@ class StreetAgent(Agent):
         self.owns_house = None
         self.seen_objects = None
         self.target = None # target for stealing
-        self.risk_threshold = random.randint(0, 1000)
-        self.breaking_and_entering_skill = random.randint(0, 10)
+        self.risk_threshold = 1 #random.randint(0, 1000)
+        self.breaking_and_entering_skill = 100#random.randint(0, 10)
         self.goal = "WALK ROAD"
         self.goodies = []
         self.objects_seen = {}
@@ -42,7 +42,7 @@ class StreetAgent(Agent):
             self.model.reporters.increase_counter("seen_object")
             # calculate stealing
             if (obj.value*1) > self.risk_threshold:  # Probability of getting away with it is 1 :) interesting C/B calculation here
-                self.goal = "STEAL"
+                self.goal = "BREAK AND ENTER"
                 self.target = obj
                 obj.set_is_target_of(self)
                 self.model.reporters.increase_counter("target_object")
@@ -131,7 +131,8 @@ class StreetAgent(Agent):
         self.vision.step()
         goal = self.goal
         if goal == "GO HOME":
-            if self.pos is not (self.get_house().x, self.get_house().y):
+            door_x, door_y = self.get_house().door_location
+            if self.pos is not (door_x, door_y):
                 self.go_home()
             else:
                 pass
@@ -144,23 +145,34 @@ class StreetAgent(Agent):
             if self.model.schedule.steps > 3:
                 self.goal = "GO HOME"
 
+        elif goal == "BREAK AND ENTER":
+            target_house = self.target.owner.owns_house
+            (new_x, new_y) = self.move_step_to_goal(target_house.door_location)
+            self.model.grid.move_agent(self, (new_x, new_y))
+            self.vision.be_moved()
+
+            # when in adjacent area, compromise house
+            # print(self.breaking_and_entering_skill)
+            if self.check_observed():  # if you can't steal, then go home without
+                self.goal = "GO HOME"
+                self.model.reporters.increase_counter("unsuccessful_stolen")
+
+            if (new_x, new_y) in target_house.door_adjacent and self.breaking_and_entering_skill > 5:
+                target_house.set_compromised()
+                self.model.reporters.increase_counter("compromise_house")
+                self.goal = "STEAL"
+
+            if self.breaking_and_entering_skill < 5 and (new_x, new_y) in target_house.door_adjacent:   # if you can't steal, then go home without
+                self.goal = "GO HOME"
+                self.model.reporters.increase_counter("unsuccessful_stolen")
+
+
         elif goal == "STEAL":
 
             # move to target and take it
             (new_x, new_y) = self.move_step_to_goal(self.target.position)
             self.model.grid.move_agent(self, (new_x, new_y))
             self.vision.be_moved()
-
-            # when in adjacent area, compromise house
-            target_house = self.target.owner.owns_house
-            #print(self.breaking_and_entering_skill)
-            if (new_x, new_y) in target_house.adjacent_included and self.breaking_and_entering_skill > 5:
-                target_house.set_compromised()
-                self.model.reporters.increase_counter("compromise_house")
-
-            if self.breaking_and_entering_skill < 5 and (new_x, new_y) in target_house.adjacent_included:   # if you can't steal, then go home without
-                self.goal = "GO HOME"
-                self.model.reporters.increase_counter("unsuccessful_stolen")
 
 
             if self.check_observed():   # if you can't steal, then go home without

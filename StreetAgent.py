@@ -15,8 +15,8 @@ class StreetAgent(Agent):
         self.owns_house = None
         self.seen_objects = None
         self.target = None # target for stealing
-        self.risk_threshold = 1 #random.randint(0, 1000)
-        self.breaking_and_entering_skill = 100#random.randint(0, 10)
+        self.risk_threshold = random.randint(0, 1000)
+        self.breaking_and_entering_skill = random.randint(0, 10)
         self.goal = "WALK ROAD"
         self.goodies = []
         self.objects_seen = {}
@@ -24,7 +24,6 @@ class StreetAgent(Agent):
 
     def set_name(self, name):
         self.name = name
-        print(self.name)
 
     def set_vision(self, radius):
         self.vision = Vision(self.model.next_id(), self.model, self, radius, self.pos)
@@ -39,7 +38,7 @@ class StreetAgent(Agent):
         if owner != self.unique_id: # potential steal
             # now we want to steal,
             self.seen_goodie = 1
-            self.model.reporters.increase_counter("seen_object")
+            self.model.reporters.increase_counter_once("seen_object")
             # calculate stealing
             if (obj.value*1) > self.risk_threshold:  # Probability of getting away with it is 1 :) interesting C/B calculation here
                 self.goal = "BREAK AND ENTER"
@@ -121,9 +120,9 @@ class StreetAgent(Agent):
             a, b, c, d, e = item
             if a == "StreetAgent" and c is not self.unique_id:
                 # see the other owner and go hide
+                if self.observed == False:
+                    self.model.reporters.increase_counter("observed")
                 self.observed = True
-                self.model.reporters.increase_counter("observed")
-                print("OBSERVED!!")
                 return True # go home
         return False    # keep stelaing
 
@@ -132,12 +131,18 @@ class StreetAgent(Agent):
         goal = self.goal
         if goal == "GO HOME":
             door_x, door_y = self.get_house().door_location
+
+            if self.target is not None:
+                if self.pos == self.target.position and self.check_observed() == True:
+                    self.model.reporters.increase_counter_once("unsuccessful_stolen")
+                    self.model.reporters.decrease_counter_once("successful_stolen")
+
             if self.pos is not (door_x, door_y):
                 self.go_home()
             else:
                 pass
         elif goal == "WALK ROAD":
-            (new_x, new_y) = self.move_step_to_goal((4, 4)) # TODO problem
+            (new_x, new_y) = self.move_step_to_goal((4, 4))
             self.model.grid.move_agent(self, (new_x, new_y))
             self.vision.be_moved()
 
@@ -155,16 +160,20 @@ class StreetAgent(Agent):
             # print(self.breaking_and_entering_skill)
             if self.check_observed():  # if you can't steal, then go home without
                 self.goal = "GO HOME"
-                self.model.reporters.increase_counter("unsuccessful_stolen")
+                self.model.reporters.increase_counter_once("unsuccessful_stolen")
+                self.model.reporters.decrease_counter_once("successful_stolen")
+
 
             if (new_x, new_y) in target_house.door_adjacent and self.breaking_and_entering_skill > 5:
                 target_house.set_compromised()
-                self.model.reporters.increase_counter("compromise_house")
+                self.model.reporters.increase_counter_once("compromise_house")
                 self.goal = "STEAL"
 
             if self.breaking_and_entering_skill < 5 and (new_x, new_y) in target_house.door_adjacent:   # if you can't steal, then go home without
                 self.goal = "GO HOME"
-                self.model.reporters.increase_counter("unsuccessful_stolen")
+                self.model.reporters.increase_counter_once("unsuccessful_stolen")
+                self.model.reporters.decrease_counter_once("successful_stolen")
+
 
 
         elif goal == "STEAL":
@@ -177,15 +186,19 @@ class StreetAgent(Agent):
 
             if self.check_observed():   # if you can't steal, then go home without
                 self.goal = "GO HOME"
-                self.model.reporters.increase_counter("unsuccessful_stolen")
+                self.model.reporters.increase_counter_once("unsuccessful_stolen")
+                self.model.reporters.decrease_counter_once("successful_stolen")
+
 
 
             if self.pos == self.target.position:
                 self.goodies.append(self.target)
                 self.goal = "GO HOME"
-                self.model.reporters.increase_counter("successful_stolen")  # TODO: double counting if observed after stolen...
+                if self.model.reporters.get_report_of_event("unsuccessful_stolen") != 1:
+                    self.model.reporters.increase_counter_once("successful_stolen")  # TODO: double counting if observed after stolen...
 
 
         elif goal == "FLEE":
             (new_x, new_y) = self.move_step_to_goal((13, 4))
             self.move_agent_and_attributes(new_x, new_y)
+

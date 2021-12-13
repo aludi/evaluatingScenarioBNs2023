@@ -109,7 +109,7 @@ class Test(TextElement):
     def render(self, model):
         str_ = ""
         for key in model.reporters.pure_frequency_event_dict.keys():
-            str_ = str_ + str(key) + " : " + str(model.reporters.pure_frequency_event_dict[key]) + ",\t"
+            str_ = str_ + str(key) + " : " + str(model.reporters.history_dict[model.reporters.run][key]) + ",\t"
         return str_
 
 grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)

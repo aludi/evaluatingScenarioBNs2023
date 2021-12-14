@@ -25,42 +25,52 @@ class Experiment():
                 # the agent decided to not steal, either because he didn't know there was something to steal,
                 # of because the cost-benefit was not worth it.
                 self.reporters.increase_counter_once("no_stealing")
-            #print(self.reporters.pure_frequency_event_dict)
         self.print_frequencies()
 
-    def conditional_frequencies(self, parent, child):
-        # hardcoded for now: F(compromize house) given a value for target object
-        # iterate over all of history
-        count_neg = 0
-        count_pos = 0
-        pos_occ_count = 0
-        neg_occ_count = 0
-
+    def conditional_frequencies(self, parents, child):
+        relevant_dict = self.reporters.history_dict
+        conditional_dict = {}
         for i in range(0, self.runs):
-            val_parent = self.reporters.history_dict[i][parent]
-            val_child = self.reporters.history_dict[i][child]
-            if val_parent == 1:
-                pos_occ_count += 1
-            else:
-                neg_occ_count += 1
-            if val_parent == 0 and val_child == 1:
-                count_neg += 1
-            elif val_parent == 1 and val_child == 1:
-                count_pos += 1
+            parent_index = ""
+            for key in parents: # we only want to look at the values for the parents
+                val_parent = relevant_dict[i][key]
+                parent_index += str(key[0:3]) + str(val_parent)
+            # then we get a key like 010010 or whatever
+            try:
+                full = parent_index + str(child[0:3]) + str(relevant_dict[i][child])
+                conditional_dict[full] += 1
+            except KeyError:
+                full = parent_index + str(child[0:3]) + str(relevant_dict[i][child])
+                conditional_dict[full] = 1
+        print("Conditionals for CHILD ", child)
+        for key in conditional_dict.keys():
+            print("\t", key, conditional_dict[key])
+        print()
+
+        #print(conditional_dict)
 
 
-        print(parent, " AND ", child, (count_pos/pos_occ_count)*100)
-        print("NOT", parent, " AND ", child, (count_neg/neg_occ_count)*100)
+    def print_bayesian_net_probs(self):
+        print()
+        self.conditional_frequencies([], "seen_object")
+        self.conditional_frequencies(["seen_object"], "target_object")
+        self.conditional_frequencies(["seen_object", "target_object"], "compromise_house")
+        self.conditional_frequencies(["seen_object"], "observed")
+        self.conditional_frequencies(["seen_object", "target_object", "compromise_house", "observed"], "unsuccessful_stolen")
+        self.conditional_frequencies(["seen_object", "target_object", "compromise_house", "observed"], "successful_stolen")
+        self.conditional_frequencies(["seen_object", "target_object", "compromise_house", "observed"], "no_stealing")
+        print()
+
+
 
     def print_frequencies(self):
         print("\t Nice frequencies")
         for key in self.reporters.pure_frequency_event_dict.keys():
-            print(key, (self.reporters.pure_frequency_event_dict[key] / self.runs)*100)
+            print(key, (self.reporters.pure_frequency_event_dict[key] / self.runs)*100, 100-(self.reporters.pure_frequency_event_dict[key] / self.runs)*100)
+        print("________________________________________")
+        self.print_bayesian_net_probs() # TODO to do this automatically
 
-        self.conditional_frequencies("seen_object", "observed")
-        print("\n")
-        self.conditional_frequencies("observed", "unsuccessful_stolen")
-        self.conditional_frequencies("observed", "no_stealing")
+
 
 if __name__ == "__main__":
     Experiment()

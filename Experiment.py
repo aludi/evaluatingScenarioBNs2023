@@ -14,7 +14,7 @@ from SimulationTest import StolenLaptop
 class Experiment():
 
     def __init__(self):  # TODO: compromise house is strange
-        self.runs = 5000  # to test
+        self.runs = 100  # to test
         self.reporters = Reporters()
         for i in range(0, self.runs):
             model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
@@ -44,7 +44,7 @@ class Experiment():
                 conditional_dict[full] = 1
         print("Conditionals for CHILD ", child)
         for key in conditional_dict.keys():
-            print("\t", key, conditional_dict[key])
+            print("\t", key, (conditional_dict[key]/self.runs) * 100)
         print()
 
         #print(conditional_dict)
@@ -55,7 +55,7 @@ class Experiment():
         self.conditional_frequencies([], "seen_object")
         self.conditional_frequencies(["seen_object"], "target_object")
         self.conditional_frequencies(["seen_object", "target_object"], "compromise_house")
-        self.conditional_frequencies(["seen_object"], "observed")
+        self.conditional_frequencies(["seen_object", "target_object", "compromise_house"], "observed")
         self.conditional_frequencies(["seen_object", "target_object", "compromise_house", "observed"], "unsuccessful_stolen")
         self.conditional_frequencies(["seen_object", "target_object", "compromise_house", "observed"], "successful_stolen")
         self.conditional_frequencies(["seen_object", "target_object", "compromise_house", "observed"], "no_stealing")

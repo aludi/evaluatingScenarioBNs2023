@@ -16,7 +16,7 @@ class StreetAgent(Agent):
         self.seen_objects = None
         self.target = None # target for stealing
         self.risk_threshold = random.randint(0, 1000)
-        self.breaking_and_entering_skill = random.randint(0, 10)
+        self.breaking_and_entering_skill = 200 #random.randint(0, 10)
         self.goal = "WALK ROAD"
         self.goodies = []
         self.objects_seen = {}

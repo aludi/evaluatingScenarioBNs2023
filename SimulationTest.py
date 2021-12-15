@@ -25,7 +25,6 @@ class StolenLaptop(Model):
 
         # reporters -> meta
         self.reporters = reporters
-        self.reporters.increase_run()
 
         '''
         I want a house that belongs to 1 agent,

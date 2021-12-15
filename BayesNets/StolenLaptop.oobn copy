@@ -53,7 +53,7 @@ class StolenLaptop
     node observed
     {
 	label = "";
-	position = (712 216);
+	position = (735 222);
 	states = ("true" "false");
 	HR_LinkGroup = "[stealing:0]";
 	HR_LinkMode = "[stealing:0]";
@@ -66,10 +66,10 @@ class StolenLaptop
     node compromise_house
     {
 	label = "";
-	position = (550 219);
+	position = (525 195);
 	states = ("true" "false");
-	HR_LinkGroup = "[stealing:0]";
-	HR_LinkMode = "[stealing:0]";
+	HR_LinkGroup = "[stealing:0][observed:0]";
+	HR_LinkMode = "[stealing:0][observed:0]";
 	HR_NodeSize = "(174, 49)";
 	HR_Group = "0";
 	HR_Desc = "";
@@ -80,10 +80,10 @@ class StolenLaptop
     node target_object
     {
 	label = "";
-	position = (330 254);
+	position = (285 255);
 	states = ("true" "false");
-	HR_LinkGroup = "[compromise_house:0][stealing:0]";
-	HR_LinkMode = "[compromise_house:0][stealing:0]";
+	HR_LinkGroup = "[compromise_house:0][stealing:0][observed:0]";
+	HR_LinkMode = "[compromise_house:0][stealing:0][observed:0]";
 	HR_NodeSize = "(126, 54)";
 	HR_Group = "0";
 	HR_Desc = "";
@@ -94,7 +94,7 @@ class StolenLaptop
     node seen_object
     {
 	label = "";
-	position = (198 356);
+	position = (378 356);
 	states = ("true" "false");
 	HR_LinkGroup = "[target_object:0][stealing:0][compromise_house:0][observed:0]";
 	HR_LinkMode = "[target_object:0][stealing:0][compromise_house:0][observed:0]";
@@ -107,7 +107,7 @@ class StolenLaptop
     node stealing
     {
 	label = "";
-	position = (749 308);
+	position = (650 347);
 	states = ("successful" "unsuccessful" "no_stealing");
 	HR_State_2 = "";
 	HR_Group = "0";
@@ -116,48 +116,54 @@ class StolenLaptop
 	HR_State_0 = "";
     }
 
-    potential (observed | seen_object)
+    potential (observed | seen_object target_object compromise_house)
     {
-	data = (( 25 75 )	%  seen_object=true
-		( 0 1 ));	%  seen_object=false
+	data = (((( 4 11 )	%  seen_object=true  target_object=true  compromise_house=true
+		  ( 19 12 ))	%  seen_object=true  target_object=true  compromise_house=false
+		 (( 1 0 )	%  seen_object=true  target_object=false  compromise_house=true
+		  ( 0 48 )))	%  seen_object=true  target_object=false  compromise_house=false
+		((( 0 1 )	%  seen_object=false  target_object=true  compromise_house=true
+		  ( 0 1 ))	%  seen_object=false  target_object=true  compromise_house=false
+		 (( 0 1 )	%  seen_object=false  target_object=false  compromise_house=true
+		  ( 0 6 ))));	%  seen_object=false  target_object=false  compromise_house=false
     }
 
     potential (compromise_house | seen_object target_object)
     {
-	data = ((( 14 86 )	%  seen_object=true  target_object=true
-		 ( 0 1 ))	%  seen_object=true  target_object=false
-		(( 0 1 )	%  seen_object=false  target_object=true
-		 ( 0 1 )));	%  seen_object=false  target_object=false
+	data = ((( 708 1704 )	%  seen_object=true  target_object=true
+		 ( 0 2261 ))	%  seen_object=true  target_object=false
+		(( 100 2 )	%  seen_object=false  target_object=true
+		 ( 0 327 )));	%  seen_object=false  target_object=false
     }
 
     potential (target_object | seen_object)
     {
-	data = (( 46 54 )	%  seen_object=true
-		( 0 1 ));	%  seen_object=false
+	data = (( 2412 2261 )	%  seen_object=true
+		( 0 327 ));	%  seen_object=false
     }
 
     potential (seen_object)
     {
-	data = ( 92 8 );
+	data = ( 4675 325 );
     }
 
-    potential (stealing | target_object observed compromise_house seen_object)
+    potential (stealing | seen_object target_object compromise_house observed)
     {
-	data = ((((( 0 1 0 )	%  target_object=true  observed=true  compromise_house=true  seen_object=true
-		   ( 0 0 1 ))	%  target_object=true  observed=true  compromise_house=true  seen_object=false
-		  (( 0 1 0 )	%  target_object=true  observed=true  compromise_house=false  seen_object=true
-		   ( 0 0 1 )))	%  target_object=true  observed=true  compromise_house=false  seen_object=false
-		 ((( 1 0 0 )	%  target_object=true  observed=false  compromise_house=true  seen_object=true
-		   ( 0 0 1 ))	%  target_object=true  observed=false  compromise_house=true  seen_object=false
-		  (( 0 1 0 )	%  target_object=true  observed=false  compromise_house=false  seen_object=true
-		   ( 0 0 1 ))))	%  target_object=true  observed=false  compromise_house=false  seen_object=false
-		(((( 0 0 1 )	%  target_object=false  observed=true  compromise_house=true  seen_object=true
-		   ( 0 0 1 ))	%  target_object=false  observed=true  compromise_house=true  seen_object=false
-		  (( 0 0 1 )	%  target_object=false  observed=true  compromise_house=false  seen_object=true
-		   ( 0 0 1 )))	%  target_object=false  observed=true  compromise_house=false  seen_object=false
-		 ((( 0 0 1 )	%  target_object=false  observed=false  compromise_house=true  seen_object=true
-		   ( 0 0 1 ))	%  target_object=false  observed=false  compromise_house=true  seen_object=false
-		  (( 0 0 1 )	%  target_object=false  observed=false  compromise_house=false  seen_object=true
-		   ( 0 0 1 )))));	%  target_object=false  observed=false  compromise_house=false  seen_object=false
+	data = ((((( 0 1 0 )	%  seen_object=true  target_object=true  compromise_house=true  observed=true
+		   ( 1 0 0 ))	%  seen_object=true  target_object=true  compromise_house=true  observed=false
+		  (( 0 1 0 )	%  seen_object=true  target_object=true  compromise_house=false  observed=true
+		   ( 0 1 0 )))	%  seen_object=true  target_object=true  compromise_house=false  observed=false
+		 ((( 0 0 1 )	%  seen_object=true  target_object=false  compromise_house=true  observed=true
+		   ( 0 0 1 ))	%  seen_object=true  target_object=false  compromise_house=true  observed=false
+		  (( 0 0 1 )	%  seen_object=true  target_object=false  compromise_house=false  observed=true
+		   ( 0 0 1 ))))	%  seen_object=true  target_object=false  compromise_house=false  observed=false
+		(((( 0 0 1 )	%  seen_object=false  target_object=true  compromise_house=true  observed=true
+		   ( 0 0 1 ))	%  seen_object=false  target_object=true  compromise_house=true  observed=false
+		  (( 0 0 1 )	%  seen_object=false  target_object=true  compromise_house=false  observed=true
+		   ( 0 0 1 )))	%  seen_object=false  target_object=true  compromise_house=false  observed=false
+		 ((( 0 0 1 )	%  seen_object=false  target_object=false  compromise_house=true  observed=true
+		   ( 0 0 1 ))	%  seen_object=false  target_object=false  compromise_house=true  observed=false
+		  (( 0 0 1 )	%  seen_object=false  target_object=false  compromise_house=false  observed=true
+		   ( 0 0 1 )))));	%  seen_object=false  target_object=false  compromise_house=false  observed=false
     }
 } % class StolenLaptop

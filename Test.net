@@ -1,0 +1,88 @@
+
+net {
+  name = Test;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node seen_object {
+   states = (0 1 );
+   label = "seen_object";
+   ID = "seen_object";
+}
+
+node target_object {
+   states = (0 1 );
+   label = "target_object";
+   ID = "target_object";
+}
+
+node compromise_house {
+   states = (0 1 );
+   label = "compromise_house";
+   ID = "compromise_house";
+}
+
+node observed {
+   states = (0 1 );
+   label = "observed";
+   ID = "observed";
+}
+
+node stolen {
+   states = (successful unsuccessful no_stealing weird );
+   label = "stolen";
+   ID = "stolen";
+}
+
+potential (seen_object) {
+   data = (  0.069 0.931);
+}
+
+potential ( target_object | seen_object   ) {
+   data = 
+   ((   1   0)   % seen_object=0   
+   (   0.511278   0.488722));   % seen_object=1   
+}
+
+potential ( compromise_house | seen_object   target_object   ) {
+   data = 
+   (((   1   0)   % target_object=0   seen_object=0   
+   (   0   0))   % target_object=1   seen_object=0   
+   ((   1   0)   % target_object=0   seen_object=1   
+   (   0.340659   0.659341)));   % target_object=1   seen_object=1   
+}
+
+potential ( observed | seen_object   target_object   compromise_house   ) {
+   data = 
+   ((((   1   0)   % compromise_house=0   target_object=0   seen_object=0   
+   (   0   0))   % compromise_house=1   target_object=0   seen_object=0   
+   ((   0   0)   % compromise_house=0   target_object=1   seen_object=0   
+   (   0   0)))   % compromise_house=1   target_object=1   seen_object=0   
+   (((   1   0)   % compromise_house=0   target_object=0   seen_object=1   
+   (   0   0))   % compromise_house=1   target_object=0   seen_object=1   
+   ((   0.0451613   0.954839)   % compromise_house=0   target_object=1   seen_object=1   
+   (   0.653333   0.346667))));   % compromise_house=1   target_object=1   seen_object=1   
+}
+
+potential ( stolen | seen_object   target_object   compromise_house   observed   ) {
+   data = 
+   (((((   0.257628   0.00817251   0.353552   0.380648)   % observed=0   compromise_house=0   target_object=0   seen_object=0   
+   (   0.320724   0.343235   0.102257   0.233784))   % observed=1   compromise_house=0   target_object=0   seen_object=0   
+   ((   0.147895   0.694246   0.154553   0.00330526)   % observed=0   compromise_house=1   target_object=0   seen_object=0   
+   (   0.171534   0.243299   0.297304   0.287863)))   % observed=1   compromise_house=1   target_object=0   seen_object=0   
+   (((   0.265788   0.309759   0.390875   0.0335783)   % observed=0   compromise_house=0   target_object=1   seen_object=0   
+   (   0.38394   0.00362368   0.490023   0.122413))   % observed=1   compromise_house=0   target_object=1   seen_object=0   
+   ((   0.365462   0.269194   0.166483   0.198861)   % observed=0   compromise_house=1   target_object=1   seen_object=0   
+   (   0.375972   0.16102   0.0144868   0.448522))))   % observed=1   compromise_house=1   target_object=1   seen_object=0   
+   ((((   0.185658   0.439626   0.082347   0.292369)   % observed=0   compromise_house=0   target_object=0   seen_object=1   
+   (   0.28456   0.300637   0.349959   0.0648438))   % observed=1   compromise_house=0   target_object=0   seen_object=1   
+   ((   0.260551   0.339665   0.079548   0.320236)   % observed=0   compromise_house=1   target_object=0   seen_object=1   
+   (   0.267123   0.187832   0.0678315   0.477214)))   % observed=1   compromise_house=1   target_object=0   seen_object=1   
+   (((   0.022349   0.130356   0.535444   0.311852)   % observed=0   compromise_house=0   target_object=1   seen_object=1   
+   (   0.223162   0.128472   0.279303   0.369063))   % observed=1   compromise_house=0   target_object=1   seen_object=1   
+   ((   0.403224   0.320317   0.0942986   0.18216)   % observed=0   compromise_house=1   target_object=1   seen_object=1   
+   (   0.31382   0.100097   0.319633   0.266449)))));   % observed=1   compromise_house=1   target_object=1   seen_object=1   
+}
+
+

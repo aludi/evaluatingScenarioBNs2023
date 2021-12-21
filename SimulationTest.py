@@ -25,6 +25,8 @@ class StolenLaptop(Model):
 
         # reporters -> meta
         self.reporters = reporters
+        self.reporters.history_dict[self.reporters.run] = {}
+        self.reporters.initialize_event_dict(self.reporters.history_dict[self.reporters.run]) # initalize current run tracker with 0
 
         '''
         I want a house that belongs to 1 agent,
@@ -74,6 +76,8 @@ class StolenLaptop(Model):
 
     def step(self):
         '''Advance the model by one step.'''
+        #for a in self.agents:
+        #    print(a.name, a.goal)
         self.schedule.step()
 
 

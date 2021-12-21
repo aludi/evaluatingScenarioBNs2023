@@ -15,7 +15,7 @@ from SimulationTest import StolenLaptop
 class Experiment():
 
     def __init__(self):  # TODO: compromise house is strange
-        self.runs = 1000  # to test
+        self.runs = 2000  # to test
         self.reporters = Reporters()
         for i in range(0, self.runs):
             model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
@@ -26,8 +26,9 @@ class Experiment():
                 # the agent decided to not steal, either because he didn't know there was something to steal,
                 # of because the cost-benefit was not worth it.
                 self.reporters.increase_counter_once("no_stealing")
+           # print(self.reporters.history_dict[i])
+
             self.reporters.increase_run()
-            #self.print_frequencies()
         self.print_frequencies()
 
 

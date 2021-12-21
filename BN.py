@@ -26,7 +26,7 @@ def nodes_for_bn(bn):
     nodes = ["seen_object", "target_object", "compromise_house", "observed"]
     for node in nodes:
         id = bn.add(gum.LabelizedVariable(node, node, 2))
-    x = bn.add(gum.LabelizedVariable("stolen", "stolen", ['successful', 'unsuccessful', 'no_stealing', 'weird']))
+    x = bn.add(gum.LabelizedVariable("stolen", "stolen", ['successful', 'unsuccessful', 'no_stealing']))
     return bn
 
 def links_for_bn(bn):
@@ -43,25 +43,25 @@ def links_for_bn(bn):
 
 
 def do_stolen(bn):
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 0, 'observed': 0}] = [0, 0, 1, 0]
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 0, 'observed': 1}] = [0, 0, 0, 1]
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 1, 'observed': 0}] = [0, 0, 0, 1]
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 1, 'observed': 1}] = [0, 0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 0, 'observed': 0}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 0, 'observed': 1}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 1, 'observed': 0}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 0, 'compromise_house': 1, 'observed': 1}] = [0, 0, 1]
 
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 0, 'observed': 0}] = [0, 0, 0, 1]
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 0, 'observed': 1}] = [0, 0, 0, 1]
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 1, 'observed': 0}] = [0, 0, 0, 1]
-    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 1, 'observed': 1}] = [0, 0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 0, 'observed': 0}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 0, 'observed': 1}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 1, 'observed': 0}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 0, 'target_object': 1, 'compromise_house': 1, 'observed': 1}] = [0, 0, 1]
 
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 0, 'observed': 0}] = [0, 0, 1, 0]
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 0, 'observed': 1}] = [0, 0, 0, 1]
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 1, 'observed': 0}] = [0, 0, 0, 1]
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 1, 'observed': 1}] = [0, 0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 0, 'observed': 0}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 0, 'observed': 1}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 1, 'observed': 0}] = [0, 0, 1]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 0, 'compromise_house': 1, 'observed': 1}] = [0, 0, 1]
 
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 0, 'observed': 0}] = [0, 1, 0, 0]
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 0, 'observed': 1}] = [0, 1, 0, 0]
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 1, 'observed': 0}] = [1, 0, 0, 0]
-    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 1, 'observed': 1}] = [0, 1, 0, 0]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 0, 'observed': 0}] = [0, 1, 0]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 0, 'observed': 1}] = [0, 1, 0]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 1, 'observed': 0}] = [1, 0, 0]
+    bn.cpt("stolen")[{'seen_object': 1, 'target_object': 1, 'compromise_house': 1, 'observed': 1}] = [0, 1, 0]
 
     return bn
 
@@ -69,11 +69,11 @@ def do_stolen(bn):
 
 
 def fill_cpts(bn, exp):
-    nodes = ["seen_object", "target_object", "compromise_house", "observed"]
+    nodes = ["seen_object", "target_object", "compromise_house", "observed"]    # same as Reporters
 
     list_ = [([], "seen_object"), (["seen_object"], "target_object"),
              (["seen_object", "target_object"], "compromise_house"),
-             (["seen_object", "target_object", "compromise_house"], "observed")]
+             (["seen_object", "target_object", "compromise_house"], "observed")]    # relevant relations (conditions, fully connected).
 
 
     for x in list_:
@@ -83,21 +83,20 @@ def fill_cpts(bn, exp):
             tup = item.pop(child)
             count = item.pop("count")
             a, b = tup
-            print(child, item, a, b, count)
+            #print(child, item, a, b, count)
 
-            if count == 0:
+            if count == 0:  # imppossible combination (eg: not target object, but compromise house)
                 count = 1   # TODO: HAAAACK FRAUD
                 a = 0
                 b = 0
             bn.cpt(child)[item] = [(b/count), (a/count)]
-        print(bn.cpt(child))
+        #print(bn.cpt(child))
 
     bn = do_stolen(bn)
+    #print(bn.cpt("stolen"))
 
     #exp.conditional_frequencies_dict([], "seen_object")
     #exp.conditional_frequencies_dict(["seen_object"], "target_object")
-
-    bn.generateCPT("stolen")    # random for now, don't want to bother with frequencies rm
 
     return bn
 
@@ -113,7 +112,6 @@ def complex():
     bn = nodes_for_bn(bn)
     bn = links_for_bn(bn)
     bn = fill_cpts(bn, experiment)
-    #bn = fill_cpts_random(bn)
     print(bn)
     return bn
 

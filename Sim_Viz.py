@@ -114,12 +114,13 @@ class Test(TextElement):
 
 grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)
 text = Test()
-
+new_reporters = Reporters()
 
 server = ModularServer(StolenLaptop,
                        [grid, text],
                        "Stolen Laptop",
-                       {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":Reporters()})
+                       {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters})
+
 
 '''
 server = ModularServer(Street,

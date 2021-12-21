@@ -18,6 +18,7 @@ class Reporters():
 
         self.initialize_event_dict(self.pure_frequency_event_dict)
         self.initialize_event_dict(self.history_dict[self.run])
+        self.outcome_keys = ["successful_stolen", "unsuccessful_stolen", "no_stealing"]
 
 
     def initialize_event_dict(self, dict_):

@@ -16,7 +16,7 @@ class StreetAgent(Agent):
         self.seen_objects = None
         self.target = None # target for stealing
         self.risk_threshold = random.randint(0, 1000)
-        self.breaking_and_entering_skill = 200 #random.randint(0, 10)
+        self.breaking_and_entering_skill = random.randint(0, 10)
         self.goal = "WALK ROAD"
         self.goodies = []
         self.objects_seen = {}
@@ -93,7 +93,21 @@ class StreetAgent(Agent):
                 bestx, besty = stepx, stepy
 
         if (bestx, besty) == (100, 100):
-            return self.pos
+            #print("no best move", self.name)    # move randomly
+            #print("RANDOM MOVE", self.name)    # move randomly
+
+            possible_steps = self.model.grid.get_neighborhood(
+                self.pos,
+                moore=True,
+                include_center=False)
+            new_position = self.random.choice(possible_steps)
+            return new_position
+
+        #print("\t agent loc ", self.name, self.pos)
+        #print("\t goal step", self.name, bestx, besty)
+        #print("\t goal loc", self.name, hx, hy)
+
+
         return bestx, besty
 
 
@@ -101,6 +115,8 @@ class StreetAgent(Agent):
         a_house = self.get_house()
         hx, hy = a_house.x, a_house.y
         bestx, besty = self.move_step_to_goal((hx, hy))
+
+
         if (bestx, besty) == (hx, hy):
             # we are home
             pass

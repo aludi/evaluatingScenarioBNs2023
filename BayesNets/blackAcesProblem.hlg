@@ -1,0 +1,124 @@
+Fri Dec 31 00:52:50 2021
+
+
+Moral links:
+
+
+
+Triangulating prime component with 3 members:
+    secondCardBlackAce, firstCardBlackAce, bothBlackAces
+This component is a clique of cost 8
+
+
+Total cost of triangulation for all prime components is 8
+
+
+Elimination sequence:
+
+    bothBlackAces
+    firstCardBlackAce
+    secondCardBlackAce
+
+
+Cliques:
+
+Clique 1, 3 members, table size = 8:
+    secondCardBlackAce, firstCardBlackAce, bothBlackAces
+
+Total clique table size: 8
+
+
+The junction forest:
+
+Creating junction tree with clique 1 as root ...
+
+
+Assignment of potentials to cliques:
+
+    Node secondCardBlackAce assigned to clique 1
+    Node firstCardBlackAce assigned to clique 1
+    Node bothBlackAces assigned to clique 1
+
+
+Checking conditional probability potentials:
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    secondCardBlackAce:
+	State 1    0.5
+	State 2    0.5
+
+    firstCardBlackAce:
+	State 1    0.5
+	State 2    0.5
+
+    bothBlackAces:
+	State 1    0.5
+	State 2    0.5
+Fri Dec 31 00:55:45 2021
+
+
+Moral links:
+
+
+
+Triangulating prime component with 3 members:
+    secondCardBlackAce, firstCardBlackAce, bothBlackAces
+This component is a clique of cost 8
+
+
+Total cost of triangulation for all prime components is 8
+
+
+Elimination sequence:
+
+    bothBlackAces
+    firstCardBlackAce
+    secondCardBlackAce
+
+
+Cliques:
+
+Clique 1, 3 members, table size = 8:
+    secondCardBlackAce, firstCardBlackAce, bothBlackAces
+
+Total clique table size: 8
+
+
+The junction forest:
+
+Creating junction tree with clique 1 as root ...
+
+
+Assignment of potentials to cliques:
+
+    Node secondCardBlackAce assigned to clique 1
+    Node firstCardBlackAce assigned to clique 1
+    Node bothBlackAces assigned to clique 1
+
+
+Checking conditional probability potentials:
+
+Warning: Conditional distributions for secondCardBlackAce sum to different values:
+    min = 1
+    max = 1.01961
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    secondCardBlackAce:
+	0          0.96156
+	1          0.0384397
+
+    firstCardBlackAce:
+	0          0.961924
+	1          0.0380762
+
+    bothBlackAces:
+	0          0.999268
+	1          0.000732313

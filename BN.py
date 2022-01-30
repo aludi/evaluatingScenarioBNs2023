@@ -35,10 +35,8 @@ def links_for_bn(bn):
     for i in range(0, len(nodes)):
         for j in range(1, len(nodes)-i):
             bn.addArc(nodes[i], nodes[i+j])
-
     for node in nodes:
         bn.addArc(node, "stolen")
-
     return bn
 
 
@@ -94,7 +92,6 @@ def fill_cpts(bn, exp):
 
     bn = do_stolen(bn)
     #print(bn.cpt("stolen"))
-
     #exp.conditional_frequencies_dict([], "seen_object")
     #exp.conditional_frequencies_dict(["seen_object"], "target_object")
 
@@ -106,16 +103,64 @@ def fill_cpts_random(bn):
         print(bn.cpt(node))
     return bn
 
-def complex():
-    experiment = Experiment()
-    bn = gum.BayesNet('Test')
+def fill_cpts_common(bn, exp):
+    nodes = ["seen_object", "target_object", "compromise_house", "observed"]    # same as Reporters
+
+
+    bn.cpt("seen_object")[{}] = [0, 1]
+    bn.cpt("target_object")[{'seen_object': 1}] = [0.5, 0.5]
+    bn.cpt("target_object")[{'seen_object': 0}] = [1, 0]
+    bn.cpt('compromise_house')[{'seen_object': 1, 'target_object': 1}] = [0.75, 0.25]
+    bn.cpt('compromise_house')[{'seen_object': 0, 'target_object': 1}] = [1, 0]
+    bn.cpt('compromise_house')[{'seen_object': 1, 'target_object': 0}] = [1, 0]
+    bn.cpt('compromise_house')[{'seen_object': 0, 'target_object': 0}] = [1, 0]
+    bn.cpt('observed')[{'seen_object': 1, 'target_object': 1, 'compromise_house': 1}] = [0.9, 0.1]
+    bn.cpt('observed')[{'seen_object': 1, 'target_object': 1, 'compromise_house': 0}] = [1, 0]
+    bn.cpt('observed')[{'seen_object': 1, 'target_object': 0, 'compromise_house': 1}] = [1, 0]
+    bn.cpt('observed')[{'seen_object': 1, 'target_object': 0, 'compromise_house': 0}] = [1, 0]
+    bn.cpt('observed')[{'seen_object': 0, 'target_object': 1, 'compromise_house': 1}] = [1, 0]
+    bn.cpt('observed')[{'seen_object': 0, 'target_object': 1, 'compromise_house': 0}] = [1, 0]
+    bn.cpt('observed')[{'seen_object': 0, 'target_object': 0, 'compromise_house': 1}] = [1, 0]
+    bn.cpt('observed')[{'seen_object': 0, 'target_object': 0, 'compromise_house': 0}] = [1, 0]
+
+    bn = do_stolen(bn)
+    return bn
+
+
+
+def complex(experiment):
+    bn = gum.fastBN("a")
+    bn = gum.BayesNet('GodBN')
     bn = nodes_for_bn(bn)
     bn = links_for_bn(bn)
     bn = fill_cpts(bn, experiment)
-    print(bn)
+    #print(bn)
+    gum.saveBN(bn, "GodBN.net")
     return bn
 
-bn = complex()
-print("saved bn as Test.net")
-gum.saveBN(bn, "Test.net")
 
+def common_sense(experiment):
+    bn = gum.BayesNet('CommonBN')
+    bn = nodes_for_bn(bn)
+    bn = links_for_bn(bn)
+    bn = fill_cpts_common(bn, experiment)
+    #print(bn)
+    gum.saveBN(bn, "CommonBN.net")
+    return bn
+
+def binary(experiment):
+    bn = gum.BayesNet('BinaryBN')
+    bn = nodes_for_bn(bn)
+    bn = links_for_bn(bn)
+    bn = fill_cpts_binary(bn, experiment)
+    #print(bn)
+    gum.saveBN(bn, "BinaryBN.net")
+    return bn
+
+
+experiment = Experiment()
+simple()
+complex(experiment)
+common_sense(experiment)
+print("saved bn as GodBN.net")
+print("saved bn as CommonBN.net")

@@ -1,6 +1,6 @@
 
 net {
-  name = Test;
+  name = GodBN;
   software = "aGrUM 0.22.5";
   node_size = (50 50);
 }
@@ -42,7 +42,7 @@ potential (seen_object) {
 potential ( target_object | seen_object   ) {
    data = 
    ((   0   0)   % seen_object=0   
-   (   0.5025   0.4975));   % seen_object=1   
+   (   0.505   0.495));   % seen_object=1   
 }
 
 potential ( compromise_house | seen_object   target_object   ) {
@@ -50,7 +50,7 @@ potential ( compromise_house | seen_object   target_object   ) {
    (((   0   0)   % target_object=0   seen_object=0   
    (   0   0))   % target_object=1   seen_object=0   
    ((   1   0)   % target_object=0   seen_object=1   
-   (   0.703518   0.296482)));   % target_object=1   seen_object=1   
+   (   0.716162   0.283838)));   % target_object=1   seen_object=1   
 }
 
 potential ( observed | seen_object   target_object   compromise_house   ) {
@@ -61,8 +61,8 @@ potential ( observed | seen_object   target_object   compromise_house   ) {
    (   0   0)))   % compromise_house=1   target_object=1   seen_object=0   
    (((   1   0)   % compromise_house=0   target_object=0   seen_object=1   
    (   0   0))   % compromise_house=1   target_object=0   seen_object=1   
-   ((   0.318571   0.681429)   % compromise_house=0   target_object=1   seen_object=1   
-   (   0.722034   0.277966))));   % compromise_house=1   target_object=1   seen_object=1   
+   ((   0.317348   0.682652)   % compromise_house=0   target_object=1   seen_object=1   
+   (   0.683274   0.316726))));   % compromise_house=1   target_object=1   seen_object=1   
 }
 
 potential ( stolen | seen_object   target_object   compromise_house   observed   ) {

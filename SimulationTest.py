@@ -2,9 +2,9 @@ from mesa import Agent, Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 import random
-from StreetAgent import StreetAgent
-from Walkway import Walkway
-from House import House
+from SimulationClasses.StreetAgent import StreetAgent
+from SimulationClasses.Walkway import Walkway
+from SimulationClasses.House import House
 from Reporters import Reporters
 import numpy as np
 import matplotlib.pyplot as plt

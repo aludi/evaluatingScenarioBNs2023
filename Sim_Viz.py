@@ -4,11 +4,11 @@ from mesa.visualization.modules import TextElement
 
 from mesa.visualization.ModularVisualization import ModularServer
 
-from StreetAgent import StreetAgent
-from Walkway import Walkway
-from House import House
-from Vision import Vision
-from Goodie import Goodie
+from SimulationClasses.StreetAgent import StreetAgent
+from SimulationClasses.Walkway import Walkway
+from SimulationClasses.House import House
+from SimulationClasses.Vision import Vision
+from SimulationClasses.Goodie import Goodie
 from Reporters import Reporters
 
 

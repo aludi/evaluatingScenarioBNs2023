@@ -18,12 +18,13 @@ class Reporters():
 
         self.initialize_event_dict(self.pure_frequency_event_dict)
         self.initialize_event_dict(self.history_dict[self.run])
-        self.outcome_keys = ["successful_stolen", "unsuccessful_stolen", "no_stealing"]
+        #self.outcome_keys = ["successful_stolen", "unsuccessful_stolen", "no_stealing"]
+        self.outcome_keys = ["successful_stolen"]
 
 
     def initialize_event_dict(self, dict_):
-        relevant_events = ["seen_object", "target_object", "compromise_house",
-                           "observed", "successful_stolen", "unsuccessful_stolen", "no_stealing"]
+        relevant_events = ["know_object", "target_object", "motive", "compromise_house",
+                           "observed", "successful_stolen"]
         for key in relevant_events:
             dict_[key] = 0
 

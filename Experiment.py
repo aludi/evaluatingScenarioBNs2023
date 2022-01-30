@@ -21,11 +21,11 @@ class Experiment():
             model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
             for j in range(20):
                 model.step()
-            if self.reporters.get_report_of_event('successful_stolen') == 0 and self.reporters.get_report_of_event(
-                    'unsuccessful_stolen') == 0:
+            #if self.reporters.get_report_of_event('successful_stolen') == 0 and self.reporters.get_report_of_event(
+                    #'unsuccessful_stolen') == 0:
                 # the agent decided to not steal, either because he didn't know there was something to steal,
                 # of because the cost-benefit was not worth it.
-                self.reporters.increase_counter_once("no_stealing")
+                #self.reporters.increase_counter_once("no_stealing")
            # print(self.reporters.history_dict[i])
 
             self.reporters.increase_run()
@@ -132,6 +132,7 @@ class Experiment():
         print()
         self.conditional_frequencies([], "seen_object")
         self.conditional_frequencies(["seen_object"], "target_object")
+        self.conditional_frequencies(["seen_object", "target_object"], "motive")
         self.conditional_frequencies(["seen_object", "target_object"], "compromise_house")
         self.conditional_frequencies(["seen_object", "target_object", "compromise_house"], "observed")
         self.conditional_frequencies(["seen_object", "target_object", "compromise_house", "observed"], "unsuccessful_stolen")

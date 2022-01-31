@@ -2,6 +2,7 @@ from pylab import *
 import matplotlib.pyplot as plt
 import os
 import pyAgrum as gum
+import copy as copy
 from Experiment import Experiment
 import pyAgrum.lib.image as gim
 
@@ -23,38 +24,37 @@ def simple():
 
     bn.cpt("r")[{'c':0}]=[0.8,0.2]
     bn.cpt("r")[{'c':1}]=[0.2,0.8]
+
     return bn
 
-def nodes_for_bn(bn):
-    nodes = ["know_object", "target_object","motive", "compromise_house", "observed", "successful_stolen"]
+
+def nodes_for_bn(bn, nodes):
     for node in nodes:
-        id = bn.add(gum.LabelizedVariable(node, node, 2))
-    #x = bn.add(gum.LabelizedVariable("stolen", "stolen", ['successful', 'unsuccessful', 'no_stealing']))
+        bn.add(gum.LabelizedVariable(node, node, 2))
     return bn
 
-def links_for_bn(bn):
-    nodes = ["know_object", "target_object", "motive", "compromise_house", "observed", "successful_stolen"]
-    # lets do full bn
+
+def links_for_bn(bn, nodes):
+    # FULL BN
     for i in range(0, len(nodes)):
         for j in range(1, len(nodes)-i):
             bn.addArc(nodes[i], nodes[i+j])
-    #for node in nodes:
-    #    bn.addArc(node, "stolen")
     return bn
 
+def generate_arc_links(exp):
+    list_ = exp.reporters.relevant_events
+    final_list = []
+    prev_list = []
+    for item in list_:
+        prev = copy.deepcopy(prev_list)
+        tupl_ = (prev, item)
+        final_list.append(tupl_)
+        prev_list.append(item)
 
+    return final_list
 
 def fill_cpts(bn, exp):
-    nodes = ["know_object", "target_object", "compromise_house", "observed", "motive", "successful_stolen"]    # same as Reporters
-
-    list_ = [([], "know_object"),
-             (["know_object"], "target_object"),
-             (["know_object", "target_object", "motive"], "compromise_house"),
-             (["know_object", "target_object"], "motive"),
-             (["know_object", "target_object", "motive", "compromise_house"], "observed"),
-             (["know_object", "target_object", "motive", "compromise_house", "observed"], "successful_stolen")]    # relevant relations (conditions, fully connected).
-
-
+    list_ = generate_arc_links(exp)
     for x in list_:
         parents, child = x
         cpt_table = exp.conditional_frequencies_dict(parents, child, 2)
@@ -62,20 +62,30 @@ def fill_cpts(bn, exp):
             tup = item.pop(child)
             count = item.pop("count")
             a, b = tup
-
             if count == 0:  # impossible combination (eg: not target object, but compromise house)
                 count = 1   # TODO: HAAAACK FRAUD
                 a = 0
                 b = 0
             bn.cpt(child)[item] = [(b/count), (a/count)]
-        #print(bn.cpt(child))
-
-    #bn = do_stolen(bn)
-    #print(bn.cpt("stolen"))
-    #exp.conditional_frequencies_dict([], "know_object")
-    #exp.conditional_frequencies_dict(["know_object"], "target_object")
-
     return bn
+
+def fill_cpts_rounded(bn, exp, f):
+    list_ = generate_arc_links(exp)
+    for x in list_:
+        parents, child = x
+        cpt_table = exp.conditional_frequencies_dict(parents, child, 2)
+        for item in cpt_table:
+            tup = item.pop(child)
+            count = item.pop("count")
+            a, b = tup
+            if count == 0:  # impossible combination (eg: not target object, but compromise house)
+                count = 1   # TODO: HAAAACK FRAUD
+                a = 0
+                b = 0
+            #print(round(b/count, 1))
+            bn.cpt(child)[item] = [round((b/count), f), round((a/count), f)]
+    return bn
+
 
 def fill_cpts_random(bn):
     for node in bn.nodes():
@@ -144,8 +154,6 @@ def do_stolen(bn):
 
 
 def fill_cpts_common(bn):
-    nodes = ["know_object", "target_object", "motive", "compromise_house", "observed", "successful_stolen"]    # same as Reporters
-
     bn.cpt("know_object")[{}] = [0, 1]
     bn.cpt("target_object")[{'know_object': 1}] = [0.5, 0.5]
     bn.cpt("target_object")[{'know_object': 0}] = [1, 0]
@@ -186,33 +194,41 @@ def fill_cpts_common(bn):
 
 
 def complex(experiment):
-    file_name = "GodBN.net"
+    file_name = "BayesNets/GodBN.net"
     bn = gum.BayesNet('GodBN')
-    bn = nodes_for_bn(bn)
-    bn = links_for_bn(bn)
-    #bn = fill_cpts_random(bn)
+    nodes = experiment.reporters.relevant_events
+    bn = nodes_for_bn(bn, nodes)
+    bn = links_for_bn(bn, nodes)
     bn = fill_cpts(bn, experiment)
-    #print(bn)
     gum.saveBN(bn, file_name)
     print(f"saved bn as {file_name}")
+    return bn
 
+def rounded(experiment):
+    file_name = "BayesNets/RoundedBN.net"
+    rounding_param = 1
+    bn = gum.BayesNet('RoundedBN')
+    nodes = experiment.reporters.relevant_events
+    bn = nodes_for_bn(bn, nodes)
+    bn = links_for_bn(bn, nodes)
+    bn = fill_cpts_rounded(bn, experiment, rounding_param)
+    gum.saveBN(bn, file_name)
+    print(f"saved bn as {file_name}")
     return bn
 
 
 def common_sense(experiment):
-    file_name = "CommonBN.net"
+    file_name = "BayesNets/CommonBN.net"
+    nodes = experiment.reporters.relevant_events
     bn = gum.BayesNet('CommonBN')
-    bn = nodes_for_bn(bn)
-    bn = links_for_bn(bn)
+    bn = nodes_for_bn(bn, nodes)
+    bn = links_for_bn(bn, nodes)
     bn = fill_cpts_common(bn)
-    #print(bn)
     gum.saveBN(bn, file_name)
     print(f"saved bn as {file_name}")
-
     return bn
-
-
 
 experiment = Experiment()
 complex(experiment)
+rounded(experiment)
 common_sense(experiment)

@@ -7,6 +7,7 @@ TODO
 
 '''
 from itertools import product
+import re
 
 from Reporters import Reporters
 from SimulationTest import StolenLaptop
@@ -30,6 +31,8 @@ class Experiment():
 
             self.reporters.increase_run()
         self.print_frequencies()
+        self.print_frequencies_latex()
+
 
 
     def generate_empty_tables(self, parents, child):
@@ -146,10 +149,20 @@ class Experiment():
 
 
     def print_frequencies(self):
-
         print("\t Nice frequencies")
         for key in self.reporters.pure_frequency_event_dict.keys():
             print(key, (self.reporters.pure_frequency_event_dict[key] / self.runs)*100, 100-(self.reporters.pure_frequency_event_dict[key] / self.runs)*100)
+        print("________________________________________")
+        #self.print_bayesian_net_probs() # TODO to do this automatically
+
+    def print_frequencies_latex(self):
+        print("\t Nice frequencies")
+        print(f"event & frequency true \% & frequency false \% \\\\")
+        print("\hline")
+        for key in self.reporters.pure_frequency_event_dict.keys():
+            l_key = key.replace("_", "\_")
+            print(f"{l_key} & {round((self.reporters.pure_frequency_event_dict[key] / self.runs)*100, 0)} & "
+                  f"{round(100-(self.reporters.pure_frequency_event_dict[key] / self.runs)*100, 0)} \\\\")
         print("________________________________________")
         #self.print_bayesian_net_probs() # TODO to do this automatically
 

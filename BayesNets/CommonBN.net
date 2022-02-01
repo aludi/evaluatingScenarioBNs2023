@@ -41,6 +41,12 @@ node successful_stolen {
    ID = "successful_stolen";
 }
 
+node raining {
+   states = (0 1 );
+   label = "raining";
+   ID = "raining";
+}
+
 potential (know_object) {
    data = (  0 1);
 }
@@ -125,6 +131,74 @@ potential ( successful_stolen | know_object   target_object   motive   compromis
    (   0   1))   % observed=1   compromise_house=0   motive=1   target_object=1   know_object=1   
    ((   1   0)   % observed=0   compromise_house=1   motive=1   target_object=1   know_object=1   
    (   0   1))))));   % observed=1   compromise_house=1   motive=1   target_object=1   know_object=1   
+}
+
+potential ( raining | know_object   target_object   motive   compromise_house   observed   successful_stolen   ) {
+   data = 
+   (((((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=0   target_object=0   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=0   target_object=0   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=0   target_object=0   know_object=0   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=0   target_object=0   know_object=0   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=0   target_object=0   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=0   target_object=0   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=0   target_object=0   know_object=0   
+   (   0   0))))   % successful_stolen=1   observed=1   compromise_house=1   motive=0   target_object=0   know_object=0   
+   ((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=1   target_object=0   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=1   target_object=0   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=1   target_object=0   know_object=0   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=1   target_object=0   know_object=0   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=1   target_object=0   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=1   target_object=0   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=1   target_object=0   know_object=0   
+   (   0   0)))))   % successful_stolen=1   observed=1   compromise_house=1   motive=1   target_object=0   know_object=0   
+   (((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=0   target_object=1   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=0   target_object=1   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=0   target_object=1   know_object=0   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=0   target_object=1   know_object=0   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=0   target_object=1   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=0   target_object=1   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=0   target_object=1   know_object=0   
+   (   0   0))))   % successful_stolen=1   observed=1   compromise_house=1   motive=0   target_object=1   know_object=0   
+   ((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=1   target_object=1   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=1   target_object=1   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=1   target_object=1   know_object=0   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=1   target_object=1   know_object=0   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=1   target_object=1   know_object=0   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=1   target_object=1   know_object=0   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=1   target_object=1   know_object=0   
+   (   0   0))))))   % successful_stolen=1   observed=1   compromise_house=1   motive=1   target_object=1   know_object=0   
+   ((((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=0   target_object=0   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=0   target_object=0   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=0   target_object=0   know_object=1   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=0   target_object=0   know_object=1   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=0   target_object=0   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=0   target_object=0   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=0   target_object=0   know_object=1   
+   (   0   0))))   % successful_stolen=1   observed=1   compromise_house=1   motive=0   target_object=0   know_object=1   
+   ((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=1   target_object=0   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=1   target_object=0   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=1   target_object=0   know_object=1   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=1   target_object=0   know_object=1   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=1   target_object=0   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=1   target_object=0   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=1   target_object=0   know_object=1   
+   (   0   0)))))   % successful_stolen=1   observed=1   compromise_house=1   motive=1   target_object=0   know_object=1   
+   (((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=0   target_object=1   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=0   target_object=1   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=0   target_object=1   know_object=1   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=0   target_object=1   know_object=1   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=0   target_object=1   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=0   target_object=1   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=0   target_object=1   know_object=1   
+   (   0   0))))   % successful_stolen=1   observed=1   compromise_house=1   motive=0   target_object=1   know_object=1   
+   ((((   0   0)   % successful_stolen=0   observed=0   compromise_house=0   motive=1   target_object=1   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=0   motive=1   target_object=1   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=0   motive=1   target_object=1   know_object=1   
+   (   0   0)))   % successful_stolen=1   observed=1   compromise_house=0   motive=1   target_object=1   know_object=1   
+   (((   0   0)   % successful_stolen=0   observed=0   compromise_house=1   motive=1   target_object=1   know_object=1   
+   (   0   0))   % successful_stolen=1   observed=0   compromise_house=1   motive=1   target_object=1   know_object=1   
+   ((   0   0)   % successful_stolen=0   observed=1   compromise_house=1   motive=1   target_object=1   know_object=1   
+   (   0   0)))))));   % successful_stolen=1   observed=1   compromise_house=1   motive=1   target_object=1   know_object=1   
 }
 
 

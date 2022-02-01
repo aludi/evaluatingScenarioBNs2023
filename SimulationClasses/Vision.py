@@ -9,6 +9,8 @@ class Vision(Agent):
         super().__init__(unique_id, model)
         self.owner = agent
         (a, b) = position
+        #if model.raining and radius > 1:    # if it rains we don't see as well (cameras also don't?)
+        #    radius = radius - 1
         self.radius = radius
         self.model.grid.place_agent(self, (a, b))
 

@@ -9,6 +9,8 @@ from SimulationClasses.Walkway import Walkway
 from SimulationClasses.House import House
 from SimulationClasses.Vision import Vision
 from SimulationClasses.Goodie import Goodie
+from SimulationClasses.Camera import Camera
+
 from Reporters import Reporters
 
 
@@ -47,7 +49,7 @@ def agent_portrayal(agent):
         else:
             portrayal["Color"] = ["yellow", "orange", "red"]
             portrayal["r"] = 0.2
-        portrayal["Layer"] = 2
+        portrayal["Layer"] = 4
 
         if agent.target is None:
             portrayal["text"] = "agent"
@@ -69,13 +71,17 @@ def agent_portrayal(agent):
         portrayal["Filled"] = "false"
         portrayal["w"] = agent.width
         portrayal["h"] = agent.height
-        portrayal["Layer"] = 0
+        portrayal["Layer"] = 1
 
     elif type(agent) is Walkway:
         portrayal["Shape"] = "rect"
         portrayal["Filled"] = "true"
-        portrayal["Color"] = ["#D0F0C0"]
-        portrayal["stroke_color"] = "green"
+        if agent.model.raining == False:
+            portrayal["Color"] = ["#D0F0C0"]
+            portrayal["stroke_color"] = "green"
+        else:
+            portrayal["Color"] = ["#9ABCA7"]
+            portrayal["stroke_color"] = "blue"
         portrayal["Filled"] = "false"
         portrayal["w"] = agent.width*2
         portrayal["h"] = agent.height
@@ -92,7 +98,7 @@ def agent_portrayal(agent):
             portrayal["Color"] = "black"
         portrayal["w"] = 0.25
         portrayal["h"] = 0.25
-        portrayal["Layer"] = 3
+        portrayal["Layer"] = 4
 
 
     elif type(agent) is Vision:
@@ -100,8 +106,16 @@ def agent_portrayal(agent):
         portrayal["Filled"] = "false"
         portrayal["Color"] = ["blue"]
         portrayal["r"] = agent.radius*2
-        portrayal["Layer"] = 1
-        portrayal["opacity"] = 0.4
+        portrayal["Layer"] = 2
+        portrayal["opacity"] = 0.2
+
+    elif type(agent) is Camera:
+        portrayal["Shape"] = "circle"
+        portrayal["Filled"] = "false"
+        portrayal["Color"] = ["blue"]
+        portrayal["r"] = agent.radius * 2
+        portrayal["Layer"] = 2
+        portrayal["opacity"] = 0.05
 
     return portrayal
 

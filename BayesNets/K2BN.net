@@ -41,44 +41,72 @@ node successful_stolen {
    ID = "successful_stolen";
 }
 
+node raining {
+   states = (0 1 );
+   label = "raining";
+   ID = "raining";
+}
+
+node spotted_by_camera {
+   states = (0 1 );
+   label = "spotted_by_camera";
+   ID = "spotted_by_camera";
+}
+
 potential (know_object) {
-   data = (  0.000749251 0.999251);
+   data = (  0.000374813 0.999625);
 }
 
 potential (target_object) {
-   data = (  0.503746 0.496254);
+   data = (  0.51062 0.48938);
 }
 
 potential ( motive | target_object   know_object   ) {
    data = 
    (((   0.9   0.1)   % know_object=0   target_object=0   
-   (   0.999876   0.0001241))   % know_object=1   target_object=0   
+   (   0.999939   6.1207e-05))   % know_object=1   target_object=0   
    ((   0.5   0.5)   % know_object=0   target_object=1   
-   (   0.000125849   0.999874)));   % know_object=1   target_object=1   
+   (   6.38325e-05   0.999936)));   % know_object=1   target_object=1   
 }
 
-potential ( compromise_house | target_object   motive   ) {
+potential ( compromise_house | target_object   observed   ) {
    data = 
-   (((   0.999876   0.000123977)   % motive=0   target_object=0   
+   (((   0.999939   6.1177e-05)   % observed=0   target_object=0   
+   (   0.5   0.5))   % observed=1   target_object=0   
+   ((   0.522696   0.477304)   % observed=0   target_object=1   
+   (   0.84352   0.15648)));   % observed=1   target_object=1   
+}
+
+potential ( observed | target_object   motive   ) {
+   data = 
+   (((   0.999939   6.1177e-05)   % motive=0   target_object=0   
    (   0.5   0.5))   % motive=1   target_object=0   
    ((   0.5   0.5)   % motive=0   target_object=1   
-   (   0.720992   0.279008)));   % motive=1   target_object=1   
-}
-
-potential ( observed | target_object   compromise_house   ) {
-   data = 
-   (((   0.999876   0.000123977)   % compromise_house=0   target_object=0   
-   (   0.5   0.5))   % compromise_house=1   target_object=0   
-   ((   0.356195   0.643805)   % compromise_house=0   target_object=1   
-   (   0.707394   0.292606)));   % compromise_house=1   target_object=1   
+   (   0.46119   0.53881)));   % motive=1   target_object=1   
 }
 
 potential ( successful_stolen | compromise_house   observed   ) {
    data = 
-   (((   0.999901   9.89511e-05)   % observed=0   compromise_house=0   
-   (   0.999729   0.000271003))   % observed=1   compromise_house=0   
-   ((   0.000636943   0.999363)   % observed=0   compromise_house=1   
-   (   0.370769   0.629231)));   % observed=1   compromise_house=1   
+   (((   0.99995   4.96968e-05)   % observed=0   compromise_house=0   
+   (   0.99986   0.00014041))   % observed=1   compromise_house=0   
+   ((   0.000289855   0.99971)   % observed=0   compromise_house=1   
+   (   0.381997   0.618003)));   % observed=1   compromise_house=1   
+}
+
+potential (raining) {
+   data = (  0.496877 0.503123);
+}
+
+potential ( spotted_by_camera | motive   observed   compromise_house   ) {
+   data = 
+   ((((   0.657846   0.342154)   % compromise_house=0   observed=0   motive=0   
+   (   0.5   0.5))   % compromise_house=1   observed=0   motive=0   
+   ((   0.5   0.5)   % compromise_house=0   observed=1   motive=0   
+   (   0.5   0.5)))   % compromise_house=1   observed=1   motive=0   
+   (((   0.00013238   0.999868)   % compromise_house=0   observed=0   motive=1   
+   (   0.00014497   0.999855))   % compromise_house=1   observed=0   motive=1   
+   ((   0.127019   0.872981)   % compromise_house=0   observed=1   motive=1   
+   (   0.000378501   0.999621))));   % compromise_house=1   observed=1   motive=1   
 }
 
 

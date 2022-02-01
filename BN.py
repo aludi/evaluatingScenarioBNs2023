@@ -203,15 +203,27 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
     # default ordering
     best_temporal_ordering = []
     header = next(csv.reader(open(global_state_csv)))
+
     for i in range(0, len(experiment.reporters.relevant_events)):
         best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
+        flag = "def"
+
     for key in experiment.reporters.temporal_dict.keys():
-        if len(key) == len(experiment.reporters.relevant_events):
+        #print(key, experiment.reporters.temporal_dict[key])
+        if len(key) == len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list):
             if experiment.reporters.temporal_dict[key] > max_score:
                 best_temporal_ordering = list(key)
+                max_score = experiment.reporters.temporal_dict[key]
+                flag = "cust"
     best_ordering_in_col_numbers_list = []
-    for item in best_temporal_ordering:
-        best_ordering_in_col_numbers_list.append(header.index(item))
+    #print(best_temporal_ordering)
+    if flag == "cust":
+        for item in best_temporal_ordering:
+            best_ordering_in_col_numbers_list.append(header.index(item))
+        for item in experiment.reporters.evidence_list:
+            best_ordering_in_col_numbers_list.append(header.index(item))
+    else:
+        best_ordering_in_col_numbers_list = best_temporal_ordering
     return best_ordering_in_col_numbers_list
 
 
@@ -264,6 +276,6 @@ def common_sense(experiment):
 
 experiment = Experiment()
 complex(experiment)
-rounded(experiment)
-common_sense(experiment)
+#rounded(experiment)
+#common_sense(experiment)
 K2_BN(experiment)

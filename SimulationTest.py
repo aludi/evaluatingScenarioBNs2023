@@ -5,6 +5,7 @@ import random
 from SimulationClasses.StreetAgent import StreetAgent
 from SimulationClasses.Walkway import Walkway
 from SimulationClasses.House import House
+
 from Reporters import Reporters
 import numpy as np
 import matplotlib.pyplot as plt
@@ -22,6 +23,7 @@ class StolenLaptop(Model):
         self.houses = []
         self.agents = []
         self.walkways = []
+        self.raining = False
 
         # reporters -> meta
         self.reporters = reporters
@@ -33,10 +35,15 @@ class StolenLaptop(Model):
         and another agent walking past
         '''
         for i in range(self.num_agents):
-            a = House(self.next_id(), self)
+            a = House(self.next_id(), self, i)
             self.schedule.add(a)
             self.grid.place_agent(a, (a.x, a.y))
             self.houses.append(a)
+
+        if random.random() > 0.5:   # rains about half of the time and it doesn't matter
+            self.reporters.increase_counter_once("raining") # increase the counter here
+            self.raining = True
+
 
 
         road = Walkway(self.next_id(), self)
@@ -73,6 +80,8 @@ class StolenLaptop(Model):
         self.agents.append(a)
         self.houses[1 % 2].set_owner(a)
         a.set_vision(radius=3)
+
+
 
     def step(self):
         '''Advance the model by one step.'''
@@ -116,6 +125,8 @@ class Street(Model):
             self.houses[i % 2].set_owner(a)
             a.set_vision(radius=4)
             a.set_goodie(pos=(x,y))
+
+
 
         road = Walkway(self.next_id(), self)
         self.schedule.add(road)

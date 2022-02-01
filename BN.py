@@ -4,8 +4,12 @@ import os
 import pyAgrum as gum
 import copy as copy
 from Experiment import Experiment
+import csv
 import pyAgrum.lib.image as gim
 
+from mesa import Agent, Model
+from mesa.time import RandomActivation
+from mesa.space import MultiGrid
 
 
 def simple():
@@ -192,11 +196,31 @@ def fill_cpts_common(bn):
     bn = do_stolen(bn)
     return bn
 
+def get_temporal_ordering_nodes(experiment, global_state_csv):
+    # determine the temporal order
+    # consider only all temporal orders that include all events!
+    max_score = 0
+    # default ordering
+    best_temporal_ordering = []
+    header = next(csv.reader(open(global_state_csv)))
+    for i in range(0, len(experiment.reporters.relevant_events)):
+        best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
+    for key in experiment.reporters.temporal_dict.keys():
+        if len(key) == len(experiment.reporters.relevant_events):
+            if experiment.reporters.temporal_dict[key] > max_score:
+                best_temporal_ordering = list(key)
+    best_ordering_in_col_numbers_list = []
+    for item in best_temporal_ordering:
+        best_ordering_in_col_numbers_list.append(header.index(item))
+    return best_ordering_in_col_numbers_list
 
-def K2_BN():
-    learner = gum.BNLearner("globalStates.csv")  # using bn as template for variables and labels
+
+def K2_BN(experiment):
+    global_state_csv = "globalStates.csv"
+    learner = gum.BNLearner(global_state_csv)  # using bn as template for variables and labels
     file_name = "BayesNets/K2BN.net"
-    learner.useK2([0, 1, 2, 3, 4, 5])
+    temporal_order = get_temporal_ordering_nodes(experiment, global_state_csv)
+    learner.useK2(temporal_order)
     bn = learner.learnBN()
     gum.saveBN(bn, file_name)
     print(f"saved bn as {file_name}")
@@ -242,4 +266,4 @@ experiment = Experiment()
 complex(experiment)
 rounded(experiment)
 common_sense(experiment)
-K2_BN()
+K2_BN(experiment)

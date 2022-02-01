@@ -1,0 +1,84 @@
+
+net {
+  name = unnamedBN;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node know_object {
+   states = (0 1 );
+   label = "know_object";
+   ID = "know_object";
+}
+
+node target_object {
+   states = (0 1 );
+   label = "target_object";
+   ID = "target_object";
+}
+
+node motive {
+   states = (0 1 );
+   label = "motive";
+   ID = "motive";
+}
+
+node compromise_house {
+   states = (0 1 );
+   label = "compromise_house";
+   ID = "compromise_house";
+}
+
+node observed {
+   states = (0 1 );
+   label = "observed";
+   ID = "observed";
+}
+
+node successful_stolen {
+   states = (0 1 );
+   label = "successful_stolen";
+   ID = "successful_stolen";
+}
+
+potential (know_object) {
+   data = (  0.000749251 0.999251);
+}
+
+potential (target_object) {
+   data = (  0.503746 0.496254);
+}
+
+potential ( motive | target_object   know_object   ) {
+   data = 
+   (((   0.9   0.1)   % know_object=0   target_object=0   
+   (   0.999876   0.0001241))   % know_object=1   target_object=0   
+   ((   0.5   0.5)   % know_object=0   target_object=1   
+   (   0.000125849   0.999874)));   % know_object=1   target_object=1   
+}
+
+potential ( compromise_house | target_object   motive   ) {
+   data = 
+   (((   0.999876   0.000123977)   % motive=0   target_object=0   
+   (   0.5   0.5))   % motive=1   target_object=0   
+   ((   0.5   0.5)   % motive=0   target_object=1   
+   (   0.720992   0.279008)));   % motive=1   target_object=1   
+}
+
+potential ( observed | target_object   compromise_house   ) {
+   data = 
+   (((   0.999876   0.000123977)   % compromise_house=0   target_object=0   
+   (   0.5   0.5))   % compromise_house=1   target_object=0   
+   ((   0.356195   0.643805)   % compromise_house=0   target_object=1   
+   (   0.707394   0.292606)));   % compromise_house=1   target_object=1   
+}
+
+potential ( successful_stolen | compromise_house   observed   ) {
+   data = 
+   (((   0.999901   9.89511e-05)   % observed=0   compromise_house=0   
+   (   0.999729   0.000271003))   % observed=1   compromise_house=0   
+   ((   0.000636943   0.999363)   % observed=0   compromise_house=1   
+   (   0.370769   0.629231)));   % observed=1   compromise_house=1   
+}
+
+

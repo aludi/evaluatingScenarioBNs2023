@@ -23,7 +23,6 @@ class Experiment():
             model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
             for j in range(20):
                 model.step()
-
             self.reporters.increase_run()
 
         self.generate_csv_report()  # use these csvs for automatic BN structure determination

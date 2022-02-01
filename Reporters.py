@@ -14,9 +14,15 @@ class Reporters():
         self.run = 0
         self.relevant_events = ["know_object", "target_object", "motive", "compromise_house",
                                 "observed", "successful_stolen"]
+        self.temporal_list = []
+        self.temporal_dict = {}
         self.history_dict[self.run] = {}
         self.initialize_event_dict(self.pure_frequency_event_dict)
         self.initialize_event_dict(self.history_dict[self.run])
+
+    def add_to_temporal_list(self, event):
+        if event not in self.temporal_list:
+            self.temporal_list.append(event)
 
     def initialize_event_dict(self, dict_):
         relevant_events = self.relevant_events
@@ -24,6 +30,7 @@ class Reporters():
             dict_[key] = 0
 
     def increase_counter(self, event):
+        self.add_to_temporal_list(event)
         self.pure_frequency_event_dict[event] += 1
         self.history_dict[self.run][event] += 1
 
@@ -31,6 +38,7 @@ class Reporters():
         return self.history_dict[self.run][event]
 
     def increase_counter_once(self, event):
+        self.add_to_temporal_list(event)
         if self.history_dict[self.run][event] == 0:  # only increase if it is called for the first time :)
             self.pure_frequency_event_dict[event] += 1
             self.history_dict[self.run][event] += 1
@@ -43,5 +51,10 @@ class Reporters():
     def increase_run(self):
         self.run += 1
         self.history_dict[self.run] = {}
+        try:
+            self.temporal_dict[tuple(self.temporal_list)] += 1
+        except KeyError:
+            self.temporal_dict[tuple(self.temporal_list)] = 1
+        self.temporal_list = []
         self.initialize_event_dict(self.history_dict[self.run])
 

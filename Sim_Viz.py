@@ -105,6 +105,7 @@ def agent_portrayal(agent):
 
     return portrayal
 
+
 class Test(TextElement):
     def render(self, model):
         str_ = ""

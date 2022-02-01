@@ -47,66 +47,74 @@ node raining {
    ID = "raining";
 }
 
-node spotted_by_camera {
+node spotted_by_house {
    states = (0 1 );
-   label = "spotted_by_camera";
-   ID = "spotted_by_camera";
+   label = "spotted_by_house";
+   ID = "spotted_by_house";
+}
+
+node spotted_with_goodie {
+   states = (0 1 );
+   label = "spotted_with_goodie";
+   ID = "spotted_with_goodie";
 }
 
 potential (know_object) {
-   data = (  0.000374813 0.999625);
+   data = (  0.00742574 0.992574);
 }
 
 potential (target_object) {
-   data = (  0.51062 0.48938);
+   data = (  0.54703 0.45297);
 }
 
 potential ( motive | target_object   know_object   ) {
    data = 
    (((   0.9   0.1)   % know_object=0   target_object=0   
-   (   0.999939   6.1207e-05))   % know_object=1   target_object=0   
+   (   0.998856   0.00114416))   % know_object=1   target_object=0   
    ((   0.5   0.5)   % know_object=0   target_object=1   
-   (   6.38325e-05   0.999936)));   % know_object=1   target_object=1   
+   (   0.00136986   0.99863)));   % know_object=1   target_object=1   
 }
 
-potential ( compromise_house | target_object   observed   ) {
+potential ( compromise_house | target_object   motive   ) {
    data = 
-   (((   0.999939   6.1177e-05)   % observed=0   target_object=0   
-   (   0.5   0.5))   % observed=1   target_object=0   
-   ((   0.522696   0.477304)   % observed=0   target_object=1   
-   (   0.84352   0.15648)));   % observed=1   target_object=1   
-}
-
-potential ( observed | target_object   motive   ) {
-   data = 
-   (((   0.999939   6.1177e-05)   % motive=0   target_object=0   
+   (((   0.998866   0.00113379)   % motive=0   target_object=0   
    (   0.5   0.5))   % motive=1   target_object=0   
    ((   0.5   0.5)   % motive=0   target_object=1   
-   (   0.46119   0.53881)));   % motive=1   target_object=1   
+   (   0.713699   0.286301)));   % motive=1   target_object=1   
+}
+
+potential ( observed | target_object   compromise_house   ) {
+   data = 
+   (((   0.998866   0.00113379)   % compromise_house=0   target_object=0   
+   (   0.5   0.5))   % compromise_house=1   target_object=0   
+   ((   0.354406   0.645594)   % compromise_house=0   target_object=1   
+   (   0.728571   0.271429)));   % compromise_house=1   target_object=1   
 }
 
 potential ( successful_stolen | compromise_house   observed   ) {
    data = 
-   (((   0.99995   4.96968e-05)   % observed=0   compromise_house=0   
-   (   0.99986   0.00014041))   % observed=1   compromise_house=0   
-   ((   0.000289855   0.99971)   % observed=0   compromise_house=1   
-   (   0.381997   0.618003)));   % observed=1   compromise_house=1   
+   (((   0.999062   0.000938086)   % observed=0   compromise_house=0   
+   (   0.997041   0.00295858))   % observed=1   compromise_house=0   
+   ((   0.00649351   0.993506)   % observed=0   compromise_house=1   
+   (   0.568966   0.431034)));   % observed=1   compromise_house=1   
 }
 
 potential (raining) {
-   data = (  0.496877 0.503123);
+   data = (  0.527228 0.472772);
 }
 
-potential ( spotted_by_camera | motive   observed   compromise_house   ) {
+potential ( spotted_by_house | motive   observed   ) {
    data = 
-   ((((   0.657846   0.342154)   % compromise_house=0   observed=0   motive=0   
-   (   0.5   0.5))   % compromise_house=1   observed=0   motive=0   
-   ((   0.5   0.5)   % compromise_house=0   observed=1   motive=0   
-   (   0.5   0.5)))   % compromise_house=1   observed=1   motive=0   
-   (((   0.00013238   0.999868)   % compromise_house=0   observed=0   motive=1   
-   (   0.00014497   0.999855))   % compromise_house=1   observed=0   motive=1   
-   ((   0.127019   0.872981)   % compromise_house=0   observed=1   motive=1   
-   (   0.000378501   0.999621))));   % compromise_house=1   observed=1   motive=1   
+   (((   0.608844   0.391156)   % observed=0   motive=0   
+   (   0.5   0.5))   % observed=1   motive=0   
+   ((   0.00295858   0.997041)   % observed=0   motive=1   
+   (   0.0837563   0.916244)));   % observed=1   motive=1   
+}
+
+potential ( spotted_with_goodie | successful_stolen   ) {
+   data = 
+   ((   0.998607   0.00139276)   % successful_stolen=0   
+   (   0.0555556   0.944444));   % successful_stolen=1   
 }
 
 

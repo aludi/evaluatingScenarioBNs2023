@@ -47,84 +47,84 @@ potential (know_object) {
 
 potential ( target_object | know_object   ) {
    data = 
-   ((   0   0)   % know_object=0   
-   (   0.502   0.498));   % know_object=1   
+   ((   1   0)   % know_object=0   
+   (   0.5065   0.4935));   % know_object=1   
 }
 
 potential ( motive | know_object   target_object   ) {
    data = 
-   (((   0   0)   % target_object=0   know_object=0   
-   (   0   0))   % target_object=1   know_object=0   
+   (((   1   0)   % target_object=0   know_object=0   
+   (   1   0))   % target_object=1   know_object=0   
    ((   1   0)   % target_object=0   know_object=1   
    (   0   1)));   % target_object=1   know_object=1   
 }
 
 potential ( compromise_house | know_object   target_object   motive   ) {
    data = 
-   ((((   0   0)   % motive=0   target_object=0   know_object=0   
-   (   0   0))   % motive=1   target_object=0   know_object=0   
-   ((   0   0)   % motive=0   target_object=1   know_object=0   
-   (   0   0)))   % motive=1   target_object=1   know_object=0   
+   ((((   1   0)   % motive=0   target_object=0   know_object=0   
+   (   1   0))   % motive=1   target_object=0   know_object=0   
+   ((   1   0)   % motive=0   target_object=1   know_object=0   
+   (   1   0)))   % motive=1   target_object=1   know_object=0   
    (((   1   0)   % motive=0   target_object=0   know_object=1   
-   (   0   0))   % motive=1   target_object=0   know_object=1   
-   ((   0   0)   % motive=0   target_object=1   know_object=1   
-   (   0.718876   0.281124))));   % motive=1   target_object=1   know_object=1   
+   (   1   0))   % motive=1   target_object=0   know_object=1   
+   ((   1   0)   % motive=0   target_object=1   know_object=1   
+   (   0.716312   0.283688))));   % motive=1   target_object=1   know_object=1   
 }
 
 potential ( observed | know_object   target_object   motive   compromise_house   ) {
    data = 
-   (((((   0   0)   % compromise_house=0   motive=0   target_object=0   know_object=0   
-   (   0   0))   % compromise_house=1   motive=0   target_object=0   know_object=0   
-   ((   0   0)   % compromise_house=0   motive=1   target_object=0   know_object=0   
-   (   0   0)))   % compromise_house=1   motive=1   target_object=0   know_object=0   
-   (((   0   0)   % compromise_house=0   motive=0   target_object=1   know_object=0   
-   (   0   0))   % compromise_house=1   motive=0   target_object=1   know_object=0   
-   ((   0   0)   % compromise_house=0   motive=1   target_object=1   know_object=0   
-   (   0   0))))   % compromise_house=1   motive=1   target_object=1   know_object=0   
+   (((((   1   0)   % compromise_house=0   motive=0   target_object=0   know_object=0   
+   (   1   0))   % compromise_house=1   motive=0   target_object=0   know_object=0   
+   ((   1   0)   % compromise_house=0   motive=1   target_object=0   know_object=0   
+   (   1   0)))   % compromise_house=1   motive=1   target_object=0   know_object=0   
+   (((   1   0)   % compromise_house=0   motive=0   target_object=1   know_object=0   
+   (   1   0))   % compromise_house=1   motive=0   target_object=1   know_object=0   
+   ((   1   0)   % compromise_house=0   motive=1   target_object=1   know_object=0   
+   (   1   0))))   % compromise_house=1   motive=1   target_object=1   know_object=0   
    ((((   1   0)   % compromise_house=0   motive=0   target_object=0   know_object=1   
-   (   0   0))   % compromise_house=1   motive=0   target_object=0   know_object=1   
-   ((   0   0)   % compromise_house=0   motive=1   target_object=0   know_object=1   
-   (   0   0)))   % compromise_house=1   motive=1   target_object=0   know_object=1   
-   (((   0   0)   % compromise_house=0   motive=0   target_object=1   know_object=1   
-   (   0   0))   % compromise_house=1   motive=0   target_object=1   know_object=1   
-   ((   0.350559   0.649441)   % compromise_house=0   motive=1   target_object=1   know_object=1   
-   (   0.682143   0.317857)))));   % compromise_house=1   motive=1   target_object=1   know_object=1   
+   (   1   0))   % compromise_house=1   motive=0   target_object=0   know_object=1   
+   ((   1   0)   % compromise_house=0   motive=1   target_object=0   know_object=1   
+   (   1   0)))   % compromise_house=1   motive=1   target_object=0   know_object=1   
+   (((   1   0)   % compromise_house=0   motive=0   target_object=1   know_object=1   
+   (   1   0))   % compromise_house=1   motive=0   target_object=1   know_object=1   
+   ((   0.343706   0.656294)   % compromise_house=0   motive=1   target_object=1   know_object=1   
+   (   0.739286   0.260714)))));   % compromise_house=1   motive=1   target_object=1   know_object=1   
 }
 
 potential ( successful_stolen | know_object   target_object   motive   compromise_house   observed   ) {
    data = 
-   ((((((   0   0)   % observed=0   compromise_house=0   motive=0   target_object=0   know_object=0   
-   (   0   0))   % observed=1   compromise_house=0   motive=0   target_object=0   know_object=0   
-   ((   0   0)   % observed=0   compromise_house=1   motive=0   target_object=0   know_object=0   
-   (   0   0)))   % observed=1   compromise_house=1   motive=0   target_object=0   know_object=0   
-   (((   0   0)   % observed=0   compromise_house=0   motive=1   target_object=0   know_object=0   
-   (   0   0))   % observed=1   compromise_house=0   motive=1   target_object=0   know_object=0   
-   ((   0   0)   % observed=0   compromise_house=1   motive=1   target_object=0   know_object=0   
-   (   0   0))))   % observed=1   compromise_house=1   motive=1   target_object=0   know_object=0   
-   ((((   0   0)   % observed=0   compromise_house=0   motive=0   target_object=1   know_object=0   
-   (   0   0))   % observed=1   compromise_house=0   motive=0   target_object=1   know_object=0   
-   ((   0   0)   % observed=0   compromise_house=1   motive=0   target_object=1   know_object=0   
-   (   0   0)))   % observed=1   compromise_house=1   motive=0   target_object=1   know_object=0   
-   (((   0   0)   % observed=0   compromise_house=0   motive=1   target_object=1   know_object=0   
-   (   0   0))   % observed=1   compromise_house=0   motive=1   target_object=1   know_object=0   
-   ((   0   0)   % observed=0   compromise_house=1   motive=1   target_object=1   know_object=0   
-   (   0   0)))))   % observed=1   compromise_house=1   motive=1   target_object=1   know_object=0   
+   ((((((   1   0)   % observed=0   compromise_house=0   motive=0   target_object=0   know_object=0   
+   (   1   0))   % observed=1   compromise_house=0   motive=0   target_object=0   know_object=0   
+   ((   1   0)   % observed=0   compromise_house=1   motive=0   target_object=0   know_object=0   
+   (   1   0)))   % observed=1   compromise_house=1   motive=0   target_object=0   know_object=0   
+   (((   1   0)   % observed=0   compromise_house=0   motive=1   target_object=0   know_object=0   
+   (   1   0))   % observed=1   compromise_house=0   motive=1   target_object=0   know_object=0   
+   ((   1   0)   % observed=0   compromise_house=1   motive=1   target_object=0   know_object=0   
+   (   1   0))))   % observed=1   compromise_house=1   motive=1   target_object=0   know_object=0   
+   ((((   1   0)   % observed=0   compromise_house=0   motive=0   target_object=1   know_object=0   
+   (   1   0))   % observed=1   compromise_house=0   motive=0   target_object=1   know_object=0   
+   ((   1   0)   % observed=0   compromise_house=1   motive=0   target_object=1   know_object=0   
+   (   1   0)))   % observed=1   compromise_house=1   motive=0   target_object=1   know_object=0   
+   (((   1   0)   % observed=0   compromise_house=0   motive=1   target_object=1   know_object=0   
+   (   1   0))   % observed=1   compromise_house=0   motive=1   target_object=1   know_object=0   
+   ((   1   0)   % observed=0   compromise_house=1   motive=1   target_object=1   know_object=0   
+   (   1   0)))))   % observed=1   compromise_house=1   motive=1   target_object=1   know_object=0   
    (((((   1   0)   % observed=0   compromise_house=0   motive=0   target_object=0   know_object=1   
-   (   0   0))   % observed=1   compromise_house=0   motive=0   target_object=0   know_object=1   
-   ((   0   0)   % observed=0   compromise_house=1   motive=0   target_object=0   know_object=1   
-   (   0   0)))   % observed=1   compromise_house=1   motive=0   target_object=0   know_object=1   
-   (((   0   0)   % observed=0   compromise_house=0   motive=1   target_object=0   know_object=1   
-   (   0   0))   % observed=1   compromise_house=0   motive=1   target_object=0   know_object=1   
-   ((   0   0)   % observed=0   compromise_house=1   motive=1   target_object=0   know_object=1   
-   (   0   0))))   % observed=1   compromise_house=1   motive=1   target_object=0   know_object=1   
-   ((((   0   0)   % observed=0   compromise_house=0   motive=0   target_object=1   know_object=1   
-   (   0   0))   % observed=1   compromise_house=0   motive=0   target_object=1   know_object=1   
-   ((   0   0)   % observed=0   compromise_house=1   motive=0   target_object=1   know_object=1   
-   (   0   0)))   % observed=1   compromise_house=1   motive=0   target_object=1   know_object=1   
+   (   1   0))   % observed=1   compromise_house=0   motive=0   target_object=0   know_object=1   
+   ((   1   0)   % observed=0   compromise_house=1   motive=0   target_object=0   know_object=1   
+   (   1   0)))   % observed=1   compromise_house=1   motive=0   target_object=0   know_object=1   
+   (((   1   0)   % observed=0   compromise_house=0   motive=1   target_object=0   know_object=1   
+   (   1   0))   % observed=1   compromise_house=0   motive=1   target_object=0   know_object=1   
+   ((   1   0)   % observed=0   compromise_house=1   motive=1   target_object=0   know_object=1   
+   (   1   0))))   % observed=1   compromise_house=1   motive=1   target_object=0   know_object=1   
+   ((((   1   0)   % observed=0   compromise_house=0   motive=0   target_object=1   know_object=1   
+   (   1   0))   % observed=1   compromise_house=0   motive=0   target_object=1   know_object=1   
+   ((   1   0)   % observed=0   compromise_house=1   motive=0   target_object=1   know_object=1   
+   (   1   0)))   % observed=1   compromise_house=1   motive=0   target_object=1   know_object=1   
    (((   1   0)   % observed=0   compromise_house=0   motive=1   target_object=1   know_object=1   
    (   1   0))   % observed=1   compromise_house=0   motive=1   target_object=1   know_object=1   
    ((   0   1)   % observed=0   compromise_house=1   motive=1   target_object=1   know_object=1   
-   (   0.314607   0.685393))))));   % observed=1   compromise_house=1   motive=1   target_object=1   know_object=1   
+   (   0.547945   0.452055))))));   % observed=1   compromise_house=1   motive=1   target_object=1   know_object=1   
 }
 
 

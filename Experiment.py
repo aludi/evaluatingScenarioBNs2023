@@ -11,6 +11,7 @@ import re
 
 from Reporters import Reporters
 from SimulationTest import StolenLaptop
+import csv
 
 
 class Experiment():
@@ -22,17 +23,28 @@ class Experiment():
             model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
             for j in range(20):
                 model.step()
-            #if self.reporters.get_report_of_event('successful_stolen') == 0 and self.reporters.get_report_of_event(
-                    #'unsuccessful_stolen') == 0:
-                # the agent decided to not steal, either because he didn't know there was something to steal,
-                # of because the cost-benefit was not worth it.
-                #self.reporters.increase_counter_once("no_stealing")
-           # print(self.reporters.history_dict[i])
 
             self.reporters.increase_run()
-        self.print_frequencies()
-        self.print_frequencies_latex()
 
+        self.generate_csv_report()  # use these csvs for automatic BN structure determination
+        self.print_frequencies()
+        #self.print_frequencies_latex()
+
+    def generate_csv_report(self):
+        history_list = []
+        #print("history dict", self.reporters.history_dict)
+        for key in self.reporters.history_dict.keys():
+            history_list.append(self.reporters.history_dict[key])
+        csv_columns = self.reporters.relevant_events
+        csv_file = "globalStates.csv"
+        try:
+            with open(csv_file, 'w') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+                writer.writeheader()
+                for data in history_list:
+                    writer.writerow(data)
+        except IOError:
+            print("I/O error")
 
 
     def generate_empty_tables(self, parents, child):
@@ -49,7 +61,6 @@ class Experiment():
         conditional_dict = {}
         for item in list_of_possible_combinations:
             conditional_dict[item] = 0
-        #print(conditional_dict)
         return conditional_dict
 
 
@@ -88,9 +99,7 @@ class Experiment():
                 #print(parents[j], i[j])
             dict_[child] = tuple([0]*var)
             dict_["count"] = 0
-            #print(dict_[child])
             list_of_dicts.append(dict_)
-        #print(list_of_dicts)
         return list_of_dicts
 
     def conditional_frequencies_dict(self, parents, child, var=2):

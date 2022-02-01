@@ -59,13 +59,14 @@ def fill_cpts(bn, exp):
         parents, child = x
         cpt_table = exp.conditional_frequencies_dict(parents, child, 2)
         for item in cpt_table:
+            #print(item)
             tup = item.pop(child)
             count = item.pop("count")
             a, b = tup
             if count == 0:  # impossible combination (eg: not target object, but compromise house)
                 count = 1   # TODO: HAAAACK FRAUD
                 a = 0
-                b = 0
+                b = 1
             bn.cpt(child)[item] = [(b/count), (a/count)]
     return bn
 
@@ -192,6 +193,15 @@ def fill_cpts_common(bn):
     return bn
 
 
+def K2_BN():
+    learner = gum.BNLearner("globalStates.csv")  # using bn as template for variables and labels
+    file_name = "BayesNets/K2BN.net"
+    learner.useK2([0, 1, 2, 3, 4, 5])
+    bn = learner.learnBN()
+    gum.saveBN(bn, file_name)
+    print(f"saved bn as {file_name}")
+    return bn
+
 
 def complex(experiment):
     file_name = "BayesNets/GodBN.net"
@@ -232,3 +242,4 @@ experiment = Experiment()
 complex(experiment)
 rounded(experiment)
 common_sense(experiment)
+K2_BN()

@@ -24,10 +24,10 @@ class Camera(Agent):
 
         for object in neighbors:
             if type(object).__name__ == "StreetAgent":
-                if object.name == "moriaty" and object.owns_house != self.owner:
-                    self.model.reporters.increase_evidence_counter_once("spotted_by_house")
+                if object.name == "moriarty" and object.owns_house != self.owner:
+                    self.model.reporters.increase_evidence_counter_once("E_s_spotted_by_house")
 
-                elif object.name == "moriaty" and object.goodies == [object.target]:
-                    self.model.reporters.increase_evidence_counter_once("spotted_with_goodie")
+                elif object.name == "moriarty" and object.goodies == [object.target]:
+                    self.model.reporters.increase_evidence_counter_once("E_s_spotted_with_goodie")
 
 

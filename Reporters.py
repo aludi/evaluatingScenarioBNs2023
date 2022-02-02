@@ -13,8 +13,8 @@ class Reporters():
         self.history_dict = {}
         self.run = 0
         self.relevant_events = ["know_object", "target_object", "motive", "compromise_house",
-                                "observed", "successful_stolen", "raining", "spotted_by_house",
-                                "spotted_with_goodie"]
+                                "observed", "successful_stolen", "raining", "E_s_spotted_by_house",
+                                "E_s_spotted_with_goodie", "E_object_is_gone", "E_broken_lock"]
         self.temporal_list = []
         self.evidence_list = []
         self.temporal_dict = {}
@@ -38,6 +38,11 @@ class Reporters():
         self.add_to_temporal_list(event)
         self.pure_frequency_event_dict[event] += 1
         self.history_dict[self.run][event] += 1
+
+    def set_value_directly(self, event, val):    # use for mutually exclusive events
+        self.add_to_temporal_list(event)
+        self.pure_frequency_event_dict[event] += val
+        self.history_dict[self.run][event] += val
 
     def get_report_of_event(self, event):   # if event is not X
         return self.history_dict[self.run][event]

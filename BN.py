@@ -210,6 +210,11 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
 
     for key in experiment.reporters.temporal_dict.keys():
         #print(key, experiment.reporters.temporal_dict[key])
+        #print(len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list))
+        #print(experiment.reporters.evidence_list)
+        #print(experiment.reporters.temporal_list)
+        #print(len(key))
+
         if len(key) == len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list):
             if experiment.reporters.temporal_dict[key] > max_score:
                 best_temporal_ordering = list(key)
@@ -224,14 +229,31 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
             best_ordering_in_col_numbers_list.append(header.index(item))
     else:
         best_ordering_in_col_numbers_list = best_temporal_ordering
+    print(flag)
     return best_ordering_in_col_numbers_list
 
+def evidence_cannot_be_connected_to_each_other(temporal_ordering):
+    #we know evidence is always added at the end
+    forbidden_pairs = []
+    evidence = temporal_ordering[-len(experiment.reporters.evidence_list):]  # we get column header idx
+    for i in range(0, len(evidence)):
+        for j in range(1, len(evidence) - i):
+            forbidden_pairs.append((evidence[i], evidence[j+i]))
+            forbidden_pairs.append((evidence[j+i], evidence[i]))
+
+    return forbidden_pairs
 
 def K2_BN(experiment):
     global_state_csv = "globalStates.csv"
     learner = gum.BNLearner(global_state_csv)  # using bn as template for variables and labels
+    #learner.addMandatoryArc(0, 1)
+
     file_name = "BayesNets/K2BN.net"
     temporal_order = get_temporal_ordering_nodes(experiment, global_state_csv)
+    forbidden = evidence_cannot_be_connected_to_each_other(temporal_order)
+    for (a, b) in forbidden:
+        learner.addForbiddenArc(a, b)
+    #print(temporal_order)
     learner.useK2(temporal_order)
     bn = learner.learnBN()
     gum.saveBN(bn, file_name)

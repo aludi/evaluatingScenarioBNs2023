@@ -23,6 +23,20 @@ class Vision(Agent):
 
 
     def step(self):
+        neighbors = []
         (new_a, new_b) = self.owner.pos[0], self.owner.pos[1]
         neighbors = self.model.grid.get_neighbors(pos=(new_a, new_b), moore=True, radius=self.radius)
+        rm_list = []
+        for object_ in neighbors:
+            if type(object_).__name__=="House":
+                if object_.has_curtains() == True:
+                    for item in neighbors:
+                        if item.pos in object_.position_covered_by_house(): # then its invisible
+                            rm_list.append(item)
+
+        for item in rm_list:
+            neighbors.remove(item)
+
+
+
         self.owner.update_objects_in_vision(neighbors)

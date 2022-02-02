@@ -17,11 +17,11 @@ import csv
 class Experiment():
 
     def __init__(self):  # TODO: compromise house is strange
-        self.runs = 200  # to test
+        self.runs = 500  # to test
         self.reporters = Reporters()
         for i in range(0, self.runs):
             model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
-            for j in range(20):
+            for j in range(30):
                 model.step()
             self.reporters.increase_run()
 

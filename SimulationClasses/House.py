@@ -6,7 +6,7 @@ from SimulationClasses.Camera import Camera
 
 
 class House(Agent):
-    def __init__(self, unique_id, model, i_place):
+    def __init__(self, unique_id, model, i_place, curtains_p):
         super().__init__(unique_id, model)
         self.width = 3
         self.height = 2
@@ -18,7 +18,14 @@ class House(Agent):
         self.compromised = False    # if the stealing agent has compromised the house, they can get in.
         self.covers_pos = self.position_covered_by_house()
         self.adjacent_included = self.circle_around_house()
+        if curtains_p < 33:
+            self.curtains = True
+        else:
+            self.curtains = False
         self.camera = Camera(self.model.next_id(), self.model, self, 2, self.door_location)
+
+    def has_curtains(self):
+        return self.curtains
 
     def set_owner(self, agent):
         house = self

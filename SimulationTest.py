@@ -25,6 +25,7 @@ class StolenLaptop(Model):
         self.walkways = []
         self.raining = False
 
+
         # reporters -> meta
         self.reporters = reporters
         self.reporters.history_dict[self.reporters.run] = {}
@@ -35,7 +36,8 @@ class StolenLaptop(Model):
         and another agent walking past
         '''
         for i in range(self.num_agents):
-            a = House(self.next_id(), self, i)
+            a = House(self.next_id(), self, i, curtains_p=random.randrange(0, 100))
+
             self.schedule.add(a)
             self.grid.place_agent(a, (a.x, a.y))
             self.houses.append(a)
@@ -58,12 +60,12 @@ class StolenLaptop(Model):
         self.schedule.add(a)
         #x = self.grid.width - 1
         #y = self.grid.height - 1
-        x = self.random.randrange(self.grid.width)
-        y = self.grid.height-1
+        x = self.random.randrange(2, self.grid.width-2)
+        y = self.grid.height-2
         self.grid.place_agent(a, (x, y))
         self.agents.append(a)
         self.houses[0 % 2].set_owner(a)
-        a.set_vision(radius=0)
+        a.set_vision(radius=3)
         a.set_goodie(pos=(a.owns_house.x, a.owns_house.y))
         a.goodies = []
 
@@ -71,7 +73,7 @@ class StolenLaptop(Model):
         a = StreetAgent(self.next_id(), self)
         a.goal = "WALK ROAD"
         self.schedule.add(a)
-        a.set_name("moriaty")
+        a.set_name("moriarty")
         #x = self.grid.width - 1
         #y = road.y
         x = self.random.randrange(self.grid.width)
@@ -79,7 +81,7 @@ class StolenLaptop(Model):
         self.grid.place_agent(a, (x, y))
         self.agents.append(a)
         self.houses[1 % 2].set_owner(a)
-        a.set_vision(radius=3)
+        a.set_vision(radius=2)
 
 
 

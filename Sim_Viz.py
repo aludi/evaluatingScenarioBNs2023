@@ -63,12 +63,13 @@ def agent_portrayal(agent):
     elif type(agent) is House:
         portrayal["Shape"] = "rect"
         portrayal["Filled"] = "true"
-        if agent.compromised is False:
-            portrayal["Color"] = "brown"
-        else:
+        if agent.curtains is True:
+            portrayal["Color"] = "black"
+        elif agent.compromised is True:
             portrayal["Color"] = "red"
+        else:
+            portrayal["Color"] = "brown"
         portrayal["stroke_color"] = "red"
-        portrayal["Filled"] = "false"
         portrayal["w"] = agent.width
         portrayal["h"] = agent.height
         portrayal["Layer"] = 1

@@ -15,10 +15,11 @@ class StreetAgent(Agent):
         self.owns_house = None
         self.know_objects = None
         self.target = None # target for stealing
-        self.risk_threshold = random.randint(0, 1000)
-        self.breaking_and_entering_skill = random.randint(0, 10)
+        self.risk_threshold = random.randint(0, 1000)  #0 is always steals
+        self.breaking_and_entering_skill = random.randint(0, 10) # 10 is always breaks in
         self.goal = "WALK ROAD"
         self.goodies = []
+        self.objects_in_sight = []
         self.objects_seen = {}
         self.observed = False
 
@@ -30,6 +31,7 @@ class StreetAgent(Agent):
 
     def set_goodie(self, pos):
         self.goodie = Goodie(self.model.next_id(), self.model, self, pos)
+        self.remembered_location_goodie = pos
         self.goodies.append(self.goodie)
 
 
@@ -55,12 +57,15 @@ class StreetAgent(Agent):
         for object in objects:
             fact_tuple = (type(object).__name__, object, object.unique_id, self.model.schedule.steps, object.owner.unique_id)
             if type(object).__name__ == "Goodie":
-                if self.target is None:
+                if self.target is None and object.owner != self:
                     self.establish_motive(fact_tuple)
             list_objects.append(fact_tuple)
 
         self.objects_seen[self.model.schedule.steps] = list_objects
+        self.objects_in_sight = objects
         # this means: this agent saw an object of TYPE, with number X, at time T, and with owner Y.
+
+
 
     def set_house_owner(self, house):
         self.owns_house = house
@@ -140,6 +145,8 @@ class StreetAgent(Agent):
                 # see the other owner and go hide
                 if self.observed == False:
                     self.model.reporters.increase_counter("observed")
+                    self.model.reporters.set_value_directly("successful_stolen", 0)
+
                 self.observed = True
                 return True # go home
         return False    # keep stelaing
@@ -148,6 +155,11 @@ class StreetAgent(Agent):
         self.vision.step()
         goal = self.goal
         if goal == "GO HOME":
+
+            if self.pos in self.get_house().position_covered_by_house():
+
+                self.goal = "IN HOME"
+
             door_x, door_y = self.get_house().door_location
 
             if self.target is not None:
@@ -160,6 +172,7 @@ class StreetAgent(Agent):
                 self.go_home()
             else:
                 pass
+
         elif goal == "WALK ROAD":
             (new_x, new_y) = self.move_step_to_goal((4, 4))
             self.model.grid.move_agent(self, (new_x, new_y))
@@ -184,9 +197,12 @@ class StreetAgent(Agent):
                 #self.model.reporters.decrease_counter_once("successful_stolen")
 
 
+
             if (new_x, new_y) in target_house.door_adjacent and self.breaking_and_entering_skill > 5:
                 target_house.set_compromised()
                 self.model.reporters.increase_counter_once("compromise_house")
+                # automatically update evidence reporter for this, because you would notice
+                self.model.reporters.increase_evidence_counter_once("E_broken_lock")
                 self.goal = "STEAL"
 
             if self.breaking_and_entering_skill < 5 and (new_x, new_y) in target_house.door_adjacent:   # if you can't steal, then go home without
@@ -206,19 +222,70 @@ class StreetAgent(Agent):
 
             if self.check_observed():   # if you can't steal, then go home without
                 self.goal = "GO HOME"
-                #self.model.reporters.increase_counter_once("unsuccessful_stolen")
-                #self.model.reporters.decrease_counter_once("successful_stolen")
-
 
 
             if self.pos == self.target.position:
                 self.goodies.append(self.target)
-                self.goal = "GO HOME"
+                self.goal = "GET OUTSIDE"
                 #if self.model.reporters.get_report_of_event("unsuccessful_stolen") != 1:
-                self.model.reporters.increase_counter_once("successful_stolen")  # TODO: double counting if observed after stolen...
 
+        elif goal == "GET OUTSIDE":
+            self.go_home()  # try to go home
+            if self.pos in self.target.owner.owns_house.position_covered_by_house():
+                # not safe, you're still in the house and can be observed
+                if self.check_observed():
+                    self.goal = "GO HOME" # don't pass start - flee and go straight home
+            else: # assume you've sneaked out of the target house
+                # congratulations, yuo have succcessfully stolen something!
+                self.model.reporters.set_value_directly("observed", 0)
+
+                self.model.reporters.increase_counter_once("successful_stolen")
+                self.goal = "GO HOME"
 
         elif goal == "FLEE":
             (new_x, new_y) = self.move_step_to_goal((13, 4))
             self.move_agent_and_attributes(new_x, new_y)
+
+        elif goal == "IN HOME":
+            ''' If you're home but you do not see your goodie, then be sad!'''
+
+
+            flag = 0
+            try:
+
+                if self.goodie.pos != self.remembered_location_goodie:
+                    self.model.reporters.increase_evidence_counter_once("E_object_is_gone")
+
+                if self.model.reporters.history_dict[self.model.reporters.run]['successful_stolen'] == 1 and \
+                    self.model.reporters.history_dict[self.model.reporters.run]['E_object_is_gone'] == 0:
+                    print(self.goodie.pos, self.remembered_location_goodie)
+                    print(self.model.reporters.history_dict[self.model.reporters.run])
+
+                '''
+                if self.goodie not in self.objects_in_sight:
+                    #print(self.name, " says: oh no! my object! it's stolen!")
+                    self.model.reporters.increase_evidence_counter_once("spotted_object_is_gone")
+                else:
+                    if self.goodie in self.objects_in_sight:
+                        for object in self.objects_in_sight:
+                            if type(object).__name__ == "StreetAgent" and object.name != self.name:
+                                #and object.pos == self.goodie.pos:  # you see a stranger
+                                #print(self.name, " says: that's my object!!! stop!!")
+                                #self.model.reporters.increase_evidence_counter_once("caught_redhanded")
+                                #self.model.reporters.increase_evidence_counter_once("spotted_object_is_gone")
+
+                                flag = 1
+                    if flag == 0:
+                        pass
+                        #print(self.name, " says: oh! my object is here! :)")
+                        #self.model.reporters.increase_evidence_counter_once("seen_object_not_stolen")
+                '''
+            except AttributeError:
+                pass # you don't own any object!
+
+            self.goal = "END"
+
+        elif goal == "END":
+            pass # just chillin'
+
 

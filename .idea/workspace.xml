@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BN.py" beforeDir="false" afterPath="$PROJECT_DIR$/BN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BayesNets/GodBN.net" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/GodBN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BayesNets/K2BN.net" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/K2BN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BayesNets/K2BN.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/K2BN.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BayesianJupyter.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/BayesianJupyter.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reporters.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reporters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sim_Viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sim_Viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimulationClasses/Camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/Camera.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimulationClasses/House.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/House.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimulationClasses/StreetAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/StreetAgent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimulationClasses/Vision.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/Vision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimulationTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/globalStates.csv" beforeDir="false" afterPath="$PROJECT_DIR$/globalStates.csv" afterDir="false" />
-    </list>
+    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

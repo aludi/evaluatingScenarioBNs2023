@@ -5,9 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BN.py" beforeDir="false" afterPath="$PROJECT_DIR$/BN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BayesNets/GodBN.net" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/GodBN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BayesNets/GodsEye.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/GodsEye.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BayesNets/K2BN.net" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/K2BN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BayesNets/K2BN.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/K2BN.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BayesianJupyter.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/BayesianJupyter.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reporters.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reporters.py" afterDir="false" />
@@ -50,14 +48,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../.virtualenvs/simulationTest/lib/python3.8/site-packages/mesa/visualization/templates/js" />
+      <recent name="$PROJECT_DIR$/../Desktop" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/BayesNets/old" />
       <recent name="$PROJECT_DIR$/BayesNets" />
       <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/../.virtualenvs/simulationTest/lib/python3.8/site-packages/mesa/visualization/templates/js" />
-      <recent name="$PROJECT_DIR$/../Desktop" />
     </key>
   </component>
   <component name="RunManager" selected="Python.BN">
@@ -147,7 +145,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -170,6 +170,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="861" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643734985718" />
+    <state x="354" y="126" width="1458" height="845" key="DiffContextDialog" timestamp="1644843960230">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
     <state width="1637" height="387" key="GridCell.Tab.0.bottom" timestamp="1644843168550">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -210,6 +214,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.right/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="234" key="GridCell.Tab.0.right/30.23.1250.777@30.23.1250.777" timestamp="1642773647127" />
     <state width="1709" height="385" key="GridCell.Tab.0.right/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
+    <state x="315" y="115" key="MergeDialog" timestamp="1644843937191">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="315" y="115" key="MergeDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843937191" />
     <state x="421" y="98" key="SettingsEditor" timestamp="1643503072200">
       <screen x="40" y="23" width="1880" height="1057" />
     </state>
@@ -217,6 +225,10 @@
     <state x="389" y="98" key="SettingsEditor/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1639515765891" />
     <state x="283" y="78" key="SettingsEditor/30.23.1250.777@30.23.1250.777" timestamp="1638531433991" />
     <state x="421" y="98" key="SettingsEditor/40.23.1880.1057@40.23.1880.1057" timestamp="1643503072200" />
+    <state x="937" y="471" key="VCS.ChangelistChooser" timestamp="1644843945261">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="937" y="471" key="VCS.ChangelistChooser/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843945261" />
     <state x="843" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1644408462669">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

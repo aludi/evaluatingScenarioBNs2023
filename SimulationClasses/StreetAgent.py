@@ -152,7 +152,9 @@ class StreetAgent(Agent):
             if a == "StreetAgent" and c is not self.unique_id:
                 # see the other owner and go hide
                 if self.observed == False:
-                    self.model.reporters.increase_counter("observed")
+                    self.model.reporters.increase_counter("flees_startled")
+                    self.model.reporters.increase_evidence_counter_once("E_private")
+
                     self.model.reporters.set_value_directly("successful_stolen", 0)
 
                 self.observed = True
@@ -253,7 +255,7 @@ class StreetAgent(Agent):
                     self.goal = "GO HOME" # don't pass start - flee and go straight home
             else: # assume you've sneaked out of the target house
                 # congratulations, yuo have succcessfully stolen something!
-                self.model.reporters.set_value_directly("observed", 0)
+                self.model.reporters.set_value_directly("flees_startled", 0)    # previously called "observed"
 
                 self.model.reporters.increase_counter_once("successful_stolen")
                 self.goal = "GO HOME"

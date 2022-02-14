@@ -209,11 +209,11 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
         flag = "def"
 
     for key in experiment.reporters.temporal_dict.keys():
-        print(key, experiment.reporters.temporal_dict[key])
-        print(len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list))
+        #print(key, experiment.reporters.temporal_dict[key])
+        #print(len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list))
         #print(experiment.reporters.evidence_list)
-        print(experiment.reporters.temporal_list)
-        print(len(key))
+        #print(experiment.reporters.temporal_list)
+        #print(len(key))
 
         if len(key) == len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list):
             if experiment.reporters.temporal_dict[key] > max_score:
@@ -253,7 +253,7 @@ def K2_BN(experiment):
     forbidden = evidence_cannot_be_connected_to_each_other(temporal_order)
     for (a, b) in forbidden:
         learner.addForbiddenArc(a, b)
-    print(temporal_order)
+    #print(temporal_order)
     learner.useK2(temporal_order)
     bn = learner.learnBN()
 
@@ -263,7 +263,6 @@ def K2_BN(experiment):
         i.setFirst()
         s = 0.0
         while (not i.end()):
-            #print(i.todict(), x[i.todict()])
             if 0.5 == x[i.todict()]:    # fix the never occurring situations -> maybe add an extra check for this TODO
                 if i.todict()[name] == 0:
                     bn.cpt(name)[i.todict()] = 1
@@ -272,9 +271,63 @@ def K2_BN(experiment):
             i.inc()
         bn.cpt(name)
 
+
+
     gum.saveBN(bn, file_name)
     print(f"saved bn as {file_name}")
     return bn
+
+
+### experiment with posterior outcomes
+def get_posteriors_in_table(experiment):
+    bnK2 = gum.loadBN("BayesNets/K2BN.net")
+    ie = gum.LazyPropagation(bnK2)
+    event_list = experiment.reporters.relevant_events
+    evidence_list = []
+    for ev in event_list:
+        if ev[0] == 'E':    # evidence node TODO make a seperate class
+            evidence_list.append(ev)
+    print("\\begin{table}")
+    print("\\begin{tabular}{c|c|c|c}")
+    print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
+    print("\\hline")
+    for evidence in evidence_list:
+        if evidence != "E_private":
+            ie.addEvidence(evidence, 1)
+        else:
+            ie.addEvidence(evidence, 0)
+        a = round(ie.posterior("successful_stolen")[1], 3)
+        b = round(ie.posterior("lost_object")[1], 3)
+        c = round(1 - a - b, 3)
+        l_key = evidence.replace("_", "\_")
+        print(f"{l_key} & {a} & {b} & {round(c, 3)} \\\\")
+    print("\\end{tabular}")
+    print("\\caption{Evidence set corresponding to scenario stealing.}")
+    print("\\end{table}")
+
+    print()
+
+    ie = gum.LazyPropagation(bnK2)
+
+    print("\\begin{table}")
+    print("\\begin{tabular}{c|c|c|c}")
+    print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
+    print("\\hline")
+    for evidence in evidence_list:
+        if evidence in ["E_object_is_gone"]:
+            ie.addEvidence(evidence, 1)
+        else:
+            ie.addEvidence(evidence, 0)
+        a = round(ie.posterior("successful_stolen")[1], 3)
+        b = round(ie.posterior("lost_object")[1], 3)
+        c = round(1 - a - b, 3)
+        l_key = evidence.replace("_", "\_")
+        print(f"{l_key} & {a} & {b} & {round(c, 3)} \\\\")
+    print("\\end{tabular}")
+    print("\\caption{Evidence set corresponding to lost scenario.}")
+    print("\\end{table}")
+
+
 
 
 def complex(experiment):
@@ -317,3 +370,4 @@ complex(experiment)
 #rounded(experiment)
 #common_sense(experiment)
 K2_BN(experiment)
+get_posteriors_in_table(experiment)

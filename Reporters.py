@@ -13,10 +13,13 @@ class Reporters():
         self.history_dict = {}
         self.run = 0
         self.relevant_events = ["know_object", "target_object", "motive", "compromise_house",
-                                "observed", "successful_stolen", "raining", "curtains", "lost_object",
+                                "flees_startled", "successful_stolen", "raining", "curtains", "lost_object",
+                                "E_object_is_gone",
+                                "E_broken_lock",
+                                "E_disturbed_house",
                                 "E_s_spotted_by_house",
-                                "E_s_spotted_with_goodie", "E_object_is_gone", "E_broken_lock",
-                                "E_disturbed_house"]
+                                "E_s_spotted_with_goodie",
+                                "E_private"]
         self.temporal_list = []
         self.evidence_list = []
         self.temporal_dict = {}

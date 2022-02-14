@@ -70,8 +70,8 @@ def agent_portrayal(agent):
         else:
             portrayal["Color"] = "brown"
         portrayal["stroke_color"] = "red"
-        portrayal["w"] = agent.width
-        portrayal["h"] = agent.height
+        portrayal["w"] = agent.width + 1
+        portrayal["h"] = agent.height + 1
         portrayal["Layer"] = 1
 
     elif type(agent) is Walkway:
@@ -94,11 +94,16 @@ def agent_portrayal(agent):
         portrayal["Shape"] = "rect"
         portrayal["Filled"] = "true"
         if agent.target_of == None:
-            portrayal["Color"] = "teal"
+            portrayal["Color"] = "yellow"
         else:
             portrayal["Color"] = "black"
-        portrayal["w"] = 0.25
-        portrayal["h"] = 0.25
+
+        if agent.lost:
+            portrayal["w"] = 0.05
+            portrayal["h"] = 0.05
+        else:
+            portrayal["w"] = 0.25
+            portrayal["h"] = 0.25
         portrayal["Layer"] = 4
 
 

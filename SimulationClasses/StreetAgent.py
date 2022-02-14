@@ -18,6 +18,8 @@ class StreetAgent(Agent):
         self.risk_threshold = random.randint(0, 1000)  #0 is always steals
         self.breaking_and_entering_skill = random.randint(0, 10) # 10 is always breaks in
         self.goal = "WALK ROAD"
+        self.prev_goal = None
+        self.stuck_timer = 0
         self.goodies = []
         self.objects_in_sight = []
         self.objects_seen = {}
@@ -29,8 +31,8 @@ class StreetAgent(Agent):
     def set_vision(self, radius):
         self.vision = Vision(self.model.next_id(), self.model, self, radius, self.pos)
 
-    def set_goodie(self, pos):
-        self.goodie = Goodie(self.model.next_id(), self.model, self, pos)
+    def set_goodie(self, pos, lost):
+        self.goodie = Goodie(self.model.next_id(), self.model, self, pos, lost)
         self.remembered_location_goodie = pos
         self.goodies.append(self.goodie)
 
@@ -56,9 +58,15 @@ class StreetAgent(Agent):
         list_objects = []
         for object in objects:
             fact_tuple = (type(object).__name__, object, object.unique_id, self.model.schedule.steps, object.owner.unique_id)
-            if type(object).__name__ == "Goodie":
+            if type(object).__name__ == "Goodie" and not object.lost:
                 if self.target is None and object.owner != self:
                     self.establish_motive(fact_tuple)
+            if type(object).__name__ == "House" and object.owner != self and object.has_curtains() or \
+                    (type(object).__name__ == "Goodie" and object.owner != self and object.lost):
+                # we know that there is a strangers house with a curtain
+                # we might take a risk and try to break in anyway
+                # but for now we are cautious
+                self.goal = "GO HOME"
             list_objects.append(fact_tuple)
 
         self.objects_seen[self.model.schedule.steps] = list_objects
@@ -154,29 +162,35 @@ class StreetAgent(Agent):
     def step(self):
         self.vision.step()
         goal = self.goal
+
+        if self.goal == self.prev_goal:
+            self.stuck_timer += 1
+        else:
+            self.stuck_timer = 0
+
+        #if self.stuck_timer > 2:    # if stuck arbitrarily long in some state then go home
+        #    self.goal = "GO HOME"
+
         if goal == "GO HOME":
-
             if self.pos in self.get_house().position_covered_by_house():
-
                 self.goal = "IN HOME"
-
-            door_x, door_y = self.get_house().door_location
-
-            if self.target is not None:
-                pass
-                #if self.pos == self.target.position and self.check_observed() == True:
-                #    self.model.reporters.increase_counter_once("unsuccessful_stolen")
-                #    self.model.reporters.decrease_counter_once("successful_stolen")
-
-            if self.pos is not (door_x, door_y):
-                self.go_home()
             else:
-                pass
+                door_x, door_y = self.get_house().door_location
+                if self.pos is not (door_x, door_y):
+                    self.go_home()
+                else:
+                    self.goal = "IN HOME"
+                    pass
 
         elif goal == "WALK ROAD":
             (new_x, new_y) = self.move_step_to_goal((4, 4))
             self.model.grid.move_agent(self, (new_x, new_y))
             self.vision.be_moved()
+
+            if self.stuck_timer > 8:    # if stuck arbitrarily long in some state then go home
+                self.goal = "GO HOME"
+
+
 
         elif goal == "STAND STILL":  # headstart
             if self.model.schedule.steps > 3:
@@ -215,6 +229,8 @@ class StreetAgent(Agent):
         elif goal == "STEAL":
 
             # move to target and take it
+            self.model.reporters.increase_evidence_counter_once("E_disturbed_house")    # thief always disturbs the house a bit
+
             (new_x, new_y) = self.move_step_to_goal(self.target.position)
             self.model.grid.move_agent(self, (new_x, new_y))
             self.vision.be_moved()
@@ -248,18 +264,19 @@ class StreetAgent(Agent):
 
         elif goal == "IN HOME":
             ''' If you're home but you do not see your goodie, then be sad!'''
-
+            #print(self.name, "in home")
 
             flag = 0
             try:
-
-                if self.goodie.pos != self.remembered_location_goodie:
+                #print(self.goodie.lost)
+                if self.goodie.pos != self.remembered_location_goodie or self.goodie.lost:
                     self.model.reporters.increase_evidence_counter_once("E_object_is_gone")
 
                 if self.model.reporters.history_dict[self.model.reporters.run]['successful_stolen'] == 1 and \
                     self.model.reporters.history_dict[self.model.reporters.run]['E_object_is_gone'] == 0:
-                    print(self.goodie.pos, self.remembered_location_goodie)
-                    print(self.model.reporters.history_dict[self.model.reporters.run])
+                    #print(self.goodie.pos, self.remembered_location_goodie)
+                    #print(self.model.reporters.history_dict[self.model.reporters.run])
+                    pass
 
                 '''
                 if self.goodie not in self.objects_in_sight:
@@ -287,5 +304,7 @@ class StreetAgent(Agent):
 
         elif goal == "END":
             pass # just chillin'
+
+        self.prev_goal = goal
 
 

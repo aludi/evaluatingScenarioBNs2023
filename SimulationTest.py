@@ -36,7 +36,11 @@ class StolenLaptop(Model):
         and another agent walking past
         '''
         for i in range(self.num_agents):
-            a = House(self.next_id(), self, i, curtains_p=random.randrange(0, 100))
+            curtains = random.randrange(0, 100)
+            if curtains > 80:
+                a = House(self.next_id(), self, i, curtains=True)
+            else:
+                a = House(self.next_id(), self, i, curtains=False)
 
             self.schedule.add(a)
             self.grid.place_agent(a, (a.x, a.y))
@@ -45,6 +49,8 @@ class StolenLaptop(Model):
         if random.random() > 0.5:   # rains about half of the time and it doesn't matter
             self.reporters.increase_counter_once("raining") # increase the counter here
             self.raining = True
+        else:
+            reporters.set_value_directly("raining", 0)
 
 
 
@@ -66,9 +72,18 @@ class StolenLaptop(Model):
         self.agents.append(a)
         self.houses[0 % 2].set_owner(a)
         a.set_vision(radius=3)
-        a.set_goodie(pos=(a.owns_house.x, a.owns_house.y))
+        lost_goodie = random.random()
+        if lost_goodie < 0.2:   # there is a 0.2 probability that the owner has misplaced the goodie
+            a.set_goodie(pos=(a.owns_house.x, a.owns_house.y), lost=True)  # goodie is lost by owner (and not findable by thief
+            reporters.increase_counter_once("lost_object")
+        else:   # the goodie is placed on the map
+            a.set_goodie(pos=(a.owns_house.x, a.owns_house.y), lost=False)
+            reporters.set_value_directly("lost_object", 0)
         a.goodies = []
-
+        if a.owns_house.has_curtains():
+            self.reporters.increase_counter_once("curtains")
+        else:
+            self.reporters.set_value_directly("curtains", 0)
         # thief
         a = StreetAgent(self.next_id(), self)
         a.goal = "WALK ROAD"

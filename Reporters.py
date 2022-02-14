@@ -13,8 +13,10 @@ class Reporters():
         self.history_dict = {}
         self.run = 0
         self.relevant_events = ["know_object", "target_object", "motive", "compromise_house",
-                                "observed", "successful_stolen", "raining", "E_s_spotted_by_house",
-                                "E_s_spotted_with_goodie", "E_object_is_gone", "E_broken_lock"]
+                                "observed", "successful_stolen", "raining", "curtains", "lost_object",
+                                "E_s_spotted_by_house",
+                                "E_s_spotted_with_goodie", "E_object_is_gone", "E_broken_lock",
+                                "E_disturbed_house"]
         self.temporal_list = []
         self.evidence_list = []
         self.temporal_dict = {}
@@ -25,6 +27,7 @@ class Reporters():
     def add_to_temporal_list(self, event):
         if event not in self.temporal_list:
             self.temporal_list.append(event)
+
     def add_to_evidence_list(self, event):
         if event not in self.evidence_list:
             self.evidence_list.append(event)
@@ -73,4 +76,15 @@ class Reporters():
             self.temporal_dict[tuple(self.temporal_list)] = 1
         self.temporal_list = []
         self.initialize_event_dict(self.history_dict[self.run])
+
+    def report(self, event, increase, evidence):
+        # report that the trigger could have been fired.
+        if not evidence:
+            self.add_to_temporal_list(event)
+        else:
+            self.add_to_evidence_list(event)
+        if increase and not evidence:
+            self.increase_counter_once(event)
+        if increase and evidence:
+            self.increase_evidence_counter_once(event)
 

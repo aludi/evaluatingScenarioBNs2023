@@ -209,11 +209,11 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
         flag = "def"
 
     for key in experiment.reporters.temporal_dict.keys():
-        #print(key, experiment.reporters.temporal_dict[key])
-        #print(len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list))
+        print(key, experiment.reporters.temporal_dict[key])
+        print(len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list))
         #print(experiment.reporters.evidence_list)
-        #print(experiment.reporters.temporal_list)
-        #print(len(key))
+        print(experiment.reporters.temporal_list)
+        print(len(key))
 
         if len(key) == len(experiment.reporters.relevant_events) - len(experiment.reporters.evidence_list):
             if experiment.reporters.temporal_dict[key] > max_score:
@@ -253,7 +253,7 @@ def K2_BN(experiment):
     forbidden = evidence_cannot_be_connected_to_each_other(temporal_order)
     for (a, b) in forbidden:
         learner.addForbiddenArc(a, b)
-    #print(temporal_order)
+    print(temporal_order)
     learner.useK2(temporal_order)
     bn = learner.learnBN()
     gum.saveBN(bn, file_name)

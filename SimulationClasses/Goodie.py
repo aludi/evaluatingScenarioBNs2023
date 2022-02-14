@@ -4,7 +4,7 @@ from mesa.space import MultiGrid
 import random
 
 class Goodie(Agent):
-    def __init__(self, unique_id, model, agent, position):
+    def __init__(self, unique_id, model, agent, position, lost):
         super().__init__(unique_id, model)
         self.type_ = "laptop"
         self.value = 500
@@ -13,6 +13,7 @@ class Goodie(Agent):
         self.position = (a, b)
         self.target_of = None
         self.model.grid.place_agent(self, (a, b))
+        self.lost = lost
 
     def be_moved(self, position):
         (new_a, new_b) = position

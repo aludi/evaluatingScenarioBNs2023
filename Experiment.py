@@ -16,8 +16,8 @@ import csv
 
 class Experiment():
 
-    def __init__(self):  # TODO: compromise house is strange
-        self.runs = 500  # to test
+    def __init__(self):
+        self.runs = 1000# to test
         self.reporters = Reporters()
         for i in range(0, self.runs):
             model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)

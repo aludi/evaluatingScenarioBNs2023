@@ -29,7 +29,7 @@ class Vision(Agent):
         rm_list = []
         for object_ in neighbors:
             if type(object_).__name__=="House":
-                if object_.has_curtains() == True:
+                if object_.has_curtains() == True and type(self).__name__ != "Camera":
                     for item in neighbors:
                         if item.pos in object_.position_covered_by_house(): # then its invisible
                             rm_list.append(item)

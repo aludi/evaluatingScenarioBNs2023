@@ -256,6 +256,22 @@ def K2_BN(experiment):
     print(temporal_order)
     learner.useK2(temporal_order)
     bn = learner.learnBN()
+
+    for name in experiment.reporters.relevant_events:
+        x = bn.cpt(name)
+        i = gum.Instantiation(x)
+        i.setFirst()
+        s = 0.0
+        while (not i.end()):
+            #print(i.todict(), x[i.todict()])
+            if 0.5 == x[i.todict()]:    # fix the never occurring situations -> maybe add an extra check for this TODO
+                if i.todict()[name] == 0:
+                    bn.cpt(name)[i.todict()] = 1
+                elif i.todict()[name] == 1:
+                    bn.cpt(name)[i.todict()] = 0
+            i.inc()
+        bn.cpt(name)
+
     gum.saveBN(bn, file_name)
     print(f"saved bn as {file_name}")
     return bn

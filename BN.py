@@ -291,18 +291,60 @@ def get_posteriors_in_table(experiment):
     print("\\begin{tabular}{c|c|c|c}")
     print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
     print("\\hline")
+    val = 1
+    a = round(ie.posterior("successful_stolen")[1], 3)
+    b = round(ie.posterior("lost_object")[1], 3)
+    c = round(1 - a - b, 3)
+    print(f" & {a} & {b} & {round(c, 3)} \\\\")
     for evidence in evidence_list:
         if evidence != "E_private":
-            ie.addEvidence(evidence, 1)
+            val = 1
         else:
-            ie.addEvidence(evidence, 0)
+            val = 0
+        ie.addEvidence(evidence, val)
         a = round(ie.posterior("successful_stolen")[1], 3)
         b = round(ie.posterior("lost_object")[1], 3)
         c = round(1 - a - b, 3)
         l_key = evidence.replace("_", "\_")
-        print(f"{l_key} & {a} & {b} & {round(c, 3)} \\\\")
+        print(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
     print("\\end{tabular}")
-    print("\\caption{Evidence set corresponding to scenario stealing.}")
+    print("\\caption{Evidence set corresponding to scenario stealing. Outcome nodes.}")
+    print("\\end{table}")
+
+    print()
+    ie = gum.LazyPropagation(bnK2)
+
+
+    print("\\begin{table}")
+    print("\\begin{tabular}{c|c|c|c|c|c|c|c}")
+    print("Evidence & Raining & Curtains & Know O & Target O & Motive & Compromise H & Flees \\\\")
+    print("\\hline")
+    val = 1
+    b1 = round(ie.posterior("raining")[1], 3)
+    b2 = round(ie.posterior("curtains")[1], 3)
+    b3 = round(ie.posterior("know_object")[1], 3)
+    b4 = round(ie.posterior("target_object")[1], 3)
+    b5 = round(ie.posterior("motive")[1], 3)
+    b6 = round(ie.posterior("compromise_house")[1], 3)
+    b7 = round(ie.posterior("flees_startled")[1], 3)
+    print(f" & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
+    for evidence in evidence_list:
+        if evidence != "E_private":
+            val = 1
+        else:
+            val = 0
+        ie.addEvidence(evidence, val)
+        b1 = round(ie.posterior("raining")[1], 3)
+        b2 = round(ie.posterior("curtains")[1], 3)
+        b3 = round(ie.posterior("know_object")[1], 3)
+        b4 = round(ie.posterior("target_object")[1], 3)
+        b5 = round(ie.posterior("motive")[1], 3)
+        b6 = round(ie.posterior("compromise_house")[1], 3)
+        b7 = round(ie.posterior("flees_startled")[1], 3)
+        l_key = evidence.replace("_", "\_")
+        print(f" {l_key} = {val} & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
+    print("\\end{tabular}")
+    print("\\caption{Evidence set corresponding to scenario stealing. Hypothesis nodes.}")
     print("\\end{table}")
 
     print()
@@ -313,18 +355,60 @@ def get_posteriors_in_table(experiment):
     print("\\begin{tabular}{c|c|c|c}")
     print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
     print("\\hline")
+    a = round(ie.posterior("successful_stolen")[1], 3)
+    b = round(ie.posterior("lost_object")[1], 3)
+    c = round(1 - a - b, 3)
+    print(f" & {a} & {b} & {round(c, 3)} \\\\")
     for evidence in evidence_list:
         if evidence in ["E_object_is_gone"]:
-            ie.addEvidence(evidence, 1)
+            val = 1
         else:
-            ie.addEvidence(evidence, 0)
+            val = 0
+        ie.addEvidence(evidence, val)
         a = round(ie.posterior("successful_stolen")[1], 3)
         b = round(ie.posterior("lost_object")[1], 3)
         c = round(1 - a - b, 3)
         l_key = evidence.replace("_", "\_")
-        print(f"{l_key} & {a} & {b} & {round(c, 3)} \\\\")
+        print(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
     print("\\end{tabular}")
-    print("\\caption{Evidence set corresponding to lost scenario.}")
+    print("\\caption{Evidence set corresponding to lost scenario. Outcome nodes.}")
+    print("\\end{table}")
+
+    print()
+
+
+    ie = gum.LazyPropagation(bnK2)
+
+    print("\\begin{table}")
+    print("\\begin{tabular}{c|c|c|c|c|c|c|c}")
+    print("Evidence & Raining & Curtains & Know O & Target O & Motive & Compromise H & Flees \\\\")
+    print("\\hline")
+    val = 1
+    b1 = round(ie.posterior("raining")[1], 3)
+    b2 = round(ie.posterior("curtains")[1], 3)
+    b3 = round(ie.posterior("know_object")[1], 3)
+    b4 = round(ie.posterior("target_object")[1], 3)
+    b5 = round(ie.posterior("motive")[1], 3)
+    b6 = round(ie.posterior("compromise_house")[1], 3)
+    b7 = round(ie.posterior("flees_startled")[1], 3)
+    print(f" & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
+    for evidence in evidence_list:
+        if evidence in ["E_object_is_gone"]:
+            val = 1
+        else:
+            val = 0
+        ie.addEvidence(evidence, val)
+        b1 = round(ie.posterior("raining")[1], 3)
+        b2 = round(ie.posterior("curtains")[1], 3)
+        b3 = round(ie.posterior("know_object")[1], 3)
+        b4 = round(ie.posterior("target_object")[1], 3)
+        b5 = round(ie.posterior("motive")[1], 3)
+        b6 = round(ie.posterior("compromise_house")[1], 3)
+        b7 = round(ie.posterior("flees_startled")[1], 3)
+        l_key = evidence.replace("_", "\_")
+        print(f" {l_key} = {val} & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}  \\\\")
+    print("\\end{tabular}")
+    print("\\caption{Evidence set corresponding to lost scenario. Hypothesis nodes.}")
     print("\\end{table}")
 
 

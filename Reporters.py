@@ -12,8 +12,8 @@ class Reporters():
         self.pure_frequency_event_dict = {}
         self.history_dict = {}
         self.run = 0
-        self.relevant_events = ["know_object", "target_object", "motive", "compromise_house",
-                                "flees_startled", "successful_stolen", "raining", "curtains", "lost_object",
+        self.relevant_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
+                                "flees_startled", "successful_stolen", "raining", "curtains",
                                 "E_object_is_gone",
                                 "E_broken_lock",
                                 "E_disturbed_house",

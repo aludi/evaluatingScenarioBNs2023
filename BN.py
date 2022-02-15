@@ -5,6 +5,7 @@ import pyAgrum as gum
 import copy as copy
 from Experiment import Experiment
 import csv
+import pandas as pd
 import pyAgrum.lib.image as gim
 
 from mesa import Agent, Model
@@ -204,7 +205,8 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
     best_temporal_ordering = []
     header = next(csv.reader(open(global_state_csv)))
 
-    for i in range(0, len(experiment.reporters.relevant_events)):
+
+    for i in range(0, len(header)):
         best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
         flag = "def"
 
@@ -222,42 +224,53 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
                 flag = "cust"
     best_ordering_in_col_numbers_list = []
     #print(best_temporal_ordering)
-    if flag == "cust":
-        for item in best_temporal_ordering:
-            best_ordering_in_col_numbers_list.append(header.index(item))
-        for item in experiment.reporters.evidence_list:
-            best_ordering_in_col_numbers_list.append(header.index(item))
+    if len(list(header)) == len(experiment.reporters.relevant_events):
+        if flag == "cust":
+            for item in best_temporal_ordering:
+                best_ordering_in_col_numbers_list.append(header.index(item))
+            for item in experiment.reporters.evidence_list:
+                best_ordering_in_col_numbers_list.append(header.index(item))
+        else:
+            best_ordering_in_col_numbers_list = best_temporal_ordering
     else:
-        best_ordering_in_col_numbers_list = best_temporal_ordering
+        flag = "def"
+        for item in header:
+            best_ordering_in_col_numbers_list.append(header.index(item))
+
     print(flag)
+    print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 
 def evidence_cannot_be_connected_to_each_other(temporal_ordering):
     #we know evidence is always added at the end
     forbidden_pairs = []
-    evidence = temporal_ordering[-len(experiment.reporters.evidence_list):]  # we get column header idx
+    evidence = []
+    for event in experiment.reporters.relevant_events:
+        if event[0] == "E":
+            evidence.append(event)
+    #evidence = temporal_ordering[-len(experiment.reporters.evidence_list):]  # we get column header idx
     for i in range(0, len(evidence)):
         for j in range(1, len(evidence) - i):
             forbidden_pairs.append((evidence[i], evidence[j+i]))
             forbidden_pairs.append((evidence[j+i], evidence[i]))
+            #pass
 
     return forbidden_pairs
 
-def K2_BN(experiment):
-    global_state_csv = "globalStates.csv"
+def K2_BN(experiment, csv_file, name):
+    global_state_csv = csv_file #"globalStates.csv"
     learner = gum.BNLearner(global_state_csv)  # using bn as template for variables and labels
-    #learner.addMandatoryArc(0, 1)
-
-    file_name = "BayesNets/K2BN.net"
+    file_name = name #"BayesNets/K2BN.net"
     temporal_order = get_temporal_ordering_nodes(experiment, global_state_csv)
-    forbidden = evidence_cannot_be_connected_to_each_other(temporal_order)
-    for (a, b) in forbidden:
-        learner.addForbiddenArc(a, b)
+    if name != "BayesNets/adaptedK2BN.net":
+        forbidden = evidence_cannot_be_connected_to_each_other(temporal_order)
+        for (a, b) in forbidden:
+            learner.addForbiddenArc(a, b)
     #print(temporal_order)
     learner.useK2(temporal_order)
     bn = learner.learnBN()
-
-    for name in experiment.reporters.relevant_events:
+    header = next(csv.reader(open(global_state_csv)))
+    for name in list(header):
         x = bn.cpt(name)
         i = gum.Instantiation(x)
         i.setFirst()
@@ -270,17 +283,26 @@ def K2_BN(experiment):
                     bn.cpt(name)[i.todict()] = 0
             i.inc()
         bn.cpt(name)
-
-
-
     gum.saveBN(bn, file_name)
     print(f"saved bn as {file_name}")
     return bn
 
 
+def K2_limited_BN(experiment):
+    temp_global_state_csv = "globalStates.csv"
+    d = pd.read_csv(temp_global_state_csv)
+    for x in experiment.reporters.relevant_events:
+        if x not in ["successful_stolen", "lost_object"]:
+            #print(x[0])
+            if x[0] != "E":
+                d.pop(x)
+    d.to_csv("partialStates.csv", index=False)
+    K2_BN(experiment, "partialStates.csv", "BayesNets/adaptedK2BN.net")
+
+
 ### experiment with posterior outcomes
-def get_posteriors_in_table(experiment):
-    bnK2 = gum.loadBN("BayesNets/K2BN.net")
+def get_outcome_posteriors_in_table(experiment, file_name):
+    bnK2 = gum.loadBN(file_name)
     ie = gum.LazyPropagation(bnK2)
     event_list = experiment.reporters.relevant_events
     evidence_list = []
@@ -312,8 +334,101 @@ def get_posteriors_in_table(experiment):
     print("\\end{table}")
 
     print()
+
     ie = gum.LazyPropagation(bnK2)
 
+    print("\\begin{table}")
+    print("\\begin{tabular}{c|c|c|c}")
+    print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
+    print("\\hline")
+    a = round(ie.posterior("successful_stolen")[1], 3)
+    b = round(ie.posterior("lost_object")[1], 3)
+    c = round(1 - a - b, 3)
+    print(f" & {a} & {b} & {round(c, 3)} \\\\")
+    for evidence in evidence_list:
+        if evidence in ["E_object_is_gone"]:
+            val = 1
+        else:
+            val = 0
+        ie.addEvidence(evidence, val)
+        a = round(ie.posterior("successful_stolen")[1], 3)
+        b = round(ie.posterior("lost_object")[1], 3)
+        c = round(1 - a - b, 3)
+        l_key = evidence.replace("_", "\_")
+        print(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
+    print("\\end{tabular}")
+    print("\\caption{Evidence set corresponding to lost scenario. Outcome nodes.}")
+    print("\\end{table}")
+
+def get_evidence_list(experiment):
+    event_list = next(csv.reader(open("partialStates.csv")))
+    evidence_list = []
+    for ev in event_list:
+        if ev[0] == 'E':  # evidence node TODO make a seperate class
+            evidence_list.append(ev)
+    print(evidence_list)
+    return evidence_list
+
+def get_posterior(ie, event):
+    return round(ie.posterior(event)[1], 3)
+
+def get_row_vals(ie, list_events):
+    post = []
+    x = 1
+    for e in list_events:
+        post.append(get_posterior(ie, e))
+        x = x - get_posterior(ie, e)
+    post.append(x)
+    return post
+
+def get_diff_outcome_posteriors_in_table(experiment, file_name1, file_name2, stolen):
+    evidence_list = get_evidence_list(experiment)
+    bn1 = gum.loadBN(file_name1)
+    bn2 = gum.loadBN(file_name2)
+    print("\\begin{table}")
+    for turn in stolen:
+        ie1 = gum.LazyPropagation(bn1)
+        ie2 = gum.LazyPropagation(bn2)
+        outcomes = ["successful_stolen", "lost_object"]
+        print("\\begin{tabular}{c|c|c|c}")
+        print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
+        print("\\hline")
+        row1 = get_row_vals(ie1, outcomes)
+        row2 = get_row_vals(ie2, outcomes)
+        print(f" & {row1[0] - row2[0]} & {row1[1] - row2[1]} & {row1[2] - row2[2]} \\\\")
+        for evidence in evidence_list:
+            if turn == "lost":
+                if evidence in ["E_object_is_gone"]:
+                    val = 1
+                else:
+                    val = 0
+            else:
+                if evidence != "E_private":
+                    val = 1
+                else:
+                    val = 0
+            l_key = evidence.replace("_", "\_")
+            ie1.addEvidence(evidence, val)
+            ie2.addEvidence(evidence, val)
+            row1 = get_row_vals(ie1, outcomes)
+            row2 = get_row_vals(ie2, outcomes)
+
+            print(f"{l_key} = {val} & {round(row1[0] - row2[0],3)} & {round(row1[1] - row2[1],3)} & {round(row1[2] - row2[2],3)} \\\\")
+        print("\\end{tabular}")
+        print("\\caption{Difference in posteriors in scenario " + turn + " }")
+    print("\\end{table}")
+
+
+def get_hypothesis_posteriors_in_table(experiment, file_name):
+    bnK2 = gum.loadBN(file_name)
+    ie = gum.LazyPropagation(bnK2)
+    event_list = experiment.reporters.relevant_events
+    evidence_list = []
+    for ev in event_list:
+        if ev[0] == 'E':  # evidence node TODO make a seperate class
+            evidence_list.append(ev)
+
+    ie = gum.LazyPropagation(bnK2)
 
     print("\\begin{table}")
     print("\\begin{tabular}{c|c|c|c|c|c|c|c}")
@@ -348,35 +463,6 @@ def get_posteriors_in_table(experiment):
     print("\\end{table}")
 
     print()
-
-    ie = gum.LazyPropagation(bnK2)
-
-    print("\\begin{table}")
-    print("\\begin{tabular}{c|c|c|c}")
-    print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
-    print("\\hline")
-    a = round(ie.posterior("successful_stolen")[1], 3)
-    b = round(ie.posterior("lost_object")[1], 3)
-    c = round(1 - a - b, 3)
-    print(f" & {a} & {b} & {round(c, 3)} \\\\")
-    for evidence in evidence_list:
-        if evidence in ["E_object_is_gone"]:
-            val = 1
-        else:
-            val = 0
-        ie.addEvidence(evidence, val)
-        a = round(ie.posterior("successful_stolen")[1], 3)
-        b = round(ie.posterior("lost_object")[1], 3)
-        c = round(1 - a - b, 3)
-        l_key = evidence.replace("_", "\_")
-        print(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
-    print("\\end{tabular}")
-    print("\\caption{Evidence set corresponding to lost scenario. Outcome nodes.}")
-    print("\\end{table}")
-
-    print()
-
-
     ie = gum.LazyPropagation(bnK2)
 
     print("\\begin{table}")
@@ -410,8 +496,6 @@ def get_posteriors_in_table(experiment):
     print("\\end{tabular}")
     print("\\caption{Evidence set corresponding to lost scenario. Hypothesis nodes.}")
     print("\\end{table}")
-
-
 
 
 def complex(experiment):
@@ -449,9 +533,15 @@ def common_sense(experiment):
     print(f"saved bn as {file_name}")
     return bn
 
+
+
 experiment = Experiment()
 complex(experiment)
 #rounded(experiment)
 #common_sense(experiment)
-K2_BN(experiment)
-get_posteriors_in_table(experiment)
+K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
+K2_limited_BN(experiment)
+get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "BayesNets/adaptedK2BN.net", ["stolen", "lost"])
+
+#get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net")
+#get_outcome_posteriors_in_table(experiment, "BayesNets/adaptedK2BN.net")

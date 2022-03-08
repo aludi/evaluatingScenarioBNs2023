@@ -6,6 +6,7 @@ import copy as copy
 from Experiment import Experiment
 import csv
 import pandas as pd
+import math
 import pyAgrum.lib.image as gim
 
 from mesa import Agent, Model
@@ -237,8 +238,8 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
         for item in header:
             best_ordering_in_col_numbers_list.append(header.index(item))
 
-    print(flag)
-    print(best_ordering_in_col_numbers_list)
+    #print(flag)
+    #print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 
 def evidence_cannot_be_connected_to_each_other(temporal_ordering):
@@ -284,14 +285,15 @@ def K2_BN(experiment, csv_file, name):
             i.inc()
         bn.cpt(name)
     gum.saveBN(bn, file_name)
-    print(f"saved bn as {file_name}")
+    #print(f"saved bn as {file_name}")
     return bn
 
-def disturb_cpts(experiment, disturb_type):
-    file_name = "BayesNets/noiseBN.net"
+def disturb_cpts(experiment, disturb_type, params_list):
+    file_name = "noiseBN.net"
     K2_BN(experiment, "globalStates.csv", file_name)
 
     bn = gum.loadBN(file_name)
+    noise_list = []
 
     if disturb_type == "NORMAL_NOISE":
 
@@ -301,8 +303,8 @@ def disturb_cpts(experiment, disturb_type):
             X'(X=1) = X(X=1) - e
             X'(X=0) = X(X=0) + e    (or vice versa)
 
-        where e is drawn from a normal distribution with 
-        M = 0, SD = 0.2 (tune parameters later). For
+        where e is drawn from a truncatec normal distribution with 
+        M = 0, SD = 0.2 (tune parameters later) - the distribution cannot be o . For
         every variable we draw again from this normal distribution.
         
         This might represent the best case scenario for human estimations
@@ -319,26 +321,203 @@ def disturb_cpts(experiment, disturb_type):
         most simple noise-type of error.
         
         '''
-        m, sd = 0, 0.2
+        m, sd, type = params_list
+        smallest_change = 1
+        largest_change = 0
         nodes = bn.nodes() # list of nodes to iterate over (names don't matter because noise is all the same
         for node in list(nodes):
             x = bn.cpt(node)
-            i = gum.Instantiation(bn.cpt(node))
-            i.setFirst()
-            s = 0.0
-            name = x.var_names[0]
-            while (not i.end()):
-                e = np.random.normal(loc=m, scale=sd)
+            name = x.var_names[-1]
+            e = np.random.normal(loc=m, scale=sd)
+            noise_list.append(e)
+            #print(name, e)
+            for i in bn.cpt(name).loopIn():
                 if i.todict()[name] == 0:
-                    bn.cpt(node)[i.todict()] = bn.cpt(node)[i.todict()] + e
+                    bn.cpt(name).set(i, keep_in_range(bn.cpt(name).get(i) + e))
                 elif i.todict()[name] == 1:
-                    bn.cpt(node)[i.todict()] = bn.cpt(node)[i.todict()] - e
-                i.inc()
+                    bn.cpt(name).set(i, keep_in_range(bn.cpt(name).get(i) - e))
 
-        gum.saveBN(bn, file_name)
-        print(f"saved bn as {file_name}")
+            if abs(e) > largest_change:
+                largest_change = abs(e)
+            if abs(e) < smallest_change:
+                smallest_change = abs(e)
+        #print(largest_change, smallest_change)
+        gum.saveBN(bn, "noiseBN.net")
+        #print(f"saved bn as {file_name}")
+        return [largest_change, smallest_change]
+
+    if disturb_type == "ROUNDED":
+        ''' we want to round the BN
+        to some degree of decimals,
+        since humans are not really accurate at 0.0001
+        estimations.
+        So then we want to get to 0.1, or 0.01 level rounding  (params_list)
+        in the network, to see what happens then.
+        '''
+        [decimal_place, rounded_name] = params_list
+        nodes = bn.nodes()  # list of nodes to iterate over (names don't matter because noise is all the same
+        for node in list(nodes):
+            x = bn.cpt(node)
+            name = x.var_names[-1]
+            for i in bn.cpt(name).loopIn():
+                bn.cpt(name).set(i, round(bn.cpt(name).get(i), decimal_place))
+        gum.saveBN(bn, "roundedBN.net")
+        return ["empty"]
+
+    if disturb_type == "ARBROUNDED":
+        ''' we want to round the BN
+        to some degree (round to quartile, octile, thirds, 2nds, hwatever,
+        since we like round numbers
+        
+        '''
+        [step, rounded_name] = params_list
+
+        nodes = bn.nodes()  # list of nodes to iterate over (names don't matter because noise is all the same
+        for node in list(nodes):
+            x = bn.cpt(node)
+            name = x.var_names[-1]
+            for i in bn.cpt(name).loopIn():
+                val = bn.cpt(name).get(i)
+                val = val
+                y = math.floor((val/step) + 0.5) * step
+                bn.cpt(name).set(i, y)
+        gum.saveBN(bn, "ARBRoundedBN.net")
+        return ["empty"]
+
+def direction(file_name):
+    bn = gum.loadBN(file_name)
+    direction_dict = {}
+    ie = gum.LazyPropagation(bn)
+    event_list = experiment.reporters.relevant_events
+    e_dict = {}
+
+    for node in list(bn.nodes()):
+        x = bn.cpt(node)
+        name = x.var_names[-1]
+        if name[0] != 'E':  # we do not care about evidence nodes
+            # print(ie.posterior(node))
+            node_false_val = ie.posterior(node)[0]
+            node_true_val = ie.posterior(node)[1]  # always binary
+            if node_false_val > node_true_val:
+                e_dict[name] = "H0"
+            elif node_false_val < node_true_val:
+                e_dict[name] = "H1"
+            else:
+                e_dict[name] = "0"
+            # print(direction_dict[name])
+    direction_dict[("no_evidence", 0)] = e_dict
 
 
+    evidence_list = []
+    for ev in event_list:
+        if ev[0] == 'E':  # evidence node TODO make a seperate class
+            evidence_list.append(ev)
+
+    for evidence in evidence_list:
+        e_dict = {}
+        if evidence != "E_private":
+            val = 1
+        else:
+            val = 0
+        ie.addEvidence(evidence, val)
+
+        for node in list(bn.nodes()):
+            x = bn.cpt(node)
+            name = x.var_names[-1]
+            if name[0] != 'E':  # we do not care about evidence nodes
+                #print(ie.posterior(node))
+                try:
+                    node_false_val = ie.posterior(node)[0]
+                    node_true_val = ie.posterior(node)[1]   # always binary
+                    if node_false_val > node_true_val:
+                        e_dict[name] = "H0"
+                    elif node_false_val < node_true_val:
+                        e_dict[name] = "H1"
+                    else:
+                        e_dict[name] = "0"
+                except:
+                    e_dict[name] = "N/A"
+                #print(direction_dict[name])
+        direction_dict[(evidence, val)] = e_dict
+
+    return direction_dict
+
+def comp(d1, d2, latex_file_name, params):   # compare two direction dictionaries
+    h = []
+    for e in d1.keys():
+        for x in d1[e].keys():
+
+            pass
+            #print(e, x, d1[e][x], d2[e][x], d1[e][x] == d2[e][x])
+
+    with open(latex_file_name, 'w') as file:
+        file.write("\\begin{table}")
+        file.write("\\begin{tabular}{c|cc|cc}")
+        file.write("\\toprule")
+        file.write("\\multirow{2}{*}{Evidence} & \\multicolumn{2}{c}{Successful Stolen} & \\multicolumn{2}{c}{Lost Object} \\\\"
+                   "& {K2} & {Dev} & {K2} & {Dev} \\\\")
+        file.write("\\midrule\n")
+        for e in d1.keys():
+            l_key = e[0].replace("_", "\_")
+            file.write(str(l_key) + ", " + str(e[1]) + " & ")
+            for x in ["successful_stolen", "lost_object"]:
+                if d1[e][x] == d2[e][x]:
+                    file.write(d1[e][x] + "&" + d2[e][x])
+                else:
+                    file.write("\\cellcolor{Bittersweet}" + d1[e][x] + "&" + "\\cellcolor{Bittersweet}" + d2[e][x])
+                if x == "successful_stolen":
+                    file.write("&")
+            file.write("\\\\")
+
+        file.write("\\bottomrule")
+        file.write("\\end{tabular}")
+        file.write("\\caption{Different outcomes for disturbances in the cpts with params " + str(params) + "}")
+        file.write("\\end{table}")
+
+def comp_count(d1, d_noise, latex_file_name, params):   # compare two direction dictionaries
+    h = []
+    for e in d1.keys():
+        for x in d1[e].keys():
+
+            pass
+            #print(e, x, d1[e][x], d2[e][x], d1[e][x] == d2[e][x])
+
+    with open(latex_file_name, 'w') as file:
+        file.write("\\begin{table}")
+        file.write("\\begin{tabular}{c|cc|cc}")
+        file.write("\\toprule")
+        file.write("\\multirow{2}{*}{Evidence} & \\multicolumn{2}{c}{Successful Stolen} & \\multicolumn{2}{c}{Lost Object} \\\\"
+                   "& {K2} & {Noise} & {K2} & {Noise} \\\\")
+        file.write("\\midrule\n")
+        for e in d1.keys():
+            l_key = e[0].replace("_", "\_")
+            file.write(str(l_key) + ", " + str(e[1]) + " & ")
+            for x in ["successful_stolen", "lost_object"]:
+                count = 0
+                for d2 in d_noise:
+                    if d1[e][x] == d2[e][x]:
+                        count += 1
+                if (count/len(d_noise)) < 0.95:
+                    file.write("\\cellcolor{Bittersweet}" + d1[e][x] + "&" + "\\cellcolor{Bittersweet}" + str(round(100*(count/len(d_noise)), 0)))
+                else:
+                    file.write(d1[e][x] + "&" + str(round(100*(count/len(d_noise)), 0)))
+                if x == "successful_stolen":
+                    file.write("&")
+            file.write("\\\\")
+
+        file.write("\\bottomrule")
+        file.write("\\end{tabular}")
+        file.write("\\caption{Different outcomes for disturbances in the cpts with params " + str(params) + "}")
+        file.write("\\end{table}")
+
+
+def keep_in_range(x):
+    ''' numbers in a ctp cannot be > 1 or < 0'''
+    if x > 1:
+        return 1
+    if x < 0:
+        return 0
+    return x
 
 
 def K2_limited_BN(experiment):
@@ -354,7 +533,7 @@ def K2_limited_BN(experiment):
 
 
 ### experiment with posterior outcomes
-def get_outcome_posteriors_in_table(experiment, file_name):
+def get_outcome_posteriors_in_table(experiment, file_name, latex_file_name, extra_vals):
     bnK2 = gum.loadBN(file_name)
     ie = gum.LazyPropagation(bnK2)
     event_list = experiment.reporters.relevant_events
@@ -362,56 +541,70 @@ def get_outcome_posteriors_in_table(experiment, file_name):
     for ev in event_list:
         if ev[0] == 'E':    # evidence node TODO make a seperate class
             evidence_list.append(ev)
-    print("\\begin{table}")
-    print("\\begin{tabular}{c|c|c|c}")
-    print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
-    print("\\hline")
-    val = 1
-    a = round(ie.posterior("successful_stolen")[1], 3)
-    b = round(ie.posterior("lost_object")[1], 3)
-    c = round(1 - a - b, 3)
-    print(f" & {a} & {b} & {round(c, 3)} \\\\")
-    for evidence in evidence_list:
-        if evidence != "E_private":
-            val = 1
-        else:
-            val = 0
-        ie.addEvidence(evidence, val)
+
+    with open(latex_file_name, 'w') as file:
+        file.write(latex_file_name)
+        file.write("\\begin{table}")
+        file.write("\\begin{tabular}{c|c|c|c}")
+        file.write("Evidence & Successful Stolen & Lost Object & Rest \\\\")
+        file.write("\\hline")
+        val = 1
         a = round(ie.posterior("successful_stolen")[1], 3)
         b = round(ie.posterior("lost_object")[1], 3)
         c = round(1 - a - b, 3)
-        l_key = evidence.replace("_", "\_")
-        print(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
-    print("\\end{tabular}")
-    print("\\caption{Evidence set corresponding to scenario stealing. Outcome nodes.}")
-    print("\\end{table}")
-
-    print()
-
-    ie = gum.LazyPropagation(bnK2)
-
-    print("\\begin{table}")
-    print("\\begin{tabular}{c|c|c|c}")
-    print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
-    print("\\hline")
-    a = round(ie.posterior("successful_stolen")[1], 3)
-    b = round(ie.posterior("lost_object")[1], 3)
-    c = round(1 - a - b, 3)
-    print(f" & {a} & {b} & {round(c, 3)} \\\\")
-    for evidence in evidence_list:
-        if evidence in ["E_object_is_gone"]:
-            val = 1
+        file.write(f" & {a} & {b} & {round(c, 3)} \\\\")
+        for evidence in evidence_list:
+            if evidence != "E_private":
+                val = 1
+            else:
+                val = 0
+            ie.addEvidence(evidence, val)
+            a = round(ie.posterior("successful_stolen")[1], 3)
+            b = round(ie.posterior("lost_object")[1], 3)
+            c = round(1 - a - b, 3)
+            l_key = evidence.replace("_", "\_")
+            file.write(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
+        file.write("\\end{tabular}")
+        if extra_vals is None:
+            file.write("\\caption{Evidence set corresponding to scenario stealing. Outcome nodes.}")
         else:
-            val = 0
-        ie.addEvidence(evidence, val)
+            file.write("\\caption{Evidence set corresponding to scenario stealing. Outcome nodes."
+                  "noise values are ", extra_vals, " }")
+
+        file.write("\\end{table}")
+
+        file.write("\n")
+
+        ie = gum.LazyPropagation(bnK2)
+
+        file.write("\\begin{table}")
+        file.write("\\begin{tabular}{c|c|c|c}")
+        file.write("Evidence & Successful Stolen & Lost Object & Rest \\\\")
+        file.write("\\hline")
         a = round(ie.posterior("successful_stolen")[1], 3)
         b = round(ie.posterior("lost_object")[1], 3)
         c = round(1 - a - b, 3)
-        l_key = evidence.replace("_", "\_")
-        print(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
-    print("\\end{tabular}")
-    print("\\caption{Evidence set corresponding to lost scenario. Outcome nodes.}")
-    print("\\end{table}")
+        file.write(f" & {a} & {b} & {round(c, 3)} \\\\")
+        for evidence in evidence_list:
+            if evidence in ["E_object_is_gone"]:
+                val = 1
+            else:
+                val = 0
+            ie.addEvidence(evidence, val)
+            a = round(ie.posterior("successful_stolen")[1], 3)
+            b = round(ie.posterior("lost_object")[1], 3)
+            c = round(1 - a - b, 3)
+            l_key = evidence.replace("_", "\_")
+            file.write(f"{l_key} = {val} & {a} & {b} & {round(c, 3)} \\\\")
+        file.write("\\end{tabular}")
+
+        if extra_vals is None:
+            file.write("\\caption{Evidence set corresponding to scenario lost. Outcome nodes.}")
+        else:
+            file.write("\\caption{Evidence set corresponding to scenario lost. Outcome nodes."
+                  "noise values are ", extra_vals, " }")
+
+        file.write("\\end{table}")
 
 def get_evidence_list(experiment):
     event_list = next(csv.reader(open("partialStates.csv")))
@@ -419,7 +612,7 @@ def get_evidence_list(experiment):
     for ev in event_list:
         if ev[0] == 'E':  # evidence node TODO make a seperate class
             evidence_list.append(ev)
-    print(evidence_list)
+    #print(evidence_list)
     return evidence_list
 
 def get_posterior(ie, event):
@@ -438,38 +631,39 @@ def get_diff_outcome_posteriors_in_table(experiment, file_name1, file_name2, sto
     evidence_list = get_evidence_list(experiment)
     bn1 = gum.loadBN(file_name1)
     bn2 = gum.loadBN(file_name2)
-    print("\\begin{table}")
-    for turn in stolen:
-        ie1 = gum.LazyPropagation(bn1)
-        ie2 = gum.LazyPropagation(bn2)
-        outcomes = ["successful_stolen", "lost_object"]
-        print("\\begin{tabular}{c|c|c|c}")
-        print("Evidence & Successful Stolen & Lost Object & Rest \\\\")
-        print("\\hline")
-        row1 = get_row_vals(ie1, outcomes)
-        row2 = get_row_vals(ie2, outcomes)
-        print(f" & {row1[0] - row2[0]} & {row1[1] - row2[1]} & {row1[2] - row2[2]} \\\\")
-        for evidence in evidence_list:
-            if turn == "lost":
-                if evidence in ["E_object_is_gone"]:
-                    val = 1
-                else:
-                    val = 0
-            else:
-                if evidence != "E_private":
-                    val = 1
-                else:
-                    val = 0
-            l_key = evidence.replace("_", "\_")
-            ie1.addEvidence(evidence, val)
-            ie2.addEvidence(evidence, val)
+    with open('table_gen.tex', 'w') as file:
+        file.write("\\begin{table}")
+        for turn in stolen:
+            ie1 = gum.LazyPropagation(bn1)
+            ie2 = gum.LazyPropagation(bn2)
+            outcomes = ["successful_stolen", "lost_object"]
+            file.write("\\begin{tabular}{c|c|c|c}")
+            file.write("Evidence & Successful Stolen & Lost Object & Rest \\\\")
+            file.write("\\hline")
             row1 = get_row_vals(ie1, outcomes)
             row2 = get_row_vals(ie2, outcomes)
+            file.write(f" & {row1[0] - row2[0]} & {row1[1] - row2[1]} & {row1[2] - row2[2]} \\\\")
+            for evidence in evidence_list:
+                if turn == "lost":
+                    if evidence in ["E_object_is_gone"]:
+                        val = 1
+                    else:
+                        val = 0
+                else:
+                    if evidence != "E_private":
+                        val = 1
+                    else:
+                        val = 0
+                l_key = evidence.replace("_", "\_")
+                ie1.addEvidence(evidence, val)
+                ie2.addEvidence(evidence, val)
+                row1 = get_row_vals(ie1, outcomes)
+                row2 = get_row_vals(ie2, outcomes)
 
-            print(f"{l_key} = {val} & {round(row1[0] - row2[0],3)} & {round(row1[1] - row2[1],3)} & {round(row1[2] - row2[2],3)} \\\\")
-        print("\\end{tabular}")
-        print("\\caption{Difference in posteriors in scenario " + turn + " }")
-    print("\\end{table}")
+                file.write(f"{l_key} = {val} & {round(row1[0] - row2[0],3)} & {round(row1[1] - row2[1],3)} & {round(row1[2] - row2[2],3)} \\\\")
+            file.write("\\end{tabular}")
+            file.write("\\caption{Difference in posteriors in scenario " + turn + " }")
+        file.write("\\end{table}")
 
 
 def get_hypothesis_posteriors_in_table(experiment, file_name):
@@ -482,26 +676,13 @@ def get_hypothesis_posteriors_in_table(experiment, file_name):
             evidence_list.append(ev)
 
     ie = gum.LazyPropagation(bnK2)
+    with open('table_gen.tex2', 'w') as file:
 
-    print("\\begin{table}")
-    print("\\begin{tabular}{c|c|c|c|c|c|c|c}")
-    print("Evidence & Raining & Curtains & Know O & Target O & Motive & Compromise H & Flees \\\\")
-    print("\\hline")
-    val = 1
-    b1 = round(ie.posterior("raining")[1], 3)
-    b2 = round(ie.posterior("curtains")[1], 3)
-    b3 = round(ie.posterior("know_object")[1], 3)
-    b4 = round(ie.posterior("target_object")[1], 3)
-    b5 = round(ie.posterior("motive")[1], 3)
-    b6 = round(ie.posterior("compromise_house")[1], 3)
-    b7 = round(ie.posterior("flees_startled")[1], 3)
-    print(f" & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
-    for evidence in evidence_list:
-        if evidence != "E_private":
-            val = 1
-        else:
-            val = 0
-        ie.addEvidence(evidence, val)
+        file.write("\\begin{table}")
+        file.write("\\begin{tabular}{c|c|c|c|c|c|c|c}")
+        file.write("Evidence & Raining & Curtains & Know O & Target O & Motive & Compromise H & Flees \\\\")
+        file.write("\\hline")
+        val = 1
         b1 = round(ie.posterior("raining")[1], 3)
         b2 = round(ie.posterior("curtains")[1], 3)
         b3 = round(ie.posterior("know_object")[1], 3)
@@ -509,34 +690,34 @@ def get_hypothesis_posteriors_in_table(experiment, file_name):
         b5 = round(ie.posterior("motive")[1], 3)
         b6 = round(ie.posterior("compromise_house")[1], 3)
         b7 = round(ie.posterior("flees_startled")[1], 3)
-        l_key = evidence.replace("_", "\_")
-        print(f" {l_key} = {val} & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
-    print("\\end{tabular}")
-    print("\\caption{Evidence set corresponding to scenario stealing. Hypothesis nodes.}")
-    print("\\end{table}")
+        file.write(f" & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
+        for evidence in evidence_list:
+            if evidence != "E_private":
+                val = 1
+            else:
+                val = 0
+            ie.addEvidence(evidence, val)
+            b1 = round(ie.posterior("raining")[1], 3)
+            b2 = round(ie.posterior("curtains")[1], 3)
+            b3 = round(ie.posterior("know_object")[1], 3)
+            b4 = round(ie.posterior("target_object")[1], 3)
+            b5 = round(ie.posterior("motive")[1], 3)
+            b6 = round(ie.posterior("compromise_house")[1], 3)
+            b7 = round(ie.posterior("flees_startled")[1], 3)
+            l_key = evidence.replace("_", "\_")
+            file.write(f" {l_key} = {val} & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
+        file.write("\\end{tabular}")
+        file.write("\\caption{Evidence set corresponding to scenario stealing. Hypothesis nodes.}")
+        file.write("\\end{table}")
 
-    print()
-    ie = gum.LazyPropagation(bnK2)
+        file.write("\n")
+        ie = gum.LazyPropagation(bnK2)
 
-    print("\\begin{table}")
-    print("\\begin{tabular}{c|c|c|c|c|c|c|c}")
-    print("Evidence & Raining & Curtains & Know O & Target O & Motive & Compromise H & Flees \\\\")
-    print("\\hline")
-    val = 1
-    b1 = round(ie.posterior("raining")[1], 3)
-    b2 = round(ie.posterior("curtains")[1], 3)
-    b3 = round(ie.posterior("know_object")[1], 3)
-    b4 = round(ie.posterior("target_object")[1], 3)
-    b5 = round(ie.posterior("motive")[1], 3)
-    b6 = round(ie.posterior("compromise_house")[1], 3)
-    b7 = round(ie.posterior("flees_startled")[1], 3)
-    print(f" & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
-    for evidence in evidence_list:
-        if evidence in ["E_object_is_gone"]:
-            val = 1
-        else:
-            val = 0
-        ie.addEvidence(evidence, val)
+        file.write("\\begin{table}")
+        file.write("\\begin{tabular}{c|c|c|c|c|c|c|c}")
+        file.write("Evidence & Raining & Curtains & Know O & Target O & Motive & Compromise H & Flees \\\\")
+        file.write("\\hline")
+        val = 1
         b1 = round(ie.posterior("raining")[1], 3)
         b2 = round(ie.posterior("curtains")[1], 3)
         b3 = round(ie.posterior("know_object")[1], 3)
@@ -544,11 +725,25 @@ def get_hypothesis_posteriors_in_table(experiment, file_name):
         b5 = round(ie.posterior("motive")[1], 3)
         b6 = round(ie.posterior("compromise_house")[1], 3)
         b7 = round(ie.posterior("flees_startled")[1], 3)
-        l_key = evidence.replace("_", "\_")
-        print(f" {l_key} = {val} & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}  \\\\")
-    print("\\end{tabular}")
-    print("\\caption{Evidence set corresponding to lost scenario. Hypothesis nodes.}")
-    print("\\end{table}")
+        file.write(f" & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}   \\\\")
+        for evidence in evidence_list:
+            if evidence in ["E_object_is_gone"]:
+                val = 1
+            else:
+                val = 0
+            ie.addEvidence(evidence, val)
+            b1 = round(ie.posterior("raining")[1], 3)
+            b2 = round(ie.posterior("curtains")[1], 3)
+            b3 = round(ie.posterior("know_object")[1], 3)
+            b4 = round(ie.posterior("target_object")[1], 3)
+            b5 = round(ie.posterior("motive")[1], 3)
+            b6 = round(ie.posterior("compromise_house")[1], 3)
+            b7 = round(ie.posterior("flees_startled")[1], 3)
+            l_key = evidence.replace("_", "\_")
+            file.write(f" {l_key} = {val} & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}  \\\\")
+        file.write("\\end{tabular}")
+        file.write("\\caption{Evidence set corresponding to lost scenario. Hypothesis nodes.}")
+        file.write("\\end{table}")
 
 
 def complex(experiment):
@@ -586,17 +781,59 @@ def common_sense(experiment):
     print(f"saved bn as {file_name}")
     return bn
 
+def experiment_with_normal_noise():
+    for params in [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
+                   [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]:
+        d_noise_list = []
+        smallest_change = 1
+        largest_change = 0
+        for i in range(0, 200):
+            [l, s] = disturb_cpts(experiment, "NORMAL_NOISE", params)
+            if abs(l) > largest_change:
+                largest_change = l
+            if abs(s) < smallest_change:
+                smallest_change = s
+            d_1 = direction("BayesNets/K2BN.net")
+            d_2 = direction("noiseBN.net")
+            d_noise_list.append(d_2)
+        print(params, largest_change, smallest_change)
+        comp_count(d_1, d_noise_list, f'texTables/diffOutcomes{params[1]}.tex', params)
+        # comp(d_1, d_2, f'texTables/diffOutcomes{params[1]}.tex', params)
+        print("generated 1x table for ", params)
+
+def experiment_with_rounding():
+    for params in [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
+                   [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]:
+        [empty] = disturb_cpts(experiment, "ROUNDED", params)
+        d_1 = direction("BayesNets/K2BN.net")
+        d_2 = direction("roundedBN.net")
+        comp(d_1, d_2, f'texTables/diffOutcomesROUNDED{params[0]}.tex', params)
+        print("generated 1x table for ", params)
+
+def experiment_with_arbitrary_rounding():
+    for params in [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
+                   [0.2, 'arbit'], [0.25, 'arbit'],[0.33, 'arbit'],
+                   [0.5, 'arbit']]:
+        [empty] = disturb_cpts(experiment, "ARBROUNDED", params)
+        d_1 = direction("BayesNets/K2BN.net")
+        d_2 = direction("ARBRoundedBN.net")
+        comp(d_1, d_2, f'texTables/diffOutcomesARBROUNDED{params[0]}.tex', params)
+        print("generated 1x table for ", params)
 
 
+
+np.random.seed(1)
 experiment = Experiment()
-#complex(experiment)
-#rounded(experiment)
-#common_sense(experiment)
-#K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
-#disturb_cpts(experiment, "NORMAL_NOISE")
-get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net")
-get_outcome_posteriors_in_table(experiment, "BayesNets/noiseBN.net")
-get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "BayesNets/noiseBN.net", ["stolen", "lost"])
+K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
+experiment_with_rounding()
+experiment_with_arbitrary_rounding()
+
+
+
+
+#get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "postK2BN.tex", None)
+#get_outcome_posteriors_in_table(experiment, "noiseBN.net", "postNoise.tex", None)
+#get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "noiseBN.net", ["stolen", "lost"])
 
 #K2_limited_BN(experiment)
 #et_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "BayesNets/adaptedK2BN.net", ["stolen", "lost"])

@@ -381,7 +381,7 @@ def disturb_cpts(experiment, disturb_type, params_list):
                 val = val
                 y = math.floor((val/step) + 0.5) * step
                 bn.cpt(name).set(i, y)
-        gum.saveBN(bn, "ARBRoundedBN.net")
+        gum.saveBN(bn, f"ARBRoundedBN{str(step*100)}.net")
         return ["empty"]
 
 def direction(file_name):
@@ -666,7 +666,7 @@ def get_diff_outcome_posteriors_in_table(experiment, file_name1, file_name2, sto
         file.write("\\end{table}")
 
 
-def get_hypothesis_posteriors_in_table(experiment, file_name):
+def get_hypothesis_posteriors_in_table(experiment, file_name, d1, d2, latex_file_name, params):
     bnK2 = gum.loadBN(file_name)
     ie = gum.LazyPropagation(bnK2)
     event_list = experiment.reporters.relevant_events
@@ -676,12 +676,42 @@ def get_hypothesis_posteriors_in_table(experiment, file_name):
             evidence_list.append(ev)
 
     ie = gum.LazyPropagation(bnK2)
-    with open('table_gen.tex2', 'w') as file:
+
+
+
+    with open(latex_file_name, 'w') as file:
 
         file.write("\\begin{table}")
-        file.write("\\begin{tabular}{c|c|c|c|c|c|c|c}")
-        file.write("Evidence & Raining & Curtains & Know O & Target O & Motive & Compromise H & Flees \\\\")
-        file.write("\\hline")
+        file.write("\\begin{tabular}{c|cc|cc|cc|cc|cc|cc|cc}")
+
+        file.write("\\toprule")
+        file.write("\\multirow{2}{*}{Evidence} & \\multicolumn{2}{c}{Raining} & "
+                   "\\multicolumn{2}{c}{Curtains} & \\multicolumn{2}{c}{Know O}"
+                   " & \\multicolumn{2}{c}{Target O} & \\multicolumn{2}{c}{Motive} &"
+                   " \\multicolumn{2}{c}{CH} & \\multicolumn{2}{c}{Flees} &"
+                   "  & {K2} & {Dev} & {K2} & {Dev} & {K2} & {Dev} & {K2} & {Dev} &"
+                   " {K2} & {Dev} & {K2} & {Dev} & {K2} & {Dev}\\\\")
+        file.write("\\midrule\n")
+
+        for e in d1.keys():
+            l_key = e[0].replace("_", "\_")
+            file.write(str(l_key) + ", " + str(e[1]) + " & ")
+            for x in ["curtains", "raining", "know_object",
+                      "target_object", "motive", "compromise_house",
+                      "flees_startled"]:
+                if d1[e][x] == d2[e][x]:
+                    file.write(d1[e][x] + "&" + d2[e][x])
+                else:
+                    file.write("\\cellcolor{Bittersweet}" + d1[e][x] + "&" + "\\cellcolor{Bittersweet}" + d2[e][x])
+                if x != "flees_startled":
+                    file.write("&")
+            file.write("\\\\")
+        file.write("\\bottomrule")
+        file.write("\\end{tabular}")
+        file.write("\\caption{Evidence set with effect on hypothesis nodes." + str(params) + "}")
+        file.write("\\end{table}")
+
+        '''    
         val = 1
         b1 = round(ie.posterior("raining")[1], 3)
         b2 = round(ie.posterior("curtains")[1], 3)
@@ -741,9 +771,8 @@ def get_hypothesis_posteriors_in_table(experiment, file_name):
             b7 = round(ie.posterior("flees_startled")[1], 3)
             l_key = evidence.replace("_", "\_")
             file.write(f" {l_key} = {val} & {b1} & {b2} &{b3} &{b4} &{b5} & {b6} & {b7}  \\\\")
-        file.write("\\end{tabular}")
-        file.write("\\caption{Evidence set corresponding to lost scenario. Hypothesis nodes.}")
-        file.write("\\end{table}")
+            '''
+
 
 
 def complex(experiment):
@@ -808,7 +837,9 @@ def experiment_with_rounding():
         d_1 = direction("BayesNets/K2BN.net")
         d_2 = direction("roundedBN.net")
         comp(d_1, d_2, f'texTables/diffOutcomesROUNDED{params[0]}.tex', params)
-        print("generated 1x table for ", params)
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_2, f'texTables/diffOutcomesROUNDEDHYPS{params[0]}.tex', params)
+
+        #print("generated 1x table for ", params)
 
 def experiment_with_arbitrary_rounding():
     for params in [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
@@ -816,9 +847,10 @@ def experiment_with_arbitrary_rounding():
                    [0.5, 'arbit']]:
         [empty] = disturb_cpts(experiment, "ARBROUNDED", params)
         d_1 = direction("BayesNets/K2BN.net")
-        d_2 = direction("ARBRoundedBN.net")
+        d_2 = direction(f"ARBRoundedBN{str(params[0]*100)}.net")
         comp(d_1, d_2, f'texTables/diffOutcomesARBROUNDED{params[0]}.tex', params)
-        print("generated 1x table for ", params)
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_2, f'texTables/diffOutcomesARBROUNDEDHYPS{params[0]}.tex', params)
+        #print("generated 1x table for ", params)
 
 
 
@@ -829,11 +861,11 @@ experiment_with_rounding()
 experiment_with_arbitrary_rounding()
 
 
+get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "postK2BN.tex", None)
+get_outcome_posteriors_in_table(experiment, "ARBRoundedBN33.0.net", "postarb.tex", None)
+get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "ARBRoundedBN33.0.net", ["stolen", "lost"])
 
 
-#get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "postK2BN.tex", None)
-#get_outcome_posteriors_in_table(experiment, "noiseBN.net", "postNoise.tex", None)
-#get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "noiseBN.net", ["stolen", "lost"])
 
 #K2_limited_BN(experiment)
 #et_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "BayesNets/adaptedK2BN.net", ["stolen", "lost"])

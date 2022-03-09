@@ -98,7 +98,7 @@ node E_private {
 potential ( lost_object | raining   ) {
    data = 
    ((   1   0)   % raining=0   
-   (   1   0));   % raining=1   
+   (   0.5   0.5));   % raining=1   
 }
 
 potential ( know_object | lost_object   curtains   ) {
@@ -112,7 +112,7 @@ potential ( know_object | lost_object   curtains   ) {
 potential ( target_object | know_object   ) {
    data = 
    ((   1   0)   % know_object=0   
-   (   1   0));   % know_object=1   
+   (   0.5   0.5));   % know_object=1   
 }
 
 potential ( motive | curtains   target_object   ) {
@@ -128,7 +128,7 @@ potential ( compromise_house | target_object   motive   ) {
    (((   1   0)   % motive=0   target_object=0   
    (   1   0))   % motive=1   target_object=0   
    ((   1   0)   % motive=0   target_object=1   
-   (   1   0)));   % motive=1   target_object=1   
+   (   0.5   0.5)));   % motive=1   target_object=1   
 }
 
 potential ( flees_startled | target_object   motive   ) {
@@ -136,7 +136,7 @@ potential ( flees_startled | target_object   motive   ) {
    (((   1   0)   % motive=0   target_object=0   
    (   1   0))   % motive=1   target_object=0   
    ((   1   0)   % motive=0   target_object=1   
-   (   1   0)));   % motive=1   target_object=1   
+   (   0.5   0.5)));   % motive=1   target_object=1   
 }
 
 potential ( successful_stolen | compromise_house   flees_startled   ) {
@@ -148,7 +148,7 @@ potential ( successful_stolen | compromise_house   flees_startled   ) {
 }
 
 potential (raining) {
-   data = (  1 0);
+   data = (  0.5 0.5);
 }
 
 potential (curtains) {

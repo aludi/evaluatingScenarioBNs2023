@@ -342,7 +342,7 @@ def disturb_cpts(experiment, disturb_type, params_list):
             if abs(e) < smallest_change:
                 smallest_change = abs(e)
         #print(largest_change, smallest_change)
-        gum.saveBN(bn, "noiseBN.net")
+        gum.saveBN(bn, f"NoiseBN{str(sd)}.net")
         #print(f"saved bn as {file_name}")
         return [largest_change, smallest_change]
 
@@ -361,7 +361,7 @@ def disturb_cpts(experiment, disturb_type, params_list):
             name = x.var_names[-1]
             for i in bn.cpt(name).loopIn():
                 bn.cpt(name).set(i, round(bn.cpt(name).get(i), decimal_place))
-        gum.saveBN(bn, "roundedBN.net")
+        gum.saveBN(bn, f"RoundedBN{str(decimal_place)}.net")
         return ["empty"]
 
     if disturb_type == "ARBROUNDED":
@@ -381,10 +381,10 @@ def disturb_cpts(experiment, disturb_type, params_list):
                 val = val
                 y = math.floor((val/step) + 0.5) * step
                 bn.cpt(name).set(i, y)
-        gum.saveBN(bn, f"ARBRoundedBN{str(step*100)}.net")
+        gum.saveBN(bn, f"ARBRoundedBN{str(step)}.net")
         return ["empty"]
 
-def direction(file_name):
+def determine_posterior_direction_or_precision(file_name, type): # type is 'direction' or 'precision
     bn = gum.loadBN(file_name)
     direction_dict = {}
     ie = gum.LazyPropagation(bn)
@@ -398,12 +398,16 @@ def direction(file_name):
             # print(ie.posterior(node))
             node_false_val = ie.posterior(node)[0]
             node_true_val = ie.posterior(node)[1]  # always binary
-            if node_false_val > node_true_val:
-                e_dict[name] = "H0"
-            elif node_false_val < node_true_val:
-                e_dict[name] = "H1"
+            if type == "direction":
+                if node_false_val > node_true_val:
+                    e_dict[name] = "H0"
+                elif node_false_val < node_true_val:
+                    e_dict[name] = "H1"
+                else:
+                    e_dict[name] = "0"
             else:
-                e_dict[name] = "0"
+                e_dict[name] = round(node_true_val, 2)
+
             # print(direction_dict[name])
     direction_dict[("no_evidence", 0)] = e_dict
 
@@ -426,15 +430,20 @@ def direction(file_name):
             name = x.var_names[-1]
             if name[0] != 'E':  # we do not care about evidence nodes
                 #print(ie.posterior(node))
+
                 try:
                     node_false_val = ie.posterior(node)[0]
                     node_true_val = ie.posterior(node)[1]   # always binary
-                    if node_false_val > node_true_val:
-                        e_dict[name] = "H0"
-                    elif node_false_val < node_true_val:
-                        e_dict[name] = "H1"
+
+                    if type == "direction":
+                        if node_false_val > node_true_val:
+                            e_dict[name] = "H0"
+                        elif node_false_val < node_true_val:
+                            e_dict[name] = "H1"
+                        else:
+                            e_dict[name] = "0"
                     else:
-                        e_dict[name] = "0"
+                        e_dict[name] = round(node_true_val, 2)
                 except:
                     e_dict[name] = "N/A"
                 #print(direction_dict[name])
@@ -443,13 +452,6 @@ def direction(file_name):
     return direction_dict
 
 def comp(d1, d2, latex_file_name, params):   # compare two direction dictionaries
-    h = []
-    for e in d1.keys():
-        for x in d1[e].keys():
-
-            pass
-            #print(e, x, d1[e][x], d2[e][x], d1[e][x] == d2[e][x])
-
     with open(latex_file_name, 'w') as file:
         file.write("\\begin{table}")
         file.write("\\begin{tabular}{c|cc|cc}")
@@ -462,9 +464,10 @@ def comp(d1, d2, latex_file_name, params):   # compare two direction dictionarie
             file.write(str(l_key) + ", " + str(e[1]) + " & ")
             for x in ["successful_stolen", "lost_object"]:
                 if d1[e][x] == d2[e][x]:
-                    file.write(d1[e][x] + "&" + d2[e][x])
+                    file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
                 else:
-                    file.write("\\cellcolor{Bittersweet}" + d1[e][x] + "&" + "\\cellcolor{Bittersweet}" + d2[e][x])
+
+                    file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(d2[e][x]))
                 if x == "successful_stolen":
                     file.write("&")
             file.write("\\\\")
@@ -474,13 +477,8 @@ def comp(d1, d2, latex_file_name, params):   # compare two direction dictionarie
         file.write("\\caption{Different outcomes for disturbances in the cpts with params " + str(params) + "}")
         file.write("\\end{table}")
 
-def comp_count(d1, d_noise, latex_file_name, params):   # compare two direction dictionaries
-    h = []
-    for e in d1.keys():
-        for x in d1[e].keys():
+def comp_count(d1, d_noise, latex_file_name, params, direction):   # compare two direction dictionaries
 
-            pass
-            #print(e, x, d1[e][x], d2[e][x], d1[e][x] == d2[e][x])
 
     with open(latex_file_name, 'w') as file:
         file.write("\\begin{table}")
@@ -493,14 +491,29 @@ def comp_count(d1, d_noise, latex_file_name, params):   # compare two direction 
             l_key = e[0].replace("_", "\_")
             file.write(str(l_key) + ", " + str(e[1]) + " & ")
             for x in ["successful_stolen", "lost_object"]:
-                count = 0
-                for d2 in d_noise:
-                    if d1[e][x] == d2[e][x]:
-                        count += 1
-                if (count/len(d_noise)) < 0.95:
-                    file.write("\\cellcolor{Bittersweet}" + d1[e][x] + "&" + "\\cellcolor{Bittersweet}" + str(round(100*(count/len(d_noise)), 0)))
-                else:
-                    file.write(d1[e][x] + "&" + str(round(100*(count/len(d_noise)), 0)))
+                if direction == "direction":
+                    count = 0
+                    for d2 in d_noise:
+                        if d1[e][x] == d2[e][x]:
+                            count += 1
+                    if (count/len(d_noise)) < 0.95:
+                        file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(round(100*(count/len(d_noise)), 0)))
+                    else:
+                        file.write(str(d1[e][x]) + "&" + str(round(100*(count/len(d_noise)), 0)))
+                if direction == "precision":
+                    count = 0
+                    for d2 in d_noise:
+                        if type(d2[e][x] == float) and d2[e][x] != "N/A":
+                            count += d2[e][x]
+                        else:
+                            count += 0.5
+                    if abs(d1[e][x] - (count / len(d_noise))) > 0.05:
+                        file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
+                            round(100 * (count / len(d_noise)), 0)))
+                    else:
+                        t = round(100 * (count/len(d_noise)), 0)
+                        file.write(str(d1[e][x]) + "&" + str(t))
+
                 if x == "successful_stolen":
                     file.write("&")
             file.write("\\\\")
@@ -666,7 +679,9 @@ def get_diff_outcome_posteriors_in_table(experiment, file_name1, file_name2, sto
         file.write("\\end{table}")
 
 
-def get_hypothesis_posteriors_in_table(experiment, file_name, d1, d2, latex_file_name, params):
+def get_hypothesis_posteriors_in_table(experiment, file_name, d1, d2, latex_file_name, params, flag, direction):
+    if flag == "noise":
+        d_noise = d2
     bnK2 = gum.loadBN(file_name)
     ie = gum.LazyPropagation(bnK2)
     event_list = experiment.reporters.relevant_events
@@ -676,9 +691,6 @@ def get_hypothesis_posteriors_in_table(experiment, file_name, d1, d2, latex_file
             evidence_list.append(ev)
 
     ie = gum.LazyPropagation(bnK2)
-
-
-
     with open(latex_file_name, 'w') as file:
 
         file.write("\\begin{table}")
@@ -699,10 +711,36 @@ def get_hypothesis_posteriors_in_table(experiment, file_name, d1, d2, latex_file
             for x in ["curtains", "raining", "know_object",
                       "target_object", "motive", "compromise_house",
                       "flees_startled"]:
-                if d1[e][x] == d2[e][x]:
-                    file.write(d1[e][x] + "&" + d2[e][x])
+                if flag == "noise":
+                    if direction == "direction":
+                        count = 0
+                        for d_2 in d_noise:
+                            if d1[e][x] == d_2[e][x]:
+                                count += 1
+                        if (count / len(d_noise)) < 0.95:
+                            file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
+                                round(100 * (count / len(d_noise)), 0)))
+                        else:
+                            file.write(str(d1[e][x]) + "&" + str(round(100 * (count / len(d_noise)), 0)))
+
+                    else:
+                        count = 0
+                        for d_2 in d_noise:
+                            if type(d_2[e][x] == float) and d_2[e][x] != "N/A":
+                                count += d_2[e][x]
+                            else:
+                                count += 0.5
+                        if abs(d1[e][x] - count/len(d_noise)) > 0.01:
+                            file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
+                                round((count / len(d_noise)), 0)))
+                        else:
+                            file.write(str(d1[e][x]) + "&" + str(round((count / len(d_noise)), 0)))
+
                 else:
-                    file.write("\\cellcolor{Bittersweet}" + d1[e][x] + "&" + "\\cellcolor{Bittersweet}" + d2[e][x])
+                    if d1[e][x] == d2[e][x]:
+                        file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
+                    else:
+                        file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(d2[e][x]))
                 if x != "flees_startled":
                     file.write("&")
             file.write("\\\\")
@@ -814,6 +852,7 @@ def experiment_with_normal_noise():
     for params in [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
                    [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]:
         d_noise_list = []
+        d4_noise_list = []
         smallest_change = 1
         largest_change = 0
         for i in range(0, 200):
@@ -822,22 +861,38 @@ def experiment_with_normal_noise():
                 largest_change = l
             if abs(s) < smallest_change:
                 smallest_change = s
-            d_1 = direction("BayesNets/K2BN.net")
-            d_2 = direction("noiseBN.net")
+            d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "direction")
+            d_2 = determine_posterior_direction_or_precision(f"NoiseBN{params[1]}.net", "direction")
             d_noise_list.append(d_2)
+
+            d_3 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "precision")
+            d_4 = determine_posterior_direction_or_precision(f"NoiseBN{params[1]}.net", "precision")
+            d4_noise_list.append(d_4)
+
         print(params, largest_change, smallest_change)
-        comp_count(d_1, d_noise_list, f'texTables/diffOutcomes{params[1]}.tex', params)
+        comp_count(d_1, d_noise_list, f'texTables/diffOutcomesDIR{params[1]}.tex', params, "direction")
+        comp_count(d_3, d4_noise_list, f'texTables/diffOutcomesPRE{params[1]}.tex', params, "precision")
+
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_noise_list, f'texTables/diffOutcomesDIRNOISEHYPS{params[1]}.tex', params, "noise", "direction")
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_3, d4_noise_list, f'texTables/diffOutcomesPRENOISEHYPS{params[1]}.tex', params, "noise", "precision")
+
         # comp(d_1, d_2, f'texTables/diffOutcomes{params[1]}.tex', params)
-        print("generated 1x table for ", params)
+        print("generated 2x table for ", params)
 
 def experiment_with_rounding():
     for params in [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
                    [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]:
         [empty] = disturb_cpts(experiment, "ROUNDED", params)
-        d_1 = direction("BayesNets/K2BN.net")
-        d_2 = direction("roundedBN.net")
-        comp(d_1, d_2, f'texTables/diffOutcomesROUNDED{params[0]}.tex', params)
-        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_2, f'texTables/diffOutcomesROUNDEDHYPS{params[0]}.tex', params)
+        d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "direction")
+        d_2 = determine_posterior_direction_or_precision(f"RoundedBN{str(params[0]*100)}.net", "direction")
+        comp(d_1, d_2, f'texTables/diffOutcomesDIRROUNDED{params[0]}.tex', params)
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_2, f'texTables/diffOutcomesDIRROUNDEDHYPS{params[0]}.tex', params, "no noise", "direction")
+
+        d_3 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "precision")
+        d_4 = determine_posterior_direction_or_precision(f"RoundedBN{str(params[0] * 100)}.net", "precision")
+        comp(d_3, d_4, f'texTables/diffOutcomesPREROUNDED{params[0]}.tex', params)
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_3, d_4,
+                                           f'texTables/diffOutcomesPREROUNDEDHYPS{params[0]}.tex', params, "no noise", "precision")
 
         #print("generated 1x table for ", params)
 
@@ -846,24 +901,33 @@ def experiment_with_arbitrary_rounding():
                    [0.2, 'arbit'], [0.25, 'arbit'],[0.33, 'arbit'],
                    [0.5, 'arbit']]:
         [empty] = disturb_cpts(experiment, "ARBROUNDED", params)
-        d_1 = direction("BayesNets/K2BN.net")
-        d_2 = direction(f"ARBRoundedBN{str(params[0]*100)}.net")
-        comp(d_1, d_2, f'texTables/diffOutcomesARBROUNDED{params[0]}.tex', params)
-        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_2, f'texTables/diffOutcomesARBROUNDEDHYPS{params[0]}.tex', params)
+        d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "direction")
+        d_2 = determine_posterior_direction_or_precision(f"ARBRoundedBN{str(params[0]*100)}.net", "direction")
+        comp(d_1, d_2, f'texTables/diffOutcomesDIRARBROUNDED{params[0]}.tex', params)
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_2, f'texTables/diffOutcomesDIRARBROUNDEDHYPS{params[0]}.tex', params, "no noise", "direction")
         #print("generated 1x table for ", params)
+
+        d_3 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "precision")
+        d_4 = determine_posterior_direction_or_precision(f"ARBRoundedBN{str(params[0] * 100)}.net", "precision")
+        comp(d_3, d_4, f'texTables/diffOutcomesPREARBROUNDED{params[0]}.tex', params)
+        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_3, d_4,
+                                           f'texTables/diffOutcomesPREARBROUNDEDHYPS{params[0]}.tex', params,
+                                           "no noise", "precision")
 
 
 
 np.random.seed(1)
 experiment = Experiment()
 K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
-experiment_with_rounding()
-experiment_with_arbitrary_rounding()
+
+experiment_with_normal_noise()
+#experiment_with_rounding()
+#experiment_with_arbitrary_rounding()
 
 
-get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "postK2BN.tex", None)
-get_outcome_posteriors_in_table(experiment, "ARBRoundedBN33.0.net", "postarb.tex", None)
-get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "ARBRoundedBN33.0.net", ["stolen", "lost"])
+#get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "postK2BN.tex", None)
+#get_outcome_posteriors_in_table(experiment, "ARBRoundedBN33.0.net", "postarb.tex", None)
+#get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "ARBRoundedBN33.0.net", ["stolen", "lost"])
 
 
 

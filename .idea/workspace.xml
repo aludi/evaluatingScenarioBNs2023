@@ -3,15 +3,42 @@
   <component name="ChangeListManager">
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARBRoundedBN10.0.net" beforeDir="false" afterPath="$PROJECT_DIR$/ARBRoundedBN10.0.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARBRoundedBN12.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/ARBRoundedBN12.5.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARBRoundedBN20.0.net" beforeDir="false" afterPath="$PROJECT_DIR$/ARBRoundedBN20.0.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARBRoundedBN25.0.net" beforeDir="false" afterPath="$PROJECT_DIR$/ARBRoundedBN25.0.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARBRoundedBN33.0.net" beforeDir="false" afterPath="$PROJECT_DIR$/ARBRoundedBN33.0.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARBRoundedBN5.0.net" beforeDir="false" afterPath="$PROJECT_DIR$/ARBRoundedBN5.0.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARBRoundedBN50.0.net" beforeDir="false" afterPath="$PROJECT_DIR$/ARBRoundedBN50.0.net" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BN.py" beforeDir="false" afterPath="$PROJECT_DIR$/BN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BayesNets/K2BN.net" beforeDir="false" afterPath="$PROJECT_DIR$/BayesNets/K2BN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Question1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Question1.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/globalStates.csv" beforeDir="false" afterPath="$PROJECT_DIR$/globalStates.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noiseBN.net" beforeDir="false" afterPath="$PROJECT_DIR$/noiseBN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postK2BN.tex" beforeDir="false" afterPath="$PROJECT_DIR$/postK2BN.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/roundedBN.net" beforeDir="false" afterPath="$PROJECT_DIR$/roundedBN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/table_gen.tex" beforeDir="false" afterPath="$PROJECT_DIR$/table_gen.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDED0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDED0.33.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomes0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomes0.1.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomes0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomes0.2.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomes0.3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomes0.3.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomes0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomes0.5.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDED0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDED0.5.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.05.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.1.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.125.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.2.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.25.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.33.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesARBROUNDEDHYPS0.5.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDED0.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDED1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDED2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDED3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDED4.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDED5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS0.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS0.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS1.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS2.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS3.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS4.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS4.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/diffOutcomesROUNDEDHYPS5.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,10 +185,10 @@
     <state x="258" y="160" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1639515728802" />
     <state x="196" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/28.23.1252.777@28.23.1252.777" timestamp="1639416581587" />
     <state x="209" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/30.23.1250.777@30.23.1250.777" timestamp="1638534518958" />
-    <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1643500077883">
+    <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1646906154718">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643500077883" />
+    <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646906154718" />
     <state x="861" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1643734985718">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -170,10 +197,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1716" height="142" key="GridCell.Tab.0.bottom" timestamp="1646815870556">
+    <state width="1780" height="262" key="GridCell.Tab.0.bottom" timestamp="1646913192118">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1716" height="142" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646815870556" />
+    <state width="1780" height="262" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646913192118" />
     <state width="1578" height="356" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836778" />
     <state width="1654" height="267" key="GridCell.Tab.0.bottom/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -181,10 +208,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.bottom/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="234" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1642773647128" />
     <state width="1709" height="385" key="GridCell.Tab.0.bottom/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
-    <state width="1716" height="142" key="GridCell.Tab.0.center" timestamp="1646815870555">
+    <state width="1780" height="262" key="GridCell.Tab.0.center" timestamp="1646913192117">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1716" height="142" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646815870555" />
+    <state width="1780" height="262" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646913192117" />
     <state width="1578" height="356" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836773" />
     <state width="1654" height="267" key="GridCell.Tab.0.center/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624619" />
     <state width="1578" height="283" key="GridCell.Tab.0.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -192,10 +219,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.center/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="234" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1642773647127" />
     <state width="1709" height="385" key="GridCell.Tab.0.center/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1716" height="142" key="GridCell.Tab.0.left" timestamp="1646815870554">
+    <state width="1780" height="262" key="GridCell.Tab.0.left" timestamp="1646913192116">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1716" height="142" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646815870554" />
+    <state width="1780" height="262" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646913192116" />
     <state width="1578" height="356" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836768" />
     <state width="1654" height="267" key="GridCell.Tab.0.left/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624618" />
     <state width="1578" height="283" key="GridCell.Tab.0.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -203,10 +230,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.left/28.23.1252.777@28.23.1252.777" timestamp="1639416586499" />
     <state width="1259" height="234" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1642773647126" />
     <state width="1709" height="385" key="GridCell.Tab.0.left/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1716" height="142" key="GridCell.Tab.0.right" timestamp="1646815870555">
+    <state width="1780" height="262" key="GridCell.Tab.0.right" timestamp="1646913192117">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1716" height="142" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646815870555" />
+    <state width="1780" height="262" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646913192117" />
     <state width="1578" height="356" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836777" />
     <state width="1654" height="267" key="GridCell.Tab.0.right/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -214,28 +241,28 @@
     <state width="1002" height="164" key="GridCell.Tab.0.right/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="234" key="GridCell.Tab.0.right/30.23.1250.777@30.23.1250.777" timestamp="1642773647127" />
     <state width="1709" height="385" key="GridCell.Tab.0.right/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
-    <state width="858" height="357" key="GridCell.Tab.1.bottom" timestamp="1646762875089">
+    <state width="1780" height="333" key="GridCell.Tab.1.bottom" timestamp="1646907680831">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="858" height="357" key="GridCell.Tab.1.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646762875089" />
+    <state width="1780" height="333" key="GridCell.Tab.1.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646907680831" />
     <state width="1578" height="356" key="GridCell.Tab.1.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836831" />
     <state width="1578" height="356" key="GridCell.Tab.1.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644939714200" />
-    <state width="858" height="357" key="GridCell.Tab.1.center" timestamp="1646762875085">
+    <state width="1780" height="333" key="GridCell.Tab.1.center" timestamp="1646907680830">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="858" height="357" key="GridCell.Tab.1.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646762875085" />
+    <state width="1780" height="333" key="GridCell.Tab.1.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646907680830" />
     <state width="1578" height="356" key="GridCell.Tab.1.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836823" />
     <state width="1578" height="356" key="GridCell.Tab.1.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644939714199" />
-    <state width="858" height="357" key="GridCell.Tab.1.left" timestamp="1646762875084">
+    <state width="1780" height="333" key="GridCell.Tab.1.left" timestamp="1646907680828">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="858" height="357" key="GridCell.Tab.1.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646762875084" />
+    <state width="1780" height="333" key="GridCell.Tab.1.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646907680828" />
     <state width="1578" height="356" key="GridCell.Tab.1.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836810" />
     <state width="1578" height="356" key="GridCell.Tab.1.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644939714199" />
-    <state width="858" height="357" key="GridCell.Tab.1.right" timestamp="1646762875087">
+    <state width="1780" height="333" key="GridCell.Tab.1.right" timestamp="1646907680831">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="858" height="357" key="GridCell.Tab.1.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646762875087" />
+    <state width="1780" height="333" key="GridCell.Tab.1.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646907680831" />
     <state width="1578" height="356" key="GridCell.Tab.1.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1645185836825" />
     <state width="1578" height="356" key="GridCell.Tab.1.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644939714200" />
     <state x="315" y="115" key="MergeDialog" timestamp="1644843937191">
@@ -271,5 +298,16 @@
     <state x="787" y="283" width="1028" height="677" key="search.everywhere.popup/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1639686899481" />
     <state x="786" y="283" width="670" height="676" key="search.everywhere.popup/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644870912496" />
     <state x="541" y="214" width="670" height="497" key="search.everywhere.popup/28.23.1252.777@28.23.1252.777" timestamp="1639179347795" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -96,28 +96,28 @@ node E_private {
 }
 
 potential (lost_object) {
-   data = (  1 0);
+   data = (  0.805 0.195);
 }
 
 potential ( know_object | curtains   lost_object   ) {
    data = 
-   (((   0   1)   % lost_object=0   curtains=0   
-   (   1   0))   % lost_object=1   curtains=0   
-   ((   1   0)   % lost_object=0   curtains=1   
-   (   1   0)));   % lost_object=1   curtains=1   
+   (((   0.032   0.968)   % lost_object=0   curtains=0   
+   (   0.999   0.001))   % lost_object=1   curtains=0   
+   ((   0.999   0.001)   % lost_object=0   curtains=1   
+   (   0.997   0.003)));   % lost_object=1   curtains=1   
 }
 
 potential ( target_object | know_object   ) {
    data = 
-   ((   1   0)   % know_object=0   
-   (   1   0));   % know_object=1   
+   ((   0.999   0.001)   % know_object=0   
+   (   0.508   0.492));   % know_object=1   
 }
 
 potential ( motive | curtains   target_object   ) {
    data = 
    (((   1   0)   % target_object=0   curtains=0   
    (   0   1))   % target_object=1   curtains=0   
-   ((   1   0)   % target_object=0   curtains=1   
+   ((   0.999   0.001)   % target_object=0   curtains=1   
    (   1   0)));   % target_object=1   curtains=1   
 }
 
@@ -126,7 +126,7 @@ potential ( compromise_house | target_object   motive   ) {
    (((   1   0)   % motive=0   target_object=0   
    (   1   0))   % motive=1   target_object=0   
    ((   1   0)   % motive=0   target_object=1   
-   (   1   0)));   % motive=1   target_object=1   
+   (   0.644   0.356)));   % motive=1   target_object=1   
 }
 
 potential ( flees_startled | motive   target_object   ) {
@@ -134,74 +134,74 @@ potential ( flees_startled | motive   target_object   ) {
    (((   1   0)   % target_object=0   motive=0   
    (   1   0))   % target_object=1   motive=0   
    ((   1   0)   % target_object=0   motive=1   
-   (   1   0)));   % target_object=1   motive=1   
+   (   0.517   0.483)));   % target_object=1   motive=1   
 }
 
 potential ( successful_stolen | flees_startled   compromise_house   ) {
    data = 
    (((   1   0)   % compromise_house=0   flees_startled=0   
-   (   0   1))   % compromise_house=1   flees_startled=0   
-   ((   1   0)   % compromise_house=0   flees_startled=1   
-   (   1   0)));   % compromise_house=1   flees_startled=1   
+   (   0.002   0.998))   % compromise_house=1   flees_startled=0   
+   ((   0.999   0.001)   % compromise_house=0   flees_startled=1   
+   (   0.998   0.002)));   % compromise_house=1   flees_startled=1   
 }
 
 potential (raining) {
-   data = (  1 0);
+   data = (  0.502 0.498);
 }
 
 potential (curtains) {
-   data = (  1 0);
+   data = (  0.812 0.188);
 }
 
 potential ( E_object_is_gone | successful_stolen   compromise_house   lost_object   ) {
    data = 
    ((((   1   0)   % lost_object=0   compromise_house=0   successful_stolen=0   
    (   0   1))   % lost_object=1   compromise_house=0   successful_stolen=0   
-   ((   0   1)   % lost_object=0   compromise_house=1   successful_stolen=0   
+   ((   0.34   0.66)   % lost_object=0   compromise_house=1   successful_stolen=0   
    (   1   0)))   % lost_object=1   compromise_house=1   successful_stolen=0   
    (((   1   0)   % lost_object=0   compromise_house=0   successful_stolen=1   
    (   1   0))   % lost_object=1   compromise_house=0   successful_stolen=1   
-   ((   0   1)   % lost_object=0   compromise_house=1   successful_stolen=1   
+   ((   0.001   0.999)   % lost_object=0   compromise_house=1   successful_stolen=1   
    (   1   0))));   % lost_object=1   compromise_house=1   successful_stolen=1   
 }
 
 potential ( E_broken_lock | successful_stolen   compromise_house   ) {
    data = 
    (((   1   0)   % compromise_house=0   successful_stolen=0   
-   (   0   1))   % compromise_house=1   successful_stolen=0   
+   (   0.002   0.998))   % compromise_house=1   successful_stolen=0   
    ((   1   0)   % compromise_house=0   successful_stolen=1   
-   (   0   1)));   % compromise_house=1   successful_stolen=1   
+   (   0.002   0.998)));   % compromise_house=1   successful_stolen=1   
 }
 
 potential ( E_disturbed_house | successful_stolen   compromise_house   ) {
    data = 
    (((   1   0)   % compromise_house=0   successful_stolen=0   
-   (   0   1))   % compromise_house=1   successful_stolen=0   
+   (   0.002   0.998))   % compromise_house=1   successful_stolen=0   
    ((   1   0)   % compromise_house=0   successful_stolen=1   
-   (   0   1)));   % compromise_house=1   successful_stolen=1   
+   (   0.002   0.998)));   % compromise_house=1   successful_stolen=1   
 }
 
 potential ( E_s_spotted_by_house | curtains   target_object   ) {
    data = 
-   (((   0   1)   % target_object=0   curtains=0   
+   (((   0.207   0.793)   % target_object=0   curtains=0   
    (   0   1))   % target_object=1   curtains=0   
-   ((   0   1)   % target_object=0   curtains=1   
+   ((   0.038   0.962)   % target_object=0   curtains=1   
    (   1   0)));   % target_object=1   curtains=1   
 }
 
 potential ( E_s_spotted_with_goodie | successful_stolen   compromise_house   ) {
    data = 
    (((   1   0)   % compromise_house=0   successful_stolen=0   
-   (   0   1))   % compromise_house=1   successful_stolen=0   
+   (   0.34   0.66))   % compromise_house=1   successful_stolen=0   
    ((   1   0)   % compromise_house=0   successful_stolen=1   
-   (   0   1)));   % compromise_house=1   successful_stolen=1   
+   (   0.002   0.998)));   % compromise_house=1   successful_stolen=1   
 }
 
 potential ( E_private | flees_startled   successful_stolen   ) {
    data = 
    (((   1   0)   % successful_stolen=0   flees_startled=0   
-   (   1   0))   % successful_stolen=1   flees_startled=0   
-   ((   0   1)   % successful_stolen=0   flees_startled=1   
+   (   0.998   0.002))   % successful_stolen=1   flees_startled=0   
+   ((   0.001   0.999)   % successful_stolen=0   flees_startled=1   
    (   1   0)));   % successful_stolen=1   flees_startled=1   
 }
 

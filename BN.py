@@ -361,20 +361,3 @@ def rounded(experiment):
 np.random.seed(1)
 experiment = Experiment()
 K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
-
-#experiment_with_normal_noise()
-#experiment_with_rounding()
-#experiment_with_arbitrary_rounding()
-
-
-#get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "postK2BN.tex", None)
-#get_outcome_posteriors_in_table(experiment, "ARBRoundedBN33.0.net", "postarb.tex", None)
-#get_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "ARBRoundedBN33.0.net", ["stolen", "lost"])
-
-
-
-#K2_limited_BN(experiment)
-#et_diff_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net", "BayesNets/adaptedK2BN.net", ["stolen", "lost"])
-
-#get_outcome_posteriors_in_table(experiment, "BayesNets/K2BN.net")
-#get_outcome_posteriors_in_table(experiment, "BayesNets/adaptedK2BN.net")

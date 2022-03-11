@@ -1,0 +1,78 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+                  % ... or a4paper or a5paper or ... 
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{color, colortbl}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\definecolor{Bittersweet}{rgb}{1.0, 0.44, 0.37}
+
+\title{So what i'm trying to say is...}
+\author{The Author}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+These are the results disturbing an ``objective'' Bayesian Network. The original BN was created with certain temporal constraints (ordering) with the K2 algorithm, with CPTs that exactly represent the underlying probabilistic structure.
+
+Then the BN was disturbed by three different processes.
+
+\begin{enumerate}
+
+\item Process 1 is straightforwardly losing precision by changing the rounding in the cpts. Rounding took place from 5 decimals (very precise) to 0 decimals (turn the number to 0 or 1, obviously this resulted in a BN that could not be used (incompatible). This is to see if the float errors in BNs matter in case of this simulation.
+
+\item Process 2 is rounding to arbitrary intervals - these intervals were chosen to represent human intuition, like 8ths, 4ths, 3rds and even halves (so the only numbers allowed in the cpt in that last one, are 0, 0.5 and 1). This should reflect relatively normal human reasoning - if we don't have exact numbers, we want to estimate to some arbitrary degree. And in this case I wanted to see how granular our estimation needs to be in order to come to a similar conclusion as the K2 network. Note - this only affects the cpt, we assume that we can think of the same structure as the cpt (ie we are able to identify all the independence/dependence relations).
+
+\item Process 3 is disturbing the cpts with random normal noise, representing the effect of confusion about directionality/causality in the network. The standard deviation of the normal noise is increased (mean at 0), to represent greater confusing about the direction of the network. Here, in the tables below we look at the \% of times that the disturbed network corresponds with the original network.
+\end{enumerate}
+
+In all of these three processes, we look at 2 things. There are 2 ways of viewing the use of BNs, which I will call the weak view and the strong view. In the weak view, probabilities are subjective estimations, and furthermore, it doesn't exactly matter what these probabilities are, as long as they help us to reason with the evidence. In this view (see Taroni), BNs can help us to reason with complex structures of evidence and hypotheses, without looking much at the numbers, but more at the change in numbers: does some piece of evidence support some hypothesis in some way, even across many different causal connections? However, the exact strength of these numbers is not exactly relevant - it is only a reasoning tool. We only care about the direction that evidence leans towards - towards H1 or towards H0?
+
+In the strong view, BNs are also subjective, but here the numbers do actually matter. We can make precise claims or estimations about probabilities, and the numbers actually represent evidence strength in a relatively precise manner. We cannot only look at the direction - the precision/numbers are informative as well. We need to care about the numbers, not just a binary (supports H1 vs H0), but if we see that support for H1 is 0.80, that means something meaningfully different from support for H1 = 0.99.
+
+Hence, here I investigate this weak vs strong view, by looking at both the `support direction' - what, for each node in the original network, is the hypothesis that they support (H1 or H0), and does the disturbed network support that same hypothesis, under all processes of disturbance?
+The other thing is the `precision' - to what extent does the disturbed network diverge from the actual probability value of H1 in every node in the network? How big is this disturbance?
+
+\section{Conclusion and Discussion}
+
+The network is relatively robust against disturbances, especially in the weak view, where in almost all cases for any disturbance, the same hypothesis is supported as the original network. In the strong view, probabilities diverge a lot, hence I would not trust a judge with a 99\% estimate, I don't know what his standard deviation is :D.
+
+The process 2 is promising, shows that even with not very granular numbers we can still show some type of evidence strength. 
+
+Also my simulation is not interesting enough, I will change some of the original probabilities so that these numbers might become more interesting (the disturbed house, spotted nodes do not add anything to the story while they should, since the broken lock evidence is too strong).
+
+Maybe also show the tables for the `lost' outcome?
+
+Todo - make these plots so that we can actually see what is going on!
+
+\clearpage
+
+%\subsection{}
+\section{Effect of disturbing the cpts by removing precision with rounding}
+\let\oldcentering\centering
+\renewcommand\centering{\tiny\oldcentering}
+\input{../simulationTest/texTables/rounded_collected_tables.tex}
+
+\clearpage
+\section{Effect of disturbing the cpts by rounding to an arbitrary fraction}
+\input{../simulationTest/texTables/arbitraryRounded_collected_tables.tex}
+\clearpage
+\section{Effect of disturbing the cpts with normal noise}
+\input{../simulationTest/texTables/normalNoise_collected_tables.tex}
+\clearpage
+
+
+
+\end{document}  

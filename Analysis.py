@@ -134,9 +134,9 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
         x = bn.cpt(node)
         name = x.var_names[-1]
         if name[0] != 'E':  # we do not care about evidence nodes
-            if direction == "direction":
+            if direction == "weak":
                 e_dict[name] = determine_winning_hypothesis(ie.posterior(node)[0], ie.posterior(node)[1]) # compare the posteriors (false, true) for node "name"
-            elif direction == "precision":  # we just want to know the posterior for truth of a node
+            elif direction == "strong":  # we just want to know the posterior for truth of a node
                 e_dict[name] = round(ie.posterior(node)[1], 2)
 
     direction_dict[("no_evidence", 0)] = e_dict
@@ -157,7 +157,7 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
             name = x.var_names[-1]
             if name[0] != 'E':  # we do not care about evidence nodes
                 try:
-                    if direction == "direction":
+                    if direction == "weak":
                         e_dict[name] = determine_winning_hypothesis(ie.posterior(node)[0], ie.posterior(node)[1])
                     else:
                         e_dict[name] = round(ie.posterior(node)[1], 2)
@@ -165,105 +165,6 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
                     e_dict[name] = "N/A"
         direction_dict[(evidence, val)] = e_dict
     return direction_dict
-
-
-def comp(d1, d2, latex_file_name, params):  # compare two direction dictionaries
-    with open(latex_file_name, 'w') as file:
-        file.write("\\begin{table}")
-        file.write("\\begin{tabular}{c|cc|cc}")
-        file.write("\\toprule")
-        file.write(
-            "\\multirow{2}{*}{Evidence} & \\multicolumn{2}{c}{Successful Stolen} & \\multicolumn{2}{c}{Lost Object} \\\\"
-            "& {K2} & {Dev} & {K2} & {Dev} \\\\")
-        file.write("\\midrule\n")
-        for e in d1.keys():
-            l_key = e[0].replace("_", "\_")
-            file.write(str(l_key) + ", " + str(e[1]) + " & ")
-            for x in ["successful_stolen", "lost_object"]:
-                if d1[e][x] == d2[e][x]:
-                    file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
-                else:
-                    file.write(
-                        "\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(d2[e][x]))
-                if x == "successful_stolen":
-                    file.write("&")
-            file.write("\\\\")
-        file.write("\\bottomrule")
-        file.write("\\end{tabular}")
-        file.write("\\caption{Different outcomes for disturbances in the cpts with params " + str(params) + "}")
-        file.write("\\end{table}")
-
-
-def comp_count(d1, d_noise, latex_file_name, params, direction):  # compare two direction dictionaries
-    with open(latex_file_name, 'w') as file:
-        file.write("\\begin{table}")
-        file.write("\\begin{tabular}{c|cc|cc}")
-        file.write("\\toprule")
-        file.write(
-            "\\multirow{2}{*}{Evidence} & \\multicolumn{2}{c}{Successful Stolen} & \\multicolumn{2}{c}{Lost Object} \\\\"
-            "& {K2} & {Dev} & {K2} & {Dev} \\\\")
-        file.write("\\midrule\n")
-
-        for e in d1.keys():
-            l_key = e[0].replace("_", "\_")
-            file.write(str(l_key) + ", " + str(e[1]) + " & ")
-            for x in ["successful_stolen", "lost_object"]:
-                if direction == "direction":
-                    #print(len(d_noise))
-                    if len(d_noise) == 7:
-                        d2 = d_noise
-                        if d1[e][x] == d2[e][x]:
-                            file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
-                        else:
-                            file.write(
-                                "\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
-                                    d2[e][x]))
-                    else:
-                        count = 0
-                        for d2 in d_noise:
-                            #print(d2)
-                            #print(d2[e][x])
-                            if d1[e][x] == d2[e][x]:
-                                count += 1
-                        if (count / len(d_noise)) < 0.95:
-                            file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
-                                round(100 * (count / len(d_noise)), 0)))
-                        else:
-                            file.write(str(d1[e][x]) + "&" + str(round(100 * (count / len(d_noise)), 0)))
-                if direction == "precision":
-                    if len(d_noise) == 7:   #something number of nodes
-                        d2 = d_noise
-                        if d1[e][x] == d2[e][x]:
-                            file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
-                        else:
-                            file.write(
-                                "\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
-                                    d2[e][x]))
-                    else:
-                        count = 0
-                        for d2 in d_noise:
-                            if type(d2[e][x]) == float and d2[e][x] != "N/A":
-                                #print(d2[e][x])
-                                #print(count)
-                                count += d2[e][x]
-                            else:
-                                count += 0.5
-                        if abs(d1[e][x] - (count / len(d_noise))) > 0.05:
-                            file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
-                                round(100 * (count / len(d_noise)), 0)))
-                        else:
-                            t = round(100 * (count / len(d_noise)), 0)
-                            file.write(str(d1[e][x]) + "&" + str(t))
-
-                if x == "successful_stolen":
-                    file.write("&")
-            file.write("\\\\")
-
-        file.write("\\bottomrule")
-        file.write("\\end{tabular}")
-        file.write("\\caption{Different outcomes for disturbances in the cpts with params " + str(params) + " " + str(direction) + "}")
-        file.write("\\end{table}")
-
 
 def keep_in_range(x):
     ''' numbers in a ctp cannot be > 1 or < 0'''
@@ -273,130 +174,127 @@ def keep_in_range(x):
         return 0
     return x
 
+def make_table_headings_based_on_events(relevant_events):
+    str_tabular_formatting = "\\begin{tabular}{l"
+    for i in range(0, len(relevant_events)):
+        str_tabular_formatting = str_tabular_formatting + "|cc"
+    str_tabular_formatting = str_tabular_formatting + "}"
 
-def get_hypothesis_posteriors_in_table(experiment, file_name, d1, d2, latex_file_name, params, flag, direction):
-    if flag == "noise":
-        d_noise = d2
-    bnK2 = gum.loadBN(file_name)
-    ie = gum.LazyPropagation(bnK2)
-    event_list = experiment.reporters.relevant_events
-    evidence_list = []
-    for ev in event_list:
-        if ev[0] == 'E':  # evidence node TODO make a seperate class
-            evidence_list.append(ev)
+    str_head = "\\multirow{2}{*}{Evidence} "
+    for e in relevant_events:
+        l_key = e.replace("_", " ")
+        str_head = str_head + "& \\multicolumn{2}{c}{" + l_key + "}"
+    str_head = str_head + "\\\\"
 
-    ie = gum.LazyPropagation(bnK2)
+    for e in relevant_events:
+        str_head = str_head + "& {K2} & {Dev}"
+    str_head = str_head + "\\\\"
+    return str_tabular_formatting, str_head
+
+
+
+def get_outcomes_in_table(d1, d_noise, latex_file_name, params, direction, noise, relevant_events):  # compare two direction dictionaries
+    tab_f, head_f = make_table_headings_based_on_events(relevant_events)
+    if len(relevant_events) > 3:
+        outcomes = "outcomes"
+    else:
+        outcomes = "hypotheses"
+
     with open(latex_file_name, 'w') as file:
-
         file.write("\\begin{table}")
-        file.write("\\begin{tabular}{c|cc|cc|cc|cc|cc|cc|cc}")
-
+        file.write(tab_f)
         file.write("\\toprule")
-        file.write("\\multirow{2}{*}{Evidence} & \\multicolumn{2}{c}{Raining} & "
-                   "\\multicolumn{2}{c}{Curtains} & \\multicolumn{2}{c}{Know O}"
-                   " & \\multicolumn{2}{c}{Target O} & \\multicolumn{2}{c}{Motive} &"
-                   " \\multicolumn{2}{c}{CH} & \\multicolumn{2}{c}{Flees} &"
-                   "  & {K2} & {Dev} & {K2} & {Dev} & {K2} & {Dev} & {K2} & {Dev} &"
-                   " {K2} & {Dev} & {K2} & {Dev} & {K2} & {Dev}\\\\")
+        file.write(head_f)
         file.write("\\midrule\n")
+
         for e in d1.keys():
-            l_key = e[0].replace("_", "\_")
+            l_key = e[0].replace("_", " ")
             file.write(str(l_key) + ", " + str(e[1]) + " & ")
-            for x in ["curtains", "raining", "know_object",
-                      "target_object", "motive", "compromise_house",
-                      "flees_startled"]:
-                if flag == "noise":
-                    if direction == "direction":
+            for x in relevant_events:
+                if direction == "weak":
+                    if not noise:   # if not noise
+                        d2 = d_noise
+                        if d1[e][x] == d2[e][x]:
+                            file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
+                        else:
+                            file.write(
+                                "\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
+                                    d2[e][x]))
+                    else:   #if noise
                         count = 0
-                        for d_2 in d_noise:
-                            if d1[e][x] == d_2[e][x]:
+                        for d2 in d_noise:
+                            if d1[e][x] == d2[e][x]:
                                 count += 1
                         if (count / len(d_noise)) < 0.95:
                             file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
                                 round(100 * (count / len(d_noise)), 0)))
                         else:
                             file.write(str(d1[e][x]) + "&" + str(round(100 * (count / len(d_noise)), 0)))
-                    else:
+                if direction == "strong":
+                    if not noise:   # something number of nodes
+                        d2 = d_noise
+                        if type(d2[e][x]) == float and abs(d1[e][x] - d2[e][x]) < 0.05:
+                            file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
+                        else:
+                            file.write(
+                                "\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
+                                    d2[e][x]))
+                    else: # noise randomness precisison
                         count = 0
-                        for d_2 in d_noise:
-                            if type(d_2[e][x]) == float and d_2[e][x] != "N/A":
-                                #print(d_2[e][x])
-                                count += d_2[e][x]
+                        for d2 in d_noise:
+                            if type(d2[e][x]) == float and d2[e][x] != "N/A":
+                                count += d2[e][x]
                             else:
                                 count += 0.5
-                        if abs(d1[e][x] - count/len(d_noise)) > 0.01:
+                        if abs(d1[e][x] - (count / len(d_noise))) > 0.05:
                             file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(
                                 round((count / len(d_noise)), 0)))
                         else:
-                            file.write(str(d1[e][x]) + "&" + str(round((count / len(d_noise)), 0)))
-                else:
-                    if d1[e][x] == d2[e][x]:
-                        file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
-                    else:
-                        file.write("\\cellcolor{Bittersweet}" + str(d1[e][x]) + "&" + "\\cellcolor{Bittersweet}" + str(d2[e][x]))
-                if x != "flees_startled":
+                            t = round((count / len(d_noise)), 0)
+                            file.write(str(d1[e][x]) + "&" + str(t))
+
+                if x != relevant_events[-1]:
                     file.write("&")
             file.write("\\\\")
+
         file.write("\\bottomrule")
         file.write("\\end{tabular}")
-        file.write("\\caption{Evidence set with effect on hypothesis nodes." + str(params) + " " + str(direction) + "}")
+        file.write("\\caption{Effect of disturbance of " + str(params) + " on " + str(direction) + " view of " + str(outcomes) + ".}")
         file.write("\\end{table}")
 
 
 
 
-def experiment_with_normal_noise():
-    for params in [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
-                   [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]:
-        d_noise_list = []
-        d4_noise_list = []
-        smallest_change = 1
-        largest_change = 0
-        for i in range(0, 200):
-            [BN_file_name, l, s] = disturb_cpts(experiment, "normalNoise", params)
-            if abs(l) > largest_change:
-                largest_change = l
-            if abs(s) < smallest_change:
-                smallest_change = s
-            d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "direction")
-            d_2 = determine_posterior_direction_or_precision(f"NoiseBN{params[1]}.net", "direction")
-            d_noise_list.append(d_2)
-
-            d_3 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", "precision")
-            d_4 = determine_posterior_direction_or_precision(f"NoiseBN{params[1]}.net", "precision")
-            d4_noise_list.append(d_4)
-
-        print(params, largest_change, smallest_change)
-        comp_count(d_1, d_noise_list, f'texTables/diffOutcomesDIR{params[1]}.tex', params, "direction")
-        comp_count(d_3, d4_noise_list, f'texTables/diffOutcomesPRE{params[1]}.tex', params, "precision")
-
-        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_noise_list, f'texTables/diffOutcomesDIRNOISEHYPS{params[1]}.tex', params, "noise", "direction")
-        get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_3, d4_noise_list, f'texTables/diffOutcomesPRENOISEHYPS{params[1]}.tex', params, "noise", "precision")
-
-        # comp(d_1, d_2, f'texTables/diffOutcomes{params[1]}.tex', params)
-        print("generated 2x table for ", params)
-
-
 def experiment_general_shape(type_exp, param_list, general_latex_file):
     d_2 = []
-    noise = "no noise"
+    noise = False
     relevant_files = []
+    relevant_nodes_out = ["successful_stolen", "lost_object"]
+    relevant_nodes_hyp = ["curtains", "raining", "know_object", "target_object", "motive", "compromise_house", "flees_startled"]
     for params in param_list:
         [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params)
-        for x in ["direction", "precision"]:
-            d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", x)
+        for direc in ["weak", "strong"]:
+            d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", direc)
             if type_exp == "normalNoise":
                 for i in range(0, 200):
-                    noise = "noise"
-                    d_i = determine_posterior_direction_or_precision(disturbed_BN_file_name, x)
+                    noise = True
+                    d_i = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
                     d_2.append(d_i)
             else:
                 [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params)
-                d_2 = determine_posterior_direction_or_precision(disturbed_BN_file_name, x)
-            comp_count(d_1, d_2, f'texTables/new/{x}{disturbed_BN_file_name}.tex', params, x)
-            get_hypothesis_posteriors_in_table(experiment, "BayesNets/K2BN.net", d_1, d_2, f'texTables/new/hyp{x}{disturbed_BN_file_name}.tex', params, noise, x)
-            relevant_files.append(f'texTables/new/{x}{disturbed_BN_file_name}.tex')
-            relevant_files.append(f'texTables/new/hyp{x}{disturbed_BN_file_name}.tex')
+                d_2 = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
+
+            outcome_table = f'texTables/outcome/{direc}{disturbed_BN_file_name}.tex'
+            hyp_table = f'texTables/hyps/{direc}{disturbed_BN_file_name}.tex'
+
+
+            get_outcomes_in_table(d_1, d_2, outcome_table, params, direc, noise, relevant_nodes_out)
+            get_outcomes_in_table(d_1, d_2, hyp_table, params, direc, noise, relevant_nodes_hyp)
+
+
+            relevant_files.append(outcome_table)
+            relevant_files.append(hyp_table)
+
     # output of experiment
     with open(general_latex_file, 'w') as file:
         for f in relevant_files:
@@ -417,11 +315,6 @@ param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
                    [0.5, 'arbit']]
 
 gen_file = '_collected_tables.tex'
-for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar)]: #, ("normalNoise", param_no)]:
-    experiment_general_shape(exp, params, f"{exp}{gen_file}")
+for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
+    experiment_general_shape(exp, params, f"texTables/{exp}{gen_file}")
     print(f"done with experiment {exp}")
-
-
-#experiment_with_normal_noise()
-#experiment_with_rounding()
-#experiment_with_arbitrary_rounding()

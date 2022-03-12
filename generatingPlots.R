@@ -35,13 +35,17 @@ View(prec_stolen)
 #prec_stolen <- filter(prec_stolen, distortion == "E_private0") # all evidence is added
 
 
+prec_stolen <- filter(prec_stolen, hypNode %in% c("successful_stolen" ,"lost_object"))
+prec_stolen$hypNode <- factor(prec_stolen$hypNode, levels=c("successful_stolen", "lost_object"))
 
 for(s in c("K2", "rounded", "arbitraryRounded", "normalNoise")){
   prec_stolen_x <- filter(prec_stolen, (distortion == s))
-  title <- paste("Absolute probability of the successfull stolen node under", s)
+  title <- paste("Absolute probability of the outcome nodes under", s)
   ggplot(data=prec_stolen_x, aes(x=ev,
                              y= Probability, group=param)) +
-  geom_point(aes(color=param, shape=distortion)) + geom_line(aes(color=param)) + 
+  geom_point(aes(color=param, shape=distortion)) + 
+    facet_wrap(hypNode~.) +
+    geom_line(aes(color=param), position=position_dodge(width=0.2)) + 
   ggtitle(title) +
     theme_bw() +
     theme(axis.text.x = element_text(angle = 30, hjust = 1)) 
@@ -51,11 +55,13 @@ for(s in c("K2", "rounded", "arbitraryRounded", "normalNoise")){
   
   ggsave(f_name, device="png", width=20, height=12, units="cm")
 
-  title <- paste("Difference in probability of the successfull stolen node under", s)
+  title <- paste("Difference in probability of the outcome nodes under", s)
   
    ggplot(data=prec_stolen_x, aes(x=ev,
                                y= delta, group=param)) +
-    geom_point(aes(color=param, shape=distortion)) + geom_line(aes(color=param)) + 
+     facet_wrap(hypNode~.) +
+    geom_point(aes(color=param, shape=distortion)) + 
+     geom_line(aes(color=param), position=position_dodge(width=0.2)) + 
     ggtitle(title) + 
      theme_bw() +
      theme(axis.text.x = element_text(angle = 30, hjust = 1)) 
@@ -70,14 +76,16 @@ for(s in c("K2", "rounded", "arbitraryRounded", "normalNoise")){
 #### WEAK VIEW ######
 
 weak <- filter(exp, strong == "weak")
-weak_stolen <- filter(weak, hypNode == "successful_stolen")
-
+weak_stolen <- filter(weak, hypNode %in% c("successful_stolen" ,"lost_object"))
+weak_stolen$hypNode <- factor(weak_stolen$hypNode, levels=c("successful_stolen", "lost_object"))
 for(s in c("K2", "rounded", "arbitraryRounded", "normalNoise")){
   weak_stolen_x <- filter(weak_stolen, (distortion == s))
-  title <- paste("Winning hypothesis of the successfull stolen node under", s)
+  title <- paste("Winning hypothesis of the outcome nodes under", s)
   ggplot(data=weak_stolen_x, aes(x=ev,
                                y= Probability, group=param)) +
-  geom_point(aes(color=param, shape=distortion)) + geom_line(aes(color=param)) + 
+    facet_wrap(hypNode~.) +
+  geom_point(aes(color=param, shape=distortion)) + 
+    geom_line(aes(color=param), position=position_dodge(width=0.2)) + 
     ggtitle(title) + 
     theme_bw() +
   theme(axis.text.x = element_text(angle = 30, hjust = 1)) 

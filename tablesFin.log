@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  11 MAR 2022 13:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  12 MAR 2022 01:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -382,7 +382,7 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@loff=\dimen196
 \@vwid@roff=\dimen197
 ))
-No file tablesFin.aux.
+(./tablesFin.aux)
 \openout1 = `tablesFin.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -400,6 +400,7 @@ LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 24.
+
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -465,7 +466,27 @@ Dictionary: translator-basic-dictionary, Language: English
 (/usr/local/texlive/2020/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 ) [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] (../simulationTest/texTables/rounded_collected_tables.tex
+<../Desktop/deltaArb.png, id=11, 822.07124pt x 522.95375pt>
+File: ../Desktop/deltaArb.png Graphic file (type png)
+<use ../Desktop/deltaArb.png>
+Package pdftex.def Info: ../Desktop/deltaArb.png  used on input line 59.
+(pdftex.def)             Requested size: 369.92863pt x 235.32701pt.
+<../Desktop/deltaNoise.png, id=13, 964.60374pt x 521.95pt>
+File: ../Desktop/deltaNoise.png Graphic file (type png)
+<use ../Desktop/deltaNoise.png>
+Package pdftex.def Info: ../Desktop/deltaNoise.png  used on input line 60.
+(pdftex.def)             Requested size: 385.83466pt x 208.77629pt.
+<../Desktop/deltaRound.png, id=14, 827.09pt x 518.93875pt>
+File: ../Desktop/deltaRound.png Graphic file (type png)
+<use ../Desktop/deltaRound.png>
+Package pdftex.def Info: ../Desktop/deltaRound.png  used on input line 61.
+(pdftex.def)             Requested size: 372.18706pt x 233.52028pt.
+
+
+LaTeX Warning: Float too large for page by 152.69698pt on input line 65.
+
+[2] [3 <../Desktop/deltaArb.png> <../Desktop/deltaNoise.png> <../Desktop/deltaR
+ound.png>] (../simulationTest/texTables/rounded_collected_tables.tex
 (../simulationTest/texTables/outcome/weakroundedBN5.tex)
 (../simulationTest/texTables/hyps/weakroundedBN5.tex
 Overfull \hbox (40.84157pt too wide) in paragraph at lines 1--2
@@ -528,19 +549,19 @@ Overfull \hbox (50.0985pt too wide) in paragraph at lines 1--2
 
 ) (../simulationTest/texTables/outcome/weakroundedBN0.tex)
 (../simulationTest/texTables/hyps/weakroundedBN0.tex
-Overfull \hbox (44.8694pt too wide) in paragraph at lines 1--2
+Overfull \hbox (40.84157pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongroundedBN0.tex)
 (../simulationTest/texTables/hyps/strongroundedBN0.tex
-Overfull \hbox (53.23744pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.20961pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
-)) [3
+)) [4
 
-] [4] [5] [6] [7] [8]
+] [5] [6] [7] [8] [9]
 (../simulationTest/texTables/arbitraryRounded_collected_tables.tex
 (../simulationTest/texTables/outcome/weakarbitraryRoundedBN0.05.tex)
 (../simulationTest/texTables/hyps/weakarbitraryRoundedBN0.05.tex
@@ -626,9 +647,9 @@ Overfull \hbox (49.20961pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
-)) [9
+)) [10
 
-] [10] [11] [12] [13] [14] [15]
+] [11] [12] [13] [14] [15] [16]
 (../simulationTest/texTables/normalNoise_collected_tables.tex
 (../simulationTest/texTables/outcome/weaknormalNoiseBN0.001.tex)
 (../simulationTest/texTables/hyps/weaknormalNoiseBN0.001.tex
@@ -702,31 +723,28 @@ Overfull \hbox (49.20961pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
-)) [16
+)) [17
 
-] [17] [18] [19] [20] [21] (./tablesFin.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+] [18] [19] [20] [21] [22] (./tablesFin.aux) ) 
 Here is how much of TeX's memory you used:
- 8388 strings out of 480608
- 169150 string characters out of 5903630
- 623104 words of memory out of 5000000
- 23793 multiletter control sequences out of 15000+600000
+ 8419 strings out of 480608
+ 169750 string characters out of 5903630
+ 616097 words of memory out of 5000000
+ 23817 multiletter control sequences out of 15000+600000
  543077 words of font info for 67 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 38i,11n,46p,3098b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
-></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
-r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
-ocal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-Output written on tablesFin.pdf (21 pages, 163505 bytes).
+ 38i,11n,46p,3098b,499s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2020/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2020/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2020/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2020/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr9.pfb>
+Output written on tablesFin.pdf (22 pages, 465551 bytes).
 PDF statistics:
- 96 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

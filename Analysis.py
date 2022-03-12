@@ -6,7 +6,7 @@ import csv
 import pandas as pd
 import math
 import numpy as np
-
+from collections import defaultdict
 import csv
 import pandas as pd
 
@@ -162,8 +162,9 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
                     else:
                         e_dict[name] = round(ie.posterior(node)[1], 2)
                 except:
-                    e_dict[name] = "N/A"
+                    e_dict[name] = "NA"
         direction_dict[(evidence, val)] = e_dict
+
     return direction_dict
 
 def keep_in_range(x):
@@ -242,7 +243,7 @@ def get_outcomes_in_table(d1, d_noise, latex_file_name, params, direction, noise
                     else: # noise randomness precisison
                         count = 0
                         for d2 in d_noise:
-                            if type(d2[e][x]) == float and d2[e][x] != "N/A":
+                            if type(d2[e][x]) == float and d2[e][x] != "NA":
                                 count += d2[e][x]
                             else:
                                 count += 0.5
@@ -265,7 +266,7 @@ def get_outcomes_in_table(d1, d_noise, latex_file_name, params, direction, noise
 
 
 
-def experiment_general_shape(type_exp, param_list, general_latex_file):
+def experiment_general_shape(type_exp, param_list, general_latex_file, experiment_list):
     d_2 = []
     noise = False
     relevant_files = []
@@ -275,14 +276,25 @@ def experiment_general_shape(type_exp, param_list, general_latex_file):
         [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params)
         for direc in ["weak", "strong"]:
             d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", direc)
+            for a in d_1.keys():
+                for b in d_1[a].keys():
+                    experiment_list.append(["K2", params[0], direc, 0, a[0]+str(a[1]), b, d_1[a][b], d_1[a][b]])
             if type_exp == "normalNoise":
                 for i in range(0, 200):
                     noise = True
                     d_i = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
                     d_2.append(d_i)
+
+                    for a in d_i.keys():
+                        for b in d_i[a].keys():
+                            experiment_list.append([type_exp, params[1], direc, i, a[0]+str(a[1]), b, d_i[a][b], d_1[a][b]])
+
             else:
                 [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params)
                 d_2 = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
+                for a in d_2.keys():
+                    for b in d_2[a].keys():
+                        experiment_list.append([type_exp, params[0], direc, 0, a[0]+str(a[1]), b, d_2[a][b], d_1[a][b]])
 
             outcome_table = f'texTables/outcome/{direc}{disturbed_BN_file_name}.tex'
             hyp_table = f'texTables/hyps/{direc}{disturbed_BN_file_name}.tex'
@@ -301,6 +313,8 @@ def experiment_general_shape(type_exp, param_list, general_latex_file):
             file.write("\\input{../simulationTest/" + f + "}\n")
 
 
+
+
 experiment = Experiment()
 K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
 
@@ -314,7 +328,17 @@ param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
                    [0.2, 'arbit'], [0.25, 'arbit'],[0.33, 'arbit'],
                    [0.5, 'arbit']]
 
+
 gen_file = '_collected_tables.tex'
+experiment_list = []
 for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
-    experiment_general_shape(exp, params, f"texTables/{exp}{gen_file}")
+    experiment_general_shape(exp, params, f"texTables/{exp}{gen_file}", experiment_list)
     print(f"done with experiment {exp}")
+
+csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability"]
+with open("exp.csv", 'w') as file:
+    writer = csv.writer(file)
+    writer.writerow(csv_cols)
+    writer.writerows(experiment_list)
+
+

@@ -54,8 +54,16 @@ The process 2 is promising, shows that even with not very granular numbers we ca
 Also my simulation is not interesting enough, I will change some of the original probabilities so that these numbers might become more interesting (the disturbed house, spotted nodes do not add anything to the story while they should, since the broken lock evidence is too strong).
 
 Maybe also show the tables for the `lost' outcome?
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale = 0.45]{../Desktop/deltaArb.png}
+\includegraphics[scale=0.40]{../Desktop/deltaNoise.png}
+\includegraphics[scale=0.45]{../Desktop/deltaRound.png}
+\caption{default}
+\label{default}
+\end{center}
+\end{figure}
 
-Todo - make these plots so that we can actually see what is going on!
 
 \clearpage
 
@@ -64,7 +72,6 @@ Todo - make these plots so that we can actually see what is going on!
 \let\oldcentering\centering
 \renewcommand\centering{\tiny\oldcentering}
 \input{../simulationTest/texTables/rounded_collected_tables.tex}
-
 \clearpage
 \section{Effect of disturbing the cpts by rounding to an arbitrary fraction}
 \input{../simulationTest/texTables/arbitraryRounded_collected_tables.tex}

@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{epstopdf}
 \usepackage{booktabs}
+\usepackage{wasysym}
                   % ... or a4paper or a5paper or ... 
 \usepackage{multirow}
 \usepackage{siunitx}
@@ -17,33 +18,47 @@
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \definecolor{Bittersweet}{rgb}{1.0, 0.44, 0.37}
 
-\title{So what i'm trying to say is...}
+\title{How can we assess the accuracy of a Bayesian Network?}
 \author{The Author}
 %\date{}                                           % Activate to display a given date or no date
 
 \begin{document}
 \maketitle
 
-\section{Introduction}
-These are the results disturbing an ``objective'' Bayesian Network. The original BN was created with certain temporal constraints (ordering) with the K2 algorithm, with CPTs that exactly represent the underlying probabilistic structure.
+\section{Preamble - Assumptions}
+\begin{enumerate}
+\item We can create a multi-agent simulation that represents some simple criminal scenario, a possible theft. The frequencies at which events occur in this simulation is in part due to interaction of agents with their surroundings, and in another part due to randomly generated numbers that represent internal `mental' factors of the agent. The events in this crime scenario can be subdivided into two classes: hypothesis events, and evidence events.
+\item We can create a Bayesian Network that represents this multi-agent simulation that corresponds exactly to the frequencies we have observed in the simulation. We create this network by running the simulation for 2000 times, and storing which events took place in each run. On this data, we used a K2 algorithm to create a Bayesian Network (given certain temporal constraints).
+\end{enumerate}
 
-Then the BN was disturbed by three different processes.
+
+\section{Introduction}
+In this section, I have disturbed the CPTs of an ``objective'' Bayesian Network (see preamble). I disturb the CPTs with 3 different processes, that might all represent human approaches to reasoning with probabilities. I then present the effect of these disturbances in the CPTs, on the ability of the disturbed BNs to get similar outcomes to the ``objective'' Bayesian Network. 
+
+ The original BN was created with certain temporal constraints (ordering) with the K2 algorithm, with CPTs that exactly represent the underlying probabilistic structure of the multi-agent simulation that the BN must represent.
+
+The BN was disturbed by three different processes.
 
 \begin{enumerate}
 
-\item Process 1 is straightforwardly losing precision by changing the rounding in the cpts. Rounding took place from 5 decimals (very precise) to 0 decimals (turn the number to 0 or 1, obviously this resulted in a BN that could not be used (incompatible). This is to see if the float errors in BNs matter in case of this simulation.
+\item Process 1 is straightforwardly losing precision by changing the rounding in the CPTs. Rounding took place from 5 decimals (very precise) to 0 decimals (turn the number to 0 or 1, obviously this resulted in a BN that could not be used (incompatible). This is to see if the float errors in BNs matter in case of this simulation.
 
 \item Process 2 is rounding to arbitrary intervals - these intervals were chosen to represent human intuition, like 8ths, 4ths, 3rds and even halves (so the only numbers allowed in the cpt in that last one, are 0, 0.5 and 1). This should reflect relatively normal human reasoning - if we don't have exact numbers, we want to estimate to some arbitrary degree. And in this case I wanted to see how granular our estimation needs to be in order to come to a similar conclusion as the K2 network. Note - this only affects the cpt, we assume that we can think of the same structure as the cpt (ie we are able to identify all the independence/dependence relations).
 
 \item Process 3 is disturbing the cpts with random normal noise, representing the effect of confusion about directionality/causality in the network. The standard deviation of the normal noise is increased (mean at 0), to represent greater confusing about the direction of the network. Here, in the tables below we look at the \% of times that the disturbed network corresponds with the original network.
 \end{enumerate}
 
-In all of these three processes, we look at 2 things. There are 2 ways of viewing the use of BNs, which I will call the weak view and the strong view. In the weak view, probabilities are subjective estimations, and furthermore, it doesn't exactly matter what these probabilities are, as long as they help us to reason with the evidence. In this view (see Taroni), BNs can help us to reason with complex structures of evidence and hypotheses, without looking much at the numbers, but more at the change in numbers: does some piece of evidence support some hypothesis in some way, even across many different causal connections? However, the exact strength of these numbers is not exactly relevant - it is only a reasoning tool. We only care about the direction that evidence leans towards - towards H1 or towards H0?
+\subsection{The Weak and the Strong Interpretation of Bayesian Networks}
+There are 2 ways of viewing the use of BNs, which I will call the weak view and the strong view. In the weak view, probabilities are subjective estimations, and furthermore, it doesn't exactly matter what these probabilities are, as long as they help us to reason with the evidence. In this view (see Taroni), BNs can help us to reason with complex structures of evidence and hypotheses, without looking much at the numbers, but more at which hypothesis is supported: does some piece of evidence support some hypothesis in some way, even across many different causal connections? However, the exact strength of the probabilities in the CPT does not matter, its not that relevant. The numbers are only relevant insofar as they can cause us to prefer one hypothesis over another. We only care about the direction that evidence leans towards - towards H1 or towards H0?
 
 In the strong view, BNs are also subjective, but here the numbers do actually matter. We can make precise claims or estimations about probabilities, and the numbers actually represent evidence strength in a relatively precise manner. We cannot only look at the direction - the precision/numbers are informative as well. We need to care about the numbers, not just a binary (supports H1 vs H0), but if we see that support for H1 is 0.80, that means something meaningfully different from support for H1 = 0.99.
 
 Hence, here I investigate this weak vs strong view, by looking at both the `support direction' - what, for each node in the original network, is the hypothesis that they support (H1 or H0), and does the disturbed network support that same hypothesis, under all processes of disturbance?
 The other thing is the `precision' - to what extent does the disturbed network diverge from the actual probability value of H1 in every node in the network? How big is this disturbance?
+
+\subsection{Why not just use...}
+Sensitivity Analysis?
+todo.
 
 \section{Conclusion and Discussion}
 
@@ -53,68 +68,91 @@ The process 2 is promising, shows that even with not very granular numbers we ca
 
 Also my simulation is not interesting enough, I will change some of the original probabilities so that these numbers might become more interesting (the disturbed house, spotted nodes do not add anything to the story while they should, since the broken lock evidence is too strong).
 
+\clearpage
+\section{Results Plots}
+
+Note - there's a slight position dodge in the lines for certain images, otherwise they would overlap.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/K2Weak.png}
+\label{default}
+\end{center}
+\end{figure}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/roundedWeak.png}
+\label{default}
+\end{center}
+\end{figure}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/arbitraryRoundedWeak.png}
+\label{default}
+\end{center}
+\end{figure}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/normalNoiseWeak.png}
+\label{default}
+\end{center}
+\end{figure}
+
+
 \begin{figure}[htbp]
 \centering
 \begin{center}
-\includegraphics[width=\linewidth]{images/K2absolute.png}
-\caption{default}
+\includegraphics[scale=0.17]{images/K2absolute.png}
 \label{default}
 \end{center}
 \end{figure}
 \begin{figure}[htbp]
 \centering
 \begin{center}
-\includegraphics[width=\linewidth]{images/roundedabsolute.png}
-\caption{default}
+\includegraphics[scale=0.17]{images/roundedabsolute.png}
 \label{default}
 \end{center}
 \end{figure}
 \begin{figure}[htbp]
 \centering
 \begin{center}
-\includegraphics[width=\linewidth]{images/arbitraryRoundedabsolute.png}
-\caption{default}
+\includegraphics[scale=0.17]{images/arbitraryRoundedabsolute.png}
 \label{default}
 \end{center}
 \end{figure}
 \begin{figure}[htbp]
 \centering
 \begin{center}
-\includegraphics[width=\linewidth]{images/normalNoiseabsolute.png}
-\caption{default}
+\includegraphics[scale=0.17]{images/normalNoiseabsolute.png}
 \label{default}
 \end{center}
 \end{figure}
 
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=\linewidth]{images/K2delta.png}
-\caption{default}
-\label{default}
-\end{center}
-\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=\linewidth]{images/roundeddelta.png}
-\caption{default}
+\includegraphics[scale=0.17]{images/K2delta.png}
 \label{default}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=\linewidth]{images/arbitraryRoundeddelta.png}
-\caption{default}
+\includegraphics[scale=0.17]{images/roundeddelta.png}
 \label{default}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=\linewidth]{images/normalNoisedelta.png}
-\caption{default}
+\includegraphics[scale=0.17]{images/arbitraryRoundeddelta.png}
+\label{default}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/normalNoisedelta.png}
 \label{default}
 \end{center}
 \end{figure}
@@ -122,8 +160,8 @@ Also my simulation is not interesting enough, I will change some of the original
 
 \clearpage
 
-%\subsection{}
-\section{Effect of disturbing the cpts by removing precision with rounding}
+
+\section{TABLES: Effect of disturbing the cpts by removing precision with rounding}
 \let\oldcentering\centering
 \renewcommand\centering{\tiny\oldcentering}
 \input{../simulationTest/texTables/rounded_collected_tables.tex}

@@ -11,9 +11,11 @@ import csv
 import pandas as pd
 
 
-def disturb_cpts(experiment, disturb_type, params_list):
-    file_name = "K2BN.net"
-    K2_BN(experiment, "globalStates.csv", file_name)
+def disturb_cpts(experiment, disturb_type, params_list, file_name):
+    if "adapted" in file_name:
+        file_name = file_name + ".net"
+    #file_name = "K2BN.net"
+    #K2_BN(experiment, "globalStates.csv", file_name)
 
     bn = gum.loadBN(file_name)
     noise_list = []
@@ -122,15 +124,17 @@ def find_posterior_based_on_evidence():
     pass
 
 def determine_posterior_direction_or_precision(file_name, direction):  # type is 'direction' or 'precision
-    if file_name != "BayesNets/K2BN.net":
-        bn = gum.loadBN(f"{file_name}.net")
-    else:
-        bn = gum.loadBN(file_name)
+    #if file_name != "BayesNets/K2BN.net":
+    #    bn = gum.loadBN(f"{file_name}.net")
+    #else:
+    if "net" not in file_name:
+        file_name = file_name + ".net"
+    bn = gum.loadBN(file_name)
     direction_dict = {}
     ie = gum.LazyPropagation(bn)
-    event_list = experiment.reporters.relevant_events
+    event_list = list(bn.names())#experiment.reporters.relevant_events
     e_dict = {}
-    for node in list(bn.nodes()):
+    for node in list(bn.names()):
         x = bn.cpt(node)
         name = x.var_names[-1]
         if name[0] != 'E':  # we do not care about evidence nodes
@@ -263,19 +267,30 @@ def get_outcomes_in_table(d1, d_noise, latex_file_name, params, direction, noise
         file.write("\\caption{Effect of disturbance of " + str(params) + " on " + str(direction) + " view of " + str(outcomes) + ".}")
         file.write("\\end{table}")
 
+def get_relevant_hyp_events(org_BN, outcome_nodes):
+    if "adapted" in org_BN:
+        org_BN = org_BN + ".net"
+    bn = gum.loadBN(org_BN)
+    hyp_nodes = []
+    for x in bn.names():
+        if x not in outcome_nodes and x[0] != 'E':
+            hyp_nodes.append(x)
+
+    return hyp_nodes
 
 
 
-def experiment_general_shape(type_exp, param_list, general_latex_file, experiment_list):
+def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, experiment_list):
     d_2 = []
     noise = False
     relevant_files = []
     relevant_nodes_out = ["successful_stolen", "lost_object"]
-    relevant_nodes_hyp = ["curtains", "raining", "know_object", "target_object", "motive", "compromise_house", "flees_startled"]
+
+    relevant_nodes_hyp = get_relevant_hyp_events(org_BN, relevant_nodes_out) #["curtains", "raining", "know_object", "target_object", "motive", "compromise_house", "flees_startled"]
     for params in param_list:
-        [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params)
+        [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params, org_BN)
         for direc in ["weak", "strong"]:
-            d_1 = determine_posterior_direction_or_precision("BayesNets/K2BN.net", direc)
+            d_1 = determine_posterior_direction_or_precision(org_BN, direc)
             for a in d_1.keys():
                 for b in d_1[a].keys():
                     experiment_list.append(["K2", params[0], direc, 0, a[0]+str(a[1]), b, d_1[a][b], d_1[a][b]])
@@ -290,14 +305,14 @@ def experiment_general_shape(type_exp, param_list, general_latex_file, experimen
                             experiment_list.append([type_exp, params[1], direc, i, a[0]+str(a[1]), b, d_i[a][b], d_1[a][b]])
 
             else:
-                [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params)
+                [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params, org_BN)
                 d_2 = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
                 for a in d_2.keys():
                     for b in d_2[a].keys():
                         experiment_list.append([type_exp, params[0], direc, 0, a[0]+str(a[1]), b, d_2[a][b], d_1[a][b]])
 
-            outcome_table = f'texTables/outcome/{direc}{disturbed_BN_file_name}.tex'
-            hyp_table = f'texTables/hyps/{direc}{disturbed_BN_file_name}.tex'
+            outcome_table = f'texTables/outcome/{org_BN}{direc}{disturbed_BN_file_name}.tex'
+            hyp_table = f'texTables/hyps/{org_BN}{direc}{disturbed_BN_file_name}.tex'
 
 
             get_outcomes_in_table(d_1, d_2, outcome_table, params, direc, noise, relevant_nodes_out)
@@ -310,7 +325,7 @@ def experiment_general_shape(type_exp, param_list, general_latex_file, experimen
     # output of experiment
     with open(general_latex_file, 'w') as file:
         for f in relevant_files:
-            file.write("\\input{../simulationTest/" + f + "}\n")
+            file.write("\\input{../simulationTest/" + org_BN + f + "}\n")
 
 
 
@@ -331,14 +346,29 @@ param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
 
 gen_file = '_collected_tables.tex'
 experiment_list = []
+org_BN = "K2BN.net"
 for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
-    experiment_general_shape(exp, params, f"texTables/{exp}{gen_file}", experiment_list)
+    experiment_general_shape(exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list)
     print(f"done with experiment {exp}")
 
 csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability"]
-with open("exp.csv", 'w') as file:
+with open("expORG.csv", 'w') as file:
     writer = csv.writer(file)
     writer.writerow(csv_cols)
     writer.writerows(experiment_list)
 
 
+
+#### testing spider BN for hypothesis ####
+gen_file = '_collected_tables.tex'
+org_BN = "adaptedK2BN"
+experiment_list_spider = []
+for (exp, params) in [("arbitraryRounded", param_ar)]:
+    experiment_general_shape(exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list_spider)
+    print(f"done with experiment {exp}")
+
+csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability"]
+with open("expSpider.csv", 'w') as file:
+    writer = csv.writer(file)
+    writer.writerow(csv_cols)
+    writer.writerows(experiment_list_spider)

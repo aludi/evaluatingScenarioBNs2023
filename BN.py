@@ -156,7 +156,7 @@ def K2_BN(experiment, csv_file, name):
     learner = gum.BNLearner(global_state_csv)  # using bn as template for variables and labels
     file_name = name #"BayesNets/K2BN.net"
     temporal_order = get_temporal_ordering_nodes(experiment, global_state_csv)
-    if name != "BayesNets/adaptedK2BN.net":
+    if name != "adaptedK2BN.net":
         forbidden = evidence_cannot_be_connected_to_each_other(temporal_order)
         for (a, b) in forbidden:
             learner.addForbiddenArc(a, b)
@@ -181,9 +181,6 @@ def K2_BN(experiment, csv_file, name):
     #print(f"saved bn as {file_name}")
     return bn
 
-
-
-
 def K2_limited_BN(experiment):
     temp_global_state_csv = "globalStates.csv"
     d = pd.read_csv(temp_global_state_csv)
@@ -193,7 +190,7 @@ def K2_limited_BN(experiment):
             if x[0] != "E":
                 d.pop(x)
     d.to_csv("partialStates.csv", index=False)
-    K2_BN(experiment, "partialStates.csv", "BayesNets/adaptedK2BN.net")
+    K2_BN(experiment, "partialStates.csv", "adaptedK2BN.net")
 
 
 ### experiment with posterior outcomes
@@ -360,4 +357,5 @@ def rounded(experiment):
 
 np.random.seed(1)
 experiment = Experiment()
-K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
+K2_BN(experiment, "globalStates.csv", "K2BN.net")
+K2_limited_BN(experiment)

@@ -71,7 +71,7 @@ Also my simulation is not interesting enough, I will change some of the original
 
 \clearpage
 \section{Results Plots}
- \tiny{Note - there's a slight position dodge in the lines for certain images, otherwise they would overlap. A value of NA in the weak-view plots means that the BN is inconsistent.}
+ {\tiny Note - there's a slight position dodge in the lines for certain images, otherwise they would overlap. A value of NA in the weak-view plots means that the BN is inconsistent.}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.15]{images/K2Weak.png}
@@ -160,6 +160,35 @@ Also my simulation is not interesting enough, I will change some of the original
 
 \clearpage
 
+\section{Why we need hypothesis nodes!}
+We need hypothesis nodes, since as you can see, when we round to an arbitrary level of precision (quarters, thirds), in a normal network, the differences between the disturbed and the original network, are relatively small (<0.2). 
+
+However, if we leave out the hypothesis nodes, and only connect evidence directly to ``outcome'' nodes, you see that for larger intervals (so quarters, thirds and even seconds), the network gets into impossible states (NA). 
+
+There's less tolerance here with rounding. If we have hypothesis nodes in between, we can still use quarters/thirds etc and get results that line up with the original network, instead of results that go to NA for degrees of precision that are lower than 0.2.
+
+So with more hypothesis nodes you can be less precise in your exact probability assigning while still preserving the correct outcome.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/arbitraryRoundedWeakSpider.png}
+\label{default}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/strongarbitraryRoundedspider.png}
+\label{default}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.17]{images/arbitraryRoundeddeltaSpider.png}
+\label{default}
+\end{center}
+\end{figure}
 
 \section{TABLES: Effect of disturbing the cpts by removing precision with rounding}
 \let\oldcentering\centering

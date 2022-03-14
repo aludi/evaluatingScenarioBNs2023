@@ -8,17 +8,24 @@ import math
 import numpy as np
 from collections import defaultdict
 import csv
-import pandas as pd
+import os
 
 
 def disturb_cpts(experiment, disturb_type, params_list, file_name):
-    if "adapted" in file_name:
-        file_name = file_name + ".net"
+    if ".net" not in file_name:
+        file_name_load = file_name + ".net"
     #file_name = "K2BN.net"
     #K2_BN(experiment, "globalStates.csv", file_name)
 
-    bn = gum.loadBN(file_name)
+    #print(file_name)
+
+    org = os.getcwd()
+    if "K2Bns" not in org:
+        os.chdir("K2Bns")
+    bn1 = gum.loadBN(file_name_load)
+    bn = gum.BayesNet(bn1)
     noise_list = []
+
 
     if disturb_type == "normalNoise":
         '''
@@ -65,9 +72,11 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
             if abs(e) < smallest_change:
                 smallest_change = abs(e)
         # print(largest_change, smallest_change)
-        final_file_name = f"{disturb_type}BN{str(sd)}"
+
+        final_file_name = f"{file_name}{disturb_type}BN{str(sd)}"
         gum.saveBN(bn, f"{final_file_name}.net")
         # print(f"saved bn as {file_name}")
+        os.chdir(org)
         return [final_file_name, [largest_change, smallest_change]]
 
     if disturb_type == "rounded":
@@ -85,8 +94,11 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
             name = x.var_names[-1]
             for i in bn.cpt(name).loopIn():
                 bn.cpt(name).set(i, round(bn.cpt(name).get(i), decimal_place))
-        final_file_name = f"{disturb_type}BN{str(decimal_place)}"
+
+        final_file_name = f"{file_name}{disturb_type}BN{str(decimal_place)}"
+        #print("four", final_file_name)
         gum.saveBN(bn, f"{final_file_name}.net")
+        os.chdir(org)
         return [final_file_name, "empty"]
 
     if disturb_type == "arbitraryRounded":
@@ -105,8 +117,11 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
                 val = val
                 y = math.floor((val / step) + 0.5) * step
                 bn.cpt(name).set(i, y)
-        final_file_name = f"{disturb_type}BN{str(step)}"
+
+        final_file_name = f"{file_name}{disturb_type}BN{step}"
         gum.saveBN(bn, f"{final_file_name}.net")
+        os.chdir(org)
+
         return [final_file_name, "empty"]
 
 
@@ -129,7 +144,14 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
     #else:
     if "net" not in file_name:
         file_name = file_name + ".net"
+    org_dir = os.getcwd()
+
+    if "K2Bns" not in os.getcwd():
+        os.chdir("K2Bns")
+
     bn = gum.loadBN(file_name)
+    os.chdir(org_dir)
+
     direction_dict = {}
     ie = gum.LazyPropagation(bn)
     event_list = list(bn.names())#experiment.reporters.relevant_events
@@ -268,8 +290,11 @@ def get_outcomes_in_table(d1, d_noise, latex_file_name, params, direction, noise
         file.write("\\end{table}")
 
 def get_relevant_hyp_events(org_BN, outcome_nodes):
-    if "adapted" in org_BN:
-        org_BN = org_BN + ".net"
+
+
+    if ".net" not in org_BN:
+        org_BN =  org_BN + ".net"
+    os.chdir("K2Bns")
     bn = gum.loadBN(org_BN)
     hyp_nodes = []
     for x in bn.names():
@@ -281,6 +306,10 @@ def get_relevant_hyp_events(org_BN, outcome_nodes):
 
 
 def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, experiment_list):
+
+    # reset dir
+    org_dir = os.getcwd()
+
     d_2 = []
     noise = False
     relevant_files = []
@@ -295,7 +324,7 @@ def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, e
                 for b in d_1[a].keys():
                     experiment_list.append(["K2", params[0], direc, 0, a[0]+str(a[1]), b, d_1[a][b], d_1[a][b]])
             if type_exp == "normalNoise":
-                for i in range(0, 200):
+                for i in range(0, 100):
                     noise = True
                     d_i = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
                     d_2.append(d_i)
@@ -306,13 +335,15 @@ def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, e
 
             else:
                 [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params, org_BN)
+                #print(disturbed_BN_file_name)
                 d_2 = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
                 for a in d_2.keys():
                     for b in d_2[a].keys():
                         experiment_list.append([type_exp, params[0], direc, 0, a[0]+str(a[1]), b, d_2[a][b], d_1[a][b]])
 
-            outcome_table = f'texTables/outcome/{org_BN}{direc}{disturbed_BN_file_name}.tex'
-            hyp_table = f'texTables/hyps/{org_BN}{direc}{disturbed_BN_file_name}.tex'
+            os.chdir(org_dir)
+            outcome_table = f'texTables/outcome/{direc}{disturbed_BN_file_name}.tex'
+            hyp_table = f'texTables/hyps/{direc}{disturbed_BN_file_name}.tex'
 
 
             get_outcomes_in_table(d_1, d_2, outcome_table, params, direc, noise, relevant_nodes_out)
@@ -325,13 +356,13 @@ def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, e
     # output of experiment
     with open(general_latex_file, 'w') as file:
         for f in relevant_files:
-            file.write("\\input{../simulationTest/" + org_BN + f + "}\n")
+            file.write("\\input{../simulationTest/" + f + "}\n")
 
 
 
 
 experiment = Experiment()
-K2_BN(experiment, "globalStates.csv", "BayesNets/K2BN.net")
+K2_BN(experiment, "globalStates.csv", "K2Bns/K2BN.net")
 
 param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
                    [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
@@ -346,8 +377,8 @@ param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
 
 gen_file = '_collected_tables.tex'
 experiment_list = []
-org_BN = "K2BN.net"
-for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
+org_BN = "K2BN"
+for (exp, params) in [ ("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
     experiment_general_shape(exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list)
     print(f"done with experiment {exp}")
 
@@ -360,7 +391,7 @@ with open("expORG.csv", 'w') as file:
 
 
 #### testing spider BN for hypothesis ####
-gen_file = '_collected_tables.tex'
+gen_file = '_collected_tables_spider.tex'
 org_BN = "adaptedK2BN"
 experiment_list_spider = []
 for (exp, params) in [("arbitraryRounded", param_ar)]:

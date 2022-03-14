@@ -167,7 +167,7 @@ However, if we leave out the hypothesis nodes, and only connect evidence directl
 
 There's less tolerance here with rounding. If we have hypothesis nodes in between, we can still use quarters/thirds etc and get results that line up with the original network, instead of results that go to NA for degrees of precision that are lower than 0.2.
 
-So with more hypothesis nodes you can be less precise in your exact probability assigning while still preserving the correct outcome.
+So with more hypothesis nodes you can be less precise in your exact probability assigning while still preserving the correct outcome. Which makes sense because you can condition on more stuff, you can probably make some calculation here but intuitively this makes sense, right - more hypothesis nodes allows for more nuance/larger truth table, and more conditional dependencies / more incoming arcs, so more complex calculation, hence more nuanced probability even if we constrain cpts to intervals.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -193,13 +193,13 @@ So with more hypothesis nodes you can be less precise in your exact probability 
 \section{TABLES: Effect of disturbing the cpts by removing precision with rounding}
 \let\oldcentering\centering
 \renewcommand\centering{\tiny\oldcentering}
-\input{../simulationTest/texTables/rounded_collected_tables.tex}
+\input{../simulationTest/texTables/K2BNrounded_collected_tables.tex}
 \clearpage
 \section{Effect of disturbing the cpts by rounding to an arbitrary fraction}
-\input{../simulationTest/texTables/arbitraryRounded_collected_tables.tex}
+\input{../simulationTest/texTables/K2BNarbitraryRounded_collected_tables.tex}
 \clearpage
 \section{Effect of disturbing the cpts with normal noise}
-\input{../simulationTest/texTables/normalNoise_collected_tables.tex}
+\input{../simulationTest/texTables/K2BNnormalNoise_collected_tables.tex}
 \clearpage
 
 

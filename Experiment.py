@@ -8,34 +8,74 @@ TODO
 '''
 from itertools import product
 import re
+import os
 
 from Reporters import Reporters
 from SimulationTest import StolenLaptop
 import csv
+from CredibilityGame import CredibilityGame
 
 
 class Experiment():
 
-    def __init__(self):
-        self.runs = 50 # to test
-        self.reporters = Reporters()
-        for i in range(0, self.runs):
-            model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
-            for j in range(30):
-                model.step()
-            self.reporters.increase_run()
+    def __init__(self, scenario, subtype=None):
+        self.scenario = scenario
 
-        self.generate_csv_report()  # use these csvs for automatic BN structure determination
-        self.print_frequencies()
-        #self.print_frequencies_latex()
+        print("experiment scenario", scenario)
+        if scenario == "StolenLaptop":
+            self.csv_file_name = "globalStates.csv"
+            self.bnDir = f"{os.getcwd()}/K2BNs"
+            rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
+                                    "flees_startled", "successful_stolen", "raining", "curtains",
+                                    "E_object_is_gone",
+                                    "E_broken_lock",
+                                    "E_disturbed_house",
+                                    "E_s_spotted_by_house",
+                                    "E_s_spotted_with_goodie",
+                                    "E_private"]
+            self.runs = 2000 # to test
+            self.reporters = Reporters(relevant_events = rel_events)
+            for i in range(0, self.runs):
+                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
+                for j in range(30):
+                    model.step()
+                self.reporters.increase_run()
 
-    def generate_csv_report(self):
+            self.generate_csv_report(self.csv_file_name)  # use these csvs for automatic BN structure determination
+            self.print_frequencies()
+            #self.print_frequencies_latex()
+
+        if scenario == "CredibilityGame":
+            self.bnDir = f"{os.getcwd()}/CredBNs"
+            self.csv_file_name = "CredibilityGameOutcomes.csv"
+            self.n = 9
+            n = self.n
+            rel_events = ["agent_steals"]
+            # create reporters automatically
+            for i in range(0, n):
+                str1 = f"E_{i}_says_stolen"
+                #str2 = i + "_credibility"
+                rel_events.append(str1)
+                #rel_events.append(str2)
+
+            self.runs = 2000  # to test
+            self.reporters = Reporters(relevant_events=rel_events)
+            for i in range(0, self.runs):
+                CredibilityGame(N_agents=n, reporters=self.reporters, subtype=subtype)
+                self.reporters.increase_run()
+
+            self.generate_csv_report(self.csv_file_name)
+            self.print_frequencies()
+
+
+
+    def generate_csv_report(self, file_name):
         history_list = []
         #print("history dict", self.reporters.history_dict)
         for key in self.reporters.history_dict.keys():
             history_list.append(self.reporters.history_dict[key])
         csv_columns = self.reporters.relevant_events
-        csv_file = "globalStates.csv"
+        csv_file = file_name
         try:
             with open(csv_file, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
@@ -177,4 +217,6 @@ class Experiment():
 
 
 if __name__ == "__main__":
-    Experiment()
+    #Experiment("StolenLaptop")
+    Experiment("CredibilityGame")
+

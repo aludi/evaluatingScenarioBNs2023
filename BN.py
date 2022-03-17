@@ -135,7 +135,7 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
     #print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 
-def evidence_cannot_be_connected_to_each_other(temporal_ordering):
+def evidence_cannot_be_connected_to_each_other(experiment, temporal_ordering):
     #we know evidence is always added at the end
     forbidden_pairs = []
     evidence = []
@@ -147,18 +147,20 @@ def evidence_cannot_be_connected_to_each_other(temporal_ordering):
         for j in range(1, len(evidence) - i):
             forbidden_pairs.append((evidence[i], evidence[j+i]))
             forbidden_pairs.append((evidence[j+i], evidence[i]))
-            #pass
+
 
     return forbidden_pairs
 
 def K2_BN(experiment, csv_file, name):
+    print(csv_file)
     global_state_csv = csv_file #"globalStates.csv"
     learner = gum.BNLearner(global_state_csv)  # using bn as template for variables and labels
     file_name = name #"BayesNets/K2BN.net"
     temporal_order = get_temporal_ordering_nodes(experiment, global_state_csv)
     if "adaptedK2BN.net" not in name:
-        forbidden = evidence_cannot_be_connected_to_each_other(temporal_order)
+        forbidden = evidence_cannot_be_connected_to_each_other(experiment, temporal_order)
         for (a, b) in forbidden:
+            #print(a, b)
             learner.addForbiddenArc(a, b)
     #print(temporal_order)
     learner.useK2(temporal_order)
@@ -358,6 +360,11 @@ def rounded(experiment):
 
 
 np.random.seed(1)
-experiment = Experiment()
-K2_BN(experiment, "globalStates.csv", "K2Bns/K2BN.net")
-K2_limited_BN(experiment)
+#experiment = Experiment(scenario="CredibilityGame")
+'''if experiment.scenario == "StolenLaptop":
+    K2_BN(experiment, experiment.csv_file_name, "K2Bns/K2BN.net")
+    K2_limited_BN(experiment)
+
+elif experiment.scenario == "CredibilityGame":
+    K2_BN(experiment, experiment.csv_file_name, "CredBNs/main.net")'''
+

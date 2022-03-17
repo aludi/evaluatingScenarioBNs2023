@@ -8,18 +8,11 @@ Print these reporters on the webpage later as well.
 
 class Reporters():
 
-    def __init__(self):
+    def __init__(self, relevant_events):
         self.pure_frequency_event_dict = {}
         self.history_dict = {}
         self.run = 0
-        self.relevant_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
-                                "flees_startled", "successful_stolen", "raining", "curtains",
-                                "E_object_is_gone",
-                                "E_broken_lock",
-                                "E_disturbed_house",
-                                "E_s_spotted_by_house",
-                                "E_s_spotted_with_goodie",
-                                "E_private"]
+        self.relevant_events = relevant_events
         self.temporal_list = []
         self.evidence_list = []
         self.temporal_dict = {}

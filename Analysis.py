@@ -9,6 +9,7 @@ import numpy as np
 from collections import defaultdict
 import csv
 import os
+from CredibilityGame import CredibilityGame
 
 
 def disturb_cpts(experiment, disturb_type, params_list, file_name):
@@ -20,8 +21,8 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
     #print(file_name)
 
     org = os.getcwd()
-    if "K2Bns" not in org:
-        os.chdir("K2Bns")
+    if experiment.bnDir not in org:
+        os.chdir(experiment.bnDir)
     bn1 = gum.loadBN(file_name_load)
     bn = gum.BayesNet(bn1)
     noise_list = []
@@ -138,16 +139,39 @@ def determine_winning_hypothesis(false_val, true_val):
 def find_posterior_based_on_evidence():
     pass
 
-def determine_posterior_direction_or_precision(file_name, direction):  # type is 'direction' or 'precision
+def get_evidence_list():
+    '''
+    evidence needs to be added in the correct order
+     this is determined by the investigator,
+     and the order is determined in this function.
+     '''
+    evidence_order = []
+    if experiment.scenario == "StolenLaptop":
+        evidence_order = ["E_object_is_gone", "E_broken_lock", "E_disturbed_house", "E_s_spotted_by_house", "E_s_spotted_with_goodie", "E_private"]
+    elif experiment.scenario == "CredibilityGame":
+        for i in range(0, experiment.n):
+            str1 = f"E_{i}_says_stolen"
+            # str2 = i + "_credibility"
+            evidence_order.append(str1)
+    return evidence_order
+
+
+def determine_posterior_direction_or_precision(dir, file_name, direction):  # type is 'direction' or 'precision
     #if file_name != "BayesNets/K2BN.net":
     #    bn = gum.loadBN(f"{file_name}.net")
     #else:
+
+
+
     if "net" not in file_name:
         file_name = file_name + ".net"
-    org_dir = os.getcwd()
 
-    if "K2Bns" not in os.getcwd():
-        os.chdir("K2Bns")
+    org_dir = os.getcwd()
+    #print(org_dir)
+
+
+    if dir not in os.getcwd():
+        os.chdir(dir)
 
     bn = gum.loadBN(file_name)
     os.chdir(org_dir)
@@ -164,13 +188,12 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
                 e_dict[name] = determine_winning_hypothesis(ie.posterior(node)[0], ie.posterior(node)[1]) # compare the posteriors (false, true) for node "name"
             elif direction == "strong":  # we just want to know the posterior for truth of a node
                 e_dict[name] = round(ie.posterior(node)[1], 2)
+                #print(name, e_dict[name])
 
     direction_dict[("no_evidence", 0)] = e_dict
 
-    evidence_list = []
-    for ev in event_list:
-        if ev[0] == 'E':  # evidence node TODO make a seperate class
-            evidence_list.append(ev)
+    evidence_list = get_evidence_list()
+
     for evidence in evidence_list:
         e_dict = {}
         if evidence != "E_private":
@@ -178,6 +201,8 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
         else:
             val = 0
         ie.addEvidence(evidence, val)
+        #print(evidence, val)
+
         for node in list(bn.nodes()):
             x = bn.cpt(node)
             name = x.var_names[-1]
@@ -187,8 +212,12 @@ def determine_posterior_direction_or_precision(file_name, direction):  # type is
                         e_dict[name] = determine_winning_hypothesis(ie.posterior(node)[0], ie.posterior(node)[1])
                     else:
                         e_dict[name] = round(ie.posterior(node)[1], 2)
+                        #print("\t", name, e_dict[name])
+
                 except:
                     e_dict[name] = "NA"
+
+
         direction_dict[(evidence, val)] = e_dict
 
     return direction_dict
@@ -289,12 +318,12 @@ def get_outcomes_in_table(d1, d_noise, latex_file_name, params, direction, noise
         file.write("\\caption{Effect of disturbance of " + str(params) + " on " + str(direction) + " view of " + str(outcomes) + ".}")
         file.write("\\end{table}")
 
-def get_relevant_hyp_events(org_BN, outcome_nodes):
+def get_relevant_hyp_events(bnDir, org_BN, outcome_nodes):
 
 
     if ".net" not in org_BN:
         org_BN =  org_BN + ".net"
-    os.chdir("K2Bns")
+    os.chdir(bnDir)
     bn = gum.loadBN(org_BN)
     hyp_nodes = []
     for x in bn.names():
@@ -305,7 +334,7 @@ def get_relevant_hyp_events(org_BN, outcome_nodes):
 
 
 
-def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, experiment_list):
+def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_latex_file, experiment_list):
 
     # reset dir
     org_dir = os.getcwd()
@@ -313,20 +342,26 @@ def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, e
     d_2 = []
     noise = False
     relevant_files = []
-    relevant_nodes_out = ["successful_stolen", "lost_object"]
+    if main_exp.scenario == "StolenLaptop":
+        relevant_nodes_out = ["successful_stolen", "lost_object"]
+        relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out) #["curtains", "raining", "know_object", "target_object", "motive", "compromise_house", "flees_startled"]
+    elif main_exp.scenario == "CredibilityGame":
+        relevant_nodes_out = ["agent_steals"]
+        relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out) # no hyps here
+    # establish original BN
+    for direc in ["weak", "strong"]:
+        d_1 = determine_posterior_direction_or_precision(main_exp.bnDir, org_BN, direc)
+        for a in d_1.keys():
+            for b in d_1[a].keys():
+                experiment_list.append(["K2", 0, direc, 0, a[0] + str(a[1]), b, d_1[a][b], d_1[a][b]])
 
-    relevant_nodes_hyp = get_relevant_hyp_events(org_BN, relevant_nodes_out) #["curtains", "raining", "know_object", "target_object", "motive", "compromise_house", "flees_startled"]
     for params in param_list:
         [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params, org_BN)
         for direc in ["weak", "strong"]:
-            d_1 = determine_posterior_direction_or_precision(org_BN, direc)
-            for a in d_1.keys():
-                for b in d_1[a].keys():
-                    experiment_list.append(["K2", params[0], direc, 0, a[0]+str(a[1]), b, d_1[a][b], d_1[a][b]])
             if type_exp == "normalNoise":
-                for i in range(0, 100):
+                for i in range(0, 200):
                     noise = True
-                    d_i = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
+                    d_i = determine_posterior_direction_or_precision(main_exp.bnDir, disturbed_BN_file_name, direc)
                     d_2.append(d_i)
 
                     for a in d_i.keys():
@@ -336,7 +371,7 @@ def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, e
             else:
                 [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params, org_BN)
                 #print(disturbed_BN_file_name)
-                d_2 = determine_posterior_direction_or_precision(disturbed_BN_file_name, direc)
+                d_2 = determine_posterior_direction_or_precision(main_exp.bnDir, disturbed_BN_file_name, direc)
                 for a in d_2.keys():
                     for b in d_2[a].keys():
                         experiment_list.append([type_exp, params[0], direc, 0, a[0]+str(a[1]), b, d_2[a][b], d_1[a][b]])
@@ -360,46 +395,85 @@ def experiment_general_shape(type_exp, org_BN, param_list, general_latex_file, e
 
 
 
+### intentions
+scenario = "CredibilityGame"
 
-experiment = Experiment()
-K2_BN(experiment, "globalStates.csv", "K2Bns/K2BN.net")
+if scenario == "CredibilityGame":
 
-param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
-                   [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
+    for game in ["basicGame", "strangeGame"]:
 
-param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
-                   [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
-
-param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
-                   [0.2, 'arbit'], [0.25, 'arbit'],[0.33, 'arbit'],
-                   [0.5, 'arbit']]
+        experiment = Experiment(scenario="CredibilityGame", subtype=game)
+        bnDir = experiment.bnDir
+        dataFileName = experiment.csv_file_name
 
 
-gen_file = '_collected_tables.tex'
-experiment_list = []
-org_BN = "K2BN"
-for (exp, params) in [ ("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
-    experiment_general_shape(exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list)
-    print(f"done with experiment {exp}")
+        K2_BN(experiment, dataFileName, "CredBNs/main.net")
+        param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
+                    [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
+                    [0.5, 'arbit']]
 
-csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability"]
-with open("expORG.csv", 'w') as file:
-    writer = csv.writer(file)
-    writer.writerow(csv_cols)
-    writer.writerows(experiment_list)
+        gen_file = f'_{game}_collected_tables.tex'
+        experiment_list = []
+        org_BN = "main"
+        for (exp, params) in [("arbitraryRounded", param_ar)]:
+            experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list)
+            print(f"done with experiment {exp}")
+
+        csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability", "Game"]
+        flag = 'w'
+        if game != "basicGame":
+            flag = 'a'
+        with open("cred.csv", flag) as file:
+            writer = csv.writer(file)
+            writer.writerow(csv_cols)
+            for row in experiment_list:
+                row.append(game)
+                writer.writerow(row)
+
+
+elif scenario == "StolenLaptop":
+    experiment = Experiment(scenario="StolenLaptop")
+    bnDir = experiment.bnDir
+    dataFileName = experiment.csv_file_name
+
+    K2_BN(experiment, dataFileName, "K2Bns/K2BN.net")
+
+    param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
+                       [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
+
+    param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
+                       [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
+
+    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
+                       [0.2, 'arbit'], [0.25, 'arbit'],[0.33, 'arbit'],
+                       [0.5, 'arbit']]
+
+
+    gen_file = '_collected_tables.tex'
+    experiment_list = []
+    org_BN = "K2BN"
+    for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
+        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list)
+        print(f"done with experiment {exp}")
+
+    csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability"]
+    with open("expORG.csv", 'w') as file:
+        writer = csv.writer(file)
+        writer.writerow(csv_cols)
+        writer.writerows(experiment_list)
 
 
 
-#### testing spider BN for hypothesis ####
-gen_file = '_collected_tables_spider.tex'
-org_BN = "adaptedK2BN"
-experiment_list_spider = []
-for (exp, params) in [("arbitraryRounded", param_ar)]:
-    experiment_general_shape(exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list_spider)
-    print(f"done with experiment {exp}")
+    #### testing spider BN for hypothesis ####
+    gen_file = '_collected_tables_spider.tex'
+    org_BN = "adaptedK2BN"
+    experiment_list_spider = []
+    for (exp, params) in [("arbitraryRounded", param_ar)]:
+        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list_spider)
+        print(f"done with experiment {exp}")
 
-csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability"]
-with open("expSpider.csv", 'w') as file:
-    writer = csv.writer(file)
-    writer.writerow(csv_cols)
-    writer.writerows(experiment_list_spider)
+    csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability"]
+    with open("expSpider.csv", 'w') as file:
+        writer = csv.writer(file)
+        writer.writerow(csv_cols)
+        writer.writerows(experiment_list_spider)

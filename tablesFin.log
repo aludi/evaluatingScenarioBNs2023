@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  14 MAR 2022 16:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  15 MAR 2022 12:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -388,7 +388,50 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@loff=\dimen196
 \@vwid@roff=\dimen197
 ))
-(./tablesFin.aux)
+(./tablesFin.aux
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+)
 \openout1 = `tablesFin.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
@@ -407,8 +450,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
 
-
-(/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
@@ -571,73 +613,73 @@ line 188.
  (../simulationTest/texTables/K2BNrounded_collected_tables.tex
 (../simulationTest/texTables/outcome/weakK2BNroundedBN5.tex)
 (../simulationTest/texTables/hyps/weakK2BNroundedBN5.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNroundedBN5.tex)
 (../simulationTest/texTables/hyps/strongK2BNroundedBN5.tex
-Overfull \hbox (54.12907pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNroundedBN4.tex)
 (../simulationTest/texTables/hyps/weakK2BNroundedBN4.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNroundedBN4.tex)
 (../simulationTest/texTables/hyps/strongK2BNroundedBN4.tex
-Overfull \hbox (54.12907pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNroundedBN3.tex)
 (../simulationTest/texTables/hyps/weakK2BNroundedBN3.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNroundedBN3.tex)
 (../simulationTest/texTables/hyps/strongK2BNroundedBN3.tex
-Overfull \hbox (54.12907pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNroundedBN2.tex)
 (../simulationTest/texTables/hyps/weakK2BNroundedBN2.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNroundedBN2.tex)
 (../simulationTest/texTables/hyps/strongK2BNroundedBN2.tex
-Overfull \hbox (54.12907pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNroundedBN1.tex)
 (../simulationTest/texTables/hyps/weakK2BNroundedBN1.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNroundedBN1.tex)
 (../simulationTest/texTables/hyps/strongK2BNroundedBN1.tex
-Overfull \hbox (53.24019pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNroundedBN0.tex)
 (../simulationTest/texTables/hyps/weakK2BNroundedBN0.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNroundedBN0.tex)
 (../simulationTest/texTables/hyps/strongK2BNroundedBN0.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
@@ -649,85 +691,85 @@ dspider.png> <./images/arbitraryRoundeddeltaSpider.png>] [12] [13]
 (../simulationTest/texTables/K2BNarbitraryRounded_collected_tables.tex
 (../simulationTest/texTables/outcome/weakK2BNarbitraryRoundedBN0.05.tex)
 (../simulationTest/texTables/hyps/weakK2BNarbitraryRoundedBN0.05.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNarbitraryRoundedBN0.05.tex)
 (../simulationTest/texTables/hyps/strongK2BNarbitraryRoundedBN0.05.tex
-Overfull \hbox (54.12907pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNarbitraryRoundedBN0.1.tex)
 (../simulationTest/texTables/hyps/weakK2BNarbitraryRoundedBN0.1.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNarbitraryRoundedBN0.1.tex)
 (../simulationTest/texTables/hyps/strongK2BNarbitraryRoundedBN0.1.tex
-Overfull \hbox (53.24019pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNarbitraryRoundedBN0.125.tex)
 (../simulationTest/texTables/hyps/weakK2BNarbitraryRoundedBN0.125.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNarbitraryRoundedBN0.125.tex)
 (../simulationTest/texTables/hyps/strongK2BNarbitraryRoundedBN0.125.tex
-Overfull \hbox (54.12907pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNarbitraryRoundedBN0.2.tex)
 (../simulationTest/texTables/hyps/weakK2BNarbitraryRoundedBN0.2.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNarbitraryRoundedBN0.2.tex)
 (../simulationTest/texTables/hyps/strongK2BNarbitraryRoundedBN0.2.tex
-Overfull \hbox (53.24019pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNarbitraryRoundedBN0.25.tex)
 (../simulationTest/texTables/hyps/weakK2BNarbitraryRoundedBN0.25.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNarbitraryRoundedBN0.25.tex)
 (../simulationTest/texTables/hyps/strongK2BNarbitraryRoundedBN0.25.tex
-Overfull \hbox (53.68463pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNarbitraryRoundedBN0.33.tex)
 (../simulationTest/texTables/hyps/weakK2BNarbitraryRoundedBN0.33.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNarbitraryRoundedBN0.33.tex)
 (../simulationTest/texTables/hyps/strongK2BNarbitraryRoundedBN0.33.tex
-Overfull \hbox (54.12907pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNarbitraryRoundedBN0.5.tex)
 (../simulationTest/texTables/hyps/weakK2BNarbitraryRoundedBN0.5.tex
-Overfull \hbox (40.44157pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNarbitraryRoundedBN0.5.tex)
 (../simulationTest/texTables/hyps/strongK2BNarbitraryRoundedBN0.5.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
@@ -737,73 +779,73 @@ Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
 (../simulationTest/texTables/K2BNnormalNoise_collected_tables.tex
 (../simulationTest/texTables/outcome/weakK2BNnormalNoiseBN0.001.tex)
 (../simulationTest/texTables/hyps/weakK2BNnormalNoiseBN0.001.tex
-Overfull \hbox (53.73329pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNnormalNoiseBN0.001.tex)
 (../simulationTest/texTables/hyps/strongK2BNnormalNoiseBN0.001.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNnormalNoiseBN0.01.tex)
 (../simulationTest/texTables/hyps/weakK2BNnormalNoiseBN0.01.tex
-Overfull \hbox (41.7749pt too wide) in paragraph at lines 1--2
+Overfull \hbox (50.14294pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNnormalNoiseBN0.01.tex)
 (../simulationTest/texTables/hyps/strongK2BNnormalNoiseBN0.01.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNnormalNoiseBN0.1.tex)
 (../simulationTest/texTables/hyps/weakK2BNnormalNoiseBN0.1.tex
-Overfull \hbox (41.7749pt too wide) in paragraph at lines 1--2
+Overfull \hbox (50.14294pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNnormalNoiseBN0.1.tex)
 (../simulationTest/texTables/hyps/strongK2BNnormalNoiseBN0.1.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNnormalNoiseBN0.2.tex)
 (../simulationTest/texTables/hyps/weakK2BNnormalNoiseBN0.2.tex
-Overfull \hbox (41.7749pt too wide) in paragraph at lines 1--2
+Overfull \hbox (50.14294pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNnormalNoiseBN0.2.tex)
 (../simulationTest/texTables/hyps/strongK2BNnormalNoiseBN0.2.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNnormalNoiseBN0.3.tex)
 (../simulationTest/texTables/hyps/weakK2BNnormalNoiseBN0.3.tex
-Overfull \hbox (41.7749pt too wide) in paragraph at lines 1--2
+Overfull \hbox (50.14294pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNnormalNoiseBN0.3.tex)
 (../simulationTest/texTables/hyps/strongK2BNnormalNoiseBN0.3.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/weakK2BNnormalNoiseBN0.5.tex)
 (../simulationTest/texTables/hyps/weakK2BNnormalNoiseBN0.5.tex
-Overfull \hbox (41.7749pt too wide) in paragraph at lines 1--2
+Overfull \hbox (49.6985pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
 ) (../simulationTest/texTables/outcome/strongK2BNnormalNoiseBN0.5.tex)
 (../simulationTest/texTables/hyps/strongK2BNnormalNoiseBN0.5.tex
-Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
+Overfull \hbox (48.80962pt too wide) in paragraph at lines 1--2
  [][] 
  []
 
@@ -811,24 +853,24 @@ Overfull \hbox (52.79575pt too wide) in paragraph at lines 1--2
 
 ] [26] [27] [28] [29] [30] (./tablesFin.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  8707 strings out of 480608
  175306 string characters out of 5903630
- 627060 words of memory out of 5000000
+ 644463 words of memory out of 5000000
  24080 multiletter control sequences out of 15000+600000
  544392 words of font info for 73 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 38i,11n,46p,3106b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,46p,3169b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 ></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
 r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-Output written on tablesFin.pdf (30 pages, 3093937 bytes).
+Output written on tablesFin.pdf (30 pages, 3050397 bytes).
 PDF statistics:
  155 PDF objects out of 1000 (max. 8388607)
  86 compressed objects within 1 object stream

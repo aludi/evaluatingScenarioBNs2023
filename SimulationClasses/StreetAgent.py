@@ -15,8 +15,6 @@ class StreetAgent(Agent):
         self.owns_house = None
         self.know_objects = None
         self.target = None # target for stealing
-        self.risk_threshold = random.randint(0, 1000)  #0 is always steals
-        self.breaking_and_entering_skill = random.randint(0, 10) # 10 is always breaks in
         self.goal = "WALK ROAD"
         self.prev_goal = None
         self.stuck_timer = 0
@@ -24,6 +22,11 @@ class StreetAgent(Agent):
         self.objects_in_sight = []
         self.objects_seen = {}
         self.observed = False
+
+        # PSYCHOLOGICAL INVISIBLE FACTORS:
+        self.risk_threshold = random.randint(0, 1000)  # 0 is always steals
+        self.breaking_and_entering_skill = random.randint(0, 10)  # 10 is always breaks in
+        self.detail_oriented = random.randint(0, 10)  # 10 means that agent doesn't disturb the house
 
     def set_name(self, name):
         self.name = name
@@ -231,7 +234,8 @@ class StreetAgent(Agent):
         elif goal == "STEAL":
 
             # move to target and take it
-            self.model.reporters.increase_evidence_counter_once("E_disturbed_house")    # thief always disturbs the house a bit
+            if self.detail_oriented < 8:
+                self.model.reporters.increase_evidence_counter_once("E_disturbed_house")    # thief always disturbs the house a bit
 
             (new_x, new_y) = self.move_step_to_goal(self.target.position)
             self.model.grid.move_agent(self, (new_x, new_y))

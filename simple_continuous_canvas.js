@@ -3,21 +3,23 @@ var ContinuousVisualization = function(width, height, context) {
 	var width = width;
 	var context = context;
 
+
 	this.draw = function(objects) {
         for (let it = 0; it < 3 ; it++) {
             for (var i in objects) {
                 console.log("hello");
                 var p = objects[i];
-                console.log(p, it);
                 if (p.Layer == it){
                     console.log(p.Shape)
                     if (p.Shape == "rect")
+                        //context.globalCompositeOperation = 'destination-over';
+
                         this.drawRectange(p.x, p.y, p.w, p.h, p.Color, p.Filled);
                     if (p.Shape == "circle")
                         this.drawCircle(p.x, p.y, p.r, p.Color, p.Filled);
                     else
-                        context.globalCompositeOperation = 'destination-over';
-                        this.drawCustomImage(p.Shape, p.x, p.y, p.scale, p.text, p.text_color)
+                        //context.globalCompositeOperation = 'destination-over';
+                        this.drawCustomImage(p.Shape, p.x, p.y, p.scale, p.text, p.text_color, height, width)
 
             };
             };
@@ -25,7 +27,7 @@ var ContinuousVisualization = function(width, height, context) {
 
 	};
 
-	this.drawCustomImage = function (shape, x, y, scale, text, text_color_) {
+	this.drawCustomImage = function (shape, x, y, scale, text, text_color_, height, width) {
                 var img = new Image();
                         img.src = "local/".concat(shape);
                 if (scale === undefined) {
@@ -34,8 +36,12 @@ var ContinuousVisualization = function(width, height, context) {
                 //document.write("what")
 
                 // Calculate coordinates so the image is always centered
-                var dWidth = scale;
-                var dHeight = scale;
+                console.log("hieght en widht")
+
+                console.log(height, width)
+
+                var dWidth = width;
+                var dHeight = height;
                 var cx = x ;
                 var cy = y;
 
@@ -112,6 +118,7 @@ var Simple_Continuous_Module = function(canvas_width, canvas_height) {
 	// Create the tag:
 	var canvas_tag = "<canvas width='" + canvas_width + "' height='" + canvas_height + "' ";
 	canvas_tag += "style='border:1px dotted'></canvas>";
+	console.log(canvas_width, canvas_height);
 	// Append it to body:
 	var canvas = $(canvas_tag)[0];
 	$("#elements").append(canvas);

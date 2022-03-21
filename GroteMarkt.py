@@ -1,76 +1,117 @@
 from mesa import Agent, Model
 from mesa.time import RandomActivation
-from mesa.space import ContinuousSpace
+from mesa.space import ContinuousSpace, HexGrid, MultiGrid
 from SimulationClasses.StreetAgent import StreetAgent
 import numpy as np
-
+import csv
 import random
 
-class GroteMarkt(Model):
-    """
-    Flocker model class. Handles agent creation, placement and scheduling.
-    """
+class MoneyAgent(Agent):
+    """An agent with fixed initial wealth."""
 
-    def __init__(
-        self,
-        width=100,
-        height=100,
-    ):
-        """
-        Create a new Flockers model.
-        Args:
-            population: Number of Boids
-            width, height: Size of the space.
-            speed: How fast should the Boids move.
-            vision: How far around should each Boid look for its neighbors
-            separation: What's the minimum distance each Boid will attempt to
-                    keep from any other
-            cohere, separate, match: factors for the relative importance of
-                    the three drives."""
+    def __init__(self, unique_id, model):
+        super().__init__(unique_id, model)
+        self.wealth = 1
 
+    def move(self):
+        possible_steps = self.model.grid.get_neighborhood(
+            self.pos, moore=True, include_center=False
+        )
+        accessible = []
+        for i in possible_steps:
+            if self.model.extended_grid[i] == "OPEN":
+                accessible.append(i)
+        new_position = self.random.choice(accessible)
+        self.model.grid.move_agent(self, new_position)
+
+    def give_money(self):
+        cellmates = self.model.grid.get_cell_list_contents([self.pos])
+        if len(cellmates) > 1:
+            other_agent = self.random.choice(cellmates)
+            other_agent.wealth += 1
+            self.wealth -= 1
+
+    def step(self):
+        self.move()
+        if self.wealth > 0:
+            self.give_money()
+
+class Dagobert(Agent):
+    """An agent with fixed initial wealth."""
+
+    def __init__(self, unique_id, model):
+        super().__init__(unique_id, model)
+        self.wealth = 100
+
+    def move(self):
+        possible_steps = self.model.grid.get_neighborhood(
+            self.pos, moore=True, include_center=False
+        )
+        new_position = self.random.choice(possible_steps)
+        self.model.grid.move_agent(self, new_position)
+
+    def give_money(self):
+        cellmates = self.model.grid.get_cell_list_contents([self.pos])
+        if len(cellmates) > 1:
+            other_agent = self.random.choice(cellmates)
+            other_agent.wealth -= 1
+            self.wealth += 1
+
+    def step(self):
+        #self.move()
+        if self.wealth > 0:
+            self.give_money()
+
+
+
+
+class MoneyModel(Model):
+    """A model with some number of agents."""
+
+    def __init__(self, N, width, height):
+        self.num_agents = N
+        self.grid = MultiGrid(width, height, True)
+        self.extended_grid = self.make_extended_grid(width, height)
         self.schedule = RandomActivation(self)
-        self.space = ContinuousSpace(width, height, True)
-        self.make_map()
-        self.make_agents()
+        # Create agents
+        for i in range(self.num_agents-1):
+            a = MoneyAgent(i, self)
+            self.schedule.add(a)
+            x, y = self.initial_xy()
+            # Add the agent to a random grid cell
+            #x = self.random.randrange(self.grid.width)
+            #y = self.random.randrange(self.grid.height)
+            self.grid.place_agent(a, (x, y))
+        a = Dagobert(self.num_agents, self)
+        self.schedule.add(a)
+        # Add the agent to a random grid cell
+        x, y = self.initial_xy()
+        self.grid.place_agent(a, (x, y))
+
+
         self.running = True
 
-    def make_map(self):
-        pos = np.array((0,0))
-        a = Map(1, self, pos)
-        self.space.place_agent(a, pos)
-        self.schedule.add(a)
+    def initial_xy(self):
+        x = self.random.randrange(self.grid.width)
+        y = self.random.randrange(self.grid.height)
+        if self.extended_grid[(x, y)] == "CLOSED":
+            self.initial_xy()
+        return (x, y)
 
-    def make_agents(self):
-        x = self.random.random() * self.space.x_max
-        y = self.random.random() * self.space.y_max
-        pos = np.array((x, y))
-        for i in range(2, 5):
-            st = Test(i, self, pos)
-            self.space.place_agent(st, pos)
-            self.schedule.add(st)
-
+    def make_extended_grid(self, width, height):
+        dict = {}
+        it = 0
+        with open('groteMarkt.csv') as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+            for i in csv_reader:
+                for j in range(len(i)):
+                    if i[j] == '0':
+                        dict[(it, j)] = "CLOSED"
+                    else:
+                        dict[(it, j)] = "OPEN"
+                it += 1
+        return dict
 
     def step(self):
         self.schedule.step()
-
-class Map(Agent):
-    def __init__(self, unique_id, model, pos):
-        super().__init__(unique_id, model)
-        self.pos = np.array(pos)
-
-    def step(self):
-        pass
-
-
-class Test(Agent):
-    def __init__(self, unique_id, model, pos):
-        super().__init__(unique_id, model)
-        self.pos = np.array(pos)
-
-    def step(self):
-        x, y = self.pos
-        print(x, y)
-        x_new = (x + random.choice([1, -1])*self.random.random())
-        y_new = (y + random.choice([1, -1])*self.random.random())
-        print(x_new, y_new)
-        self.pos = np.array((x_new, y_new))

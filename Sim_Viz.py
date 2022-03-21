@@ -1,5 +1,5 @@
 from SimulationTest import *
-from GroteMarkt import GroteMarkt
+from GroteMarkt import MoneyModel
 
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.modules import TextElement
@@ -161,27 +161,35 @@ def agent_portrayal(agent):
 
 
 def agent_portrayal1(agent):
-    portrayal = {"Shape": "circle",
-                 "Filled": "false",
-                 "r": 0.5,
-                 "Layer":0,
-                 "opacity": 1}
+    portrayal = {"Shape": "rect", "Filled": "true", "r": 0.5,"w": 5, "h": 5,"Layer":0, "Color":"black"}
+    print(type(agent))
 
-
-    if str(type(agent)) == "<class 'GroteMarkt.Test'>":
+    if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
         portrayal["Shape"] = "circle"
-        portrayal["Color"] = ["red"]
-        portrayal["r"] = 10
-        portrayal["Layer"] = 1
+        if agent.wealth > 0:
+            portrayal["Color"] = "red"
+            portrayal["Layer"] = 1
+        else:
+            portrayal["Color"] = "blue"
+            portrayal["Layer"] = 1
 
-    if str(type(agent)) == "<class 'GroteMarkt.Map'>":
+
+    elif str(type(agent)) == "<class 'GroteMarkt.Dagobert'>":
         portrayal["Shape"] = "groteMarkt.png"
-        portrayal["scale"] = 500
-        portrayal["x"] = 0
-        portrayal["y"] = 0
+        portrayal["Color"] = "Blue"
+        portrayal["scale"] = 25
+        portrayal["h"] = 25
+        portrayal["w"] = 25
+
         portrayal["Layer"] = 0
+        portrayal["opacity"] = 0.3
 
     return portrayal
+
+
+
+
+
 
 
 class Test(TextElement):
@@ -213,14 +221,9 @@ if sim == 0:
                            {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters})
 elif sim == 1:
 
-    grote_markt_canvas = SimpleCanvas(agent_portrayal1, 500, 500)
-    model_params = {
+    grid = CanvasGrid(agent_portrayal1, 25, 25, 500, 500)
 
-        "width": 100,
-        "height": 100
-    }
-
-    server = ModularServer(GroteMarkt, [grote_markt_canvas], "Grote Markt", model_params)
+    server = ModularServer(MoneyModel, [grid], "Grote Markt", {"N": 10,"width": 25, "height": 25})
 
 
 

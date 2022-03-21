@@ -2,178 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CredibilityGame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GroteMarkt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/groteMarkt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simple_continuous_canvas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BN.py" beforeDir="false" afterPath="$PROJECT_DIR$/BN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BN.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.05.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.05.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.1.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.125.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.125.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.2.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.25.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.25.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.33.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.33.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.001.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.001.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.01.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.01.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.1.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.2.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.3.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.3.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN0.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN0.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN1.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN2.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN3.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN3.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN4.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN4.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN5.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BN.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.05.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.05.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.1.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.125.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.125.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.2.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.25.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.25.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.33.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.33.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Question1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Question1.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reporters.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reporters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimulationClasses/StreetAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/StreetAgent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expORG.csv" beforeDir="false" afterPath="$PROJECT_DIR$/expORG.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expSpider.csv" beforeDir="false" afterPath="$PROJECT_DIR$/expSpider.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generatingPlots.R" beforeDir="false" afterPath="$PROJECT_DIR$/generatingPlots.R" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/globalStates.csv" beforeDir="false" afterPath="$PROJECT_DIR$/globalStates.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/K2Weak.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/K2Weak.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/K2WeakSpider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/K2absolute.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/K2absolute.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/K2delta.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/K2delta.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/K2deltaSpider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/K2spider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedWeak.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/arbitraryRoundedWeak.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedWeakSpider.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/arbitraryRoundedWeakSpider.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedabsolute.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/arbitraryRoundedabsolute.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundeddelta.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/arbitraryRoundeddelta.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundeddeltaSpider.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/arbitraryRoundeddeltaSpider.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedspider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/normalNoiseWeak.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/normalNoiseWeak.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/normalNoiseWeakSpider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/normalNoiseabsolute.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/normalNoiseabsolute.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/normalNoisedelta.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/normalNoisedelta.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/roundedWeak.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/roundedWeak.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/roundedWeakSpider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/roundedabsolute.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/roundedabsolute.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/roundeddelta.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/roundeddelta.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/strongK2deltaSpider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/strongK2spider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/strongarbitraryRoundedspider.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/strongarbitraryRoundedspider.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/partialStates.csv" beforeDir="false" afterPath="$PROJECT_DIR$/partialStates.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tablesFin.log" beforeDir="false" afterPath="$PROJECT_DIR$/tablesFin.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tablesFin.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/tablesFin.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tablesFin.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/tablesFin.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tablesFin.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.001.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.001.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.01.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.01.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN0.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN0.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN4.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN4.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.001.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.001.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.01.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.01.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN0.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN0.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN4.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN4.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.001.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.001.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.01.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.01.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN0.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN0.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN4.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN4.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.001.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.001.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.01.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.01.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN0.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN0.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN3.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN3.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN4.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN4.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.5.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sim_Viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sim_Viz.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +49,7 @@
       <recent name="$PROJECT_DIR$/../Desktop" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Analysis">
+  <component name="RunManager" selected="Python.Sim_Viz">
     <configuration name="Analysis" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="simulationTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -281,6 +114,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.BN" />
       <item itemvalue="Python.Analysis" />
       <item itemvalue="Python.Sim_Viz" />
     </list>
@@ -319,7 +153,6 @@
     <state x="258" y="245" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519090668" />
     <state x="258" y="160" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1639515728802" />
     <state x="196" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/28.23.1252.777@28.23.1252.777" timestamp="1639416581587" />
-    <state x="209" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/30.23.1250.777@30.23.1250.777" timestamp="1638534518958" />
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1646906154718">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -332,10 +165,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1793" height="257" key="GridCell.Tab.0.bottom" timestamp="1647535152844">
+    <state width="1578" height="210" key="GridCell.Tab.0.bottom" timestamp="1647863226207">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1793" height="257" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647535152844" />
+    <state width="1578" height="210" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647863226207" />
     <state width="1793" height="264" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354447" />
     <state width="1654" height="267" key="GridCell.Tab.0.bottom/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -344,10 +177,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.bottom/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="234" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1642773647128" />
     <state width="1709" height="385" key="GridCell.Tab.0.bottom/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
-    <state width="1793" height="257" key="GridCell.Tab.0.center" timestamp="1647535152843">
+    <state width="1578" height="210" key="GridCell.Tab.0.center" timestamp="1647863226205">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1793" height="257" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647535152843" />
+    <state width="1578" height="210" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647863226205" />
     <state width="1793" height="264" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354445" />
     <state width="1654" height="267" key="GridCell.Tab.0.center/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624619" />
     <state width="1578" height="283" key="GridCell.Tab.0.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -356,10 +189,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.center/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="234" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1642773647127" />
     <state width="1709" height="385" key="GridCell.Tab.0.center/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1793" height="257" key="GridCell.Tab.0.left" timestamp="1647535152842">
+    <state width="1578" height="210" key="GridCell.Tab.0.left" timestamp="1647863226203">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1793" height="257" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647535152842" />
+    <state width="1578" height="210" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647863226203" />
     <state width="1793" height="264" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354445" />
     <state width="1654" height="267" key="GridCell.Tab.0.left/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624618" />
     <state width="1578" height="283" key="GridCell.Tab.0.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -368,10 +201,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.left/28.23.1252.777@28.23.1252.777" timestamp="1639416586499" />
     <state width="1259" height="234" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1642773647126" />
     <state width="1709" height="385" key="GridCell.Tab.0.left/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1793" height="257" key="GridCell.Tab.0.right" timestamp="1647535152844">
+    <state width="1578" height="210" key="GridCell.Tab.0.right" timestamp="1647863226206">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1793" height="257" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647535152844" />
+    <state width="1578" height="210" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647863226206" />
     <state width="1793" height="264" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354446" />
     <state width="1654" height="267" key="GridCell.Tab.0.right/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -414,21 +247,17 @@
     <state x="468" y="178" key="SettingsEditor/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646321155722" />
     <state x="389" y="98" key="SettingsEditor/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1639515765891" />
     <state x="389" y="98" key="SettingsEditor/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644938783166" />
-    <state x="283" y="78" key="SettingsEditor/30.23.1250.777@30.23.1250.777" timestamp="1638531433991" />
     <state x="421" y="98" key="SettingsEditor/40.23.1880.1057@40.23.1880.1057" timestamp="1643503072200" />
     <state x="937" y="471" key="VCS.ChangelistChooser" timestamp="1644843945261">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="937" y="471" key="VCS.ChangelistChooser/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843945261" />
-    <state x="843" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1646317454238">
+    <state x="843" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1647857232323">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="-986" y="485" key="com.intellij.ide.util.TipDialog/-1250.224.1250.777/0.23.1920.1057@-1250.224.1250.777" timestamp="1637938551445" />
-    <state x="843" y="23" key="com.intellij.ide.util.TipDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1646317454238" />
+    <state x="843" y="23" key="com.intellij.ide.util.TipDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647857232323" />
     <state x="843" y="23" key="com.intellij.ide.util.TipDialog/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643720161065" />
     <state x="843" y="23" key="com.intellij.ide.util.TipDialog/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644408462669" />
-    <state x="578" y="23" key="com.intellij.ide.util.TipDialog/29.23.1251.777@29.23.1251.777" timestamp="1638722865562" />
-    <state x="406" y="98" key="com.intellij.ide.util.TipDialog/30.23.1250.777@30.23.1250.777" timestamp="1638361456067" />
     <state x="786" y="283" width="670" height="676" key="search.everywhere.popup" timestamp="1647532287964">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -436,7 +265,6 @@
     <state x="786" y="283" width="670" height="676" key="search.everywhere.popup/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643724274085" />
     <state x="787" y="283" width="1028" height="677" key="search.everywhere.popup/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1639686899481" />
     <state x="786" y="283" width="670" height="676" key="search.everywhere.popup/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644870912496" />
-    <state x="541" y="214" width="670" height="497" key="search.everywhere.popup/28.23.1252.777@28.23.1252.777" timestamp="1639179347795" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

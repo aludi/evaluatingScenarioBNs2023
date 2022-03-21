@@ -1,8 +1,11 @@
 from SimulationTest import *
+from GroteMarkt import GroteMarkt
+
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.modules import TextElement
-
 from mesa.visualization.ModularVisualization import ModularServer
+from mesa.visualization.ModularVisualization import VisualizationElement
+
 
 from SimulationClasses.StreetAgent import StreetAgent
 from SimulationClasses.Walkway import Walkway
@@ -32,6 +35,37 @@ _COLORS = [
     "White",
     "Yellow",
 ]
+
+class SimpleCanvas(VisualizationElement):
+    local_includes = ["simple_continuous_canvas.js"]
+    portrayal_method = None
+    canvas_height = 500
+    canvas_width = 500
+
+    def __init__(self, portrayal_method, canvas_height=500, canvas_width=500):
+        """
+        Instantiate a new SimpleCanvas
+        """
+        self.portrayal_method = portrayal_method
+        self.canvas_height = canvas_height
+        self.canvas_width = canvas_width
+        new_element = "new Simple_Continuous_Module({}, {})".format(
+            self.canvas_width, self.canvas_height
+        )
+        self.js_code = "elements.push(" + new_element + ");"
+
+    def render(self, model):
+        space_state = []
+        for obj in model.schedule.agents:
+            portrayal = self.portrayal_method(obj)
+            x, y = obj.pos
+            x = (x - model.space.x_min) / (model.space.x_max - model.space.x_min)
+            y = (y - model.space.y_min) / (model.space.y_max - model.space.y_min)
+            portrayal["x"] = x
+            portrayal["y"] = y
+            space_state.append(portrayal)
+        return space_state
+
 
 def agent_portrayal(agent):
     portrayal = {"Shape": "circle",
@@ -126,6 +160,30 @@ def agent_portrayal(agent):
     return portrayal
 
 
+def agent_portrayal1(agent):
+    portrayal = {"Shape": "circle",
+                 "Filled": "false",
+                 "r": 0.5,
+                 "Layer":0,
+                 "opacity": 1}
+
+
+    if str(type(agent)) == "<class 'GroteMarkt.Test'>":
+        portrayal["Shape"] = "circle"
+        portrayal["Color"] = ["red"]
+        portrayal["r"] = 10
+        portrayal["Layer"] = 1
+
+    if str(type(agent)) == "<class 'GroteMarkt.Map'>":
+        portrayal["Shape"] = "groteMarkt.png"
+        portrayal["scale"] = 500
+        portrayal["x"] = 0
+        portrayal["y"] = 0
+        portrayal["Layer"] = 0
+
+    return portrayal
+
+
 class Test(TextElement):
     def render(self, model):
         str_ = ""
@@ -133,22 +191,41 @@ class Test(TextElement):
             str_ = str_ + str(key) + " : " + str(model.reporters.history_dict[model.reporters.run][key]) + ",\t"
         return str_
 
-grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)
-text = Test()
-new_reporters = Reporters()
-
-server = ModularServer(StolenLaptop,
-                       [grid, text],
-                       "Stolen Laptop",
-                       {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters})
 
 
-'''
-server = ModularServer(Street,
-                       [grid],
-                       "Street Model",
-                       {"N_agents":2, "N_houses":2, "width":16, "height":9})
-'''
+sim = 1
+if sim == 0:
+    rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
+                                        "flees_startled", "successful_stolen", "raining", "curtains",
+                                        "E_object_is_gone",
+                                        "E_broken_lock",
+                                        "E_disturbed_house",
+                                        "E_s_spotted_by_house",
+                                        "E_s_spotted_with_goodie",
+                                        "E_private"]
+
+    grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)
+    text = Test()
+    new_reporters = Reporters(rel_events)
+    server = ModularServer(StolenLaptop,
+                           [grid, text],
+                           "Stolen Laptop",
+                           {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters})
+elif sim == 1:
+
+    grote_markt_canvas = SimpleCanvas(agent_portrayal1, 500, 500)
+    model_params = {
+
+        "width": 100,
+        "height": 100
+    }
+
+    server = ModularServer(GroteMarkt, [grote_markt_canvas], "Grote Markt", model_params)
+
+
+
+
+
 
 server.port = 8521 # The default
 server.launch()

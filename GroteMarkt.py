@@ -9,9 +9,13 @@ import random
 class MoneyAgent(Agent):
     """An agent with fixed initial wealth."""
 
-    def __init__(self, unique_id, model):
+    def __init__(self, unique_id, goal_state, model):
         super().__init__(unique_id, model)
         self.wealth = 1
+        self.goal = goal_state
+        self.thresholds = [random.random(), random.random(), random.random()]    # talk sing dance
+        self.thresholds.sort()
+        self.state = "HANG AROUND"
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(
@@ -24,6 +28,39 @@ class MoneyAgent(Agent):
         new_position = self.random.choice(accessible)
         self.model.grid.move_agent(self, new_position)
 
+    def move_to_goal(self):
+        self.state = "MOVE TO GOAL"
+        if self.pos == self.goal:
+            new_position = self.pos
+        else:
+            hx, hy = self.goal
+            accessible = []
+            possible_steps = self.model.grid.get_neighborhood(
+                self.pos,
+                moore=True, include_center=False)
+            for i in possible_steps:
+                if self.model.extended_grid[i] == "OPEN":
+                    accessible.append(i)
+
+            bestx, besty = 100, 100
+            best = 100
+            for step in accessible:
+                stepx, stepy = step
+                if ((hx - stepx) ** 2 + (hy - stepy) ** 2 < best):
+                    best = (hx - stepx) ** 2 + (hy - stepy) ** 2
+                    bestx, besty = stepx, stepy
+
+            if (bestx, besty) == (100, 100):
+                new_position = self.random.choice(accessible)
+            else:
+                new_position = (bestx, besty)
+
+        self.model.grid.move_agent(self, new_position)
+
+    def hang_around(self):
+        self.state = "HANG AROUND"
+        self.move()
+
     def give_money(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
         if len(cellmates) > 1:
@@ -32,7 +69,12 @@ class MoneyAgent(Agent):
             self.wealth -= 1
 
     def step(self):
-        self.move()
+        t = random.random()
+        if t > self.thresholds[2]:
+            self.move_to_goal()
+        else:
+            self.hang_around()
+
         if self.wealth > 0:
             self.give_money()
 
@@ -68,20 +110,19 @@ class Dagobert(Agent):
 class MoneyModel(Model):
     """A model with some number of agents."""
 
-    def __init__(self, N, width, height):
+    def __init__(self, N, width, height, torus=False):
         self.num_agents = N
-        self.grid = MultiGrid(width, height, True)
-        self.extended_grid = self.make_extended_grid(width, height)
+        self.grid = MultiGrid(width, height, torus)
+        self.extended_grid, self.accessible_list = self.make_extended_grid(width, height)
+        self.possible_goal_states = self.get_possible_goal_states()
         self.schedule = RandomActivation(self)
         # Create agents
         for i in range(self.num_agents-1):
-            a = MoneyAgent(i, self)
+            a = MoneyAgent(i, random.choice(self.possible_goal_states), self)
             self.schedule.add(a)
             x, y = self.initial_xy()
-            # Add the agent to a random grid cell
-            #x = self.random.randrange(self.grid.width)
-            #y = self.random.randrange(self.grid.height)
             self.grid.place_agent(a, (x, y))
+
         a = Dagobert(self.num_agents, self)
         self.schedule.add(a)
         # Add the agent to a random grid cell
@@ -92,26 +133,34 @@ class MoneyModel(Model):
         self.running = True
 
     def initial_xy(self):
-        x = self.random.randrange(self.grid.width)
-        y = self.random.randrange(self.grid.height)
-        if self.extended_grid[(x, y)] == "CLOSED":
-            self.initial_xy()
+        (x,y) = random.choice(self.accessible_list)
         return (x, y)
 
     def make_extended_grid(self, width, height):
         dict = {}
-        it = 0
+        it = 1
+        w = width
+        h = height
+        accesible_list = []
         with open('groteMarkt.csv') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
-            for i in csv_reader:
-                for j in range(len(i)):
-                    if i[j] == '0':
-                        dict[(it, j)] = "CLOSED"
+            for j in csv_reader:
+                for i in range(len(j)):
+                    if j[i] == str(0):
+                        dict[(i, h-it)] = "CLOSED"
                     else:
-                        dict[(it, j)] = "OPEN"
+                        dict[(i, h-it)] = "OPEN"
+                        accesible_list.append((i, h-it))
                 it += 1
-        return dict
+        return dict, accesible_list
+
+    def get_possible_goal_states(self):
+        n = []
+        for (x, y) in self.accessible_list:
+            if (x == 24 or x == 0 or y == 0 or y == 24):
+                n.append((x, y))
+        return n
 
     def step(self):
         self.schedule.step()

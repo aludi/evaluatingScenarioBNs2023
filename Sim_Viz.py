@@ -161,20 +161,22 @@ def agent_portrayal(agent):
 
 
 def agent_portrayal1(agent):
-    portrayal = {"Shape": "rect", "Filled": "true", "r": 0.25,"w": 5, "h": 5,"Layer":0, "Color":"black"}
+    portrayal = {"Shape": "rect", "Filled": "true", "r": 0.5,"w": 5, "h": 5,"Layer":0, "Color":"black"}
 
     if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
         if agent.pos == agent.goal:
             portrayal["Color"] = "yellow"
-            portrayal["r"] = 0.5
         else:
-            if agent.state == "MOVE TO GOAL":
+            if agent.state == "HANG AROUND":
                 portrayal["Color"] = "red"
-            else:
+            elif agent.state == "FAST MOVE TO GOAL":
+                portrayal["Color"] = "green"
+
+            elif agent.state == "MOVE TO GOAL":
                 portrayal["Color"] = "blue"
 
         portrayal["Shape"] = "circle"
-        portrayal["text"] = str(agent.goal)
+        portrayal["text"] = str(agent.cooldown_time)
         portrayal["text_color"] = "black"
         portrayal["Layer"] = 1
 
@@ -229,7 +231,7 @@ elif sim == 1:
 
     grid = CanvasGrid(agent_portrayal1, 25, 25, 500, 500)
 
-    server = ModularServer(MoneyModel, [grid], "Grote Markt", {"N": 50,"width": 25, "height": 25, "torus":False})
+    server = ModularServer(MoneyModel, [grid], "Grote Markt", {"N": 200,"width": 25, "height": 25, "torus":False})
 
 
 

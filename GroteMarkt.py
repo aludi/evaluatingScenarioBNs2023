@@ -15,11 +15,83 @@ class MoneyAgent(Agent):
         self.goal = goal_state
         self.thresholds = [random.random(), random.random(), random.random()]    # talk sing dance
         self.thresholds.sort()
+        self.cooldown_time = random.randint(10, 15)
+        self.state_timer = 10
         self.state = "HANG AROUND"
+        self.position_list = []
+
+    def step(self):
+
+        if self.pos == self.goal:
+            self.state = "GOAL"
+
+
+        else:
+            neighbors = self.model.grid.get_neighbors(pos=self.pos, moore=True, radius=3) #agents see around them with radius 3
+            # if they see that they're surrounded by other agents, they're more likely to hang out.
+            # at every step, agents check if they're near other agents,
+            # and want to hang around in a crowd if that's the case.
+
+            if self.state == "HANG AROUND":
+                self.hang_around()
+            elif self.state == "MOVE TO GOAL":
+                self.move_to_goal(radius=1)
+            elif self.state == "ESCAPE":
+                self.hang_around()
+            else:
+                self.move_to_goal(radius=2)
+
+
+
+
+            if self.state_timer > self.cooldown_time and self.state != "ESCAPE":
+                self.state_timer = 0
+                t = random.random()
+                #print(t, self.thresholds[2])
+                if t > self.thresholds[2]: # max speed
+                    self.state = "FAST MOVE TO GOAL"
+
+                elif t > self.thresholds[1]:
+                    self.state = "MOVE TO GOAL"
+
+                else:
+                    self.state = "HANG AROUND"
+
+                if len(neighbors) > 20:  # 6 agents nearby is a crowd.
+                    t = random.random()
+                    if t > 0.25:
+                        self.state = "HANG AROUND"
+
+            if self.state_timer > self.cooldown_time and self.state == "ESCAPE":
+                t = random.randrange(0, 20)
+                if t > 17:
+                    self.state = "HANG AROUND"
+
+
+        self.position_list.append(self.pos)
+        self.state_timer += 1
+
+        if self.state != "ESCAPE":
+            if len(self.position_list) > 10:
+                y = len(self.position_list)
+                count_dict = {}
+                for x in self.position_list[y-10: -1]:
+                    if x not in count_dict.keys():
+                        count_dict[x] = 0
+                    else:
+                        count_dict[x] += 1
+
+                for key in count_dict.keys():
+                    if count_dict[key] > 3:
+                        self.state = "ESCAPE"
+                        #print(self.unique_id, "ESCAPE")
+
+        if self.wealth > 0:
+            self.give_money()
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(
-            self.pos, moore=True, include_center=False
+            self.pos, moore=True, include_center=True
         )
         accessible = []
         for i in possible_steps:
@@ -28,8 +100,11 @@ class MoneyAgent(Agent):
         new_position = self.random.choice(accessible)
         self.model.grid.move_agent(self, new_position)
 
-    def move_to_goal(self):
-        self.state = "MOVE TO GOAL"
+    def move_to_goal(self, radius):
+        if radius == 1:
+            self.state = "MOVE TO GOAL"
+        elif radius != 1:
+            self.state = "FAST MOVE TO GOAL"
         if self.pos == self.goal:
             new_position = self.pos
         else:
@@ -37,23 +112,29 @@ class MoneyAgent(Agent):
             accessible = []
             possible_steps = self.model.grid.get_neighborhood(
                 self.pos,
+                radius=radius,
                 moore=True, include_center=False)
             for i in possible_steps:
                 if self.model.extended_grid[i] == "OPEN":
                     accessible.append(i)
 
+            #print("current location", self.pos, "goal", self.goal)
             bestx, besty = 100, 100
-            best = 100
+            best = bestx*besty
+            #print(accessible)
             for step in accessible:
                 stepx, stepy = step
                 if ((hx - stepx) ** 2 + (hy - stepy) ** 2 < best):
                     best = (hx - stepx) ** 2 + (hy - stepy) ** 2
                     bestx, besty = stepx, stepy
+                    #print(bestx, besty)
 
             if (bestx, besty) == (100, 100):
                 new_position = self.random.choice(accessible)
             else:
                 new_position = (bestx, besty)
+        #print("besrt new location", new_position)
+
 
         self.model.grid.move_agent(self, new_position)
 
@@ -68,15 +149,7 @@ class MoneyAgent(Agent):
             other_agent.wealth += 1
             self.wealth -= 1
 
-    def step(self):
-        t = random.random()
-        if t > self.thresholds[2]:
-            self.move_to_goal()
-        else:
-            self.hang_around()
 
-        if self.wealth > 0:
-            self.give_money()
 
 class Dagobert(Agent):
     """An agent with fixed initial wealth."""
@@ -127,6 +200,7 @@ class MoneyModel(Model):
         self.schedule.add(a)
         # Add the agent to a random grid cell
         x, y = self.initial_xy()
+        self.time = 0
         self.grid.place_agent(a, (x, y))
 
 
@@ -164,3 +238,4 @@ class MoneyModel(Model):
 
     def step(self):
         self.schedule.step()
+        self.time += 1

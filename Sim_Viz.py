@@ -165,24 +165,25 @@ def agent_portrayal1(agent):
 
     if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
         if agent.pos == agent.goal:
-            portrayal["Color"] = "yellow"
+            portrayal["Color"] = "black"
         else:
             if agent.state == "HANG AROUND":
-                portrayal["Color"] = "red"
+                portrayal["Color"] = "yellow"
             elif agent.state == "FAST MOVE TO GOAL":
-                portrayal["Color"] = "green"
+                portrayal["Color"] = "red"
 
             elif agent.state == "MOVE TO GOAL":
-                portrayal["Color"] = "blue"
+                portrayal["Color"] = "orange"
 
         portrayal["Shape"] = "circle"
-        portrayal["text"] = str(agent.cooldown_time)
+
+        portrayal["text"] = agent.ag_text
         portrayal["text_color"] = "black"
         portrayal["Layer"] = 1
 
 
 
-    elif str(type(agent)) == "<class 'GroteMarkt.Dagobert'>":
+    '''elif str(type(agent)) == "<class 'GroteMarkt.Dagobert'>":
         portrayal["Shape"] = "groteMarkt.png"
         portrayal["Color"] = "Blue"
         portrayal["scale"] = 25
@@ -190,7 +191,7 @@ def agent_portrayal1(agent):
         portrayal["w"] = 25
 
         portrayal["Layer"] = 0
-        portrayal["opacity"] = 0.3
+        portrayal["opacity"] = 0.3'''
 
     return portrayal
 

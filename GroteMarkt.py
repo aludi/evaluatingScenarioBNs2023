@@ -19,15 +19,59 @@ class MoneyAgent(Agent):
         self.state_timer = 10
         self.state = "HANG AROUND"
         self.position_list = []
+        ### theft and property
+        self.value_of_good = random.randrange(0, 1000)
+        self.risk_threshold = random.randrange(900, 5000) # will steal if opportunity
+        self.steal_state = "N"
+        self.target = None
+        self.ag_text = ":)"
+
 
     def step(self):
-
         if self.pos == self.goal:
             self.state = "GOAL"
+            self.steal_state = "DONE"
+            self.ag_text = ""
 
 
         else:
-            neighbors = self.model.grid.get_neighbors(pos=self.pos, moore=True, radius=3) #agents see around them with radius 3
+            if self.steal_state == "LOSER":
+                self.ag_text = ":("
+
+            elif self.steal_state == "STEALING":
+                self.ag_text = "..💰"
+
+            elif self.steal_state == "N":
+                self.ag_text = ":)"
+
+
+            all_neighbors = self.model.grid.get_neighbors(pos=self.pos, moore=True, radius=2) #agents see around them with radius 3
+            neighbors = []
+            for i in all_neighbors:
+                if self.model.extended_grid[i.pos] == "OPEN":
+                    neighbors.append(i)
+
+            if self.target is not None:
+                if self.target.pos == self.pos:
+                    self.steal_state = "STEALING"
+                    # stealing from the target!!
+                    self.value_of_good += self.target.value_of_good
+                    self.target.value_of_good = 0
+                    self.target.steal_state = "LOSER"
+
+
+                if self.target not in neighbors and self.target.pos != self.pos:
+                    self.steal_state = "N"
+                    self.target = None
+
+            # check the neighbors for their values
+            for agent in neighbors:
+                if agent.value_of_good > self.risk_threshold and self.steal_state != "STEALING":
+                    self.steal_state = "MOTIVE"
+                    self.target = agent
+                    self.ag_text = "8}"
+
+
             # if they see that they're surrounded by other agents, they're more likely to hang out.
             # at every step, agents check if they're near other agents,
             # and want to hang around in a crowd if that's the case.
@@ -57,7 +101,7 @@ class MoneyAgent(Agent):
                 else:
                     self.state = "HANG AROUND"
 
-                if len(neighbors) > 20:  # 6 agents nearby is a crowd.
+                if len(neighbors) > 20:  # 20 agents nearby is a crowd.
                     t = random.random()
                     if t > 0.25:
                         self.state = "HANG AROUND"
@@ -69,6 +113,7 @@ class MoneyAgent(Agent):
 
 
         self.position_list.append(self.pos)
+
         self.state_timer += 1
 
         if self.state != "ESCAPE":
@@ -86,8 +131,6 @@ class MoneyAgent(Agent):
                         self.state = "ESCAPE"
                         #print(self.unique_id, "ESCAPE")
 
-        if self.wealth > 0:
-            self.give_money()
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(
@@ -157,6 +200,11 @@ class Dagobert(Agent):
     def __init__(self, unique_id, model):
         super().__init__(unique_id, model)
         self.wealth = 100
+        ### theft and property
+        self.value_of_good = random.randrange(0, 1000)
+        self.risk_threshold = random.randrange(400, 1000)  # will steal if opportunity
+        self.steal_state = "N"
+        self.target = None
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(

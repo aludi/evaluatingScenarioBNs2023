@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/createMap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/groteMarkt4.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroteMarkt.py" beforeDir="false" afterPath="$PROJECT_DIR$/GroteMarkt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sim_Viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sim_Viz.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,14 +37,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/../.virtualenvs/simulationTest/lib/python3.8/site-packages/mesa/visualization/templates/js" />
-      <recent name="$PROJECT_DIR$/../Desktop" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/BayesNets/old" />
       <recent name="$PROJECT_DIR$/BayesNets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../.virtualenvs/simulationTest/lib/python3.8/site-packages/mesa/visualization/templates/js" />
+      <recent name="$PROJECT_DIR$/../Desktop" />
     </key>
   </component>
   <component name="RunManager" selected="Python.Sim_Viz">
@@ -163,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647975239658</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed layering issue by using 'destination-over' and restoring contexts!">
+      <created>1648051727171</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1648051727171</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,7 +192,8 @@
     <MESSAGE value="added new map&#10;(really think about increasing resolution and automating map-drawing process...)" />
     <MESSAGE value="agents get to the edge&#10;steealing enxt" />
     <MESSAGE value="agents steal (a lot!)" />
-    <option name="LAST_COMMIT_MESSAGE" value="agents steal (a lot!)" />
+    <MESSAGE value="fixed layering issue by using 'destination-over' and restoring contexts!" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed layering issue by using 'destination-over' and restoring contexts!" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1647530973462">
@@ -203,18 +211,18 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="861" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643734985718" />
-    <state x="538" y="156" key="CommitChangelistDialog2" timestamp="1647975239397">
+    <state x="538" y="156" key="CommitChangelistDialog2" timestamp="1648051726746">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="538" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647975239397" />
+    <state x="538" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648051726746" />
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog" timestamp="1644843960230">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1548" height="375" key="GridCell.Tab.0.bottom" timestamp="1648051690383">
+    <state width="1548" height="375" key="GridCell.Tab.0.bottom" timestamp="1648053867093">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="375" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648051690383" />
+    <state width="1548" height="375" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648053867093" />
     <state width="1793" height="264" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354447" />
     <state width="1654" height="267" key="GridCell.Tab.0.bottom/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -223,10 +231,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.bottom/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="153" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1648033992002" />
     <state width="1709" height="385" key="GridCell.Tab.0.bottom/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
-    <state width="1548" height="375" key="GridCell.Tab.0.center" timestamp="1648051690382">
+    <state width="1548" height="375" key="GridCell.Tab.0.center" timestamp="1648053867092">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="375" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648051690382" />
+    <state width="1548" height="375" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648053867092" />
     <state width="1793" height="264" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354445" />
     <state width="1654" height="267" key="GridCell.Tab.0.center/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624619" />
     <state width="1578" height="283" key="GridCell.Tab.0.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -235,10 +243,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.center/28.23.1252.777@28.23.1252.777" timestamp="1639416586500" />
     <state width="1259" height="153" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1648033992001" />
     <state width="1709" height="385" key="GridCell.Tab.0.center/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1548" height="375" key="GridCell.Tab.0.left" timestamp="1648051690381">
+    <state width="1548" height="375" key="GridCell.Tab.0.left" timestamp="1648053867091">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="375" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648051690381" />
+    <state width="1548" height="375" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648053867091" />
     <state width="1793" height="264" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354445" />
     <state width="1654" height="267" key="GridCell.Tab.0.left/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624618" />
     <state width="1578" height="283" key="GridCell.Tab.0.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -247,10 +255,10 @@
     <state width="1002" height="164" key="GridCell.Tab.0.left/28.23.1252.777@28.23.1252.777" timestamp="1639416586499" />
     <state width="1259" height="153" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1648033992001" />
     <state width="1709" height="385" key="GridCell.Tab.0.left/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1548" height="375" key="GridCell.Tab.0.right" timestamp="1648051690382">
+    <state width="1548" height="375" key="GridCell.Tab.0.right" timestamp="1648053867092">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="375" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648051690382" />
+    <state width="1548" height="375" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648053867092" />
     <state width="1793" height="264" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354446" />
     <state width="1654" height="267" key="GridCell.Tab.0.right/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -287,10 +295,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="315" y="115" key="MergeDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843937191" />
-    <state x="468" y="178" key="SettingsEditor" timestamp="1648048756864">
+    <state x="468" y="178" key="SettingsEditor" timestamp="1648053601151">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="468" y="178" key="SettingsEditor/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648048756864" />
+    <state x="468" y="178" key="SettingsEditor/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648053601151" />
     <state x="389" y="98" key="SettingsEditor/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1639515765891" />
     <state x="389" y="98" key="SettingsEditor/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644938783166" />
     <state x="421" y="98" key="SettingsEditor/40.23.1880.1057@40.23.1880.1057" timestamp="1643503072200" />
@@ -298,10 +306,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="937" y="471" key="VCS.ChangelistChooser/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843945261" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1647975259402">
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1648051733465">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647975259402" />
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648051733465" />
     <state x="843" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1648046742295">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

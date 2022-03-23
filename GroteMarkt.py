@@ -173,7 +173,15 @@ class MoneyAgent(Agent):
                     #print(bestx, besty)
 
             if (bestx, besty) == (100, 100):
-                new_position = self.random.choice(accessible)
+                try:
+                    new_position = self.random.choice(accessible)
+                except IndexError:
+                    print("TODO - later")
+                    '''print(self.pos)
+                    print(accessible)
+                    print(possible_steps)'''
+                    new_position = self.random.choice(possible_steps)
+
             else:
                 new_position = (bestx, besty)
         #print("besrt new location", new_position)
@@ -216,8 +224,9 @@ class Dagobert(Agent):
 class MoneyModel(Model):
     """A model with some number of agents."""
 
-    def __init__(self, N, width, height, torus=False):
+    def __init__(self, N, width, height, topic, torus=False):
         self.num_agents = N
+        self.topic = topic
         self.grid = MultiGrid(width, height, torus)
         self.extended_grid, self.accessible_list = self.make_extended_grid(width, height)
         self.possible_goal_states = self.get_possible_goal_states()
@@ -251,7 +260,7 @@ class MoneyModel(Model):
         w = width
         h = height
         accesible_list = []
-        with open('groteMarkt.csv') as csv_file:
+        with open(self.topic+str('.csv')) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for j in csv_reader:
@@ -267,7 +276,7 @@ class MoneyModel(Model):
     def get_possible_goal_states(self):
         n = []
         for (x, y) in self.accessible_list:
-            if (x == 24 or x == 0 or y == 0 or y == 24):
+            if (x == self.grid.width-1 or x == 0 or y == 0 or y == self.grid.height-1):
                 n.append((x, y))
         return n
 

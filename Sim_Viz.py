@@ -161,7 +161,8 @@ def agent_portrayal(agent):
 
 
 def agent_portrayal1(agent):
-    portrayal = {"Shape": "rect", "Filled": "true", "r": 0.5,"w": 5, "h": 5,"Layer":0, "Color":"black"}
+    portrayal = {"Shape": "rect", "Filled": "true", "r": 0.5,"w": 5, "h": 5,"Layer":0, "Color":"red"}
+
 
     if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
         if agent.pos == agent.goal:
@@ -179,19 +180,21 @@ def agent_portrayal1(agent):
 
         portrayal["text"] = agent.ag_text
         portrayal["text_color"] = "black"
-        portrayal["Layer"] = 1
+        if agent.state != "HANG AROUND":
+            portrayal["Layer"] = 2
+        else:
+            portrayal["Layer"] = 1
 
 
 
-    '''elif str(type(agent)) == "<class 'GroteMarkt.Dagobert'>":
+    elif str(type(agent)) == "<class 'GroteMarkt.Dagobert'>":
         portrayal["Shape"] = "groteMarkt.png"
         portrayal["Color"] = "Blue"
         portrayal["scale"] = 25
         portrayal["h"] = 25
         portrayal["w"] = 25
-
         portrayal["Layer"] = 0
-        portrayal["opacity"] = 0.3'''
+        portrayal["opacity"] = 1
 
     return portrayal
 

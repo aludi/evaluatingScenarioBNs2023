@@ -206,24 +206,9 @@ class Dagobert(Agent):
         self.steal_state = "N"
         self.target = None
 
-    def move(self):
-        possible_steps = self.model.grid.get_neighborhood(
-            self.pos, moore=True, include_center=False
-        )
-        new_position = self.random.choice(possible_steps)
-        self.model.grid.move_agent(self, new_position)
-
-    def give_money(self):
-        cellmates = self.model.grid.get_cell_list_contents([self.pos])
-        if len(cellmates) > 1:
-            other_agent = self.random.choice(cellmates)
-            other_agent.wealth -= 1
-            self.wealth += 1
-
     def step(self):
-        #self.move()
-        if self.wealth > 0:
-            self.give_money()
+        pass
+
 
 
 
@@ -250,6 +235,8 @@ class MoneyModel(Model):
         x, y = self.initial_xy()
         self.time = 0
         self.grid.place_agent(a, (x, y))
+
+
 
 
         self.running = True

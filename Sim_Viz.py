@@ -162,33 +162,29 @@ def agent_portrayal(agent):
 
 
 def agent_portrayal1(agent):
-    portrayal = {"Shape": "rect", "Filled": "true", "r": 1,"w": 5, "h": 5,"Layer":0, "Color":"red", "stroke_color":"black"}
+    portrayal = {"Shape": "rect", "Filled": "true", "r":0.75,"w": 5, "h": 5,"Layer":0, "Color":"yellow", "stroke_color":"black"}
 
 
     if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
         if agent.pos == agent.goal:
             portrayal["Color"] = "black"
-        else:
-            if agent.state == "HANG AROUND":
-                portrayal["Color"] = "yellow"
-            elif agent.state == "FAST MOVE TO GOAL":
-                portrayal["Color"] = "red"
+        if agent.steal_state == "SNEAK":
+            portrayal["Color"] = "pink"
 
-            elif agent.state == "MOVE TO GOAL":
-                portrayal["Color"] = "orange"
+
 
         portrayal["Shape"] = "circle"
-
-        #portrayal["text"] = agent.ag_text
         portrayal["text_color"] = "black"
-        if agent.state != "HANG AROUND":
-            portrayal["Layer"] = 2
-        else:
-            portrayal["Layer"] = 1
+
+
+        portrayal["text"] =  agent.ag_text
 
 
 
-    elif str(type(agent)) == "<class 'GroteMarkt.Dagobert'>":
+
+
+
+    elif str(type(agent)) == "<class 'GroteMarkt.Background'>":
         portrayal["Shape"] = str(agent.model.topic) + ".png"
         portrayal["Color"] = "Blue"
         portrayal["scale"] = 50
@@ -237,7 +233,7 @@ elif sim == 1:
     # y = 45
     # x = int(y*1.5)
 
-    y = 100
+    y = 20
     topic_gen = "groteMarkt4"
     C = CreateMap(topic_gen, y)
 
@@ -245,7 +241,7 @@ elif sim == 1:
 
     grid = CanvasGrid(agent_portrayal1, x, y, int((C.rel)*500), 500)
 
-    server = ModularServer(MoneyModel, [grid], "Grote Markt", {"N": 500,"width": x, "height": y, "topic":topic_gen, "torus":False})
+    server = ModularServer(MoneyModel, [grid], "Grote Markt", {"N": 10,"width": x, "height": y, "topic":topic_gen, "torus":False})
 
 
 

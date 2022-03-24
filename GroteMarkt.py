@@ -341,10 +341,7 @@ class MoneyModel(Model):
             a.value_of_good = 1000 # super tempting target
             a.risk_threshold = 5000 # will never steal risky
             a.age_threshold = 100   # will never steal even from old people (redundant)
-            print(a.pos)
-
             all_neighbors = a.model.grid.get_neighborhood(pos=a.pos, moore=True, radius=3)  # agents see around them with radius 3
-            print(all_neighbors)
             neighbors = []
             for i in all_neighbors:
                 if a.model.extended_grid[i] == "OPEN":

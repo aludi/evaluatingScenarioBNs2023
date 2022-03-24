@@ -14,6 +14,8 @@ from Reporters import Reporters
 from SimulationTest import StolenLaptop
 import csv
 from CredibilityGame import CredibilityGame
+from GroteMarkt import MoneyModel
+from CreateMap import CreateMap
 
 
 class Experiment():
@@ -35,7 +37,7 @@ class Experiment():
                                     "E_private"]
             self.runs = 2000 # to test
             self.reporters = Reporters(relevant_events = rel_events)
-            for i in range(0, self.runs):
+            for i in range(0, self.runs-1):
                 model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
                 for j in range(30):
                     model.step()
@@ -60,9 +62,46 @@ class Experiment():
 
             self.runs = 2000  # to test
             self.reporters = Reporters(relevant_events=rel_events)
-            for i in range(0, self.runs):
+            for i in range(0, self.runs-1):
                 CredibilityGame(N_agents=n, reporters=self.reporters, subtype=subtype)
                 self.reporters.increase_run()
+
+            self.generate_csv_report(self.csv_file_name)
+            self.print_frequencies()
+
+
+        if scenario == "GroteMarkt":
+            self.subtype = subtype
+            self.bnDir = f"{os.getcwd()}/BNGroteMarkt"
+            self.csv_file_name = "GroteMarktOutcomes.csv"
+            self.n = 3
+            n = self.n
+            rel_events = ["motive", "sneak", "stealing"]
+            # create reporters automatically
+            '''for i in range(0, n):    # to do - separate evidence node for each possible thief?
+                str1 = f"E_{i}_says_stolen"
+                #str2 = i + "_credibility"
+                rel_events.append(str1)
+                #rel_events.append(str2)'''
+
+            y = 20
+            topic_gen = "groteMarkt4"
+            C = CreateMap(topic_gen, y)
+            x = int(y * C.rel)
+
+
+            self.runs = 10  # to test
+            self.reporters = Reporters(relevant_events=rel_events)
+            for i in range(0, self.runs-1):
+                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, torus=False)
+
+                for j in range(30):
+                    model.step()
+                self.reporters.increase_run()
+
+            #print(self.reporters.history_dict)
+
+            #print(self.reporters.pure_frequency_event_dict)
 
             self.generate_csv_report(self.csv_file_name)
             self.print_frequencies()
@@ -218,5 +257,7 @@ class Experiment():
 
 if __name__ == "__main__":
     #Experiment("StolenLaptop")
-    Experiment("CredibilityGame")
+    #Experiment("CredibilityGame")
+    Experiment("GroteMarkt")
+
 

@@ -43,6 +43,13 @@ class Reporters():
         self.pure_frequency_event_dict[event] += val
         self.history_dict[self.run][event] += val
 
+    def set_evidence_straight(self, event, val):    # use for mutually exclusive events
+        if event not in self.temporal_list:
+            self.pure_frequency_event_dict[event] += val
+        self.add_to_temporal_list(event)
+
+        self.history_dict[self.run][event] = val
+
     def get_report_of_event(self, event):   # if event is not X
         return self.history_dict[self.run][event]
 

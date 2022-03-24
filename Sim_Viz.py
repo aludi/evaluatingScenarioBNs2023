@@ -2,6 +2,11 @@ from SimulationTest import *
 from GroteMarkt import MoneyModel
 from CreateMap import CreateMap
 
+import pyAgrum as gum
+import pyAgrum.lib.image as bng
+import matplotlib.pyplot as plt
+
+
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.modules import TextElement
 from mesa.visualization.ModularVisualization import ModularServer
@@ -162,7 +167,7 @@ def agent_portrayal(agent):
 
 
 def agent_portrayal1(agent):
-    portrayal = {"Shape": "rect", "Filled": "true", "r":0.75,"w": 5, "h": 5,"Layer":0, "Color":"yellow", "stroke_color":"black"}
+    portrayal = {"Shape": "circle", "Filled": "true", "r":0.75,"Layer":0, "Color":"yellow",  "opacity":0}
 
 
     if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
@@ -170,19 +175,10 @@ def agent_portrayal1(agent):
             portrayal["Color"] = "black"
         if agent.steal_state == "SNEAK":
             portrayal["Color"] = "pink"
-
-
-
         portrayal["Shape"] = "circle"
         portrayal["text_color"] = "black"
-
-
         portrayal["text"] =  agent.name + " " + str(agent.age) + " " + agent.ag_text
-
-
-
-
-
+        portrayal["opacity"] = 1
 
     elif str(type(agent)) == "<class 'GroteMarkt.Background'>":
         portrayal["Shape"] = str(agent.model.topic) + ".png"
@@ -193,11 +189,34 @@ def agent_portrayal1(agent):
         portrayal["Layer"] = 0
         portrayal["opacity"] = 1
 
+
+
     return portrayal
 
+def agent_portrayal2(agent):
+    portrayal = {"Shape": "circle", "Filled": "true", "r": 0.05, "Layer": 0, "Color": "yellow", "opacity": 0}
 
 
 
+
+    bnK2 = gum.loadBN("BNGroteMarkt/main.net")
+
+    bng.export(bnK2, "imgBNGroteMarkt.png")
+    bng.exportInference(bnK2, "imgBNGroteMarkt.png", evs={})
+
+
+
+
+    if str(type(agent)) == "<class 'GroteMarkt.BN'>":
+        portrayal["Shape"] = "imgBNGroteMarkt.png"
+        portrayal["Color"] = "Blue"
+        portrayal["scale"] = 1
+        portrayal["h"] = 500
+        portrayal["w"] = 250
+        portrayal["Layer"] = 0
+        portrayal["opacity"] = 1
+
+    return portrayal
 
 
 
@@ -207,6 +226,8 @@ class Test(TextElement):
         for key in model.reporters.pure_frequency_event_dict.keys():
             str_ = str_ + str(key) + " : " + str(model.reporters.history_dict[model.reporters.run][key]) + ",\t"
         return str_
+
+
 
 
 
@@ -229,19 +250,26 @@ if sim == 0:
                            "Stolen Laptop",
                            {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters})
 elif sim == 1:
+
+
+
     # params from map making
     # y = 45
     # x = int(y*1.5)
+    rel = ["motive", "sneak", "stealing"]
+
+    reporters = Reporters(rel)
 
     y = 20
     topic_gen = "groteMarkt4"
     C = CreateMap(topic_gen, y)
-
     x = int(y*C.rel)
-
     grid = CanvasGrid(agent_portrayal1, x, y, int((C.rel)*500), 500)
-
-    server = ModularServer(MoneyModel, [grid], "Grote Markt", {"N": 10,"width": x, "height": y, "topic":topic_gen, "torus":False})
+    text = Test()
+    #bnPic = CanvasGrid(agent_portrayal2, 250, 500, 250, 500)
+    server = ModularServer(MoneyModel, [grid, text], "Grote Markt", {"N": 10,"width": x, "height": y, "topic":topic_gen,
+                                                               "reporters": reporters,
+                                                               "torus":False})
 
 
 

@@ -75,6 +75,7 @@ class MoneyAgent(Agent):
                     self.state = "FAST MOVE TO GOAL"
 
             if self.steal_state == "MOTIVE":
+                self.model.reporters. set_evidence_straight("motive", 1)
                 self.state = "FAST MOVE TO GOAL"
                 #print("I want to steal")
                 if self.target.steal_state == "DONE":
@@ -83,10 +84,13 @@ class MoneyAgent(Agent):
 
                 if self.target.pos != self.pos:
                     self.steal_state = "SNEAK"
+
                 else:
                     self.steal_state = "STEALING"
 
+
             if self.steal_state == "SNEAK":
+                self.model.reporters. set_evidence_straight("sneak", 1)
                 self.state = "FAST MOVE TO GOAL"
                 #print("sneaking")
                 if self.target is not None:
@@ -108,6 +112,7 @@ class MoneyAgent(Agent):
                         self.steal_state = "N"
 
                     if self.target is not None:
+                        self.model.reporters. set_evidence_straight("stealing", 1)
                         self.value_of_good += self.target.value_of_good
                         self.target.value_of_good = 0
                         self.target.steal_state = "LOSER"
@@ -296,6 +301,20 @@ class Background(Agent):
     def step(self):
         pass
 
+class BN(Agent):
+    """An agent with fixed initial wealth."""
+
+    def __init__(self, unique_id, model):
+        super().__init__(unique_id, model)
+        ### theft and property
+        self.value_of_good = -1
+        self.risk_threshold = None
+        self.steal_state = "N"
+        self.target = None
+
+    def step(self):
+        pass
+
 
 
 
@@ -304,13 +323,14 @@ class Background(Agent):
 class MoneyModel(Model):
     """A model with some number of agents."""
 
-    def __init__(self, N, width, height, topic, torus=False):
+    def __init__(self, N, width, height, topic, reporters, torus=False):
         self.num_agents = N
         self.topic = topic
         self.grid = MultiGrid(width, height, torus)
         self.extended_grid, self.accessible_list = self.make_extended_grid(width, height)
         self.possible_goal_states = self.get_possible_goal_states()
         self.schedule = RandomActivation(self)
+
         # Create agents
         self.create_agents(scenario=2)
 
@@ -319,9 +339,22 @@ class MoneyModel(Model):
         self.schedule.add(a)
         # Add the agent to a random grid cell
         x, y = self.initial_xy()
-        self.time = 0
         self.grid.place_agent(a, (x, y))
+
+        a = BN(self.num_agents + 2, self)
+        self.schedule.add(a)
+        # Add the agent to a random grid cell
+        x, y = self.initial_xy()
+        self.grid.place_agent(a, (x, y))
+
+        self.time = 0
         self.running = True
+
+        # reporters -> meta
+        self.reporters = reporters
+        self.reporters.history_dict[self.reporters.run] = {}
+        self.reporters.initialize_event_dict(self.reporters.history_dict[self.reporters.run])  # initalize current run tracker with 0
+
 
     def create_agents(self, scenario):
         if scenario == 1:
@@ -341,7 +374,9 @@ class MoneyModel(Model):
             a.value_of_good = 1000 # super tempting target
             a.risk_threshold = 5000 # will never steal risky
             a.age_threshold = 100   # will never steal even from old people (redundant)
-            all_neighbors = a.model.grid.get_neighborhood(pos=a.pos, moore=True, radius=3)  # agents see around them with radius 3
+
+            # generate the thief agent near the old agent
+            all_neighbors = a.model.grid.get_neighborhood(pos=a.pos, moore=True, radius=5)
             neighbors = []
             for i in all_neighbors:
                 if a.model.extended_grid[i] == "OPEN":
@@ -350,7 +385,7 @@ class MoneyModel(Model):
             # thief
             a = MoneyAgent(1, random.choice(self.possible_goal_states), self)
             self.schedule.add(a)
-            x, y = random.choice(neighbors)
+            x, y = random.choice(neighbors) # pick from neighbors instead of entire map
             self.grid.place_agent(a, (x, y))
             a.age = 25  # young agent
             a.value_of_good = 0  # not tempting target
@@ -391,3 +426,4 @@ class MoneyModel(Model):
     def step(self):
         self.schedule.step()
         self.time += 1
+        #print(self.reporters.history_dict)

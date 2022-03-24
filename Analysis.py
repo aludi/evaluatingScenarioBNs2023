@@ -348,6 +348,9 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
     elif main_exp.scenario == "CredibilityGame":
         relevant_nodes_out = ["agent_steals"]
         relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out) # no hyps here
+    elif main_exp.scenario == "GroteMarkt":
+        relevant_nodes_out = ["stealing"]
+        relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out)  # no hyps here
     # establish original BN
     for direc in ["weak", "strong"]:
         d_1 = determine_posterior_direction_or_precision(main_exp.bnDir, org_BN, direc)
@@ -397,6 +400,8 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
 
 ### intentions
 scenario = "CredibilityGame"
+scenario = "GroteMarkt"
+
 
 if scenario == "CredibilityGame":
 
@@ -429,6 +434,35 @@ if scenario == "CredibilityGame":
             for row in experiment_list:
                 row.append(game)
                 writer.writerow(row)
+
+elif scenario == "GroteMarkt":
+    experiment = Experiment(scenario="GroteMarkt", subtype=1)  # we do the simple scenario
+    bnDir = experiment.bnDir
+    dataFileName = experiment.csv_file_name
+
+    K2_BN(experiment, dataFileName, "BNGroteMarkt/main.net")
+    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
+                [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
+                [0.5, 'arbit']]
+
+    gen_file = f'_{scenario}_collected_tables.tex'
+    experiment_list = []
+    org_BN = "main"
+    for (exp, params) in [("arbitraryRounded", param_ar)]:
+        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list)
+        print(f"done with experiment {exp}")
+
+    csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability",
+                "Scenario"]
+    flag = 'w'
+    if experiment.subtype != "1":
+        flag = 'a'
+    with open("gm.csv", flag) as file:
+        writer = csv.writer(file)
+        writer.writerow(csv_cols)
+        for row in experiment_list:
+            writer.writerow(row)
+
 
 
 elif scenario == "StolenLaptop":

@@ -177,7 +177,7 @@ def agent_portrayal1(agent):
         portrayal["text_color"] = "black"
 
 
-        portrayal["text"] =  agent.ag_text
+        portrayal["text"] =  agent.name + " " + str(agent.age) + " " + agent.ag_text
 
 
 

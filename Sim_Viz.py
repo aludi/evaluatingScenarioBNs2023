@@ -12,7 +12,7 @@ from mesa.visualization.modules import TextElement
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.ModularVisualization import VisualizationElement
 
-from vizModule import WorkaroundCanvas
+from vizModule import WorkaroundCanvas, Image
 
 
 from SimulationClasses.StreetAgent import StreetAgent
@@ -267,7 +267,7 @@ elif sim == 1:
     x = int(y*C.rel)
     grid = WorkaroundCanvas(agent_portrayal1, x, y, int((C.rel)*500), 500)
     text = Test()
-    #bnPic = CanvasGrid(agent_portrayal2, 250, 500, 250, 500)
+    #bnPic = Image("imgBNGroteMarkt.png", 250, 500, 250, 500)
     server = ModularServer(MoneyModel, [grid, text], "Grote Markt", {"N": 10,"width": x, "height": y, "topic":topic_gen,
                                                                "reporters": reporters,
                                                                "torus":False})

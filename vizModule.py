@@ -59,7 +59,7 @@ class WorkaroundCanvas(VisualizationElement):
 
     """
 
-    package_includes = ["canvas_1.js", "CanvasModule.js", "InteractionHandler.js"]
+    package_includes = ["CanvasModule.js", "InteractionHandler.js"]
 
     def __init__(
         self,
@@ -104,3 +104,42 @@ class WorkaroundCanvas(VisualizationElement):
                         grid_state[portrayal["Layer"]].append(portrayal)
 
         return grid_state
+
+
+class Image(VisualizationElement):
+    local_includes = ["image.js"]
+    package_includes = ["CanvasModule.js", "InteractionHandler.js"]
+
+    def __init__(
+        self,
+        image,
+        grid_width,
+        grid_height,
+        canvas_width=500,
+        canvas_height=500,
+    ):
+        """Instantiate a new CanvasGrid.
+
+        Args:
+            portrayal_method: function to convert each object on the grid to
+                              a portrayal, as described above.
+            grid_width, grid_height: Size of the grid, in cells.
+            canvas_height, canvas_width: Size of the canvas to draw in the
+                                         client, in pixels. (default: 500x500)
+
+        """
+        print(image)
+        self.image = image
+        self.grid_width = grid_width
+        self.grid_height = grid_height
+        self.canvas_width = canvas_width
+        self.canvas_height = canvas_height
+
+        new_element = "new CanvasModule({}, {}, {}, {})".format(
+            self.canvas_width, self.canvas_height, self.grid_width, self.grid_height
+        )
+
+        self.js_code = "elements.push(" + new_element + ");"
+
+    def render(self, model):
+        pass

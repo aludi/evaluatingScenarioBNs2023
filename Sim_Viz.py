@@ -200,7 +200,6 @@ def agent_portrayal2(agent):
 
 
     bnK2 = gum.loadBN("BNGroteMarkt/main.net")
-
     bng.export(bnK2, "imgBNGroteMarkt.png")
     bng.exportInference(bnK2, "imgBNGroteMarkt.png", evs={})
 
@@ -266,7 +265,7 @@ elif sim == 1:
     x = int(y*C.rel)
     grid = CanvasGrid(agent_portrayal1, x, y, int((C.rel)*500), 500)
     text = Test()
-    #bnPic = CanvasGrid(agent_portrayal2, 250, 500, 250, 500)
+    bnPic = CanvasGrid(agent_portrayal2, 250, 500, 250, 500)
     server = ModularServer(MoneyModel, [grid, text], "Grote Markt", {"N": 10,"width": x, "height": y, "topic":topic_gen,
                                                                "reporters": reporters,
                                                                "torus":False})

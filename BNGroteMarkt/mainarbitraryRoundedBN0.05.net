@@ -5,40 +5,294 @@ net {
   node_size = (50 50);
 }
 
-node motive {
+node motive_1_0 {
    states = (0 1 );
-   label = "motive";
-   ID = "motive";
+   label = "motive_1_0";
+   ID = "motive_1_0";
 }
 
-node sneak {
+node sneak_1_0 {
    states = (0 1 );
-   label = "sneak";
-   ID = "sneak";
+   label = "sneak_1_0";
+   ID = "sneak_1_0";
 }
 
-node stealing {
+node stealing_1_0 {
    states = (0 1 );
-   label = "stealing";
-   ID = "stealing";
+   label = "stealing_1_0";
+   ID = "stealing_1_0";
 }
 
-potential (motive) {
-   data = (  0.4 0.6);
+node motive_2_0 {
+   states = (0 1 );
+   label = "motive_2_0";
+   ID = "motive_2_0";
 }
 
-potential ( sneak | motive   ) {
+node sneak_2_0 {
+   states = (0 1 );
+   label = "sneak_2_0";
+   ID = "sneak_2_0";
+}
+
+node stealing_2_0 {
+   states = (0 1 );
+   label = "stealing_2_0";
+   ID = "stealing_2_0";
+}
+
+node motive_3_0 {
+   states = (0 1 );
+   label = "motive_3_0";
+   ID = "motive_3_0";
+}
+
+node sneak_3_0 {
+   states = (0 1 );
+   label = "sneak_3_0";
+   ID = "sneak_3_0";
+}
+
+node stealing_3_0 {
+   states = (0 1 );
+   label = "stealing_3_0";
+   ID = "stealing_3_0";
+}
+
+node motive_4_0 {
+   states = (0 1 );
+   label = "motive_4_0";
+   ID = "motive_4_0";
+}
+
+node sneak_4_0 {
+   states = (0 1 );
+   label = "sneak_4_0";
+   ID = "sneak_4_0";
+}
+
+node stealing_4_0 {
+   states = (0 1 );
+   label = "stealing_4_0";
+   ID = "stealing_4_0";
+}
+
+node motive_5_0 {
+   states = (0 1 );
+   label = "motive_5_0";
+   ID = "motive_5_0";
+}
+
+node sneak_5_0 {
+   states = (0 1 );
+   label = "sneak_5_0";
+   ID = "sneak_5_0";
+}
+
+node stealing_5_0 {
+   states = (0 1 );
+   label = "stealing_5_0";
+   ID = "stealing_5_0";
+}
+
+potential (motive_1_0) {
+   data = (  0.2 0.8);
+}
+
+potential ( sneak_1_0 | motive_1_0   ) {
    data = 
-   ((   0.95   0.05)   % motive=0   
-   (   0.05   0.95));   % motive=1   
+   ((   1   0)   % motive_1_0=0   
+   (   0   1));   % motive_1_0=1   
 }
 
-potential ( stealing | sneak   motive   ) {
+potential ( stealing_1_0 | sneak_1_0   motive_1_0   ) {
    data = 
-   (((   0.95   0.05)   % motive=0   sneak=0   
-   (   1   0))   % motive=1   sneak=0   
-   ((   1   0)   % motive=0   sneak=1   
-   (   0   1)));   % motive=1   sneak=1   
+   (((   1   0)   % motive_1_0=0   sneak_1_0=0   
+   (   1   0))   % motive_1_0=1   sneak_1_0=0   
+   ((   1   0)   % motive_1_0=0   sneak_1_0=1   
+   (   0.35   0.65)));   % motive_1_0=1   sneak_1_0=1   
+}
+
+potential ( motive_2_0 | stealing_1_0   ) {
+   data = 
+   ((   0.6   0.4)   % stealing_1_0=0   
+   (   0.75   0.25));   % stealing_1_0=1   
+}
+
+potential ( sneak_2_0 | motive_2_0   ) {
+   data = 
+   ((   1   0)   % motive_2_0=0   
+   (   0   1));   % motive_2_0=1   
+}
+
+potential ( stealing_2_0 | stealing_1_0   motive_2_0   ) {
+   data = 
+   (((   1   0)   % motive_2_0=0   stealing_1_0=0   
+   (   0.4   0.6))   % motive_2_0=1   stealing_1_0=0   
+   ((   1   0)   % motive_2_0=0   stealing_1_0=1   
+   (   0.75   0.25)));   % motive_2_0=1   stealing_1_0=1   
+}
+
+potential (motive_3_0) {
+   data = (  0.7 0.3);
+}
+
+potential ( sneak_3_0 | motive_3_0   ) {
+   data = 
+   ((   1   0)   % motive_3_0=0   
+   (   0   1));   % motive_3_0=1   
+}
+
+potential ( stealing_3_0 | stealing_2_0   motive_3_0   stealing_1_0   sneak_3_0   ) {
+   data = 
+   (((((   1   0)   % sneak_3_0=0   stealing_1_0=0   motive_3_0=0   stealing_2_0=0   
+   (   1   0))   % sneak_3_0=1   stealing_1_0=0   motive_3_0=0   stealing_2_0=0   
+   ((   1   0)   % sneak_3_0=0   stealing_1_0=1   motive_3_0=0   stealing_2_0=0   
+   (   1   0)))   % sneak_3_0=1   stealing_1_0=1   motive_3_0=0   stealing_2_0=0   
+   (((   1   0)   % sneak_3_0=0   stealing_1_0=0   motive_3_0=1   stealing_2_0=0   
+   (   0.25   0.75))   % sneak_3_0=1   stealing_1_0=0   motive_3_0=1   stealing_2_0=0   
+   ((   1   0)   % sneak_3_0=0   stealing_1_0=1   motive_3_0=1   stealing_2_0=0   
+   (   0.7   0.3))))   % sneak_3_0=1   stealing_1_0=1   motive_3_0=1   stealing_2_0=0   
+   ((((   1   0)   % sneak_3_0=0   stealing_1_0=0   motive_3_0=0   stealing_2_0=1   
+   (   1   0))   % sneak_3_0=1   stealing_1_0=0   motive_3_0=0   stealing_2_0=1   
+   ((   1   0)   % sneak_3_0=0   stealing_1_0=1   motive_3_0=0   stealing_2_0=1   
+   (   1   0)))   % sneak_3_0=1   stealing_1_0=1   motive_3_0=0   stealing_2_0=1   
+   (((   1   0)   % sneak_3_0=0   stealing_1_0=0   motive_3_0=1   stealing_2_0=1   
+   (   1   0))   % sneak_3_0=1   stealing_1_0=0   motive_3_0=1   stealing_2_0=1   
+   ((   1   0)   % sneak_3_0=0   stealing_1_0=1   motive_3_0=1   stealing_2_0=1   
+   (   1   0)))));   % sneak_3_0=1   stealing_1_0=1   motive_3_0=1   stealing_2_0=1   
+}
+
+potential ( motive_4_0 | stealing_3_0   stealing_2_0   stealing_1_0   ) {
+   data = 
+   ((((   0.45   0.55)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=0   
+   (   0.7   0.3))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=0   
+   ((   0.8   0.2)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=0   
+   (   0.75   0.25)))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=0   
+   (((   0.75   0.25)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=1   
+   (   0.7   0.3))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=1   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=1   
+   (   1   0))));   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=1   
+}
+
+potential ( sneak_4_0 | motive_4_0   ) {
+   data = 
+   ((   1   0)   % motive_4_0=0   
+   (   0   1));   % motive_4_0=1   
+}
+
+potential ( stealing_4_0 | stealing_3_0   motive_4_0   stealing_2_0   stealing_1_0   sneak_4_0   ) {
+   data = 
+   ((((((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=0   motive_4_0=0   stealing_3_0=0   
+   (   1   0))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=0   motive_4_0=0   stealing_3_0=0   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=0   motive_4_0=0   stealing_3_0=0   
+   (   1   0)))   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=0   motive_4_0=0   stealing_3_0=0   
+   (((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=1   motive_4_0=0   stealing_3_0=0   
+   (   1   0))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=1   motive_4_0=0   stealing_3_0=0   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=1   motive_4_0=0   stealing_3_0=0   
+   (   1   0))))   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=1   motive_4_0=0   stealing_3_0=0   
+   ((((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=0   motive_4_0=1   stealing_3_0=0   
+   (   0.15   0.85))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=0   motive_4_0=1   stealing_3_0=0   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=0   motive_4_0=1   stealing_3_0=0   
+   (   0.65   0.35)))   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=0   motive_4_0=1   stealing_3_0=0   
+   (((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=1   motive_4_0=1   stealing_3_0=0   
+   (   0.95   0.05))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=1   motive_4_0=1   stealing_3_0=0   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=1   motive_4_0=1   stealing_3_0=0   
+   (   1   0)))))   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=1   motive_4_0=1   stealing_3_0=0   
+   (((((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=0   motive_4_0=0   stealing_3_0=1   
+   (   1   0))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=0   motive_4_0=0   stealing_3_0=1   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=0   motive_4_0=0   stealing_3_0=1   
+   (   1   0)))   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=0   motive_4_0=0   stealing_3_0=1   
+   (((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=1   motive_4_0=0   stealing_3_0=1   
+   (   1   0))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=1   motive_4_0=0   stealing_3_0=1   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=1   motive_4_0=0   stealing_3_0=1   
+   (   1   0))))   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=1   motive_4_0=0   stealing_3_0=1   
+   ((((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=0   motive_4_0=1   stealing_3_0=1   
+   (   1   0))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=0   motive_4_0=1   stealing_3_0=1   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=0   motive_4_0=1   stealing_3_0=1   
+   (   1   0)))   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=0   motive_4_0=1   stealing_3_0=1   
+   (((   1   0)   % sneak_4_0=0   stealing_1_0=0   stealing_2_0=1   motive_4_0=1   stealing_3_0=1   
+   (   1   0))   % sneak_4_0=1   stealing_1_0=0   stealing_2_0=1   motive_4_0=1   stealing_3_0=1   
+   ((   1   0)   % sneak_4_0=0   stealing_1_0=1   stealing_2_0=1   motive_4_0=1   stealing_3_0=1   
+   (   1   0))))));   % sneak_4_0=1   stealing_1_0=1   stealing_2_0=1   motive_4_0=1   stealing_3_0=1   
+}
+
+potential ( motive_5_0 | stealing_1_0   stealing_4_0   stealing_3_0   sneak_1_0   stealing_2_0   ) {
+   data = 
+   ((((((   0.55   0.45)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=0   stealing_4_0=0   stealing_1_0=0   
+   (   0.8   0.2))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=0   stealing_4_0=0   stealing_1_0=0   
+   ((   0.1   0.9)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=0   stealing_4_0=0   stealing_1_0=0   
+   (   0.85   0.15)))   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=0   stealing_4_0=0   stealing_1_0=0   
+   (((   0.8   0.2)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=1   stealing_4_0=0   stealing_1_0=0   
+   (   1   0))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=1   stealing_4_0=0   stealing_1_0=0   
+   ((   0.7   0.3)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=1   stealing_4_0=0   stealing_1_0=0   
+   (   1   0))))   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=1   stealing_4_0=0   stealing_1_0=0   
+   ((((   0.8   0.2)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=0   stealing_4_0=1   stealing_1_0=0   
+   (   1   0))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=0   stealing_4_0=1   stealing_1_0=0   
+   ((   0.85   0.15)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=0   stealing_4_0=1   stealing_1_0=0   
+   (   1   0)))   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=0   stealing_4_0=1   stealing_1_0=0   
+   (((   1   0)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=1   stealing_4_0=1   stealing_1_0=0   
+   (   1   0))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=1   stealing_4_0=1   stealing_1_0=0   
+   ((   1   0)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=1   stealing_4_0=1   stealing_1_0=0   
+   (   1   0)))))   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=1   stealing_4_0=1   stealing_1_0=0   
+   (((((   1   0)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=0   stealing_4_0=0   stealing_1_0=1   
+   (   1   0))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=0   stealing_4_0=0   stealing_1_0=1   
+   ((   0.75   0.25)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=0   stealing_4_0=0   stealing_1_0=1   
+   (   0.75   0.25)))   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=0   stealing_4_0=0   stealing_1_0=1   
+   (((   1   0)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=1   stealing_4_0=0   stealing_1_0=1   
+   (   1   0))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=1   stealing_4_0=0   stealing_1_0=1   
+   ((   0.7   0.3)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=1   stealing_4_0=0   stealing_1_0=1   
+   (   1   0))))   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=1   stealing_4_0=0   stealing_1_0=1   
+   ((((   1   0)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=0   stealing_4_0=1   stealing_1_0=1   
+   (   1   0))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=0   stealing_4_0=1   stealing_1_0=1   
+   ((   0.75   0.25)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=0   stealing_4_0=1   stealing_1_0=1   
+   (   1   0)))   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=0   stealing_4_0=1   stealing_1_0=1   
+   (((   1   0)   % stealing_2_0=0   sneak_1_0=0   stealing_3_0=1   stealing_4_0=1   stealing_1_0=1   
+   (   1   0))   % stealing_2_0=1   sneak_1_0=0   stealing_3_0=1   stealing_4_0=1   stealing_1_0=1   
+   ((   1   0)   % stealing_2_0=0   sneak_1_0=1   stealing_3_0=1   stealing_4_0=1   stealing_1_0=1   
+   (   1   0))))));   % stealing_2_0=1   sneak_1_0=1   stealing_3_0=1   stealing_4_0=1   stealing_1_0=1   
+}
+
+potential ( sneak_5_0 | motive_5_0   ) {
+   data = 
+   ((   1   0)   % motive_5_0=0   
+   (   0   1));   % motive_5_0=1   
+}
+
+potential ( stealing_5_0 | stealing_4_0   motive_5_0   stealing_3_0   stealing_2_0   stealing_1_0   ) {
+   data = 
+   ((((((   1   0)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=0   motive_5_0=0   stealing_4_0=0   
+   (   1   0))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=0   motive_5_0=0   stealing_4_0=0   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=0   motive_5_0=0   stealing_4_0=0   
+   (   1   0)))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=0   motive_5_0=0   stealing_4_0=0   
+   (((   1   0)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=1   motive_5_0=0   stealing_4_0=0   
+   (   1   0))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=1   motive_5_0=0   stealing_4_0=0   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=1   motive_5_0=0   stealing_4_0=0   
+   (   1   0))))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=1   motive_5_0=0   stealing_4_0=0   
+   ((((   0   1)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=0   motive_5_0=1   stealing_4_0=0   
+   (   0.7   0.3))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=0   motive_5_0=1   stealing_4_0=0   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=0   motive_5_0=1   stealing_4_0=0   
+   (   1   0)))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=0   motive_5_0=1   stealing_4_0=0   
+   (((   1   0)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=1   motive_5_0=1   stealing_4_0=0   
+   (   1   0))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=1   motive_5_0=1   stealing_4_0=0   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=1   motive_5_0=1   stealing_4_0=0   
+   (   1   0)))))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=1   motive_5_0=1   stealing_4_0=0   
+   (((((   1   0)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=0   motive_5_0=0   stealing_4_0=1   
+   (   1   0))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=0   motive_5_0=0   stealing_4_0=1   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=0   motive_5_0=0   stealing_4_0=1   
+   (   1   0)))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=0   motive_5_0=0   stealing_4_0=1   
+   (((   1   0)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=1   motive_5_0=0   stealing_4_0=1   
+   (   1   0))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=1   motive_5_0=0   stealing_4_0=1   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=1   motive_5_0=0   stealing_4_0=1   
+   (   1   0))))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=1   motive_5_0=0   stealing_4_0=1   
+   ((((   1   0)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=0   motive_5_0=1   stealing_4_0=1   
+   (   1   0))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=0   motive_5_0=1   stealing_4_0=1   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=0   motive_5_0=1   stealing_4_0=1   
+   (   1   0)))   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=0   motive_5_0=1   stealing_4_0=1   
+   (((   1   0)   % stealing_1_0=0   stealing_2_0=0   stealing_3_0=1   motive_5_0=1   stealing_4_0=1   
+   (   1   0))   % stealing_1_0=1   stealing_2_0=0   stealing_3_0=1   motive_5_0=1   stealing_4_0=1   
+   ((   1   0)   % stealing_1_0=0   stealing_2_0=1   stealing_3_0=1   motive_5_0=1   stealing_4_0=1   
+   (   1   0))))));   % stealing_1_0=1   stealing_2_0=1   stealing_3_0=1   motive_5_0=1   stealing_4_0=1   
 }
 
 

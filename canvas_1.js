@@ -299,7 +299,7 @@ var GridVisualization = function(width, height, gridWidth, gridHeight, context, 
         */
 
         this.drawGridLines = function() {
-                context.beginPath();
+                /**context.beginPath();
                 context.strokeStyle = "#eee";
                 maxX = cellWidth * gridWidth;
                 maxY = cellHeight * gridHeight;
@@ -315,7 +315,7 @@ var GridVisualization = function(width, height, gridWidth, gridHeight, context, 
                         context.lineTo(x+0.5, maxY);
                 }
 
-                context.stroke();
+                context.stroke();*/
         };
 
         this.resetCanvas = function() {

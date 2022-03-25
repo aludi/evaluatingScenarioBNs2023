@@ -22,6 +22,7 @@ class MoneyAgent(Agent):
         ### Personal details
         self.age = random.randrange(16, 95)
         self.name = self.pick_a_name()
+        self.role = None
         ### theft and property
         self.value_of_good = random.randrange(0, 1000)
         self.risk_threshold = random.randrange(500, 5000) # will steal if opportunity
@@ -75,7 +76,7 @@ class MoneyAgent(Agent):
                     self.state = "FAST MOVE TO GOAL"
 
             if self.steal_state == "MOTIVE":
-                self.model.reporters. set_evidence_straight("motive", 1)
+                self.model.reporters. set_evidence_straight(f"motive_{str(self.unique_id)}_0", 1)
                 self.state = "FAST MOVE TO GOAL"
                 #print("I want to steal")
                 if self.target.steal_state == "DONE":
@@ -90,7 +91,7 @@ class MoneyAgent(Agent):
 
 
             if self.steal_state == "SNEAK":
-                self.model.reporters. set_evidence_straight("sneak", 1)
+                self.model.reporters. set_evidence_straight(f"sneak_{str(self.unique_id)}_0", 1)
                 self.state = "FAST MOVE TO GOAL"
                 #print("sneaking")
                 if self.target is not None:
@@ -112,11 +113,14 @@ class MoneyAgent(Agent):
                         self.steal_state = "N"
 
                     if self.target is not None:
-                        self.model.reporters. set_evidence_straight("stealing", 1)
-                        self.value_of_good += self.target.value_of_good
-                        self.target.value_of_good = 0
-                        self.target.steal_state = "LOSER"
-                        self.steal_state = "N"
+                        if self.target.value_of_good >= self.risk_threshold: # the agent might have been robbed before you got there
+                            self.model.reporters. set_evidence_straight(f"stealing_{str(self.unique_id)}_0", 1)
+                            self.value_of_good += self.target.value_of_good
+                            self.target.value_of_good = 0
+                            self.target.steal_state = "LOSER"
+                            self.steal_state = "N"
+                        else:
+                            self.steal_state = "N"
 
             '''if self.target is not None:
                 print(self.steal_state, self.unique_id, self.target.unique_id, self.pos, self.temp_goal)
@@ -261,7 +265,7 @@ class MoneyAgent(Agent):
                 try:
                     new_position = self.random.choice(accessible)
                 except IndexError:
-                    print("TODO - later")
+                    #print("TODO - later")
                     '''print(self.pos)
                     print(accessible)
                     print(possible_steps)'''
@@ -332,7 +336,7 @@ class MoneyModel(Model):
         self.schedule = RandomActivation(self)
 
         # Create agents
-        self.create_agents(scenario=2)
+        self.create_agents(scenario=3)
 
 
         a = Background(self.num_agents+1, self)
@@ -355,7 +359,6 @@ class MoneyModel(Model):
         self.reporters.history_dict[self.reporters.run] = {}
         self.reporters.initialize_event_dict(self.reporters.history_dict[self.reporters.run])  # initalize current run tracker with 0
 
-
     def create_agents(self, scenario):
         if scenario == 1:
             for i in range(self.num_agents-1):
@@ -364,33 +367,65 @@ class MoneyModel(Model):
                 x, y = self.initial_xy()
                 self.grid.place_agent(a, (x, y))
 
-        if scenario == 2:   # one old agent, and one thief
+        elif scenario == 2:   # one old agent, and one thief
             # old agent
-            a = MoneyAgent(0, random.choice(self.possible_goal_states), self)
-            self.schedule.add(a)
-            x, y = self.initial_xy()
-            self.grid.place_agent(a, (x, y))
-            a.age = 80 # old agent
-            a.value_of_good = 1000 # super tempting target
-            a.risk_threshold = 5000 # will never steal risky
-            a.age_threshold = 100   # will never steal even from old people (redundant)
+            old_agent = self.make_old_agent()
+            self.make_thief_near_old_agent(old_agent) # make thief near old agent
 
-            # generate the thief agent near the old agent
-            all_neighbors = a.model.grid.get_neighborhood(pos=a.pos, moore=True, radius=5)
-            neighbors = []
-            for i in all_neighbors:
-                if a.model.extended_grid[i] == "OPEN":
-                    neighbors.append(i)
+        elif scenario == 3: # one thief, many innocents, but how do you know?
+            old_agent = self.make_old_agent()
+            self.make_thief_near_old_agent(old_agent) # make thief near old agent
+            self.make_innocent_near_old_agent(old_agent, self.num_agents)
 
-            # thief
-            a = MoneyAgent(1, random.choice(self.possible_goal_states), self)
+
+    def make_innocent_near_old_agent(self, old_agent, N):
+        all_neighbors = old_agent.model.grid.get_neighborhood(pos=old_agent.pos, moore=True, radius=3)
+        neighbors = []
+        for i in all_neighbors:
+            if old_agent.model.extended_grid[i] == "OPEN":
+                neighbors.append(i)
+        for j in range(2, N):
+            a = MoneyAgent(j, random.choice(self.possible_goal_states), self)
             self.schedule.add(a)
-            x, y = random.choice(neighbors) # pick from neighbors instead of entire map
+            x, y = random.choice(neighbors)  # pick from neighbors instead of entire map
             self.grid.place_agent(a, (x, y))
-            a.age = 25  # young agent
-            a.value_of_good = 0  # not tempting target
-            a.risk_threshold = 1  # will always try to steal
-            a.age_threshold = 0  # will steal from a baby
+            a.age = random.randrange(13, 76)  # old agent
+            a.value_of_good = -1  # not a tempting target
+            a.risk_threshold = random.randrange(0, 2000)  # will never steal risky
+            a.age_threshold = 79  # will never steal even from old people (redundant)
+            a.role = "innocent"
+
+
+    def make_old_agent(self):
+        a = MoneyAgent(0, random.choice(self.possible_goal_states), self)
+        self.schedule.add(a)
+        x, y = self.initial_xy()
+        self.grid.place_agent(a, (x, y))
+        a.age = 80  # old agent
+        a.value_of_good = 1000  # super tempting target
+        a.risk_threshold = 5000  # will never steal risky
+        a.age_threshold = 100  # will never steal even from old people (redundant)
+        a.role = "victim"
+        return a
+
+    def make_thief_near_old_agent(self, old_agent):
+        all_neighbors = old_agent.model.grid.get_neighborhood(pos=old_agent.pos, moore=True, radius=3)
+        neighbors = []
+        for i in all_neighbors:
+            if old_agent.model.extended_grid[i] == "OPEN":
+                neighbors.append(i)
+
+        # thief
+        a = MoneyAgent(1, random.choice(self.possible_goal_states), self)
+        self.schedule.add(a)
+        x, y = random.choice(neighbors)  # pick from neighbors instead of entire map
+        self.grid.place_agent(a, (x, y))
+        a.age = 25  # young agent
+        a.value_of_good = 0  # not tempting target
+        a.risk_threshold = 1  # will always try to steal
+        a.age_threshold = 0  # will steal from a baby
+        a.role = "thief"
+
 
 
     def initial_xy(self):

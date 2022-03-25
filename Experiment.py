@@ -74,15 +74,17 @@ class Experiment():
             self.subtype = subtype
             self.bnDir = f"{os.getcwd()}/BNGroteMarkt"
             self.csv_file_name = "GroteMarktOutcomes.csv"
-            self.n = 3
+            self.n = 6
             n = self.n
-            rel_events = ["motive", "sneak", "stealing"]
+            base_rel_events = ["motive", "sneak", "stealing"]
             # create reporters automatically
-            '''for i in range(0, n):    # to do - separate evidence node for each possible thief?
-                str1 = f"E_{i}_says_stolen"
-                #str2 = i + "_credibility"
-                rel_events.append(str1)
-                #rel_events.append(str2)'''
+            rel_events = []
+
+            for i in range(1, n):
+                for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
+                    str1 = f"{j}_{str(i)}_0"
+                    # str2 = i + "_credibility"
+                    rel_events.append(str1)
 
             y = 20
             topic_gen = "groteMarkt4"
@@ -90,7 +92,8 @@ class Experiment():
             x = int(y * C.rel)
 
 
-            self.runs = 10  # to test
+            self.runs = 1000
+            #print(rel_events)
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
                 model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, torus=False)

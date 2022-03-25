@@ -164,20 +164,25 @@ def K2_BN(experiment, csv_file, name):
             learner.addForbiddenArc(a, b)
     #print(temporal_order)
     learner.useK2(temporal_order)
+    #print(learner)
     bn = learner.learnBN()
     header = next(csv.reader(open(global_state_csv)))
     for name in list(header):
+
         x = bn.cpt(name)
         i = gum.Instantiation(x)
         i.setFirst()
-        s = 0.0
+        #print(x)
+        #print(i, i.todict(), type(name), name)
         while (not i.end()):
+            #print(i, "todict", i.todict(), type(i.todict()))
             if 0.5 == x[i.todict()]:    # fix the never occurring situations -> maybe add an extra check for this TODO
                 if i.todict()[name] == 0:
                     bn.cpt(name)[i.todict()] = 1
                 elif i.todict()[name] == 1:
                     bn.cpt(name)[i.todict()] = 0
             i.inc()
+
         bn.cpt(name)
     gum.saveBN(bn, file_name)
     #print(f"saved bn as {file_name}")

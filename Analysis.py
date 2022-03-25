@@ -270,6 +270,7 @@ def get_outcomes_in_table(d1, d_noise, latex_file_name, params, direction, noise
                 if direction == "weak":
                     if not noise:   # if not noise
                         d2 = d_noise
+
                         if d1[e][x] == d2[e][x]:
                             file.write(str(d1[e][x]) + "&" + str(d2[e][x]))
                         else:
@@ -349,8 +350,8 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
         relevant_nodes_out = ["agent_steals"]
         relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out) # no hyps here
     elif main_exp.scenario == "GroteMarkt":
-        relevant_nodes_out = ["stealing"]
-        relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out)  # no hyps here
+        relevant_nodes_out = ["stealing_1_0", "stealing_2_0"]
+        #relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out)  # no hyps here
     # establish original BN
     for direc in ["weak", "strong"]:
         d_1 = determine_posterior_direction_or_precision(main_exp.bnDir, org_BN, direc)
@@ -385,7 +386,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
 
 
             get_outcomes_in_table(d_1, d_2, outcome_table, params, direc, noise, relevant_nodes_out)
-            get_outcomes_in_table(d_1, d_2, hyp_table, params, direc, noise, relevant_nodes_hyp)
+            #get_outcomes_in_table(d_1, d_2, hyp_table, params, direc, noise, relevant_nodes_hyp)
 
 
             relevant_files.append(outcome_table)
@@ -399,7 +400,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
 
 
 ### intentions
-scenario = "CredibilityGame"
+#scenario = "CredibilityGame"
 scenario = "GroteMarkt"
 
 

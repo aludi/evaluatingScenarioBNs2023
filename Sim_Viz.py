@@ -177,9 +177,15 @@ def agent_portrayal1(agent):
             portrayal["Color"] = "black"
         if agent.steal_state == "SNEAK":
             portrayal["Color"] = "pink"
+        if agent.steal_state == "LOSER":
+            portrayal["Color"] = "red"
+
         portrayal["Shape"] = "circle"
         portrayal["text_color"] = "black"
-        portrayal["text"] =  agent.name + " " + str(agent.age) + " " + agent.ag_text
+        if agent.role in ["victim", "thief"]:
+            portrayal["text"] = agent.name + " " + str(agent.age) + " " + agent.ag_text
+            portrayal["Layer"] = 2
+            portrayal["r"] = 2
         portrayal["opacity"] = 1
 
     elif str(type(agent)) == "<class 'GroteMarkt.Background'>":
@@ -257,18 +263,25 @@ elif sim == 1:
     # params from map making
     # y = 45
     # x = int(y*1.5)
-    rel = ["motive", "sneak", "stealing"]
+    rel_events = []
+    n = 5
+    for i in range(1, n):
+        for j in ["motive", "sneak", "stealing"]:   # "motive, sneak and stealing are 2 place predicates
+            str1 = f"{j}({str(i)},0)"
+            # str2 = i + "_credibility"
+            rel_events.append(str1)
 
-    reporters = Reporters(rel)
 
-    y = 20
+    reporters = Reporters(rel_events)
+
+    y = 50
     topic_gen = "groteMarkt4"
     C = CreateMap(topic_gen, y)
     x = int(y*C.rel)
     grid = WorkaroundCanvas(agent_portrayal1, x, y, int((C.rel)*500), 500)
     text = Test()
     #bnPic = Image("imgBNGroteMarkt.png", 250, 500, 250, 500)
-    server = ModularServer(MoneyModel, [grid, text], "Grote Markt", {"N": 10,"width": x, "height": y, "topic":topic_gen,
+    server = ModularServer(MoneyModel, [grid, text], "Grote Markt", {"N": n,"width": x, "height": y, "topic":topic_gen,
                                                                "reporters": reporters,
                                                                "torus":False})
 

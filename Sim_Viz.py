@@ -12,6 +12,8 @@ from mesa.visualization.modules import TextElement
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.ModularVisualization import VisualizationElement
 
+from vizModule import WorkaroundCanvas
+
 
 from SimulationClasses.StreetAgent import StreetAgent
 from SimulationClasses.Walkway import Walkway
@@ -263,9 +265,9 @@ elif sim == 1:
     topic_gen = "groteMarkt4"
     C = CreateMap(topic_gen, y)
     x = int(y*C.rel)
-    grid = CanvasGrid(agent_portrayal1, x, y, int((C.rel)*500), 500)
+    grid = WorkaroundCanvas(agent_portrayal1, x, y, int((C.rel)*500), 500)
     text = Test()
-    bnPic = CanvasGrid(agent_portrayal2, 250, 500, 250, 500)
+    #bnPic = CanvasGrid(agent_portrayal2, 250, 500, 250, 500)
     server = ModularServer(MoneyModel, [grid, text], "Grote Markt", {"N": 10,"width": x, "height": y, "topic":topic_gen,
                                                                "reporters": reporters,
                                                                "torus":False})
@@ -275,5 +277,5 @@ elif sim == 1:
 
 
 
-#server.port = 8521 # The default
+server.port = 8521 # The default
 server.launch()

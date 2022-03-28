@@ -20,10 +20,11 @@ from CreateMap import CreateMap
 
 class Experiment():
 
-    def __init__(self, scenario, subtype=None):
+    def __init__(self, scenario, runs, subtype=None):
         self.scenario = scenario
-
         print("experiment scenario", scenario)
+        self.runs = runs
+
         if scenario == "StolenLaptop":
             self.csv_file_name = "globalStates.csv"
             self.bnDir = f"{os.getcwd()}/K2BNs"
@@ -35,7 +36,6 @@ class Experiment():
                                     "E_s_spotted_by_house",
                                     "E_s_spotted_with_goodie",
                                     "E_private"]
-            self.runs = 2000 # to test
             self.reporters = Reporters(relevant_events = rel_events)
             for i in range(0, self.runs-1):
                 model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
@@ -60,7 +60,6 @@ class Experiment():
                 rel_events.append(str1)
                 #rel_events.append(str2)
 
-            self.runs = 2000  # to test
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
                 CredibilityGame(N_agents=n, reporters=self.reporters, subtype=subtype)
@@ -76,7 +75,7 @@ class Experiment():
             self.csv_file_name = "GroteMarktOutcomes.csv"
 
             self.scenario = subtype
-            print(self.scenario)
+            #print(self.scenario)
 
             if self.scenario == 1:
                 self.n = 10
@@ -104,7 +103,6 @@ class Experiment():
             x = int(y * C.rel)
 
 
-            self.runs = 1000
             #print(rel_events)
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):

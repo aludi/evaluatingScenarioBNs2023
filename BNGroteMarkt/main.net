@@ -23,142 +23,22 @@ node stealing_1_0 {
    ID = "stealing_1_0";
 }
 
-node motive_2_0 {
-   states = (0 );
-   label = "motive_2_0";
-   ID = "motive_2_0";
-}
-
-node sneak_2_0 {
-   states = (0 );
-   label = "sneak_2_0";
-   ID = "sneak_2_0";
-}
-
-node stealing_2_0 {
-   states = (0 );
-   label = "stealing_2_0";
-   ID = "stealing_2_0";
-}
-
-node motive_3_0 {
-   states = (0 );
-   label = "motive_3_0";
-   ID = "motive_3_0";
-}
-
-node sneak_3_0 {
-   states = (0 );
-   label = "sneak_3_0";
-   ID = "sneak_3_0";
-}
-
-node stealing_3_0 {
-   states = (0 );
-   label = "stealing_3_0";
-   ID = "stealing_3_0";
-}
-
-node motive_4_0 {
-   states = (0 );
-   label = "motive_4_0";
-   ID = "motive_4_0";
-}
-
-node sneak_4_0 {
-   states = (0 );
-   label = "sneak_4_0";
-   ID = "sneak_4_0";
-}
-
-node stealing_4_0 {
-   states = (0 );
-   label = "stealing_4_0";
-   ID = "stealing_4_0";
-}
-
-node motive_5_0 {
-   states = (0 );
-   label = "motive_5_0";
-   ID = "motive_5_0";
-}
-
-node sneak_5_0 {
-   states = (0 );
-   label = "sneak_5_0";
-   ID = "sneak_5_0";
-}
-
-node stealing_5_0 {
-   states = (0 );
-   label = "stealing_5_0";
-   ID = "stealing_5_0";
-}
-
 potential (motive_1_0) {
-   data = (  0.591908 0.408092);
+   data = (  0.585457 0.414543);
 }
 
 potential ( sneak_1_0 | motive_1_0   ) {
    data = 
-   ((   0.999578   0.000421941)   % motive_1_0=0   
-   (   0.000611995   0.999388));   % motive_1_0=1   
+   ((   0.999787   0.000213402)   % motive_1_0=0   
+   (   0.000301386   0.999699));   % motive_1_0=1   
 }
 
 potential ( stealing_1_0 | motive_1_0   sneak_1_0   ) {
    data = 
-   (((   0.999789   0.00021106)   % sneak_1_0=0   motive_1_0=0   
+   (((   0.999893   0.000106724)   % sneak_1_0=0   motive_1_0=0   
    (   1   0))   % sneak_1_0=1   motive_1_0=0   
    ((   1   0)   % sneak_1_0=0   motive_1_0=1   
-   (   0.024801   0.975199)));   % sneak_1_0=1   motive_1_0=1   
-}
-
-potential (motive_2_0) {
-   data = (  1);
-}
-
-potential (sneak_2_0) {
-   data = (  1);
-}
-
-potential (stealing_2_0) {
-   data = (  1);
-}
-
-potential (motive_3_0) {
-   data = (  1);
-}
-
-potential (sneak_3_0) {
-   data = (  1);
-}
-
-potential (stealing_3_0) {
-   data = (  1);
-}
-
-potential (motive_4_0) {
-   data = (  1);
-}
-
-potential (sneak_4_0) {
-   data = (  1);
-}
-
-potential (stealing_4_0) {
-   data = (  1);
-}
-
-potential (motive_5_0) {
-   data = (  1);
-}
-
-potential (sneak_5_0) {
-   data = (  1);
-}
-
-potential (stealing_5_0) {
-   data = (  1);
+   (   0.0399457   0.960054)));   % sneak_1_0=1   motive_1_0=1   
 }
 
 

@@ -86,7 +86,7 @@ potential ( E_2_says_stolen | agent_steals   ) {
 }
 
 potential (E_3_says_stolen) {
-   data = (  0.66 0.33);
+   data = (  0.33 0.66);
 }
 
 potential ( E_4_says_stolen | agent_steals   ) {
@@ -96,7 +96,7 @@ potential ( E_4_says_stolen | agent_steals   ) {
 }
 
 potential (E_5_says_stolen) {
-   data = (  0.66 0.33);
+   data = (  0.33 0.66);
 }
 
 potential ( E_6_says_stolen | agent_steals   ) {

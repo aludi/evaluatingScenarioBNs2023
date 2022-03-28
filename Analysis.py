@@ -399,18 +399,24 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
 
 
 
-### intentions
-#scenario = "CredibilityGame"
-scenario = "GroteMarkt"
 
+
+### intentions
+scenario = "CredibilityGame"
+#scenario = "GroteMarkt"
+
+train_test_split = [2000, 200]
+
+runs = train_test_split[0]
 
 if scenario == "CredibilityGame":
 
     for game in ["basicGame", "strangeGame"]:
 
-        experiment = Experiment(scenario="CredibilityGame", subtype=game)
+        experiment = Experiment(scenario="CredibilityGame", runs=runs, subtype=game)
         bnDir = experiment.bnDir
         dataFileName = experiment.csv_file_name
+
 
 
         K2_BN(experiment, dataFileName, "CredBNs/main.net")
@@ -437,7 +443,7 @@ if scenario == "CredibilityGame":
                 writer.writerow(row)
 
 elif scenario == "GroteMarkt":
-    experiment = Experiment(scenario="GroteMarkt", subtype=3)  # we do the simple scenario
+    experiment = Experiment(scenario="GroteMarkt", runs=runs, subtype=2)  # we do the simple scenario
     bnDir = experiment.bnDir
     dataFileName = experiment.csv_file_name
 
@@ -467,7 +473,7 @@ elif scenario == "GroteMarkt":
 
 
 elif scenario == "StolenLaptop":
-    experiment = Experiment(scenario="StolenLaptop")
+    experiment = Experiment(scenario="StolenLaptop", runs=runs)
     bnDir = experiment.bnDir
     dataFileName = experiment.csv_file_name
 

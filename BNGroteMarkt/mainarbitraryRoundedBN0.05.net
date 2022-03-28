@@ -24,7 +24,7 @@ node stealing_1_0 {
 }
 
 potential (motive_1_0) {
-   data = (  0.55 0.45);
+   data = (  0.6 0.4);
 }
 
 potential ( sneak_1_0 | motive_1_0   ) {

@@ -385,7 +385,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
             hyp_table = f'texTables/hyps/{direc}{disturbed_BN_file_name}.tex'
 
 
-            get_outcomes_in_table(d_1, d_2, outcome_table, params, direc, noise, relevant_nodes_out)
+            #get_outcomes_in_table(d_1, d_2, outcome_table, params, direc, noise, relevant_nodes_out)
             #get_outcomes_in_table(d_1, d_2, hyp_table, params, direc, noise, relevant_nodes_hyp)
 
 

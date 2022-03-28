@@ -232,6 +232,51 @@ df$Probability <- factor(df$Probability)
 
 
 
+####### grote markt######
+
+df <- read_csv("~/simulationTest/cred.csv")
+
+df$param <- as.factor(df$param)
+
+df$ev <- factor(df$evidenceCUMUL, levels=c("no_evidence0", "E_0_says_stolen1",
+                                           "E_1_says_stolen1",
+                                           "E_2_says_stolen1",
+                                           "E_3_says_stolen1",
+                                           "E_4_says_stolen1",
+                                           "E_5_says_stolen1",
+                                           "E_6_says_stolen1",
+                                           "E_7_says_stolen1",
+                                           "E_8_says_stolen1"))
+
+df$distortion <- factor(df$distortion, levels=c("K2", "arbitraryRounded"))
+df$Game <- factor(df$Game, levels=c("basicGame", "strangeGame"))
+
+df$delta <- abs(as.double(df$Probability) - as.double(df$K2Probability))
+df$ProbabilityD <- as.double(df$Probability)
+
+
+df$hypNode <- factor(df$hypNode, levels=c("agent_steals"))
+
+s <- "arbitraryRounded"
+df_x <- filter(df, strong == "strong")
+
+
+title <- paste("Credibility Game Absolute probability of the outcome nodes under", s)
+ggplot(data=na.omit(df_x), aes(x=ev,y=ProbabilityD, group=param)) +
+  geom_point(aes(color=param, shape=distortion)) + 
+  facet_grid(distortion ~ Game) +
+  geom_line(aes(color=param)) + 
+  ggtitle(title) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) 
+
+f_name <- paste(s, "cred.png", sep="")
+f_name <- paste(x, f_name, sep="")
+f_name <- paste("images/", f_name, sep="")
+
+ggsave(f_name, device="png", width=20, height=12, units="cm")
+
+
 #####  Other
 weak <- filter(df, strong == "weak")
 weak_stolen <- filter(weak, hypNode %in% c("agent_steals"))

@@ -2,6 +2,7 @@ from mesa import Agent, Model
 from mesa.time import RandomActivation
 from mesa.space import ContinuousSpace, HexGrid, MultiGrid
 from SimulationClasses.StreetAgent import StreetAgent
+from Reporters import Reporters
 import numpy as np
 import csv
 import random
@@ -25,8 +26,8 @@ class MoneyAgent(Agent):
         self.role = None
         ### theft and property
         self.value_of_good = random.randrange(0, 1000)
-        self.risk_threshold = random.randrange(500, 5000) # will steal if opportunity
-        self.age_threshold = random.randrange(60, 100) # minimum age an agent will steal from
+        self.risk_threshold = random.randrange(200, 5000) # will steal if opportunity
+        self.age_threshold = random.randrange(16, 100) # minimum age an agent will steal from
         self.steal_state = "N"
         self.target = None
         self.temp_goal = None
@@ -327,16 +328,19 @@ class BN(Agent):
 class MoneyModel(Model):
     """A model with some number of agents."""
 
-    def __init__(self, N, width, height, topic, reporters, torus=False):
+    def __init__(self, N, width, height, topic, reporters, scenario, torus=False):
         self.num_agents = N
         self.topic = topic
         self.grid = MultiGrid(width, height, torus)
         self.extended_grid, self.accessible_list = self.make_extended_grid(width, height)
         self.possible_goal_states = self.get_possible_goal_states()
         self.schedule = RandomActivation(self)
+        self.scenario = scenario
+        self.model_description = self.set_model_text_explanation()
+
 
         # Create agents
-        self.create_agents(scenario=3)
+        self.create_agents(self.scenario)
 
 
         a = Background(self.num_agents+1, self)
@@ -355,15 +359,61 @@ class MoneyModel(Model):
         self.running = True
 
         # reporters -> meta
-        self.reporters = reporters
+        self.reporters = self.set_reporters()
         self.reporters.history_dict[self.reporters.run] = {}
         self.reporters.initialize_event_dict(self.reporters.history_dict[self.reporters.run])  # initalize current run tracker with 0
 
+    def set_model_text_explanation(self):
+        if self.scenario == 1:
+            model_text = "State of nature: agents move towards goal and every agent can steal from any agent. " \
+                         "Usually agents don't steal."
+        elif self.scenario == 2:
+            model_text = "There are two agents, a thief and a victim."
+        elif self.scenario == 3:
+            model_text = "There are more than two agents, but there's only one thief that will only target a specific victim."
+        elif self.scenario == 4:
+            model_text = "There is one designated victim, all the agents can steal from them."
+
+        return model_text
+
+    def set_reporters(self):
+        if self.scenario == 1:
+            self.num_agents = 4
+        elif self.scenario == 2:
+            self.num_agents = 2
+        elif self.scenario == 3:
+            self.num_agents = 6
+        elif self.scenario == 4:
+            self.num_agents = 6
+
+        n = self.num_agents
+        base_rel_events = ["motive", "sneak", "stealing"]
+        # create reporters automatically
+        rel_events = []
+
+        if self.scenario == 1:
+            for i in range(0, n):
+                for k in range(0, n):
+                    for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
+                        if i != k:
+                            str1 = f"{j}_{str(i)}_{str(k)}"
+                            # str2 = i + "_credibility"
+                            rel_events.append(str1)
+        else:
+            for i in range(1, n):   # agent 0 is the old agent who never steals and is always stolen from
+                for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
+                    str1 = f"{j}_{str(i)}_0"
+                    # str2 = i + "_credibility"
+                    rel_events.append(str1)
+
+        return Reporters(rel_events)
+
     def create_agents(self, scenario):
-        if scenario == 1:
+        if scenario == 1:   # scenario 1 is
             for i in range(self.num_agents-1):
                 a = MoneyAgent(i, random.choice(self.possible_goal_states), self)
                 self.schedule.add(a)
+                a.role = "thief"
                 x, y = self.initial_xy()
                 self.grid.place_agent(a, (x, y))
 
@@ -376,6 +426,10 @@ class MoneyModel(Model):
             old_agent = self.make_old_agent()
             self.make_thief_near_old_agent(old_agent) # make thief near old agent
             self.make_innocent_near_old_agent(old_agent, self.num_agents)
+
+        elif scenario == 4:
+            old_agent = self.make_old_agent()
+            self.make_potential_thieves_near_old_agent(old_agent, self.num_agents)
 
 
     def make_innocent_near_old_agent(self, old_agent, N):
@@ -391,9 +445,26 @@ class MoneyModel(Model):
             self.grid.place_agent(a, (x, y))
             a.age = random.randrange(13, 76)  # old agent
             a.value_of_good = -1  # not a tempting target
-            a.risk_threshold = random.randrange(0, 2000)  # will never steal risky
+            a.risk_threshold = 4000 #random.randrange(0, 2000)  # will never steal risky
             a.age_threshold = 79  # will never steal even from old people (redundant)
             a.role = "innocent"
+
+    def make_potential_thieves_near_old_agent(self, old_agent, N):  # they only steal from the old agent
+        all_neighbors = old_agent.model.grid.get_neighborhood(pos=old_agent.pos, moore=True, radius=3)
+        neighbors = []
+        for i in all_neighbors:
+            if old_agent.model.extended_grid[i] == "OPEN":
+                neighbors.append(i)
+        for j in range(1, N):
+            a = MoneyAgent(j, random.choice(self.possible_goal_states), self)
+            self.schedule.add(a)
+            x, y = random.choice(neighbors)  # pick from neighbors instead of entire map
+            self.grid.place_agent(a, (x, y))
+            a.age = random.randrange(13, 76)  # old agent
+            a.value_of_good = -1  # not a tempting target
+            a.risk_threshold = random.randrange(0, 2000)  # will never steal risky
+            a.age_threshold = 79  # will never steal even from old people (redundant)
+            a.role = "thief"
 
 
     def make_old_agent(self):

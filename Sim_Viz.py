@@ -11,6 +11,8 @@ from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.modules import TextElement
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.ModularVisualization import VisualizationElement
+from mesa.visualization.UserParam import UserSettableParameter
+
 
 from vizModule import WorkaroundCanvas, Image
 
@@ -234,6 +236,10 @@ class Test(TextElement):
             str_ = str_ + str(key) + " : " + str(model.reporters.history_dict[model.reporters.run][key]) + ",\t"
         return str_
 
+class ScenarioDescription(TextElement):
+    def render(self, model):
+        return model.model_description
+
 
 
 
@@ -265,25 +271,36 @@ elif sim == 1:
     # x = int(y*1.5)
     rel_events = []
     n = 5
-    for i in range(1, n):
-        for j in ["motive", "sneak", "stealing"]:   # "motive, sneak and stealing are 2 place predicates
-            str1 = f"{j}({str(i)},0)"
-            # str2 = i + "_credibility"
-            rel_events.append(str1)
 
 
-    reporters = Reporters(rel_events)
 
     y = 50
     topic_gen = "groteMarkt4"
     C = CreateMap(topic_gen, y)
     x = int(y*C.rel)
     grid = WorkaroundCanvas(agent_portrayal1, x, y, int((C.rel)*500), 500)
+    model_params = {"N": n,
+        "scenario" : UserSettableParameter(
+            "slider",
+            "Scenario",
+            1,
+            1,
+            4,
+            1,
+          description="what scenario do you want to investigate?",
+        ),
+
+        "width": x, "height": y, "topic":topic_gen, "reporters": None, "torus":False}
+
+
+
+
     text = Test()
+    model_text = ScenarioDescription()
+
+
     #bnPic = Image("imgBNGroteMarkt.png", 250, 500, 250, 500)
-    server = ModularServer(MoneyModel, [grid, text], "Grote Markt", {"N": n,"width": x, "height": y, "topic":topic_gen,
-                                                               "reporters": reporters,
-                                                               "torus":False})
+    server = ModularServer(MoneyModel, [model_text, grid, text], "Grote Markt", model_params)
 
 
 

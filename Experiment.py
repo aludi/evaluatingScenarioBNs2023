@@ -74,7 +74,16 @@ class Experiment():
             self.subtype = subtype
             self.bnDir = f"{os.getcwd()}/BNGroteMarkt"
             self.csv_file_name = "GroteMarktOutcomes.csv"
-            self.n = 6
+
+            self.scenario = 2
+
+            if self.scenario == 1:
+                self.n = 10
+            elif self.scenario == 2:
+                self.n = 2
+            elif self.scenario == 3:
+                self.n = 6
+
             n = self.n
             base_rel_events = ["motive", "sneak", "stealing"]
             # create reporters automatically
@@ -96,7 +105,7 @@ class Experiment():
             #print(rel_events)
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
-                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, torus=False)
+                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, scenario=self.scenario, torus=False)
 
                 for j in range(30):
                     model.step()

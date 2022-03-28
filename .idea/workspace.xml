@@ -15,31 +15,17 @@
       <change beforePath="$PROJECT_DIR$/Experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GroteMarkt.py" beforeDir="false" afterPath="$PROJECT_DIR$/GroteMarkt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GroteMarktOutcomes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/GroteMarktOutcomes.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Question1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Question1.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ReducedgroteMarkt4.png" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedgroteMarkt4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sim_Viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sim_Viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generatingPlots.R" beforeDir="false" afterPath="$PROJECT_DIR$/generatingPlots.R" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gm.csv" beforeDir="false" afterPath="$PROJECT_DIR$/gm.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/groteMarkt4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/groteMarkt4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.5.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.05.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.05.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.1.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.125.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.125.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.2.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.25.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.25.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.33.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.33.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.5.tex" beforeDir="false" afterPath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.5.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="simulationTest" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -77,7 +63,7 @@
       <recent name="$PROJECT_DIR$/BayesNets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Sim_Viz">
+  <component name="RunManager" selected="Python.Analysis">
     <configuration name="Analysis" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="simulationTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -263,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648252662600</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="implemented switching scenarios in website view, made terminology more consistent and added model description.,">
+      <created>1648476667611</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1648476667611</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -295,7 +288,8 @@
     <MESSAGE value="added image of BN to page (very slow so removed it again, but works in theory!)" />
     <MESSAGE value="added heroku support" />
     <MESSAGE value="more thiefs and a large bn with weird relations (ordering? but that will aways be fucked)" />
-    <option name="LAST_COMMIT_MESSAGE" value="more thiefs and a large bn with weird relations (ordering? but that will aways be fucked)" />
+    <MESSAGE value="implemented switching scenarios in website view, made terminology more consistent and added model description.," />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented switching scenarios in website view, made terminology more consistent and added model description.," />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1648212699238">
@@ -319,10 +313,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1548" height="299" key="GridCell.Tab.0.bottom" timestamp="1648476535950">
+    <state width="1548" height="225" key="GridCell.Tab.0.bottom" timestamp="1648478500436">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="299" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648476535950" />
+    <state width="1548" height="225" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648478500436" />
     <state width="1793" height="264" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354447" />
     <state width="1654" height="267" key="GridCell.Tab.0.bottom/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -330,10 +324,10 @@
     <state width="1229" height="247" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1647042670108" />
     <state width="1259" height="153" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1648033992002" />
     <state width="1709" height="385" key="GridCell.Tab.0.bottom/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
-    <state width="1548" height="299" key="GridCell.Tab.0.center" timestamp="1648476535949">
+    <state width="1548" height="225" key="GridCell.Tab.0.center" timestamp="1648478500435">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="299" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648476535949" />
+    <state width="1548" height="225" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648478500435" />
     <state width="1793" height="264" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354445" />
     <state width="1654" height="267" key="GridCell.Tab.0.center/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624619" />
     <state width="1578" height="283" key="GridCell.Tab.0.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -341,10 +335,10 @@
     <state width="1229" height="247" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1647042670107" />
     <state width="1259" height="153" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1648033992001" />
     <state width="1709" height="385" key="GridCell.Tab.0.center/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1548" height="299" key="GridCell.Tab.0.left" timestamp="1648476535948">
+    <state width="1548" height="225" key="GridCell.Tab.0.left" timestamp="1648478500434">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="299" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648476535948" />
+    <state width="1548" height="225" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648478500434" />
     <state width="1793" height="264" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354445" />
     <state width="1654" height="267" key="GridCell.Tab.0.left/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624618" />
     <state width="1578" height="283" key="GridCell.Tab.0.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -352,10 +346,10 @@
     <state width="1229" height="247" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1647042670106" />
     <state width="1259" height="153" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1648033992001" />
     <state width="1709" height="385" key="GridCell.Tab.0.left/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1548" height="299" key="GridCell.Tab.0.right" timestamp="1648476535949">
+    <state width="1548" height="225" key="GridCell.Tab.0.right" timestamp="1648478500435">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1548" height="299" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648476535949" />
+    <state width="1548" height="225" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648478500435" />
     <state width="1793" height="264" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519354446" />
     <state width="1654" height="267" key="GridCell.Tab.0.right/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />

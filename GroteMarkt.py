@@ -359,7 +359,10 @@ class MoneyModel(Model):
         self.running = True
 
         # reporters -> meta
-        self.reporters = self.set_reporters()
+        if reporters is None:
+            self.reporters = self.set_reporters()
+        else:
+            self.reporters = reporters
         self.reporters.history_dict[self.reporters.run] = {}
         self.reporters.initialize_event_dict(self.reporters.history_dict[self.reporters.run])  # initalize current run tracker with 0
 
@@ -493,8 +496,8 @@ class MoneyModel(Model):
         self.grid.place_agent(a, (x, y))
         a.age = 25  # young agent
         a.value_of_good = 0  # not tempting target
-        a.risk_threshold = 1  # will always try to steal
-        a.age_threshold = 0  # will steal from a baby
+        a.risk_threshold = random.randint(800, 1200)  # steals sometimes
+        a.age_threshold = 0 # will steal from a baby
         a.role = "thief"
 
 

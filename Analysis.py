@@ -437,7 +437,7 @@ if scenario == "CredibilityGame":
                 writer.writerow(row)
 
 elif scenario == "GroteMarkt":
-    experiment = Experiment(scenario="GroteMarkt", subtype=1)  # we do the simple scenario
+    experiment = Experiment(scenario="GroteMarkt", subtype=3)  # we do the simple scenario
     bnDir = experiment.bnDir
     dataFileName = experiment.csv_file_name
 

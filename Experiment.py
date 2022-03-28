@@ -75,12 +75,15 @@ class Experiment():
             self.bnDir = f"{os.getcwd()}/BNGroteMarkt"
             self.csv_file_name = "GroteMarktOutcomes.csv"
 
-            self.scenario = 2
+            self.scenario = subtype
+            print(self.scenario)
 
             if self.scenario == 1:
                 self.n = 10
             elif self.scenario == 2:
                 self.n = 2
+            elif self.scenario == 3:
+                self.n = 6
             elif self.scenario == 3:
                 self.n = 6
 
@@ -107,13 +110,13 @@ class Experiment():
             for i in range(0, self.runs-1):
                 model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, scenario=self.scenario, torus=False)
 
-                for j in range(30):
+                for j in range(100):
                     model.step()
                 self.reporters.increase_run()
 
             #print(self.reporters.history_dict)
 
-            #print(self.reporters.pure_frequency_event_dict)
+            print(self.reporters.pure_frequency_event_dict)
 
             self.generate_csv_report(self.csv_file_name)
             self.print_frequencies()

@@ -478,7 +478,7 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis)
     df[f"{network}PREDICTEDOUTPUt"] = pred_output
     df[f"{network}MATCHINGOUTPUt"] = matching_output
     df[f"{network}RMS"] = rms_list
-    df.to_csv(analysis.test_csv)
+    df.to_csv(analysis.test_csv, index=False)
 
 
 

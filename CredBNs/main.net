@@ -66,53 +66,53 @@ node E_8_says_stolen {
 }
 
 potential (agent_steals) {
-   data = (  0.496502 0.503498);
+   data = (  0.486507 0.513493);
 }
 
 potential ( E_0_says_stolen | agent_steals   ) {
    data = 
-   ((   0.101912   0.898088)   % agent_steals=0   
-   (   0.877667   0.122333));   % agent_steals=1   
+   ((   0.108115   0.891885)   % agent_steals=0   
+   (   0.90146   0.0985401));   % agent_steals=1   
 }
 
 potential (E_1_says_stolen) {
-   data = (  0.501499 0.498501);
+   data = (  0.494003 0.505997);
 }
 
 potential ( E_2_says_stolen | agent_steals   ) {
    data = 
-   ((   0.105939   0.894061)   % agent_steals=0   
-   (   0.900496   0.0995037));   % agent_steals=1   
+   ((   0.0947612   0.905239)   % agent_steals=0   
+   (   0.886861   0.113139));   % agent_steals=1   
 }
 
 potential (E_3_says_stolen) {
-   data = (  0.492504 0.507496);
+   data = (  0.501 0.499);
 }
 
 potential ( E_4_says_stolen | agent_steals   ) {
    data = 
-   ((   0.106945   0.893055)   % agent_steals=0   
-   (   0.888586   0.111414));   % agent_steals=1   
+   ((   0.0968156   0.903184)   % agent_steals=0   
+   (   0.906326   0.093674));   % agent_steals=1   
 }
 
 potential (E_5_says_stolen) {
-   data = (  0.492504 0.507496);
+   data = (  0.51999 0.48001);
 }
 
 potential ( E_6_says_stolen | agent_steals   ) {
    data = 
-   ((   0.0948666   0.905133)   % agent_steals=0   
-   (   0.899504   0.100496));   % agent_steals=1   
+   ((   0.110169   0.889831)   % agent_steals=0   
+   (   0.906326   0.093674));   % agent_steals=1   
 }
 
 potential (E_7_says_stolen) {
-   data = (  0.507496 0.492504);
+   data = (  0.496502 0.503498);
 }
 
 potential ( E_8_says_stolen | agent_steals   ) {
    data = 
-   ((   0.104932   0.895068)   % agent_steals=0   
-   (   0.895533   0.104467));   % agent_steals=1   
+   ((   0.120442   0.879558)   % agent_steals=0   
+   (   0.905353   0.0946472));   % agent_steals=1   
 }
 
 

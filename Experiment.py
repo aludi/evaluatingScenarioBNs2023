@@ -20,13 +20,14 @@ from CreateMap import CreateMap
 
 class Experiment():
 
-    def __init__(self, scenario, runs, subtype=None):
+    def __init__(self, scenario, runs, csv_file_name, subtype=None):
         self.scenario = scenario
         print("experiment scenario", scenario)
         self.runs = runs
+        self.csv_file_name = csv_file_name #"CredibilityGameOutcomes.csv"    # can take 2 shapes: "{experiment name}{Outcomes}.csv" and "{experiment name}{Test}.csv"
 
         if scenario == "StolenLaptop":
-            self.csv_file_name = "globalStates.csv"
+            #self.csv_file_name = "globalStates.csv"
             self.bnDir = f"{os.getcwd()}/K2BNs"
             rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
                                     "flees_startled", "successful_stolen", "raining", "curtains",
@@ -49,7 +50,6 @@ class Experiment():
 
         if scenario == "CredibilityGame":
             self.bnDir = f"{os.getcwd()}/CredBNs"
-            self.csv_file_name = "CredibilityGameOutcomes.csv"
             self.n = 9
             n = self.n
             rel_events = ["agent_steals"]
@@ -72,7 +72,7 @@ class Experiment():
         if scenario == "GroteMarkt":
             self.subtype = subtype
             self.bnDir = f"{os.getcwd()}/BNGroteMarkt"
-            self.csv_file_name = "GroteMarktOutcomes.csv"
+            #self.csv_file_name = "GroteMarktOutcomes.csv"
 
             self.scenario = subtype
             #print(self.scenario)

@@ -335,7 +335,7 @@ def get_relevant_hyp_events(bnDir, org_BN, outcome_nodes):
 
 
 
-def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_latex_file, experiment_list, test_set):
+def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_latex_file, experiment_list, test_set, analysis):
 
     # reset dir
     org_dir = os.getcwd()
@@ -353,8 +353,8 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
         relevant_nodes_out = ["stealing_1_0"]
         #relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out)  # no hyps here
     # establish original BN
-
-    acc, rms = calculate_accuracy(org_BN, test_set, relevant_nodes_out, org_dir, main_exp.bnDir)
+    analysis.output_nodes = relevant_nodes_out
+    acc, rms = calculate_accuracy(org_BN, test_set, relevant_nodes_out, org_dir, main_exp.bnDir, analysis)
 
     for direc in ["weak", "strong"]:
         d_1 = determine_posterior_direction_or_precision(main_exp.bnDir, org_BN, direc)
@@ -364,7 +364,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
 
     for params in param_list:
         [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params, org_BN)
-        acc, rms = calculate_accuracy(disturbed_BN_file_name, test_set, relevant_nodes_out, org_dir,  main_exp.bnDir)
+        acc, rms = calculate_accuracy(disturbed_BN_file_name, test_set, relevant_nodes_out, org_dir,  main_exp.bnDir, analysis)
 
         for direc in ["weak", "strong"]:
             if type_exp == "normalNoise":
@@ -404,21 +404,22 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
             file.write("\\input{../simulationTest/" + f + "}\n")
 
 
-def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir):
+def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis):
     '''print(network)
     print(orgDir)
     print(bnDir)
     print(os.getcwd())'''
     print(network)
+
     if "net" not in network:
         network = network + ".net"
 
-    org_dir = orgDir
+    #org_dir = orgDir
     #if dir not in os.getcwd():
-    os.chdir(bnDir)
+    os.chdir(analysis.network_dir)
 
     bn = gum.loadBN(network)
-    os.chdir(org_dir)
+    os.chdir(analysis.org_dir)
 
     # todo: set evidence
     # see value of output
@@ -435,12 +436,15 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir):
 
 
 
-    df = pd.read_csv(test_set.csv_file_name, sep=r',',
+    df = pd.read_csv(analysis.test_csv, sep=r',',
             skipinitialspace = True)
 
     accuracy = 0
     rmsd = 0
     #print(output_nodes)
+    pred_output=[]
+    matching_output=[]
+    rms_list=[]
     for i in range(0, len(df)):
         ie = gum.LazyPropagation(bn)
 
@@ -454,13 +458,31 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir):
             try:
                 fin = round(ie.posterior(output_node)[1], 2)
                 rmsd += round(abs(fin - val_output), 2)
+                rms_list.append(round(abs(fin - val_output), 2))
+
             except:
                 fin = "NA"
                 rmsd += 1
+                rms_list.append(1)
+
             if fin == val_output:
                 accuracy += 1
+                matching_output.append(1)
             else:
+                matching_output.append(0)
+
                 pass
+
+            pred_output.append(fin)
+
+    df[f"{network}PREDICTEDOUTPUt"] = pred_output
+    df[f"{network}MATCHINGOUTPUt"] = matching_output
+    df[f"{network}RMS"] = rms_list
+    df.to_csv(analysis.test_csv)
+
+
+
+
                 #print(fin, val_output)
 
 
@@ -470,16 +492,34 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir):
 
 
 
+class Analysis():
+    def __init__(self, scenario, output_nodes, org_dir, network_dir, train_test_split,  outcomes, test):
+        # directories
+        self.scenario = scenario
+        self.output_nodes = output_nodes
+        self.org_dir = org_dir
+        self.network_dir = network_dir
+        self.train_test_split = train_test_split
+        self.runs = train_test_split[0]
+        self.outcomes_csv = outcomes
+        self.test_csv = test
+        self.results = []
+        self.networks = []
+        self.outcome_experiment = None
+        self.test_experiment = None
+
 
 
 ### intentions
-#scenario = "CredibilityGame"
+scenario = "CredibilityGame"
 #scenario = "GroteMarkt"
-scenario = "StolenLaptop"
+#scenario = "StolenLaptop"
 train_test_split = [2000, 200]
 
 runs = train_test_split[0]
 test = train_test_split[1]
+
+analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, None)
 
 if scenario == "CredibilityGame":
 
@@ -495,8 +535,14 @@ if scenario == "CredibilityGame":
 
         test_setFileName = test_set.csv_file_name
 
+        #####
+        analysis.network_dir = bnDir
+        analysis.outcomes_csv = experiment.csv_file_name
+        analysis.test_csv = test_setFileName
+        analysis.outcome_experiment = experiment
+        analysis.test_experiment = test_set
 
-        #calculate_accuracy("main.net", test_set, bnDir)
+
 
         param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
                     [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
@@ -506,7 +552,7 @@ if scenario == "CredibilityGame":
         experiment_list = []
         org_BN = "main"
         for (exp, params) in [("arbitraryRounded", param_ar)]:
-            experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list, test_set)
+            experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list, test_set, analysis)
             print(f"done with experiment {exp}")
 
         csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability", "accuracy", "rms", "Game"]

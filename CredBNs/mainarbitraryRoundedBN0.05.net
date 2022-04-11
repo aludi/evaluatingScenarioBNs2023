@@ -71,48 +71,56 @@ potential (agent_steals) {
 
 potential ( E_0_says_stolen | agent_steals   ) {
    data = 
-   ((   0.1   0.9)   % agent_steals=0   
-   (   0.9   0.1));   % agent_steals=1   
+   ((   0.2   0.8)   % agent_steals=0   
+   (   0.8   0.2));   % agent_steals=1   
 }
 
-potential (E_1_says_stolen) {
-   data = (  0.5 0.5);
+potential ( E_1_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.8   0.2)   % agent_steals=0   
+   (   0.2   0.8));   % agent_steals=1   
 }
 
 potential ( E_2_says_stolen | agent_steals   ) {
    data = 
-   ((   0.1   0.9)   % agent_steals=0   
-   (   0.9   0.1));   % agent_steals=1   
+   ((   0.8   0.2)   % agent_steals=0   
+   (   0.2   0.8));   % agent_steals=1   
 }
 
-potential (E_3_says_stolen) {
-   data = (  0.5 0.5);
+potential ( E_3_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.2   0.8)   % agent_steals=0   
+   (   0.8   0.2));   % agent_steals=1   
 }
 
 potential ( E_4_says_stolen | agent_steals   ) {
    data = 
-   ((   0.1   0.9)   % agent_steals=0   
-   (   0.9   0.1));   % agent_steals=1   
+   ((   0.8   0.2)   % agent_steals=0   
+   (   0.2   0.8));   % agent_steals=1   
 }
 
-potential (E_5_says_stolen) {
-   data = (  0.5 0.5);
+potential ( E_5_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.8   0.2)   % agent_steals=0   
+   (   0.2   0.8));   % agent_steals=1   
 }
 
 potential ( E_6_says_stolen | agent_steals   ) {
    data = 
-   ((   0.1   0.9)   % agent_steals=0   
-   (   0.9   0.1));   % agent_steals=1   
+   ((   0.2   0.8)   % agent_steals=0   
+   (   0.8   0.2));   % agent_steals=1   
 }
 
-potential (E_7_says_stolen) {
-   data = (  0.5 0.5);
+potential ( E_7_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.8   0.2)   % agent_steals=0   
+   (   0.2   0.8));   % agent_steals=1   
 }
 
 potential ( E_8_says_stolen | agent_steals   ) {
    data = 
-   ((   0.1   0.9)   % agent_steals=0   
-   (   0.9   0.1));   % agent_steals=1   
+   ((   0.8   0.2)   % agent_steals=0   
+   (   0.2   0.8));   % agent_steals=1   
 }
 
 

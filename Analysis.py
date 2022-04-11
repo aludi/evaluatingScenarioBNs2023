@@ -354,7 +354,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
         #relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out)  # no hyps here
     # establish original BN
     analysis.output_nodes = relevant_nodes_out
-    acc, rms = calculate_accuracy(org_BN, test_set, relevant_nodes_out, org_dir, main_exp.bnDir, analysis)
+    acc, rms = calculate_accuracy(org_BN, test_set, relevant_nodes_out, org_dir, main_exp.bnDir, analysis, "first")
 
     for direc in ["weak", "strong"]:
         d_1 = determine_posterior_direction_or_precision(main_exp.bnDir, org_BN, direc)
@@ -364,7 +364,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
 
     for params in param_list:
         [disturbed_BN_file_name, empty] = disturb_cpts(experiment, type_exp, params, org_BN)
-        acc, rms = calculate_accuracy(disturbed_BN_file_name, test_set, relevant_nodes_out, org_dir,  main_exp.bnDir, analysis)
+        acc, rms = calculate_accuracy(disturbed_BN_file_name, test_set, relevant_nodes_out, org_dir,  main_exp.bnDir, analysis, "not first")
 
         for direc in ["weak", "strong"]:
             if type_exp == "normalNoise":
@@ -404,7 +404,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
             file.write("\\input{../simulationTest/" + f + "}\n")
 
 
-def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis):
+def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis, first):
     '''print(network)
     print(orgDir)
     print(bnDir)
@@ -442,18 +442,23 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis)
     accuracy = 0
     rmsd = 0
     #print(output_nodes)
+    network_name = []
     pred_output=[]
     matching_output=[]
     rms_list=[]
+    input_list = []
+    output_list = []
     for i in range(0, len(df)):
         ie = gum.LazyPropagation(bn)
-
+        k = []
         for ev in evidence:
             val = df.loc[i, ev]
             ie.addEvidence(ev, int(val))
+            k.append(val)
 
         for output_node in output_nodes:
             val_output = df.loc[i, output_node]
+            output_list.append(val_output)
             #print("output actual",val_output)
             try:
                 fin = round(ie.posterior(output_node)[1], 2)
@@ -474,11 +479,23 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis)
                 pass
 
             pred_output.append(fin)
+            network_name.append(network)
+            input_list.append(k)
 
-    df[f"{network}PREDICTEDOUTPUt"] = pred_output
-    df[f"{network}MATCHINGOUTPUt"] = matching_output
-    df[f"{network}RMS"] = rms_list
-    df.to_csv(analysis.test_csv, index=False)
+    otp = {}
+    otp["network"] = network_name
+    otp["input"] = input_list
+    otp["output"] = output_list
+    otp["predicted"] = pred_output
+    otp["matching"] = matching_output
+    otp["RMS"] = rms_list
+    otp_pd = pd.DataFrame.from_dict(otp)
+
+    if first == "first":
+        otp_pd.to_csv(analysis.accuracy_csv, index=False)
+    else:
+        otp_pd.to_csv(analysis.accuracy_csv, index=False, mode='a', header=False)
+
 
 
 
@@ -503,6 +520,7 @@ class Analysis():
         self.runs = train_test_split[0]
         self.outcomes_csv = outcomes
         self.test_csv = test
+        self.accuracy_csv = f"{scenario}Accuracy.csv"
         self.results = []
         self.networks = []
         self.outcome_experiment = None
@@ -514,7 +532,7 @@ class Analysis():
 scenario = "CredibilityGame"
 #scenario = "GroteMarkt"
 #scenario = "StolenLaptop"
-train_test_split = [2000, 200]
+train_test_split = [5000, 500]
 
 runs = train_test_split[0]
 test = train_test_split[1]
@@ -523,7 +541,7 @@ analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, Non
 
 if scenario == "CredibilityGame":
 
-    for game in ["basicGame", "strangeGame"]:
+    for game in ["basicGame"]: #, "strangeGame"]:
         experiment = Experiment(scenario="CredibilityGame", runs=runs, csv_file_name=f"{scenario}Outcomes.csv", subtype=game)
         bnDir = experiment.bnDir
         dataFileName = experiment.csv_file_name

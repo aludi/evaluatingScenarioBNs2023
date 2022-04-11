@@ -3,17 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/main.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/main.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.05.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.05.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.1.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.125.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.125.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.2.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.25.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.25.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.33.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.33.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredibilityGameOutcomes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/CredibilityGameOutcomes.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cred.csv" beforeDir="false" afterPath="$PROJECT_DIR$/cred.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +262,21 @@
       <option name="project" value="LOCAL" />
       <updated>1648726040245</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="appended predicted scores and rms scores to credibility test output">
+      <created>1648746940318</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1648746940318</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fixed index">
+      <created>1648747033108</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1648747033108</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -309,7 +312,9 @@
     <MESSAGE value="make BN of scenario 2 of grote markt&#10;&#10;(tonight implement accuracy rating)" />
     <MESSAGE value="blegh" />
     <MESSAGE value="added light accuracy metric, kinda disspaointed that its usually around 85% ish. but thats expected? should really get these in a separate file as well (next to test results) so that they can be analysed." />
-    <option name="LAST_COMMIT_MESSAGE" value="added light accuracy metric, kinda disspaointed that its usually around 85% ish. but thats expected? should really get these in a separate file as well (next to test results) so that they can be analysed." />
+    <MESSAGE value="appended predicted scores and rms scores to credibility test output" />
+    <MESSAGE value="fixed index" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed index" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1648212699238">
@@ -325,10 +330,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="861" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643734985718" />
-    <state x="174" y="156" key="CommitChangelistDialog2" timestamp="1648746939838">
+    <state x="174" y="156" key="CommitChangelistDialog2" timestamp="1648747032721">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648746939838" />
+    <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648747032721" />
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog" timestamp="1644843960230">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -415,10 +420,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="937" y="471" key="VCS.ChangelistChooser/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843945261" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1648726047698">
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1648747038986">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648726047698" />
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648747038986" />
     <state x="843" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1648471342382">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

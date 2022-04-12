@@ -3,22 +3,78 @@
  
 %!TEX root =  mainMastersProject.tex
 
-\chapter[Method: Simulations to Evaluate Bayesian Networks]{Creating Simulations to Evaluate Bayesian Networks.}
+\chapter[Simulations to Evaluate Bayesian Networks.]{Creating Simulations to Evaluate Bayesian Networks.}
 
 \section{Introduction}
 
-The diagram below shows a general overview, each part of the process is discussed in more detail in the next sections.
+In this part, I explain the general method for creating simulations with automatic Bayesian Networks, as well as how to evaluate these Bayesian Networks. The general process of creating simulations to evaluate Bayesian Networks is illustrated in Figure~\ref{pipeline}. We start by defining a simulation with agents, and then have reporters report on that simulation in the `Experiment' stage. Relevant events in simulations are collected by the reporters in each run. The collection of runs is used by an automatic Bayesian Network constructor algorithm to construct a Bayesian Network automatically in the `Building BN' stage. Finally, the constructed Bayesian Network is evaluated with respect to the criteria in the `Evaluate BN' stage. These three stages are explained in this section. Specific instances of simulations and networks I created with this process are the subject of the next chapters.
+
+\begin{figure}[h]
+\includegraphics[width=\linewidth]{images/pipeline.pdf}
+\label{pipeline}
+\caption{Method for evaluating automatically generated Bayesian Networks from simulations.}
+\end{figure}
 
 
-\section{Setting up an Experiment}
+\section{Setting-up an Experiment}
 An experiment consists of a simulation and reporters. Reporters are defined separately from the simulation because they are not inherent to it - they are defined with respect to what we want to know about the simulation.
 
+\subsection{Simulation}
+
+\subsubsection{Structure of a simulation}
+In the simulation, we are simulating some sort of criminal scenario - a theft, usually. Or we are simulating purely for the theoretical things. The simulation can be as precise as necessary, but there are certain things that need to be present: we need to have states that happen, there needs to be evidence for those states as well. The granularity of the simulation and its complexity depend on the modeller and her requirements.
+
+\subsubsection{Spatial and Non-spatial simulations.}
+I'm discussing two types of simulations: spatial simulations and non-spatial simulations. In a spatial simulation, an agent's behaviour is mediated with respect to their environment - eg, agents cannot pass through buildings, or cannot see agents that are far away, or can only steal from another agent when that agent is nearby. In a non-spatial simulations, agents can behave and interact with each other, but this is happening without any environment, hence we are simulating an abstraction. In concrete terms, you can think about a non-spatial simulation as a communication game.
+
+For this project, that means that spatial simulations are more complex and interesting than non-spatial simulations, as there are more possibilities for variety.
+
+The simulations were programmed in MESA, a python package that is made for the creation of Multi-agent systems simulations. We define an environment that the agents can interact with, as well as agents that perform some behaviours. Specifics of simulations and agent behaviour are described in the following chapters.
+
+\subsubsection{Predictability and randomness}
+Where does the interest of the simulation come from? In one part, agents sometimes do things because they are commanded to do so by the computer \footnote{rephrase, this is always true lol.}. This means that, at the start, a random number generator might `decide' that some agent has a motive, since the random number generator generated a 1 instead of a 0. On the other hand, some randomness arises from interactions between agents, or between agents and their environments. This is where spatial simulations bring additional value compared to non-spatial simulations.
+
+ In non-spatial simulations, all agent states are essentially brought about by a combination of randomly generated numbers, and reasoning rules. For example, if an agent has a tendency to lie (randomly generated), and it has the opportunity for lying (brought about due to the current non-spatial simulation), then it will lie. Hence a combination of behavioural rules and randomly generated numbers results in a state of `agent lies' of 1.
+ 
+ However, in spatial simulations, interactions and behavioural rules and randomly generated numbers are all brought together: if an agent is near another agent (chance interaction), and it has a tendency to steal (randomly generated), then it will attempt (but might not succeed) in stealing. Here the behavioural rule might lead to a more interesting/complex/complicated outcome than in the non-spatial simulation.
+ 
+
+
+\subsection{Reporters}
+
+In the simulation, certain states can be brought about. For example, an agent can succeed in stealing an object, or in lying, or in having a motivation (or in not having those things). We need a way to observe these states: this is where reporters come in. A reporter reports the outcome of a relevant event or state in the simulation, and is embedded in the code. If an event happens (or does not happen), the reporter reports that the event is true (or false). In essence, the reporter ($R$) is a random variable (RV) that maps an event ($e$) to a truth value:
+
+\[ R : e \rightarrow \{0, 1\} \]
+
+Not all the states in the simulation have a reporter associated with it - otherwise I could build infinitely many reporters. I could have reporters for names, for $agent\_Q\_at\_x\_1\_y\_200$. Hence, I only created reporters for states I deemed relevant for the scenario that I am investigating. Here is a subjectivity gap. I can imagine that in my simulation of the Grote Markt (see later chapter), there is some part of the simulation that by chance geometry, lends itself to an easier job for the thief than another part of the simulation. If the thief and victim spawn near this point, then the probability of the thief succeeding will be higher. Increasing the granularity of the reporters might help us determine if there is a spot like this. However, I did not implement this level of granularity in the simulation (yet), because that is a local and specific part, and does not fit into the more global scenario description (the scenario of theft is spatially-free).
+
+The global state of one run of the simulation, is the combination of all reporters.
+
+\[ G = (e_0 \rightarrow \{0, 1\} \times e_1 \rightarrow \{0, 1\} \times ... \times e_n \rightarrow \{0, 1\})\]
+ or,
+ 
+\[ G = R_1 \times R_2 \times... \times R_n\]
+for $n$ reporters.
+
+Then, we collect these global states over the number of runs that we do for each experiment, which results finally that the output $O$ of this stage of the method, is a series of global states, one for each run:
+
+\[ O = (G_0, G_1, ... G_{runs})\]
+
+
 \section{Creating a Bayesian Network from a Simulation Automatically}
-The output of an experiment is a collection of runs, where each run is the global state of the simulation.
+
+The output of an experiment is the collection of runs $O$, where each run is the global state $G$ of the simulation, as measured by the random variables $R$. Semantically, it fits that reporters are random variables, as the reporters become the nodes in the Bayesian Network.
+
+Once we have a collection of states and runs, we can give this to an automated Bayesian Network learner, such as those implemented in pyAgrum. These learners can interpolate a Bayesian Network using algorithms, such as Greedy Hillclimbing and K2. This results in automatic generation of the Bayesian Network which is solely based on the data that is collected in $O$. 
+
+For more detail on these algorithms watch this space.
+
+
+
 
 \section{Evaluating the Bayesian Network}
 
-We want to evaluate different aspects of the Bayesian Network: structural criteria and performance criteria.
+We want to evaluate different aspects of the Bayesian Network: structural criteria, performance criteria and human criteria.
 
 \subsection{Structural Criteria}
 \begin{enumerate}
@@ -37,6 +93,11 @@ We want to evaluate different aspects of the Bayesian Network: structural criter
 \item Sensitivity analysis shows that no simulation-irrelevant event influences some output \footnote{rephrase}
 \end{enumerate}
 
-Now that we've established how the automatically generated Bayesian Networks are going to be judged
+\subsection{Human Criteria}
+\begin{enumerate}
+\item Do we think that a human can find these numbers?
+\end{enumerate}
+
+Now that we've established how the automatically generated Bayesian Networks are going to be judged, we can show cautiously in the next chapter how well they are holding up!
 
 

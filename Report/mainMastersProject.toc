@@ -5,18 +5,24 @@
 \contentsline {section}{\numberline {2.2}Reasoning with evidence}{3}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Bayes!}{4}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Problems with the Bayesian Approach}{4}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Method: Simulations to Evaluate Bayesian Networks}{5}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{5}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Setting up an Experiment}{5}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Creating a Bayesian Network from a Simulation Automatically}{5}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Evaluating the Bayesian Network}{5}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Structural Criteria}{6}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Performance Criteria}{6}{subsection.3.4.2}%
-\contentsline {chapter}{\numberline {4}Simple Non-Spatial Simulations}{7}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{7}{section.4.1}%
-\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{9}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introduction}{9}{section.5.1}%
-\contentsline {chapter}{\numberline {6}The Great Grote Markt Robbery Island Prior}{11}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Introduction}{11}{section.6.1}%
-\contentsline {chapter}{\numberline {7}Conclusion}{13}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Conclusion}{13}{section.7.1}%
+\contentsline {chapter}{\numberline {3}Simulations to Evaluate Bayesian Networks.}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Setting-up an Experiment}{7}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Simulation}{8}{subsection.3.2.1}%
+\contentsline {subsubsection}{Structure of a simulation}{8}{section*.3}%
+\contentsline {subsubsection}{Spatial and Non-spatial simulations.}{8}{section*.4}%
+\contentsline {subsubsection}{Predictability and randomness}{9}{section*.5}%
+\contentsline {subsection}{\numberline {3.2.2}Reporters}{9}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Creating a Bayesian Network from a Simulation Automatically}{10}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Evaluating the Bayesian Network}{11}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Structural Criteria}{11}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Performance Criteria}{11}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Human Criteria}{11}{subsection.3.4.3}%
+\contentsline {chapter}{\numberline {4}Simple Non-Spatial Simulations}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{13}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{15}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{15}{section.5.1}%
+\contentsline {chapter}{\numberline {6}The Great Grote Markt Robbery Island Prior}{17}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Introduction}{17}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Conclusion}{19}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusion}{19}{section.7.1}%

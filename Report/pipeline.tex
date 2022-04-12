@@ -1,0 +1,42 @@
+% Activate the following line by filling in the right side. If for example the name of the root file is Main.tex, write
+% "...root = Main.tex" if the chapter file is in the same directory, and "...root = ../Main.tex" if the chapter is in a subdirectory.
+ 
+%!TEX root =  mainMastersProject.tex
+
+\chapter[Method: Simulations to Evaluate Bayesian Networks]{Creating Simulations to Evaluate Bayesian Networks.}
+
+\section{Introduction}
+
+The diagram below shows a general overview, each part of the process is discussed in more detail in the next sections.
+
+
+\section{Setting up an Experiment}
+An experiment consists of a simulation and reporters. Reporters are defined separately from the simulation because they are not inherent to it - they are defined with respect to what we want to know about the simulation.
+
+\section{Creating a Bayesian Network from a Simulation Automatically}
+The output of an experiment is a collection of runs, where each run is the global state of the simulation.
+
+\section{Evaluating the Bayesian Network}
+
+We want to evaluate different aspects of the Bayesian Network: structural criteria and performance criteria.
+
+\subsection{Structural Criteria}
+\begin{enumerate}
+\item (temp) Events are ordered temporally - scenario-like.
+\item (con) Evidence connects to hypotheses.
+\item (exc) All events that are irrelevant are not included in the scenario BN.
+\item (exh) All events that are relevant are included in the scenario BN.
+\item (ind) Independent events are not connected to each other.
+\end{enumerate}
+
+\subsection{Performance Criteria}
+\begin{enumerate}
+\item The accuracy of the network is not lower than the inherent randomness of the simulation.
+\item The strong view: probabilities in the network correspond exactly to probabilities in the simulation.
+\item The weak view: Updates on evidence in the network go in the same direction as updates on evidence in the simulation.
+\item Sensitivity analysis shows that no simulation-irrelevant event influences some output \footnote{rephrase}
+\end{enumerate}
+
+Now that we've established how the automatically generated Bayesian Networks are going to be judged
+
+

@@ -529,10 +529,11 @@ class Analysis():
 
 
 ### intentions
-scenario = "CredibilityGame"
+#scenario = "CredibilityGame"
 #scenario = "GroteMarkt"
-#scenario = "StolenLaptop"
-train_test_split = [5000, 500]
+scenario = "StolenLaptop"
+tr = 10000
+train_test_split = [tr, int(tr/10)]
 
 runs = train_test_split[0]
 test = train_test_split[1]
@@ -596,6 +597,13 @@ elif scenario == "GroteMarkt":
 
     test_setFileName = test_set.csv_file_name
 
+    #####
+    analysis.network_dir = bnDir
+    analysis.outcomes_csv = experiment.csv_file_name
+    analysis.test_csv = test_setFileName
+    analysis.outcome_experiment = experiment
+    analysis.test_experiment = test_set
+
 
     param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
                 [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
@@ -605,7 +613,7 @@ elif scenario == "GroteMarkt":
     experiment_list = []
     org_BN = "main"
     for (exp, params) in [("arbitraryRounded", param_ar)]:
-        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list, test_set)
+        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list, test_set, analysis)
         print(f"done with experiment {exp}")
 
     csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability",
@@ -631,6 +639,12 @@ elif scenario == "StolenLaptop":
     test_set = Experiment(scenario="StolenLaptop", runs=test, csv_file_name=f"{scenario}Test.csv")
 
     test_setFileName = test_set.csv_file_name
+    #####
+    analysis.network_dir = bnDir
+    analysis.outcomes_csv = experiment.csv_file_name
+    analysis.test_csv = test_setFileName
+    analysis.outcome_experiment = experiment
+    analysis.test_experiment = test_set
 
     param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
                        [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
@@ -647,7 +661,7 @@ elif scenario == "StolenLaptop":
     experiment_list = []
     org_BN = "K2BN"
     for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
-        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list,test_set)
+        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list,test_set, analysis)
         print(f"done with experiment {exp}")
 
     csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability", "accuracy", "rms"]
@@ -663,7 +677,7 @@ elif scenario == "StolenLaptop":
     org_BN = "adaptedK2BN"
     experiment_list_spider = []
     for (exp, params) in [("arbitraryRounded", param_ar)]:
-        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list_spider, test_set)
+        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list_spider, test_set, analysis)
         print(f"done with experiment {exp}")
 
     csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability", "accuracy", "rms"]

@@ -15,6 +15,8 @@ from SimulationTest import StolenLaptop
 import csv
 from CredibilityGame import CredibilityGame
 from GroteMarkt import MoneyModel
+from VlekNetwork import VlekNetwork
+
 from CreateMap import CreateMap
 
 

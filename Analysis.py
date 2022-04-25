@@ -1,7 +1,7 @@
 import pyAgrum as gum
 import copy as copy
 from Experiment import Experiment
-from BN import K2_BN
+from BN import K2_BN, K2_BN_csv_only
 import csv
 import pandas as pd
 import math
@@ -10,6 +10,8 @@ from collections import defaultdict
 import csv
 import os
 from CredibilityGame import CredibilityGame
+from VlekNetwork import VlekNetwork
+
 
 
 def disturb_cpts(experiment, disturb_type, params_list, file_name):
@@ -531,7 +533,8 @@ class Analysis():
 ### intentions
 #scenario = "CredibilityGame"
 #scenario = "GroteMarkt"
-scenario = "StolenLaptop"
+#scenario = "StolenLaptop"
+scenario = "VlekNetwork"
 tr = 100
 train_test_split = [tr, int(tr/10)]
 
@@ -584,6 +587,13 @@ if scenario == "CredibilityGame":
             for row in experiment_list:
                 row.append(game)
                 writer.writerow(row)
+
+elif scenario == "VlekNetwork":
+    VlekNetwork(runs=10000, output_file="VlekOutcomes.csv")
+    K2_BN_csv_only("VlekOutcomeskbFull.csv", "BNVlekNetwork/main.net")
+    K2_BN_csv_only("VlekOutcomeskb1.csv", "BNVlekNetwork/kb1.net")
+    K2_BN_csv_only("VlekOutcomeskb2.csv", "BNVlekNetwork/kb2.net")
+
 
 elif scenario == "GroteMarkt":
     experiment = Experiment(scenario="GroteMarkt", runs=runs, csv_file_name=f"{scenario}Outcomes.csv", subtype=2)  # we do the simple scenario

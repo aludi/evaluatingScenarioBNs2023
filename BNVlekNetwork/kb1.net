@@ -1,0 +1,54 @@
+
+net {
+  name = unnamedBN;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node jane_and_mark_fight {
+   states = (0 1 );
+   label = "jane_and_mark_fight";
+   ID = "jane_and_mark_fight";
+}
+
+node jane_has_knife {
+   states = (0 1 );
+   label = "jane_has_knife";
+   ID = "jane_has_knife";
+}
+
+node jane_stabs_mark_with_knife {
+   states = (0 1 );
+   label = "jane_stabs_mark_with_knife";
+   ID = "jane_stabs_mark_with_knife";
+}
+
+node mark_dies {
+   states = (0 1 );
+   label = "mark_dies";
+   ID = "mark_dies";
+}
+
+potential (jane_and_mark_fight) {
+   data = (  0.789971 0.210029);
+}
+
+potential (jane_has_knife) {
+   data = (  0.30232 0.69768);
+}
+
+potential ( jane_stabs_mark_with_knife | jane_and_mark_fight   jane_has_knife   ) {
+   data = 
+   (((   0.999948   5.23615e-05)   % jane_has_knife=0   jane_and_mark_fight=0   
+   (   0.999977   2.26727e-05))   % jane_has_knife=1   jane_and_mark_fight=0   
+   ((   0.999804   0.000196464)   % jane_has_knife=0   jane_and_mark_fight=1   
+   (   0.983524   0.016476)));   % jane_has_knife=1   jane_and_mark_fight=1   
+}
+
+potential ( mark_dies | jane_stabs_mark_with_knife   ) {
+   data = 
+   ((   0.999975   2.50589e-05)   % jane_stabs_mark_with_knife=0   
+   (   0.336735   0.663265));   % jane_stabs_mark_with_knife=1   
+}
+
+

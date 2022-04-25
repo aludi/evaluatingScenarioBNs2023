@@ -9,126 +9,110 @@ from collections import defaultdict
 
 class VlekNetwork(Model):
 
-    def __init__(self, N_agents, reporters, output_file):
+    def __init__(self, runs, output_file):
         self.output_file = output_file
+        self.run = runs
+        self.mark_and_jane()
 
 
-    def scn1(self, N_agents, reporters):  # this is the basic game with independent agents.
+    def mark_and_jane(self):  # this is the basic game with independent agents.
+        kbFull = [
+            ([], "jane_and_mark_fight", 20, 0),
+            ([], "jane_has_knife", 70, 0),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_stabs_mark_with_knife", 1, 1),
+            (["jane_stabs_mark_with_knife"], "mark_dies", 70, 2),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_threatens_mark_with_knife", 3, 1),
+            (["jane_threatens_mark_with_knife"], "mark_hits_jane", 90, 2), #90
+            (["mark_hits_jane"], "jane_drops_knife", 50, 3), # 50
+            (["jane_drops_knife"], "mark_falls_on_knife", 10, 4),    #1
+            (["mark_falls_on_knife"], "mark_dies_by_accident", 70, 5), #60
+            (["mark_dies_by_accident"], "mark_dies", 100, 6)
+
+            ]
+
+        kb1 = [
+            ([], "jane_and_mark_fight", 20, 0),
+            ([], "jane_has_knife", 70, 0),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_stabs_mark_with_knife", 1, 1),
+            (["jane_stabs_mark_with_knife"], "mark_dies", 70, 2)
+            ]
+        kb2 = [
+            ([], "jane_and_mark_fight", 20, 0),
+            ([], "jane_has_knife", 70, 0),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_threatens_mark_with_knife", 3, 1),
+            (["jane_threatens_mark_with_knife"], "mark_hits_jane", 90, 2),  # 90
+            (["mark_hits_jane"], "jane_drops_knife", 50, 3),  # 50
+            (["jane_drops_knife"], "mark_falls_on_knife", 10, 4),  # 1
+            (["mark_falls_on_knife"], "mark_dies_by_accident", 70, 5),  # 60
+            (["mark_dies_by_accident"], "mark_dies", 100, 6)
+
+            ]
 
 
+        block = {"jane_stabs_mark_with_knife" : "jane_threatens_mark_with_knife",  # mutually exclusive
+            "jane_threatens_mark_with_knife" : "jane_stabs_mark_with_knife"}
+
+        for kb in [kbFull, kb1, kb2]:
+            if kb == kbFull:
+                name_x = "KBFull"
+            elif kb == kb1:
+                name_x = "KB1"
+            else:
+                name_x = "KB2"
+            freq_dict = defaultdict(int)
+            current_inf_dict = {}
+            j = 0
+            output_list = []
+            while j < self.run:
+                current_inf = []
+                for fact_tup in kb:
+                    a, b, c, d = fact_tup
+                    current_inf_dict[b] = 0
+                i = 0
+                while i < 10:
+                    for fact_tup in kb:
+                        prem, conc, prob, time_idx = fact_tup
+                        flag = True
+                        for p_x in prem:
+                            if p_x not in current_inf:
+                                flag = False
+                        if flag and random.randint(0, 100) <= prob and conc not in current_inf and time_idx == i:
+                            try:
+                                if block[conc] not in current_inf:
+                                    current_inf.append(conc)
+                                    current_inf_dict[conc] = 1
+                            except KeyError:    # no blockers
+                                current_inf.append(conc)
+                                current_inf_dict[conc] = 1
+                    #print(current_inf)
+
+                    random.shuffle(kb)
+                    i = i + 1
+
+                l = []
+                for key in current_inf_dict.keys():
+                    l.append(current_inf_dict[key])
+
+                output_list.append(l)
+
+                #print(current_inf_dict)
 
 
-        '''n = N_agents
-        ground_truth = random.randint(0, 1)  # 50/50 proportion is not great
-        reporters.set_value_directly("agent_steals", ground_truth)
-        agent_dict = {}
-        for i in range(n):
-            agent_statement = random.randrange(0, 100)
-            if i%3 == 0:    # one every 3rd agent is a lier
-                if agent_statement < 80: #agents lie with 80% probability
-                    agent_statement = 1 - ground_truth
-                else:
-                    agent_statement = ground_truth
-            else:           # the other agents are mistaken sometimes.
-                if agent_statement < 20: #agents are mistaken with 20% probability
-                    agent_statement = 1 - ground_truth
-                else:
-                    agent_statement = ground_truth
-
-            #print(f"agent {i} says {agent_statement}")
-            reporters.set_value_directly(f"E_{i}_says_stolen", agent_statement)
-
-            agent_dict[i] = agent_statement
-'''
-
-
-kb = [
-    ([], "jane and mark fight", 20),
-    ([], "jane has knife", 70),
-    (["jane and mark fight", "jane has knife"], "jane stabs mark with knife", 1),
-    (["jane stabs mark with knife"], "mark dies", 70),
-    (["jane and mark fight", "jane has knife"], "jane threatens mark with knife", 3),
-    (["jane threatens mark with knife"], "mark hit jane", 90),
-    (["mark hits jane"], "jane drops knife", 50),
-    (["jane drops knife"], "mark falls on knife", 1),
-    (["mark falls on knife"], "mark dies by accident", 60),
-    (["mark dies by accident"], "mark dies", 100),
-
-    ]
-
-block = {"jane stabs mark with knife":"jane threatens mark with knife",  # mutually exclusive
-    "jane threatens mark with knife":"jane stabs mark with knife"}
-
-freq_dict = defaultdict(int)
-current_inf_dict = {}
-
-
-
-j = 0
-
-
-output_list = []
-while j < 2:
-    current_inf = []
-    for fact_tup in kb:
-        a, b, c = fact_tup
-        current_inf_dict[b] = 0
-    i = 0
-    while i < 100:
-        for fact_tup in kb:
-            prem, conc, prob = fact_tup
-            flag = True
-            for p_x in prem:
-                if p_x not in current_inf:
-                    flag = False
-            if flag and random.randint(0, 100) <= prob and conc not in current_inf:
                 try:
-                    if block[conc] not in current_inf:
-                        current_inf.append(conc)
-                        current_inf_dict[conc] = 1
-                except KeyError:    # no blockers
-                    current_inf.append(conc)
-                    current_inf_dict[conc] = 1
+                    freq_dict[str(current_inf)] += 1
+                except KeyError:
+                    freq_dict[str(current_inf)] = 0
+                j += 1
 
+            current_inf_dict[conc] = 1
 
+            csv_columns = current_inf_dict.keys()
+            csv_file = f"VlekOutcomes{name_x}.csv"
 
+            with open(csv_file, 'w') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(csv_columns)
+                for data in output_list:
 
-
-        random.shuffle(kb)
-        i = i + 1
-
-    print(current_inf)
-    print(current_inf_dict)
-    print("\n")
-    l = []
-    for key in current_inf_dict.keys():
-        l.append(current_inf_dict[key])
-
-    output_list.append(l)
-
-    #print(current_inf_dict)
-
-
-    try:
-        freq_dict[str(current_inf)] += 1
-    except KeyError:
-        freq_dict[str(current_inf)] = 0
-    j += 1
-
-'''for key in sorted(freq_dict, key=freq_dict.get, reverse=True):
-    print(key, freq_dict[key])'''
-
-
-
-current_inf_dict[conc] = 1
-
-csv_columns = current_inf_dict.keys()
-csv_file = "VlekOutcomes.csv"
-
-with open(csv_file, 'w') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(csv_columns)
-    for data in output_list:
-
-        #print(data)
-        writer.writerow(data)
+                    #print(data)
+                    writer.writerow(data)

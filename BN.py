@@ -151,6 +151,36 @@ def evidence_cannot_be_connected_to_each_other(experiment, temporal_ordering):
 
     return forbidden_pairs
 
+def K2_BN_csv_only(csv_file, bn_file_name):
+    learner = gum.BNLearner(csv_file)  # using bn as template for variables and labels
+    file_name = bn_file_name  # "BayesNets/K2BN.net"
+    header = next(csv.reader(open(csv_file)))
+    best_temporal_ordering = []
+    for i in range(0, len(header)):
+        best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
+    learner.useK2(best_temporal_ordering)
+    # print(learner)
+    bn = learner.learnBN()
+    header = next(csv.reader(open(csv_file)))
+    for name in list(header):
+        x = bn.cpt(name)
+        i = gum.Instantiation(x)
+        i.setFirst()
+        # print(x)
+        # print(i, i.todict(), type(name), name)
+        while (not i.end()):
+            # print(i, "todict", i.todict(), type(i.todict()))
+            if 0.5 == x[i.todict()]:  # fix the never occurring situations -> maybe add an extra check for this TODO
+                if i.todict()[name] == 0:
+                    bn.cpt(name)[i.todict()] = 1
+                elif i.todict()[name] == 1:
+                    bn.cpt(name)[i.todict()] = 0
+            i.inc()
+        bn.cpt(name)
+    gum.saveBN(bn, file_name)
+    # print(f"saved bn as {file_name}")
+    return bn
+
 def K2_BN(experiment, csv_file, name):
     print(csv_file)
     global_state_csv = csv_file #"globalStates.csv"

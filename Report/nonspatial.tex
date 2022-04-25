@@ -14,8 +14,8 @@ These non-spatial simulations are boring, but they are necessary first steps: af
 
 In this part, I have two experiments. One simple experiment meant to be a replication of Charlotte Vlek's Bayesian Network in xxx \footnote{rephrase}, and another simple experiment mainly meant to test the evaluation criteria for the Bayesian Networks, as outlined in the previous chapter.
 
-\section{Methods}
-There are two methods outlined here, one for each initial experiment.
+\section{Method}
+%There are two methods outlined here, one for each initial experiment.
 
 \subsection{Vlek Networks}
 Take the Vlek networks from Vlek Jurix 2015.
@@ -58,10 +58,53 @@ Scenario 2
 
  \textbf{Mark died by accident} $\rightarrow$  \textbf{Mark died}  (0, 100)
 
-
-Since Vlek does not give probabilities in her paper, I'm just making some up. The logical sentences are reporters in the simulation, and then I let the simulation run for many times. And then there came out three different Bayesian Networks, one for scenario 1, one for scenario 2, and one for the combined network.
-
+This was done using forward chaining, with a time index, which means that a rule could only be triggered at one time (otherwise the probabilities get messed up). So we have a forward chaining rule, which means that if the premises of some rule are true, there are no excluding facts true, the timestep is correct, and the random number generator generated a number that is lower than the probability threshold, we find that the conclusion is true, and add it to our found facts. We keep doing this.
 
 
+Since Vlek does not give probabilities in her paper, I'm just making some up. The logical sentences are reporters in the simulation, and then I let the simulation run for many times (10,000 times). Then there came out three different Bayesian Networks, one for scenario 1, one for scenario 2, and one for the combined network (Figure~\ref{kb1}, Figure~\ref{kb2}, Figure~\ref{full}).
 
-\subsection{The credibility game}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale = 0.5]{images/Kb1.png}
+\caption{Automatically generated BN with K2 and the above forward chaining rules, scenario 1.}
+\label{kb1}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale = 0.5]{images/Kb2.png}
+\caption{Automatic generated BN with K2 and above forward chaining rules, scenario 2}
+\label{kb2}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\linewidth]{images/Kb.png}
+\caption{Automatically generated BN with rules from both scenarios included.}
+\label{full}
+\end{center}
+\end{figure}
+
+\section{Results - Figure comparison to Vlek 2015}
+If we only look at the ordering of the Bayesian Network, we can see that for Figure~\ref{kb1}, the sub-scenario structure is the same as in Vlek 2015 Figure~3. There's no scenario node constraining the network, all the information is contained in the network, no scenario node needed (todo: make the nodes the exact same names).
+
+However, there are differences between Vlek 2015 Figure~4, and the automatically generated BN here. Figure~4 in Vlek 2015 is replicated below in Figure~\ref{vlek} (todo: ask permission?? or just remove). The automatically generated BN is very linear and can be interpreted in a purely temporal way: mark hits jane, jane drops the knife, and due to jane dropping the knife, and mark falling on it, mark dies by accident - and if mark dies by accident, mark dies. The probabilities for all these events (from jane dropping the knife on), are ridiculously low, and don't really make sense (should interpret the small probabilities as e, and not as actual numbers I guess, due to underflow?). 
+
+In Vlek's paper, we see a subscenario: we have the subscenario ``Mark died by accident", which contains events such like mark hit jane, which leads to jane dropping the knife, and mark falling on the knife, and then dying. The coparents of Mark died are the same in this network as in the automatically generated BN, however, we once-again miss the scenario-like construction where mark hitting jane, jane dropping the knife, and mark falling on the knife are connected as part of a subscenario, rather than their ``own" nodes.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\linewidth]{images/vlek2015.png}
+\caption{Vlek BN.}
+\label{vlek}
+\end{center}
+\end{figure}
+
+Why to choose for subscenarios when it is not required? Tomorrow I will look up why the scenario construction was used and I will see if it does something that I miss? Coherence? But that also travels up the chain? But something with d-separation probably. I'll read the Vlek 2015 again i guess.
+
+And then I will also reflect on the evaluation section, and also show a plot of the changing prior, and maybe do the accuracy etc.
+
+
+

@@ -3,6 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Question1-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Question1-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BN.py" beforeDir="false" afterPath="$PROJECT_DIR$/BN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Question1.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/conclusion.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/conclusion.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/islandprior.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/islandprior.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.log" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.out" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.toc" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/nonspatial.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/nonspatial.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/nonspatial.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/nonspatial.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/spatialsimple.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/spatialsimple.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VlekNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/VlekNetwork.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +64,7 @@
       <recent name="$PROJECT_DIR$/BayesNets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.VlekNetwork">
+  <component name="RunManager" selected="Python.Analysis">
     <configuration name="Analysis" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="simulationTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -326,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650883229807</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="csv file simple sim">
+      <created>1650907483028</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1650907483028</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -343,7 +365,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added new map&#10;(really think about increasing resolution and automating map-drawing process...)" />
     <MESSAGE value="agents get to the edge&#10;steealing enxt" />
     <MESSAGE value="agents steal (a lot!)" />
     <MESSAGE value="fixed layering issue by using 'destination-over' and restoring contexts!" />
@@ -368,7 +389,8 @@
     <MESSAGE value="report updata" />
     <MESSAGE value="implemented case model converter on csv file" />
     <MESSAGE value="nonspatial simulation forward chaining with numbers" />
-    <option name="LAST_COMMIT_MESSAGE" value="nonspatial simulation forward chaining with numbers" />
+    <MESSAGE value="csv file simple sim" />
+    <option name="LAST_COMMIT_MESSAGE" value="csv file simple sim" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1650882023929">
@@ -384,20 +406,20 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="861" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643734985718" />
-    <state x="174" y="156" key="CommitChangelistDialog2" timestamp="1650883228372">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2" timestamp="1650907482592">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883228372" />
     <state x="174" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649711880253" />
-    <state x="143" y="23" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1649702507548" />
+    <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1650907482592" />
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog" timestamp="1644843960230">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1259" height="147" key="GridCell.Tab.0.bottom" timestamp="1650907461654">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1682" height="346" key="GridCell.Tab.0.bottom" timestamp="1650921945229">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1486" height="488" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066447" />
+    <state width="1682" height="346" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650921945229" />
     <state width="1780" height="284" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479948" />
     <state width="1654" height="267" key="GridCell.Tab.0.bottom/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -406,10 +428,10 @@
     <state width="1259" height="284" key="GridCell.Tab.0.bottom/29.23.1251.777@29.23.1251.777" timestamp="1649924766051" />
     <state width="1259" height="147" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1650907461654" />
     <state width="1709" height="385" key="GridCell.Tab.0.bottom/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
-    <state width="1259" height="147" key="GridCell.Tab.0.center" timestamp="1650907461652">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1682" height="346" key="GridCell.Tab.0.center" timestamp="1650921945228">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1486" height="488" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066446" />
+    <state width="1682" height="346" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650921945228" />
     <state width="1780" height="284" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479947" />
     <state width="1654" height="267" key="GridCell.Tab.0.center/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624619" />
     <state width="1578" height="283" key="GridCell.Tab.0.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -418,10 +440,10 @@
     <state width="1259" height="284" key="GridCell.Tab.0.center/29.23.1251.777@29.23.1251.777" timestamp="1649924766049" />
     <state width="1259" height="147" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1650907461652" />
     <state width="1709" height="385" key="GridCell.Tab.0.center/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1259" height="147" key="GridCell.Tab.0.left" timestamp="1650907461652">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1682" height="346" key="GridCell.Tab.0.left" timestamp="1650921945227">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1486" height="488" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066446" />
+    <state width="1682" height="346" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650921945227" />
     <state width="1780" height="284" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479946" />
     <state width="1654" height="267" key="GridCell.Tab.0.left/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624618" />
     <state width="1578" height="283" key="GridCell.Tab.0.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -430,10 +452,10 @@
     <state width="1259" height="284" key="GridCell.Tab.0.left/29.23.1251.777@29.23.1251.777" timestamp="1649924766047" />
     <state width="1259" height="147" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1650907461652" />
     <state width="1709" height="385" key="GridCell.Tab.0.left/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1259" height="147" key="GridCell.Tab.0.right" timestamp="1650907461653">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1682" height="346" key="GridCell.Tab.0.right" timestamp="1650921945228">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1486" height="488" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066446" />
+    <state width="1682" height="346" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650921945228" />
     <state width="1780" height="284" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479948" />
     <state width="1654" height="267" key="GridCell.Tab.0.right/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644702624620" />
     <state width="1578" height="283" key="GridCell.Tab.0.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />

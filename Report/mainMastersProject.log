@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  25 APR 2022 10:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  26 APR 2022 00:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -417,34 +417,59 @@ Chapter 4.
 
 
 
-] [14]) [15]
+] [14]
+<images/Kb1.png, id=291, 362.35374pt x 313.17pt>
+File: images/Kb1.png Graphic file (type png)
+<use images/Kb1.png>
+Package pdftex.def Info: images/Kb1.png  used on input line 68.
+(pdftex.def)             Requested size: 181.17642pt x 156.58461pt.
+<images/Kb2.png, id=293, 365.365pt x 787.94376pt>
+File: images/Kb2.png Graphic file (type png)
+<use images/Kb2.png>
+Package pdftex.def Info: images/Kb2.png  used on input line 76.
+(pdftex.def)             Requested size: 182.68205pt x 393.97092pt.
+<images/Kb.png, id=294, 556.0775pt x 672.5125pt>
+File: images/Kb.png Graphic file (type png)
+<use images/Kb.png>
+Package pdftex.def Info: images/Kb.png  used on input line 84.
+(pdftex.def)             Requested size: 430.00462pt x 520.05275pt.
+
+Underfull \vbox (badness 3612) has occurred while \output is active []
+
+ [15 <./images/Kb1.png>] [16 <./images/Kb2.png>] [17 <./images/Kb.png>]
+<images/vlek2015.png, id=315, 700.6175pt x 410.53375pt>
+File: images/vlek2015.png Graphic file (type png)
+<use images/vlek2015.png>
+Package pdftex.def Info: images/vlek2015.png  used on input line 99.
+(pdftex.def)             Requested size: 430.00462pt x 251.97249pt.
+) [18] [19 <./images/vlek2015.png>]
 \openout2 = `spatialsimple.aux'.
 
- (./spatialsimple.tex [16
+ (./spatialsimple.tex [20
 
 
 
 ]
 Chapter 5.
-) [17]
+) [21]
 \openout2 = `islandprior.aux'.
 
- (./islandprior.tex [18
+ (./islandprior.tex [22
 
 
 
 ]
 Chapter 6.
-) [19]
+) [23]
 \openout2 = `conclusion.aux'.
 
- (./conclusion.tex [20
+ (./conclusion.tex [24
 
 
 
 ]
 Chapter 7.
-) [21]
+) [25]
 No file mainMastersProject.bbl.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 72.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 72.
@@ -453,14 +478,24 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 72.
 (./islandprior.aux) (./conclusion.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 72.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 72.
-Package rerunfilecheck Info: File `mainMastersProject.out' has not changed.
-(rerunfilecheck)             Checksum: 8719A68CFF607C1F6E8FD54AF3F89A68;1918.
+
+
+Package rerunfilecheck Warning: File `mainMastersProject.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `mainMastersProject.out':
+(rerunfilecheck)             Before: AB935E3E11DE5F93A2D84F37A6A38E40;1920
+(rerunfilecheck)             After:  25072E71C135B9A5E4D2702D0DE20306;1930.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 6857 strings out of 480608
- 102239 string characters out of 5903630
- 372475 words of memory out of 5000000
- 22491 multiletter control sequences out of 15000+600000
+ 6894 strings out of 480608
+ 102731 string characters out of 5903630
+ 372814 words of memory out of 5000000
+ 22515 multiletter control sequences out of 15000+600000
  543805 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,8n,32p,1742b,377s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -476,10 +511,10 @@ texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
 live/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texliv
 e/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive
 /2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on mainMastersProject.pdf (27 pages, 188994 bytes).
+Output written on mainMastersProject.pdf (31 pages, 349260 bytes).
 PDF statistics:
- 377 PDF objects out of 1000 (max. 8388607)
- 328 compressed objects within 4 object streams
- 81 named destinations out of 1000 (max. 500000)
- 238 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 413 PDF objects out of 1000 (max. 8388607)
+ 352 compressed objects within 4 object streams
+ 89 named destinations out of 1000 (max. 500000)
+ 258 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -50,7 +50,7 @@ class Experiment():
 
         if scenario == "CredibilityGame":
             self.bnDir = f"{os.getcwd()}/CredBNs"
-            self.n = 9
+            self.n = 4
             n = self.n
             rel_events = ["agent_steals"]
             # create reporters automatically

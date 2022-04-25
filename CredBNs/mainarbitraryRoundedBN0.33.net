@@ -35,49 +35,19 @@ node E_3_says_stolen {
    ID = "E_3_says_stolen";
 }
 
-node E_4_says_stolen {
-   states = (0 1 );
-   label = "E_4_says_stolen";
-   ID = "E_4_says_stolen";
-}
-
-node E_5_says_stolen {
-   states = (0 1 );
-   label = "E_5_says_stolen";
-   ID = "E_5_says_stolen";
-}
-
-node E_6_says_stolen {
-   states = (0 1 );
-   label = "E_6_says_stolen";
-   ID = "E_6_says_stolen";
-}
-
-node E_7_says_stolen {
-   states = (0 1 );
-   label = "E_7_says_stolen";
-   ID = "E_7_says_stolen";
-}
-
-node E_8_says_stolen {
-   states = (0 1 );
-   label = "E_8_says_stolen";
-   ID = "E_8_says_stolen";
-}
-
 potential (agent_steals) {
-   data = (  0.66 0.66);
+   data = (  0.33 0.66);
 }
 
 potential ( E_0_says_stolen | agent_steals   ) {
    data = 
    ((   0.33   0.66)   % agent_steals=0   
-   (   0.66   0.33));   % agent_steals=1   
+   (   0.99   0));   % agent_steals=1   
 }
 
 potential ( E_1_says_stolen | agent_steals   ) {
    data = 
-   ((   0.66   0.33)   % agent_steals=0   
+   ((   0.99   0)   % agent_steals=0   
    (   0.33   0.66));   % agent_steals=1   
 }
 
@@ -90,37 +60,7 @@ potential ( E_2_says_stolen | agent_steals   ) {
 potential ( E_3_says_stolen | agent_steals   ) {
    data = 
    ((   0.33   0.66)   % agent_steals=0   
-   (   0.66   0.33));   % agent_steals=1   
-}
-
-potential ( E_4_says_stolen | agent_steals   ) {
-   data = 
-   ((   0.66   0.33)   % agent_steals=0   
-   (   0.33   0.66));   % agent_steals=1   
-}
-
-potential ( E_5_says_stolen | agent_steals   ) {
-   data = 
-   ((   0.66   0.33)   % agent_steals=0   
-   (   0.33   0.66));   % agent_steals=1   
-}
-
-potential ( E_6_says_stolen | agent_steals   ) {
-   data = 
-   ((   0.33   0.66)   % agent_steals=0   
-   (   0.66   0.33));   % agent_steals=1   
-}
-
-potential ( E_7_says_stolen | agent_steals   ) {
-   data = 
-   ((   0.66   0.33)   % agent_steals=0   
-   (   0.33   0.66));   % agent_steals=1   
-}
-
-potential ( E_8_says_stolen | agent_steals   ) {
-   data = 
-   ((   0.66   0.33)   % agent_steals=0   
-   (   0.33   0.66));   % agent_steals=1   
+   (   0.99   0));   % agent_steals=1   
 }
 
 

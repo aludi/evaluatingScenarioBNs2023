@@ -529,10 +529,10 @@ class Analysis():
 
 
 ### intentions
-#scenario = "CredibilityGame"
+scenario = "CredibilityGame"
 #scenario = "GroteMarkt"
-scenario = "StolenLaptop"
-tr = 10000
+#scenario = "StolenLaptop"
+tr = 100
 train_test_split = [tr, int(tr/10)]
 
 runs = train_test_split[0]

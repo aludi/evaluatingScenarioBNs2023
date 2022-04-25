@@ -20,9 +20,13 @@
 \contentsline {subsection}{\numberline {3.4.3}Human Criteria}{11}{subsection.3.4.3}%
 \contentsline {chapter}{\numberline {4}Simple Non-Spatial Simulations}{13}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Introduction}{13}{section.4.1}%
-\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{15}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introduction}{15}{section.5.1}%
-\contentsline {chapter}{\numberline {6}The Great Grote Markt Robbery Island Prior}{17}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Introduction}{17}{section.6.1}%
-\contentsline {chapter}{\numberline {7}Conclusion}{19}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Conclusion}{19}{section.7.1}%
+\contentsline {section}{\numberline {4.2}Methods}{14}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Vlek Networks}{14}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Behavioural rules for the simulation}{14}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}The credibility game}{15}{subsection.4.2.3}%
+\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{17}{section.5.1}%
+\contentsline {chapter}{\numberline {6}The Great Grote Markt Robbery Island Prior}{19}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Introduction}{19}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Conclusion}{21}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusion}{21}{section.7.1}%

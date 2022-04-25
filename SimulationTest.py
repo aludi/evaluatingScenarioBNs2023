@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 class StolenLaptop(Model):
 
-    def __init__(self, N_agents, N_houses, width, height, reporters):
+    def __init__(self, N_agents, N_houses, width, height, reporters, output_file):
         self.running = True
         self.current_id = -1
         self.num_agents = N_agents
@@ -30,6 +30,8 @@ class StolenLaptop(Model):
         self.reporters = reporters
         self.reporters.history_dict[self.reporters.run] = {}
         self.reporters.initialize_event_dict(self.reporters.history_dict[self.reporters.run]) # initalize current run tracker with 0
+
+        self.output_file = output_file
 
         '''
         I want a house that belongs to 1 agent,

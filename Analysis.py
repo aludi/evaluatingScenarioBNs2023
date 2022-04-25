@@ -529,9 +529,9 @@ class Analysis():
 
 
 ### intentions
-scenario = "CredibilityGame"
+#scenario = "CredibilityGame"
 #scenario = "GroteMarkt"
-#scenario = "StolenLaptop"
+scenario = "StolenLaptop"
 tr = 100
 train_test_split = [tr, int(tr/10)]
 

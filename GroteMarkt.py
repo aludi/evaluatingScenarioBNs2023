@@ -328,7 +328,7 @@ class BN(Agent):
 class MoneyModel(Model):
     """A model with some number of agents."""
 
-    def __init__(self, N, width, height, topic, reporters, scenario, torus=False):
+    def __init__(self, N, width, height, topic, reporters, scenario, output_file, torus=False):
         self.num_agents = N
         self.topic = topic
         self.grid = MultiGrid(width, height, torus)
@@ -337,6 +337,7 @@ class MoneyModel(Model):
         self.schedule = RandomActivation(self)
         self.scenario = scenario
         self.model_description = self.set_model_text_explanation()
+        self.output_file = output_file
 
 
         # Create agents

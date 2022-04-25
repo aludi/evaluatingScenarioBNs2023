@@ -6,7 +6,8 @@ import numpy as np
 
 class CredibilityGame(Model):
 
-    def __init__(self, N_agents, reporters, subtype):
+    def __init__(self, N_agents, reporters, subtype, output_file):
+        self.output_file = output_file
         if subtype == "basicGame":
             self.basic_game(N_agents, reporters)
         elif subtype == "strangeGame":

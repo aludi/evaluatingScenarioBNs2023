@@ -39,7 +39,7 @@ class Experiment():
                                     "E_private"]
             self.reporters = Reporters(relevant_events = rel_events)
             for i in range(0, self.runs-1):
-                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters)
+                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters, output_file = csv_file_name)
                 for j in range(30):
                     model.step()
                 self.reporters.increase_run()
@@ -62,7 +62,7 @@ class Experiment():
 
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
-                CredibilityGame(N_agents=n, reporters=self.reporters, subtype=subtype)
+                CredibilityGame(N_agents=n, reporters=self.reporters, subtype=subtype, output_file = csv_file_name)
                 self.reporters.increase_run()
 
             self.generate_csv_report(self.csv_file_name)
@@ -106,7 +106,7 @@ class Experiment():
             #print(rel_events)
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
-                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, scenario=self.scenario, torus=False)
+                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, scenario=self.scenario, output_file = csv_file_name, torus=False)
 
                 for j in range(100):
                     model.step()

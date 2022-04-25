@@ -24,6 +24,8 @@ from SimulationClasses.Vision import Vision
 from SimulationClasses.Goodie import Goodie
 from SimulationClasses.Camera import Camera
 
+from CaseModel import CaseModel
+
 from Reporters import Reporters
 
 
@@ -240,6 +242,11 @@ class ScenarioDescription(TextElement):
     def render(self, model):
         return model.model_description
 
+class ViewCaseModel(TextElement):
+    def render(self, model):
+        c = CaseModel(model.output_file)
+        return c.get_case_model()
+
 
 
 
@@ -257,11 +264,12 @@ if sim == 0:
 
     grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)
     text = Test()
+    cm = ViewCaseModel()
     new_reporters = Reporters(rel_events)
     server = ModularServer(StolenLaptop,
-                           [grid, text],
+                           [grid, text, cm],
                            "Stolen Laptop",
-                           {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters})
+                           {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters, "output_file":"StolenLaptopOutcomes.csv"})
 elif sim == 1:
 
 
@@ -278,29 +286,37 @@ elif sim == 1:
     topic_gen = "groteMarkt4"
     C = CreateMap(topic_gen, y)
     x = int(y*C.rel)
+    cm = ViewCaseModel()
+
     grid = WorkaroundCanvas(agent_portrayal1, x, y, int((C.rel)*500), 500)
     model_params = {"N": n,
         "scenario" : UserSettableParameter(
             "slider",
             "Scenario",
-            1,
-            1,
-            4,
-            1,
+            2,  # actual value
+            1,  # min value
+            4,  # max value
+            1,  # step size
           description="what scenario do you want to investigate?",
+
         ),
 
-        "width": x, "height": y, "topic":topic_gen, "reporters": None, "torus":False}
+        "width": x, "height": y, "topic":topic_gen, "reporters": None, "output_file":"GroteMarktOutcomes.csv", "torus":False}
 
 
 
 
     text = Test()
+    cm = ViewCaseModel()
     model_text = ScenarioDescription()
 
 
     #bnPic = Image("imgBNGroteMarkt.png", 250, 500, 250, 500)
-    server = ModularServer(MoneyModel, [model_text, grid, text], "Grote Markt", model_params)
+    server = ModularServer(MoneyModel, [model_text, grid, text, cm], "Grote Markt", model_params)   #we're making a case model from previous data!!
+
+    # todo: case model does not change with scenario!! This is because cm is generated from the csv source file
+    # which is not the same as the scenario that is run online. So generate different csvs for each subscenario
+    # so that we can have the right case model per subscenario.
 
 
 

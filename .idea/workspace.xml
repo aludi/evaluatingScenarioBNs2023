@@ -2,40 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/VlekNetwork.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CredibilityGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/CredibilityGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroteMarkt.py" beforeDir="false" afterPath="$PROJECT_DIR$/GroteMarkt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BN.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BN.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.05.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.05.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.1.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.125.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.125.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.2.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.25.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.25.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.33.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.33.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.001.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.001.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.01.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.01.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.1.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.2.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.3.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.3.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN0.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN0.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN1.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN2.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN3.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN3.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN4.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN4.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN5.net" beforeDir="false" afterPath="$PROJECT_DIR$/K2Bns/K2BNroundedBN5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sim_Viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sim_Viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimulationTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StolenLaptopAccuracy.csv" beforeDir="false" afterPath="$PROJECT_DIR$/StolenLaptopAccuracy.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StolenLaptopOutcomes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/StolenLaptopOutcomes.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StolenLaptopTest.csv" beforeDir="false" afterPath="$PROJECT_DIR$/StolenLaptopTest.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caseModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/CaseModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expORG.csv" beforeDir="false" afterPath="$PROJECT_DIR$/expORG.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expSpider.csv" beforeDir="false" afterPath="$PROJECT_DIR$/expSpider.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VlekNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/VlekNetwork.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650878587503</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="nonspatial simulation forward chaining with numbers">
+      <created>1650883229807</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1650883229807</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -368,7 +343,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="basic simulation (no thief yet) of grote markt. Agents can hang around and move to their goal (think of implementing &quot;waypoints&quot; for efficiency's sake)." />
     <MESSAGE value="added new map&#10;(really think about increasing resolution and automating map-drawing process...)" />
     <MESSAGE value="agents get to the edge&#10;steealing enxt" />
     <MESSAGE value="agents steal (a lot!)" />
@@ -393,7 +367,8 @@
     <MESSAGE value="bare structure report" />
     <MESSAGE value="report updata" />
     <MESSAGE value="implemented case model converter on csv file" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented case model converter on csv file" />
+    <MESSAGE value="nonspatial simulation forward chaining with numbers" />
+    <option name="LAST_COMMIT_MESSAGE" value="nonspatial simulation forward chaining with numbers" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1650882023929">
@@ -409,18 +384,18 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="861" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1643734985718" />
-    <state x="174" y="156" key="CommitChangelistDialog2" timestamp="1650878586737">
+    <state x="174" y="156" key="CommitChangelistDialog2" timestamp="1650883228372">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650878586737" />
+    <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883228372" />
     <state x="174" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649711880253" />
     <state x="143" y="23" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1649702507548" />
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog" timestamp="1644843960230">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1486" height="488" key="GridCell.Tab.0.bottom" timestamp="1650883066447">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1259" height="147" key="GridCell.Tab.0.bottom" timestamp="1650907461654">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state width="1486" height="488" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066447" />
     <state width="1780" height="284" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479948" />
@@ -429,10 +404,10 @@
     <state width="1637" height="387" key="GridCell.Tab.0.bottom/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752094" />
     <state width="1229" height="247" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1647042670108" />
     <state width="1259" height="284" key="GridCell.Tab.0.bottom/29.23.1251.777@29.23.1251.777" timestamp="1649924766051" />
-    <state width="1259" height="153" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1648033992002" />
+    <state width="1259" height="147" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1650907461654" />
     <state width="1709" height="385" key="GridCell.Tab.0.bottom/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
-    <state width="1486" height="488" key="GridCell.Tab.0.center" timestamp="1650883066446">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1259" height="147" key="GridCell.Tab.0.center" timestamp="1650907461652">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state width="1486" height="488" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066446" />
     <state width="1780" height="284" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479947" />
@@ -441,10 +416,10 @@
     <state width="1637" height="387" key="GridCell.Tab.0.center/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752093" />
     <state width="1229" height="247" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1647042670107" />
     <state width="1259" height="284" key="GridCell.Tab.0.center/29.23.1251.777@29.23.1251.777" timestamp="1649924766049" />
-    <state width="1259" height="153" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1648033992001" />
+    <state width="1259" height="147" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1650907461652" />
     <state width="1709" height="385" key="GridCell.Tab.0.center/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1486" height="488" key="GridCell.Tab.0.left" timestamp="1650883066446">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1259" height="147" key="GridCell.Tab.0.left" timestamp="1650907461652">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state width="1486" height="488" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066446" />
     <state width="1780" height="284" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479946" />
@@ -453,10 +428,10 @@
     <state width="1637" height="387" key="GridCell.Tab.0.left/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752093" />
     <state width="1229" height="247" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1647042670106" />
     <state width="1259" height="284" key="GridCell.Tab.0.left/29.23.1251.777@29.23.1251.777" timestamp="1649924766047" />
-    <state width="1259" height="153" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1648033992001" />
+    <state width="1259" height="147" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1650907461652" />
     <state width="1709" height="385" key="GridCell.Tab.0.left/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164658" />
-    <state width="1486" height="488" key="GridCell.Tab.0.right" timestamp="1650883066446">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1259" height="147" key="GridCell.Tab.0.right" timestamp="1650907461653">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state width="1486" height="488" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883066446" />
     <state width="1780" height="284" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649757479948" />
@@ -465,7 +440,7 @@
     <state width="1637" height="387" key="GridCell.Tab.0.right/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752094" />
     <state width="1229" height="247" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1647042670107" />
     <state width="1259" height="284" key="GridCell.Tab.0.right/29.23.1251.777@29.23.1251.777" timestamp="1649924766049" />
-    <state width="1259" height="153" key="GridCell.Tab.0.right/30.23.1250.777@30.23.1250.777" timestamp="1648033992002" />
+    <state width="1259" height="147" key="GridCell.Tab.0.right/30.23.1250.777@30.23.1250.777" timestamp="1650907461653" />
     <state width="1709" height="385" key="GridCell.Tab.0.right/40.23.1880.1057@40.23.1880.1057" timestamp="1643503164659" />
     <state width="1548" height="354" key="GridCell.Tab.1.bottom" timestamp="1648474377099">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -505,10 +480,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="937" y="471" key="VCS.ChangelistChooser/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843945261" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1649782330477">
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1650883236696">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1649782330477" />
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650883236696" />
     <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1649702515001" />
     <state x="843" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1650876464697">
       <screen x="0" y="23" width="1920" height="1057" />

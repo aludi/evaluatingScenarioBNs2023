@@ -1,4 +1,5 @@
 import random
+import csv
 from mesa import Agent, Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
@@ -61,14 +62,17 @@ block = {"jane stabs mark with knife":"jane threatens mark with knife",  # mutua
 freq_dict = defaultdict(int)
 current_inf_dict = {}
 
-for fact_tup in kb:
-    a, b, c = fact_tup
-    current_inf_dict[b] = 0
+
 
 j = 0
 
-while j < 10:
+
+output_list = []
+while j < 2:
     current_inf = []
+    for fact_tup in kb:
+        a, b, c = fact_tup
+        current_inf_dict[b] = 0
     i = 0
     while i < 100:
         for fact_tup in kb:
@@ -86,10 +90,22 @@ while j < 10:
                     current_inf.append(conc)
                     current_inf_dict[conc] = 1
 
-                #print(current_inf)
+
+
+
 
         random.shuffle(kb)
         i = i + 1
+
+    print(current_inf)
+    print(current_inf_dict)
+    print("\n")
+    l = []
+    for key in current_inf_dict.keys():
+        l.append(current_inf_dict[key])
+
+    output_list.append(l)
+
     #print(current_inf_dict)
 
 
@@ -99,7 +115,20 @@ while j < 10:
         freq_dict[str(current_inf)] = 0
     j += 1
 
-for key in sorted(freq_dict, key=freq_dict.get, reverse=True):
-    print(key, freq_dict[key])
+'''for key in sorted(freq_dict, key=freq_dict.get, reverse=True):
+    print(key, freq_dict[key])'''
 
 
+
+current_inf_dict[conc] = 1
+
+csv_columns = current_inf_dict.keys()
+csv_file = "VlekOutcomes.csv"
+
+with open(csv_file, 'w') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(csv_columns)
+    for data in output_list:
+
+        #print(data)
+        writer.writerow(data)

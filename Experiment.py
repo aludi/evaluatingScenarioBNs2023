@@ -22,15 +22,19 @@ from CreateMap import CreateMap
 
 class Experiment():
 
-    def __init__(self, scenario, runs, csv_file_name, subtype=None):
+    def __init__(self, scenario, runs, train, subtype=None):
         self.scenario = scenario
+        self.train = train
         print("experiment scenario", scenario)
         self.runs = runs
-        self.csv_file_name = csv_file_name #"CredibilityGameOutcomes.csv"    # can take 2 shapes: "{experiment name}{Outcomes}.csv" and "{experiment name}{Test}.csv"
+        #self.csv_file_name = csv_file_name #"CredibilityGameOutcomes.csv"    # can take 2 shapes: "{experiment name}{Outcomes}.csv" and "{experiment name}{Test}.csv"
+        self.bnDir = f"experiments/{scenario}/BNs"
+        if scenario == "VlekNetwork":
+            VlekNetwork(runs=runs, train=train)
 
         if scenario == "StolenLaptop":
             #self.csv_file_name = "globalStates.csv"
-            self.bnDir = f"{os.getcwd()}/K2BNs"
+
             rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
                                     "flees_startled", "successful_stolen", "raining", "curtains",
                                     "E_object_is_gone",
@@ -41,17 +45,16 @@ class Experiment():
                                     "E_private"]
             self.reporters = Reporters(relevant_events = rel_events)
             for i in range(0, self.runs-1):
-                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters, output_file = csv_file_name)
+                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters, output_file = f"experiments/{scenario}/{self.train}")
                 for j in range(30):
                     model.step()
                 self.reporters.increase_run()
 
-            self.generate_csv_report(self.csv_file_name)  # use these csvs for automatic BN structure determination
+            self.generate_csv_report(f"experiments/{scenario}/train")  # use these csvs for automatic BN structure determination
             self.print_frequencies()
             #self.print_frequencies_latex()
 
         if scenario == "CredibilityGame":
-            self.bnDir = f"{os.getcwd()}/CredBNs"
             self.n = 4
             n = self.n
             rel_events = ["agent_steals"]
@@ -64,16 +67,15 @@ class Experiment():
 
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
-                CredibilityGame(N_agents=n, reporters=self.reporters, subtype=subtype, output_file = csv_file_name)
+                CredibilityGame(N_agents=n, reporters=self.reporters, subtype=subtype, output_file = f"experiments/{scenario}/{self.train}")
                 self.reporters.increase_run()
 
-            self.generate_csv_report(self.csv_file_name)
+            self.generate_csv_report(f"experiments/{scenario}/{self.train}")
             self.print_frequencies()
 
 
         if scenario == "GroteMarkt":
             self.subtype = subtype
-            self.bnDir = f"{os.getcwd()}/BNGroteMarkt"
             #self.csv_file_name = "GroteMarktOutcomes.csv"
 
             self.scenario = subtype
@@ -108,7 +110,7 @@ class Experiment():
             #print(rel_events)
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
-                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, scenario=self.scenario, output_file = csv_file_name, torus=False)
+                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
 
                 for j in range(100):
                     model.step()
@@ -118,7 +120,7 @@ class Experiment():
 
             print(self.reporters.pure_frequency_event_dict)
 
-            self.generate_csv_report(self.csv_file_name)
+            self.generate_csv_report(f"experiments/{scenario}/{self.train}")
             self.print_frequencies()
 
 

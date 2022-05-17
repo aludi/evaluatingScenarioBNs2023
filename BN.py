@@ -177,6 +177,7 @@ def K2_BN_csv_only(csv_file, bn_file_name):
                     bn.cpt(name)[i.todict()] = 0
             i.inc()
         bn.cpt(name)
+    print("current dir", os.getcwd())
     gum.saveBN(bn, file_name)
     # print(f"saved bn as {file_name}")
     return bn
@@ -214,6 +215,8 @@ def K2_BN(experiment, csv_file, name):
             i.inc()
 
         bn.cpt(name)
+    print("experiment", experiment)
+    print("current dit", os.getcwd())
     gum.saveBN(bn, file_name)
     #print(f"saved bn as {file_name}")
     return bn

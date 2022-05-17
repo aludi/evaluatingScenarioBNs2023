@@ -18,12 +18,21 @@
 \BOOKMARK [0][-]{chapter.4}{Simple Non-Spatial Simulations}{}% 18
 \BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 19
 \BOOKMARK [1][-]{section.4.2}{Method}{chapter.4}% 20
-\BOOKMARK [2][-]{subsection.4.2.1}{Vlek Networks}{section.4.2}% 21
-\BOOKMARK [2][-]{subsection.4.2.2}{Behavioural rules for the simulation}{section.4.2}% 22
-\BOOKMARK [1][-]{section.4.3}{Results - Figure comparison to Vlek 2015}{chapter.4}% 23
-\BOOKMARK [0][-]{chapter.5}{Simple Spatial Simulations}{}% 24
-\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 25
-\BOOKMARK [0][-]{chapter.6}{The Great Grote Markt Robbery Island Prior}{}% 26
-\BOOKMARK [1][-]{section.6.1}{Introduction}{chapter.6}% 27
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 28
-\BOOKMARK [1][-]{section.7.1}{Conclusion}{chapter.7}% 29
+\BOOKMARK [2][-]{subsection.4.2.1}{Behavioural rules for the simulation}{section.4.2}% 21
+\BOOKMARK [1][-]{section.4.3}{Results}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.4}{Discussion}{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.4.4.1}{Structural Criteria}{section.4.4}% 24
+\BOOKMARK [2][-]{subsection.4.4.2}{Performance Criteria}{section.4.4}% 25
+\BOOKMARK [2][-]{subsection.4.4.3}{Human Criteria}{section.4.4}% 26
+\BOOKMARK [2][-]{subsection.4.4.4}{Comparison to Vlek 2015}{section.4.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.5}{Quality of scenario}{section.4.4}% 28
+\BOOKMARK [1][-]{section.4.5}{Important take-aways}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.5.1}{We don't need the scenario node for mutual exclusivity}{section.4.5}% 30
+\BOOKMARK [2][-]{subsection.4.5.2}{Resolution and number of runs}{section.4.5}% 31
+\BOOKMARK [0][-]{chapter.5}{Simple Spatial Simulations}{}% 32
+\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 33
+\BOOKMARK [0][-]{chapter.6}{The Great Grote Markt Robbery Island Prior}{}% 34
+\BOOKMARK [1][-]{section.6.1}{Introduction}{chapter.6}% 35
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 36
+\BOOKMARK [1][-]{section.7.1}{Conclusion}{chapter.7}% 37
+\BOOKMARK [1][-]{section.7.2}{Future Work}{chapter.7}% 38

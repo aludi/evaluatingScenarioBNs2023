@@ -21,12 +21,21 @@
 \contentsline {chapter}{\numberline {4}Simple Non-Spatial Simulations}{13}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Introduction}{13}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Method}{14}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Vlek Networks}{14}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Behavioural rules for the simulation}{14}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Results - Figure comparison to Vlek 2015}{18}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{21}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introduction}{21}{section.5.1}%
-\contentsline {chapter}{\numberline {6}The Great Grote Markt Robbery Island Prior}{23}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Introduction}{23}{section.6.1}%
-\contentsline {chapter}{\numberline {7}Conclusion}{25}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Conclusion}{25}{section.7.1}%
+\contentsline {subsection}{\numberline {4.2.1}Behavioural rules for the simulation}{14}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Results}{15}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Discussion}{15}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Structural Criteria}{15}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Performance Criteria}{19}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Human Criteria}{21}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Comparison to Vlek 2015}{21}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Quality of scenario}{22}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Important take-aways}{23}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}We don't need the scenario node for mutual exclusivity}{23}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Resolution and number of runs}{23}{subsection.4.5.2}%
+\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{25}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{25}{section.5.1}%
+\contentsline {chapter}{\numberline {6}The Great Grote Markt Robbery Island Prior}{27}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Introduction}{27}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Conclusion}{29}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusion}{29}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Future Work}{29}{section.7.2}%

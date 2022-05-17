@@ -18,13 +18,13 @@ node jane_has_knife {
 }
 
 node jane_stabs_mark_with_knife {
-   states = (0 1 );
+   states = (0 );
    label = "jane_stabs_mark_with_knife";
    ID = "jane_stabs_mark_with_knife";
 }
 
 node mark_dies {
-   states = (0 1 );
+   states = (0 );
    label = "mark_dies";
    ID = "mark_dies";
 }
@@ -42,95 +42,85 @@ node mark_hits_jane {
 }
 
 node jane_drops_knife {
-   states = (0 1 );
+   states = (0 );
    label = "jane_drops_knife";
    ID = "jane_drops_knife";
 }
 
 node mark_falls_on_knife {
-   states = (0 1 );
+   states = (0 );
    label = "mark_falls_on_knife";
    ID = "mark_falls_on_knife";
 }
 
 node mark_dies_by_accident {
-   states = (0 1 );
+   states = (0 );
    label = "mark_dies_by_accident";
    ID = "mark_dies_by_accident";
 }
 
 potential (jane_and_mark_fight) {
-   data = (  0.792671 0.207329);
+   data = (  0.723881 0.276119);
 }
 
 potential (jane_has_knife) {
-   data = (  0.29782 0.70218);
+   data = (  0.256219 0.743781);
 }
 
-potential ( jane_stabs_mark_with_knife | jane_and_mark_fight   jane_has_knife   ) {
-   data = 
-   (((   0.999947   5.29381e-05)   % jane_has_knife=0   jane_and_mark_fight=0   
-   (   0.999978   2.24568e-05))   % jane_has_knife=1   jane_and_mark_fight=0   
-   ((   0.999797   0.000202511)   % jane_has_knife=0   jane_and_mark_fight=1   
-   (   0.978627   0.0213734)));   % jane_has_knife=1   jane_and_mark_fight=1   
+potential (jane_stabs_mark_with_knife) {
+   data = (  1);
 }
 
-potential ( mark_dies | jane_and_mark_fight   jane_stabs_mark_with_knife   ) {
-   data = 
-   (((   0.999984   1.57684e-05)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=0   
-   (   1   0))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=0   
-   ((   0.998959   0.00104052)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=1   
-   (   0.324   0.676)));   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=1   
+potential (mark_dies) {
+   data = (  1);
 }
 
-potential ( jane_threatens_mark_with_knife | jane_has_knife   mark_dies   jane_and_mark_fight   jane_stabs_mark_with_knife   ) {
+potential ( jane_threatens_mark_with_knife | jane_and_mark_fight   ) {
    data = 
-   (((((   0.999987   1.32356e-05)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=0   mark_dies=0   jane_has_knife=0   
-   (   1   0))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=0   mark_dies=0   jane_has_knife=0   
-   ((   0.999949   5.06432e-05)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=1   mark_dies=0   jane_has_knife=0   
-   (   1   0)))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=1   mark_dies=0   jane_has_knife=0   
-   (((   1   0)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=0   mark_dies=1   jane_has_knife=0   
-   (   1   0))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=0   mark_dies=1   jane_has_knife=0   
-   ((   1   0)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=1   mark_dies=1   jane_has_knife=0   
-   (   1   0))))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=1   mark_dies=1   jane_has_knife=0   
-   ((((   0.999994   5.61438e-06)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=0   mark_dies=0   jane_has_knife=1   
-   (   1   0))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=0   mark_dies=0   jane_has_knife=1   
-   ((   0.963437   0.0365629)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=1   mark_dies=0   jane_has_knife=1   
-   (   0.996894   0.00310559)))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=1   mark_dies=0   jane_has_knife=1   
-   (((   1   0)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=0   mark_dies=1   jane_has_knife=1   
-   (   1   0))   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=0   mark_dies=1   jane_has_knife=1   
-   ((   0.0151515   0.984848)   % jane_stabs_mark_with_knife=0   jane_and_mark_fight=1   mark_dies=1   jane_has_knife=1   
-   (   0.998516   0.00148368)))));   % jane_stabs_mark_with_knife=1   jane_and_mark_fight=1   mark_dies=1   jane_has_knife=1   
+   ((   0.998282   0.00171821)   % jane_and_mark_fight=0   
+   (   0.959459   0.0405405));   % jane_and_mark_fight=1   
 }
 
 potential ( mark_hits_jane | jane_threatens_mark_with_knife   ) {
    data = 
-   ((   0.999975   2.51345e-05)   % jane_threatens_mark_with_knife=0   
-   (   0.0779817   0.922018));   % jane_threatens_mark_with_knife=1   
+   ((   0.998741   0.00125945)   % jane_threatens_mark_with_knife=0   
+   (   0.1   0.9));   % jane_threatens_mark_with_knife=1   
 }
 
-potential ( jane_drops_knife | mark_hits_jane   mark_dies   ) {
+potential ( jane_drops_knife | mark_hits_jane   jane_and_mark_fight   jane_threatens_mark_with_knife   ) {
    data = 
-   (((   0.999987   1.25891e-05)   % mark_dies=0   mark_hits_jane=0   
-   (   0.994118   0.00588235))   % mark_dies=1   mark_hits_jane=0   
-   ((   0.479275   0.520725)   % mark_dies=0   mark_hits_jane=1   
-   (   0.0555556   0.944444)));   % mark_dies=1   mark_hits_jane=1   
+   ((((   1)   % jane_threatens_mark_with_knife=0   jane_and_mark_fight=0   mark_hits_jane=0   
+   (   1))   % jane_threatens_mark_with_knife=1   jane_and_mark_fight=0   mark_hits_jane=0   
+   ((   1)   % jane_threatens_mark_with_knife=0   jane_and_mark_fight=1   mark_hits_jane=0   
+   (   1)))   % jane_threatens_mark_with_knife=1   jane_and_mark_fight=1   mark_hits_jane=0   
+   (((   1)   % jane_threatens_mark_with_knife=0   jane_and_mark_fight=0   mark_hits_jane=1   
+   (   1))   % jane_threatens_mark_with_knife=1   jane_and_mark_fight=0   mark_hits_jane=1   
+   ((   1)   % jane_threatens_mark_with_knife=0   jane_and_mark_fight=1   mark_hits_jane=1   
+   (   1))));   % jane_threatens_mark_with_knife=1   jane_and_mark_fight=1   mark_hits_jane=1   
 }
 
-potential ( mark_falls_on_knife | mark_dies   jane_stabs_mark_with_knife   ) {
+potential ( mark_falls_on_knife | jane_threatens_mark_with_knife   jane_and_mark_fight   mark_hits_jane   ) {
    data = 
-   (((   0.999987   1.25411e-05)   % jane_stabs_mark_with_knife=0   mark_dies=0   
-   (   0.987805   0.0121951))   % jane_stabs_mark_with_knife=1   mark_dies=0   
-   ((   0.0555556   0.944444)   % jane_stabs_mark_with_knife=0   mark_dies=1   
-   (   0.994118   0.00588235)));   % jane_stabs_mark_with_knife=1   mark_dies=1   
+   ((((   1)   % mark_hits_jane=0   jane_and_mark_fight=0   jane_threatens_mark_with_knife=0   
+   (   1))   % mark_hits_jane=1   jane_and_mark_fight=0   jane_threatens_mark_with_knife=0   
+   ((   1)   % mark_hits_jane=0   jane_and_mark_fight=1   jane_threatens_mark_with_knife=0   
+   (   1)))   % mark_hits_jane=1   jane_and_mark_fight=1   jane_threatens_mark_with_knife=0   
+   (((   1)   % mark_hits_jane=0   jane_and_mark_fight=0   jane_threatens_mark_with_knife=1   
+   (   1))   % mark_hits_jane=1   jane_and_mark_fight=0   jane_threatens_mark_with_knife=1   
+   ((   1)   % mark_hits_jane=0   jane_and_mark_fight=1   jane_threatens_mark_with_knife=1   
+   (   1))));   % mark_hits_jane=1   jane_and_mark_fight=1   jane_threatens_mark_with_knife=1   
 }
 
-potential ( mark_dies_by_accident | mark_dies   mark_falls_on_knife   ) {
+potential ( mark_dies_by_accident | jane_threatens_mark_with_knife   jane_and_mark_fight   mark_hits_jane   ) {
    data = 
-   (((   0.999987   1.25285e-05)   % mark_falls_on_knife=0   mark_dies=0   
-   (   1   0))   % mark_falls_on_knife=1   mark_dies=0   
-   ((   0.994118   0.00588235)   % mark_falls_on_knife=0   mark_dies=1   
-   (   0.0555556   0.944444)));   % mark_falls_on_knife=1   mark_dies=1   
+   ((((   1)   % mark_hits_jane=0   jane_and_mark_fight=0   jane_threatens_mark_with_knife=0   
+   (   1))   % mark_hits_jane=1   jane_and_mark_fight=0   jane_threatens_mark_with_knife=0   
+   ((   1)   % mark_hits_jane=0   jane_and_mark_fight=1   jane_threatens_mark_with_knife=0   
+   (   1)))   % mark_hits_jane=1   jane_and_mark_fight=1   jane_threatens_mark_with_knife=0   
+   (((   1)   % mark_hits_jane=0   jane_and_mark_fight=0   jane_threatens_mark_with_knife=1   
+   (   1))   % mark_hits_jane=1   jane_and_mark_fight=0   jane_threatens_mark_with_knife=1   
+   ((   1)   % mark_hits_jane=0   jane_and_mark_fight=1   jane_threatens_mark_with_knife=1   
+   (   1))));   % mark_hits_jane=1   jane_and_mark_fight=1   jane_threatens_mark_with_knife=1   
 }
 
 

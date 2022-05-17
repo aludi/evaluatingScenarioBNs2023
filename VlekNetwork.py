@@ -7,10 +7,20 @@ import numpy as np
 from collections import defaultdict
 
 
+import csv
+from mesa import Agent, Model
+from mesa.time import RandomActivation
+from mesa.space import MultiGrid
+import numpy as np
+import os
+from collections import defaultdict
+
+
 class VlekNetwork(Model):
 
-    def __init__(self, runs, output_file):
-        self.output_file = output_file
+    def __init__(self, runs, train):
+        self.path = "/experiments/VlekNetwork/"
+        self.train = train
         self.run = runs
         self.mark_and_jane()
 
@@ -25,7 +35,35 @@ class VlekNetwork(Model):
             (["jane_threatens_mark_with_knife"], "mark_hits_jane", 90, 2), #90
             (["mark_hits_jane"], "jane_drops_knife", 50, 3), # 50
             (["jane_drops_knife"], "mark_falls_on_knife", 10, 4),    #1
-            (["mark_falls_on_knife"], "mark_dies_by_accident", 70, 5), #60
+            (["mark_falls_on_knife"], "mark_dies_by_accident", 60, 5), #60
+            (["mark_dies_by_accident"], "mark_dies", 100, 6)
+
+            ]
+
+        kb1 = [
+            ([], "jane_and_mark_fight", 20, 0),
+            ([], "jane_has_knife", 70, 0),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_stabs_mark_with_knife", 1, 1),
+            (["jane_stabs_mark_with_knife"], "mark_dies", 70, 2)
+            ]
+        kb2 = [
+            ([], "jane_and_mark_fight", 20, 0),
+            ([], "jane_has_knife", 70, 0),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_threatens_mark_with_knife", 3, 1),
+            (["jane_threatens_mark_with_knife"], "mark_hits_jane", 9, 2)]
+
+
+    def mark_and_jane(self):  # this is the basic game with independent agents.
+        kbFull = [
+            ([], "jane_and_mark_fight", 20, 0),
+            ([], "jane_has_knife", 70, 0),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_stabs_mark_with_knife", 1, 1),
+            (["jane_stabs_mark_with_knife"], "mark_dies", 70, 2),
+            (["jane_and_mark_fight", "jane_has_knife"], "jane_threatens_mark_with_knife", 3, 1),
+            (["jane_threatens_mark_with_knife"], "mark_hits_jane", 90, 2), #90
+            (["mark_hits_jane"], "jane_drops_knife", 50, 3), # 50
+            (["jane_drops_knife"], "mark_falls_on_knife", 10, 4),    #1
+            (["mark_falls_on_knife"], "mark_dies_by_accident", 60, 5), #60
             (["mark_dies_by_accident"], "mark_dies", 100, 6)
 
             ]
@@ -43,7 +81,7 @@ class VlekNetwork(Model):
             (["jane_threatens_mark_with_knife"], "mark_hits_jane", 90, 2),  # 90
             (["mark_hits_jane"], "jane_drops_knife", 50, 3),  # 50
             (["jane_drops_knife"], "mark_falls_on_knife", 10, 4),  # 1
-            (["mark_falls_on_knife"], "mark_dies_by_accident", 70, 5),  # 60
+            (["mark_falls_on_knife"], "mark_dies_by_accident", 60, 5),  # 60
             (["mark_dies_by_accident"], "mark_dies", 100, 6)
 
             ]
@@ -107,12 +145,11 @@ class VlekNetwork(Model):
             current_inf_dict[conc] = 1
 
             csv_columns = current_inf_dict.keys()
-            csv_file = f"VlekOutcomes{name_x}.csv"
+            csv_file = os.getcwd() + self.path + f"{self.train}/{name_x}.csv"
 
             with open(csv_file, 'w') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(csv_columns)
                 for data in output_list:
-
                     #print(data)
                     writer.writerow(data)

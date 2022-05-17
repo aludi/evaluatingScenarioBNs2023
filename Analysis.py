@@ -351,9 +351,12 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
     elif main_exp.scenario == "CredibilityGame":
         relevant_nodes_out = ["agent_steals"]
         relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out) # no hyps here
+    elif main_exp.scenario == "VlekNetwork":
+        relevant_nodes_out = ["mark_dies"]
     elif main_exp.scenario == 2:
         relevant_nodes_out = ["stealing_1_0"]
         #relevant_nodes_hyp = get_relevant_hyp_events(main_exp.bnDir, org_BN, relevant_nodes_out)  # no hyps here
+
     # establish original BN
     analysis.output_nodes = relevant_nodes_out
     acc, rms = calculate_accuracy(org_BN, test_set, relevant_nodes_out, org_dir, main_exp.bnDir, analysis, "first")
@@ -404,6 +407,31 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
     with open(general_latex_file, 'w') as file:
         for f in relevant_files:
             file.write("\\input{../simulationTest/" + f + "}\n")
+
+
+def hugin_converter(bnfilename):  # make the network handable in hugin with some cheats
+    file1 = open(bnfilename, 'r')
+    Lines = file1.readlines()
+    count = 0
+    # Strips the newline character
+    proper = []
+    for line in Lines:
+        count += 1
+        flag = 0
+        for x in ["unnamedBN;", "aGrUM 0.22.5", "node_size"]:
+            if x in line:
+                flag = 1
+
+        if flag == 0:
+            if "states = (0 1 );" in line:
+                line = "states = (\"0\" \"1\");\n"
+            elif "states = (1 0 );" in line:
+                line = "states = (\"1\" \"0\");\n"
+            #print("Line{}: {}".format(count, line))
+            proper.append(line)
+
+    with open(f'BNHUGIN/{bnfilename}', 'w') as file2:
+        file2.writelines(proper)
 
 
 def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis, first):
@@ -543,16 +571,17 @@ test = train_test_split[1]
 
 analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, None)
 
+csv_file_name = None
 if scenario == "CredibilityGame":
 
     for game in ["basicGame"]: #, "strangeGame"]:
-        experiment = Experiment(scenario="CredibilityGame", runs=runs, csv_file_name=f"{scenario}Outcomes.csv", subtype=game)
+        experiment = Experiment(scenario="CredibilityGame", runs=runs, train="train", subtype=game)
         bnDir = experiment.bnDir
         dataFileName = experiment.csv_file_name
 
         K2_BN(experiment, dataFileName, "CredBNs/main.net")
 
-        test_set = Experiment(scenario="CredibilityGame", runs=test, csv_file_name=f"{scenario}Test.csv",
+        test_set = Experiment(scenario="CredibilityGame", runs=test, train="test",
                                 subtype=game)
 
         test_setFileName = test_set.csv_file_name
@@ -589,20 +618,50 @@ if scenario == "CredibilityGame":
                 writer.writerow(row)
 
 elif scenario == "VlekNetwork":
-    VlekNetwork(runs=10000, output_file="VlekOutcomes.csv")
-    K2_BN_csv_only("VlekOutcomeskbFull.csv", "BNVlekNetwork/main.net")
-    K2_BN_csv_only("VlekOutcomeskb1.csv", "BNVlekNetwork/kb1.net")
-    K2_BN_csv_only("VlekOutcomeskb2.csv", "BNVlekNetwork/kb2.net")
+
+    experiment = Experiment(scenario="VlekNetwork", runs=1000, train="train", subtype=2)  # we do the simple scenario
+    bnDir = experiment.bnDir
+
+    # VlekNetwork(runs=100000, output_file="VlekOutcomes.csv")
+
+    list_files = os.listdir(os.getcwd()+"/experiments/"+scenario+"/test")
+    list_files.sort()
+    list_files.remove(".DS_Store")
+    print(list_files)
+
+
+
+    K2_BN_csv_only("VlekNetwork")
+    #"VlekOutcomeskbFull.csv", "BNVlekNetwork/main.net")
+    #K2_BN_csv_only("VlekOutcomeskb1.csv", "BNVlekNetwork/kb1.net")
+    #K2_BN_csv_only("VlekOutcomeskb2.csv", "BNVlekNetwork/kb2.net")
+    hugin_converter("BNVlekNetwork/main.net")
+    hugin_converter("BNVlekNetwork/kb1.net")
+    hugin_converter("BNVlekNetwork/kb2.net")
+
+    test_set = Experiment(scenario="VlekNetwork", runs=200,train="test",
+                          subtype=2)
+
+
+    analysis.network_dir = bnDir
+    analysis.outcome_experiment = experiment
+    analysis.test_experiment = test_set
+
+    #VlekNetwork(runs=2000, output_file="VlekTest.csv")
+    experiment_list = []
+    experiment_general_shape(experiment, None, "main.net", None, None, [], test_set, analysis)
+
+
 
 
 elif scenario == "GroteMarkt":
-    experiment = Experiment(scenario="GroteMarkt", runs=runs, csv_file_name=f"{scenario}Outcomes.csv", subtype=2)  # we do the simple scenario
+    experiment = Experiment(scenario="GroteMarkt", runs=runs, train="train", subtype=2)  # we do the simple scenario
     bnDir = experiment.bnDir
     dataFileName = experiment.csv_file_name
 
     K2_BN(experiment, dataFileName, "BNGroteMarkt/main.net")
 
-    test_set = Experiment(scenario="GroteMarkt", runs=test, csv_file_name=f"{scenario}Test.csv",
+    test_set = Experiment(scenario="GroteMarkt", runs=test, train="test",
                           subtype=2)
 
     test_setFileName = test_set.csv_file_name
@@ -640,13 +699,13 @@ elif scenario == "GroteMarkt":
 
 
 elif scenario == "StolenLaptop":
-    experiment = Experiment(scenario="StolenLaptop", csv_file_name=f"{scenario}Outcomes.csv", runs=runs)
+    experiment = Experiment(scenario="StolenLaptop", runs=runs, train="train")
     bnDir = experiment.bnDir
     dataFileName = experiment.csv_file_name
 
     K2_BN(experiment, dataFileName, "K2Bns/K2BN.net")
 
-    test_set = Experiment(scenario="StolenLaptop", runs=test, csv_file_name=f"{scenario}Test.csv")
+    test_set = Experiment(scenario="StolenLaptop", runs=test, train="test")
 
     test_setFileName = test_set.csv_file_name
     #####

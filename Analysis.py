@@ -16,9 +16,11 @@ from VlekNetwork import VlekNetwork
 
 
 
-def disturb_cpts(experiment, disturb_type, params_list, file_name):
+def disturb_cpts(path, disturb_type, params_list, file_name):
+
+
     if ".net" not in file_name:
-        file_name_load = file_name + ".net"
+        file_name_load = path + file_name + ".net"
     #file_name = "K2BN.net"
     #K2_BN(experiment, "globalStates.csv", file_name)
 
@@ -27,7 +29,9 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
     org = os.getcwd()
     if experiment.bnDir not in org:
         os.chdir(experiment.bnDir)
-    bn1 = gum.loadBN(file_name_load)
+
+    path_bn = path + "/BNs/"+file_name+".net"
+    bn1 = gum.loadBN(path_bn)
     bn = gum.BayesNet(bn1)
     noise_list = []
 
@@ -81,7 +85,6 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
         final_file_name = f"{file_name}{disturb_type}BN{str(sd)}"
         gum.saveBN(bn, f"{final_file_name}.net")
         # print(f"saved bn as {file_name}")
-        os.chdir(org)
         return [final_file_name, [largest_change, smallest_change]]
 
     if disturb_type == "rounded":
@@ -103,16 +106,16 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
         final_file_name = f"{file_name}{disturb_type}BN{str(decimal_place)}"
         #print("four", final_file_name)
         gum.saveBN(bn, f"{final_file_name}.net")
-        os.chdir(org)
         return [final_file_name, "empty"]
 
-    if disturb_type == "arbitraryRounded":
+    if disturb_type == "arbit":
         ''' we want to round the BN
         to some degree (round to quartile, octile, thirds, 2nds, hwatever,
         since we like round numbers
 
         '''
-        [step, rounded_name] = params_list
+        print(path)
+        step = params_list
         nodes = bn.nodes()  # list of nodes to iterate over (names don't matter because noise is all the same
         for node in list(nodes):
             x = bn.cpt(node)
@@ -123,11 +126,10 @@ def disturb_cpts(experiment, disturb_type, params_list, file_name):
                 y = math.floor((val / step) + 0.5) * step
                 bn.cpt(name).set(i, y)
 
-        final_file_name = f"{file_name}{disturb_type}BN{step}"
-        gum.saveBN(bn, f"{final_file_name}.net")
-        os.chdir(org)
+        final_file_name = f"{path}/BNs/{file_name}_{disturb_type}_{step}.net"
+        print(final_file_name)
+        gum.saveBN(bn, final_file_name)
 
-        return [final_file_name, "empty"]
 
 
 def determine_winning_hypothesis(false_val, true_val):
@@ -433,6 +435,8 @@ def hugin_converter(bnfilename, path):  # make the network handable in hugin wit
             #print("Line{}: {}".format(count, line))
             proper.append(line)
 
+    print(bnfilename)
+
     with open(path+"/huginBN/"+bnfilename+".net", 'w') as file2:
         file2.writelines(proper)
 
@@ -546,7 +550,8 @@ def calculate_accuracy_1(file_name, path):
     print(bnDir)
     print(os.getcwd())'''
     network = path + "/BNs/"+file_name+".net"
-    csv_file = path + "/test/"+file_name+".csv"
+    csv_name = file_name.split("_", 1)[0]   # we want to refer to hte original csv file
+    csv_file = path + "/test/"+csv_name+".csv"
     #print(network)
 
     if "net" not in network:
@@ -653,18 +658,18 @@ def calculate_accuracy_1(file_name, path):
 def load_temporal_evidence(name):
     d = {}
     print(name)
-    if name == "KB1":
+    if "KB1" in name:
         d["events"] = ["jane_has_knife", "jane_and_mark_fight","jane_stabs_mark_with_knife"]
         d["values"] = [1, 1, 0]
         d["output"] = ["mark_dies"]
 
 
-    elif name == "KB2":
+    elif "KB2" in name:
         d["events"] = ["jane_and_mark_fight", "jane_has_knife", "jane_threatens_mark_with_knife", "mark_hits_jane", "jane_drops_knife", "mark_falls_on_knife", "mark_dies_by_accident"]
         d["values"] = [1, 1, 1, 1, 1, 1, 0]
         d["output"] = ["mark_dies"]
 
-    elif name == "KBFull":
+    elif  "KBFull" in name:
         d["events"] = ["jane_and_mark_fight", "jane_has_knife", "jane_stabs_mark_with_knife", \
         "jane_threatens_mark_with_knife", "mark_hits_jane", "jane_drops_knife", "mark_falls_on_knife", "mark_dies_by_accident"]
         d["values"] = [1, 1, 0, 1, 1, 1, 0, 0]
@@ -677,9 +682,13 @@ def load_temporal_evidence(name):
 
 
 
-def progress(name, path, temporal_evidence):
+def progress(name, path, temporal_evidence, params):
     x = []
     y = []
+    posterior_name = []
+    param_num = []
+    param_name = []
+
     network_name = path + "/BNs/" + name+".net"
     bn = gum.loadBN(network_name)
     ie = gum.LazyPropagation(bn)
@@ -690,32 +699,68 @@ def progress(name, path, temporal_evidence):
     output = temporal_evidence["output"][0]
     x.append("No evidence")
     y.append(round(ie.posterior(output)[1], 2))
+    posterior_name.append(output)
+    param_num.append(params[0])
+    param_name.append(params[1])
 
     i = 0
     for i in range(0, len(event)):
         ie.addEvidence(event[i], val[i])
         x.append(str((event[i], val[i])))
-        y.append(round(ie.posterior(output)[1], 2))
+        posterior_name.append(output)
+        param_num.append(params[0])
+        param_name.append(params[1])
 
-    print(x)
-    print(y)
+        try:
+            y.append(round(ie.posterior(output)[1], 2))
+        except Exception:
+            y.append("NA")
 
     otp = {}
     otp["evidence"] = x
     otp["posterior"] = y
+    otp["posterior_name"] = posterior_name
+    otp["param_num"] = param_num
+    otp["param_name"] = param_name
     otp_pd = pd.DataFrame.from_dict(otp)
     otp_pd.to_csv(path + "/progress/" + name + ".csv", index=False)
 
-    fig, ax = plt.subplots()
-    plt.plot(x, y)
-    plt.xticks(x, rotation='vertical')
-    # Tweak spacing to prevent clipping of tick-labels
-    plt.subplots_adjust(bottom=0.60)
-    plt.xlabel("Evidence added")
-    plt.ylabel("Posterior of "+output)
-    plt.title("The effect of evidence on the posterior")
-    file_name = path + "/plots/" + name + ".pdf"
+def plot_posterior(path, base_network):
+    folder = path+"/progress/"
+    list_files = os.listdir(folder)
+    list_files.sort()
+    relevant_files = []
+    colors = ['#be254a', '#dc484c', '#ef6645', '#f88c51', '#fdb365', '#fed27f', '#feeb9d', '#fffebe',
+            '#f0f9a7', '#d8ef9b', '#b3e0a2', '#89d0a4', '#60bba8', '#3f97b7', '#4273b3']
+    for f in list_files:
+        if base_network in f:
+            relevant_files.append(f)
+
+    ax = plt.gca()
+    for i in range(0, len(relevant_files)):
+        file = relevant_files[i]
+        param = file.split("_", 2)
+        if len(param) > 2:
+            [base, dis, num] = param
+            num = num[:-4]
+        else:
+            base = file
+            num = "no"
+
+        df = pd.read_csv(folder+file, sep=r',',
+            skipinitialspace=True)
+        df.rename(columns={"posterior": str(num)},inplace=True)
+        col = list(df.columns)
+        df.plot(kind='line', x=col[0], y=col[1], color=colors[i], title=base, legend=num, ax=ax)
+        plt.xticks(range(0,len(df["evidence"])), df["evidence"], rotation='vertical')
+        # Tweak spacing to prevent clipping of tick-labels
+        plt.subplots_adjust(bottom=0.60)
+        plt.xlabel("Evidence added")
+        plt.ylabel("Posterior of " + col[2][0])
+        plt.title("The effect of evidence on the posterior")
+    file_name = path + "/plots/" + base_network + ".pdf"
     plt.savefig(file_name)
+    plt.show()
 
 
 
@@ -800,45 +845,69 @@ if scenario == "CredibilityGame":
                 writer.writerow(row)
 
 elif scenario == "VlekNetwork":
-    train_runs = 100000
+
+    list_files = os.listdir(os.getcwd() + "/experiments/" + scenario + "/train")
+    list_files.sort()
+    path = os.getcwd() + "/experiments/" + scenario
+
+    '''train_runs = 50000
     test_runs = train_runs/10
 
 
     experiment = Experiment(scenario="VlekNetwork", runs=train_runs, train="train", subtype=2)  # we do the simple scenario
     test_set = Experiment(scenario="VlekNetwork", runs=test_runs,train="test",
                           subtype=2)
+    
+    
 
-    list_files = os.listdir(os.getcwd()+"/experiments/"+scenario+"/train")
-    list_files.sort()
+    param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
+                [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
+
+    param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
+                [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
+
+    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
+                [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
+                [0.5, 'arbit']]
+
+
     if ".DS_Store" in list_files:
         list_files.remove(".DS_Store")
+
     for train_data in list_files:
-        print(train_data, train_data[:-4])
-        K2_BN_csv_only(train_data, os.getcwd()+"/experiments/"+scenario)
-        hugin_converter(train_data[:-4], os.getcwd()+"/experiments/"+scenario)
-        calculate_accuracy_1(train_data[:-4], os.getcwd()+"/experiments/"+scenario)
-        progress(train_data[:-4], os.getcwd() + "/experiments/" + scenario, load_temporal_evidence(train_data[:-4]))
+        K2_BN_csv_only(train_data, path)
 
-    #K2_BN_csv_only("VlekNetwork")
-    #"VlekOutcomeskbFull.csv", "BNVlekNetwork/main.net")
-    #K2_BN_csv_only("VlekOutcomeskb1.csv", "BNVlekNetwork/kb1.net")
-    #K2_BN_csv_only("VlekOutcomeskb2.csv", "BNVlekNetwork/kb2.net")
+        for (exp, params) in [("arbit", param_ar)]: #("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
+            for p in params:
+                disturb_cpts(path, exp, p[0], train_data[:-4])
 
-    #hugin_converter("BNVlekNetwork/kb1.net")
-    #hugin_converter("BNVlekNetwork/kb2.net")
-
+    # now we've generated all the networks even with disturbances
+    # reload the list of files and see how the disturbances affect the rest of the outputs
+    disturbed_list_files = os.listdir(path + "/BNs")
+    disturbed_list_files.sort()
+    if ".DS_Store" in list_files:
+        disturbed_list_files.remove(".DS_Store")
 
 
+    for networks in disturbed_list_files:
+        #
+        k = networks.split("_", 2)
+        if len(k) > 2:
+            [base, dist, num] = k
+            num = num[:-4]
 
-    #analysis.network_dir = bnDir
-    #analysis.outcome_experiment = experiment
-    #analysis.test_experiment = test_set
+        else:
+            dist = "none"
+            num = 0
 
-    #VlekNetwork(runs=2000, output_file="VlekTest.csv")
-    #experiment_list = []
-    #experiment_general_shape(experiment, None, "main.net", None, None, [], test_set, analysis)
-
-
+        hugin_converter(networks[:-4], path)
+        calculate_accuracy_1(networks[:-4], path)
+        progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
+'''
+    ## IMAGING
+    # making some nice plots of the posterior
+    for base_network in list_files:
+        plot_posterior(path, base_network[:-4])
 
 
 elif scenario == "GroteMarkt":

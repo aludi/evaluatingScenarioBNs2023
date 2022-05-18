@@ -152,6 +152,8 @@ def evidence_cannot_be_connected_to_each_other(experiment, temporal_ordering):
     return forbidden_pairs
 
 def K2_BN_csv_only(training_data, path):
+    print(path)
+    print("training data", training_data)
 
     learner = gum.BNLearner(path + "/train/"+training_data)  # using bn as template for variables and labels
     file_name = path + "/BNs/"+training_data[:-4]+".net"

@@ -8,7 +8,9 @@ import math
 import numpy as np
 from collections import defaultdict
 import csv
+import random
 import os
+import matplotlib.pyplot as plt
 from CredibilityGame import CredibilityGame
 from VlekNetwork import VlekNetwork
 
@@ -409,8 +411,9 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
             file.write("\\input{../simulationTest/" + f + "}\n")
 
 
-def hugin_converter(bnfilename):  # make the network handable in hugin with some cheats
-    file1 = open(bnfilename, 'r')
+def hugin_converter(bnfilename, path):  # make the network handable in hugin with some cheats
+    bn = path + "/BNs/"+bnfilename+".net"
+    file1 = open(bn, 'r')
     Lines = file1.readlines()
     count = 0
     # Strips the newline character
@@ -430,7 +433,7 @@ def hugin_converter(bnfilename):  # make the network handable in hugin with some
             #print("Line{}: {}".format(count, line))
             proper.append(line)
 
-    with open(f'BNHUGIN/{bnfilename}', 'w') as file2:
+    with open(path+"/huginBN/"+bnfilename+".net", 'w') as file2:
         file2.writelines(proper)
 
 
@@ -537,6 +540,185 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis,
     print("\t rmsd", rmsd/(len(output_nodes) * len(df)))
     return accuracy/(len(output_nodes) * len(df)), rmsd/(len(output_nodes) * len(df))
 
+def calculate_accuracy_1(file_name, path):
+    '''print(network)
+    print(orgDir)
+    print(bnDir)
+    print(os.getcwd())'''
+    network = path + "/BNs/"+file_name+".net"
+    csv_file = path + "/test/"+file_name+".csv"
+    #print(network)
+
+    if "net" not in network:
+        network = network + ".net"
+
+    #org_dir = orgDir
+    #if dir not in os.getcwd():
+
+    bn = gum.loadBN(network)
+
+    # todo: set evidence
+    # see value of output
+    # if the same +1, else +0
+    # then calcualte accuracy
+    # store D in some other array
+
+    direction_dict = {}
+
+
+    '''evidence = []
+    for x in event_list:
+        if x[0] == "E": # evidence node
+            evidence.append(x)
+'''
+
+
+    df = pd.read_csv(csv_file, sep=r',',
+            skipinitialspace = True)
+
+    #print(df.columns)
+
+    accuracy = 0
+    rmsd = 0
+    #print(output_nodes)
+    network_name = []
+    pred_output=[]
+    matching_output=[]
+    rms_list=[]
+    output_list = []
+    name_output_list = []
+    for i in range(0, len(df)):
+        #print("NEW COMBO")
+        event_list = list(bn.names())  # experiment.reporters.relevant_events
+        random.shuffle(event_list)
+        output_node = event_list.pop()
+
+        ie = gum.LazyPropagation(bn)
+
+        #print("going over set nodes")
+        for ev in event_list:
+            val = df.loc[i, ev]
+            #print("\t", ev, int(val))
+            ie.addEvidence(ev, int(val))
+
+
+        #print("output according to csv")
+        val_output = df.loc[i, output_node]
+        #print("\t", output_node, val_output)
+        name_output_list.append(output_node)
+
+        output_list.append(val_output)
+        #print("output actual",val_output)
+        try:
+            #print("output according to network")
+            fin = round(ie.posterior(output_node)[1], 2)
+            #print("\t", output_node, fin)
+            rmsd += round(abs(fin - val_output), 2)
+            rms_list.append(round(abs(fin - val_output), 2))
+
+        except:
+            fin = "NA"
+            rmsd += 1
+            rms_list.append(1)
+
+        if fin == val_output:
+            accuracy += 1
+            matching_output.append(1)
+        else:
+            matching_output.append(0)
+
+            pass
+
+        pred_output.append(fin)
+
+    otp = {}
+
+    event_list = list(bn.names())  # experiment.reporters.relevant_events
+    for ev in event_list:
+        otp[ev] = df.loc[:,ev]
+
+    otp["nameoutput"] = name_output_list
+    otp["output"] = output_list
+    otp["predicted"] = pred_output
+    otp["matching"] = matching_output
+    otp["RMS"] = rms_list
+    otp_pd = pd.DataFrame.from_dict(otp)
+
+    print("accuracy", accuracy/len(df))
+    print("root mean square", rmsd/len(df))
+
+    otp_pd.to_csv(path+"/stats/"+file_name+".csv", index=False)
+
+
+def load_temporal_evidence(name):
+    d = {}
+    print(name)
+    if name == "KB1":
+        d["events"] = ["jane_has_knife", "jane_and_mark_fight","jane_stabs_mark_with_knife"]
+        d["values"] = [1, 1, 0]
+        d["output"] = ["mark_dies"]
+
+
+    elif name == "KB2":
+        d["events"] = ["jane_and_mark_fight", "jane_has_knife", "jane_threatens_mark_with_knife", "mark_hits_jane", "jane_drops_knife", "mark_falls_on_knife", "mark_dies_by_accident"]
+        d["values"] = [1, 1, 1, 1, 1, 1, 0]
+        d["output"] = ["mark_dies"]
+
+    elif name == "KBFull":
+        d["events"] = ["jane_and_mark_fight", "jane_has_knife", "jane_stabs_mark_with_knife", \
+        "jane_threatens_mark_with_knife", "mark_hits_jane", "jane_drops_knife", "mark_falls_on_knife", "mark_dies_by_accident"]
+        d["values"] = [1, 1, 0, 1, 1, 1, 0, 0]
+        d["output"] = ["mark_dies"]
+
+    else:
+        exit()
+
+    return d
+
+
+
+def progress(name, path, temporal_evidence):
+    x = []
+    y = []
+    network_name = path + "/BNs/" + name+".net"
+    bn = gum.loadBN(network_name)
+    ie = gum.LazyPropagation(bn)
+
+
+    event = temporal_evidence["events"]
+    val = temporal_evidence["values"]
+    output = temporal_evidence["output"][0]
+    x.append("No evidence")
+    y.append(round(ie.posterior(output)[1], 2))
+
+    i = 0
+    for i in range(0, len(event)):
+        ie.addEvidence(event[i], val[i])
+        x.append(str((event[i], val[i])))
+        y.append(round(ie.posterior(output)[1], 2))
+
+    print(x)
+    print(y)
+
+    otp = {}
+    otp["evidence"] = x
+    otp["posterior"] = y
+    otp_pd = pd.DataFrame.from_dict(otp)
+    otp_pd.to_csv(path + "/progress/" + name + ".csv", index=False)
+
+    fig, ax = plt.subplots()
+    plt.plot(x, y)
+    plt.xticks(x, rotation='vertical')
+    # Tweak spacing to prevent clipping of tick-labels
+    plt.subplots_adjust(bottom=0.60)
+    plt.xlabel("Evidence added")
+    plt.ylabel("Posterior of "+output)
+    plt.title("The effect of evidence on the posterior")
+    file_name = path + "/plots/" + name + ".pdf"
+    plt.savefig(file_name)
+
+
+
 
 
 class Analysis():
@@ -618,38 +800,43 @@ if scenario == "CredibilityGame":
                 writer.writerow(row)
 
 elif scenario == "VlekNetwork":
+    train_runs = 100000
+    test_runs = train_runs/10
 
-    experiment = Experiment(scenario="VlekNetwork", runs=1000, train="train", subtype=2)  # we do the simple scenario
-    bnDir = experiment.bnDir
 
-    # VlekNetwork(runs=100000, output_file="VlekOutcomes.csv")
+    experiment = Experiment(scenario="VlekNetwork", runs=train_runs, train="train", subtype=2)  # we do the simple scenario
+    test_set = Experiment(scenario="VlekNetwork", runs=test_runs,train="test",
+                          subtype=2)
 
-    list_files = os.listdir(os.getcwd()+"/experiments/"+scenario+"/test")
+    list_files = os.listdir(os.getcwd()+"/experiments/"+scenario+"/train")
     list_files.sort()
-    list_files.remove(".DS_Store")
-    print(list_files)
+    if ".DS_Store" in list_files:
+        list_files.remove(".DS_Store")
+    for train_data in list_files:
+        print(train_data, train_data[:-4])
+        K2_BN_csv_only(train_data, os.getcwd()+"/experiments/"+scenario)
+        hugin_converter(train_data[:-4], os.getcwd()+"/experiments/"+scenario)
+        calculate_accuracy_1(train_data[:-4], os.getcwd()+"/experiments/"+scenario)
+        progress(train_data[:-4], os.getcwd() + "/experiments/" + scenario, load_temporal_evidence(train_data[:-4]))
 
-
-
-    K2_BN_csv_only("VlekNetwork")
+    #K2_BN_csv_only("VlekNetwork")
     #"VlekOutcomeskbFull.csv", "BNVlekNetwork/main.net")
     #K2_BN_csv_only("VlekOutcomeskb1.csv", "BNVlekNetwork/kb1.net")
     #K2_BN_csv_only("VlekOutcomeskb2.csv", "BNVlekNetwork/kb2.net")
-    hugin_converter("BNVlekNetwork/main.net")
-    hugin_converter("BNVlekNetwork/kb1.net")
-    hugin_converter("BNVlekNetwork/kb2.net")
 
-    test_set = Experiment(scenario="VlekNetwork", runs=200,train="test",
-                          subtype=2)
+    #hugin_converter("BNVlekNetwork/kb1.net")
+    #hugin_converter("BNVlekNetwork/kb2.net")
 
 
-    analysis.network_dir = bnDir
-    analysis.outcome_experiment = experiment
-    analysis.test_experiment = test_set
+
+
+    #analysis.network_dir = bnDir
+    #analysis.outcome_experiment = experiment
+    #analysis.test_experiment = test_set
 
     #VlekNetwork(runs=2000, output_file="VlekTest.csv")
-    experiment_list = []
-    experiment_general_shape(experiment, None, "main.net", None, None, [], test_set, analysis)
+    #experiment_list = []
+    #experiment_general_shape(experiment, None, "main.net", None, None, [], test_set, analysis)
 
 
 

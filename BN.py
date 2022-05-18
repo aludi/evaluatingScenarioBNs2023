@@ -151,17 +151,18 @@ def evidence_cannot_be_connected_to_each_other(experiment, temporal_ordering):
 
     return forbidden_pairs
 
-def K2_BN_csv_only(csv_file, bn_file_name):
-    learner = gum.BNLearner(csv_file)  # using bn as template for variables and labels
-    file_name = bn_file_name  # "BayesNets/K2BN.net"
-    header = next(csv.reader(open(csv_file)))
+def K2_BN_csv_only(training_data, path):
+
+    learner = gum.BNLearner(path + "/train/"+training_data)  # using bn as template for variables and labels
+    file_name = path + "/BNs/"+training_data[:-4]+".net"
+    header = next(csv.reader(open(path + "/train/"+training_data)))
     best_temporal_ordering = []
     for i in range(0, len(header)):
         best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
     learner.useK2(best_temporal_ordering)
     # print(learner)
     bn = learner.learnBN()
-    header = next(csv.reader(open(csv_file)))
+    header = next(csv.reader(open(path + "/train/"+training_data)))
     for name in list(header):
         x = bn.cpt(name)
         i = gum.Instantiation(x)
@@ -178,6 +179,7 @@ def K2_BN_csv_only(csv_file, bn_file_name):
             i.inc()
         bn.cpt(name)
     print("current dir", os.getcwd())
+    print(file_name)
     gum.saveBN(bn, file_name)
     # print(f"saved bn as {file_name}")
     return bn

@@ -11,6 +11,7 @@ import csv
 import random
 import os
 import matplotlib.pyplot as plt
+from colour import Color
 from CredibilityGame import CredibilityGame
 from VlekNetwork import VlekNetwork
 
@@ -85,6 +86,7 @@ def disturb_cpts(path, disturb_type, params_list, file_name):
         final_file_name = f"{file_name}{disturb_type}BN{str(sd)}"
         gum.saveBN(bn, f"{final_file_name}.net")
         # print(f"saved bn as {file_name}")
+        os.chdir(org)
         return [final_file_name, [largest_change, smallest_change]]
 
     if disturb_type == "rounded":
@@ -114,7 +116,7 @@ def disturb_cpts(path, disturb_type, params_list, file_name):
         since we like round numbers
 
         '''
-        print(path)
+        #print(path)
         step = params_list
         nodes = bn.nodes()  # list of nodes to iterate over (names don't matter because noise is all the same
         for node in list(nodes):
@@ -127,7 +129,7 @@ def disturb_cpts(path, disturb_type, params_list, file_name):
                 bn.cpt(name).set(i, y)
 
         final_file_name = f"{path}/BNs/{file_name}_{disturb_type}_{step}.net"
-        print(final_file_name)
+        #print(final_file_name)
         gum.saveBN(bn, final_file_name)
 
 
@@ -345,7 +347,7 @@ def experiment_general_shape(main_exp, type_exp, org_BN, param_list, general_lat
 
     # reset dir
     org_dir = os.getcwd()
-    print(main_exp.scenario)
+    #print(main_exp.scenario)
     d_2 = []
     noise = False
     relevant_files = []
@@ -435,7 +437,7 @@ def hugin_converter(bnfilename, path):  # make the network handable in hugin wit
             #print("Line{}: {}".format(count, line))
             proper.append(line)
 
-    print(bnfilename)
+    #print(bnfilename)
 
     with open(path+"/huginBN/"+bnfilename+".net", 'w') as file2:
         file2.writelines(proper)
@@ -540,8 +542,8 @@ def calculate_accuracy(network, test_set, output_nodes, orgDir, bnDir, analysis,
                 #print(fin, val_output)
 
 
-    print("\t final accuracy in posterior", accuracy/(len(output_nodes) * len(df)))
-    print("\t rmsd", rmsd/(len(output_nodes) * len(df)))
+    #print("\t final accuracy in posterior", accuracy/(len(output_nodes) * len(df)))
+    #print("\t rmsd", rmsd/(len(output_nodes) * len(df)))
     return accuracy/(len(output_nodes) * len(df)), rmsd/(len(output_nodes) * len(df))
 
 def calculate_accuracy_1(file_name, path):
@@ -649,33 +651,58 @@ def calculate_accuracy_1(file_name, path):
     otp["RMS"] = rms_list
     otp_pd = pd.DataFrame.from_dict(otp)
 
-    print("accuracy", accuracy/len(df))
-    print("root mean square", rmsd/len(df))
+    #print("accuracy", accuracy/len(df))
+    #print("root mean square", rmsd/len(df))
+    n = file_name.split("_", 2)
+    if len(n) > 1:
+        [name, dist, val] = n
+    else:
+        name = n[0]
+        dist = "none"
+        val = 0
+
+    row = [name, dist, val, accuracy/len(df), rmsd/len(df)]
+    with open(path+f"/stats/{csv_name}_performance.csv", 'a', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(row)
 
     otp_pd.to_csv(path+"/stats/"+file_name+".csv", index=False)
 
 
 def load_temporal_evidence(name):
+    # this should load a json dict that is written during the experiment
     d = {}
-    print(name)
+    #print(name)
     if "KB1" in name:
         d["events"] = ["jane_has_knife", "jane_and_mark_fight","jane_stabs_mark_with_knife"]
         d["values"] = [1, 1, 0]
         d["output"] = ["mark_dies"]
-
 
     elif "KB2" in name:
         d["events"] = ["jane_and_mark_fight", "jane_has_knife", "jane_threatens_mark_with_knife", "mark_hits_jane", "jane_drops_knife", "mark_falls_on_knife", "mark_dies_by_accident"]
         d["values"] = [1, 1, 1, 1, 1, 1, 0]
         d["output"] = ["mark_dies"]
 
-    elif  "KBFull" in name:
+    elif "KBFull" in name:
         d["events"] = ["jane_and_mark_fight", "jane_has_knife", "jane_stabs_mark_with_knife", \
         "jane_threatens_mark_with_knife", "mark_hits_jane", "jane_drops_knife", "mark_falls_on_knife", "mark_dies_by_accident"]
         d["values"] = [1, 1, 0, 1, 1, 1, 0, 0]
         d["output"] = ["mark_dies"]
 
+    elif "StolenLaptop" in name:
+        #"lost_object", "know_object", "target_object", "motive", "compromise_house",
+           #                         "flees_startled", "successful_stolen", "raining", "curtains",
+        d["events"] = ["E_object_is_gone",
+                                    "E_broken_lock",
+                                    "E_disturbed_house",
+                                    "E_s_spotted_by_house",
+                                    "E_s_spotted_with_goodie",
+                                    "E_private"]
+        d["values"] = [1, 1, 1, 1, 1, 0]
+        d["output"] = ["successful_stolen"]
+
     else:
+        print("temporal evidence not implemented yet ")
         exit()
 
     return d
@@ -730,8 +757,8 @@ def plot_posterior(path, base_network):
     list_files = os.listdir(folder)
     list_files.sort()
     relevant_files = []
-    colors = ['#be254a', '#dc484c', '#ef6645', '#f88c51', '#fdb365', '#fed27f', '#feeb9d', '#fffebe',
-            '#f0f9a7', '#d8ef9b', '#b3e0a2', '#89d0a4', '#60bba8', '#3f97b7', '#4273b3']
+
+    colors = ["#fde725", "#b5de2b", "#6ece58", "#35b779", "#1f9e89", "#26828e", "#31688e", "#3e4989", "#482878", "#440154"]
     for f in list_files:
         if base_network in f:
             relevant_files.append(f)
@@ -756,9 +783,24 @@ def plot_posterior(path, base_network):
         # Tweak spacing to prevent clipping of tick-labels
         plt.subplots_adjust(bottom=0.60)
         plt.xlabel("Evidence added")
-        plt.ylabel("Posterior of " + col[2][0])
+        plt.ylabel("Posterior of " + df["posterior_name"][0])
         plt.title("The effect of evidence on the posterior")
-    file_name = path + "/plots/" + base_network + ".pdf"
+    file_name = path + "/plots/posterior_" + base_network + ".pdf"
+    plt.savefig(file_name)
+    plt.show()
+
+def plot_performance(path, base_network):
+    df = pd.read_csv(path+f"/stats/{base_network}_performance.csv", sep=r',',
+                     skipinitialspace=True)
+    col = list(df.columns)
+    df.plot(kind='line', x=col[2], y=col[3], title=base, legend=num)
+    #plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation='vertical')
+    # Tweak spacing to prevent clipping of tick-labels
+    #plt.subplots_adjust(bottom=0.60)
+    plt.xlabel("Disturbance")
+    plt.ylabel("Accuracy")
+    plt.title("How disturbance affects accuracy")
+    file_name = path + "/plots/performance_" + base_network + ".pdf"
     plt.savefig(file_name)
     plt.show()
 
@@ -798,7 +840,87 @@ test = train_test_split[1]
 
 analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, None)
 
+org_dir = os.getcwd()
 csv_file_name = None
+for (scenario, train_runs) in [("StolenLaptop", 1000), ("VlekNetwork", 50000)]:
+
+    os.chdir(org_dir)
+
+    list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
+    list_files.sort()
+    path = org_dir + "/experiments/" + scenario
+
+
+
+    test_runs = int(train_runs / 10)
+
+    experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
+                            subtype=2)  # we do the simple scenario
+    test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
+                          subtype=2)
+
+    param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
+                [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
+
+    param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
+                [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
+
+    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
+                [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
+                [0.5, 'arbit']]
+
+    if ".DS_Store" in list_files:
+        list_files.remove(".DS_Store")
+
+    for train_data in list_files:
+        K2_BN_csv_only(train_data, path)
+
+        for (exp, params) in [
+            ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
+            for p in params:
+                disturb_cpts(path, exp, p[0], train_data[:-4])
+
+
+
+        with open(path + f"/stats/{train_data[:-4]}_performance.csv", 'w+') as f:
+            f.truncate()
+            writer = csv.writer(f)
+            writer.writerow(["experiment", "disturbance", "value", "accuracy", "rmsq"])
+
+    # now we've generated all the networks even with disturbances
+    # reload the list of files and see how the disturbances affect the rest of the outputs
+    disturbed_list_files = os.listdir(path + "/BNs")
+    disturbed_list_files.sort()
+    if ".DS_Store" in list_files:
+        disturbed_list_files.remove(".DS_Store")
+
+    #print("disturbed files", disturbed_list_files)
+    for networks in disturbed_list_files:
+        #
+        k = networks.split("_", 2)
+        if len(k) > 2:
+            [base, dist, num] = k
+            num = num[:-4]
+
+        else:
+            dist = "none"
+            num = 0
+
+
+        hugin_converter(networks[:-4], path)
+        calculate_accuracy_1(networks[:-4], path)
+        progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
+
+
+
+    ## IMAGING
+    # making some nice plots of the posterior
+    for base_network in list_files:
+        plot_posterior(path, base_network[:-4])
+        plot_performance(path, base_network[:-4])
+
+
+exit()
 if scenario == "CredibilityGame":
 
     for game in ["basicGame"]: #, "strangeGame"]:
@@ -850,7 +972,7 @@ elif scenario == "VlekNetwork":
     list_files.sort()
     path = os.getcwd() + "/experiments/" + scenario
 
-    '''train_runs = 50000
+    train_runs = 50000
     test_runs = train_runs/10
 
 
@@ -903,7 +1025,7 @@ elif scenario == "VlekNetwork":
         hugin_converter(networks[:-4], path)
         calculate_accuracy_1(networks[:-4], path)
         progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
-'''
+
     ## IMAGING
     # making some nice plots of the posterior
     for base_network in list_files:
@@ -957,7 +1079,7 @@ elif scenario == "GroteMarkt":
 elif scenario == "StolenLaptop":
     experiment = Experiment(scenario="StolenLaptop", runs=runs, train="train")
     bnDir = experiment.bnDir
-    dataFileName = experiment.csv_file_name
+    #dataFileName = experiment.csv_file_name
 
     K2_BN(experiment, dataFileName, "K2Bns/K2BN.net")
 

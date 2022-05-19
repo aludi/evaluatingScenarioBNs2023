@@ -144,7 +144,9 @@ class VlekNetwork(Model):
 
             current_inf_dict[conc] = 1
 
+
             csv_columns = current_inf_dict.keys()
+
             csv_file = os.getcwd() + self.path + f"{self.train}/{name_x}.csv"
 
             with open(csv_file, 'w') as csvfile:

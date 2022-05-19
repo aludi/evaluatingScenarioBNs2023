@@ -32,8 +32,11 @@ class Experiment():
         if scenario == "VlekNetwork":
             VlekNetwork(runs=runs, train=train)
 
+
+
         if scenario == "StolenLaptop":
             #self.csv_file_name = "globalStates.csv"
+            print("scenario is stolen laptop")
 
             rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
                                     "flees_startled", "successful_stolen", "raining", "curtains",
@@ -50,7 +53,10 @@ class Experiment():
                     model.step()
                 self.reporters.increase_run()
 
-            self.generate_csv_report(f"experiments/{scenario}/train")  # use these csvs for automatic BN structure determination
+
+
+
+            self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")  # use these csvs for automatic BN structure determination
             self.print_frequencies()
             #self.print_frequencies_latex()
 
@@ -125,13 +131,18 @@ class Experiment():
 
 
 
-    def generate_csv_report(self, file_name):
+    def generate_csv_report(self, file_path):
         history_list = []
         #print("history dict", self.reporters.history_dict)
         for key in self.reporters.history_dict.keys():
             history_list.append(self.reporters.history_dict[key])
         csv_columns = self.reporters.relevant_events
-        csv_file = file_name
+        csv_file = file_path
+
+        #csv_file = os.getcwd() + self.path + f"{self.train}/{file_name}.csv"
+
+
+
         try:
             with open(csv_file, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)

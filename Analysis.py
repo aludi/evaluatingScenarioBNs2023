@@ -554,13 +554,14 @@ def calculate_accuracy_1(file_name, path):
     network = path + "/BNs/"+file_name+".net"
     csv_name = file_name.split("_", 1)[0]   # we want to refer to hte original csv file
     csv_file = path + "/test/"+csv_name+".csv"
-    #print(network)
+
 
     if "net" not in network:
         network = network + ".net"
 
     #org_dir = orgDir
     #if dir not in os.getcwd():
+
 
     bn = gum.loadBN(network)
 
@@ -601,29 +602,35 @@ def calculate_accuracy_1(file_name, path):
         output_node = event_list.pop()
 
         ie = gum.LazyPropagation(bn)
+        val_output = df.loc[i, output_node]
 
         #print("going over set nodes")
+        '''print(i)
+        print(event_list)
+        print("output", output_node)'''
         for ev in event_list:
             val = df.loc[i, ev]
             #print("\t", ev, int(val))
             ie.addEvidence(ev, int(val))
 
+            try:
+                fin = round(ie.posterior(output_node)[1], 2)
+            except:
+                fin = "NA"
+            #    fin = "NA"
+            #    print("BREAKS")
+                break
 
-        #print("output according to csv")
-        val_output = df.loc[i, output_node]
-        #print("\t", output_node, val_output)
+
+        #print(ie.posterior(output_node))
         name_output_list.append(output_node)
 
         output_list.append(val_output)
         #print("output actual",val_output)
-        try:
-            #print("output according to network")
-            fin = round(ie.posterior(output_node)[1], 2)
-            #print("\t", output_node, fin)
+        if fin != "NA":
             rmsd += round(abs(fin - val_output), 2)
             rms_list.append(round(abs(fin - val_output), 2))
-
-        except:
+        else:
             fin = "NA"
             rmsd += 1
             rms_list.append(1)
@@ -631,6 +638,8 @@ def calculate_accuracy_1(file_name, path):
         if fin == val_output:
             accuracy += 1
             matching_output.append(1)
+        elif fin == "NA":
+            matching_output.append("NA")
         else:
             matching_output.append(0)
 
@@ -666,6 +675,8 @@ def calculate_accuracy_1(file_name, path):
         writer = csv.writer(f)
         writer.writerow(row)
 
+    print(file_name)
+
     otp_pd.to_csv(path+"/stats/"+file_name+".csv", index=False)
 
 
@@ -700,6 +711,11 @@ def load_temporal_evidence(name):
                                     "E_private"]
         d["values"] = [1, 1, 1, 1, 1, 0]
         d["output"] = ["successful_stolen"]
+
+    elif "GroteMarkt" in name:
+        d["events"] = ["motive_1_0"]
+        d["values"] = [1]
+        d["output"] = ["stealing_1_0"]
 
     else:
         print("temporal evidence not implemented yet ")
@@ -790,16 +806,21 @@ def plot_posterior(path, base_network):
     plt.show()
 
 def plot_performance(path, base_network):
+    fig, axs = plt.subplots(2)
+
     df = pd.read_csv(path+f"/stats/{base_network}_performance.csv", sep=r',',
                      skipinitialspace=True)
     col = list(df.columns)
-    df.plot(kind='line', x=col[2], y=col[3], title=base, legend=num)
+    df.plot(kind='line', x=col[2], y=col[3], title="Accuracy", legend=num, ax=axs[0])
+    df.plot(kind='line', x=col[2], y=col[4], title="RMSE", legend=num, ax=axs[1])
     #plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation='vertical')
     # Tweak spacing to prevent clipping of tick-labels
     #plt.subplots_adjust(bottom=0.60)
-    plt.xlabel("Disturbance")
-    plt.ylabel("Accuracy")
-    plt.title("How disturbance affects accuracy")
+    axs[0].set(xlabel="Disturbance", ylabel="Accuracy")
+    axs[1].set(xlabel="Disturbance", ylabel="RMSE")
+
+
+
     file_name = path + "/plots/performance_" + base_network + ".pdf"
     plt.savefig(file_name)
     plt.show()
@@ -842,7 +863,9 @@ analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, Non
 
 org_dir = os.getcwd()
 csv_file_name = None
-for (scenario, train_runs) in [("StolenLaptop", 1000), ("VlekNetwork", 50000)]:
+
+run_analysis_only = True
+for (scenario, train_runs) in [("GroteMarkt", 1000)]: #, ("StolenLaptop", 1000), ("VlekNetwork", 50000)]:
 
     os.chdir(org_dir)
 
@@ -853,6 +876,7 @@ for (scenario, train_runs) in [("StolenLaptop", 1000), ("VlekNetwork", 50000)]:
 
 
     test_runs = int(train_runs / 10)
+
 
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
                             subtype=2)  # we do the simple scenario
@@ -869,6 +893,7 @@ for (scenario, train_runs) in [("StolenLaptop", 1000), ("VlekNetwork", 50000)]:
                 [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
                 [0.5, 'arbit']]
 
+
     if ".DS_Store" in list_files:
         list_files.remove(".DS_Store")
 
@@ -877,6 +902,7 @@ for (scenario, train_runs) in [("StolenLaptop", 1000), ("VlekNetwork", 50000)]:
 
         for (exp, params) in [
             ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
+
             for p in params:
                 disturb_cpts(path, exp, p[0], train_data[:-4])
 

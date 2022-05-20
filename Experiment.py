@@ -126,7 +126,7 @@ class Experiment():
 
             print(self.reporters.pure_frequency_event_dict)
 
-            self.generate_csv_report(f"experiments/{scenario}/{self.train}")
+            self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
             self.print_frequencies()
 
 
@@ -140,6 +140,8 @@ class Experiment():
         csv_file = file_path
 
         #csv_file = os.getcwd() + self.path + f"{self.train}/{file_name}.csv"
+
+        #print(csv_file)
 
 
 

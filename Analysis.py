@@ -595,6 +595,7 @@ def calculate_accuracy_1(file_name, path):
     rms_list=[]
     output_list = []
     name_output_list = []
+    rounded_predicted_output = []
     for i in range(0, len(df)):
         #print("NEW COMBO")
         event_list = list(bn.names())  # experiment.reporters.relevant_events
@@ -630,20 +631,20 @@ def calculate_accuracy_1(file_name, path):
         if fin != "NA":
             rmsd += round(abs(fin - val_output), 2)
             rms_list.append(round(abs(fin - val_output), 2))
+            rounded_predicted_output.append(round(fin,0))
+            if round(fin, 0) == val_output:  # we use the rounded network output -> the prediction.
+                accuracy += 1
+                matching_output.append(1)
+            else:
+                matching_output.append(0)
         else:
             fin = "NA"
+            rounded_predicted_output.append("NA")
+
             rmsd += 1
             rms_list.append(1)
-
-        if fin == val_output:
-            accuracy += 1
-            matching_output.append(1)
-        elif fin == "NA":
             matching_output.append("NA")
-        else:
-            matching_output.append(0)
 
-            pass
 
         pred_output.append(fin)
 
@@ -653,11 +654,15 @@ def calculate_accuracy_1(file_name, path):
     for ev in event_list:
         otp[ev] = df.loc[:,ev]
 
+
+
     otp["nameoutput"] = name_output_list
     otp["output"] = output_list
-    otp["predicted"] = pred_output
+    otp["network_output"] = pred_output
     otp["matching"] = matching_output
     otp["RMS"] = rms_list
+    otp["prediction"] = rounded_predicted_output
+
     otp_pd = pd.DataFrame.from_dict(otp)
 
     #print("accuracy", accuracy/len(df))
@@ -714,7 +719,7 @@ def load_temporal_evidence(name):
 
     elif "GroteMarkt" in name:
         d["events"] = ["motive_1_0"]
-        d["values"] = [1]
+        d["values"] = [0]
         d["output"] = ["stealing_1_0"]
 
     else:
@@ -864,8 +869,7 @@ analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, Non
 org_dir = os.getcwd()
 csv_file_name = None
 
-run_analysis_only = True
-for (scenario, train_runs) in [("GroteMarkt", 1000)]: #, ("StolenLaptop", 1000), ("VlekNetwork", 50000)]:
+for (scenario, train_runs, subscenario) in [("VlekNetwork", 50000, 2), ("GroteMarkt", 1000, 2),("StolenLaptop", 1000, 1)]:
 
     os.chdir(org_dir)
 
@@ -875,13 +879,13 @@ for (scenario, train_runs) in [("GroteMarkt", 1000)]: #, ("StolenLaptop", 1000),
 
 
 
-    test_runs = int(train_runs / 10)
+    test_runs = int(train_runs / 100)
 
 
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
-                            subtype=2)  # we do the simple scenario
+                            subtype=subscenario)  # we do the simple scenario
     test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
-                          subtype=2)
+                          subtype=subscenario)
 
     param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
                 [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
@@ -942,8 +946,8 @@ for (scenario, train_runs) in [("GroteMarkt", 1000)]: #, ("StolenLaptop", 1000),
     ## IMAGING
     # making some nice plots of the posterior
     for base_network in list_files:
-        plot_posterior(path, base_network[:-4])
         plot_performance(path, base_network[:-4])
+        plot_posterior(path, base_network[:-4])
 
 
 exit()

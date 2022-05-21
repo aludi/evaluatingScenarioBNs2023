@@ -140,7 +140,6 @@ class Experiment():
         csv_file = file_path
 
         #csv_file = os.getcwd() + self.path + f"{self.train}/{file_name}.csv"
-
         #print(csv_file)
 
 

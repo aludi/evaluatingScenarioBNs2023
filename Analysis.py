@@ -551,9 +551,15 @@ def calculate_accuracy_1(file_name, path):
     print(orgDir)
     print(bnDir)
     print(os.getcwd())'''
+
+
     network = path + "/BNs/"+file_name+".net"
-    csv_name = file_name.split("_", 1)[0]   # we want to refer to hte original csv file
+    if "param" not in file_name:
+        csv_name = file_name.split("_", 1)[0]   # we want to refer to hte original csv file
+    else:
+        csv_name = file_name
     csv_file = path + "/test/"+csv_name+".csv"
+
 
 
     if "net" not in network:
@@ -676,6 +682,9 @@ def calculate_accuracy_1(file_name, path):
         val = 0
 
     row = [name, dist, val, accuracy/len(df), rmsd/len(df)]
+    print(csv_name)
+    print(file_name)
+    print(path)
     with open(path+f"/stats/{csv_name}_performance.csv", 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(row)
@@ -690,10 +699,15 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
     print(bnDir)
     print(os.getcwd())'''
     network = path + "/BNs/"+file_name+".net"
-    csv_name = file_name.split("_", 1)[0]   # we want to refer to hte original csv file
+    if "param" not in file_name:
+        csv_name = file_name.split("_", 1)[0]  # we want to refer to hte original csv file
+    else:
+        csv_name = file_name
     csv_file = path + "/test/"+csv_name+".csv"
 
-
+    print(network)
+    print(csv_name)
+    print(csv_file)
     if "net" not in network:
         network = network + ".net"
 
@@ -1080,8 +1094,8 @@ d_S = {"camera_vision":2}
 d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
-for (scenario, train_runs, param_dict) in [
-                                                        ("StolenLaptop", 1000, d_S),
+for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1000, d_S),
+                                                      #  ("StolenLaptop", 1000, d_S),
                                                        # ("VlekNetwork", 50000, d_V),
                                                        # ("GroteMarkt", 1000, d_G)
 
@@ -1089,8 +1103,7 @@ for (scenario, train_runs, param_dict) in [
 
     os.chdir(org_dir)
 
-    list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
-    list_files.sort()
+
     path = org_dir + "/experiments/" + scenario
 
     test_runs = int(train_runs / 10)
@@ -1101,7 +1114,10 @@ for (scenario, train_runs, param_dict) in [
     test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
                           param_dict=param_dict)
 
-    '''
+    list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
+    list_files.sort()
+
+
     param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
                 [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
 
@@ -1112,20 +1128,19 @@ for (scenario, train_runs, param_dict) in [
                 [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
                 [0.5, 'arbit']]
 
-
+    
     if ".DS_Store" in list_files:
         list_files.remove(".DS_Store")
 
+    print("List files", list_files)
     for train_data in list_files:
         K2_BN_csv_only(train_data, path)
 
-        for (exp, params) in [
-            ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
-
-            for p in params:
-                disturb_cpts(path, exp, p[0], train_data[:-4])
-
-
+        if scenario != "StolenLaptopVision":    # for some experiments we don't want to generate disturbances
+            for (exp, params) in [
+                ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
+                for p in params:
+                    disturb_cpts(path, exp, p[0], train_data[:-4])
 
         with open(path + f"/stats/{train_data[:-4]}_performance.csv", 'w+') as f:
             f.truncate()
@@ -1141,6 +1156,8 @@ for (scenario, train_runs, param_dict) in [
 
     #print("disturbed files", disturbed_list_files)
     for networks in disturbed_list_files:
+        if networks == ".DS_Store":
+            continue
         print(networks)
         #
         k = networks.split("_", 2)
@@ -1156,6 +1173,7 @@ for (scenario, train_runs, param_dict) in [
         print("hugin")
         hugin_converter(networks[:-4], path)
         print("acc 1")
+        print(networks[:-4], path)
 
         calculate_accuracy_1(networks[:-4], path)
         print("acc output")
@@ -1171,10 +1189,10 @@ for (scenario, train_runs, param_dict) in [
     # making some nice plots of the posterior
 
     for base_network in list_files:
-        #plot_performance(path, base_network[:-4])
+        plot_performance(path, base_network[:-4])
         plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
-        #plot_posterior(path, base_network[:-4])
-    '''
+        plot_posterior(path, base_network[:-4])
+
 
 
 exit()

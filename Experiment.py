@@ -32,31 +32,37 @@ class Experiment():
         if scenario == "VlekNetwork":
             VlekNetwork(runs=runs, train=train)
 
-
-
-        if scenario == "StolenLaptop":
+        if scenario == "StolenLaptop" or scenario == "StolenLaptopVision":
+            # iteration
+            iterate_experiment = []
+            if scenario == "StolenLaptop":
+                iterate_experiment = [2]
+            else:
+                iterate_experiment = [2, 3, 4, 5, 6]
             print("scenario is stolen laptop")
-            rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
-                                    "flees_startled", "successful_stolen", "raining", "curtains",
-                                    "E_object_is_gone",
-                                    "E_broken_lock",
-                                    "E_disturbed_house",
-                                    "E_s_spotted_by_house",
-                                    "E_s_spotted_with_goodie",
-                                    "E_private"]
-            self.reporters = Reporters(relevant_events = rel_events)
-            for i in range(0, self.runs-1):
-                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, camera_vision=param_dict["camera_vision"], reporters=self.reporters, output_file = f"experiments/{scenario}/{self.train}")
-                for j in range(30):
-                    model.step()
-                self.reporters.increase_run()
 
+            for camera_vision in iterate_experiment:
+                rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
+                                        "flees_startled", "successful_stolen", "raining", "curtains",
+                                        "E_object_is_gone",
+                                        "E_broken_lock",
+                                        "E_disturbed_house",
+                                        "E_s_spotted_by_house",
+                                        "E_s_spotted_with_goodie",
+                                        "E_private"]
 
-
-
-            self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")  # use these csvs for automatic BN structure determination
-            self.print_frequencies()
-            #self.print_frequencies_latex()
+                self.reporters = Reporters(relevant_events = rel_events)
+                for i in range(0, self.runs-1):
+                    model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, camera_vision=camera_vision, reporters=self.reporters, output_file = f"experiments/{scenario}/{self.train}")
+                    for j in range(30):
+                        model.step()
+                    self.reporters.increase_run()
+                if scenario == "StolenLaptop":
+                    self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")  # use these csvs for automatic BN structure determination
+                else:
+                    self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}_param_{camera_vision}.csv")
+                self.print_frequencies()
+                #self.print_frequencies_latex()
 
         if scenario == "CredibilityGame":
             self.n = 4

@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
+    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="progression plots in progress...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReducedgroteMarkt4.png" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedgroteMarkt4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/conclusion.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/conclusion.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/conclusion.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/conclusion.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/islandPrior.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/islandPrior.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/islandprior.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/islandprior.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.log" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.out" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.toc" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/nonspatial.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/nonspatial.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/nonspatial.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/nonspatial.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/pipeline.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/pipeline.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/pipeline.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/pipeline.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/spatialsimple.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/spatialsimple.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/spatialsimple.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/spatialsimple.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/stateoftheart.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/stateoftheart.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/stateoftheart.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/stateoftheart.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VlekNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/VlekNetwork.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/groteMarkt4.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,28 +70,7 @@
       <recent name="$PROJECT_DIR$/../Desktop" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Analysis">
-    <configuration name="Analysis" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="simulationTest" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/../.virtualenvs/simulationTest/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Analysis.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.Sim_Viz">
     <configuration name="CaseModel" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="simulationTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,6 +84,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CaseModel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Sim_Viz" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="simulationTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../.virtualenvs/simulationTest/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Sim_Viz.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -115,7 +135,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.Analysis" />
+      <item itemvalue="Python.Sim_Viz" />
       <item itemvalue="Python.VlekNetwork" />
       <item itemvalue="Python.CaseModel" />
     </list>
@@ -383,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653137960254</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="progression plots in progress...">
+      <created>1653167028375</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1653167028375</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -400,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="agent can steal from old agent" />
     <MESSAGE value="rm print" />
     <MESSAGE value="added image of BN to page (very slow so removed it again, but works in theory!)" />
     <MESSAGE value="added heroku support" />
@@ -425,72 +451,74 @@
     <MESSAGE value="added support for stolen laptop situation&#10;todo clean up and add final thing" />
     <MESSAGE value="all three main scenarios now work. to do - change grote markt so it has evidence, add standard deviation, and then start writing" />
     <MESSAGE value="fixed accuracy problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed accuracy problem" />
+    <MESSAGE value="progression plots in progress..." />
+    <option name="LAST_COMMIT_MESSAGE" value="progression plots in progress..." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1650882023929">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="209" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1653315145898">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650882023929" />
     <state x="258" y="245" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519090668" />
+    <state x="209" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/30.23.1250.777@30.23.1250.777" timestamp="1653315145898" />
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1648214114780">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648214114780" />
-    <state x="174" y="156" width="752" height="777" key="CommitChangelistDialog2" timestamp="1653137959397">
+    <state x="174" y="156" width="752" height="777" key="CommitChangelistDialog2" timestamp="1653206659027">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653137959397" />
+    <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653206659027" />
     <state x="0" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652977737853" />
     <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1650907482592" />
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog" timestamp="1644843960230">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1824" height="265" key="GridCell.Tab.0.bottom" timestamp="1653166950845">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1229" height="134" key="GridCell.Tab.0.bottom" timestamp="1653396967596">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
-    <state width="1824" height="265" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166950845" />
-    <state width="1824" height="265" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166283887" />
+    <state width="1485" height="221" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516410" />
+    <state width="1485" height="221" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942503" />
     <state width="1630" height="165" key="GridCell.Tab.0.bottom/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955916" />
     <state width="1578" height="283" key="GridCell.Tab.0.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
     <state width="1637" height="387" key="GridCell.Tab.0.bottom/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752094" />
     <state width="1229" height="247" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1647042670108" />
     <state width="1259" height="284" key="GridCell.Tab.0.bottom/29.23.1251.777@29.23.1251.777" timestamp="1649924766051" />
-    <state width="1259" height="147" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1650907461654" />
-    <state width="1824" height="265" key="GridCell.Tab.0.center" timestamp="1653166950841">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1229" height="134" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1653396967596" />
+    <state width="1229" height="134" key="GridCell.Tab.0.center" timestamp="1653396967594">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
-    <state width="1824" height="265" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166950841" />
-    <state width="1824" height="265" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166283886" />
+    <state width="1485" height="221" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516409" />
+    <state width="1485" height="221" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942502" />
     <state width="1630" height="165" key="GridCell.Tab.0.center/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955915" />
     <state width="1578" height="283" key="GridCell.Tab.0.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
     <state width="1637" height="387" key="GridCell.Tab.0.center/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752093" />
     <state width="1229" height="247" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1647042670107" />
     <state width="1259" height="284" key="GridCell.Tab.0.center/29.23.1251.777@29.23.1251.777" timestamp="1649924766049" />
-    <state width="1259" height="147" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1650907461652" />
-    <state width="1824" height="265" key="GridCell.Tab.0.left" timestamp="1653166950838">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1229" height="134" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1653396967594" />
+    <state width="1229" height="134" key="GridCell.Tab.0.left" timestamp="1653396967593">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
-    <state width="1824" height="265" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166950838" />
-    <state width="1824" height="265" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166283885" />
+    <state width="1485" height="221" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516408" />
+    <state width="1485" height="221" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942501" />
     <state width="1630" height="165" key="GridCell.Tab.0.left/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955914" />
     <state width="1578" height="283" key="GridCell.Tab.0.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
     <state width="1637" height="387" key="GridCell.Tab.0.left/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752093" />
     <state width="1229" height="247" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1647042670106" />
     <state width="1259" height="284" key="GridCell.Tab.0.left/29.23.1251.777@29.23.1251.777" timestamp="1649924766047" />
-    <state width="1259" height="147" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1650907461652" />
-    <state width="1824" height="265" key="GridCell.Tab.0.right" timestamp="1653166950843">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state width="1229" height="134" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1653396967593" />
+    <state width="1229" height="134" key="GridCell.Tab.0.right" timestamp="1653396967595">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
-    <state width="1824" height="265" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166950843" />
-    <state width="1824" height="265" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653166283887" />
+    <state width="1485" height="221" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516409" />
+    <state width="1485" height="221" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942502" />
     <state width="1630" height="165" key="GridCell.Tab.0.right/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955915" />
     <state width="1578" height="283" key="GridCell.Tab.0.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
     <state width="1637" height="387" key="GridCell.Tab.0.right/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644871752094" />
     <state width="1229" height="247" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1647042670107" />
     <state width="1259" height="284" key="GridCell.Tab.0.right/29.23.1251.777@29.23.1251.777" timestamp="1649924766049" />
-    <state width="1259" height="147" key="GridCell.Tab.0.right/30.23.1250.777@30.23.1250.777" timestamp="1650907461653" />
+    <state width="1229" height="134" key="GridCell.Tab.0.right/30.23.1250.777@30.23.1250.777" timestamp="1653396967595" />
     <state width="1548" height="354" key="GridCell.Tab.1.bottom" timestamp="1648474377099">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -528,15 +556,15 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="937" y="471" key="VCS.ChangelistChooser/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843945261" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1653137967519">
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1653167034922">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653137967519" />
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653167034922" />
     <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1649702515001" />
-    <state x="843" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1653162025344">
+    <state x="579" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1653389549361">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="843" y="23" key="com.intellij.ide.util.TipDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653162025344" />
+    <state x="579" y="303" key="com.intellij.ide.util.TipDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653389549361" />
     <state x="825" y="175" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1647951050499">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

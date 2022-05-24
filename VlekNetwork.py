@@ -25,33 +25,6 @@ class VlekNetwork(Model):
         self.mark_and_jane()
 
 
-    def mark_and_jane(self):  # this is the basic game with independent agents.
-        kbFull = [
-            ([], "jane_and_mark_fight", 20, 0),
-            ([], "jane_has_knife", 70, 0),
-            (["jane_and_mark_fight", "jane_has_knife"], "jane_stabs_mark_with_knife", 1, 1),
-            (["jane_stabs_mark_with_knife"], "mark_dies", 70, 2),
-            (["jane_and_mark_fight", "jane_has_knife"], "jane_threatens_mark_with_knife", 3, 1),
-            (["jane_threatens_mark_with_knife"], "mark_hits_jane", 90, 2), #90
-            (["mark_hits_jane"], "jane_drops_knife", 50, 3), # 50
-            (["jane_drops_knife"], "mark_falls_on_knife", 10, 4),    #1
-            (["mark_falls_on_knife"], "mark_dies_by_accident", 60, 5), #60
-            (["mark_dies_by_accident"], "mark_dies", 100, 6)
-
-            ]
-
-        kb1 = [
-            ([], "jane_and_mark_fight", 20, 0),
-            ([], "jane_has_knife", 70, 0),
-            (["jane_and_mark_fight", "jane_has_knife"], "jane_stabs_mark_with_knife", 1, 1),
-            (["jane_stabs_mark_with_knife"], "mark_dies", 70, 2)
-            ]
-        kb2 = [
-            ([], "jane_and_mark_fight", 20, 0),
-            ([], "jane_has_knife", 70, 0),
-            (["jane_and_mark_fight", "jane_has_knife"], "jane_threatens_mark_with_knife", 3, 1),
-            (["jane_threatens_mark_with_knife"], "mark_hits_jane", 9, 2)]
-
 
     def mark_and_jane(self):  # this is the basic game with independent agents.
         kbFull = [

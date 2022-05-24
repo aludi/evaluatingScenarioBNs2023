@@ -5,34 +5,76 @@
 \BOOKMARK [1][-]{section.2.2}{Reasoning with evidence}{chapter.2}% 5
 \BOOKMARK [1][-]{section.2.3}{Bayes!}{chapter.2}% 6
 \BOOKMARK [1][-]{section.2.4}{Problems with the Bayesian Approach}{chapter.2}% 7
-\BOOKMARK [0][-]{chapter.3}{Simulations to Evaluate Bayesian Networks.}{}% 8
-\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 9
-\BOOKMARK [1][-]{section.3.2}{Setting-up an Experiment}{chapter.3}% 10
-\BOOKMARK [2][-]{subsection.3.2.1}{Simulation}{section.3.2}% 11
-\BOOKMARK [2][-]{subsection.3.2.2}{Reporters}{section.3.2}% 12
-\BOOKMARK [1][-]{section.3.3}{Creating a Bayesian Network from a Simulation Automatically}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.4}{Evaluating the Bayesian Network}{chapter.3}% 14
-\BOOKMARK [2][-]{subsection.3.4.1}{Structural Criteria}{section.3.4}% 15
-\BOOKMARK [2][-]{subsection.3.4.2}{Performance Criteria}{section.3.4}% 16
-\BOOKMARK [2][-]{subsection.3.4.3}{Human Criteria}{section.3.4}% 17
-\BOOKMARK [0][-]{chapter.4}{Simple Non-Spatial Simulations}{}% 18
-\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{Method}{chapter.4}% 20
-\BOOKMARK [2][-]{subsection.4.2.1}{Behavioural rules for the simulation}{section.4.2}% 21
-\BOOKMARK [1][-]{section.4.3}{Results}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.4}{Discussion}{chapter.4}% 23
-\BOOKMARK [2][-]{subsection.4.4.1}{Structural Criteria}{section.4.4}% 24
-\BOOKMARK [2][-]{subsection.4.4.2}{Performance Criteria}{section.4.4}% 25
-\BOOKMARK [2][-]{subsection.4.4.3}{Human Criteria}{section.4.4}% 26
-\BOOKMARK [2][-]{subsection.4.4.4}{Comparison to Vlek 2015}{section.4.4}% 27
-\BOOKMARK [2][-]{subsection.4.4.5}{Quality of scenario}{section.4.4}% 28
-\BOOKMARK [1][-]{section.4.5}{Important take-aways}{chapter.4}% 29
-\BOOKMARK [2][-]{subsection.4.5.1}{We don't need the scenario node for mutual exclusivity}{section.4.5}% 30
-\BOOKMARK [2][-]{subsection.4.5.2}{Resolution and number of runs}{section.4.5}% 31
-\BOOKMARK [0][-]{chapter.5}{Simple Spatial Simulations}{}% 32
-\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 33
-\BOOKMARK [0][-]{chapter.6}{The Great Grote Markt Robbery Island Prior}{}% 34
-\BOOKMARK [1][-]{section.6.1}{Introduction}{chapter.6}% 35
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 36
-\BOOKMARK [1][-]{section.7.1}{Conclusion}{chapter.7}% 37
-\BOOKMARK [1][-]{section.7.2}{Future Work}{chapter.7}% 38
+\BOOKMARK [1][-]{section.2.5}{Background on probabilities - the meaning of random variables}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{Simulations to Evaluate Bayesian Networks.}{}% 9
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.2}{Setting-up an Experiment}{chapter.3}% 11
+\BOOKMARK [2][-]{subsection.3.2.1}{Simulation}{section.3.2}% 12
+\BOOKMARK [2][-]{subsection.3.2.2}{Reporters \(as Random Variables\)}{section.3.2}% 13
+\BOOKMARK [1][-]{section.3.3}{Creating a Bayesian Network from a Simulation Automatically}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{Evaluating the Bayesian Network}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.4.1}{Structural Criteria}{section.3.4}% 16
+\BOOKMARK [2][-]{subsection.3.4.2}{Performance Criteria}{section.3.4}% 17
+\BOOKMARK [2][-]{subsection.3.4.3}{Human Criteria}{section.3.4}% 18
+\BOOKMARK [0][-]{chapter.4}{Simple Non-Spatial Simulations}{}% 19
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{Method}{chapter.4}% 21
+\BOOKMARK [2][-]{subsection.4.2.1}{Behavioural rules for the simulation}{section.4.2}% 22
+\BOOKMARK [1][-]{section.4.3}{Results}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.4}{Discussion}{chapter.4}% 24
+\BOOKMARK [2][-]{subsection.4.4.1}{Structural Criteria}{section.4.4}% 25
+\BOOKMARK [2][-]{subsection.4.4.2}{Performance Criteria}{section.4.4}% 26
+\BOOKMARK [2][-]{subsection.4.4.3}{Human Criteria}{section.4.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.4}{Comparison to Vlek 2015}{section.4.4}% 28
+\BOOKMARK [2][-]{subsection.4.4.5}{Quality of scenario}{section.4.4}% 29
+\BOOKMARK [1][-]{section.4.5}{Important take-aways}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.5.1}{Simulations work}{section.4.5}% 31
+\BOOKMARK [2][-]{subsection.4.5.2}{We don't need the scenario node for mutual exclusivity}{section.4.5}% 32
+\BOOKMARK [2][-]{subsection.4.5.3}{Resolution and number of runs}{section.4.5}% 33
+\BOOKMARK [1][-]{section.4.6}{Conclusion }{chapter.4}% 34
+\BOOKMARK [0][-]{chapter.5}{Simple Spatial Simulations}{}% 35
+\BOOKMARK [1][-]{section.5.1}{Experiment 1: Generating BNs with disturbances}{chapter.5}% 36
+\BOOKMARK [2][-]{subsection.5.1.1}{Introduction}{section.5.1}% 37
+\BOOKMARK [2][-]{subsection.5.1.2}{Methods}{section.5.1}% 38
+\BOOKMARK [2][-]{subsection.5.1.3}{Results}{section.5.1}% 39
+\BOOKMARK [2][-]{subsection.5.1.4}{Discussion}{section.5.1}% 40
+\BOOKMARK [1][-]{section.5.2}{Experiment 2: Investigating the evidence strength depending on parameters of the network.}{chapter.5}% 41
+\BOOKMARK [2][-]{subsection.5.2.1}{Introduction}{section.5.2}% 42
+\BOOKMARK [2][-]{subsection.5.2.2}{Methods}{section.5.2}% 43
+\BOOKMARK [2][-]{subsection.5.2.3}{Results}{section.5.2}% 44
+\BOOKMARK [2][-]{subsection.5.2.4}{Discussion}{section.5.2}% 45
+\BOOKMARK [1][-]{section.5.3}{Experiment 3: Investigating the effect of private knowledge}{chapter.5}% 46
+\BOOKMARK [2][-]{subsection.5.3.1}{Introduction}{section.5.3}% 47
+\BOOKMARK [2][-]{subsection.5.3.2}{Method}{section.5.3}% 48
+\BOOKMARK [2][-]{subsection.5.3.3}{Results}{section.5.3}% 49
+\BOOKMARK [2][-]{subsection.5.3.4}{Discussion}{section.5.3}% 50
+\BOOKMARK [1][-]{section.5.4}{Take aways from the three experiments}{chapter.5}% 51
+\BOOKMARK [0][-]{chapter.6}{Robberies in real locations}{}% 52
+\BOOKMARK [1][-]{section.6.1}{General information}{chapter.6}% 53
+\BOOKMARK [1][-]{section.6.2}{Experiment 1: General - can we create BNs of a robbery at Grote Markt?}{chapter.6}% 54
+\BOOKMARK [2][-]{subsection.6.2.1}{Introduction}{section.6.2}% 55
+\BOOKMARK [2][-]{subsection.6.2.2}{Methods}{section.6.2}% 56
+\BOOKMARK [2][-]{subsection.6.2.3}{Results}{section.6.2}% 57
+\BOOKMARK [2][-]{subsection.6.2.4}{Discussion}{section.6.2}% 58
+\BOOKMARK [1][-]{section.6.3}{Experiment 2: Swapping out the maps.}{chapter.6}% 59
+\BOOKMARK [2][-]{subsection.6.3.1}{Introduction}{section.6.3}% 60
+\BOOKMARK [2][-]{subsection.6.3.2}{Methods}{section.6.3}% 61
+\BOOKMARK [2][-]{subsection.6.3.3}{Results}{section.6.3}% 62
+\BOOKMARK [2][-]{subsection.6.3.4}{Discussion}{section.6.3}% 63
+\BOOKMARK [1][-]{section.6.4}{Experiment 3: Reporters, random variables and the reference class problem}{chapter.6}% 64
+\BOOKMARK [2][-]{subsection.6.4.1}{Introduction}{section.6.4}% 65
+\BOOKMARK [2][-]{subsection.6.4.2}{Methods}{section.6.4}% 66
+\BOOKMARK [2][-]{subsection.6.4.3}{Results}{section.6.4}% 67
+\BOOKMARK [2][-]{subsection.6.4.4}{Discussion}{section.6.4}% 68
+\BOOKMARK [1][-]{section.6.5}{Experiment 4: Investigating }{chapter.6}% 69
+\BOOKMARK [2][-]{subsection.6.5.1}{Introduction}{section.6.5}% 70
+\BOOKMARK [2][-]{subsection.6.5.2}{Methods}{section.6.5}% 71
+\BOOKMARK [2][-]{subsection.6.5.3}{Results}{section.6.5}% 72
+\BOOKMARK [2][-]{subsection.6.5.4}{Discussion}{section.6.5}% 73
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 74
+\BOOKMARK [1][-]{section.7.1}{Fundamental Problems with Bayesian Networks}{chapter.7}% 75
+\BOOKMARK [2][-]{subsection.7.1.1}{Reporters, Reference Classes and Random Variables.}{section.7.1}% 76
+\BOOKMARK [2][-]{subsection.7.1.2}{Maps and implicitness.}{section.7.1}% 77
+\BOOKMARK [2][-]{subsection.7.1.3}{Private knowledge}{section.7.1}% 78
+\BOOKMARK [1][-]{section.7.2}{Conclusion}{chapter.7}% 79
+\BOOKMARK [1][-]{section.7.3}{Future Work}{chapter.7}% 80

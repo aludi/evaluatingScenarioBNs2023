@@ -204,6 +204,10 @@ The conditional probability tables as displayed in these networks are not great.
 	\item How robust is the network against disturbances around the mean (problem with precision)?
 	\item How robust is the network around rounding to arbitrary intervals?
 	\end{enumerate}
+	
+\item Can a human find this network \& reason with it? All the evidence points in the correct direction, in the weak and strong views we're ok, even for relatively large intervals - we see a sharp drop in accuracy and increase in RMS error at around intervals of 0.33. This would mean, that for these networks, the elicitor should only need to specify probabilities that are 0, 0.33, 0.66, and 1 (eg, round every probability that is not one of these, to one of these). Note, that this is likely different dependent on the complexity of the networks (in some way, lol). This sounds definitely plausible as a lower level. If someone has strong opinions on the CPT then we can always increase precision in certain nodes. Hence, this seems pretty great.
+
+
 \end{enumerate}
 
 
@@ -242,11 +246,14 @@ Uh. The second objection is that you have to arbitrarily decide which cause is t
 
 \end{itemize}
 
+
+
+
 \section{Important take-aways}
 In this section, I summarise some important take-aways, that will be necessary for the rest of this project. Things that we learn here, will be useful in evaluating the rest.
 
 \subsection{Simulations work}
-Even this very simple `forward chaining' simulation (eg: forward chaining with some probabilities attached), can be used to construct meaningful Bayesian Networks. The Bayesian Networks 
+Even this very simple `forward chaining' simulation (eg: forward chaining with some probabilities attached), can be used to construct meaningful Bayesian Networks. The Bayesian Networks have generally ok accuracy and RMS error, and reflect the structure of the simulation (dependent on the number of runs, that's true). Even when we disturb the CPTs in the table, we get relatively ok accuracy and RMS until  
 
 
 \subsection{We don't need the scenario node for mutual exclusivity}
@@ -258,6 +265,12 @@ The accuracy of the Bayesian Network improves as the number of runs improves. Th
 
 What are the practical implications of this? On this side, that we need enough data to get an accurate prediction. But, if we're thinking about elicitation, this means that if you decide to add an event to a scenario, or a node to a network, you really have to think about the probability that you assign it - a probability of 1 in 10.000 would really mean that this event would only happen once every 10.000 situations (that you are considering - the reference class is never far away). 
 
+
+\section{Conclusion }
+
+With this part, I have shown that the pipeline works. We can make a simulation using forward chaining, that generates world-states, and those world states can be translated into Bayesian Networks by means of the K2 algorithm, with reasonable accuracy even under rounding. The K2 manages to replicate constraints and merge two different possible scenarios together. So if the real world worked like a simple forward chaining inference method where we knew exactly when a proposition was true (which is, if the state is true, we set the proposition to true in every epoch), then BNs would work flawlessly even if we weren't very great at estimating the correct frequencies precisely.
+
+Sad that the real world doesn't work that way.
 
 
 > Dit is de focus van mijn onderzoek!!!

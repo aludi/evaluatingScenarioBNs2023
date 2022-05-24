@@ -40,7 +40,7 @@ Where does the interest of the simulation come from? In one part, agents sometim
  
 
 
-\subsection{Reporters}
+\subsection{Reporters (as Random Variables)}
 
 In the simulation, certain states can be brought about. For example, an agent can succeed in stealing an object, or in lying, or in having a motivation (or in not having those things). We need a way to observe these states: this is where reporters come in. A reporter reports the outcome of a relevant event or state in the simulation, and is embedded in the code. If an event happens (or does not happen), the reporter reports that the event is true (or false). In essence, the reporter ($R$) is a random variable (RV) that maps an event ($e$) to a truth value:
 

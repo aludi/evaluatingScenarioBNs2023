@@ -5,8 +5,45 @@
 
 \chapter[Conclusion]{Conclusion}
 
+\section{Fundamental Problems with Bayesian Networks}
+
+There are some fundamental problems with BNs as used for scenario-like whole legal Bayesian Networks.
+
+Robustness is not the problem, even if we round to arbitrary intervals, losing a lot of precision, we have networks with a reasonable accuracy/rms error, that generally reach the right (enough) conclusion and respond correctly to evidence. Granularity is also whatever. The real problem is with the translation from human language to mathematical language. A random variable maps a sample world to a value, according to a certain procedure that is described in natural language. This means that for every node in the BN, we need to describe a procedure through which we can know whether or not it is true. This should be explicit, and everyone in court should agree with this - there can be no `personal interpretation' of this, no `probably close enough to count', because then we have shifted from one RV to a different one. This is not necessarily problematic, perhaps the robustness of BNs does not just hold for estimating a probability for a given reporter, but also holds for estimating a probability over an estimated set of reporters. However, we have to make this explicit - if we change reporters (RVs) without communicating about it, we're in trouble. 
+
+However, in court this would imply that we would have a discussion about every measuring procedure for every node of every BN, and there would be no `idiom database', because as soom as we try to app
+\subsection{Reporters, Reference Classes and Random Variables.}
+
+Fundamentally, the problem is that the nodes in Bayesian Networks have a specific meaning. They are not pragmatic/dialogical/argumentation sentences, but have intricate statistical meaning \footnote{secret fourth good sherlock episode.} They are random variables, and a random variable implies an observation procedure (a mapping from a world state to a number). This means, that a node implies that we know how to measure if it is true or not in the real world.
+
+ In our simulation, this is really not a problem. We have an observation procedure: if a certain state occurs, we have the reporter in the same place as when the state change occurs, and the reporter reports exactly and only that. In experiment XXX we saw what happens when this goes wrong: if we have an imprecise/contradictory/smaller/larger reporters, we see that the probabilities can change a lot, might even change the structure of the network. 
+ 
+Hence, BNs might work for subsections of reality that have a clear observation procedure (eg reasoning with DNA evidence or other forensic stuff). We know exactly what it means for the node to be true (eg: we know the measurement associated with the random variable). However, for many of the node events that we encounter in scenario BNs/argumentation BNs, we do not know how we are determining that the node is true or not. So either we spell out exactly when a node is true or not, and by exactly I mean exactly, and we lose all generality/chance at DBs. Or we do not spell it out, interpret BN nodes not as random variables but as some sort of fuzzy conditional logic operation, but then that's fine, but we're not really building Bayesian Networks, we're doing something else.
+
+Experiment outcomes: best possible case would be that the structure of the BN becomes different (not just the probabilities) based on different reporters used.
+
+- I want one random variable that is a `wide' interpretation: a combination of all possible reporters for some thing.
+- I want some random variables that are the most narrow possible interpretation.
+- alternative.
+
+---------------------------------------------------------------------
+
+This is not the same as the problem of the reference class, but it is related. The problem of the reference class is the discussion which definition/reporter is appropriate for a given situation. This problem is the step before that, which is - how do we specify what reference class we are talking about? This is not described in the scenario-like BNs I've discussed in my introduction. The forensic BNs come closer, because there we at least know what method is used to determine if an event happened or not...
+
+\subsection{Maps and implicitness.}
+
+Put the exact same agents with the same behavioural loops on a different map, and the probabilities for events change (see XXX). This is not a problem - this means that environment/world knowledge/context, which is not a node explicitly in the Bayesian Network, affects the output of networks. This can be remedied in a sense, by adding a context node. So what's the problem? That if we see a BN and we do not know exactly what the context was in which it was created, we cannot assume that it generalises to a different environment. We cannot take parts of that network (with probabilities) and put it in a different one, because implicitly it is only defined over the environment for which it was originally created.
+
+\subsection{Private knowledge}
+
+Here we run into a paradox: in our simulation we know exactly when something is true, even when that thing is private knowledge. If we leave out the private knowledge (drop from our table, basically), we have a problem and the accuracy of the network drops. This means that we can only generate a BN that uses private knowledge if we have all knowledge, requiring everyone in the process to help along. Feasible? No.
+
+
 \section{Conclusion}
-Here I draw some conclusions.
+Bayesian Networks are a good tool if you know exactly what you want to investigate and have methods for it as well. This is the case in simulation, obviously.
+
 
 \section{Future Work}
-Testing or generating Bayesian Network idioms from simulations. The dream is to get ``plug and play'' Bayesian Network idioms - preconnected structures (perhaps even with some probabilities attached) that you can add evidence to and adapt and combine if necessary. Using simulations, we can test the granularity of these possible idioms, to simulate an crime at larger and smaller resolution (more or fewer events) to see how well the idioms can capture it.
+Testing or generating Bayesian Network idioms from simulations. The dream is to get ``plug and play'' Bayesian Network idioms - preconnected structures (perhaps even with some probabilities attached) that you can add evidence to and adapt and combine if necessary. Using simulations, we can test the granularity of these possible idioms, to simulate a crime at larger and smaller resolution (more or fewer events) to see how well the idioms can capture it.
+
+Investigate the effect of granularity, expecially in relation to the complexity of the network. Size, num of arrows, etc. 

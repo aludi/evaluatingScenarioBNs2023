@@ -680,7 +680,7 @@ def calculate_accuracy_1(file_name, path):
         writer = csv.writer(f)
         writer.writerow(row)
 
-    print(file_name)
+    #print(file_name)
 
     otp_pd.to_csv(path+"/stats/"+file_name+".csv", index=False)
 
@@ -751,16 +751,16 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
                 val = df.loc[i, ev]
                 #print("\t", ev, int(val))
                 ie.addEvidence(ev, int(val))
-                print(ev, val, output_node)
+                #print(ev, val, output_node)
 
                 try:
                     fin = round(ie.posterior(output_node)[1], 2)
-                    print(fin)
+                    #print(fin)
                 except:
                     fin = "NA"
                 #    fin = "NA"
                 #    print("BREAKS")
-                    print(fin)
+                    #print(fin)
                     break
 
 
@@ -768,7 +768,7 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
         name_output_list.append(output_node)
 
         output_list.append(val_output)
-        print("output actual",val_output)
+        #print("output actual",val_output)
         if fin != "NA":
             rmsd += round(abs(fin - val_output), 2)
             rms_list.append(round(abs(fin - val_output), 2))
@@ -816,10 +816,7 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
         dist = "none"
         val = 0
 
-    row = [name, dist, val, accuracy/len(df), rmsd/len(df)]
-    with open(path+f"/stats/{csv_name}_performance_fixed_output.csv", 'a', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(row)
+
 
 
     otp_pd.to_csv(path+"/stats/"+file_name+"_performance_fixed_output.csv", index=False)
@@ -948,11 +945,11 @@ def plot_posterior(path, base_network):
         plt.title("The effect of evidence on the posterior")
     file_name = path + "/plots/posterior_" + base_network + ".pdf"
     plt.savefig(file_name)
-    plt.show()
+    #plt.show()
 
 def plot_performance(path, base_network):
     fig, axs = plt.subplots(2)
-    print(path, base_network)
+    #print(path, base_network)
 
     df = pd.read_csv(path+f"/stats/{base_network}_performance.csv", sep=r',',
                      skipinitialspace=True)
@@ -966,12 +963,14 @@ def plot_performance(path, base_network):
     axs[1].set(xlabel="Disturbance", ylabel="RMSE")
     file_name = path + "/plots/performance_" + base_network + ".pdf"
     plt.savefig(file_name)
-    plt.show()
+    #plt.show()
 
 def plot_performance_fixed_output(path, base_network, temporal_evidence):
+    folder = path + "/stats/"
+    list_files = os.listdir(folder)
+    list_files.sort()
     fig, axs = plt.subplots(2)
     colors = ["#fde725", "#b5de2b", "#6ece58", "#35b779", "#1f9e89", "#26828e", "#31688e", "#3e4989", "#482878", "#440154"]
-
     df_list = []
     df = pd.read_csv(path + f"/stats/{base_network}_performance_fixed_output.csv", sep=r',',
                      skipinitialspace=True)
@@ -981,12 +980,36 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
     for event in temporal_evidence["events"]:
         df['conc'] += df[event].map(str)
 
-    t = df.groupby('conc').agg({'RMS': 'mean', 'matching': 'mean'})
-    t.rename(columns={'conc':'conc','RMS': f'RMS None', 'matching': 'accuracy None'}, inplace=True)
-    #print(t)
+    t = df.groupby('conc', as_index=False).agg({'RMS': 'mean', 'matching': 'mean'})
+    t.rename(columns={'conc':'conc','RMS': f'RMS No', 'matching': 'Acc No'}, inplace=True)
+    print("first t")
+    print(t)
+
+    c = colors.pop()
+    t.plot(kind='bar', x='conc', y=f'Acc No', legend="No", color=c, title="Accuracy", ax=axs[0])
+    t.plot(kind='bar', x='conc', y=f'RMS No', legend="No", color=c, title="RMS", ax=axs[1])
 
     df_list.append(t)
-    for num in [ 0.05, 0.125, 0.1, 0.2, 0.25, 0.33, 0.5]:
+    relevant_files = []
+    for f in list_files:
+        #print(f)
+        if base_network in f and "fixed_output" in f and "arbit" in f:
+            relevant_files.append(f)
+
+    #print(relevant_files)
+    for i in range(0, len(relevant_files)):
+        file = relevant_files[i]
+        param = file.split("_", 3)
+        #print("param", param)
+        if len(param) > 2:
+            [base, dis, num, r] = param
+
+        else:
+            base = file
+            num = "no"
+
+        #print(base, dis, num)
+        #for num in [ 0.05, 0.125, 0.1, 0.2, 0.25, 0.33, 0.5]:
         df = pd.read_csv(path+f"/stats/{base_network}_arbit_{num}_performance_fixed_output.csv", sep=r',',
                          skipinitialspace=True)
 
@@ -994,35 +1017,24 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
         #print(num)
         for event in temporal_evidence["events"]:
             df['conc'] += df[event].map(str)
+
         #print(df['conc'])
 
-        t = df.groupby('conc').agg({'RMS':'mean','matching':'mean'})
-        t.rename(columns = {'conc':'conc','RMS': f'RMS{str(num)}', 'matching': f'accuracy{str(num)}'},inplace=True)
+        t = df.groupby('conc', as_index=False).agg({'RMS':'mean','matching':'mean'})
+
+        t.rename(columns = {'conc':'conc', 'RMS': f'RMS {str(num)}', 'matching': f'Acc {str(num)}'},inplace=True)
         #print(list(t))
-        df_list.append(t)
+        c = colors.pop()
 
-    t = pd.concat(df_list)
-
-
-    col = list(t)
-    print(col)
-    print(t)
-    i = 0
-    while i < 2*len(df_list):
-        t.plot(kind='line',   y=col[i+1], title="accuracy", ax=axs[0], color=colors[int(i/2)])
-        t.plot(kind='line',  y=col[i], title="rms", ax=axs[1], color=colors[int(i/2)])
-        i += 2
-
-    #plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation='vertical')
-    # Tweak spacing to prevent clipping of tick-labels
-    #plt.subplots_adjust(bottom=0.60)
-
-    axs[0].set(xlabel="Disturbance",  ylabel="Accuracy")
-    axs[1].set(xlabel="Disturbance",  ylabel="RMSE")
+        t.plot(kind='bar', x='conc',y= f'Acc {str(num)}', legend=num, color=c, title="Accuracy",  ax=axs[0])
+        t.plot(kind='bar', x='conc',y= f'RMS {str(num)}', legend=num, color=c, title="RMS",  ax=axs[1])
+        print(t)
 
     file_name = path + "/plots/performance_fixed_output_" + base_network + ".pdf"
+    #fig.tight_layout()
     plt.savefig(file_name)
-    plt.show()
+    #plt.show()
+
 
 
 
@@ -1064,7 +1076,7 @@ analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, Non
 org_dir = os.getcwd()
 csv_file_name = None
 
-for (scenario, train_runs, subscenario) in [("StolenLaptop", 1000, 1)]:#[("VlekNetwork", 50000, 2), ("GroteMarkt", 1000, 2),("StolenLaptop", 1000, 1)]:
+for (scenario, train_runs, subscenario) in [("StolenLaptop", 1000, 1), ("VlekNetwork", 50000, 2), ("GroteMarkt", 1000, 2)]: #("StolenLaptop", 1000, 1) ,
 
     os.chdir(org_dir)
 
@@ -1119,6 +1131,7 @@ for (scenario, train_runs, subscenario) in [("StolenLaptop", 1000, 1)]:#[("VlekN
 
     #print("disturbed files", disturbed_list_files)
     for networks in disturbed_list_files:
+        print(networks)
         #
         k = networks.split("_", 2)
         if len(k) > 2:
@@ -1130,18 +1143,26 @@ for (scenario, train_runs, subscenario) in [("StolenLaptop", 1000, 1)]:#[("VlekN
             num = 0
 
 
-        #hugin_converter(networks[:-4], path)
-        #calculate_accuracy_1(networks[:-4], path)
-        #calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
-        #progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
+        print("hugin")
+        hugin_converter(networks[:-4], path)
+        print("acc 1")
+
+        calculate_accuracy_1(networks[:-4], path)
+        print("acc output")
+
+        calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
+        print("progress")
+
+        progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
 
 
     ## IMAGING
     # making some nice plots of the posterior
+
     for base_network in list_files:
         #plot_performance(path, base_network[:-4])
-        plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(networks[:-4]))
+        plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
         #plot_posterior(path, base_network[:-4])
 
 

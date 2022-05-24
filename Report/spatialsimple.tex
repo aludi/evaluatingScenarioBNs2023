@@ -10,7 +10,7 @@ Summary:
 
  The problem is that in the previous chapter, we have established that we have a method to convert a simple, forward chaining simulation, to a collection of data, which then in turn can be used to create a Bayesian Network, that represents the situation in the simulation relatively well (some problems none-withstanding, accuracy and RMS error are generally ok even in increments that people might plausibly be able to estimate ~ intervals of 0.33/0.25-ish). However, this was totally 100\% determined by deterministic forward chaining rules. The real world does not run on deterministic forward chaining rules (as far as we know). At least, we are spatially situated, which means that there are probabilities that will arise out of interactions between agents and their environment. These probabilities are not `set' in the same ways as the probabilities are set in the previous chapter, they arise organically from interactions: eg: an agent has to be located at a door to break in, an agent can be seen by a camera only in some locations of the simulation. We do not know these probabilities a-priori (although we can probably calculate them, I don't know).
  
-New idea: We create spatially situated simulations that are more complex, and see if they work the same way/are as accurate \& rms as the previous.
+New idea: We create spatially situated simulations that are more complex, and see if they work the same way/are as accurate \& rms as the previous. Then we will also use these simple spatial simulations to test two hypotheses about 1) the effect of private knowledge and 2) the effect of parameters.
 
 
 \section{Experiment 1: Generating BNs with disturbances}
@@ -27,7 +27,17 @@ Same as before.
 \subsection{Results}
 
 
+See Figure~\ref{laptopAcc}
 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[]{../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in stolenLaptop network and simulation}
+\label{laptopAcc}
+\end{center}
+\end{figure}
+
+Overall pretty accurate.
 
 
 \subsection{Discussion}
@@ -46,7 +56,8 @@ A funny thing is that this simulation we can test how the evidence strength is d
 I changed the parameter of vision of the camera for the simulation between 1 and 15, for the rest the simulation was the exact same. I didn't apply any disturbances to the network.
 
 \subsection{Results}
-plot here.
+
+
 
 \subsection{Discussion}
 We see here, that the name of the variable is actually incorrect. It shouldn't be called "agent seen near house", because the reporter is not actually reporting that the agent is near the house - instead it is reporting whether the agent is within the vision of the camera. So properly it should be called "agent is seen in camera", or we can rewrite the reporter to measure whether the agent is actually near the house. 

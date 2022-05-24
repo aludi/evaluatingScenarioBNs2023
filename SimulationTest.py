@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 class StolenLaptop(Model):
 
-    def __init__(self, N_agents, N_houses, width, height, reporters, output_file):
+    def __init__(self, N_agents, N_houses, width, height, camera_vision, reporters, output_file):
         self.running = True
         self.current_id = -1
         self.num_agents = N_agents
@@ -23,6 +23,7 @@ class StolenLaptop(Model):
         self.houses = []
         self.agents = []
         self.walkways = []
+        self.camera_vision = camera_vision
         self.raining = False
 
 
@@ -40,9 +41,9 @@ class StolenLaptop(Model):
         for i in range(self.num_agents):
             curtains = random.randrange(0, 100)
             if curtains > 80:
-                a = House(self.next_id(), self, i, curtains=True)
+                a = House(self.next_id(), self, i, curtains=True, camera_vision=self.camera_vision)
             else:
-                a = House(self.next_id(), self, i, curtains=False)
+                a = House(self.next_id(), self, i, curtains=False, camera_vision=self.camera_vision)
 
             self.schedule.add(a)
             self.grid.place_agent(a, (a.x, a.y))
@@ -112,7 +113,7 @@ class StolenLaptop(Model):
 
 class Street(Model):
     """A model with some number of agents."""
-    def __init__(self, N_agents, N_houses, width, height):
+    def __init__(self, N_agents, N_houses, width, height, camera_vision):
 
         self.running = True
         self.current_id = -1
@@ -123,12 +124,13 @@ class Street(Model):
         self.houses = []
         self.agents = []
         self.walkways = []
+        self.camera_vision = camera_vision
 
 
 
         # Create agents
         for i in range(self.num_agents):
-            a = House(self.next_id(), self)
+            a = House(self.next_id(), self, camera_vision=self.camera_vision)
             self.schedule.add(a)
             self.grid.place_agent(a, (a.x, a.y))
             self.houses.append(a)

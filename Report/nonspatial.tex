@@ -130,6 +130,32 @@ This is not entirely correct in the uncombined networks (and also not correct in
 
 
 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[]{../experiments/VlekNetwork/plots/performance_KB1.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in network 1.}
+\label{kb1a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[]{../experiments/VlekNetwork/plots/performance_KB2.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in network 2.}
+\label{kb2a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[]{../experiments/VlekNetwork/plots/performance_KBFull.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in the full network.}
+\label{fulla}
+\end{center}
+\end{figure}
+
+We see that as the disturbance increases (eg we round to larger intervals), accuracy obviously decreases, and RMS increases. But these decreases and increases are not that drastic, and overall performance is still pretty good (eg even for the worst, accuracy is still near 0.88)
+
 \item The strong and the weak view.
 
 The strong view: probabilities in the network correspond exactly to probabilities in the simulation. The weak view: Updates on evidence in the network go in the same direction as updates on evidence in the simulation.

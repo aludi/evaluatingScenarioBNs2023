@@ -36,7 +36,4 @@ class Vision(Agent):
 
         for item in rm_list:
             neighbors.remove(item)
-
-
-
         self.owner.update_objects_in_vision(neighbors)

@@ -1,10 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="progression plots in progress...">
+    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AUTOgroteMarkt.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReducedgroteMarkt4.png" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedgroteMarkt4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/main.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/mainarbitraryRoundedBN0.05.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/mainarbitraryRoundedBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/mainarbitraryRoundedBN0.125.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/mainarbitraryRoundedBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/mainarbitraryRoundedBN0.25.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/mainarbitraryRoundedBN0.33.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNGroteMarkt/mainarbitraryRoundedBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNVlekNetwork/kb1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNVlekNetwork/kb2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BNVlekNetwork/main.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BayesianJupyter.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateMap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/main.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.05.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.125.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.25.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.33.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredBNs/mainarbitraryRoundedBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredibilityGameAccuracy.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredibilityGameOutcomes.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredibilityGameTest.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN0.05.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN0.125.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN0.25.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN0.33.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN10.0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN12.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN20.0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN25.0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN33.0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN5.0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/ARBRoundedBN50.0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/Common.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/CommonBN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/GodBN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/GodsEye.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/GodsEye1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/K2BN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/K2BN.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/NoiseBN0.001.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/NoiseBN0.01.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/NoiseBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/NoiseBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/NoiseBN0.3.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/NoiseBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/Rounded.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN100.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN200.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN3.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN300.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN4.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN400.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/RoundedBN500.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/adaptedK2BN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/adaptedK2BN.net copy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/arbitraryRoundedBN0.05.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/arbitraryRoundedBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/arbitraryRoundedBN0.125.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/arbitraryRoundedBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/arbitraryRoundedBN0.25.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/arbitraryRoundedBN0.33.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/arbitraryRoundedBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/noiseBN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/noiseBN.net copy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/normalNoiseBN0.001.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/normalNoiseBN0.01.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/normalNoiseBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/normalNoiseBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/normalNoiseBN0.3.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/normalNoiseBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/old/StolenLaptop.hlg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/old/StolenLaptop.oobn copy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/old/blackAcesProblem.hlg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/old/blackAcesProblem.oobn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/old/globalStates100000runs.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DEPRICIATEDBayesNets/roundedBN.net copy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroteMarktAccuracy.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroteMarktOutcomes.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroteMarktTest.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HuginConverter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.05.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.125.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.25.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.33.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNarbitraryRoundedBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.001.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.01.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.3.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNnormalNoiseBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN0.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN3.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN4.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/K2BNroundedBN5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BN.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.05.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.1.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.125.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.2.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.25.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.33.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/adaptedK2BNarbitraryRoundedBN0.5.net" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/K2Bns/expORG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Oranje.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Oranje.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReducedOranje.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReducedSchilders.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReducedgroteMarkt4.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/conclusion.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/conclusion.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/conclusion.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/conclusion.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/islandPrior.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/islandPrior.tex" afterDir="false" />
@@ -16,14 +145,215 @@
       <change beforePath="$PROJECT_DIR$/Report/mainMastersProject.toc" beforeDir="false" afterPath="$PROJECT_DIR$/Report/mainMastersProject.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/nonspatial.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/nonspatial.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/nonspatial.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/nonspatial.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/pipeline.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/pipeline.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/pipeline.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/pipeline.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/spatialsimple.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/spatialsimple.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/spatialsimple.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/spatialsimple.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/stateoftheart.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/stateoftheart.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/stateoftheart.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/stateoftheart.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VlekNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/VlekNetwork.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/groteMarkt4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/groteMarkt4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Schilders.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Schilders.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sim_Viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sim_Viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimulationClasses/Camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/Camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimulationClasses/House.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/House.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimulationClasses/Vision.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationClasses/Vision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimulationTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StolenLaptopAccuracy.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StolenLaptopOutcomes.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StolenLaptopTest.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VlekOutcomes.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VlekOutcomesKB1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VlekOutcomesKB2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VlekOutcomesKBFull.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accuracyAnalysis.R" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cred.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluatingBNs.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluatingBNs.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluatingBNs.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluatingBNs.synctex.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluatingBNs.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exp.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expORG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/expSpider.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/generatingPlots.R" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/globalStates.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gm.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt4.png" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/GroteMarkt/maps/groteMarkt.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarkt4Reduced.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarktWaypoints/Sheet 1-Table 1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarktWaypoints/Sheet 2-Table 1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarktWaypoints/Sheet 3-Table 1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groteMarktWaypoints/Sheet 4-Table 1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/K2Weak.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/K2absolute.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/K2delta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedWeak.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedWeakCred.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedWeakSpider.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundedabsolute.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundeddelta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundeddeltaCred.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/arbitraryRoundeddeltaSpider.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/normalNoiseWeak.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/normalNoiseabsolute.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/normalNoisedelta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/roundedWeak.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/roundedabsolute.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/roundeddelta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/strongarbitraryRoundedcred.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/strongarbitraryRoundedspider.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgBNGroteMarkt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/partialStates.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sun.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tablesFin.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tablesFin.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tablesFin.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tablesFin.synctex.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/K2BNarbitraryRounded_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/K2BNnormalNoise_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/K2BNrounded_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/adaptedK2BNarbitraryRounded_collected_tables_spider.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/basicGamemainarbitraryRounded_basicGame_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.001.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.01.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNnormalNoiseBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN0.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN4.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongK2BNroundedBN5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongmainarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongmainarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongmainarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongmainarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongmainarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongmainarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/strongmainarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.001.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.01.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNnormalNoiseBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN0.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN4.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakK2BNroundedBN5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakmainarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakmainarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakmainarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakmainarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakmainarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakmainarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/hyps/weakmainarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/mainarbitraryRounded_GroteMarkt_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/mainarbitraryRounded_basicGame_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/mainarbitraryRounded_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/mainarbitraryRounded_strangeGame_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.001.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.01.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNnormalNoiseBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN0.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN4.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongK2BNroundedBN5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/strongmainarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.001.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.01.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNnormalNoiseBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN0.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN4.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakK2BNroundedBN5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakadaptedK2BNarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.05.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.125.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.25.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.33.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/outcome/weakmainarbitraryRoundedBN0.5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/texTables/strangeGamemainarbitraryRounded_strangeGame_collected_tables.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,18 +389,40 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/BayesNets/old" />
-      <recent name="$PROJECT_DIR$/BayesNets" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/experiments" />
       <recent name="$PROJECT_DIR$/../.virtualenvs/simulationTest/lib/python3.8/site-packages/mesa/visualization/templates/js" />
       <recent name="$PROJECT_DIR$/../Desktop" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/experiments/GroteMarkt/maps" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/BayesNets/old" />
+      <recent name="$PROJECT_DIR$/BayesNets" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.Sim_Viz">
+  <component name="RunManager" selected="Python.Analysis">
+    <configuration name="Analysis" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="simulationTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../.virtualenvs/simulationTest/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Analysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="CaseModel" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="simulationTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,30 +465,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="VlekNetwork" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="simulationTest" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/../.virtualenvs/simulationTest/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VlekNetwork.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.Sim_Viz" />
-      <item itemvalue="Python.VlekNetwork" />
+      <item itemvalue="Python.Analysis" />
       <item itemvalue="Python.CaseModel" />
     </list>
   </component>
@@ -410,7 +741,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653167028375</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="added structure to report">
+      <created>1653403393778</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1653403393778</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,7 +765,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rm print" />
     <MESSAGE value="added image of BN to page (very slow so removed it again, but works in theory!)" />
     <MESSAGE value="added heroku support" />
     <MESSAGE value="more thiefs and a large bn with weird relations (ordering? but that will aways be fucked)" />
@@ -452,33 +789,34 @@
     <MESSAGE value="all three main scenarios now work. to do - change grote markt so it has evidence, add standard deviation, and then start writing" />
     <MESSAGE value="fixed accuracy problem" />
     <MESSAGE value="progression plots in progress..." />
-    <option name="LAST_COMMIT_MESSAGE" value="progression plots in progress..." />
+    <MESSAGE value="added structure to report" />
+    <option name="LAST_COMMIT_MESSAGE" value="added structure to report" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="209" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1653315145898">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1653411755898">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1650882023929" />
+    <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653411755898" />
     <state x="258" y="245" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1647519090668" />
     <state x="209" y="124" key="#com.intellij.execution.impl.EditConfigurationsDialog/30.23.1250.777@30.23.1250.777" timestamp="1653315145898" />
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1648214114780">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648214114780" />
-    <state x="174" y="156" width="752" height="777" key="CommitChangelistDialog2" timestamp="1653206659027">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2" timestamp="1653403392740">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="174" y="156" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653206659027" />
     <state x="0" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652977737853" />
-    <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1650907482592" />
+    <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1653403392740" />
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog" timestamp="1644843960230">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="354" y="126" width="1458" height="845" key="DiffContextDialog/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843960230" />
-    <state width="1229" height="134" key="GridCell.Tab.0.bottom" timestamp="1653396967596">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1862" height="134" key="GridCell.Tab.0.bottom" timestamp="1653413712658">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1485" height="221" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516410" />
+    <state width="1862" height="134" key="GridCell.Tab.0.bottom/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653413712658" />
     <state width="1485" height="221" key="GridCell.Tab.0.bottom/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942503" />
     <state width="1630" height="165" key="GridCell.Tab.0.bottom/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955916" />
     <state width="1578" height="283" key="GridCell.Tab.0.bottom/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -486,10 +824,10 @@
     <state width="1229" height="247" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1647042670108" />
     <state width="1259" height="284" key="GridCell.Tab.0.bottom/29.23.1251.777@29.23.1251.777" timestamp="1649924766051" />
     <state width="1229" height="134" key="GridCell.Tab.0.bottom/30.23.1250.777@30.23.1250.777" timestamp="1653396967596" />
-    <state width="1229" height="134" key="GridCell.Tab.0.center" timestamp="1653396967594">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1862" height="134" key="GridCell.Tab.0.center" timestamp="1653413712656">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1485" height="221" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516409" />
+    <state width="1862" height="134" key="GridCell.Tab.0.center/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653413712656" />
     <state width="1485" height="221" key="GridCell.Tab.0.center/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942502" />
     <state width="1630" height="165" key="GridCell.Tab.0.center/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955915" />
     <state width="1578" height="283" key="GridCell.Tab.0.center/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -497,10 +835,10 @@
     <state width="1229" height="247" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1647042670107" />
     <state width="1259" height="284" key="GridCell.Tab.0.center/29.23.1251.777@29.23.1251.777" timestamp="1649924766049" />
     <state width="1229" height="134" key="GridCell.Tab.0.center/30.23.1250.777@30.23.1250.777" timestamp="1653396967594" />
-    <state width="1229" height="134" key="GridCell.Tab.0.left" timestamp="1653396967593">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1862" height="134" key="GridCell.Tab.0.left" timestamp="1653413712656">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1485" height="221" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516408" />
+    <state width="1862" height="134" key="GridCell.Tab.0.left/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653413712656" />
     <state width="1485" height="221" key="GridCell.Tab.0.left/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942501" />
     <state width="1630" height="165" key="GridCell.Tab.0.left/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955914" />
     <state width="1578" height="283" key="GridCell.Tab.0.left/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730458" />
@@ -508,10 +846,10 @@
     <state width="1229" height="247" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1647042670106" />
     <state width="1259" height="284" key="GridCell.Tab.0.left/29.23.1251.777@29.23.1251.777" timestamp="1649924766047" />
     <state width="1229" height="134" key="GridCell.Tab.0.left/30.23.1250.777@30.23.1250.777" timestamp="1653396967593" />
-    <state width="1229" height="134" key="GridCell.Tab.0.right" timestamp="1653396967595">
-      <screen x="30" y="23" width="1250" height="777" />
+    <state width="1862" height="134" key="GridCell.Tab.0.right" timestamp="1653413712657">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1485" height="221" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653221516409" />
+    <state width="1862" height="134" key="GridCell.Tab.0.right/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653413712657" />
     <state width="1485" height="221" key="GridCell.Tab.0.right/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653208942502" />
     <state width="1630" height="165" key="GridCell.Tab.0.right/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652801955915" />
     <state width="1578" height="283" key="GridCell.Tab.0.right/-1253.224.1253.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644946730459" />
@@ -556,11 +894,11 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="937" y="471" key="VCS.ChangelistChooser/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644843945261" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1653167034922">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="453" y="221" key="Vcs.Push.Dialog.v2" timestamp="1653403403539">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653167034922" />
-    <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1649702515001" />
+    <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1653403403539" />
     <state x="579" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1653389549361">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -577,12 +915,12 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="532" y="189" width="1209" height="691" key="dock-window-1/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1648058726400" />
-    <state x="786" y="283" width="670" height="676" key="search.everywhere.popup" timestamp="1652978299630">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="542" y="214" width="670" height="497" key="search.everywhere.popup" timestamp="1653407105974">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="786" y="283" width="670" height="676" key="search.everywhere.popup/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1652978299630" />
     <state x="786" y="283" width="670" height="676" key="search.everywhere.popup/-1254.224.1254.777/0.23.1920.1057@0.23.1920.1057" timestamp="1644870912496" />
-    <state x="542" y="214" width="670" height="497" key="search.everywhere.popup/30.23.1250.777@30.23.1250.777" timestamp="1648034930929" />
+    <state x="542" y="214" width="670" height="497" key="search.everywhere.popup/30.23.1250.777@30.23.1250.777" timestamp="1653407105974" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

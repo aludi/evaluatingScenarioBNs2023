@@ -22,7 +22,7 @@ from CreateMap import CreateMap
 
 class Experiment():
 
-    def __init__(self, scenario, runs, train, subtype=None):
+    def __init__(self, scenario, runs, train, param_dict=None): #subtype=None):
         self.scenario = scenario
         self.train = train
         print("experiment scenario", scenario)
@@ -35,9 +35,7 @@ class Experiment():
 
 
         if scenario == "StolenLaptop":
-            #self.csv_file_name = "globalStates.csv"
             print("scenario is stolen laptop")
-
             rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
                                     "flees_startled", "successful_stolen", "raining", "curtains",
                                     "E_object_is_gone",
@@ -48,7 +46,7 @@ class Experiment():
                                     "E_private"]
             self.reporters = Reporters(relevant_events = rel_events)
             for i in range(0, self.runs-1):
-                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, reporters=self.reporters, output_file = f"experiments/{scenario}/{self.train}")
+                model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, camera_vision=param_dict["camera_vision"], reporters=self.reporters, output_file = f"experiments/{scenario}/{self.train}")
                 for j in range(30):
                     model.step()
                 self.reporters.increase_run()
@@ -81,10 +79,11 @@ class Experiment():
 
 
         if scenario == "GroteMarkt":
-            self.subtype = subtype
+
+            self.subtype = param_dict["subtype"]
             #self.csv_file_name = "GroteMarktOutcomes.csv"
 
-            self.scenario = subtype
+            self.scenario = param_dict["subtype"]
             #print(self.scenario)
 
             if self.scenario == 1:
@@ -108,15 +107,15 @@ class Experiment():
                     rel_events.append(str1)
 
             y = 20
-            topic_gen = "groteMarkt4"
-            C = CreateMap(topic_gen, y)
+            #topic_gen = "groteMarkt4"
+            C = CreateMap(param_dict["map"], y)
             x = int(y * C.rel)
 
 
             #print(rel_events)
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs-1):
-                model = MoneyModel(N=n, width=x, height=y, topic=topic_gen, reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
+                model = MoneyModel(N=n, width=x, height=y, topic=param_dict["map"], reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
 
                 for j in range(100):
                     model.step()

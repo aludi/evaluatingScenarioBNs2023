@@ -5,6 +5,12 @@
 
 \chapter[Conclusion]{Conclusion}
 
+
+\section{Good things}
+
+We can have reasonable accuracy and rms in the bayesian networks in the simulation. This is due to reporters.
+
+
 \section{Fundamental Problems with Bayesian Networks}
 
 There are some fundamental problems with BNs as used for scenario-like whole legal Bayesian Networks.
@@ -30,9 +36,11 @@ Experiment outcomes: best possible case would be that the structure of the BN be
 
 This is not the same as the problem of the reference class, but it is related. The problem of the reference class is the discussion which definition/reporter is appropriate for a given situation. This problem is the step before that, which is - how do we specify what reference class we are talking about? This is not described in the scenario-like BNs I've discussed in my introduction. The forensic BNs come closer, because there we at least know what method is used to determine if an event happened or not...
 
-\subsection{Maps and implicitness.}
+\subsection{Dependence on implicit parameters and background knowledge.}
 
 Put the exact same agents with the same behavioural loops on a different map, and the probabilities for events change (see XXX). This is not a problem - this means that environment/world knowledge/context, which is not a node explicitly in the Bayesian Network, affects the output of networks. This can be remedied in a sense, by adding a context node. So what's the problem? That if we see a BN and we do not know exactly what the context was in which it was created, we cannot assume that it generalises to a different environment. We cannot take parts of that network (with probabilities) and put it in a different one, because implicitly it is only defined over the environment for which it was originally created.
+
+The networks are also dependent on implicit parameters, like the radius of the vision of the camera. It's neat that changing this parameter will influence the evidential strength of it. Not necessarily a flaw but it does mean that its like. We have the nodes in the networks are we need to specify exactly what we mean, over all relevant parameters. And we don't know what these parameters are.
 
 \subsection{Private knowledge}
 

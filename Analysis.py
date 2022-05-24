@@ -1076,7 +1076,16 @@ analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, Non
 org_dir = os.getcwd()
 csv_file_name = None
 
-for (scenario, train_runs, subscenario) in [("StolenLaptop", 1000, 1), ("VlekNetwork", 50000, 2), ("GroteMarkt", 1000, 2)]: #("StolenLaptop", 1000, 1) ,
+d_S = {"camera_vision":2}
+d_V = {}
+d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
+
+for (scenario, train_runs, param_dict) in [
+                                                        ("StolenLaptop", 1000, d_S),
+                                                       # ("VlekNetwork", 50000, d_V),
+                                                       # ("GroteMarkt", 1000, d_G)
+
+                                        ]:
 
     os.chdir(org_dir)
 
@@ -1088,10 +1097,11 @@ for (scenario, train_runs, subscenario) in [("StolenLaptop", 1000, 1), ("VlekNet
 
 
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
-                            subtype=subscenario)  # we do the simple scenario
+                            param_dict=param_dict)  # we do the simple scenario
     test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
-                          subtype=subscenario)
+                          param_dict=param_dict)
 
+    '''
     param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
                 [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
 
@@ -1164,6 +1174,7 @@ for (scenario, train_runs, subscenario) in [("StolenLaptop", 1000, 1), ("VlekNet
         #plot_performance(path, base_network[:-4])
         plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
         #plot_posterior(path, base_network[:-4])
+    '''
 
 
 exit()

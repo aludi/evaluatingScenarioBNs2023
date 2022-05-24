@@ -17,7 +17,6 @@ class Camera(Agent):
 
 
 
-
     def step(self):
         (new_a, new_b) = self.owner.pos[0], self.owner.pos[1]
         neighbors = self.model.grid.get_neighbors(pos=(new_a, new_b), moore=True, radius=self.radius)

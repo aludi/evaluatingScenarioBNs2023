@@ -6,7 +6,7 @@ from SimulationClasses.Camera import Camera
 
 
 class House(Agent):
-    def __init__(self, unique_id, model, i_place, curtains):
+    def __init__(self, unique_id, model, i_place, curtains, camera_vision):
         super().__init__(unique_id, model)
         self.width = 3
         self.height = 2
@@ -19,7 +19,7 @@ class House(Agent):
         self.covers_pos = self.position_covered_by_house()
         self.adjacent_included = self.circle_around_house()
         self.curtains = curtains
-        self.camera = Camera(self.model.next_id(), self.model, self, 2, self.door_location)
+        self.camera = Camera(self.model.next_id(), self.model, self, radius=camera_vision, position=self.door_location)
 
     def has_curtains(self):
         return self.curtains

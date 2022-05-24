@@ -6,6 +6,7 @@ import pyAgrum as gum
 import pyAgrum.lib.image as bng
 import matplotlib.pyplot as plt
 
+import os
 
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.modules import TextElement
@@ -193,7 +194,7 @@ def agent_portrayal1(agent):
         portrayal["opacity"] = 1
 
     elif str(type(agent)) == "<class 'GroteMarkt.Background'>":
-        portrayal["Shape"] = str(agent.model.topic) + ".png"
+        portrayal["Shape"] = str(agent.model.topic)
         portrayal["Color"] = "Blue"
         portrayal["scale"] = 50
         portrayal["h"] = 500
@@ -251,7 +252,7 @@ class ViewCaseModel(TextElement):
 
 
 
-sim = 1
+sim = 0
 if sim == 0:
     rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
                                         "flees_startled", "successful_stolen", "raining", "curtains",
@@ -267,9 +268,9 @@ if sim == 0:
     cm = ViewCaseModel()
     new_reporters = Reporters(rel_events)
     server = ModularServer(StolenLaptop,
-                           [grid, text, cm],
+                           [grid, text],
                            "Stolen Laptop",
-                           {"N_agents":2, "N_houses":2, "width":16, "height":9, "reporters":new_reporters, "output_file":"StolenLaptopOutcomes.csv"})
+                           {"N_agents":2, "N_houses":2, "width":16, "height":9,"camera_vision": 2, "reporters":new_reporters, "output_file":"StolenLaptopOutcomes.csv"})
 elif sim == 1:
 
 
@@ -283,7 +284,7 @@ elif sim == 1:
 
 
     y = 50
-    topic_gen = "groteMarkt4"
+    topic_gen = os.getcwd() + "/experiments/GroteMarkt/maps/groteMarkt.png"
     C = CreateMap(topic_gen, y)
     x = int(y*C.rel)
     cm = ViewCaseModel()
@@ -307,12 +308,12 @@ elif sim == 1:
 
 
     text = Test()
-    cm = ViewCaseModel()
+    #cm = ViewCaseModel()
     model_text = ScenarioDescription()
 
 
     #bnPic = Image("imgBNGroteMarkt.png", 250, 500, 250, 500)
-    server = ModularServer(MoneyModel, [model_text, grid, text, cm], "Grote Markt", model_params)   #we're making a case model from previous data!!
+    server = ModularServer(MoneyModel, [model_text, grid, text], "Grote Markt", model_params)   #we're making a case model from previous data!!
 
     # todo: case model does not change with scenario!! This is because cm is generated from the csv source file
     # which is not the same as the scenario that is run online. So generate different csvs for each subscenario

@@ -6,11 +6,15 @@
 \chapter[Robberies in real locations]{Robberies}
 
 
-Summary:
+Why now go to a larger map, if we have already identified some problems? WEll, there can always be more problems :D 
+
+
+New idea: A  larger, more interesting spatial situation. we know we can have agents walking around a simple flat simulation, but now we want a more life-like situation, a town, and they're going to rob shit.
+
 
 \section{General information}
 %  - investigating idioms with the Island Prior
-New idea: we know we can have agents walking around a simple flat simulation, but now we want a more life-like situation, a town, and they're going to rob shit.
+
 
 Agent behavioural loop, etc. Look at the code its online.
 
@@ -24,6 +28,13 @@ Here I talk about the Grote Markt and the more complex simulations that I create
 \subsection{Methods}
 
 \subsection{Results}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[]{../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in GroteMarkt network and simulation}
+\label{groteMarkt}
+\end{center}
+\end{figure}
 
 \subsection{Discussion}
 
@@ -61,6 +72,7 @@ For some things its not a problem because in those cases its clear what exactly 
 This has deep implications because if we want BNs to be accepted, everyone relevant in the discussion has to agree exactly on 1) what we're using the nodes `natural language' to mean in RV language, 2) how we're measuring whether an RV is true or not, and then 3) the probability of the RV. I agree with Fenton that subjectivity or slight imprecision in the CPTs in part 3) is ok, fine, as long as everyone knows which parts are subjective. But the greater problems (or at least implicit problems, are 1) and 2), and those need to be made explicit as well.
 
 \subsection{Methods}
+I'm going to create many reporters that can all point back to the same natural language meaning. The easiest version is with something inherently subjective like `near', or different definitions of `motive'.
 
 \subsection{Results}
 

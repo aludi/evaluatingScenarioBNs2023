@@ -66,15 +66,17 @@
 \BOOKMARK [2][-]{subsection.6.4.2}{Methods}{section.6.4}% 66
 \BOOKMARK [2][-]{subsection.6.4.3}{Results}{section.6.4}% 67
 \BOOKMARK [2][-]{subsection.6.4.4}{Discussion}{section.6.4}% 68
-\BOOKMARK [1][-]{section.6.5}{Experiment 4: Investigating }{chapter.6}% 69
+\BOOKMARK [1][-]{section.6.5}{Experiment 4: Investigating the island prior - Fenton.}{chapter.6}% 69
 \BOOKMARK [2][-]{subsection.6.5.1}{Introduction}{section.6.5}% 70
 \BOOKMARK [2][-]{subsection.6.5.2}{Methods}{section.6.5}% 71
 \BOOKMARK [2][-]{subsection.6.5.3}{Results}{section.6.5}% 72
 \BOOKMARK [2][-]{subsection.6.5.4}{Discussion}{section.6.5}% 73
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 74
-\BOOKMARK [1][-]{section.7.1}{Fundamental Problems with Bayesian Networks}{chapter.7}% 75
-\BOOKMARK [2][-]{subsection.7.1.1}{Reporters, Reference Classes and Random Variables.}{section.7.1}% 76
-\BOOKMARK [2][-]{subsection.7.1.2}{Maps and implicitness.}{section.7.1}% 77
-\BOOKMARK [2][-]{subsection.7.1.3}{Private knowledge}{section.7.1}% 78
-\BOOKMARK [1][-]{section.7.2}{Conclusion}{chapter.7}% 79
-\BOOKMARK [1][-]{section.7.3}{Future Work}{chapter.7}% 80
+\BOOKMARK [1][-]{section.6.6}{Take aways - Conclusion}{chapter.6}% 74
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 75
+\BOOKMARK [1][-]{section.7.1}{Good things}{chapter.7}% 76
+\BOOKMARK [1][-]{section.7.2}{Fundamental Problems with Bayesian Networks}{chapter.7}% 77
+\BOOKMARK [2][-]{subsection.7.2.1}{Reporters, Reference Classes and Random Variables.}{section.7.2}% 78
+\BOOKMARK [2][-]{subsection.7.2.2}{Dependence on implicit parameters and background knowledge.}{section.7.2}% 79
+\BOOKMARK [2][-]{subsection.7.2.3}{Private knowledge}{section.7.2}% 80
+\BOOKMARK [1][-]{section.7.3}{Conclusion}{chapter.7}% 81
+\BOOKMARK [1][-]{section.7.4}{Future Work}{chapter.7}% 82

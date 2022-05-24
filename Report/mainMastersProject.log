@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  24 MAY 2022 16:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  24 MAY 2022 17:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -410,7 +410,7 @@ ARIABLES \OT1/cmr/m/n/10.95 5
 
 ]
 Chapter 3.
-<images/pipeline.pdf, id=478, 1027.84pt x 602.25pt>
+<images/pipeline.pdf, id=489, 1027.84pt x 602.25pt>
 File: images/pipeline.pdf Graphic file (type pdf)
 <use images/pipeline.pdf>
 Package pdftex.def Info: images/pipeline.pdf  used on input line 13.
@@ -436,23 +436,23 @@ Overfull \hbox (77.57597pt too wide) in paragraph at lines 35--51
 [][] 
  []
 
-<images/Kb1.pdf, id=552, 234.8775pt x 226.8475pt>
+<images/Kb1.pdf, id=562, 234.8775pt x 226.8475pt>
 File: images/Kb1.pdf Graphic file (type pdf)
 <use images/Kb1.pdf>
 Package pdftex.def Info: images/Kb1.pdf  used on input line 63.
 (pdftex.def)             Requested size: 234.87692pt x 226.84694pt.
-<images/vlek2015a.png, id=553, 588.1975pt x 300.12125pt>
+<images/vlek2015a.png, id=563, 588.1975pt x 300.12125pt>
 File: images/vlek2015a.png Graphic file (type png)
 <use images/vlek2015a.png>
 Package pdftex.def Info: images/vlek2015a.png  used on input line 66.
 (pdftex.def)             Requested size: 323.50961pt x 165.06718pt.
 [14]
-<images/Kb2.pdf, id=559, 234.8775pt x 536.0025pt>
+<images/Kb2.pdf, id=569, 234.8775pt x 536.0025pt>
 File: images/Kb2.pdf Graphic file (type pdf)
 <use images/Kb2.pdf>
 Package pdftex.def Info: images/Kb2.pdf  used on input line 75.
 (pdftex.def)             Requested size: 164.41312pt x 375.19919pt.
-<images/vlek2015.png, id=560, 700.6175pt x 410.53375pt>
+<images/vlek2015.png, id=570, 700.6175pt x 410.53375pt>
 File: images/vlek2015.png Graphic file (type png)
 <use images/vlek2015.png>
 Package pdftex.def Info: images/vlek2015.png  used on input line 78.
@@ -461,67 +461,149 @@ Package pdftex.def Info: images/vlek2015.png  used on input line 78.
 
 LaTeX Warning: Float too large for page by 108.44606pt on input line 81.
 
-<images/Kb.pdf, id=561, 326.21875pt x 578.16pt>
+<images/Kb.pdf, id=571, 326.21875pt x 578.16pt>
 File: images/Kb.pdf Graphic file (type pdf)
 <use images/Kb.pdf>
 Package pdftex.def Info: images/Kb.pdf  used on input line 86.
 (pdftex.def)             Requested size: 260.97534pt x 462.52863pt.
 [15] [16 <./images/Kb1.pdf> <./images/vlek2015a.png>] [17 <./images/Kb2.pdf> <.
-/images/vlek2015.png>] [18 <./images/Kb.pdf>] [19]
-Overfull \hbox (9.95964pt too wide) in paragraph at lines 150--164
+/images/vlek2015.png>] [18 <./images/Kb.pdf>]
+<../experiments/VlekNetwork/plots/performance_KB1.pdf, id=623, 462.52798pt x 34
+6.89601pt>
+File: ../experiments/VlekNetwork/plots/performance_KB1.pdf Graphic file (type p
+df)
+<use ../experiments/VlekNetwork/plots/performance_KB1.pdf>
+Package pdftex.def Info: ../experiments/VlekNetwork/plots/performance_KB1.pdf  
+used on input line 135.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+
+Overfull \hbox (32.52222pt too wide) in paragraph at lines 135--136
+ [] 
+ []
+
+<../experiments/VlekNetwork/plots/performance_KB2.pdf, id=624, 462.52798pt x 34
+6.89601pt>
+File: ../experiments/VlekNetwork/plots/performance_KB2.pdf Graphic file (type p
+df)
+<use ../experiments/VlekNetwork/plots/performance_KB2.pdf>
+Package pdftex.def Info: ../experiments/VlekNetwork/plots/performance_KB2.pdf  
+used on input line 143.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+
+Overfull \hbox (32.52222pt too wide) in paragraph at lines 143--144
+ [] 
+ []
+
+<../experiments/VlekNetwork/plots/performance_KBFull.pdf, id=625, 462.52798pt x
+ 346.89601pt>
+File: ../experiments/VlekNetwork/plots/performance_KBFull.pdf Graphic file (typ
+e pdf)
+<use ../experiments/VlekNetwork/plots/performance_KBFull.pdf>
+Package pdftex.def Info: ../experiments/VlekNetwork/plots/performance_KBFull.pd
+f  used on input line 151.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+
+Overfull \hbox (32.52222pt too wide) in paragraph at lines 151--152
+ [] 
+ []
+
+[19] [20 <../experiments/VlekNetwork/plots/performance_KB1.pdf>] [21 <../experi
+ments/VlekNetwork/plots/performance_KB2.pdf>] [22 <../experiments/VlekNetwork/p
+lots/performance_KBFull.pdf>]
+Overfull \hbox (9.95964pt too wide) in paragraph at lines 176--190
 [][] 
  []
 
 
-Overfull \hbox (68.66383pt too wide) in paragraph at lines 172--188
+Overfull \hbox (68.66383pt too wide) in paragraph at lines 198--214
 [][] 
  []
 
-[20] [21] [22] [23] [24]) [25]
+[23] [24] [25] [26] [27]) [28]
 \openout2 = `spatialsimple.aux'.
 
- (./spatialsimple.tex [26
+ (./spatialsimple.tex
+Chapter 5.
+[29
 
 
 
 ]
-Chapter 5.
+<../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf, id=797, 462.52
+798pt x 346.89601pt>
+File: ../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf Graphic fi
+le (type pdf)
+<use ../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf>
+Package pdftex.def Info: ../experiments/StolenLaptop/plots/performance_StolenLa
+ptop.pdf  used on input line 34.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
 
-Underfull \vbox (badness 2205) has occurred while \output is active []
-
- [27]
-[28]
-Overfull \hbox (7.05072pt too wide) has occurred while \output is active
-\OT1/cmr/m/sl/10.95 5.3.  EXPERIMENT 3: INVESTIGATING THE EFFECT OF PRIVATE KNO
-WLEDGE \OT1/cmr/m/n/10.95 29
+Overfull \hbox (32.52222pt too wide) in paragraph at lines 34--35
+ [] 
  []
 
-[29]) [30]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[30]
+Overfull \hbox (218.21382pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/10.95 5.2.  EXPERIMENT 2: INVESTIGATING THE EVIDENCE STRENGTH DEP
+ENDING ON PARAMETERS OF THE NETWORK. \OT1/cmr/m/n/10.95 31
+ []
+
+[31 <../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf>] [32])
+[33]
 \openout2 = `islandprior.aux'.
 
- (./islandprior.tex
+ (./islandprior.tex [34
+
+
+
+]
 Chapter 6.
-[31
+<../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf, id=856, 462.52798p
+t x 346.89601pt>
+File: ../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf Graphic file (
+type pdf)
+<use ../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf>
+Package pdftex.def Info: ../experiments/GroteMarkt/plots/performance_GroteMarkt
+.pdf  used on input line 33.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+
+Overfull \hbox (32.52222pt too wide) in paragraph at lines 33--34
+ [] 
+ []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [32]) [33]
+ [35]
+[36 <../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf>] [37]
+Overfull \hbox (8.28317pt too wide) in paragraph at lines 83--83
+[]\OT1/cmr/bx/n/14.4 Experiment 4: In-ves-ti-gat-ing the is-land prior - Fen-to
+n. 
+ []
+
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
+[39]
 \openout2 = `conclusion.aux'.
 
- (./conclusion.tex [34
+ (./conclusion.tex [40
 
 
 
 ]
 Chapter 7.
+[41]
+Overfull \hbox (10.36203pt too wide) in paragraph at lines 39--39
+[]\OT1/cmr/bx/n/12 Dependence on im-plicit pa-ram-e-ters and back-ground knowl-
+edge. 
+ []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [35]
-Underfull \vbox (badness 1584) has occurred while \output is active []
-
- [36])
-[37]
+[42]) [43]
 No file mainMastersProject.bbl.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 73.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 73.
@@ -530,14 +612,21 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 73.
 (./islandprior.aux) (./conclusion.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 73.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 73.
-Package rerunfilecheck Info: File `mainMastersProject.out' has not changed.
-(rerunfilecheck)             Checksum: 12FA3DE8FE81A2569FC49AC1DDF5380C;5679.
+
+
+Package rerunfilecheck Warning: File `mainMastersProject.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `mainMastersProject.out':
+(rerunfilecheck)             Before: D87EFD94A0350F1542D9D6302D07FF52;5833
+(rerunfilecheck)             After:  3D4BD5572C66E8CDB0E6221DD7F99ABA;5870.
  ) 
 Here is how much of TeX's memory you used:
- 7440 strings out of 480608
- 109207 string characters out of 5903630
- 386259 words of memory out of 5000000
- 22969 multiletter control sequences out of 15000+600000
+ 7493 strings out of 480608
+ 111212 string characters out of 5903630
+ 386976 words of memory out of 5000000
+ 23001 multiletter control sequences out of 15000+600000
  544146 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,8n,37p,1742b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -555,10 +644,10 @@ ive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive
 /2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/
 2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
 020/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on mainMastersProject.pdf (45 pages, 467975 bytes).
+Output written on mainMastersProject.pdf (51 pages, 524861 bytes).
 PDF statistics:
- 807 PDF objects out of 1000 (max. 8388607)
- 722 compressed objects within 8 object streams
- 177 named destinations out of 1000 (max. 500000)
- 671 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1024 PDF objects out of 1200 (max. 8388607)
+ 785 compressed objects within 8 object streams
+ 190 named destinations out of 1000 (max. 500000)
+ 712 words of extra memory for PDF output out of 10000 (max. 10000000)
 

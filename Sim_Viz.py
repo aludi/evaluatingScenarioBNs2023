@@ -252,7 +252,7 @@ class ViewCaseModel(TextElement):
 
 
 
-sim = 0
+sim =1000 1
 if sim == 0:
     rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
                                         "flees_startled", "successful_stolen", "raining", "curtains",
@@ -284,8 +284,9 @@ elif sim == 1:
 
 
     y = 50
+    coverage = None
     topic_gen = os.getcwd() + "/experiments/GroteMarkt/maps/groteMarkt.png"
-    C = CreateMap(topic_gen, y)
+    C = CreateMap(topic_gen, coverage, y)
     x = int(y*C.rel)
     cm = ViewCaseModel()
 

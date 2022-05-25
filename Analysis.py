@@ -554,12 +554,13 @@ def calculate_accuracy_1(file_name, path):
 
 
     network = path + "/BNs/"+file_name+".net"
-    if "param" not in file_name:
+    if "param" not in file_name and "map" not in file_name:
         csv_name = file_name.split("_", 1)[0]   # we want to refer to hte original csv file
     else:
         csv_name = file_name
-    csv_file = path + "/test/"+csv_name+".csv"
 
+
+    csv_file = path + "/test/"+csv_name+".csv"
 
 
     if "net" not in network:
@@ -584,7 +585,7 @@ def calculate_accuracy_1(file_name, path):
     for x in event_list:
         if x[0] == "E": # evidence node
             evidence.append(x)
-'''
+    '''
 
 
     df = pd.read_csv(csv_file, sep=r',',
@@ -699,7 +700,7 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
     print(bnDir)
     print(os.getcwd())'''
     network = path + "/BNs/"+file_name+".net"
-    if "param" not in file_name:
+    if "param" not in file_name and "map" not in file_name:
         csv_name = file_name.split("_", 1)[0]  # we want to refer to hte original csv file
     else:
         csv_name = file_name
@@ -859,12 +860,21 @@ def load_temporal_evidence(name):
     elif "StolenLaptop" in name:
         #"lost_object", "know_object", "target_object", "motive", "compromise_house",
            #                         "flees_startled", "successful_stolen", "raining", "curtains",
-        d["events"] = ["E_object_is_gone",
+        if "Private" in name:
+            d["events"] = ["E_object_is_gone",
                                     "E_broken_lock",
                                     "E_disturbed_house",
                                     "E_s_spotted_by_house",
                                     "E_s_spotted_with_goodie",
-                                    "E_private"]
+                                    ]
+        else:
+            d["events"] = ["E_object_is_gone",
+                           "E_broken_lock",
+                           "E_disturbed_house",
+                           "E_s_spotted_by_house",
+                           "E_s_spotted_with_goodie",
+                           "E_private"]
+
         d["values"] = [1, 1, 1, 1, 1, 0]
         d["output"] = ["successful_stolen"]
 
@@ -1094,11 +1104,12 @@ d_S = {"camera_vision":2}
 d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
-for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1000, d_S),
+for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 5000, d_S),
+                                                        ("StolenLaptopPrivate", 1000, d_S),
                                                       #  ("StolenLaptop", 1000, d_S),
                                                        # ("VlekNetwork", 50000, d_V),
-                                                       # ("GroteMarkt", 1000, d_G)
-
+                                                        #("GroteMarkt", 1000, d_G),
+                                                        #("GroteMarktMaps", 1000, d_G)
                                         ]:
 
     os.chdir(org_dir)
@@ -1136,7 +1147,7 @@ for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1
     for train_data in list_files:
         K2_BN_csv_only(train_data, path)
 
-        if scenario != "StolenLaptopVision":    # for some experiments we don't want to generate disturbances
+        if scenario != "StolenLaptopVision" and scenario != "GroteMarktMaps":    # for some experiments we don't want to generate disturbances
             for (exp, params) in [
                 ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
                 for p in params:
@@ -1154,7 +1165,7 @@ for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1
     if ".DS_Store" in list_files:
         disturbed_list_files.remove(".DS_Store")
 
-    #print("disturbed files", disturbed_list_files)
+    print("disturbed files", disturbed_list_files)
     for networks in disturbed_list_files:
         if networks == ".DS_Store":
             continue

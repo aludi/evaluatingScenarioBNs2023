@@ -32,10 +32,10 @@ class Experiment():
         if scenario == "VlekNetwork":
             VlekNetwork(runs=runs, train=train)
 
-        if scenario == "StolenLaptop" or scenario == "StolenLaptopVision":
+        if scenario == "StolenLaptop" or scenario == "StolenLaptopVision" or scenario == "StolenLaptopPrivate":
             # iteration
             iterate_experiment = []
-            if scenario == "StolenLaptop":
+            if scenario == "StolenLaptop" or scenario == "StolenLaptopPrivate":
                 iterate_experiment = [2]
             else:
                 iterate_experiment = [2, 3, 4, 5, 6]
@@ -51,13 +51,15 @@ class Experiment():
                                         "E_s_spotted_with_goodie",
                                         "E_private"]
 
+
+
                 self.reporters = Reporters(relevant_events = rel_events)
                 for i in range(0, self.runs-1):
                     model = StolenLaptop(N_agents=2, N_houses=2, width=16, height=9, camera_vision=camera_vision, reporters=self.reporters, output_file = f"experiments/{scenario}/{self.train}")
                     for j in range(30):
                         model.step()
                     self.reporters.increase_run()
-                if scenario == "StolenLaptop":
+                if scenario == "StolenLaptop" or "StolenLaptopPrivate":
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")  # use these csvs for automatic BN structure determination
                 else:
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}_param_{camera_vision}.csv")
@@ -84,79 +86,98 @@ class Experiment():
             self.print_frequencies()
 
 
-        if scenario == "GroteMarkt":
+        if scenario == "GroteMarkt" or scenario == "GroteMarktMaps":
 
-            self.subtype = param_dict["subtype"]
-            #self.csv_file_name = "GroteMarktOutcomes.csv"
+            if scenario == "GroteMarkt":
+                iterate_experiment = ["groteMarkt.png"]
+            else:
+                iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png",
+                    0, 10, 50, 75]
 
-            self.scenario = param_dict["subtype"]
-            #print(self.scenario)
+            for map in iterate_experiment:
+                if type(map) == str:
+                    map_name = os.getcwd()+f"/experiments/{scenario}/maps/" + map
+                    coverage = None
+                else:
+                    map_name = os.getcwd()+f"/experiments/{scenario}/maps/random_"+str(map)
+                    coverage = map
 
-            if self.scenario == 1:
-                self.n = 10
-            elif self.scenario == 2:
-                self.n = 2
-            elif self.scenario == 3:
-                self.n = 6
-            elif self.scenario == 3:
-                self.n = 6
+                self.subtype = param_dict["subtype"]
+                #self.csv_file_name = "GroteMarktOutcomes.csv"
 
-            n = self.n
-            base_rel_events = ["motive", "sneak", "stealing"]
-            # create reporters automatically
-            rel_events = []
+                self.scenario = param_dict["subtype"]
+                #print(self.scenario)
 
-            for i in range(1, n):
-                for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
-                    str1 = f"{j}_{str(i)}_0"
-                    # str2 = i + "_credibility"
-                    rel_events.append(str1)
+                if self.scenario == 1:
+                    self.n = 10
+                elif self.scenario == 2:
+                    self.n = 2
+                elif self.scenario == 3:
+                    self.n = 6
+                elif self.scenario == 3:
+                    self.n = 6
 
-            y = 20
-            #topic_gen = "groteMarkt4"
-            C = CreateMap(param_dict["map"], y)
-            x = int(y * C.rel)
+                n = self.n
+                base_rel_events = ["motive", "sneak", "stealing"]
+                # create reporters automatically
+                rel_events = []
+
+                for i in range(1, n):
+                    for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
+                        str1 = f"{j}_{str(i)}_0"
+                        # str2 = i + "_credibility"
+                        rel_events.append(str1)
+
+                y = 20
+                C = CreateMap(map_name, coverage, y)
+                x = int(y * C.rel)
+                #print(rel_events)
+                self.reporters = Reporters(relevant_events=rel_events)
+                for i in range(0, self.runs-1):
+                    model = MoneyModel(N=n, width=x, height=y, topic=map_name, reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
+                    for j in range(100):
+                        model.step()
+                    self.reporters.increase_run()
+
+                #print(self.reporters.history_dict)
+
+                #print(self.reporters.pure_frequency_event_dict)
+                if scenario == "GroteMarkt":
+                    self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
+                else:
+                    self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}_map_{str(map)}.csv")
 
 
-            #print(rel_events)
-            self.reporters = Reporters(relevant_events=rel_events)
-            for i in range(0, self.runs-1):
-                model = MoneyModel(N=n, width=x, height=y, topic=param_dict["map"], reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
 
-                for j in range(100):
-                    model.step()
-                self.reporters.increase_run()
-
-            #print(self.reporters.history_dict)
-
-            print(self.reporters.pure_frequency_event_dict)
-
-            self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
-            self.print_frequencies()
+            #self.print_frequencies()
 
 
 
-    def generate_csv_report(self, file_path):
+    def generate_csv_report(self, file_path): # drop columns here
         history_list = []
+        print(file_path)
         #print("history dict", self.reporters.history_dict)
         for key in self.reporters.history_dict.keys():
             history_list.append(self.reporters.history_dict[key])
-        csv_columns = self.reporters.relevant_events
-        csv_file = file_path
 
+
+        csv_columns = self.reporters.relevant_events
+        if "StolenLaptopPrivate" in file_path:
+            csv_columns.remove("flees_startled")
+            csv_columns.remove("E_private")
+        print(csv_columns)
+
+        csv_file = file_path
         #csv_file = os.getcwd() + self.path + f"{self.train}/{file_name}.csv"
         #print(csv_file)
-
-
-
         try:
             with open(csv_file, 'w') as csvfile:
-                writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+                writer = csv.DictWriter(csvfile, fieldnames=csv_columns, extrasaction='ignore')
                 writer.writeheader()
                 for data in history_list:
                     writer.writerow(data)
         except IOError:
-            print("I/O error")
+            print("I/O error line 170 experiment")
 
 
     def generate_empty_tables(self, parents, child):

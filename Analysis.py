@@ -588,6 +588,9 @@ def calculate_accuracy_1(file_name, path):
     '''
 
 
+
+
+
     df = pd.read_csv(csv_file, sep=r',',
             skipinitialspace = True)
 
@@ -683,16 +686,19 @@ def calculate_accuracy_1(file_name, path):
         val = 0
 
     row = [name, dist, val, accuracy/len(df), rmsd/len(df)]
-    print(csv_name)
-    print(file_name)
-    print(path)
-    with open(path+f"/stats/{csv_name}_performance.csv", 'a', newline='') as f:
+    #print(csv_name)
+    #print(file_name)
+    #print(path)
+
+    with open(path+f"/stats/performance/{csv_name}_performance.csv", 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(row)
 
     #print(file_name)
 
-    otp_pd.to_csv(path+"/stats/"+file_name+".csv", index=False)
+
+    otp_pd.to_csv(path+"/stats/runs/"+file_name+".csv", index=False)
+
 
 def calculate_accuracy_fixed_output(file_name, path, output_node):
     '''print(network)
@@ -706,9 +712,9 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
         csv_name = file_name
     csv_file = path + "/test/"+csv_name+".csv"
 
-    print(network)
-    print(csv_name)
-    print(csv_file)
+    #print(network)
+    #print(csv_name)
+    #print(csv_file)
     if "net" not in network:
         network = network + ".net"
 
@@ -749,6 +755,9 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
     output_list = []
     name_output_list = []
     rounded_predicted_output = []
+
+
+
     for i in range(0, len(df)):
         #print("NEW COMBO")
         event_list = list(bn.names())  # experiment.reporters.relevant_events
@@ -831,10 +840,7 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
         dist = "none"
         val = 0
 
-
-
-
-    otp_pd.to_csv(path+"/stats/"+file_name+"_performance_fixed_output.csv", index=False)
+    otp_pd.to_csv(path+"/stats/fixed_output/"+file_name+"_performance_fixed_output.csv", index=False)
 
 
 def load_temporal_evidence(name):
@@ -973,9 +979,9 @@ def plot_posterior(path, base_network):
 
 def plot_performance(path, base_network):
     fig, axs = plt.subplots(2)
-    #print(path, base_network)
+    print(path, base_network)
 
-    df = pd.read_csv(path+f"/stats/{base_network}_performance.csv", sep=r',',
+    df = pd.read_csv(path+f"/stats/performance/{base_network}_performance.csv", sep=r',',
                      skipinitialspace=True)
     col = list(df.columns)
     df.plot(kind='line', x=col[2], y=col[3], title="Accuracy",  ax=axs[0])
@@ -985,18 +991,18 @@ def plot_performance(path, base_network):
     #plt.subplots_adjust(bottom=0.60)
     axs[0].set(xlabel="Disturbance", ylabel="Accuracy")
     axs[1].set(xlabel="Disturbance", ylabel="RMSE")
-    file_name = path + "/plots/performance_" + base_network + ".pdf"
+    file_name = path + "/plots/" + base_network + ".pdf"
     plt.savefig(file_name)
-    #plt.show()
+    plt.show()
 
 def plot_performance_fixed_output(path, base_network, temporal_evidence):
-    folder = path + "/stats/"
+    folder = path + "/stats/fixed_output/"
     list_files = os.listdir(folder)
     list_files.sort()
     fig, axs = plt.subplots(2)
     colors = ["#fde725", "#b5de2b", "#6ece58", "#35b779", "#1f9e89", "#26828e", "#31688e", "#3e4989", "#482878", "#440154"]
     df_list = []
-    df = pd.read_csv(path + f"/stats/{base_network}_performance_fixed_output.csv", sep=r',',
+    df = pd.read_csv(path + f"/stats/fixed_output/{base_network}_performance_fixed_output.csv", sep=r',',
                      skipinitialspace=True)
 
     df['conc'] = ""
@@ -1034,7 +1040,7 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
 
         #print(base, dis, num)
         #for num in [ 0.05, 0.125, 0.1, 0.2, 0.25, 0.33, 0.5]:
-        df = pd.read_csv(path+f"/stats/{base_network}_arbit_{num}_performance_fixed_output.csv", sep=r',',
+        df = pd.read_csv(path+f"/stats/fixed_output/{base_network}_arbit_{num}_performance_fixed_output.csv", sep=r',',
                          skipinitialspace=True)
 
         df['conc'] = ""
@@ -1054,7 +1060,7 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
         t.plot(kind='bar', x='conc',y= f'RMS {str(num)}', legend=num, color=c, title="RMS",  ax=axs[1])
         print(t)
 
-    file_name = path + "/plots/performance_fixed_output_" + base_network + ".pdf"
+    file_name = path + "/plots/" + base_network + ".pdf"
     #fig.tight_layout()
     plt.savefig(file_name)
     #plt.show()
@@ -1104,12 +1110,12 @@ d_S = {"camera_vision":2}
 d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
-for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 5000, d_S),
+for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1000, d_S),
                                                         ("StolenLaptopPrivate", 1000, d_S),
-                                                      #  ("StolenLaptop", 1000, d_S),
-                                                       # ("VlekNetwork", 50000, d_V),
-                                                        #("GroteMarkt", 1000, d_G),
-                                                        #("GroteMarktMaps", 1000, d_G)
+                                                       ("StolenLaptop", 1000, d_S),
+                                                        ("VlekNetwork", 50000, d_V),
+                                                        ("GroteMarkt", 1000, d_G),
+                                                        ("GroteMarktMaps", 1000, d_G)
                                         ]:
 
     os.chdir(org_dir)
@@ -1118,7 +1124,11 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
     path = org_dir + "/experiments/" + scenario
 
     test_runs = int(train_runs / 10)
+    list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
+    list_files.sort()
+    print(scenario)
 
+    '''
 
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
                             param_dict=param_dict)  # we do the simple scenario
@@ -1143,7 +1153,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
     if ".DS_Store" in list_files:
         list_files.remove(".DS_Store")
 
-    print("List files", list_files)
+    #print("List files", list_files)
     for train_data in list_files:
         K2_BN_csv_only(train_data, path)
 
@@ -1153,7 +1163,8 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
                 for p in params:
                     disturb_cpts(path, exp, p[0], train_data[:-4])
 
-        with open(path + f"/stats/{train_data[:-4]}_performance.csv", 'w+') as f:
+    for train_data in list_files:
+        with open(path + f"/stats/performance/{train_data[:-4]}_performance.csv", 'w+') as f:
             f.truncate()
             writer = csv.writer(f)
             writer.writerow(["experiment", "disturbance", "value", "accuracy", "rmsq"])
@@ -1165,7 +1176,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
     if ".DS_Store" in list_files:
         disturbed_list_files.remove(".DS_Store")
 
-    print("disturbed files", disturbed_list_files)
+    #print("disturbed files", disturbed_list_files)
     for networks in disturbed_list_files:
         if networks == ".DS_Store":
             continue
@@ -1184,7 +1195,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         print("hugin")
         hugin_converter(networks[:-4], path)
         print("acc 1")
-        print(networks[:-4], path)
+        #print(networks[:-4], path)
 
         calculate_accuracy_1(networks[:-4], path)
         print("acc output")
@@ -1195,14 +1206,16 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
 
-
+    '''
     ## IMAGING
     # making some nice plots of the posterior
 
+
     for base_network in list_files:
-        plot_performance(path, base_network[:-4])
-        plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
-        plot_posterior(path, base_network[:-4])
+        if ".DS" not in base_network:
+            plot_performance(path, base_network[:-4])
+            #plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
+            #plot_posterior(path, base_network[:-4])
 
 
 

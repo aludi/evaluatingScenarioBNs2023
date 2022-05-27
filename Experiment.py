@@ -155,7 +155,7 @@ class Experiment():
 
     def generate_csv_report(self, file_path): # drop columns here
         history_list = []
-        print(file_path)
+        #print(file_path)
         #print("history dict", self.reporters.history_dict)
         for key in self.reporters.history_dict.keys():
             history_list.append(self.reporters.history_dict[key])
@@ -165,7 +165,7 @@ class Experiment():
         if "StolenLaptopPrivate" in file_path:
             csv_columns.remove("flees_startled")
             csv_columns.remove("E_private")
-        print(csv_columns)
+        #print(csv_columns)
 
         csv_file = file_path
         #csv_file = os.getcwd() + self.path + f"{self.train}/{file_name}.csv"

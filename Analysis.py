@@ -969,16 +969,19 @@ def plot_posterior(path, base_network):
         df.plot(kind='line', x=col[0], y=col[1], color=colors[i], legend=num, title=base,  ax=ax)
         plt.xticks(range(0,len(df["evidence"])), df["evidence"], rotation='vertical')
         # Tweak spacing to prevent clipping of tick-labels
-        plt.subplots_adjust(bottom=0.60)
+        plt.subplots_adjust(right=0.8, bottom=0.5)
+        ax.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
         plt.xlabel("Evidence added")
         plt.ylabel("Posterior of " + df["posterior_name"][0])
         plt.title("The effect of evidence on the posterior")
     file_name = path + "/plots/posterior_" + base_network + ".pdf"
     plt.savefig(file_name)
+    plt.close()
+
     #plt.show()
 
 def plot_performance(path, base_network):
-    fig, axs = plt.subplots(2)
+    fig, axs = plt.subplots(2, sharex='col')
     print(path, base_network)
 
     df = pd.read_csv(path+f"/stats/performance/{base_network}_performance.csv", sep=r',',
@@ -991,15 +994,21 @@ def plot_performance(path, base_network):
     #plt.subplots_adjust(bottom=0.60)
     axs[0].set(xlabel="Disturbance", ylabel="Accuracy")
     axs[1].set(xlabel="Disturbance", ylabel="RMSE")
-    file_name = path + "/plots/" + base_network + ".pdf"
+    file_name = path + "/plots/performance_" + base_network + ".pdf"
+
+    plt.subplots_adjust(right=0.7, bottom=0.2)
+    axs[0].legend(bbox_to_anchor=(1.04, 1), loc="upper left")
+    axs[1].legend(bbox_to_anchor=(1.04, 1), loc="upper left")
+
     plt.savefig(file_name)
-    plt.show()
+    #plt.show()
+    plt.close()
 
 def plot_performance_fixed_output(path, base_network, temporal_evidence):
     folder = path + "/stats/fixed_output/"
     list_files = os.listdir(folder)
     list_files.sort()
-    fig, axs = plt.subplots(2)
+    fig, axs = plt.subplots(2, sharex='col')
     colors = ["#fde725", "#b5de2b", "#6ece58", "#35b779", "#1f9e89", "#26828e", "#31688e", "#3e4989", "#482878", "#440154"]
     df_list = []
     df = pd.read_csv(path + f"/stats/fixed_output/{base_network}_performance_fixed_output.csv", sep=r',',
@@ -1016,15 +1025,16 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
     print(t)
 
     c = colors.pop()
-    t.plot(kind='bar', x='conc', y=f'Acc No', legend="No", color=c, title="Accuracy", ax=axs[0])
-    t.plot(kind='bar', x='conc', y=f'RMS No', legend="No", color=c, title="RMS", ax=axs[1])
+    t.plot(kind='bar', x='conc', y=f'Acc No', stacked=True, legend="No", color=c, title="Accuracy", ax=axs[0])
+    t.plot(kind='bar', x='conc', y=f'RMS No', stacked=True, legend="No", color=c, title="RMS", ax=axs[1])
 
     df_list.append(t)
     relevant_files = []
     for f in list_files:
         #print(f)
         if base_network in f and "fixed_output" in f and "arbit" in f:
-            relevant_files.append(f)
+            if str(0.33) not in f and str(0.5) not in f and str(0.4) not in f and str(0.45) not in f:    # i only care about the errors in the good plots
+                relevant_files.append(f)
 
     #print(relevant_files)
     for i in range(0, len(relevant_files)):
@@ -1056,14 +1066,20 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
         #print(list(t))
         c = colors.pop()
 
-        t.plot(kind='bar', x='conc',y= f'Acc {str(num)}', legend=num, color=c, title="Accuracy",  ax=axs[0])
-        t.plot(kind='bar', x='conc',y= f'RMS {str(num)}', legend=num, color=c, title="RMS",  ax=axs[1])
+        t.plot(kind='bar', x='conc',y= f'Acc {str(num)}', stacked=True, legend=num, color=c, title="Accuracy",  ax=axs[0])
+        t.plot(kind='bar', x='conc',y= f'RMS {str(num)}', stacked=True, legend=num, color=c, title="RMS",  ax=axs[1])
         print(t)
 
-    file_name = path + "/plots/" + base_network + ".pdf"
-    #fig.tight_layout()
+    plt.subplots_adjust(right=0.7, bottom = 0.2)
+    axs[0].legend(bbox_to_anchor=(1.04,1), loc="upper left")
+    axs[1].legend(bbox_to_anchor=(1.04,1), loc="upper left")
+
+    file_name = path + "/plots/performance_fixed_output_" + base_network + ".pdf"
+    print(file_name)
     plt.savefig(file_name)
     #plt.show()
+    plt.close()
+
 
 
 
@@ -1214,8 +1230,8 @@ for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1
     for base_network in list_files:
         if ".DS" not in base_network:
             plot_performance(path, base_network[:-4])
-            #plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
-            #plot_posterior(path, base_network[:-4])
+            plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
+            plot_posterior(path, base_network[:-4])
 
 
 

@@ -9,6 +9,7 @@ TODO
 from itertools import product
 import re
 import os
+import pickle
 
 from Reporters import Reporters
 from SimulationTest import StolenLaptop
@@ -59,10 +60,36 @@ class Experiment():
                     for j in range(30):
                         model.step()
                     self.reporters.increase_run()
-                if scenario == "StolenLaptop" or "StolenLaptopPrivate":
+                #print("temporal", self.reporters.temporal_list, self.reporters.temporal_dict)
+
+
+
+                '''
+                
+                f = open(f"experiments/{scenario}/{train}/{scenario}_temporal.pkl", "wb")
+                pickle.dump(self.reporters.temporal_dict, f)
+                f.close()
+                f = open(f"experiments/{scenario}/{train}/{scenario}_relevantEvents.pkl", "wb")
+                pickle.dump(self.reporters.relevant_events, f)
+                f.close()
+                f = open(f"experiments/{scenario}/{train}/{scenario}_evidenceList.pkl", "wb")
+                pickle.dump(self.reporters.evidence_list, f)
+                f.close()
+                '''
+                print("SCENARIO", scenario)
+                if scenario == "StolenLaptop" or scenario == "StolenLaptopPrivate":
+                    print("who?")
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")  # use these csvs for automatic BN structure determination
+                    ### save temporal data to file
+                    if train == "train":
+                        self.pickle_relevant(scenario, train, scenario)  # pickles temporal dict, event dict and evidence list
                 else:
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}_param_{camera_vision}.csv")
+                    ### save temporal data to file
+                    print("in here")
+                    print(f"{scenario}_param_{camera_vision}")
+                    if train == "train":
+                        self.pickle_relevant(scenario, train, f"{scenario}_param_{camera_vision}")  # pickles temporal dict, event dict and evidence list
                 self.print_frequencies()
                 #self.print_frequencies_latex()
 
@@ -138,20 +165,40 @@ class Experiment():
                     for j in range(100):
                         model.step()
                     self.reporters.increase_run()
+                    ### save temporal data to file
+
 
                 #print(self.reporters.history_dict)
 
                 #print(self.reporters.pure_frequency_event_dict)
                 if scenario == "GroteMarkt":
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
+                    if train == "train":
+                        self.pickle_relevant(scenario, train, scenario)  # pickles temporal dict, event dict and evidence list
+
                 else:
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}_map_{str(map)}.csv")
+                    if train == "train":
+                        self.pickle_relevant(scenario, train, f"{scenario}_map_{str(map)}")  # pickles temporal dict, event dict and evidence list
+
 
 
 
             #self.print_frequencies()
 
 
+    def pickle_relevant(self, scenario, train, name):
+        ### save temporal data to file
+        print(name)
+        f = open(f"experiments/{scenario}/pickleJar/{name}_temporal.pkl", "wb")
+        pickle.dump(self.reporters.temporal_dict, f)
+        f.close()
+        f = open(f"experiments/{scenario}/pickleJar/{name}_relevantEvents.pkl", "wb")
+        pickle.dump(self.reporters.relevant_events, f)
+        f.close()
+        f = open(f"experiments/{scenario}/pickleJar/{name}_evidenceList.pkl", "wb")
+        pickle.dump(self.reporters.evidence_list, f)
+        f.close()
 
     def generate_csv_report(self, file_path): # drop columns here
         history_list = []

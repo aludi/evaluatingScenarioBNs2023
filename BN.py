@@ -6,6 +6,9 @@ import copy as copy
 from Experiment import Experiment
 import csv
 import pandas as pd
+import pickle
+
+
 import math
 import pyAgrum.lib.image as gim
 
@@ -135,36 +138,117 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
     #print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 
-def evidence_cannot_be_connected_to_each_other(experiment, temporal_ordering):
+def unpickle_dict(name):
+    f = open(name, "rb")
+    output = pickle.load(f)
+    f.close()
+    #print(output)
+    return output
+
+def get_temporal_ordering_nodes_path(training_data, path):
+    # path + "/train/"+training_data
+    header = next(csv.reader(open(path + "/train/" + training_data)))
+    best_temporal_ordering = []
+
+    for i in range(0, len(header)):
+        best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
+        flag = "def"
+
+    if "KB" in training_data:
+        return best_temporal_ordering
+
+    # determine the temporal order
+    # consider only all temporal orders that include all events!
+    max_score = 0
+    # default ordering
+
+    temporal_dict_path = path+"/pickleJar/"+training_data[:-4]+"_temporal.pkl"
+    relevant_dict_path = path+"/pickleJar/"+training_data[:-4]+"_relevantEvents.pkl"
+    evidence_list_path = path+"/pickleJar/"+training_data[:-4]+"_evidenceList.pkl"
+
+    temporal_dict = unpickle_dict(temporal_dict_path)
+    relevant_dict = unpickle_dict(relevant_dict_path)
+    evidence_list = unpickle_dict(evidence_list_path)
+
+
+    for key in temporal_dict.keys():
+        if len(key) == len(relevant_dict) - len(evidence_list):
+            if temporal_dict[key] > max_score:
+                best_temporal_ordering = list(key)
+                max_score = temporal_dict[key]
+                flag = "cust"
+    best_ordering_in_col_numbers_list = []
+    #print(best_temporal_ordering)
+    if len(list(header)) == len(relevant_dict):
+        if flag == "cust":
+            for item in best_temporal_ordering:
+                best_ordering_in_col_numbers_list.append(header.index(item))
+            for item in evidence_list:
+                best_ordering_in_col_numbers_list.append(header.index(item))
+        else:
+            best_ordering_in_col_numbers_list = best_temporal_ordering
+    else:
+        flag = "def"
+        for item in header:
+            best_ordering_in_col_numbers_list.append(header.index(item))
+
+    #print(flag)
+    #print(best_ordering_in_col_numbers_list)
+    return best_ordering_in_col_numbers_list
+
+def evidence_cannot_be_connected_to_each_other_path(training_data, path, temporal_ordering):
+    if "KB" in training_data:   # we don't do this for tvlek networks
+        return []
     #we know evidence is always added at the end
     forbidden_pairs = []
     evidence = []
-    for event in experiment.reporters.relevant_events:
+
+    relevant_dict_path = path + "/pickleJar/" + training_data[:-4] + "_relevantEvents.pkl"
+    relevant_dict = unpickle_dict(relevant_dict_path)
+
+    for event in relevant_dict:
         if event[0] == "E":
             evidence.append(event)
     #evidence = temporal_ordering[-len(experiment.reporters.evidence_list):]  # we get column header idx
+    #print("EVIDENCE")
+    #print(evidence)
     for i in range(0, len(evidence)):
         for j in range(1, len(evidence) - i):
             forbidden_pairs.append((evidence[i], evidence[j+i]))
             forbidden_pairs.append((evidence[j+i], evidence[i]))
-
-
     return forbidden_pairs
 
+def export_picture(training_data, path):
+    #print("in here, exporting picture")
+    bn = gum.loadBN(path + "/BNs/"+training_data[:-4]+".net")
+    ie = gum.LazyPropagation(bn)
+    gim.exportInference(model=bn, filename=path + "/bnImage/BNIMAGE" + training_data[:-4]+".pdf", engine=ie, evs={})
+
+
 def K2_BN_csv_only(training_data, path):
-    print(path)
-    print("training data", training_data)
+    #print(path)
+    #print("training data", training_data)
 
     learner = gum.BNLearner(path + "/train/"+training_data)  # using bn as template for variables and labels
     file_name = path + "/BNs/"+training_data[:-4]+".net"
     header = next(csv.reader(open(path + "/train/"+training_data)))
-    best_temporal_ordering = []
-    for i in range(0, len(header)):
-        best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
+
+    best_temporal_ordering = get_temporal_ordering_nodes_path(training_data, path)
+    #for i in range(0, len(header)):
+    #    best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
+
+    #print(best_temporal_ordering)
     learner.useK2(best_temporal_ordering)
+
+    forbidden = evidence_cannot_be_connected_to_each_other_path(training_data, path, best_temporal_ordering)
+    for (a, b) in forbidden:
+        #print(a, b)
+        learner.addForbiddenArc(a, b)
+
     # print(learner)
     bn = learner.learnBN()
     header = next(csv.reader(open(path + "/train/"+training_data)))
+
     for name in list(header):
         x = bn.cpt(name)
         i = gum.Instantiation(x)
@@ -180,11 +264,26 @@ def K2_BN_csv_only(training_data, path):
                     bn.cpt(name)[i.todict()] = 0
             i.inc()
         bn.cpt(name)
-    print("current dir", os.getcwd())
-    print(file_name)
+    #print("current dir", os.getcwd())
+    # print(file_name)
     gum.saveBN(bn, file_name)
+    export_picture(training_data, path)
     # print(f"saved bn as {file_name}")
     return bn
+
+def evidence_cannot_be_connected_to_each_other(experiment, temporal_ordering):
+    #we know evidence is always added at the end
+    forbidden_pairs = []
+    evidence = []
+    for event in experiment.reporters.relevant_events:
+        if event[0] == "E":
+            evidence.append(event)
+    #evidence = temporal_ordering[-len(experiment.reporters.evidence_list):]  # we get column header idx
+    for i in range(0, len(evidence)):
+        for j in range(1, len(evidence) - i):
+            forbidden_pairs.append((evidence[i], evidence[j+i]))
+            forbidden_pairs.append((evidence[j+i], evidence[i]))
+    return forbidden_pairs
 
 def K2_BN(experiment, csv_file, name):
     print(csv_file)

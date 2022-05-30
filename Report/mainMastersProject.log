@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  24 MAY 2022 21:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.29)  31 MAY 2022 01:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -87,6 +87,30 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \Gin@req@height=\dimen143
 \Gin@req@width=\dimen144
 )
+(/usr/local/texlive/2020/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen145
+\captionmargin@=\dimen146
+\captionwidth=\dimen147
+\caption@tempdima=\dimen148
+\caption@indent=\dimen149
+\caption@parindent=\dimen150
+\caption@hangindent=\dimen151
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count180
+\c@continuedfloat=\count181
+)
+\c@subfigure=\count182
+\c@subtable=\count183
+)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
@@ -145,9 +169,9 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-\@linkdim=\dimen145
-\Hy@linkcounter=\count180
-\Hy@pagecounter=\count181
+\@linkdim=\dimen152
+\Hy@linkcounter=\count184
+\Hy@pagecounter=\count185
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
@@ -160,7 +184,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 (/usr/local/texlive/2020/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count182
+\Hy@SavedSpaceFactor=\count186
 Package hyperref Info: Option `colorlinks' set `true' on input line 4421.
 Package hyperref Info: Hyper figures OFF on input line 4547.
 Package hyperref Info: Link nesting OFF on input line 4552.
@@ -169,14 +193,14 @@ Package hyperref Info: Plain pages OFF on input line 4562.
 Package hyperref Info: Backreferencing OFF on input line 4567.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count183
+\c@Hy@tempcnt=\count187
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5159.
-\XeTeXLinkMargin=\dimen146
+\XeTeXLinkMargin=\dimen153
 
 (/usr/local/texlive/2020/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -185,9 +209,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count184
-\Field@Width=\dimen147
-\Fld@charsize=\dimen148
+\Fld@menulength=\count188
+\Field@Width=\dimen154
+\Fld@charsize=\dimen155
 Package hyperref Info: Hyper figures OFF on input line 6430.
 Package hyperref Info: Link nesting OFF on input line 6435.
 Package hyperref Info: Hyper index ON on input line 6438.
@@ -201,9 +225,9 @@ LaTeX Info: Redefining \pageref on input line 6504.
 (/usr/local/texlive/2020/texmf-dist/tex/generic/atbegshi/atbegshi.sty
 Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count185
-\c@Item=\count186
-\c@Hfootnote=\count187
+\Hy@abspage=\count189
+\c@Item=\count190
+\c@Hfootnote=\count191
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
@@ -213,8 +237,8 @@ File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
 (/usr/local/texlive/2020/texmf-dist/tex/latex/atveryend/atveryend.sty
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 )
-\Fld@listcount=\count188
-\c@bookmark@seq@number=\count189
+\Fld@listcount=\count192
+\c@bookmark@seq@number=\count193
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
@@ -243,40 +267,49 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-\c@theorem=\count190
-\c@definition=\count191
-\c@lemma=\count192
-\c@exercise=\count193
-\c@remark=\count194
-\c@example=\count195
-\c@warning=\count196
+\c@theorem=\count194
+\c@definition=\count195
+\c@lemma=\count196
+\c@exercise=\count197
+\c@remark=\count198
+\c@example=\count199
+\c@warning=\count266
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count197
+\l__kernel_color_stack_int=\count267
 \l__pdf_internal_box=\box45
 )
 (./mainMastersProject.aux (./abstract.aux) (./introduction.aux)
-(./stateoftheart.aux) (./pipeline.aux) (./nonspatial.aux) (./spatialsimple.aux)
-(./islandprior.aux) (./conclusion.aux))
+(./stateoftheart.aux) (./pipeline.aux) (./nonspatial.aux) (./spatialsimple.aux
+
+LaTeX Warning: Label `laptopAcc' multiply defined.
+
+
+LaTeX Warning: Label `visionlaptopPosterior' multiply defined.
+
+
+LaTeX Warning: Label `privatelaptopperformance' multiply defined.
+
+) (./islandprior.aux) (./conclusion.aux))
 \openout1 = `mainMastersProject.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -314,20 +347,23 @@ LaTeX Font Info:    ... okay on input line 42.
 
 (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
-\scratchdimen=\dimen149
+\scratchcounter=\count268
+\scratchdimen=\dimen156
 \scratchbox=\box46
-\nofMPsegments=\count199
-\nofMParguments=\count266
+\nofMPsegments=\count269
+\nofMParguments=\count270
 \everyMPshowfont=\toks18
-\MPscratchCnt=\count267
-\MPscratchDim=\dimen150
-\MPnumerator=\count268
-\makeMPintoPDFobject=\count269
+\MPscratchCnt=\count271
+\MPscratchDim=\dimen157
+\MPnumerator=\count272
+\makeMPintoPDFobject=\count273
 \everyMPtoPDFconversion=\toks19
 )
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box47
-Package hyperref Info: Link coloring ON on input line 42.
+Package hyperref Info: Link coloring ON on input line 44.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
@@ -338,22 +374,22 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count270
+\c@section@level=\count274
 )
-LaTeX Info: Redefining \ref on input line 42.
-LaTeX Info: Redefining \pageref on input line 42.
-LaTeX Info: Redefining \nameref on input line 42.
+LaTeX Info: Redefining \ref on input line 44.
+LaTeX Info: Redefining \pageref on input line 44.
+LaTeX Info: Redefining \nameref on input line 44.
  (./mainMastersProject.out) (./mainMastersProject.out)
 \@outlinefile=\write3
 \openout3 = `mainMastersProject.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 49.
 
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 49.
 
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -395,22 +431,61 @@ Chapter 1.
 
 ]
 Chapter 2.
-[3] [4])
+[3]
+Overfull \hbox (17.48592pt too wide) in paragraph at lines 45--46
+[]\OT1/cmr/m/n/10.95 Automated Bayesian Net-work build-ing might prove use-ful 
+in other, more data-and-information-
+ []
+
+[4]
+<images/rv1.png, id=495, 560.0925pt x 303.1325pt>
+File: images/rv1.png Graphic file (type png)
+<use images/rv1.png>
+Package pdftex.def Info: images/rv1.png  used on input line 74.
+(pdftex.def)             Requested size: 430.00462pt x 232.73743pt.
+
+Overfull \hbox (30.0pt too wide) in paragraph at lines 74--75
+[][] 
+ []
+
+
 Overfull \hbox (17.16318pt too wide) has occurred while \output is active
 \OT1/cmr/m/sl/10.95 2.5.  BACKGROUND ON PROBABILITIES - THE MEANING OF RANDOM V
 ARIABLES \OT1/cmr/m/n/10.95 5
  []
 
 [5]
+<images/rv2.png, id=509, 550.055pt x 381.425pt>
+File: images/rv2.png Graphic file (type png)
+<use images/rv2.png>
+Package pdftex.def Info: images/rv2.png  used on input line 87.
+(pdftex.def)             Requested size: 430.00462pt x 298.18542pt.
+
+Underfull \vbox (badness 6428) has occurred while \output is active []
+
+ [6 <./images/rv1.png>]
+Overfull \hbox (17.16318pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/10.95 2.5.  BACKGROUND ON PROBABILITIES - THE MEANING OF RANDOM V
+ARIABLES \OT1/cmr/m/n/10.95 7
+ []
+
+[7 <./images/rv2.png>] [8]) [9]
 \openout2 = `pipeline.aux'.
 
- (./pipeline.tex [6
+ (./pipeline.tex [10
 
 
 
 ]
 Chapter 3.
-<images/pipeline.pdf, id=489, 1027.84pt x 602.25pt>
+
+Package caption Warning: \label without proper reference on input line 14.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `pipeline' on page 11 undefined on input line 10.
+
+<images/pipeline.pdf, id=549, 1027.84pt x 602.25pt>
 File: images/pipeline.pdf Graphic file (type pdf)
 <use images/pipeline.pdf>
 Package pdftex.def Info: images/pipeline.pdf  used on input line 13.
@@ -421,13 +496,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [7]
-[8 <./images/pipeline.pdf>] [9] [10] [11]) [12]
+ [11]
+[12 <./images/pipeline.pdf>] [13] [14] [15]) [16]
 \openout2 = `nonspatial.aux'.
 
  (./nonspatial.tex
 Chapter 4.
-[13
+[17
 
 
 
@@ -436,39 +511,39 @@ Overfull \hbox (77.57597pt too wide) in paragraph at lines 35--51
 [][] 
  []
 
-<images/Kb1.pdf, id=562, 234.8775pt x 226.8475pt>
+<images/Kb1.pdf, id=619, 234.8775pt x 226.8475pt>
 File: images/Kb1.pdf Graphic file (type pdf)
 <use images/Kb1.pdf>
 Package pdftex.def Info: images/Kb1.pdf  used on input line 63.
 (pdftex.def)             Requested size: 234.87692pt x 226.84694pt.
-<images/vlek2015a.png, id=563, 588.1975pt x 300.12125pt>
+<images/vlek2015a.png, id=620, 588.1975pt x 300.12125pt>
 File: images/vlek2015a.png Graphic file (type png)
 <use images/vlek2015a.png>
 Package pdftex.def Info: images/vlek2015a.png  used on input line 66.
 (pdftex.def)             Requested size: 323.50961pt x 165.06718pt.
-[14]
-<images/Kb2.pdf, id=569, 234.8775pt x 536.0025pt>
+[18]
+<images/Kb2.pdf, id=625, 234.8775pt x 536.0025pt>
 File: images/Kb2.pdf Graphic file (type pdf)
 <use images/Kb2.pdf>
 Package pdftex.def Info: images/Kb2.pdf  used on input line 75.
 (pdftex.def)             Requested size: 164.41312pt x 375.19919pt.
-<images/vlek2015.png, id=570, 700.6175pt x 410.53375pt>
+<images/vlek2015.png, id=626, 700.6175pt x 410.53375pt>
 File: images/vlek2015.png Graphic file (type png)
 <use images/vlek2015.png>
 Package pdftex.def Info: images/vlek2015.png  used on input line 78.
 (pdftex.def)             Requested size: 385.3408pt x 225.79425pt.
 
 
-LaTeX Warning: Float too large for page by 108.44606pt on input line 81.
+LaTeX Warning: Float too large for page by 106.31686pt on input line 81.
 
-<images/Kb.pdf, id=571, 326.21875pt x 578.16pt>
+<images/Kb.pdf, id=627, 326.21875pt x 578.16pt>
 File: images/Kb.pdf Graphic file (type pdf)
 <use images/Kb.pdf>
 Package pdftex.def Info: images/Kb.pdf  used on input line 86.
 (pdftex.def)             Requested size: 260.97534pt x 462.52863pt.
-[15] [16 <./images/Kb1.pdf> <./images/vlek2015a.png>] [17 <./images/Kb2.pdf> <.
-/images/vlek2015.png>] [18 <./images/Kb.pdf>]
-<../experiments/VlekNetwork/plots/performance_KB1.pdf, id=623, 462.52798pt x 34
+[19] [20 <./images/Kb1.pdf> <./images/vlek2015a.png>] [21 <./images/Kb2.pdf> <.
+/images/vlek2015.png>] [22 <./images/Kb.pdf>]
+<../experiments/VlekNetwork/plots/performance_KB1.pdf, id=675, 462.52798pt x 34
 6.89601pt>
 File: ../experiments/VlekNetwork/plots/performance_KB1.pdf Graphic file (type p
 df)
@@ -481,7 +556,7 @@ Overfull \hbox (32.52222pt too wide) in paragraph at lines 135--136
  [] 
  []
 
-<../experiments/VlekNetwork/plots/performance_KB2.pdf, id=624, 462.52798pt x 34
+<../experiments/VlekNetwork/plots/performance_KB2.pdf, id=676, 462.52798pt x 34
 6.89601pt>
 File: ../experiments/VlekNetwork/plots/performance_KB2.pdf Graphic file (type p
 df)
@@ -494,7 +569,7 @@ Overfull \hbox (32.52222pt too wide) in paragraph at lines 143--144
  [] 
  []
 
-<../experiments/VlekNetwork/plots/performance_KBFull.pdf, id=625, 462.52798pt x
+<../experiments/VlekNetwork/plots/performance_KBFull.pdf, id=677, 462.52798pt x
  346.89601pt>
 File: ../experiments/VlekNetwork/plots/performance_KBFull.pdf Graphic file (typ
 e pdf)
@@ -507,8 +582,8 @@ Overfull \hbox (32.52222pt too wide) in paragraph at lines 151--152
  [] 
  []
 
-[19] [20 <../experiments/VlekNetwork/plots/performance_KB1.pdf>] [21 <../experi
-ments/VlekNetwork/plots/performance_KB2.pdf>] [22 <../experiments/VlekNetwork/p
+[23] [24 <../experiments/VlekNetwork/plots/performance_KB1.pdf>] [25 <../experi
+ments/VlekNetwork/plots/performance_KB2.pdf>] [26 <../experiments/VlekNetwork/p
 lots/performance_KBFull.pdf>]
 Overfull \hbox (9.95964pt too wide) in paragraph at lines 176--190
 [][] 
@@ -519,128 +594,295 @@ Overfull \hbox (68.66383pt too wide) in paragraph at lines 198--214
 [][] 
  []
 
-[23] [24] [25] [26] [27]) [28]
+[27] [28] [29] [30] [31]) [32]
 \openout2 = `spatialsimple.aux'.
 
  (./spatialsimple.tex
 Chapter 5.
-[29
+
+Overfull \hbox (17.41641pt too wide) in paragraph at lines 24--46
+[][] 
+ []
+
+[33
 
 
 
 ]
-<../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf, id=797, 462.52
+<images/sim1.png, id=847, 592.2125pt x 349.305pt>
+File: images/sim1.png Graphic file (type png)
+<use images/sim1.png>
+Package pdftex.def Info: images/sim1.png  used on input line 54.
+(pdftex.def)             Requested size: 215.0023pt x 126.81569pt.
+<images/stealing.png, id=848, 579.16376pt x 341.275pt>
+File: images/stealing.png Graphic file (type png)
+<use images/stealing.png>
+Package pdftex.def Info: images/stealing.png  used on input line 58.
+(pdftex.def)             Requested size: 215.0023pt x 126.69156pt.
+
+Overfull \hbox (2.43332pt too wide) in paragraph at lines 53--61
+[]$[]$ $[]$ 
+ []
+
+<../experiments/StolenLaptop/bnImage/BNIMAGEStolenLaptop.pdf, id=850, 512.91624
+pt x 543.02875pt>
+File: ../experiments/StolenLaptop/bnImage/BNIMAGEStolenLaptop.pdf Graphic file 
+(type pdf)
+<use ../experiments/StolenLaptop/bnImage/BNIMAGEStolenLaptop.pdf>
+Package pdftex.def Info: ../experiments/StolenLaptop/bnImage/BNIMAGEStolenLapto
+p.pdf  used on input line 76.
+(pdftex.def)             Requested size: 512.915pt x 543.0274pt.
+
+Overfull \hbox (82.91037pt too wide) in paragraph at lines 76--77
+ [] 
+ []
+
+
+LaTeX Warning: Float too large for page by 24.75084pt on input line 80.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf, id=851, 462.52
 798pt x 346.89601pt>
 File: ../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf Graphic fi
 le (type pdf)
 <use ../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf>
 Package pdftex.def Info: ../experiments/StolenLaptop/plots/performance_StolenLa
-ptop.pdf  used on input line 34.
+ptop.pdf  used on input line 85.
 (pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
 
-Overfull \hbox (32.52222pt too wide) in paragraph at lines 34--35
+Overfull \hbox (32.52222pt too wide) in paragraph at lines 85--86
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[30]
+<../experiments/StolenLaptop/plots/posterior_StolenLaptop.pdf, id=852, 462.5279
+8pt x 346.89601pt>
+File: ../experiments/StolenLaptop/plots/posterior_StolenLaptop.pdf Graphic file
+ (type pdf)
+<use ../experiments/StolenLaptop/plots/posterior_StolenLaptop.pdf>
+Package pdftex.def Info: ../experiments/StolenLaptop/plots/posterior_StolenLapt
+op.pdf  used on input line 94.
+(pdftex.def)             Requested size: 430.00462pt x 322.51996pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[34 <./images/sim1.png> <./images/stealing.png>]
+Underfull \vbox (badness 2277) has occurred while \output is active []
+
+
 Overfull \hbox (218.21382pt too wide) has occurred while \output is active
 \OT1/cmr/m/sl/10.95 5.2.  EXPERIMENT 2: INVESTIGATING THE EVIDENCE STRENGTH DEP
-ENDING ON PARAMETERS OF THE NETWORK. \OT1/cmr/m/n/10.95 31
+ENDING ON PARAMETERS OF THE NETWORK. \OT1/cmr/m/n/10.95 35
  []
 
-[31 <../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf>] [32])
-[33]
+[35]
+<../experiments/StolenLaptopVision/bnImage/BNIMAGEStolenLaptopVision.pdf, id=86
+9, 506.89375pt x 543.02875pt>
+File: ../experiments/StolenLaptopVision/bnImage/BNIMAGEStolenLaptopVision.pdf G
+raphic file (type pdf)
+<use ../experiments/StolenLaptopVision/bnImage/BNIMAGEStolenLaptopVision.pdf>
+Package pdftex.def Info: ../experiments/StolenLaptopVision/bnImage/BNIMAGEStole
+nLaptopVision.pdf  used on input line 134.
+(pdftex.def)             Requested size: 430.00462pt x 460.67343pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../experiments/StolenLaptopVision/plots/posterior_StolenLaptopVision.pdf, id=8
+70, 462.52798pt x 346.89601pt>
+File: ../experiments/StolenLaptopVision/plots/posterior_StolenLaptopVision.pdf 
+Graphic file (type pdf)
+<use ../experiments/StolenLaptopVision/plots/posterior_StolenLaptopVision.pdf>
+Package pdftex.def Info: ../experiments/StolenLaptopVision/plots/posterior_Stol
+enLaptopVision.pdf  used on input line 143.
+(pdftex.def)             Requested size: 430.00462pt x 322.51996pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../experiments/StolenLaptopPrivate/bnImage/BNIMAGEStolenLaptopPrivate.pdf, id=
+871, 442.65375pt x 543.02875pt>
+File: ../experiments/StolenLaptopPrivate/bnImage/BNIMAGEStolenLaptopPrivate.pdf
+ Graphic file (type pdf)
+<use ../experiments/StolenLaptopPrivate/bnImage/BNIMAGEStolenLaptopPrivate.pdf>
+
+Package pdftex.def Info: ../experiments/StolenLaptopPrivate/bnImage/BNIMAGEStol
+enLaptopPrivate.pdf  used on input line 174.
+(pdftex.def)             Requested size: 430.00462pt x 527.54097pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../experiments/StolenLaptopPrivate/plots/performance_StolenLaptopPrivate.pdf, 
+id=872, 462.52798pt x 346.89601pt>
+File: ../experiments/StolenLaptopPrivate/plots/performance_StolenLaptopPrivate.
+pdf Graphic file (type pdf)
+<use ../experiments/StolenLaptopPrivate/plots/performance_StolenLaptopPrivate.p
+df>
+Package pdftex.def Info: ../experiments/StolenLaptopPrivate/plots/performance_S
+tolenLaptopPrivate.pdf  used on input line 182.
+(pdftex.def)             Requested size: 430.00462pt x 322.51996pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../experiments/StolenLaptopPrivate/plots/posterior_StolenLaptopPrivate.pdf, id
+=873, 462.52798pt x 346.89601pt>
+File: ../experiments/StolenLaptopPrivate/plots/posterior_StolenLaptopPrivate.pd
+f Graphic file (type pdf)
+<use ../experiments/StolenLaptopPrivate/plots/posterior_StolenLaptopPrivate.pdf
+>
+Package pdftex.def Info: ../experiments/StolenLaptopPrivate/plots/posterior_Sto
+lenLaptopPrivate.pdf  used on input line 190.
+(pdftex.def)             Requested size: 430.00462pt x 322.51996pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[36]) [37] [38 <../experiments/StolenLaptop/bnImage/BNIMAGEStolenLaptop.pdf>]
+[39 <../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf>] [40 <../e
+xperiments/StolenLaptop/plots/posterior_StolenLaptop.pdf>] [41 <../experiments/
+StolenLaptopVision/bnImage/BNIMAGEStolenLaptopVision.pdf>] [42 <../experiments/
+StolenLaptopVision/plots/posterior_StolenLaptopVision.pdf>] [43 <../experiments
+/StolenLaptopPrivate/bnImage/BNIMAGEStolenLaptopPrivate.pdf>] [44 <../experimen
+ts/StolenLaptopPrivate/plots/performance_StolenLaptopPrivate.pdf>] [45 <../expe
+riments/StolenLaptopPrivate/plots/posterior_StolenLaptopPrivate.pdf>]
 \openout2 = `islandprior.aux'.
 
- (./islandprior.tex [34
+
+(./islandprior.tex [46
 
 
 
 ]
 Chapter 6.
-<../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf, id=856, 462.52798p
-t x 346.89601pt>
+<../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf, id=1159, 462.52798
+pt x 346.89601pt>
 File: ../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf Graphic file (
 type pdf)
 <use ../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf>
 Package pdftex.def Info: ../experiments/GroteMarkt/plots/performance_GroteMarkt
-.pdf  used on input line 33.
-(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
-
-Overfull \hbox (32.52222pt too wide) in paragraph at lines 33--34
- [] 
- []
-
+.pdf  used on input line 34.
+(pdftex.def)             Requested size: 430.00462pt x 322.51996pt.
+<../experiments/GroteMarkt/plots/posterior_GroteMarkt.pdf, id=1160, 462.52798pt
+ x 346.89601pt>
+File: ../experiments/GroteMarkt/plots/posterior_GroteMarkt.pdf Graphic file (ty
+pe pdf)
+<use ../experiments/GroteMarkt/plots/posterior_GroteMarkt.pdf>
+Package pdftex.def Info: ../experiments/GroteMarkt/plots/posterior_GroteMarkt.p
+df  used on input line 42.
+(pdftex.def)             Requested size: 430.00462pt x 322.51996pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35]
-[36 <../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf>] [37]
-Overfull \hbox (8.28317pt too wide) in paragraph at lines 83--83
+ [47]
+[48 <../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf>]
+Overfull \hbox (74.49376pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/10.95 6.2.  EXPERIMENT 1: GENERAL - CAN WE CREATE BNS OF A ROBBER
+Y AT GROTE MARKT? \OT1/cmr/m/n/10.95 49
+ []
+
+[49 <../experiments/GroteMarkt/plots/posterior_GroteMarkt.pdf>]
+<../experiments/GroteMarktMaps/maps/groteMarkt.png, id=1248, 1179.40625pt x 788
+.9475pt>
+File: ../experiments/GroteMarktMaps/maps/groteMarkt.png Graphic file (type png)
+
+<use ../experiments/GroteMarktMaps/maps/groteMarkt.png>
+Package pdftex.def Info: ../experiments/GroteMarktMaps/maps/groteMarkt.png  use
+d on input line 64.
+(pdftex.def)             Requested size: 215.0023pt x 143.8222pt.
+<../experiments/GroteMarktMaps/maps/Selwerd.png, id=1249, 770.88pt x 399.4925pt
+>
+File: ../experiments/GroteMarktMaps/maps/Selwerd.png Graphic file (type png)
+<use ../experiments/GroteMarktMaps/maps/Selwerd.png>
+Package pdftex.def Info: ../experiments/GroteMarktMaps/maps/Selwerd.png  used o
+n input line 69.
+(pdftex.def)             Requested size: 215.0023pt x 111.41823pt.
+<../experiments/GroteMarktMaps/maps/zuidCentrum.png, id=1250, 754.82pt x 469.75
+5pt>
+File: ../experiments/GroteMarktMaps/maps/zuidCentrum.png Graphic file (type png
+)
+<use ../experiments/GroteMarktMaps/maps/zuidCentrum.png>
+Package pdftex.def Info: ../experiments/GroteMarktMaps/maps/zuidCentrum.png  us
+ed on input line 74.
+(pdftex.def)             Requested size: 215.0023pt x 133.80272pt.
+
+Underfull \vbox (badness 1708) has occurred while \output is active []
+
+ [50]
+[51 <../experiments/GroteMarktMaps/maps/groteMarkt.png> <../experiments/GroteMa
+rktMaps/maps/Selwerd.png> <../experiments/GroteMarktMaps/maps/zuidCentrum.png>]
+[52]
+Overfull \hbox (8.28317pt too wide) in paragraph at lines 136--136
 []\OT1/cmr/bx/n/14.4 Experiment 4: In-ves-ti-gat-ing the is-land prior - Fen-to
 n. 
  []
 
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [38]
-[39]
+) [53]
 \openout2 = `conclusion.aux'.
 
- (./conclusion.tex [40
+ (./conclusion.tex [54
 
 
 
 ]
 Chapter 7.
-[41]
+[55]
 Overfull \hbox (10.36203pt too wide) in paragraph at lines 39--39
 []\OT1/cmr/bx/n/12 Dependence on im-plicit pa-ram-e-ters and back-ground knowl-
 edge. 
  []
 
-[42]) [43]
+[56]) [57]
 No file mainMastersProject.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 73.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 73.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 75.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 75.
 (./mainMastersProject.aux (./abstract.aux) (./introduction.aux)
 (./stateoftheart.aux) (./pipeline.aux) (./nonspatial.aux) (./spatialsimple.aux)
 (./islandprior.aux) (./conclusion.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 73.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 73.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 75.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 75.
 Package rerunfilecheck Info: File `mainMastersProject.out' has not changed.
-(rerunfilecheck)             Checksum: 3D4BD5572C66E8CDB0E6221DD7F99ABA;5870.
+(rerunfilecheck)             Checksum: CF7F6A300DBB1638D86C46BDC27CA0CD;6157.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 7493 strings out of 480608
- 111212 string characters out of 5903630
- 386976 words of memory out of 5000000
- 23001 multiletter control sequences out of 15000+600000
- 544146 words of font info for 68 fonts, out of 8000000 for 9000
+ 8776 strings out of 480608
+ 137417 string characters out of 5903630
+ 406493 words of memory out of 5000000
+ 24218 multiletter control sequences out of 15000+600000
+ 544492 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,8n,37p,1742b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,9n,46p,1742b,507s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
-l/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
-exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
-ive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive
-/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/
-2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
-020/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on mainMastersProject.pdf (51 pages, 524904 bytes).
+usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></us
+r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
+local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/lo
+cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
+l/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
+texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/te
+xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texli
+ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
+2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/202
+0/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2020
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2020/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2020/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf
+-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on mainMastersProject.pdf (65 pages, 1890675 bytes).
 PDF statistics:
- 1024 PDF objects out of 1200 (max. 8388607)
- 785 compressed objects within 8 object streams
- 190 named destinations out of 1000 (max. 500000)
- 712 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1409 PDF objects out of 1440 (max. 8388607)
+ 937 compressed objects within 10 object streams
+ 226 named destinations out of 1000 (max. 500000)
+ 819 words of extra memory for PDF output out of 10000 (max. 10000000)
 

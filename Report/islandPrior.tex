@@ -28,11 +28,20 @@ Here I talk about the Grote Markt and the more complex simulations that I create
 \subsection{Methods}
 
 \subsection{Results}
+
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[]{../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf}
+\includegraphics[width=\linewidth]{../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf}
 \caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in GroteMarkt network and simulation}
-\label{groteMarkt}
+\label{groteMarktperfo}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\linewidth]{../experiments/GroteMarkt/plots/posterior_GroteMarkt.pdf}
+\caption{Posterior}
+\label{groteMarktp}
 \end{center}
 \end{figure}
 
@@ -46,7 +55,51 @@ I selected 5 different parts of Groningen, screenshotted then, converted them to
 
 \subsection{Methods}
 
+\subsection{maps}
+Image maps compilation here.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/maps/groteMarkt.png}
+\caption{Grote Markt.}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+
+\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/maps/Selwerd.png}
+\caption{Selwerd.}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/maps/zuidCentrum.png}
+\caption{South-center}
+\end{subfigure}
+
+
+\caption{Maps.}
+\label{maps}
+\end{center}
+\end{figure}
+
+
 \subsection{Results}
+
+\begin{figure}[htbp]
+\begin{center}
+%\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/plots/performance_GroteMarktMaps.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in GroteMarkt network and simulation}
+\label{groteMarktMapsperfo}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+%\includegraphics[width=\linewidth]{../experiments/GroteMarkMaps/plots/posterior_GroteMarktMaps.pdf}
+\caption{Posterior}
+\label{groteMarktMapsp}
+\end{center}
+\end{figure}
+
 
 \subsection{Discussion}
 Implications of this is that we need to condition explicitly on maps for our networks to work, because it does meaningfully change the probabilities that we find, and there's no way to predict how the map that we're using affects the probabilities. This has implications for the real world, because it means that. ugh. we can't depend on some generic ``probability of getting robbed'', we need to condition on spatial conditions/background world assumptions.

@@ -1087,6 +1087,9 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
 
 
 
+
+
+
 class Analysis():
     def __init__(self, scenario, output_nodes, org_dir, network_dir, train_test_split,  outcomes, test):
         # directories
@@ -1126,10 +1129,10 @@ d_S = {"camera_vision":2}
 d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
-for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1000, d_S),
-                                                        ("StolenLaptopPrivate", 1000, d_S),
-                                                       ("StolenLaptop", 1000, d_S),
-                                                        ("VlekNetwork", 50000, d_V),
+for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 1000, d_S),
+                                                        #("StolenLaptopPrivate", 1000, d_S),
+                                                       #("StolenLaptop", 1000, d_S),
+                                                        #("VlekNetwork", 50000, d_V),
                                                         ("GroteMarkt", 1000, d_G),
                                                         ("GroteMarktMaps", 1000, d_G)
                                         ]:
@@ -1144,7 +1147,7 @@ for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1
     list_files.sort()
     print(scenario)
 
-    '''
+
 
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
                             param_dict=param_dict)  # we do the simple scenario
@@ -1169,17 +1172,23 @@ for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1
     if ".DS_Store" in list_files:
         list_files.remove(".DS_Store")
 
+
     #print("List files", list_files)
     for train_data in list_files:
+        if "pkl" in train_data:
+            continue
         K2_BN_csv_only(train_data, path)
 
         if scenario != "StolenLaptopVision" and scenario != "GroteMarktMaps":    # for some experiments we don't want to generate disturbances
             for (exp, params) in [
                 ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
                 for p in params:
+                    print(param_ar)
                     disturb_cpts(path, exp, p[0], train_data[:-4])
 
     for train_data in list_files:
+        if "pkl" in train_data:
+            continue
         with open(path + f"/stats/performance/{train_data[:-4]}_performance.csv", 'w+') as f:
             f.truncate()
             writer = csv.writer(f)
@@ -1196,7 +1205,8 @@ for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1
     for networks in disturbed_list_files:
         if networks == ".DS_Store":
             continue
-        print(networks)
+
+        #print(networks)
         #
         k = networks.split("_", 2)
         if len(k) > 2:
@@ -1222,13 +1232,13 @@ for (scenario, train_runs, param_dict) in [             ("StolenLaptopVision", 1
         progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
 
-    '''
+
     ## IMAGING
     # making some nice plots of the posterior
 
 
     for base_network in list_files:
-        if ".DS" not in base_network:
+        if ".DS" not in base_network and 'pkl' not in base_network:
             plot_performance(path, base_network[:-4])
             plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
             plot_posterior(path, base_network[:-4])

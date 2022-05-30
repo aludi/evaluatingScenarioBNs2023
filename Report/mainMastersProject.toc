@@ -4,82 +4,86 @@
 \contentsline {section}{\numberline {2.1}The problem with evidence}{3}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Reasoning with evidence}{3}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Bayes!}{4}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Bayesian Networks}{4}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}(Automatic) Bayesian Networks Builders}{4}{subsection.2.3.2}%
 \contentsline {section}{\numberline {2.4}Problems with the Bayesian Approach}{4}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Background on probabilities - the meaning of random variables}{5}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Simulations to Evaluate Bayesian Networks.}{7}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{7}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Setting-up an Experiment}{7}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Simulation}{8}{subsection.3.2.1}%
-\contentsline {subsubsection}{Structure of a simulation}{8}{section*.3}%
-\contentsline {subsubsection}{Spatial and Non-spatial simulations.}{8}{section*.4}%
-\contentsline {subsubsection}{Predictability and randomness}{9}{section*.5}%
-\contentsline {subsection}{\numberline {3.2.2}Reporters (as Random Variables)}{9}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Creating a Bayesian Network from a Simulation Automatically}{10}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Evaluating the Bayesian Network}{11}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Structural Criteria}{11}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Performance Criteria}{11}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Human Criteria}{11}{subsection.3.4.3}%
-\contentsline {chapter}{\numberline {4}Simple Non-Spatial Simulations}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{13}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Method}{14}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Behavioural rules for the simulation}{14}{subsection.4.2.1}%
-\contentsline {section}{\numberline {4.3}Results}{15}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Discussion}{15}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Structural Criteria}{15}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Performance Criteria}{19}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Human Criteria}{24}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Comparison to Vlek 2015}{25}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Quality of scenario}{25}{subsection.4.4.5}%
-\contentsline {section}{\numberline {4.5}Important take-aways}{26}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Simulations work}{26}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}We don't need the scenario node for mutual exclusivity}{27}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Resolution and number of runs}{27}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Conclusion }{27}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{29}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Experiment 1: Generating BNs with disturbances}{30}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Introduction}{30}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Methods}{30}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Results}{30}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}Discussion}{30}{subsection.5.1.4}%
-\contentsline {section}{\numberline {5.2}Experiment 2: Investigating the evidence strength depending on parameters of the network.}{30}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Introduction}{30}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Methods}{30}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Results}{31}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Discussion}{31}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Experiment 3: Investigating the effect of private knowledge}{32}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Introduction}{32}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Method}{32}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Results}{32}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Discussion}{32}{subsection.5.3.4}%
-\contentsline {section}{\numberline {5.4}Take aways from the three experiments}{32}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Robberies in real locations}{35}{chapter.6}%
-\contentsline {section}{\numberline {6.1}General information}{35}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Experiment 1: General - can we create BNs of a robbery at Grote Markt?}{35}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Introduction}{35}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Methods}{37}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Results}{37}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Discussion}{37}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Experiment 2: Swapping out the maps.}{37}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Introduction}{37}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Methods}{37}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Results}{37}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Discussion}{37}{subsection.6.3.4}%
-\contentsline {section}{\numberline {6.4}Experiment 3: Reporters, random variables and the reference class problem}{37}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Introduction}{37}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Methods}{38}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Results}{39}{subsection.6.4.3}%
-\contentsline {subsection}{\numberline {6.4.4}Discussion}{39}{subsection.6.4.4}%
-\contentsline {section}{\numberline {6.5}Experiment 4: Investigating the island prior - Fenton.}{39}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Introduction}{39}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Methods}{39}{subsection.6.5.2}%
-\contentsline {subsection}{\numberline {6.5.3}Results}{39}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}Discussion}{39}{subsection.6.5.4}%
-\contentsline {section}{\numberline {6.6}Take aways - Conclusion}{39}{section.6.6}%
-\contentsline {chapter}{\numberline {7}Conclusion}{41}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Good things}{41}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Fundamental Problems with Bayesian Networks}{41}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Reporters, Reference Classes and Random Variables.}{42}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Dependence on implicit parameters and background knowledge.}{43}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Private knowledge}{43}{subsection.7.2.3}%
-\contentsline {section}{\numberline {7.3}Conclusion}{43}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Future Work}{43}{section.7.4}%
+\contentsline {section}{\numberline {2.6}Agent simulations}{8}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Simulations to Evaluate Bayesian Networks.}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Setting-up an Experiment}{11}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Simulation}{12}{subsection.3.2.1}%
+\contentsline {subsubsection}{Structure of a simulation}{12}{section*.4}%
+\contentsline {subsubsection}{Spatial and Non-spatial simulations.}{12}{section*.5}%
+\contentsline {subsubsection}{Predictability and randomness}{13}{section*.6}%
+\contentsline {subsection}{\numberline {3.2.2}Reporters (as Random Variables)}{13}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Creating a Bayesian Network from a Simulation Automatically}{14}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Evaluating the Bayesian Network}{15}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Structural Criteria}{15}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Performance Criteria}{15}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Human Criteria}{15}{subsection.3.4.3}%
+\contentsline {chapter}{\numberline {4}Simple Non-Spatial Simulations}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Method}{18}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Behavioural rules for the simulation}{18}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Results}{19}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Discussion}{19}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Structural Criteria}{19}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Performance Criteria}{23}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Human Criteria}{28}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Comparison to Vlek 2015}{29}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Quality of scenario}{29}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Important take-aways}{30}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Simulations work}{30}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}We don't need the scenario node for mutual exclusivity}{31}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Resolution and number of runs}{31}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Conclusion }{31}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Simple Spatial Simulations}{33}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experiment 1: Generating BNs with disturbances}{34}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Introduction}{34}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Methods}{34}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Results}{34}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Discussion}{35}{subsection.5.1.4}%
+\contentsline {section}{\numberline {5.2}Experiment 2: Investigating the evidence strength depending on parameters of the network.}{35}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Introduction}{35}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Methods}{36}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Results}{36}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Discussion}{36}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Experiment 3: Investigating the effect of private knowledge}{36}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Introduction}{36}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Method}{36}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Results}{36}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Discussion}{36}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Take aways from the three experiments}{36}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Robberies in real locations}{47}{chapter.6}%
+\contentsline {section}{\numberline {6.1}General information}{47}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Experiment 1: General - can we create BNs of a robbery at Grote Markt?}{47}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Introduction}{47}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Methods}{50}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Results}{50}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Discussion}{50}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Experiment 2: Swapping out the maps.}{50}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Introduction}{50}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Methods}{50}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}maps}{50}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Results}{50}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Discussion}{50}{subsection.6.3.5}%
+\contentsline {section}{\numberline {6.4}Experiment 3: Reporters, random variables and the reference class problem}{52}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Introduction}{52}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Methods}{52}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Results}{53}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Discussion}{53}{subsection.6.4.4}%
+\contentsline {section}{\numberline {6.5}Experiment 4: Investigating the island prior - Fenton.}{53}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Introduction}{53}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Methods}{53}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}Results}{53}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}Discussion}{53}{subsection.6.5.4}%
+\contentsline {section}{\numberline {6.6}Take aways - Conclusion}{53}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Conclusion}{55}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Good things}{55}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Fundamental Problems with Bayesian Networks}{55}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Reporters, Reference Classes and Random Variables.}{56}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Dependence on implicit parameters and background knowledge.}{57}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Private knowledge}{57}{subsection.7.2.3}%
+\contentsline {section}{\numberline {7.3}Conclusion}{57}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Future Work}{57}{section.7.4}%

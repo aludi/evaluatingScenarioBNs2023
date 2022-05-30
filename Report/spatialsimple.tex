@@ -16,18 +16,69 @@ New idea: We create spatially situated simulations that are more complex, and se
 \section{Experiment 1: Generating BNs with disturbances}
 \subsection{Introduction}
 Here I talk about the robbery example with the evidence.
-Also model reference class explicitly just for fun here.
 
 
+
+\begin{table}
+\tiny
+\begin{tabular}{|l|l|}
+ \hline
+ RV &Operationalization\\
+ \hline
+lost\_object   & A random number generator (0, 1) generates a number. If the number $\leq 0.2$, the object is lost.\\
+curtains & A random number generator (0, 1) generates a number. If the number $\leq 0.8$, the house has no curtains.  \\
+raining & A random number generator (0, 1) generates a number. If the number $\leq 0.5$, it is raining.   \\
+know\_object & if we see an object in our vision that is not our own, and we are not already targeting something else  \\
+target\_object & if we know the object exists, and we consider the value of the object higher than our risk threshold.  \\
+motive & if we have a target \\
+compromise\_house & if we are adjacent to the target's house's door, and we have a breaking and entering skill of greater than 5. \\
+flees\_startled & if we see another agent and we haven't been observed yet  \\
+successful\_stolen & if we're not in someone's house anymore and we have the object in our possession \\ 
+E\_s\_spotted\_by\_house&   \\ 
+E\_disturbed\_house&   \\ 
+E\_object\_is\_gone&   \\ 
+E\_broken\_lock&   \\ 
+E\_s\_spotted\_with\_goodie&   \\ 
+E\_private&   \\ 
+
+\hline
+\end{tabular}
+\caption{This is so tedious.}
+\end{table}
+
+
+
+
+\begin{figure}[htbp]
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{images/sim1.png}
+\caption{The simulation with the 2 agents.}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{images/stealing.png}
+\caption{The agent attempts to steal something but flees when it thinks that it is noticed.}
+\end{subfigure}
+\end{figure}
 
 \subsection{Methods}
 
 Same as before. 
 
+table where I define all the variables here.
+
 \subsection{Results}
 
+image of network.
 
 See Figure~\ref{laptopAcc}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[]{../experiments/StolenLaptop/bnImage/BNIMAGEStolenLaptop.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in stolenLaptop network and simulation}
+\label{laptopAcc}
+\end{center}
+\end{figure}
+
 
 \begin{figure}[h!]
 \begin{center}
@@ -37,10 +88,31 @@ See Figure~\ref{laptopAcc}
 \end{center}
 \end{figure}
 
-Overall pretty accurate.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\linewidth]{../experiments/StolenLaptop/plots/posterior_StolenLaptop.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in stolenLaptop network and simulation}
+\label{laptopPosterior}
+\end{center}
+\end{figure}
+
+
+Overall pretty accurate. This shows that small disturbances in rounding - and even larger disturbances in rounding, such as to 0.25 or even 0.33, does not matter very much for the accuracy of this specific network. 
 
 
 \subsection{Discussion}
+
+The network itself makes sense. The spurious node `raining' is not connected to any other node, because the rain should not affect what happens.
+
+The fact that these networks can be rounded without losing accuracy, means that even with a lack of precision in the ctps of the network, the network is still able to accurately predict outputs - eg, whether a node is going to be true or false given a set of evidence. Changing the precision of the network does not change the network structure itself, this is kept constant - it is generated first, and then the cpts are rounded to arbitrary intervals. 
+
+This shows that even when this network's cpt's only contain probability values, [0, 0.33, 0.66, 0.99], we still get the reflection of the evidence in the network. 
+
+To note - network structure is not trivial. Can we place restrictions on network structure (such as evidence not connecting to each other) and preserve accuracy? Keep the network temporal? The network structure is not temporal right now.
+
+
+How would a judge/lawyer interpret this?
 
 
 
@@ -57,14 +129,30 @@ I changed the parameter of vision of the camera for the simulation between 1 and
 
 \subsection{Results}
 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\linewidth]{../experiments/StolenLaptopVision/bnImage/BNIMAGEStolenLaptopVision.pdf}
+\caption{Vision. Doesn't matter.}
+\label{visionlaptopPosterior}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\linewidth]{../experiments/StolenLaptopVision/plots/posterior_StolenLaptopVision.pdf}
+\caption{Vision. Doesn't matter.}
+\label{visionlaptopPosterior}
+\end{center}
+\end{figure}
+
 
 
 \subsection{Discussion}
 We see here, that the name of the variable is actually incorrect. It shouldn't be called "agent seen near house", because the reporter is not actually reporting that the agent is near the house - instead it is reporting whether the agent is within the vision of the camera. So properly it should be called "agent is seen in camera", or we can rewrite the reporter to measure whether the agent is actually near the house. 
 
-But, this means that the BN is responsive to the effect of relevance in the real world. If a piece of information is less relevant, it will reflect that. But you have to know exactly what you're measuring.
+But, this means that the BN is not responsive to the effect of relevance in the real world. 
 
-How natural language names relate to reporters, is actually a really difficult question that I will address in more detail later.
 
 How would a judge/lawyer interpret this?
 
@@ -81,19 +169,49 @@ Drop column Private knowledge and evidence for it, see the effect on the posteri
 New network.
 New accuracy and RMS plots.
 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/bnImage/BNIMAGEStolenLaptopPrivate.pdf}
+\caption{Private evidence}
+\label{privatelaptopperformance}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/plots/performance_StolenLaptopPrivate.pdf}
+\caption{Private evidence}
+\label{privatelaptopperformance}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/plots/posterior_StolenLaptopPrivate.pdf}
+\caption{Private evidence}
+\label{privatelaptopPosterior}
+\end{center}
+\end{figure}
+
+
 \subsection{Discussion}
 
+Seems to be effective, posterior never goes to 1. Lack of private knowledge hence will affect the end results, even if it will not affect the trajectory of the evidence progression. Overall accuracy and rms performs worse as well.
 How would a judge/lawyer interpret this?
 
 
 \section{Take aways from the three experiments}
 
+
+
 Simulating works, accuracy and RMS fine.
+
+Table of accuracies and rms for the three experiments for comparisons.
 
 We run into problems when we use words like `near' in our node names. We're lucky that we know what we mean (because our reporter forces us to make this explicit). We do not just ground the probabilities in our network, but we actually also ground our random variables - we have a measure of exactly what events we are interested in, and which we aren't.
 
 We are in trouble with private knowledge, dropping this column from our table (which means that we don't know it) when we make our BN, we're drastically reducing our uh. Accuracy, and increasing our RMS. This implies that we do seem to need a full picture of everything that's happening, otherwise our BN will be kind of shit, and be less accurate :(.
 
-Hence, for a simulation to work we 1) need to know exactly what it is that we're measuring since evidence strength depends on it \footnote{explain this more}, and 2) private information is necessary to create the BN because it influences fleeing behaviour. If we don't have this information our BN will be shit.
+Hence, for a simulation to work we 1) need to know exactly what it is that we're measuring since evidence strength depends on it \footnote{explain this more}, and 2) private information is necessary to create the BN because it influences fleeing behaviour. If we don't have this information our BN will be less effective.
 
 

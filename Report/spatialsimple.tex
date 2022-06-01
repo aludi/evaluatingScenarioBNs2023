@@ -5,7 +5,7 @@
 
 \chapter[Simple Spatial Simulations]{A Simple Robbery - Spatial Simulations and their Bayesian Networks}
 
-Three experiments: 1) getting the bayesian networks with disturbances (). 2) testing the effect of a simulation parameter change on the BN (how different does it become. 3) investigating the effect of hidden information/private knowledge on the network.
+Three experiments: 1) getting the bayesian networks with decreased precision by disturbing the cpts 2) testing the effect of a simulation parameter change on the BN (how different does it become. 3) investigating the effect of hidden information/private knowledge on the network.
 Summary:
 
  The problem is that in the previous chapter, we have established that we have a method to convert a simple, forward chaining simulation, to a collection of data, which then in turn can be used to create a Bayesian Network, that represents the situation in the simulation relatively well (some problems none-withstanding, accuracy and RMS error are generally ok even in increments that people might plausibly be able to estimate ~ intervals of 0.33/0.25-ish). However, this was totally 100\% determined by deterministic forward chaining rules. The real world does not run on deterministic forward chaining rules (as far as we know). At least, we are spatially situated, which means that there are probabilities that will arise out of interactions between agents and their environment. These probabilities are not `set' in the same ways as the probabilities are set in the previous chapter, they arise organically from interactions: eg: an agent has to be located at a door to break in, an agent can be seen by a camera only in some locations of the simulation. We do not know these probabilities a-priori (although we can probably calculate them, I don't know).
@@ -21,7 +21,8 @@ In this first experiment, I will be creating an agent simulation of a very simpl
 
 The scenario that the agents play out goes as follows. There are two agents. They are neighbors. One day, the agent who lives in the house on the right ($R$), walks past the house of the other agent ($L$). $R$ looks inside, if it can. Sometimes it cannot look inside, because $L$ has drawn the curtains. However, if $R$ can look inside, it might see a goodie in the house. It also might not see a goodie, if $L$ has lost the goodie - in that case, the goodie has been lost. However, if the goodie is there, $R$ will know that the goodie is there. Then, because $R$ is a rational agent, it will try to calculate the worth of the object, and if it might want to steal it. It can decide to target the object. If $R$ knows and targets the object, $R$ has a motive. Then, $R$ attempts to break into the house by breaking the lock on the door, grabbing the goodie, and running away to its own house.  Meanwhile, $L$ is returning home. If $R$ thinks that $L$ might have seen it stealing, $R$ will flee home, with or without the goodie. $L$ has also hung up security cameras on the outside corner of its house, that might serve as evidence against $R$.
 
-With regards to the end, there can be three outcomes: either the goodie is lost, the goodie is not lost but was stolen successfully, or the goodie is not lost and wasn't stolen successfully ({\color{red}does this mean that there was always a stealing attempt? check in jup}). The environment of the agents is very simple, just two `houses' (rectangles, really). The environment and the agents (with their vision parameter) are shown in Figure~\ref{env}.
+With regards to the end, there can be three outcomes: either the goodie is lost, the goodie is not lost but was stolen successfully, or the goodie is not lost and wasn't stolen successfully. %({\color{red}does this mean that there was always a stealing attempt? check in jup}). 
+The environment of the agents is very simple, just two `houses' (rectangles, really). The environment and the agents (with their vision parameter) are shown in Figure~\ref{env}.
 
 \begin{figure}[htbp]
 \begin{subfigure}{.5\textwidth}
@@ -239,8 +240,10 @@ See Figure~\ref{private}
 Seems to be effective, posterior never goes to 1. Lack of private knowledge hence will affect the end results, even if it will not affect the trajectory of the evidence progression. Overall accuracy and rms performs worse as well.
 
 
-\section{Takeaways from the three experiments}
+\section{Conclusion}
 
+
+{\color{blue} TLDR: We can build an accurate network for a spatial simulation, even when we disturb the cpts. We can see how the posterior probability of an outcome becomes more likely when we add incriminating evidence. We can change parameters in the simulation (change vision radius of camera) and this effects the network (nodes do not show up). We can remove private knowledge, and this reduces the overall accuracy of the network from 100\% to 80\%, although it does not change the `shape' of the effect of the other evidence on the posterior. This all needs to be worked out.}
 
 
 Simulating works, accuracy and RMS fine.
@@ -249,7 +252,7 @@ Table of accuracies and rms for the three experiments for comparisons.
 
 We run into problems when we use words like `near' in our node names. We're lucky that we know what we mean (because our reporter forces us to make this explicit). We do not just ground the probabilities in our network, but we actually also ground our random variables - we have a measure of exactly what events we are interested in, and which we aren't.
 
-We are in trouble with private knowledge, dropping this column from our table (which means that we don't know it) when we make our BN, we're drastically reducing our uh. Accuracy, and increasing our RMS. This implies that we do seem to need a full picture of everything that's happening, otherwise our BN will be kind of shit, and be less accurate :(.
+We are in trouble with private knowledge, dropping this column from our table (which means that we don't know it) when we make our BN, we're drastically reducing our uh. Accuracy, and increasing our RMS. This implies that we do seem to need a full picture of everything that's happening, otherwise our BN will be kind of terrible, and be less accurate :(.
 
 Hence, for a simulation to work we 1) need to know exactly what it is that we're measuring since evidence strength depends on it \footnote{explain this more}, and 2) private information is necessary to create the BN because it influences fleeing behaviour. If we don't have this information our BN will be less effective.
 

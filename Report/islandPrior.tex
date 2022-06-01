@@ -3,10 +3,10 @@
  
 %!TEX root =  mainMastersProject.tex
 
-\chapter[Robberies in real locations]{Robberies}
+\chapter[Robberies in ``real'' locations]{Robberies}
 
 
-Why now go to a larger map, if we have already identified some problems? WEll, there can always be more problems :D 
+Why now go to a larger map, if we have already identified some problems? well, there can always be more problems :D 
 
 
 New idea: A  larger, more interesting spatial situation. we know we can have agents walking around a simple flat simulation, but now we want a more life-like situation, a town, and they're going to rob shit.
@@ -19,35 +19,56 @@ New idea: A  larger, more interesting spatial situation. we know we can have age
 Agent behavioural loop, etc. Look at the code its online.
 
 
-
-
 \section{Experiment 1: General - can we create BNs of a robbery at Grote Markt?}
+
+{\color{red} todo add complexity in simulation by adding simple evidence and add description of simulation}
+
+
 \subsection{Introduction}
-Here I talk about the Grote Markt and the more complex simulations that I created for it, including the island prior.
+Here I talk about the Grote Markt and the more complex simulations that I created for it.
 
 \subsection{Methods}
 
-\subsection{Results}
-
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=\linewidth]{../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in GroteMarkt network and simulation}
-\label{groteMarktperfo}
+\includegraphics[width=\linewidth]{images/grotemarktmap.png}
+\caption{map of environment - 2 agents}
+\label{groteMarkt}
 \end{center}
 \end{figure}
 
+
+
+\subsection{Results}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=\linewidth]{../experiments/GroteMarkt/plots/posterior_GroteMarkt.pdf}
-\caption{Posterior}
-\label{groteMarktp}
+\begin{subfigure}{.7\textwidth}
+\includegraphics[width=.7\linewidth]{../experiments/GroteMarkt/bnImage/BNIMAGEGroteMarkt.pdf}
+\caption{Bayesian NEtwork}
+\label{groteMarktperfo}
+\end{subfigure}
 \end{center}
+
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=.7\linewidth]{../experiments/GroteMarkt/plots/performance_GroteMarkt.pdf}
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in GroteMarkt network and simulation}
+\label{groteMarktperfo}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=.7\linewidth]{../experiments/GroteMarkt/plots/posterior_GroteMarkt.pdf}
+\caption{Posterior}
+\label{groteMarktperfo}
+\end{subfigure}
+
+
+\caption{Network}
 \end{figure}
 
 \subsection{Discussion}
 
 \section{Experiment 2: Swapping out the maps.}
+
 \subsection{Introduction}
 What happens if we have the exact same agent logic but we place them in a different spatial configuration? Instead of the Grote Markt, I now put some other part of Groningen in the simulation. We have the same nodes in the network. The only thing that's different is the underlying map.
 
@@ -55,11 +76,13 @@ I selected 5 different parts of Groningen, screenshotted then, converted them to
 
 \subsection{Methods}
 
-\subsection{maps}
-Image maps compilation here.
+\subsubsection{Behaviour}
+We keep the same behaviour as before (which is not described, sorry, ran out of time!).
+
+\subsubsection{maps}
+Image maps compilation in Figure~\ref{maps}.
 
 \begin{figure}[htbp]
-\begin{center}
 \begin{subfigure}{.5\textwidth}
 \includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/maps/groteMarkt.png}
 \caption{Grote Markt.}
@@ -75,39 +98,54 @@ Image maps compilation here.
 \caption{South-center}
 \end{subfigure}
 
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/maps/kattediep.png}
+\caption{kattediep}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/maps/academy.png}
+\caption{Street with the academy building}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/maps/wall.png}
+\caption{Not groningen, just a wall}
+\end{subfigure}
 
 \caption{Maps.}
 \label{maps}
-\end{center}
 \end{figure}
 
 
 \subsection{Results}
 
-\begin{figure}[htbp]
-\begin{center}
+We look at the difference in the cpt tables for `seen\_1\_0', which represents the event that agent 1 (the thief), sees agent 0 (Table~\ref{mapstab}). If we did not need to condition on underlying geometry of the simulation, we would expect that this probability would be the same, regardless of map. However, we find something different - the probability of the thief seeing the potential victim, depends on the underlying map, and not just `a bit', the smallest probability is 0.19 for the GroteMarkt map, while the largest is 0.50 for the Wall Map. At this difference, robustness to rounding does not hold!
 
-%\includegraphics[width=\linewidth]{../experiments/GroteMarktMaps/plots/performance_GroteMarktMaps.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in GroteMarkt network and simulation}
-\label{groteMarktMapsperfo}
-\end{center}
-\end{figure}
+This means that we actually cannot speak of just one `probability' for the agent seeing the victim - we can only speak of the probability of the agent seeing the victim, as conditioned on the map. 
 
-\begin{figure}[htbp]
-\begin{center}
-%\includegraphics[width=\linewidth]{../experiments/GroteMarkMaps/plots/posterior_GroteMarktMaps.pdf}
-\caption{Posterior}
-\label{groteMarktMapsp}
-\end{center}
-\end{figure}
-
+\begin{table}[]
+\begin{tabular}{lllll}
+map & cpt of `seen\_1\_0' True \\
+\hline
+selwerd.png &0.26\\
+academy.png & 0.47\\
+groteMarkt.png  &0.19\\
+kattediep.png &0.49\\
+wall.png &0.50\\
+zuidCentrum.png & 0.209\\
+\end{tabular}
+\caption{Difference in cpt depending only on difference in underlying map, no further difference in agent behaviour!}
+\label{mapstab}
+\end{table}
 
 \subsection{Discussion}
-Implications of this is that we need to condition explicitly on maps for our networks to work, because it does meaningfully change the probabilities that we find, and there's no way to predict how the map that we're using affects the probabilities. This has implications for the real world, because it means that. ugh. we can't depend on some generic ``probability of getting robbed'', we need to condition on spatial conditions/background world assumptions.
+Implications of this is that we need to condition explicitly on maps for our networks to work, because it does meaningfully change the probabilities that we find, and there's no way to predict how the map that we're using affects the probabilities. This has implications for the real world, because it means that we can't depend on some generic ``probability of getting robbed'', we need to condition on spatial conditions/background world assumptions.
 
-And these are not even very good maps - agents can either go somewhere, or not, and can see through buildings. Affordances in the real world are very different \footnote{parkour!}. So it's likely that the actual probabilities in the real world are even worse...
+And these are not even very good maps - agents can either go somewhere, or not. Affordances in the real world are very different \footnote{parkour!}. So it's likely that the actual probabilities in the real world are even worse...
+
 
 \section{Experiment 3: Reporters, random variables and the reference class problem}
+
+{\color{red} todo properly}
 
 \subsection{Introduction}
 A reporter is a random variable. A random variable maps a sample space to value. Let's make the random variable problematic. What sort of events are we talking about in our sample space? There can be many instantiations of random variables from one natural language string. Here I don't want to talk about the reference class, which is the problem of selecting which sample space we're actually interested in. Instead, it's the awareness that a natural language string (like a node name) by itself does not offer sufficient information to know what events we are actually interested in. We need to select a subset of all the events in the world, that we're actually interested in, and this is underspecified in most bayesian networks.

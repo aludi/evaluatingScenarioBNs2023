@@ -78,7 +78,7 @@ class Experiment():
                 '''
                 print("SCENARIO", scenario)
                 if scenario == "StolenLaptop" or scenario == "StolenLaptopPrivate":
-                    print("who?")
+                    #print("who?")
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")  # use these csvs for automatic BN structure determination
                     ### save temporal data to file
                     if train == "train":
@@ -86,7 +86,7 @@ class Experiment():
                 else:
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}_param_{camera_vision}.csv")
                     ### save temporal data to file
-                    print("in here")
+                    #print("in here")
                     print(f"{scenario}_param_{camera_vision}")
                     if train == "train":
                         self.pickle_relevant(scenario, train, f"{scenario}_param_{camera_vision}")  # pickles temporal dict, event dict and evidence list
@@ -118,8 +118,9 @@ class Experiment():
             if scenario == "GroteMarkt":
                 iterate_experiment = ["groteMarkt.png"]
             else:
-                iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png",
-                    0, 10, 50, 75]
+                #iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png",
+                #    0, 5, 10, 25, 50, 75]
+                iterate_experiment = ["academy.png"]
 
             for map in iterate_experiment:
                 if type(map) == str:
@@ -154,8 +155,8 @@ class Experiment():
                 rel_events = []
                 n = 2
 
-                for i in range(0, n):
-                    for k in range(0, n):
+                for i in range(1, n):
+                    for k in range(0, 1):
                         for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
                             if i != k:
                                 str1 = f"{j}_{str(i)}_{str(k)}"
@@ -174,8 +175,8 @@ class Experiment():
                 #print(rel_events)
                 self.reporters = Reporters(relevant_events=rel_events)
                 for i in range(0, self.runs-1):
-                    print(self.scenario)
-                    print("i", i)
+                    #print(self.scenario)
+                    #print("i", i)
                     model = MoneyModel(N=n, width=x, height=y, topic=map_name, reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
                     for j in range(100):
                         model.step()

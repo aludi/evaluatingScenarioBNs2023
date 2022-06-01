@@ -44,6 +44,32 @@ class MoneyAgent(Agent):
 
         name = random.choice(first_names) + " " + random.choice(last_names)
         return name
+    
+    
+    def calculate_line_of_sight(self, other_agent):
+        #print("calculating line of sight")
+        #print(self.pos, other_agent.pos)
+        (x0, y0) = self.pos
+        (x1, y1) = other_agent.pos
+        dx = x0 - x1
+        dy = y0 - y1
+        D = 2*dy - dx
+        y = y0
+        #print(x0, x1)
+        for x in range(x0, x1):
+            #print(x, y)
+            if self.model.extended_grid[self.pos] == "CLOSED":
+                return "UNSEEN"
+            if D > 0:
+                y = y+1
+                D = D - 2*dx
+            if D == D + 2*dy:
+                break
+        return "SEEN"
+
+
+        #pass
+        #self.model.extended_grid[i] == "OPEN":
 
     def step(self):
         if self.pos == self.goal:
@@ -57,7 +83,7 @@ class MoneyAgent(Agent):
             # check the neighbors for their values
 
             all_neighbors = self.model.grid.get_neighbors(pos=self.pos, moore=True,
-                                                          radius=2)  # agents see around them with radius 3
+                                                          radius=5)  # agents see around them with radius 3
             neighbors = []
             for i in all_neighbors:
                 if self.model.extended_grid[i.pos] == "OPEN":
@@ -67,26 +93,32 @@ class MoneyAgent(Agent):
             # an agent will try to steal from a neighbor if the neighbor is old enough, if
             # the neighbor has valuable goods, and if the agent is not currently stealing from
             # someone else.
+            #print("taking steps")
             for agent in neighbors:
 
                 if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
                     #print(self.unique_id, agent.unique_id, agent)
-                    self.model.reporters.set_evidence_straight(f"seen_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+                    if self.unique_id == 1:
+                        if self.calculate_line_of_sight(agent) == "UNSEEN":
+                            continue
 
-                    if agent.value_of_good > self.risk_threshold:
-                        self.model.reporters.set_evidence_straight(f"know_valuable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
-                    if agent.age > self.age_threshold:
-                        self.model.reporters.set_evidence_straight(f"know_vulnerable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
-                    if self.steal_state == "N" or self.steal_state == "LOSER":
-                        self.model.reporters.set_evidence_straight(f"able_to_steal_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
 
-                    if agent.value_of_good > self.risk_threshold and \
-                        agent.age > self.age_threshold and \
-                            (self.steal_state == "N" or self.steal_state == "LOSER"):
-                        self.steal_state = "MOTIVE"
-                        self.target = agent
-                        self.temp_goal = agent.pos
-                        self.state = "FAST MOVE TO GOAL"
+                        self.model.reporters.set_evidence_straight(f"seen_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+
+                        if agent.value_of_good > self.risk_threshold:
+                            self.model.reporters.set_evidence_straight(f"know_valuable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+                        if agent.age > self.age_threshold:
+                            self.model.reporters.set_evidence_straight(f"know_vulnerable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+                        if self.steal_state == "N" or self.steal_state == "LOSER":
+                            self.model.reporters.set_evidence_straight(f"able_to_steal_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+
+                        if agent.value_of_good > self.risk_threshold and \
+                            agent.age > self.age_threshold and \
+                                (self.steal_state == "N" or self.steal_state == "LOSER"):
+                            self.steal_state = "MOTIVE"
+                            self.target = agent
+                            self.temp_goal = agent.pos
+                            self.state = "FAST MOVE TO GOAL"
 
                 if self.steal_state == "MOTIVE":
                     self.model.reporters.set_evidence_straight(f"motive_{str(self.unique_id)}_0", 1)
@@ -352,7 +384,7 @@ class MoneyModel(Model):
         self.scenario = scenario
         self.model_description = self.set_model_text_explanation()
         self.output_file = output_file
-        print("num agents", N)
+        #print("num agents", N)
 
         # Create agents
         self.create_agents(self.scenario)
@@ -438,7 +470,8 @@ class MoneyModel(Model):
         elif scenario == 2:   # one old agent, and one thief
             # old agent
             old_agent = self.make_old_agent()
-            self.make_thief_near_old_agent(old_agent) # make thief near old agent
+            self.make_thief()
+            #self.make_thief_near_old_agent(old_agent) # make thief near old agent
 
         elif scenario == 3: # one thief, many innocents, but how do you know?
             old_agent = self.make_old_agent()
@@ -497,8 +530,20 @@ class MoneyModel(Model):
         a.role = "victim"
         return a
 
+    def make_thief(self):
+        # thief
+        a = MoneyAgent(1, random.choice(self.possible_goal_states), self)
+        self.schedule.add(a)
+        x, y = self.initial_xy()
+        self.grid.place_agent(a, (x, y))
+        a.age = 25  # young agent
+        a.value_of_good = 0  # not tempting target
+        a.risk_threshold = random.randint(800, 1200)  # steals sometimes
+        a.age_threshold = 0  # will steal from a baby
+        a.role = "thief"
+
     def make_thief_near_old_agent(self, old_agent):
-        all_neighbors = old_agent.model.grid.get_neighborhood(pos=old_agent.pos, moore=True, radius=3)
+        all_neighbors = old_agent.model.grid.get_neighborhood(pos=old_agent.pos, moore=True, radius=6)
         neighbors = []
         for i in all_neighbors:
             if old_agent.model.extended_grid[i] == "OPEN":
@@ -550,4 +595,4 @@ class MoneyModel(Model):
     def step(self):
         self.schedule.step()
         self.time += 1
-        print(self.reporters.pure_frequency_event_dict)
+        #print(self.reporters.pure_frequency_event_dict)

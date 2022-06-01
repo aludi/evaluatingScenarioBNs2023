@@ -896,6 +896,12 @@ def load_temporal_evidence(name):
     return d
 
 
+def get_cpts(name, path):   # we only use this for GroteMarktMaps checking cpts out
+    network_name = path + "/BNs/" + name + ".net"
+    bn = gum.loadBN(network_name)
+    #ie = gum.LazyPropagation(bn)
+    print(name, bn.cpt("seen_1_0")[0])
+
 
 def progress(name, path, temporal_evidence, params):
     x = []
@@ -1021,8 +1027,8 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
 
     t = df.groupby('conc', as_index=False).agg({'RMS': 'mean', 'matching': 'mean'})
     t.rename(columns={'conc':'conc','RMS': f'RMS No', 'matching': 'Acc No'}, inplace=True)
-    print("first t")
-    print(t)
+    #print("first t")
+    #print(t)
 
     c = colors.pop()
     t.plot(kind='bar', x='conc', y=f'Acc No', stacked=True, legend="No", color=c, title="Accuracy", ax=axs[0])
@@ -1133,8 +1139,8 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
                                                         #("StolenLaptopPrivate", 1000, d_S),
                                                        #("StolenLaptop", 1000, d_S),
                                                         #("VlekNetwork", 50000, d_V),
-                                                        ("GroteMarkt", 1000, d_G),
-                                                        ("GroteMarktMaps", 1000, d_G)
+                                                        ("GroteMarkt", 2000, d_G),
+                                                        #("GroteMarktMaps", 2000, d_G)
                                         ]:
 
     os.chdir(org_dir)
@@ -1145,7 +1151,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
     test_runs = int(train_runs / 10)
     list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
     list_files.sort()
-    print(scenario)
+    #print(scenario)
 
 
 
@@ -1183,7 +1189,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
             for (exp, params) in [
                 ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
                 for p in params:
-                    print(param_ar)
+                    #print(param_ar)
                     disturb_cpts(path, exp, p[0], train_data[:-4])
 
     for train_data in list_files:
@@ -1218,16 +1224,20 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
             num = 0
 
 
-        print("hugin")
+        #print("hugin")
         hugin_converter(networks[:-4], path)
-        print("acc 1")
+
+        if scenario == "GroteMarktMaps":
+            get_cpts(networks[:-4], path)
+
+        #print("acc 1")
         #print(networks[:-4], path)
 
         calculate_accuracy_1(networks[:-4], path)
-        print("acc output")
+        #print("acc output")
 
         calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
-        print("progress")
+        #print("progress")
 
         progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 

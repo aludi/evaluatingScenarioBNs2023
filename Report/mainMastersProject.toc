@@ -6,9 +6,10 @@
 \contentsline {section}{\numberline {2.3}Bayes!}{4}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Bayesian Networks}{4}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}(Automatic) Bayesian Networks Builders}{4}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Problems with the Bayesian Approach}{4}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Background on probabilities - the meaning of random variables}{5}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Agent simulations}{8}{section.2.6}%
+\contentsline {section}{\numberline {2.4}Problems with the Bayesian Approach}{5}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Background on probabilities - the meaning of random variables}{6}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Agent simulations}{9}{section.2.6}%
+\contentsline {section}{\numberline {2.7}What's the point? Conclusion and Normativity}{9}{section.2.7}%
 \contentsline {chapter}{\numberline {3}Simulations to Evaluate Bayesian Networks.}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Introduction}{11}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Setting-up an Experiment}{11}{section.3.2}%
@@ -42,48 +43,51 @@
 \contentsline {section}{\numberline {5.1}Experiment 1: Generating BNs with disturbances}{34}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Introduction}{34}{subsection.5.1.1}%
 \contentsline {subsection}{\numberline {5.1.2}Methods}{34}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Results}{34}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}Discussion}{35}{subsection.5.1.4}%
-\contentsline {section}{\numberline {5.2}Experiment 2: Investigating the evidence strength depending on parameters of the network.}{35}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Introduction}{35}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Methods}{36}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Results}{36}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Discussion}{36}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Experiment 3: Investigating the effect of private knowledge}{36}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Introduction}{36}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Method}{36}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Results}{36}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Discussion}{36}{subsection.5.3.4}%
-\contentsline {section}{\numberline {5.4}Take aways from the three experiments}{36}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Robberies in real locations}{47}{chapter.6}%
-\contentsline {section}{\numberline {6.1}General information}{47}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Experiment 1: General - can we create BNs of a robbery at Grote Markt?}{47}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Introduction}{47}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Methods}{50}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Results}{50}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Discussion}{50}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Experiment 2: Swapping out the maps.}{50}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Introduction}{50}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Methods}{50}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}maps}{50}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Results}{50}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Discussion}{50}{subsection.6.3.5}%
-\contentsline {section}{\numberline {6.4}Experiment 3: Reporters, random variables and the reference class problem}{52}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Introduction}{52}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Methods}{52}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Results}{53}{subsection.6.4.3}%
-\contentsline {subsection}{\numberline {6.4.4}Discussion}{53}{subsection.6.4.4}%
-\contentsline {section}{\numberline {6.5}Experiment 4: Investigating the island prior - Fenton.}{53}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Introduction}{53}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Methods}{53}{subsection.6.5.2}%
-\contentsline {subsection}{\numberline {6.5.3}Results}{53}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}Discussion}{53}{subsection.6.5.4}%
-\contentsline {section}{\numberline {6.6}Take aways - Conclusion}{53}{section.6.6}%
-\contentsline {chapter}{\numberline {7}Conclusion}{55}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Good things}{55}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Fundamental Problems with Bayesian Networks}{55}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Reporters, Reference Classes and Random Variables.}{56}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Dependence on implicit parameters and background knowledge.}{57}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Private knowledge}{57}{subsection.7.2.3}%
-\contentsline {section}{\numberline {7.3}Conclusion}{57}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Future Work}{57}{section.7.4}%
+\contentsline {subsubsection}{Agent behaviour}{34}{section*.17}%
+\contentsline {subsubsection}{Operationalisation of the RVs}{35}{section*.18}%
+\contentsline {subsubsection}{Simulation parameters}{35}{section*.19}%
+\contentsline {subsubsection}{Disturbing the cpts}{35}{section*.20}%
+\contentsline {subsection}{\numberline {5.1.3}Results}{36}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Discussion}{36}{subsection.5.1.4}%
+\contentsline {subsubsection}{Network structure}{36}{section*.22}%
+\contentsline {section}{\numberline {5.2}Experiment 2: Investigating Evidence Strength.}{37}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Introduction}{37}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Methods}{37}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Results}{37}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Discussion}{37}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Experiment 3: Investigating Private Knowledge}{38}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Introduction}{38}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Method}{38}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Results}{38}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Discussion}{38}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Takeaways from the three experiments}{38}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Forensic, Criminal and Legal interpreters, feasibility}{39}{subsection.5.4.1}%
+\contentsline {chapter}{\numberline {6}Robberies in real locations}{43}{chapter.6}%
+\contentsline {section}{\numberline {6.1}General information}{43}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Experiment 1: General - can we create BNs of a robbery at Grote Markt?}{43}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Introduction}{43}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Methods}{46}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Results}{46}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Discussion}{46}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Experiment 2: Swapping out the maps.}{46}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Introduction}{46}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Methods}{46}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}maps}{46}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Results}{46}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Discussion}{46}{subsection.6.3.5}%
+\contentsline {section}{\numberline {6.4}Experiment 3: Reporters, random variables and the reference class problem}{48}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Introduction}{48}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Methods}{48}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Results}{49}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Discussion}{49}{subsection.6.4.4}%
+\contentsline {section}{\numberline {6.5}Experiment 4: Investigating the island prior - Fenton.}{49}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}maybe scrap this}{49}{subsection.6.5.1}%
+\contentsline {section}{\numberline {6.6}Take aways - Conclusion}{49}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Conclusion}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Good things}{51}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Fundamental Problems with Bayesian Networks}{51}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Reporters, Reference Classes and Random Variables.}{52}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Dependence on implicit parameters and background knowledge.}{53}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Private knowledge}{53}{subsection.7.2.3}%
+\contentsline {section}{\numberline {7.3}Conclusion}{53}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Future Work}{53}{section.7.4}%

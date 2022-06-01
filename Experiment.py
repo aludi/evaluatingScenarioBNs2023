@@ -144,23 +144,38 @@ class Experiment():
                 elif self.scenario == 3:
                     self.n = 6
 
+                self.n = 2
+
                 n = self.n
-                base_rel_events = ["motive", "sneak", "stealing"]
+                self.scenario = 2
+                base_rel_events = ["seen", "know_valuable", "know_vulnerable", "able_to_steal", "motive", "sneak", "stealing"]
+
                 # create reporters automatically
                 rel_events = []
+                n = 2
 
+                for i in range(0, n):
+                    for k in range(0, n):
+                        for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
+                            if i != k:
+                                str1 = f"{j}_{str(i)}_{str(k)}"
+                                # str2 = i + "_credibility"
+                                rel_events.append(str1)
+                '''
                 for i in range(1, n):
                     for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
                         str1 = f"{j}_{str(i)}_0"
                         # str2 = i + "_credibility"
                         rel_events.append(str1)
-
+                '''
                 y = 20
                 C = CreateMap(map_name, coverage, y)
                 x = int(y * C.rel)
                 #print(rel_events)
                 self.reporters = Reporters(relevant_events=rel_events)
                 for i in range(0, self.runs-1):
+                    print(self.scenario)
+                    print("i", i)
                     model = MoneyModel(N=n, width=x, height=y, topic=map_name, reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
                     for j in range(100):
                         model.step()

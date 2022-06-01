@@ -28,10 +28,17 @@ Hybrid Approach.
 \section{Bayes!}
 Probabilistic reasoning (Dahlman, simple).
 Bayesian Networks
+Vlek and Timmer
 Fenton and Vlek - combining scenarios, idioms in Bayesian Networks.
 
 \subsection{Bayesian Networks}
 DAG. Pearl. Random variables nodes, ``causal'' but actually conditional.
+
+
+Advantages:
+
+Disadvantages: The use of Bayesian Networks is not straightforward, neither for the builder or for the interpreter (de Koeijer): it is complex, time-consuming, hard to explain, and, the `repeatability [...] leaves much to be desired. Node definitions and model structures are often directed by personal habits, resulting in different models for the same problem, depending on the expert' (de Koeijer).
+
 
 \subsection{(Automatic) Bayesian Networks Builders}
 Standard toolsets. Pyagrum, agenarisk and hugin. We build Bayesian Networks by hand, perhaps guided by a scenario or by argumentation. However, the links that we put between nodes must be done by ourselves.
@@ -111,6 +118,11 @@ Why are simulations a good tool for investigating problematic aspects of the app
 But are agent simulations even used in crime? Is this purely an academic exercise? Actually yes, but maybe also no.
 Bosse and Gerritsen and friends.
 
+\section{What's the point? Conclusion and Normativity}
+
+In this chapter I have laid out the landscape of theories that I'm going to travel in the rest of this thesis. The two main ideas are Bayesian reasoning, specifically as implemented in Bayesian Networks, and computational simulations of agents. The simulation is supposed to be the grounding for the Bayesian Networks.
+
+But why do we want to use Bayesian Networks in the first place? In the best possible case, a Bayesian Network would help us to make the correct reasoning steps, telling us exactly how to weigh each piece of evidence in the grand scale of the simulated crime. This is a normative approach - it's telling us how to reason, but it is not (and not meant to be) an empirical approach. As far as I know, Bayesian networks are not a reflection of `how people actually reason' - eg if you open up our minds, you won't see Bayesian Networks in there. One of the problems for normative models in decision making (see Colyvan 2013), is that we can only test how well our normative models work, if we already know what a good outcome would be. In a sense, we're doing experimental model testing for normative Bayesian Networks in this project.
 
  
 

@@ -252,7 +252,7 @@ class ViewCaseModel(TextElement):
 
 
 
-sim =0
+sim =1
 if sim == 0:
     rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
                                         "flees_startled", "successful_stolen", "raining", "curtains",

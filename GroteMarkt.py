@@ -39,7 +39,7 @@ class MoneyAgent(Agent):
                  "octavia", "jeff", "hella", "hilary", "aafke", "john",
                  "terry"]
         last_names = ["cornflower", "olive", "daisy", "tulip",
-                      "violet", "goldenrod", "lemon", "orange",
+                      "violet", "lemon", "orange", "apple", "pear",
                       "maroon", "plum"]
 
         name = random.choice(first_names) + " " + random.choice(last_names)
@@ -68,27 +68,39 @@ class MoneyAgent(Agent):
             # the neighbor has valuable goods, and if the agent is not currently stealing from
             # someone else.
             for agent in neighbors:
-                if agent.value_of_good > self.risk_threshold and \
-                    agent.age > self.age_threshold and \
-                        (self.steal_state == "N" or self.steal_state == "LOSER"):
-                    self.steal_state = "MOTIVE"
-                    self.target = agent
-                    self.temp_goal = agent.pos
+
+                if str(type(agent)) == "<class 'GroteMarkt.MoneyAgent'>":
+                    #print(self.unique_id, agent.unique_id, agent)
+                    self.model.reporters.set_evidence_straight(f"seen_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+
+                    if agent.value_of_good > self.risk_threshold:
+                        self.model.reporters.set_evidence_straight(f"know_valuable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+                    if agent.age > self.age_threshold:
+                        self.model.reporters.set_evidence_straight(f"know_vulnerable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+                    if self.steal_state == "N" or self.steal_state == "LOSER":
+                        self.model.reporters.set_evidence_straight(f"able_to_steal_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+
+                    if agent.value_of_good > self.risk_threshold and \
+                        agent.age > self.age_threshold and \
+                            (self.steal_state == "N" or self.steal_state == "LOSER"):
+                        self.steal_state = "MOTIVE"
+                        self.target = agent
+                        self.temp_goal = agent.pos
+                        self.state = "FAST MOVE TO GOAL"
+
+                if self.steal_state == "MOTIVE":
+                    self.model.reporters.set_evidence_straight(f"motive_{str(self.unique_id)}_0", 1)
                     self.state = "FAST MOVE TO GOAL"
+                    #print("I want to steal")
+                    if self.target.steal_state == "DONE":
+                        self.target = None
+                        self.steal_state = "N"
 
-            if self.steal_state == "MOTIVE":
-                self.model.reporters. set_evidence_straight(f"motive_{str(self.unique_id)}_0", 1)
-                self.state = "FAST MOVE TO GOAL"
-                #print("I want to steal")
-                if self.target.steal_state == "DONE":
-                    self.target = None
-                    self.steal_state = "N"
+                    if self.target.pos != self.pos:
+                        self.steal_state = "SNEAK"
 
-                if self.target.pos != self.pos:
-                    self.steal_state = "SNEAK"
-
-                else:
-                    self.steal_state = "STEALING"
+                    else:
+                        self.steal_state = "STEALING"
 
 
             if self.steal_state == "SNEAK":
@@ -329,6 +341,8 @@ class MoneyModel(Model):
     """A model with some number of agents."""
 
     def __init__(self, N, width, height, topic, reporters, scenario, output_file, torus=False):
+
+        scenario = 2
         self.num_agents = N
         self.topic = topic
         self.grid = MultiGrid(width, height, torus)
@@ -338,7 +352,7 @@ class MoneyModel(Model):
         self.scenario = scenario
         self.model_description = self.set_model_text_explanation()
         self.output_file = output_file
-
+        print("num agents", N)
 
         # Create agents
         self.create_agents(self.scenario)
@@ -391,11 +405,11 @@ class MoneyModel(Model):
             self.num_agents = 6
 
         n = self.num_agents
-        base_rel_events = ["motive", "sneak", "stealing"]
+        base_rel_events = ["seen", "know_valuable", "know_vulnerable", "able_to_steal", "motive", "sneak", "stealing"]
         # create reporters automatically
         rel_events = []
 
-        if self.scenario == 1:
+        if self.scenario == 1 or self.scenario == 2:
             for i in range(0, n):
                 for k in range(0, n):
                     for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
@@ -406,9 +420,9 @@ class MoneyModel(Model):
         else:
             for i in range(1, n):   # agent 0 is the old agent who never steals and is always stolen from
                 for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
-                    str1 = f"{j}_{str(i)}_0"
-                    # str2 = i + "_credibility"
-                    rel_events.append(str1)
+                        str1 = f"{j}_{str(i)}_0"
+                        # str2 = i + "_credibility"
+                        rel_events.append(str1)
 
         return Reporters(rel_events)
 
@@ -536,4 +550,4 @@ class MoneyModel(Model):
     def step(self):
         self.schedule.step()
         self.time += 1
-        #print(self.reporters.history_dict)
+        print(self.reporters.pure_frequency_event_dict)

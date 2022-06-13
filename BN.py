@@ -240,10 +240,10 @@ def K2_BN_csv_only(training_data, path):
     #print(best_temporal_ordering)
     learner.useK2(best_temporal_ordering)
 
-    forbidden = evidence_cannot_be_connected_to_each_other_path(training_data, path, best_temporal_ordering)
-    for (a, b) in forbidden:
+    #forbidden = evidence_cannot_be_connected_to_each_other_path(training_data, path, best_temporal_ordering)
+    #for (a, b) in forbidden:
         #print(a, b)
-        learner.addForbiddenArc(a, b)
+        #learner.addForbiddenArc(a, b)
 
     # print(learner)
     bn = learner.learnBN()
@@ -292,7 +292,8 @@ def K2_BN(experiment, csv_file, name):
     file_name = name #"BayesNets/K2BN.net"
     temporal_order = get_temporal_ordering_nodes(experiment, global_state_csv)
     if "adaptedK2BN.net" not in name:
-        forbidden = evidence_cannot_be_connected_to_each_other(experiment, temporal_order)
+        #forbidden = evidence_cannot_be_connected_to_each_other(experiment, temporal_order)
+        forbidden  = []
         for (a, b) in forbidden:
             #print(a, b)
             learner.addForbiddenArc(a, b)

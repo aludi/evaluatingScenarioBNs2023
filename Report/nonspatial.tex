@@ -1,27 +1,32 @@
 % Activate the following line by filling in the right side. If for example the name of the root file is Main.tex, write
 % "...root = Main.tex" if the chapter file is in the same directory, and "...root = ../Main.tex" if the chapter is in a subdirectory.
  
-%!TEX root =  mainMastersProject.tex
+%!TEX root =  testMain.tex
 
 \chapter[Simple Non-Spatial Simulations]{A Simple Stabbing - Non-Spatial Simulations and their Bayesian Networks}
 
 \section{Introduction}
-Here I talk about the credibility game and Charlotte Vlek's Stabbing Bayesian Network example.
 
-In these non-spatial simulations, there are agents, and they interact with each other, but there is no environment for them to interact in. So the simulation is a pure combination of the probabilities assigned to each state transition (or something along those lines). In a sense, the probability for an agent to `stab with knife' purely depends on the probability of `motive' and `opportunity'. Compared to a spatial simulation, where `opportunity' is more complex, as it involves proximity to victim which arises from the simulation and not from some random number generator.
+This first experiment is not a true agent model. Agents have, as their name suggest, a limited amount of agency. They have knowledge and can interact with the world and each other. This simulation does not contain agents and is instead based on simple rule-based inference.
 
-These non-spatial simulations are boring, but they are necessary first steps: after all, if we cannot make BNs out of these predetermined (the probabilities in each run are not predetermined, but the distributions that they are drawn from, and their thresholds, are), then the rest of our endeavours will be fruitless. On the other hand, if the process for creating and evaluating these simple simulations work well, then we can proceed to modelling more complex, spatial simulations.
+This chapter is meant to show that we can:
+\begin{itemize}
+\item create a simulation that runs on an uncertain rule-based inference engine. 
+\item create reporters that capture the state of the simulation.
+\item the output of the reporters can be used to automatically generate Bayesian Networks.
+\item we can apply our performance criteria to these Bayesian Networks.
+\end{itemize}
 
-In this part, I have two experiments. One simple experiment meant to be a replication of Charlotte Vlek's Bayesian Network in xxx \footnote{rephrase}, and another simple experiment mainly meant to test the evaluation criteria for the Bayesian Networks, as outlined in the previous chapter.
+Apart from these goals, we will then also compare the networks to the networks created in \citet{Vlek2015}. If we find that our method functions well, then we have a chance to apply it to complex spatial simulations in the following chapters. If we cannot make BNs out of this simple simulation, then the rest of our endeavour will be fruitless.
 
 \section{Method}
 %There are two methods outlined here, one for each initial experiment.
 
 Take the Vlek networks from Vlek Jurix 2015.
 
-The general story is: Jane and Mark had a fight, but Jane had a knife. Mark died. 
+The general story is: Jane and Mark had a fight, and Jane had a knife. Something happened, and then Mark died. 
 
-Then, there are two specific scenarios that can explain why Mark died. In scenario one, Jane stabbed Mark, and then he died. In scenario 2, Jane threatened Mark with the knife, Mark hit Jane, Jane dropped the knife, Mark fell on the knife, and Mark died by accident. There are two separate networks for these scenarios.
+Then, there are two specific scenarios that can explain why Mark died. In scenario 1, Jane stabbed Mark, and then he died. In scenario 2, Jane threatened Mark with the knife, Mark hit Jane, Jane dropped the knife, Mark fell on the knife, and Mark died by accident. There are two separate networks for these scenarios.
 
 I'm going to create two separate networks, and then also see if I can merge them, by creating a Jane-and-Mark-knife simulation, assigning some random probabilities that correspond to the story, and see what the K2 algorithm makes of it. Then I will also merge the two networks to see if the K2 can deal with mutually exclusive nodes (eg: `Mark died by accident' should rule out `Mark died by stabbing').
 
@@ -88,10 +93,6 @@ We succeeded in generating three different BNs:  One for scenario 1, one for sce
 \label{full}
 \end{center}
 \end{figure}
-
-\section{Discussion}
-How well do these networks evaluate compared to the criteria we set out initially, and how well do they compare to the Vlek networks, and the criteria set out in Vlek 2015?
-
 
 
 
@@ -237,9 +238,24 @@ The conditional probability tables as displayed in these networks are not great.
 \end{enumerate}
 
 
+\section{Discussion}
+In the discussion, we focus on the comparison of the automatically generated networks, to the paper in Vlek.
+
 
 
 \subsection{Comparison to Vlek 2015}
+
+How does the network react to:
+
+Combination: if Mark dies accidentally, what does that imply? That Jane didn't stab Mark. We can model this without constraint node.
+Inconsistent scenario: If we say that jane does not have a knife, but does stab Mark, what does the network do? Breaks/error. 
+
+There are two types of inconsistency: network-breaking ones, and competative-scenario ones.
+
+The advantage of this approach is that it is effortless to combine two networks.
+
+
+
 If we only look at the ordering of the Bayesian Network, we can see that for Figure~\ref{kb1}, the sub-scenario structure is the same as in Vlek 2015 Figure~3, our Figure~\ref{vlek1}. There's no scenario node constraining the network, all the information is contained in the network, no scenario node needed (todo: make the nodes the exact same names).
 
 However, there are differences between Vlek 2015 Figure~4, and the automatically generated BN here. Figure~4 in Vlek 2015 is replicated below in Figure~\ref{vlek} (todo: ask permission?? or just remove). The automatically generated BN is very linear and can be interpreted in a purely temporal way: mark hits jane, jane drops the knife, and due to jane dropping the knife, and mark falling on it, mark dies by accident - and if mark dies by accident, mark dies. The probabilities for all these events (from jane dropping the knife on), are ridiculously low, and don't really make sense (should interpret the small probabilities as e, and not as actual numbers I guess, due to underflow?). 
@@ -247,8 +263,7 @@ However, there are differences between Vlek 2015 Figure~4, and the automatically
 In Vlek's paper, we see a subscenario: we have the subscenario ``Mark died by accident", which contains events such like mark hit jane, which leads to jane dropping the knife, and mark falling on the knife, and then dying. The coparents of Mark died are the same in this network as in the automatically generated BN, however, we once-again miss the scenario-like construction where mark hitting jane, jane dropping the knife, and mark falling on the knife are connected as part of a subscenario, rather than their ``own" nodes.
 
 
-Why to choose for subscenarios when it is not required? Tomorrow I will look up why the scenario construction was used and I will see if it does something that I miss? Coherence? But that also travels up the chain? But something with d-separation probably. I'll read the Vlek 2015 again i guess.
-
+Why to choose for subscenarios when it is not required? Just syntactic sugar? {\color{red} look}.
 
 
 In the full final network, we see that the two mutually exclusive scenarios (stabbing vs falling on knife) are excluding each other even without the use of a scenario node - so we can make networks that combine two different stories. This is nice.
@@ -261,18 +276,16 @@ In the full final network, we see that the two mutually exclusive scenarios (sta
 
 figure here of $\Delta$ P stabbing for increasing values of P threatening. If we know threatening is true, stabbing goes to 0, and vice-versa - and all the consequences of the threatening scenario also go to 0, so it just works. This means that several different scenarios can be combined into one network, and still be mutually exclusive. Both scenarios share some events (as some scenarios can do in real life), but the different scenarios themselves are not separated from each other by structure or construction (as is the case in Vlek~2015).
 
-Do we need the constraint node? Or do we only use that if we have knowledge but no data? what. 11 in Vlek.
+\textbf{Do we need the constraint node? }
 
-We can just straight-up draw a line between two events in order for them to become mutually exclusive, like we do with Jane stabs mark and jane threatens mark. Fenton et al advice against that - we draw a relation between two causes to ensure mutual exclusivity. Fenton doesn't like this even though it satisfies the axioms because 1) the parent cause becomes part of the causal pathway leading to the child cause, which means that you have to involve many more numbers (``meaningless columns''). Fortunately, this is not a problem in the automatically generated BNs, because the algorithm fixes this for us :). Not sure if an extra node is good for the computational complexity of BNs either. Uh. Anyway, even if this is not the case, there are lots of unnecessary numbers in Bayesian Networks anyway (show image here), because there's many combinations of events that just do not happen (eg: mark dies but jane doesn't have a knife, never happens, but is in the table anyway. Unnecessary complexity? Probably a rounding error!!). Anyway, that's a thing. So it doesn't really matter.
+We can just  draw a line between two events in order for them to become mutually exclusive, like we do with `Jane stabs mark' and `jane threatens mark'. Fenton et al advice against that - we draw a relation between two causes to ensure mutual exclusivity. Fenton doesn't like this even though it satisfies the axioms he sets out in the paper because 1) the parent cause becomes part of the causal pathway leading to the child cause, which means that you have to involve many more numbers (``meaningless columns''). Fortunately, this is not a problem in the automatically generated BNs, because the algorithm fixes this for us :). Not sure if an extra node is good for the computational complexity of BNs either. Uh. Anyway, even if this is not the case, there are lots of unnecessary numbers in Bayesian Networks anyway, because there's many combinations of events that just do not happen (eg: mark dies but jane doesn't have a knife, never happens, but is in the table anyway. Unnecessary complexity? Probably a rounding error!!). Anyway, that's a thing. So it doesn't really matter.
 
-Uh. The second objection is that you have to arbitrarily decide which cause is the parent - which doesn't make sense if you interpret the networks causally. Fortunately. there's no causality in this part, its just frequencies so it doesn't matter, we can just pick one and it's fine. So turns out we don't need the constraint node anyway :D
+The second objection to using the direct connection over the constraint node is that you have to arbitrarily decide which cause is the parent - which doesn't make sense if you interpret the networks causally. Fortunately. there's no causality in this part, its just frequencies and conditional probabilities, so it doesn't matter, we can just pick one and it's fine. So turns out we don't need the constraint node anyway :D
 
 \item Plausible - scenario should correspond to the modellers knowledge about the world. Support can help implausible scenarios to become plausible.
 
 
 \end{itemize}
-
-
 
 
 \section{Important take-aways}
@@ -292,7 +305,6 @@ The accuracy of the Bayesian Network improves as the number of runs improves. Th
 What are the practical implications of this? On this side, that we need enough data to get an accurate prediction. But, if we're thinking about elicitation, this means that if you decide to add an event to a scenario, or a node to a network, you really have to think about the probability that you assign it - a probability of 1 in 10.000 would really mean that this event would only happen once every 10.000 situations (that you are considering - the reference class is never far away). 
 
 
-\section{Conclusion }
 
 With this part, I have shown that the pipeline works. We can make a simulation using forward chaining, that generates world-states, and those world states can be translated into Bayesian Networks by means of the K2 algorithm, with reasonable accuracy even under rounding. The K2 manages to replicate constraints and merge two different possible scenarios together. So if the real world worked like a simple forward chaining inference method where we knew exactly when a proposition was true (which is, if the state is true, we set the proposition to true in every epoch), then BNs would work flawlessly even if we weren't very great at estimating the correct frequencies precisely.
 

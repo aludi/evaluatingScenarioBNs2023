@@ -616,9 +616,9 @@ def calculate_accuracy_1(file_name, path):
         val_output = df.loc[i, output_node]
 
         #print("going over set nodes")
-        '''print(i)
+
         print(event_list)
-        print("output", output_node)'''
+        print("output", output_node)
         for ev in event_list:
             val = df.loc[i, ev]
             #print("\t", ev, int(val))

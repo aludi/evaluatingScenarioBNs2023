@@ -1331,8 +1331,8 @@ d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
 for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 1000, d_S),
-                                                        #("StolenLaptopPrivate", 1000, d_S),
-                                                        ("StolenLaptop", 2000, d_S),
+                                                        ("StolenLaptopPrivate", 2000, d_S),
+                                                        #("StolenLaptop", 2000, d_S),
                                                         #("VlekNetwork", 500000, d_V),
                                                         #("GroteMarkt", 2000, d_G),
                                                         #("GroteMarktMaps", 2000, d_G)
@@ -1351,7 +1351,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
 
 
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
-                            param_dict=param_dict)  # we do the simple scenario
+                               param_dict=param_dict)  # we do the simple scenario
     #test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
     #                      param_dict=param_dict)
 
@@ -1448,7 +1448,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         #calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
         print("progress")
 
-        progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
+        #progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
 
 
@@ -1460,8 +1460,8 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         if ".DS" not in base_network and 'pkl' not in base_network:
             plot_performance(path, base_network[:-4])
             #plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
-            #plot_posterior_base_network_only(path, base_network[:-4])
-            #plot_posterior(path, base_network[:-4])
+            plot_posterior_base_network_only(path, base_network[:-4])
+            plot_posterior(path, base_network[:-4])
 
 
 

@@ -5,17 +5,23 @@
 
 \chapter[Simple Spatial Simulations]{A Simple Robbery - Spatial Simulations and their Bayesian Networks}
 
-Three experiments: 1) getting the bayesian networks with decreased precision by disturbing the cpts 2) testing the effect of a simulation parameter change on the BN (how different does it become. 3) investigating the effect of hidden information/private knowledge on the network.
-Summary:
-
- The problem is that in the previous chapter, we have established that we have a method to convert a simple, forward chaining simulation, to a collection of data, which then in turn can be used to create a Bayesian Network, that represents the situation in the simulation relatively well (some problems none-withstanding, accuracy and RMS error are generally ok even in increments that people might plausibly be able to estimate ~ intervals of 0.33/0.25-ish). However, this was totally 100\% determined by deterministic forward chaining rules. The real world does not run on deterministic forward chaining rules (as far as we know). At least, we are spatially situated, which means that there are probabilities that will arise out of interactions between agents and their environment. These probabilities are not `set' in the same ways as the probabilities are set in the previous chapter, they arise organically from interactions: eg: an agent has to be located at a door to break in, an agent can be seen by a camera only in some locations of the simulation. We do not know these probabilities a-priori (although we can probably calculate them, I don't know).
+ The problem is that in the previous chapter, we have established that we have a method to convert a simple forward-chaining simulation into a collection of data, which then in turn can be used to create a Bayesian Network, that represents the situation in the simulation.
  
-New idea: We create spatially situated simulations that are more complex, and see if they work the same way/are as accurate \& rms as the previous. Then we will also use these simple spatial simulations to test two hypotheses about 1) the effect of private knowledge and 2) the effect of parameters.
+ However, this was totally 100\% determined by deterministic forward chaining rules. The real world does not run on deterministic forward chaining rules (as far as we know). At least, we are spatially situated, which means that there are probabilities that will arise out of interactions between agents and their environment. These probabilities are not `set' in the same ways as the probabilities are set in the previous chapter, they arise organically from interactions: an agent has to be located at a door to break in, an agent can be seen by a camera only in some locations of the simulation. We do not know these probabilities a-priori.
+ 
+ Research questions for this chapter:
+ 
+ \begin{itemize}
+ \item Can we create an automatic BN from a simulation of similar accuracy and rmse as in the previous chapter, but now spatially explicit, with agents, and with evidence?
+ \item What is the effect of loss of precision on this network?
+ \item What is the effect of truly private knowledge on the network?
+ \end{itemize}
+ 
 
 
-\section{Experiment 1: Generating BNs with disturbances}
+\section{Experiment 1: Generating BNs and lowering precision}
 
-In this first experiment, I will be creating an agent simulation of a very simple crime case. I will run the simulation for some number of times, and then automatically generate BNs, based on the K2 algorithm. Then I will change the values of the cpts in the BNs, to see if we can accurately predict the outcome even with low precision in cpts, given the structure of the BN.
+For the first experiment, a very simple crime case will be modelled in a multi-agent simulation. This is the data-generating environment, the gathered data will be used by the K2 algorithm to automatically generate a Bayesian Network. This network will be assessed based on the criteria set out in chapter 3.  
 
 \subsection{Introduction}
 
@@ -38,7 +44,7 @@ The environment of the agents is very simple, just two `houses' (rectangles, rea
 \end{figure}
 
 \subsection{Methods}
-There are four things to be explained here: the agent behaviour, the operationalisation of the random variables, the simulation (meta-)parameters, and the process through which the cpts of the given BN is to be disturbed.
+There are four things to be explained here: the agent behaviour, the operationalisation of the random variables, the simulation (meta-)parameters, and the process through which the cpts of the given BN is to be disturbed. The simulation was ran for 2000 times, with 30 epochs max per run.
 
 \subsubsection{Agent behaviour}
 flowchart here.
@@ -74,57 +80,19 @@ E\_private&   \\
 \end{tabular}
 \end{adjustbox}
 
-\subsubsection{Simulation parameters}
-Number of runs: 2000
-
-
-
 
 \subsection{Results}
 
 See Figure~\ref{laptop}
 
-
-\begin{figure}[h]
+\begin{figure}[htbp]
 \begin{center}
-\begin{subfigure}{.7\textwidth}
 \includegraphics[width=\linewidth]{../experiments/StolenLaptop/bnImage/BNIMAGEStolenLaptop.pdf}
-\caption{network structure}
-\label{laptopAcc}
-\end{subfigure}
 \end{center}
-
-\begin{subfigure}{.5\textwidth}
-
-\includegraphics[width=\linewidth]{../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) }
-\label{laptopAcc}
-\end{subfigure}
-\begin{subfigure}{.5\textwidth}
-
-\includegraphics[width=\linewidth]{../experiments/StolenLaptop/plots/posterior_StolenLaptop.pdf}
-\caption{effect of evidence on posterior}
-\label{laptopPosterior}
-
-\end{subfigure}
-\caption{The network, the accuracy and root mean square for rounding the cpts to intervals, and the effect of evidence on the posterior for stolen laptop simulation.}
+\caption{network structure}
 \label{laptop}
 \end{figure}
 
-
-%\begin{figure}[h!]
-%\begin{center}
-%\includegraphics[]{../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf}
-%\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in stolenLaptop network and simulation}
-%\label{laptopAcc}
-%\end{center}
-%\end{figure}
-
-
-
-Overall pretty accurate. This shows that small disturbances in rounding - and even larger disturbances in rounding, such as to 0.25 or even 0.33, does not matter very much for the accuracy of this specific network. 
-
-{\color{red} todo: add automatic table with accuracies and rms generated}.
 
 \subsection{Evaluation with regards to structural, performance and human-factor criteria}
 In this section, the evaluation criteria as set out before are applied to the networks.
@@ -132,9 +100,21 @@ In this section, the evaluation criteria as set out before are applied to the ne
 \subsubsection{Structural Criteria}
 \begin{enumerate}
 \item \textbf{Hypotheses are ordered temporally.}
+
+The main scenario hypothesis nodes are ordered temporally.
+
 \item \textbf{Evidence connects to hypotheses.}
+
+All evidence is connected to at least one hypothesis. However, the structure of how the evidence nodes are added is confusing and overwhelming. One piece of evidence - the most crucial one, which is that the evidence is gone, has 5 parents!
+
 \item \textbf{Relevance: All relevant events are in the BN, all irrelevant events are outside of the BN.}
+
+We know that truly irrelevant nodes are kept out of the main Bayesian Network - we can see that the node for `raining' is not connected to any other node. This is because the rain does not affect anything in this simulation - this is reflected in the Bayesian Network.
+
 \item \textbf{Independent events are not connected to each other.}
+
+Evidence is connected to each other. This is because we need to consider dependent evidence as dependent in the network (I know i read this somewhere, there was a good example with cameras, Fenton?? I forgot!! fucl). 
+
 \end{enumerate}
 
 
@@ -144,36 +124,84 @@ We consider the accuracy and root mean square per network, then also look at the
 \begin{enumerate}
 \item \textbf{Accuracy and Root Mean Square error}
 
-The accuracy and rmse are shown in Table~\ref{tabA}.
-
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{|c|c|c|}
- \hline
- Network & Accuracy & Root Mean Square\\
- \hline
- Scenario 1   & 0.83 &  0.17   \\
- Scenario 2 & 0.88 & 0.14 \\
- Combined & 0.81 & 0.2 \\
-\hline
-\end{tabular}
-\caption{Accuracy and Root Mean Square Error for the networks}
-\end{center}
-\label{tabA}
-\end{table}
+The accuracy of the network is 88\% and Root Mean Square error is 0.14. This is comparable to the networks in the previous chapter.
 
 \item \textbf{Correspondence.}
-\item \textbf{Sensitivity analysis shows that no simulation-irrelevant event influences some output \footnote{rephrase}}
+
+Once again, compared the probabilities in the network with the frequencies of the events in the simulation (maybe run again, larger training set but don't actually train on it). We see the same pattern (Table~\ref{test}) as before, it is accurate within ±0.005. 
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|}
+ \hline
+ Conclusion & Frequency P(event) & P(event)\\
+ \hline
+lost\_object   & 0.1985 & 0.1987\\
+curtains & 0.1695 &  0.1697\\
+raining & 0.5085 &  0.5085\\
+know\_object & 0.6515 &  0.6510\\
+target\_object & 0.3135 & 0.3134\\
+motive & 0.3135 & 0.3133\\
+compromise\_house & 0.0925 & 0.0925 \\
+flees\_startled & 0.1655 &  0.1654\\
+successful\_stolen & 0.05 & 0.0438\\ 
+E\_s\_spotted\_by\_house&  0.901 & 0.9004 \\ 
+E\_disturbed\_house& 0.071 &  0.0709\\ 
+E\_object\_is\_gone&  0.281 &  0.2793\\ 
+E\_broken\_lock&  0.0925 &  0.0924\\ 
+E\_s\_spotted\_with\_goodie& 0.083  & 0.0813 \\ 
+E\_private&  0.1655 & 0.1653\\ 
+\hline
+\label{test}
+\end{tabular}
+\caption{Correspondences}
+\end{table}
+
+
+\item \textbf{Sensitivity analysis values}
+
 \item \textbf{Effect of evidence on the posterior.}
+
+The effect of turning on evidence on the posterior of the initial network is shown in Figure~\ref{baseposterior}.
+
+The scenario that this posterior progression corresponds to is as follows: the duped agent comes home, and finds that their object is gone. Then, it takes a closer look at the door, and sees that the lock is broken. It looks at the disturbed house, and then at the cameras. The camera shows that the other agent was spotted near the house, and later on emerged with the object. Then, we need to look inside the head of the stealing agent, who fled before they saw the duped agent come home - hence, E\_private is 0.
+
+\begin{figure}[htbp]
+ \centering
+\includegraphics[width=0.6\linewidth]{../experiments/StolenLaptop/plots/posterior_base_networkStolenLaptop.pdf}
+\caption{ Progression of evidence resulting in changing the posterior}
+\label{baseposterior}
+\end{figure}%
+
 
 \end{enumerate}
 
 \subsubsection{Human Criteria}
 \begin{enumerate}
-\item \textbf{How robust is the network against a loss of precision?}
-\item \textbf{Could a human find these probabilities?}
-\item \textbf{ Can a human determine the correct independence relations?}
+	\item \textbf{How robust is the network against a loss of precision?}
+
+	We again create networks with lower precision, and use the $\epsilon$ method to create networks that do not saturate with 1 or 0, like in the previous chapter. Then we calculate accuracy and root mean square errors on lower-precision networks (Figure~\ref{dist}). We again see that while the RMSE increases when we lose precision, it does not increase by much - from 0.14 to 0.20. This means that the rounding to $\epsilon$ and $1-\epsilon$ instead of 0 or , leaves the network very robust - the accuracy remains the same. So this method works even for more complex networks that include evidence. 
+
+	The posterior progression is also relatively the same as the original network (Figure~\ref{post}).
+	\item \textbf{Could a human find these probabilities?}
+	\item \textbf{ Can a human determine the correct independence relations?}
 \end{enumerate}
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=0.9\linewidth]{../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf}
+\caption{Network Under Disturbance.}
+\label{dist}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=0.9\linewidth]{../experiments/StolenLaptop/plots/posterior_StolenLaptop.pdf}
+\caption{ Progression of evidence resulting in changing the posterior}
+\label{post}
+\end{subfigure}
+\end{center}
+\end{figure}
+
 
 
 \subsection{Discussion}
@@ -192,54 +220,7 @@ Knowing to which parent node some pieces of evidence should connect is also not 
 
 
 
-
-
-\section{Experiment 2: Investigating Evidence Strength.}
-
-
-\subsection{Introduction}
-A funny thing is that this simulation we can test how the evidence strength is dependent on certain parameters in the network. For a simple example, see the radius of camera vision. If we have the Reporter ``agent seen near house''/"agent spotted by camera", and by that we mean, that if the agent is visible in the camera placed near the house, then the range of vision of the camera becomes relevant for the investigation. If the camera is super good and can see the agent even when he's not near the house, then the effect of being-seen-on-camera should decrease: it becomes less relevant that the agent was seen by the camera, because they usually are. On the other hand, if the camera is pointed only at the door, then being seen by the camera is relevant, the agent is only by the door when he's trying to break in. Below you see a plot of camera vision range vs effect on posterior when the node is turned on (given the same structure of the BN).
-
-\subsection{Methods}
-I changed the parameter of vision of the camera for the simulation between 1 and 15, for the rest the simulation was the exact same. I didn't apply any disturbances to the network.
-
-\subsection{Results}
-
-See Figure~\ref{vision}
-
-\begin{figure}[h]
-\begin{center}
-\begin{subfigure}{.7\textwidth}
-\includegraphics[width=\linewidth]{../experiments/StolenLaptopVision/bnImage/BNIMAGEStolenLaptopVision.pdf}
-\caption{network structure}
-\label{visionlaptopAcc}
-\end{subfigure}
-\end{center}
-
-\begin{subfigure}{.5\textwidth}
-
-\includegraphics[width=\linewidth]{../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) }
-\label{laptopAcc}
-\end{subfigure}
-\begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{../experiments/StolenLaptopVision/plots/posterior_StolenLaptopVision.pdf}
-\caption{effect of evidence on posterior}
-\label{visionlaptopPosterior}
-\end{subfigure}
-\caption{The network, the accuracy and root mean square for rounding the cpts to intervals, and the effect of evidence on the posterior for stolen laptop simulation.}
-\label{vision}
-\end{figure}
-
-
-
-\subsection{Discussion}
-We see here, that the name of the variable is actually incorrect. It shouldn't be called "agent seen near house", because the reporter is not actually reporting that the agent is near the house - instead it is reporting whether the agent is within the vision of the camera. So properly it should be called "agent is seen in camera", or we can rewrite the reporter to measure whether the agent is actually near the house. 
-
-But, this means that the BN is not responsive to the effect of relevance in the real world. 
-
-
-\section{Experiment 3: Investigating Private Knowledge}
+\section{Experiment 2: Investigating Private Knowledge}
 
 \subsection{Introduction}
 The most obvious problem in crime is the distribution of knowledge. The criminal will (usually) know what he did, victims can testify, the police knows something else. Etc. So our ultimate goal is just to collect all the private knowledge of all the people involved, and paint a collective knowledge picture that (ideally) everyone can agree on, and then the judge can decide. Of course, it is not in the interest of everyone to freely share their private knowledge all the time. Police might not want to talk about the limitations of their evidence (or their ways of procuring it), witnesses and victims might not want to talk due to incrimination, guilt/shame or relations to the people involved, and suspects might not want to share their murder plans (obviously). So there's so much private knowledge, and our Bayesian Network assumes that we can just get into the heads of everyone and report on what we find there. So what if we cannot? What if we lose some information - like that of the suspect: that the suspect will flee if it thinks that it is being observed?
@@ -257,20 +238,20 @@ See Figure~\ref{private}
 \begin{center}
 \begin{subfigure}{.50\textwidth}
 \includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/bnImage/BNIMAGEStolenLaptopPrivate.pdf}
-\caption{network structure}
+\caption{network structure for missing private information}
 \label{privatelaptopAcc}
 \end{subfigure}
 \end{center}
 
 \begin{subfigure}{.45\textwidth}
 \includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/plots/performance_StolenLaptopPrivate.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) }
+\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for missing private information}
 \label{privatelaptopAcc}
 \end{subfigure}
 
 \begin{subfigure}{.45\textwidth}
 \includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/plots/posterior_StolenLaptopPrivate.pdf}
-\caption{posterior }
+\caption{posterior private information}
 \label{privatelaptoppost}
 \end{subfigure}
 

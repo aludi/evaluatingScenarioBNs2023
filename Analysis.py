@@ -758,7 +758,7 @@ def calculate_world_states_accuracy(file_name, path, output_node):
         #print()
         ie = gum.LazyPropagation(bn)
         ie.addAllTargets()
-        print(item)
+        #print(item)
 
 
         for name in load_temporal_evidence(networks[:-4])["events"]:
@@ -767,7 +767,7 @@ def calculate_world_states_accuracy(file_name, path, output_node):
             if i != output_ind:
 
 
-                print("\t", i, event_list[i], item[i])
+                #print("\t", i, event_list[i], item[i])
                 try:
                     ie.addEvidence(event_list[i], item[i])
                     ie.eraseTarget(event_list[i])
@@ -779,7 +779,7 @@ def calculate_world_states_accuracy(file_name, path, output_node):
 
 
                     ie.addEvidence(event_list[i], item[i])
-                    print(ie.posterior(event_list[i]))
+                    #print(ie.posterior(event_list[i]))
                     #ie.eraseTarget(event_list[i])
                     #for node in event_list:
                     #    print(f"\t {ie.posterior(node)[1]}")
@@ -789,39 +789,39 @@ def calculate_world_states_accuracy(file_name, path, output_node):
                     #ie.evidenceJointImpact(ie.targets(), {event_list[i]})
                     final_posterior = ie.posterior(event_list[output_ind])[1]
                     #ie.addTarget(event_list[i])
-                    print(event_list[i])
+                    #print(event_list[i])
 
-                    print(f"posterior prob {event_list[output_ind]}", final_posterior)
+                    #print(f"posterior prob {event_list[output_ind]}", final_posterior)
 
 
                 except:
 
                     final_posterior = "NA"
-                    print(f"network breaks!!  {file_name}")
+                    #print(f"network breaks!!  {file_name}")
                     break
 
 
         if final_posterior == "NA":
-            print("bad")
+            #print("bad")
             acc += 0
             bad_count += 1
         else:
-            print("final posterior", final_posterior)
-            print("actual value", event_list[output_ind], item[output_ind])
+            #print("final posterior", final_posterior)
+            #print("actual value", event_list[output_ind], item[output_ind])
             rmq += abs(int(item[output_ind]) - final_posterior)
 
             if int(round(final_posterior,0)) == int(item[output_ind]):
                 acc += 1
-                print("accuracy win")
+                #print("accuracy win")
             else:
                 acc += 0
-                print("accuracy loss")
+                #print("accuracy loss")
 
 
-    print(file_name)
-    print(f"overall accuracy {acc/len(possible_states)}")
-    print(f"overall rmsq {rmq/len(possible_states)}")
-    print(f"overall inconsistent count {bad_count/len(possible_states)}")
+    #print(file_name)
+    #print(f"overall accuracy {acc/len(possible_states)}")
+    #print(f"overall rmsq {rmq/len(possible_states)}")
+    #print(f"overall inconsistent count {bad_count/len(possible_states)}")
 
     n = file_name.split("_", 2)
     if len(n) > 1:
@@ -1332,8 +1332,8 @@ d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"
 
 for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 1000, d_S),
                                                         #("StolenLaptopPrivate", 1000, d_S),
-                                                       #("StolenLaptop", 1000, d_S),
-                                                        ("VlekNetwork", 500000, d_V),
+                                                        ("StolenLaptop", 2000, d_S),
+                                                        #("VlekNetwork", 500000, d_V),
                                                         #("GroteMarkt", 2000, d_G),
                                                         #("GroteMarktMaps", 2000, d_G)
                                         ]:
@@ -1343,7 +1343,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
 
     path = org_dir + "/experiments/" + scenario
 
-    test_runs = int(train_runs / 500) #originally 10
+    test_runs = int(train_runs / 100) #originally 10
     list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
     list_files.sort()
     #print(scenario)

@@ -75,7 +75,7 @@ E\_private&   \\
 \end{adjustbox}
 
 \subsubsection{Simulation parameters}
-Number of runs: 1000
+Number of runs: 2000
 
 
 
@@ -125,6 +125,55 @@ See Figure~\ref{laptop}
 Overall pretty accurate. This shows that small disturbances in rounding - and even larger disturbances in rounding, such as to 0.25 or even 0.33, does not matter very much for the accuracy of this specific network. 
 
 {\color{red} todo: add automatic table with accuracies and rms generated}.
+
+\subsection{Evaluation with regards to structural, performance and human-factor criteria}
+In this section, the evaluation criteria as set out before are applied to the networks.
+
+\subsubsection{Structural Criteria}
+\begin{enumerate}
+\item \textbf{Hypotheses are ordered temporally.}
+\item \textbf{Evidence connects to hypotheses.}
+\item \textbf{Relevance: All relevant events are in the BN, all irrelevant events are outside of the BN.}
+\item \textbf{Independent events are not connected to each other.}
+\end{enumerate}
+
+
+%%%%%%% Criteria %%%%%%%%
+\subsubsection{Performance Criteria}
+We consider the accuracy and root mean square per network, then also look at the correspondence, sensitivity values and the progression given a certain evidence set.
+\begin{enumerate}
+\item \textbf{Accuracy and Root Mean Square error}
+
+The accuracy and rmse are shown in Table~\ref{tabA}.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+ \hline
+ Network & Accuracy & Root Mean Square\\
+ \hline
+ Scenario 1   & 0.83 &  0.17   \\
+ Scenario 2 & 0.88 & 0.14 \\
+ Combined & 0.81 & 0.2 \\
+\hline
+\end{tabular}
+\caption{Accuracy and Root Mean Square Error for the networks}
+\end{center}
+\label{tabA}
+\end{table}
+
+\item \textbf{Correspondence.}
+\item \textbf{Sensitivity analysis shows that no simulation-irrelevant event influences some output \footnote{rephrase}}
+\item \textbf{Effect of evidence on the posterior.}
+
+\end{enumerate}
+
+\subsubsection{Human Criteria}
+\begin{enumerate}
+\item \textbf{How robust is the network against a loss of precision?}
+\item \textbf{Could a human find these probabilities?}
+\item \textbf{ Can a human determine the correct independence relations?}
+\end{enumerate}
 
 
 \subsection{Discussion}

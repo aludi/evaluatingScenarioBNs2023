@@ -67,19 +67,9 @@ The output of an experiment is the collection of runs $O$, where each run is the
 
 Once we have a collection of states and runs, we can give this to an automated Bayesian Network learner, such as those implemented in pyAgrum. These learners can interpolate a Bayesian Network using algorithms, such as Greedy Hillclimbing and K2. This results in automatic generation of the Bayesian Network which is solely based on the data that is collected in $O$. 
 
-For more detail on these algorithms watch this space.
+
 K2 and temporal restraints.  No restraints on evidence (evidence can connect to each other)
 
-
-\section{Performance Measures}
-To get perspective on the performance of the models, we measure their accuracy and their root mean square error.
-We generate a training set of $m$ entries and a test set of $n$ entries, by running the simulation respectively $m$ and $n$ times. At every run, we collect the state of the simulation from the reporters. This results in $m$ rows for the training data and $n$ rows for the testing data. The K2 algorithm is trained on the full $m$ entries of the training set, which results in a Bayesian network. The number of runs $n$ and $m$ depend on the simulation, but $n$ is always 10\% of $m$.
-
-The accuracy is calculated on the testing set. Every row in the testing set has a set number of elements: one element for each reporter. For every row, at random, one element in the row is obscured. The rest of the row is passed as input to the Bayesian Network, we set it as evidence. This means that there is one node that we do not set evidence on, which is the node that represents the obscured reporter. Due to the evidence now set in the network, this node now has a posterior probability. 
-
-For accuracy: We round the posterior probability to either 0 (if posterior $\leq 0.5$) or to 1 (if posterior $>0.5$). The rounded posterior is compared to the obscured element. If they match, the network has correctly predicted the state of a random reporter in the simulation. If they do not match, the network has made an incorrect prediction. The accuracy is calculated as \[\frac{correct}{total}\]
-
-We also calculate the root mean square error as a way to see how close the posterior of the network is to the state of the world. We do not round the posterior probability, and for each row compute \[\sqrt{\frac{\sum_i^N (state_i - posterior_i)^2}{N}}\] 
 
 
 \section{Evaluating the Bayesian Network}
@@ -88,38 +78,59 @@ We want to evaluate different aspects of the Bayesian Network: structural criter
 
 \subsection{Structural Criteria}
 \begin{enumerate}
-\item (temp) Hypotheses are ordered temporally. Following the cause-consequence idiom.
-\item (con) Evidence connects to hypotheses.
-\item (rel) Relevance: All relevant events are in the BN, all irrelevant events are outside of the BN.
-%\item (exc) All events that are irrelevant are not included in the scenario BN.
-%\item (exh) All events that are relevant are included in the scenario BN.
-\item (ind) Independent events are not connected to each other.
+\item Hypotheses are ordered temporally. Following the cause-consequence idiom.
+\item Evidence connects to hypotheses.
+\item Relevance: All relevant events are in the BN, all irrelevant events are outside of the BN.
+\item Independent events are not connected to each other.
 \end{enumerate}
 
 \subsection{Performance Criteria}
 \begin{enumerate}
-\item The accuracy 
-\item the Root Mean Squared error
-\item The sensitivity analysis of the output node
+\item Accuracy.
+
+We generate a training set of $m$ entries and a test set of $n$ entries, by running the simulation respectively $m$ and $n$ times. At every run, we collect the state of the simulation from the reporters. This results in $m$ rows for the training data and $n$ rows for the testing data. The K2 algorithm is trained on the full $m$ entries of the training set, which results in a Bayesian network. The number of runs $n$ and $m$ depend on the simulation, but $n$ is always 10\% of $m$.
+
+The accuracy is calculated on the testing set. Every row in the testing set has a set number of elements: one element for each reporter. For every row, at random, one element in the row is obscured. The rest of the row is passed as input to the Bayesian Network, we set it as evidence. This means that there is one node that we do not set evidence on, which is the node that represents the obscured reporter. Due to the evidence now set in the network, this node now has a posterior probability. 
+
+ We round the posterior probability to either 0 (if posterior $\leq 0.5$) or to 1 (if posterior $>0.5$). The rounded posterior is compared to the obscured element. If they match, the network has correctly predicted the state of a random reporter in the simulation. If they do not match, the network has made an incorrect prediction. The accuracy is calculated as \[\frac{correct}{total}\]
+
+
+\item Root Mean Squared Error.
+
+Similar to accuracy, except that we do not round the posterior probability. We also calculate the root mean square error as a way to see how close the posterior of the network is to the state of the world. For each row compute \[\sqrt{\frac{\sum_i^N (state_i - posterior_i)^2}{N}}\] 
+
+\item Correspondence.
+
+To what extend do the probabilities found in the Bayesian Network correspond to the frequencies encountered in the simulation? 
+
+\item Sensitivity Values of Output Node.
+
+The sensitivity analysis on the network is difficult. In essence, a sensitivity analysis's goal is to see how small changes in a conditional probability table (cpt) of a node can result in changes in some target node. Since Bayesian Networks have many parameters per node, it is not trivial to perform a sensitivity analysis that takes into account all the nodes in the network, and interpret the results in a meaningful way - this would be an $n$-way sensitivity analysis \citep{gaag2007}.  Instead, in this project, we chose to perform one-way sensitivity analyses from any node in a network to the ultimate outcome node, using Hugin's Parameter Sensitivity Wizard. This tool allows us to calculate the maximal sensitivity value of each node with respect to the ultimate outcome node. 
+
+A sensitivity value is the first derivative of the sensitivity function, at the point of the probability value \footnote{this is a terrible explanation}. It represents how much the sensitivity function changes at the point (sensitivity functions only take certain shapes, hyperboles and linear). A sensitivity value of near 0 means that at the point of the cpt, a `small' change in the parameter would result in an infinitesimally small change in the output probability - eg, this cpt is not sensitive at all, and a misestimation might not matter so much. However, a large sensitivity value means that the value is very sensitive to change - a small change in cpt might result in a meaningfully different output. What counts as a large sensitivity value I arbitrarily decide to be $>0.5$.
+
+
+
 \item Evidence updates the posterior in the correct direction.
 
+Given a plausible set of evidence (for instance, the set of evidence that a lawyer might present), that we update in chronological order, does the value of the posterior of our ultimate output node change in a meaningful way (corresponding to the evidence strength with regards to the output node).
 
-%\item The accuracy of the network is not lower than the inherent randomness of the simulation. Explain how to calculate accuracy and RMS here.
-%\item The strong view: probabilities in the network correspond exactly to probabilities in the simulation.
-%\item The weak view: Updates on evidence in the network go in the same direction as updates on evidence in the simulation.
-%\item Sensitivity analysis shows that no simulation-irrelevant event influences some output \footnote{rephrase}
 \end{enumerate}
 
 \subsection{Human Criteria}
 \begin{enumerate}
 
+
 \item How robust is the network against a loss of precision? \citep{Druzdzel2013}.
 
-\item Do we think that a human can find these numbers?
-	\begin{enumerate}
-	\item How robust is the network against disturbances around the mean (problem with precision)?
-	\item How robust is the network around rounding to arbitrary intervals?
-	\end{enumerate}
+We generated only one Bayesian Network, with the data we collected from the simulation. Then, we create many new networks, with this network as a basis. We do not change the number of nodes (we do not leave out or add nodes), nor the structure of the Bayesian network. We only change the values in each node's conditional probability table (cpt). In this case, we round the values in the cpt's, such that the BN becomes increasingly less precise. The intuition behind this is, that when expert users are going to elicit the probabilities, we do not know how robust the network is against smaller and larger imprecisions in the elicited probabilities. By simulating such imprecisions, we can compare the accuracy and rmsq error of the more imprecise networks to the ground truth of the `real' network. 
+
+We round every value in the cpts $c$ to each of \[i, i \in \{\text{no disturbance}, 0.05, 0.1, 0.125, 0.2, 0.25, 0.33, 0.5\} \] according to \[ floor(\frac{c}{i} + 0.5) \cdot i.\]
+
+\item Could a human find these probabilities?
+
+\item Can a human determine the correct independence relations?
+
 \end{enumerate}
 
 Now that we've established how the automatically generated Bayesian Networks are going to be judged, we can show cautiously in the next chapter how well they are holding up!

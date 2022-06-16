@@ -21,18 +21,19 @@ Apart from these goals, we will then also compare the networks to the networks c
 
 \section{Method}
 %There are two methods outlined here, one for each initial experiment.
+We want to see if our method can produce similar Bayesian Networks as those in \citet{Vlek2015}. This means that we take the two scenarios presented in that paper as inspiration. The facts that both scenarios agree on, are these: Jane and Mark had a fight, and Jane had a knife. Something Happened, and then Mark died. 
 
-Take the Vlek networks from Vlek Jurix 2015.
+The problem here, is that Something Happened. The two scenarios that explain why Mark died, are
 
-The general story is: Jane and Mark had a fight, and Jane had a knife. Something happened, and then Mark died. 
+Scenario 1, Jane stabbed Mark, and then he died. 
 
-Then, there are two specific scenarios that can explain why Mark died. In scenario 1, Jane stabbed Mark, and then he died. In scenario 2, Jane threatened Mark with the knife, Mark hit Jane, Jane dropped the knife, Mark fell on the knife, and Mark died by accident. There are two separate networks for these scenarios.
+Scenario 2, Jane threatened Mark with the knife, Mark hit Jane, Jane dropped the knife, Mark fell on the knife, and Mark died by accident. 
 
-I'm going to create two separate networks, and then also see if I can merge them, by creating a Jane-and-Mark-knife simulation, assigning some random probabilities that correspond to the story, and see what the K2 algorithm makes of it. Then I will also merge the two networks to see if the K2 can deal with mutually exclusive nodes (eg: `Mark died by accident' should rule out `Mark died by stabbing').
+These two scenarios are represented by two different Bayesian networks (Figure~\ref{vlek1} and Figure~\ref{vlek} for replications of the Bayesian Network structure for scenario 1 and 2 respectively). In \citet{Vlek2015}, no probabilities are given, as this paper considers how the structure of the networks represents completeness, consistency and plausibility, and is not meant as an investigation into probability elicitation.
 
-So, I created some logical rules, either atoms or rules, and we can process in the simulation these using standard forward chaining inference. Every atom has a prior probability, and every conclusion of a rule has a probability given the F/T state of the premises. At every step, the simulation checks which new sentences are true, applies a rule with a given probability, and counts the outcome.
+For this experiment, every fact \footnote{Or event, or random variable, or reporter, these are all interchangible in this chapter.} that is represented in the network, is represented as a fact in an uncertain forward chaining inference engine. We are creating a simulation using this engine (this is our data-generating environment). We are creating 3 different simulations: one for scenario 1, another for scenario 2, and a third for a combination, where either scenario 1 happens, or scenario 2, but we do not know which. The output of these simulations is presented to the K2 algorithm, which builds us Bayesian Networks that we can then evaluate.
 
-This does mean that rules at the end are not triggered as often as rules in the beginning, even if they have the same trigger probability (they are on other sides of the chain, more needs to be have happened to conclude that Mark died).
+The uncertain forward chaining engine is the simulation. Every fact has a prior probability, and every conclusion of a rule has a probability given the state of the premises. At every step, the simulation checks which new sentences are true, applies a rule with a given probability, and counts the outcome using the reporters of the same name with the process outlined in the previous chapter.
 
 \subsection{Behavioural rules for the simulation}
 
@@ -56,115 +57,110 @@ This does mean that rules at the end are not triggered as often as rules in the 
 \caption{For combined scenarios: blue rules belong to scenario 1, red rules belong to scenario 2, and black rules belong to both.}
 \end{table}
 
-This was done using forward chaining, with a time index, which means that a rule could only be triggered at one time (otherwise the probabilities get messed up). So we have a forward chaining rule, which means that if the premises of some rule are true, there are no excluding facts true, the timestep is correct, and the random number generator generated a number that is lower than the probability threshold, we find that the conclusion is true, and add it to our found facts. We keep doing this.
+This was done using forward chaining, with a time index, which means that a rule could only be triggered at one time (otherwise the probabilities get messed up). So we have a forward chaining rule, which means that if the premises of some rule are true, there are no excluding facts true, the timestep is correct, and the random number generator generated a number that is lower than the probability threshold, we find that the conclusion is true, and add it to our found facts, until we cannot generate any new facts anymore.
 
-Vlek's paper contains no probabilities, so I'm just making some up. The logical sentences are reporters in the simulation, and then I let the simulation run for 10,000 times. 
+The probabilities for these rules to fire were chosen as by the modeller as a subjective estimation of how often these events `might happen', and do not correspond to real statistics. Each simulation was run 10,000 times.
+
 
 \section{Results}
-We succeeded in generating three different BNs:  One for scenario 1, one for scenario 2, and one for the combined network (Figure~\ref{kb1}, Figure~\ref{kb2}, Figure~\ref{full}).
+We succeeded in generating three different BNs, one per scenario (Figure~\ref{kb1}, Figure~\ref{kb2}, Figure~\ref{full}, with the networks from \citet{Vlek2015} on the side for comparison).
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[]{images/Kb1.pdf}
-\caption{Automatically generated BN with K2 and the above forward chaining rules, scenario 1.}
+\begin{subfigure}{.4\textwidth}
+\includegraphics[width=\linewidth]{../experiments/VlekNetwork/bnImage/BNIMAGEKB1.pdf}
+\caption{Automatically generated.}
 \label{kb1}
-\includegraphics[scale=0.55]{images/vlek2015a.png}
-\caption{Vlek BN.}
+\end{subfigure}
+\begin{subfigure}{.6\textwidth}
+\includegraphics[width=\linewidth]{images/vlek2015a.png}
+\caption{Original BN.}
 \label{vlek1}
-\end{center}
+\end{subfigure}
+\caption{Scenario 1}
 \end{figure}
 
 
 \begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.7]{images/Kb2.pdf}
-\caption{Automatic generated BN with K2 and above forward chaining rules, scenario 2}
+\begin{subfigure}{.4\textwidth}
+\includegraphics[scale=0.7]{../experiments/VlekNetwork/bnImage/BNIMAGEKB2.pdf}
+\caption{Automatic generated.}
 \label{kb2}
-\includegraphics[scale=0.55]{images/vlek2015.png}
-\caption{Vlek BN.}
+\end{subfigure}
+\begin{subfigure}{.7\textwidth}
+\includegraphics[scale=0.4]{images/vlek2015.png}
+\caption{Original BN.}
 \label{vlek}
+\end{subfigure}
+\caption{Scenario 2}
 \end{figure}
 
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.8]{images/Kb.pdf}
+\includegraphics[scale=0.8]{../experiments/VlekNetwork/bnImage/BNIMAGEKBFull.pdf}
 \caption{Automatically generated BN with rules from both scenarios included.}
 \label{full}
 \end{center}
 \end{figure}
 
 
+\subsection{Evaluation with regards to structural, performance and human-factor criteria}
+In this section, the evaluation criteria as set out before are applied to the networks.
 
-\subsection{Structural Criteria}
+
+\subsubsection{Structural Criteria}
 \begin{enumerate}
-\item (temp) Events are ordered temporally - scenario-like.
+\item Hypotheses are ordered temporally.
 
-In the forward chaining knowledge base, we have premises and conclusions. If we take the event in a conclusion, then we know that the premise of that rule, is the parent of that node in the Bayesian Network. (again, rephrase this is so vague. Maybe make it a rule or smth). The two ``premiseless'' events Jane and Mark fight, and Jane has a knife, are also parentless in the simulation. In this sense, the structure of the Bayesian Network reflects the structure of the inference rules that we set out.
+We see that in both the separate networks, the temporal ordering of the nodes is correct - every node has as a parent a node that represents an event that would have happened earlier. In the combined network, this is not the case: there are some temporal links - the chain of events from "Jane threatening Mark" to "Mark dies by accident" is represented correctly, however, every node in this chain has as a parent ``Mark dies", which would, temporally, occur only after "Mark falls on knife" occurs.
 
-We see that in both the separate networks, the temporal ordering of the nodes is correct - every node has as a parent a node that represents an event that would have happened beforehand. In the combined network, this is not the case: mostly the temporal links are represented ok (eg: the chain of events from "Jane threatening Mark" to "Mark dies by accident" is represented correctly), however, this chain of nodes all has as a parent "Mark dies", which would, temporally, occur only after "Mark falls on knife" occurs. This means that in the combined Bayesian Network, we cannot satisfy the temporal ordering constraint due to the conditional probabilities between the events (eg: if Jane stabs Mark, then she cannot threaten him after, which is a relation that `inhibits' the `Jane threatening Mark' node - eg: there is a conditional relation between the two nodes, but not a temporal or causal one). As a conclusion about this criteria: Maybe temporal ordering should just hold within scenarios and not between scenarios, because we get into these sorts of causal messes. Or we should use the scenario node to organise different scenarios together. Idea: scenario node could cause temporal ordering, but what in cases with much shared evidence?
+The combined Bayesian Network brings up difficulties for temporal ordering. If we try to merge two mutually exclusive scenarios, we cannot meaningfully speak of that `Jane stabs Mark' happens before or after `Jane threatens Mark' - either one of these events happen, never both, and no one of them will happen before or after the other. This is not a problem for the performance of the Bayesian Network - we can arbitrarily decide on a parent node, and interpret the arcs as conditional, and not temporal or causal. However, structurally, it is easier to think about the links as temporal, and temporally organised `within' scenarios. 
 
-\item (con) Evidence connects to hypotheses.
+\item Evidence connects to hypotheses.
 
-In the original network, we have no evidence, so it is not included into this one. However, I might add some evidence to test the Performance Criteria.
+In these networks and simulation, no evidence is implemented yet, that means that this criteria does not apply.
 
-\item (exc) All events that are irrelevant are not included in the scenario BN.
+\item Relevance: All relevant events are in the BN, all irrelevant events are outside of the BN.
+This criteria, and the next one, are freebies, because we are just copying a network that already exist - our set of relevant events is the same as that in the original network by Vlek. By the structure of the network, we see that all events are connected to each other, there is no node that is both without parents and without children, which means that all nodes are relevant in that they represent conditional relations.
 
-This criteria, and the next one, are freebies, because we are just copying a network that already exist - our set of relevant events is the same as that in the original network by Vlek. We do not have any irrelevant event because we can see that all events are connected to each other, and all events reflect an underlying `decision' by an agent.
+\item Independent events are not connected to each other.
 
-\item (exh) All events that are relevant are included in the scenario BN.
-
-We have included all relevant events - all the events in the knowledge base are also in the network.
-
-\item (ind) Independent events are not connected to each other.
-
-This is not entirely correct in the uncombined networks (and also not correct in the combined network) - If Mark dies by accident, this is only dependent on Mark falling on the knife, and not also on Jane dropping the knife (since all cases where Mark dies by accident are also cases where Mark falls on the knife, we don't need a separate condition for Jane dropping the knife). This is probably due to an insufficient number of runs (eg: the probability that this happens is very low and we might not have enough data to correctly estimate it).
-
+This is done correctly in the non-combined networks, where each node has appropriate parents. However, in the combined network, we see that this goes wrong.
 
 \end{enumerate}
 
-\subsection{Performance Criteria}
-
+\subsubsection{Performance Criteria}
+We consider the accuracy and root mean square per network, then also look at the correspondence, sensitivity values and the progression given a certain evidence set.
 
 \begin{enumerate}
-\item The accuracy of the network is not lower than the inherent randomness of the simulation.
+\item Accuracy and Root Mean Square error are shown in Table~\ref{tabAcc}. 
 
-
-
-\begin{figure}[htbp]
+\begin{table}[h]
 \begin{center}
-\includegraphics[]{../experiments/VlekNetwork/plots/performance_KB1.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in network 1.}
-\label{kb1a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[]{../experiments/VlekNetwork/plots/performance_KB2.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in network 2.}
-\label{kb2a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[]{../experiments/VlekNetwork/plots/performance_KBFull.pdf}
-\caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for rounding to different intervals in the full network.}
-\label{fulla}
-\end{center}
-\end{figure}
-
-We see that as the disturbance increases (eg we round to larger intervals), accuracy obviously decreases, and RMS increases. But these decreases and increases are not that drastic, and overall performance is still pretty good (eg even for the worst, accuracy is still near 0.88)
-
-\item The strong and the weak view.
-
-The strong view: probabilities in the network correspond exactly to probabilities in the simulation. The weak view: Updates on evidence in the network go in the same direction as updates on evidence in the simulation.
-
-\begin{table}
 \begin{tabular}{|c|c|c|}
  \hline
- Conclusion &P(conclusion) given premises & P(event) given premises\\
+ Network & Accuracy & Root Mean Square\\
+ \hline
+ Scenario 1   & 0.88 &  0.19   \\
+ Scenario 2 & 0.94 & 0.09 \\
+ Combined & 0.95 & 0.08 \\
+\hline
+\label{tabAcc}
+\end{tabular}
+\caption{Accuracy and Root Mean Square Error for the networks}
+\end{center}
+\end{table}
+
+\item Correspondence.
+
+In this case, we know exactly the frequencies of events given their premises in the rule base, because we have set them explicitly in our probabilistic-forward-chaining engine. These frequencies are represented in Table~\ref{test} as the `True P(event)' column. The `P(event)' column is the result of the prediction of the Bayesian Network. As shown in the tables, the Bayesian Network \textbf{usually} estimates the probability of the event within ±1\% uncertainty. There are a few exceptions to the general behaviour of less than ±1\% uncertainty in the network - the network generally overestimates small probabilities. Whether an uncertainty of `generally less than ±1\%' is good or bad depends on the precision that the network requires - since we do not have any evidence that really depends on high-precision data or networks (eg: a change of 0.01 in one node results in a different conclusion - see sensitivity analysis and precision reduction), the Bayesian Networks seems satisfactory. 
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+ \hline
+ Conclusion & True P(event) & P(event) \\
  \hline
  Jane and Mark fight   & 20 &  20.87   \\
  Jane has knife & 70 & 70.23 \\
@@ -176,7 +172,7 @@ The strong view: probabilities in the network correspond exactly to probabilitie
 
 \begin{tabular}{|c|c|c|}
  \hline
- Conclusion &P(conclusion) given premises & P(event) given premises\\
+ Conclusion & True P(event) & P(event)\\
  \hline
  Jane and Mark fight   & 20 &  20.87   \\
  Jane has knife & 70 & 70.23 \\
@@ -189,16 +185,10 @@ The strong view: probabilities in the network correspond exactly to probabilitie
 \hline
 \end{tabular}
 \caption{For only scenario 2}
-\end{table}
 
-For both scenarios, the probabilities in the network are very similar to the probabilities in the ground truth (simulation). There is a
-loss of precision, which is the worst in case of `Mark dies' in the first scenario, which is estimated at 75\% by the network, but in fact in the simulation is only 70\% probable. I don't know where this comes from. Apart from that, all divergences for the original probabilities are within 2\%. This means the strong view does not hold, but the weak view does (updating on evidence gets us with probabilities that are closer to the simulation probabilities than before).
-
-
-\begin{table}
 \begin{tabular}{|c|c|c|}
  \hline
- Conclusion &P(conclusion) given premises & P(event) given premises\\
+ Conclusion & True P(event) & P(event)\\
  \hline
  Jane and Mark fight   & 20 &  20.87   \\
  Jane has knife & 70 & 70.17 \\
@@ -211,104 +201,253 @@ loss of precision, which is the worst in case of `Mark dies' in the first scenar
  Mark dies (premise: Jane stabs Mark) & 70 & 68.68 \\ 
   Mark dies (premise: Mark dies by accident)& 100 & 98.77 \\ 
 \hline
+\label{test}
+
 \end{tabular}
 \caption{For combined scenarios}
+\end{center}
 \end{table}
 
-The probabilities of the conclusions in the combined network given the premises, also look relatively similar on a human scale - I assume that a human probability elicitor would not be able to distinguish between a probability of 11.13, 10.92 or 10.00 for the conclusion ``Mark falls on knife". On the other hand, if we round all the probabilities in the network to 10, a human probability elicitor might be able to say that the probability of `Mark falls on knife'' is 0.1 (or 10\%), to exactly that level of precision (so not 0.10, or 0.100). The resulting probabilities might be elicitable, while still meaningfully reflecting the ground truth.
 
 
 \item Sensitivity analysis shows that no simulation-irrelevant event influences some output \footnote{rephrase}
+
+kb1
+
+fight 0.01
+knife 3.12e-3
+stab 0.4
+dies 1
+
+
+kb2
+jane\_and\_mark\_fight	9.5E-4	
+jane\_has\_knife	2.8E-4	
+jane\_threatens\_mark\_with\_knife	0.018
+mark\_hits\_jane	0.036
+jane\_drops\_knife	0.07
+mark\_falls\_on\_knife	0.66	
+mark\_dies\_by\_accident	1	
+mark\_dies	0.0
+
+
+full
+jane\_and\_mark\_fight 	4.6E-4	
+jane\_has\_knife	1.3E-4	
+jane\_stabs\_mark\_with\_knife	3.0E-4	
+mark\_dies 0.12	
+jane\_threatens\_mark\_with\_knife	0.002
+mark\_hits\_jane	0.003
+jane\_drops\_knife	0.002
+mark\_falls\_on\_knife	0.013
+mark\_dies\_by\_accident	1
+
+From these values we can see that a parameter chance in most nodes will not affect the output probability very much. The parent nodes of the output node are, of course, the most influential. 
+
+
+\item Effect of evidence on the posterior.
+
+We plot the effect of a sets of evidence on the posterior (Figure~\ref{kb1a}, ~\ref{kb2a}, ~\ref{fulla}). In each, we select a different story: 
+
+For the first case, Jane has a knife, and Jane and Mark have a fight, but then Jane does not stab Mark - hence, we see the posterior of `mark dies' increase once we learn that they have a fight, and decrease when Jane does not stab Mark.
+
+For the second case, Jane and Mark fight, and Jane has a knife, and Jane threatens Mark with a knife, Mark responds by hitting Jane, and Jane drops the knife. All of these facts cause the posterior of `mark dies' to increase, since, given all of these factors, we would expect it a bit more likely that Mark dies. However, it is a very small increase, from 0.0 to perhaps 0.1. Then, once we learn that Mark actually does fall on a knife, we see the posterior probability of Mark dying increase by much more, growing to 0.5. However, Mark gets lucky, and does not die accidentally (he probably fell on the good side of the knife). Now, the posterior for `mark dies' also goes to 0, since the only way that Mark dies in this scenario is due to an accidental death by falling on a knife. 
+
+The combined scenario represents the story where Jane and Mark fight, Jane has a knife, but Jane does not stab, but threatens instead. Then Mark hits Jane, and Jane drops the knife, which is the highest posterior probability for `mark dies' in the entire story. Then, Mark does not fall on the knife, and Mark does not die by accident, and hence the posterior for `mark dies' goes to 0.
+
+\begin{figure}[htbp]
+
+\begin{subfigure}{.5\textwidth}
+ \centering
+\includegraphics[width=0.95\linewidth]{../experiments/VlekNetwork/plots/posterior_base_networkKB1.pdf}
+\caption{ network 1.}
+\label{kb1a}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=0.95\linewidth]{../experiments/VlekNetwork/plots/posterior_base_networkKB2.pdf}
+\caption{ network 2.}
+\label{kb2a}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=0.95\linewidth]{../experiments/VlekNetwork/plots/posterior_base_networkKBFull.pdf}
+\caption{Combined network.}
+\label{fulla}
+\end{subfigure}
+
+\end{figure}
+
 \end{enumerate}
 
-\subsection{Human Criteria}
+\subsubsection{Human Criteria}
 \begin{enumerate}
-\item Do we think that a human can find these numbers?
 
-The conditional probability tables as displayed in these networks are not great.
 
-	\begin{enumerate}
-	\item How robust is the network against disturbances around the mean (problem with precision)?
-	\item How robust is the network around rounding to arbitrary intervals?
-	\end{enumerate}
-	
-\item Can a human find this network \& reason with it? All the evidence points in the correct direction, in the weak and strong views we're ok, even for relatively large intervals - we see a sharp drop in accuracy and increase in RMS error at around intervals of 0.33. This would mean, that for these networks, the elicitor should only need to specify probabilities that are 0, 0.33, 0.66, and 1 (eg, round every probability that is not one of these, to one of these). Note, that this is likely different dependent on the complexity of the networks (in some way, lol). This sounds definitely plausible as a lower level. If someone has strong opinions on the CPT then we can always increase precision in certain nodes. Hence, this seems pretty great.
+\item How robust is the network against a loss of precision?
+
+We tested this by changing the cpts to be less and less precise, and plotted the results in Figure~\ref{kb1a1} - ~\ref{fullp}. We see that as the precision decreases, accuracy decreases, and RMS increases. But this decrease in performance is not drastic, it is not the case that accuracy ever drops below 75\%. 
+
+With regards to the effect of loss of precision on the effect of evidence on the posterior, we see that there are two different situations: in network 1 and the combined network, we see that loss of precision has a large effect: evidence seems to not affect the posterior at all, leaving it at 0.0 throughout the entire run. For network 2, we see that loss of precision causes a `jitter' effect - the general shape of the impact of evidence remains the same, only the exact values differ.
+
+This altogether suggests that in some cases, the network is very robust to loss of precision (in the case of network 2). However, in other cases the network, even though it remains at high accuracy, is not very robust, since the effect of evidence on the posterior is very different from the non-disturbed network.
+
+However, the accuracy values of especially the very low-precision networks can be 
+
+
+\begin{figure}[htbp]
+\begin{subfigure}{.5\textwidth}
+ \centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KB1.pdf}
+\caption{Network 1 accuracy and RMS.}
+\label{kb1a1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+ \centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/posterior_KB1.pdf}
+\caption{Network 1 posterior.}
+\label{kb1a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KB2.pdf}
+\caption{Network 2 accuracy and RMS.}
+\label{kb2a1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+ \centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/posterior_KB2.pdf}
+\caption{Network 2 posterior.}
+\label{kb2p}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KBFull.pdf}
+\caption{Combined network accuracy and RMS.}
+\label{fulla1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+ \centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/posterior_KBFull.pdf}
+\caption{Combined network posterior.}
+\label{fullp}
+\end{subfigure}
+
+\end{figure}
+
+
+\item Could a human find these probabilities?
+We see in the previous item that the loss of precision only begins to affect the accuracy of the network at a precision of about 0.3, which means that all the values in the cpts in the Bayesian Network are restricted to 0, 0.33, 0.66 and 0.99. 
+
+
+\item Can a human determine the correct independence relations?
+
+
+
 
 
 \end{enumerate}
 
 
 \section{Discussion}
-In the discussion, we focus on the comparison of the automatically generated networks, to the paper in Vlek.
+In the discussion, we focus on the comparison of the automatically generated networks to the paper in Vlek, 
 
 
+\subsection{Comparison to Vlek's Method}
 
-\subsection{Comparison to Vlek 2015}
+The Bayesian Networks generated using the method outlined in this paper diverge meaningfully from the networks as presented in \citet{Vlek2015}. 
 
-How does the network react to:
+Firstly, in the original paper there was no integration of both scenarios into one network. In this paper, the combination is shown in Figure~\ref{full}. For the integration of two scenarios, Vlek proposed combining the networks from Figure~\ref{kb1} and Figure~\ref{kb2} using the merged scenario idiom construction as outlined in \citet{Vlek2014}. This merging depends on a scenario-like construction with a constraint node, and requires extra probabilities to be elicited. In this case, there was no `merging' of two networks, instead the simulation was run with all the rules and reporters (and one excluding rule that states that if Jane was threatening Mark, Jane couldn't stab Mark). In short, the `merging' happened at the simulation level, and the data obtained from the simulation was then used to create the network that combines both scenarios (Figure~\ref{full}), effectively effortlessly combining two networks.
 
-Combination: if Mark dies accidentally, what does that imply? That Jane didn't stab Mark. We can model this without constraint node.
-Inconsistent scenario: If we say that jane does not have a knife, but does stab Mark, what does the network do? Breaks/error. 
+Secondly, the network structure between the networks in \citet{Vlek2015} and this paper are different. In this case, there is no scenario node or subscenario-structure organisation. The only organisation in the automatically generated networks is the `temporal' structure of parent vs child nodes, which is usually present (the child event happens after the parent event). The subscenario-structure we see in Figure~\ref{vlek} is not present. The lack of scenario, subscenario and constraint nodes, is because these are not necessary in representing the events of the simulation. A `scenario' is not ordered using a scenario node, but instead should be modelled in such a way that when setting evidence, some nodes being true `cause' other nodes to become false (and vice versa). The scenarios, in this project, emerge from the network, instead of being represented explicitly.
 
-There are two types of inconsistency: network-breaking ones, and competative-scenario ones.
+The temporal structure is not consistently present in the networks, however. In Figure~4.3, we see that the node `mark\_dies' is the parent node of almost all the nodes of the second scenario. This is because the temporal ordering in K2 is not straightforward when multiple scenarios are combined (eg, Mark dies after being stabbed, which is the 4th and final event in scenario 1, but Mark can also die after falling on the knife, which is the 6th event in scenario 2). Either improving the temporal ordering algorithm or the ordering of nodes by the modeller could improve this situation. 
 
-The advantage of this approach is that it is effortless to combine two networks.
+Even though the networks in this paper are different from the networks in \citet{Vlek2015}, we can still use the criteria of completeness, consistency and plausibility outlined in that work to assess their quality.
 
-
-
-If we only look at the ordering of the Bayesian Network, we can see that for Figure~\ref{kb1}, the sub-scenario structure is the same as in Vlek 2015 Figure~3, our Figure~\ref{vlek1}. There's no scenario node constraining the network, all the information is contained in the network, no scenario node needed (todo: make the nodes the exact same names).
-
-However, there are differences between Vlek 2015 Figure~4, and the automatically generated BN here. Figure~4 in Vlek 2015 is replicated below in Figure~\ref{vlek} (todo: ask permission?? or just remove). The automatically generated BN is very linear and can be interpreted in a purely temporal way: mark hits jane, jane drops the knife, and due to jane dropping the knife, and mark falling on it, mark dies by accident - and if mark dies by accident, mark dies. The probabilities for all these events (from jane dropping the knife on), are ridiculously low, and don't really make sense (should interpret the small probabilities as e, and not as actual numbers I guess, due to underflow?). 
-
-In Vlek's paper, we see a subscenario: we have the subscenario ``Mark died by accident", which contains events such like mark hit jane, which leads to jane dropping the knife, and mark falling on the knife, and then dying. The coparents of Mark died are the same in this network as in the automatically generated BN, however, we once-again miss the scenario-like construction where mark hitting jane, jane dropping the knife, and mark falling on the knife are connected as part of a subscenario, rather than their ``own" nodes.
-
-
-Why to choose for subscenarios when it is not required? Just syntactic sugar? {\color{red} look}.
-
-
-In the full final network, we see that the two mutually exclusive scenarios (stabbing vs falling on knife) are excluding each other even without the use of a scenario node - so we can make networks that combine two different stories. This is nice.
-
-\subsection{Quality of scenario}
 \begin{itemize}
-\item Completeness - have all the parts and not one more. Not a big deal for this simulation, as I've taken all the nodes from Vlek 2015, there's no discussion about granularity.
+\item Completeness can be operationalised in this situation, not by looking at story schemes and idioms, but by looking at the reporters in the simulation. A network can be considered complete if it represents every reporter as a node. This means that all the networks are complete, because every network contains nodes that correspond to all reporters. It is more likely that we suffer from the opposite problem, where irrelevant reporters are still included in the network. 
 
-\item Consistent - no internal contradictions. There is no explicit structure in the final BN that ensures consistency. The probabilities inside the BN need to ensure that. For instance, the only thing that is contradictory in the KB is that jane threatening and jane stabbing, cannot both happen. In the final network (Figure~\ref{full}), there are nodes for both threatening and stabbing. However, the relations of these nodes are such, that when one node becomes more likely (eg, we set evidence on it),  the other node becomes less likely (as we can see in the figure below:
+\item Consistency means that there are no internal contradiction. In this network, consistency cannot be seen structurally (by separate scenarios and constraint nodes). The node `jane threatens mark with knife' and the node 'jane stabs mark with knife' are inconsistent, but they belong in the same network. Instead of structurally, consistency is ensured using the conditional probability tables. The relations of these nodes are such, that when one is true, the other becomes false (Figure~\ref{cont}).
 
-figure here of $\Delta$ P stabbing for increasing values of P threatening. If we know threatening is true, stabbing goes to 0, and vice-versa - and all the consequences of the threatening scenario also go to 0, so it just works. This means that several different scenarios can be combined into one network, and still be mutually exclusive. Both scenarios share some events (as some scenarios can do in real life), but the different scenarios themselves are not separated from each other by structure or construction (as is the case in Vlek~2015).
 
-\textbf{Do we need the constraint node? }
+This means that several different scenarios can be combined into one network, while the overall network is still consistent. Both scenarios share some events (as scenarios can do in real life), but the different scenarios themselves are not separated from each other by structure, and we do not need the constraint node as suggested in \citet{Fenton2011}. Fenton suggests two objections against a solution as presented here: unnecessary extra numbers, and lack of causal interpretation. Unnecessary extra numbers is not a problem here, because we do not need to elicit them (they fall out of the algorithm automatically). For causality, we are not interpreting the arcs between nodes causally in any way. They are conditional, and in that case it does not matter which node is the parent.
 
-We can just  draw a line between two events in order for them to become mutually exclusive, like we do with `Jane stabs mark' and `jane threatens mark'. Fenton et al advice against that - we draw a relation between two causes to ensure mutual exclusivity. Fenton doesn't like this even though it satisfies the axioms he sets out in the paper because 1) the parent cause becomes part of the causal pathway leading to the child cause, which means that you have to involve many more numbers (``meaningless columns''). Fortunately, this is not a problem in the automatically generated BNs, because the algorithm fixes this for us :). Not sure if an extra node is good for the computational complexity of BNs either. Uh. Anyway, even if this is not the case, there are lots of unnecessary numbers in Bayesian Networks anyway, because there's many combinations of events that just do not happen (eg: mark dies but jane doesn't have a knife, never happens, but is in the table anyway. Unnecessary complexity? Probably a rounding error!!). Anyway, that's a thing. So it doesn't really matter.
+Other types of inconsistency - such as Jane stabbing Mark, when Jane does not have a knife, result in a `conflict' message when when the network is imported into Hugin. PyAgrum does not show such a conflict message.
 
-The second objection to using the direct connection over the constraint node is that you have to arbitrarily decide which cause is the parent - which doesn't make sense if you interpret the networks causally. Fortunately. there's no causality in this part, its just frequencies and conditional probabilities, so it doesn't matter, we can just pick one and it's fine. So turns out we don't need the constraint node anyway :D
+\begin{figure}[htbp]
+\begin{subfigure}{.3\textwidth}
+\includegraphics[scale=0.5]{images/vlekprog/e1.png}
+\caption{Stabbing means no threatening.}
+\label{e1}
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+\includegraphics[scale=0.5]{images/vlekprog/e2.png}
+\caption{Not stabbing does \textbf{not} mean that there's threatening, we do not have mutual exclusivity constraint.}
+\label{e2}
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+\includegraphics[scale=0.5]{images/vlekprog/e3.png}
+\caption{Threatening with knife means that there's no stabbing.}
+\label{e3}
+\end{subfigure}
+\caption{Effect of setting evidence on contradictory nodes.}
+\label{cont}
+\end{figure}
 
-\item Plausible - scenario should correspond to the modellers knowledge about the world. Support can help implausible scenarios to become plausible.
+\item Plausible. Plausibility is defined such that a scenario should correspond to the modellers knowledge about the world. In this case, we have outsourced the problem of plausibility to the simulation, and the Bayesian Network reflects it. 
 
+If we set to true one of the nodes in the temporal chain that leads towards the outcome of scenario 2, then we find that the rest of the nodes in that chain become more plausible - but not by much, because scenario 2 is very implausible to begin with! For example, P( `mark\_falls\_on\_knife' $| \emptyset$) = 0.00028, but once we know that Jane has threatened Mark, we see P( `mark\_falls\_on\_knife' $|$ `jane\_threatens\_mark\_with\_knife) = 0.046. Implausible elements become more plausible once we find support for them, reflecting the modeller's knowledge about the world.
 
 \end{itemize}
+%\textbf{Do we need the constraint node? }
+
+%We can just  draw a line between two events in order for them to become mutually exclusive, like we do with `Jane stabs mark' and `jane threatens mark'. Fenton et al advice against that - we draw a relation between two causes to ensure mutual exclusivity. Fenton doesn't like this even though it satisfies the axioms he sets out in the paper because 1) the parent cause becomes part of the causal pathway leading to the child cause, which means that you have to involve many more numbers (``meaningless columns''). Fortunately, this is not a problem in the automatically generated BNs, because the algorithm fixes this for us :). Not sure if an extra node is good for the computational complexity of BNs either. Uh. Anyway, even if this is not the case, there are lots of unnecessary numbers in Bayesian Networks anyway, because there's many combinations of events that just do not happen (eg: mark dies but jane doesn't have a knife, never happens, but is in the table anyway. Unnecessary complexity? Probably a rounding error!!). Anyway, that's a thing. So it doesn't really matter.
+
+%The second objection to using the direct connection over the constraint node is that you have to arbitrarily decide which cause is the parent - which doesn't make sense if you interpret the networks causally. Fortunately. there's no causality in this part, its just frequencies and conditional probabilities, so it doesn't matter, we can just pick one and it's fine. So turns out we don't need the constraint node anyway :D
 
 
-\section{Important take-aways}
-In this section, I summarise some important take-aways, that will be necessary for the rest of this project. Things that we learn here, will be useful in evaluating the rest.
 
-\subsection{Simulations work}
-Even this very simple `forward chaining' simulation (eg: forward chaining with some probabilities attached), can be used to construct meaningful Bayesian Networks. The Bayesian Networks have generally ok accuracy and RMS error, and reflect the structure of the simulation (dependent on the number of runs, that's true). Even when we disturb the CPTs in the table, we get relatively ok accuracy and RMS until  
+So our overall conclusion with regards to the quality of the network, is that the networks represent the scenarios well with regards to completeness, consistency and plausibility, even without structural support from scenario, sub-scenario and constraint nodes. This means that this method seems promising and does not need to include or build on the scenario-type structures.
+
+\subsection{Further Discussion}
+
+\subsubsection{High Accuracy does not mean very much}
+The accuracy and RMS values for low precision (like 0.33) might seem high, but that does not mean very much if we want to generalise to different situations. Recall that the accuracy and RMS are calculated on data that comes from the \textbf{exact same} data-generating environment: the parameters of the simulation has not changed. This also means that, in case of scenario 2, the very implausible situation where Mark actually falls on a knife, is not represented many times in the testing data. 
+
+However, if we use the network rounded to precision 0.33, to apply evidence such that Mark falls on a knife, the network breaks: PyAgrum gives an `Joint probability of evidence = 0' error, while Hugin states: `Propagation of inconsistent evidence attempted', making the low-precision-networks effectively useless for cases that are underrepresented in the data-generating environment. Imprecisely said: low-precision networks inadvertently round the probabilities in the cpts in favour of high-frequency world-states.
+
+This means that these low-precision networks are not great at generalising to low-frequency world states (such as cases where Jane threatens Mark with a knife in scenario 2). This means that, for future research, we should either calculate the accuracy over a set of all (possible) world states, instead of a generic test/train sample taken from the simulation/data-generating environment, or we should not trust high-accuracy blindly.
 
 
-\subsection{We don't need the scenario node for mutual exclusivity}
-Both of Fenton's objections for the direct node connection are not problems for us (yet) - the first one, specifying too many numbers, might become problematic in the future, and the second, about the interpretation of the arcs between nodes is not a problem, because we interpret these links as solely conditional, and not causal. Background information about causal relations between events might help us to order the network, so that it can become more efficient, but this should not affect the ``reasoning'' aspect - eg, even if the structure of the network is different, updating on evidence should produce the same results as before.
 
 
-\subsection{Resolution and number of runs}
+\subsubsection{Are we just outsourcing?}
+
+This approach to completeness and plausibility outsources the problem of determining completeness or eliciting plausibility from the builder of the network to the builder of the simulation. We get a complete network for free, given a simulation, in our approach, but that is because we are basing our network entirely on the simulation. This brings up the following problem: what does it mean for a simulation to be `incomplete'? How can we know that the probabilities inputted in the simulation are plausible?
+
+ There is no good answer to this question. A simulation will always be an incomplete reflection of reality. Perhaps the simulation should correspond to some story or idiom. If the scenario contains `intentional' agents, we might find it easier to think about stories and idioms in simulation than we find it to think about stories and idioms with regards to Bayesian Networks.
+
+
+
+\subsubsection{Resolution and number of runs}
 The accuracy of the Bayesian Network improves as the number of runs improves. This is an obvious fact. It has implications for the rest of the network. For example, if we run the network too few times (let's say 10 times), then the network will not be able to estimate the probability of certain states - eg: the probability that Mark hits Jane can be calculated as: $0.7 \cdot 0.2 \cdot 0.03 \cdot 0.9 = 0.00379$, which means that there's a 0.378\% chance that it happens, eg, if we run the simulation a 1000 times, Mark will hit Jane in 4 of them (or, actually, the sentence ``Mark hits Jane" is true in 4 of them). If we go all the way down the chain of unreasonable facts to ``Mark dies accidentally", we get a probability of 0.0001134, which is 1 every 10.000 runs. If we run the simulation 10.000 times, that means that we cannot estimate probabilities that are smaller than 0.0001 - either they occur `accidentally', eg, by chance, and the network estimates that they happen once every 10.000 runs, or they don't happen within 10.000 runs, and the network estimates that these events never happen at all - when in fact, they might happen, but just once every 20.000 runs.
 
 What are the practical implications of this? On this side, that we need enough data to get an accurate prediction. But, if we're thinking about elicitation, this means that if you decide to add an event to a scenario, or a node to a network, you really have to think about the probability that you assign it - a probability of 1 in 10.000 would really mean that this event would only happen once every 10.000 situations (that you are considering - the reference class is never far away). 
 
 
 
-With this part, I have shown that the pipeline works. We can make a simulation using forward chaining, that generates world-states, and those world states can be translated into Bayesian Networks by means of the K2 algorithm, with reasonable accuracy even under rounding. The K2 manages to replicate constraints and merge two different possible scenarios together. So if the real world worked like a simple forward chaining inference method where we knew exactly when a proposition was true (which is, if the state is true, we set the proposition to true in every epoch), then BNs would work flawlessly even if we weren't very great at estimating the correct frequencies precisely.
 
-Sad that the real world doesn't work that way.
+\section{Conclusion}
+Even this very simple `forward chaining' simulation (forward chaining with some probabilities attached), can be used to construct meaningful Bayesian Networks. The Bayesian Networks have generally high accuracy and low RMS error, even when their cpts are disturbed, and reflect the structure of the simulation. 
+
+With this part, I have shown that the pipeline works. We can make a simulation using forward chaining, that generates world-states, and those world states can be translated into Bayesian Networks by means of the K2 algorithm, with reasonable accuracy even under rounding. The K2 manages to replicate constraints and merge two different possible scenarios together. The resulting networks are consistent, complete and plausible. The scenario, sub-scenario and constraint node mechanisms are not necessary for modelling these Bayesian Networks.
+
+So if the real world worked like a simple forward chaining inference method where we knew exactly when a proposition was true (which is, if the state is true, we set the proposition to true in every epoch), then BNs would work flawlessly, even if we weren't very great at estimating the correct frequencies precisely.
+
 
 
 %> Dit is de focus van mijn onderzoek!!!

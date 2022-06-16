@@ -11,6 +11,7 @@ import csv
 import random
 import os
 import matplotlib.pyplot as plt
+import itertools
 from colour import Color
 from CredibilityGame import CredibilityGame
 from VlekNetwork import VlekNetwork
@@ -617,8 +618,8 @@ def calculate_accuracy_1(file_name, path):
 
         #print("going over set nodes")
 
-        print(event_list)
-        print("output", output_node)
+        #print(event_list)
+        #print("output", output_node)
         for ev in event_list:
             val = df.loc[i, ev]
             #print("\t", ev, int(val))
@@ -628,6 +629,8 @@ def calculate_accuracy_1(file_name, path):
                 fin = round(ie.posterior(output_node)[1], 2)
             except:
                 fin = "NA"
+                print("network breaks at precision")
+                print(file_name)
             #    fin = "NA"
             #    print("BREAKS")
                 break
@@ -698,6 +701,127 @@ def calculate_accuracy_1(file_name, path):
 
 
     otp_pd.to_csv(path+"/stats/runs/"+file_name+".csv", index=False)
+
+
+def calculate_world_states_accuracy(file_name, path, output_node):
+    network = path + "/BNs/" + file_name + ".net"
+    if "param" not in file_name and "map" not in file_name:
+        csv_name = file_name.split("_", 1)[0]  # we want to refer to hte original csv file
+    else:
+        csv_name = file_name
+    csv_file = path + "/train/" + csv_name + ".csv"
+    if "net" not in network:
+        network = network + ".net"
+    bn = gum.loadBN(network)
+    df = pd.read_csv(csv_file, sep=r',',
+                     skipinitialspace=True)
+    ddf = df.drop_duplicates()
+
+
+    event_list = list(ddf.head())  # experiment.reporters.relevant_events
+    #print(event_list)
+    #random.shuffle(event_list)
+    #ie = gum.LazyPropagation(bn)
+
+    #print(ddf.head())
+
+    possible_states = []
+    impossible_states = []
+
+    l = list(itertools.product([1, 0], repeat=len(event_list)))
+    for item in l:
+        a = np.array(item)
+        #print(a)
+        da = pd.DataFrame(np.expand_dims(a, axis=0), columns=list(ddf.head()))
+        result = pd.concat([ddf, da]).shape[0] - pd.concat([ddf, da]).drop_duplicates().shape[0]
+        #print(result)
+        if result == 1:
+            possible_states.append(item)
+        else:
+            impossible_states.append(item)
+
+
+    #print(l)
+
+    output_ind = event_list.index(output_node)
+    #print(output_ind)
+
+    acc = 0
+    rmq = 0
+    bad_count = 0
+    #print(network)
+    for item in possible_states:
+        #print()
+        ie = gum.LazyPropagation(bn)
+        ie.addAllTargets()
+        #print(item)
+
+
+        for name in list(bn.names()):
+            i = event_list.index(name)
+            ie.addAllTargets()
+            if i != output_ind:
+                #print(i, event_list[i], item[i])
+
+
+                ie.addEvidence(event_list[i], int(item[i]))
+                ie.eraseTarget(event_list[i])
+                #for node in event_list:
+                #    print(f"\t {ie.posterior(node)[1]}")
+
+                # go over all the nodes to check for breakage
+                try:
+                    ie.evidenceJointImpact(ie.targets(), {event_list[i]})
+                    final_posterior = ie.posterior(event_list[output_ind])[1]
+                    #print(f"posterior prob {event_list[output_ind]}", ie.posterior(event_list[output_ind])[1])
+
+                except:
+
+                    final_posterior = "NA"
+                    #print(f"network breaks!!  {file_name}")
+                    break
+
+
+        if final_posterior == "NA":
+            #print("bad")
+            acc += 0
+            bad_count += 1
+        else:
+            #print("final posterior", final_posterior)
+            #print("actual value", event_list[output_ind], item[output_ind])
+            rmq += abs(int(item[output_ind]) - final_posterior)
+
+            if int(round(final_posterior,0)) == int(item[output_ind]):
+                acc += 1
+            else:
+                acc += 0
+
+    print(file_name)
+    print(f"overall accuracy {acc/len(possible_states)}")
+    print(f"overall rmsq {rmq/len(possible_states)}")
+    print(f"overall inconsistent count {bad_count/len(possible_states)}")
+
+    n = file_name.split("_", 2)
+    if len(n) > 1:
+        [name, dist, val] = n
+    else:
+        name = n[0]
+        dist = "none"
+        val = 0
+
+    row = [name, val, acc/len(possible_states), rmq/len(possible_states), bad_count/len(possible_states)]
+
+    with open(path + f"/stats/performance/{csv_name}_STATE_performance.csv", 'a', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(row)
+
+
+
+
+
+
+
+
 
 
 def calculate_accuracy_fixed_output(file_name, path, output_node):
@@ -781,6 +905,8 @@ def calculate_accuracy_fixed_output(file_name, path, output_node):
                     fin = round(ie.posterior(output_node)[1], 2)
                     #print(fin)
                 except:
+                    print("network breaks at precision")
+                    print(csv_file)
                     fin = "NA"
                 #    fin = "NA"
                 #    print("BREAKS")
@@ -903,6 +1029,11 @@ def get_cpts(name, path):   # we only use this for GroteMarktMaps checking cpts 
     print(name, bn.cpt("seen_1_0")[0])
 
 
+
+
+
+
+
 def progress(name, path, temporal_evidence, params):
     x = []
     y = []
@@ -984,17 +1115,64 @@ def plot_posterior(path, base_network):
     plt.savefig(file_name)
     plt.close()
 
+def plot_posterior_base_network_only(path, base_network):
+    folder = path + "/progress/"
+    list_files = os.listdir(folder)
+    list_files.sort()
+    relevant_files = []
+    flag = 0
+
+    colors = ["#fde725", "#b5de2b", "#6ece58", "#35b779", "#1f9e89", "#26828e", "#31688e", "#3e4989", "#482878",
+              "#440154"]
+    for f in list_files:
+        if base_network in f:
+            relevant_files.append(f)
+
+    ax = plt.gca()
+    for i in range(0, len(relevant_files)):
+        file = relevant_files[i]
+        param = file.split("_", 2)
+        if len(param) > 2:
+            [base, dis, num] = param
+            num = num[:-4]
+            flag = 0
+        else:
+            base = file
+            num = "no"
+            flag = 1
+
+        if flag == 1:
+
+            df = pd.read_csv(folder + file, sep=r',',
+                             skipinitialspace=True)
+            df.rename(columns={"posterior": str(num)}, inplace=True)
+            col = list(df.columns)
+            df.plot(kind='line', x=col[0], y=col[1], color=colors[i], legend=num, title=base, ax=ax)
+            plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation='vertical')
+            # Tweak spacing to prevent clipping of tick-labels
+            plt.subplots_adjust(right=0.8, bottom=0.5)
+            ax.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
+            plt.xlabel("Evidence added")
+            plt.ylabel("Posterior of " + df["posterior_name"][0])
+            plt.title("The effect of evidence on the posterior")
+        file_name = path + "/plots/posterior_base_network" + base_network + ".pdf"
+    plt.savefig(file_name)
+    plt.close()
+
     #plt.show()
 
 def plot_performance(path, base_network):
     fig, axs = plt.subplots(2, sharex='col')
     print(path, base_network)
 
-    df = pd.read_csv(path+f"/stats/performance/{base_network}_performance.csv", sep=r',',
+    df = pd.read_csv(path+f"/stats/performance/{base_network}_STATE_performance.csv", sep=r',',
                      skipinitialspace=True)
     col = list(df.columns)
-    df.plot(kind='line', x=col[2], y=col[3], title="Accuracy",  ax=axs[0])
-    df.plot(kind='line', x=col[2], y=col[4], title="RMSE",  ax=axs[1])
+    print(col)
+    print(col[2])
+    print(col[3])
+    df.plot(kind='line', x=col[1], y={col[2], col[4]}, title="Accuracy",  ax=axs[0])
+    df.plot(kind='line', x=col[1], y=col[3], title="RMSE",  ax=axs[1])
     #plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation='vertical')
     # Tweak spacing to prevent clipping of tick-labels
     #plt.subplots_adjust(bottom=0.60)
@@ -1007,7 +1185,7 @@ def plot_performance(path, base_network):
     axs[1].legend(bbox_to_anchor=(1.04, 1), loc="upper left")
 
     plt.savefig(file_name)
-    #plt.show()
+    plt.show()
     plt.close()
 
 def plot_performance_fixed_output(path, base_network, temporal_evidence):
@@ -1138,8 +1316,8 @@ d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"
 for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 1000, d_S),
                                                         #("StolenLaptopPrivate", 1000, d_S),
                                                        #("StolenLaptop", 1000, d_S),
-                                                        #("VlekNetwork", 50000, d_V),
-                                                        ("GroteMarkt", 2000, d_G),
+                                                        ("VlekNetwork", 500000, d_V),
+                                                        #("GroteMarkt", 2000, d_G),
                                                         #("GroteMarktMaps", 2000, d_G)
                                         ]:
 
@@ -1148,29 +1326,30 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
 
     path = org_dir + "/experiments/" + scenario
 
-    test_runs = int(train_runs / 10)
+    test_runs = int(train_runs / 500) #originally 10
     list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
     list_files.sort()
     #print(scenario)
 
 
-
+    '''
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
                             param_dict=param_dict)  # we do the simple scenario
     test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
                           param_dict=param_dict)
 
+    '''
     list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
     list_files.sort()
 
-
+    '''
     param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
                 [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
 
     param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
                 [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
 
-    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
+    param_ar = [[0.001, 'arbit'], [0.01, 'arbit'], [0.025, 'arbit'], [0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
                 [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
                 [0.5, 'arbit']]
 
@@ -1191,6 +1370,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
                 for p in params:
                     #print(param_ar)
                     disturb_cpts(path, exp, p[0], train_data[:-4])
+    '''
 
     for train_data in list_files:
         if "pkl" in train_data:
@@ -1200,8 +1380,17 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
             writer = csv.writer(f)
             writer.writerow(["experiment", "disturbance", "value", "accuracy", "rmsq"])
 
+        #with open(path + f"/stats/performance/{train_data[:-4]}_STATE_performance.csv", 'w', newline='') as f:
+        #    f.truncate()
+        #    writer = csv.writer(f)
+        #    writer.writerow(["experiment", "disturbance", "accuracy", "rmsq", "failed"])
+        #    #row = [file_name, acc / len(possible_states), rmq / len(possible_states), bad_count / len(possible_states)]
+            
+
+
     # now we've generated all the networks even with disturbances
     # reload the list of files and see how the disturbances affect the rest of the outputs
+
     disturbed_list_files = os.listdir(path + "/BNs")
     disturbed_list_files.sort()
     if ".DS_Store" in list_files:
@@ -1230,28 +1419,31 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         if scenario == "GroteMarktMaps":
             get_cpts(networks[:-4], path)
 
-        #print("acc 1")
+        print("world state combinations accuracy")
+        #calculate_world_states_accuracy(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
+        print("acc 1")
         #print(networks[:-4], path)
 
-        calculate_accuracy_1(networks[:-4], path)
-        #print("acc output")
+        #calculate_accuracy_1(networks[:-4], path)
+        print("acc output")
 
-        calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
-        #print("progress")
+        #calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
+        print("progress")
 
-        progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
+        #progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
 
 
     ## IMAGING
     # making some nice plots of the posterior
 
-
+    print("plots")
     for base_network in list_files:
         if ".DS" not in base_network and 'pkl' not in base_network:
             plot_performance(path, base_network[:-4])
-            plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
-            plot_posterior(path, base_network[:-4])
+            #plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
+            #plot_posterior_base_network_only(path, base_network[:-4])
+            #plot_posterior(path, base_network[:-4])
 
 
 

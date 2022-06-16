@@ -77,10 +77,6 @@ E\_private&   \\
 \subsubsection{Simulation parameters}
 Number of runs: 1000
 
-\subsubsection{Disturbing the cpts}
-We generated only one Bayesian Network, with the data we collected from the simulation. Then, we create many new networks, with this network as a basis. We do not change the number of nodes (we do not leave out or add nodes), nor the structure of the Bayesian network. We only change the values in each node's conditional probability table (cpt). In this case, we round the values in the cpt's, such that the BN becomes increasingly less precise. The intuition behind this is, that when expert users are going to elicit the probabilities, we do not know how robust the network is against smaller and larger imprecisions in the elicited probabilities. By simulating such imprecisions, we can compare the accuracy and rmsq error of the more imprecise networks to the ground truth of the `real' network. 
-
-We round every value in the cpts $c$ to each of $i, i \in \{\text{no disturbance}, 0.05, 0.1, 0.125, 0.2, 0.25, 0.33, 0.5\}$, according to \[ floor(\frac{c}{i} + 0.5) \cdot i.\]
 
 
 

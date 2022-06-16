@@ -141,9 +141,9 @@ We consider the accuracy and root mean square per network, then also look at the
  \hline
  Network & Accuracy & Root Mean Square\\
  \hline
- Scenario 1   & 0.88 &  0.19   \\
- Scenario 2 & 0.94 & 0.09 \\
- Combined & 0.95 & 0.08 \\
+ Scenario 1   & 0.83 &  0.17   \\
+ Scenario 2 & 0.88 & 0.14 \\
+ Combined & 0.81 & 0.2 \\
 \hline
 \label{tabAcc}
 \end{tabular}
@@ -288,19 +288,34 @@ The combined scenario represents the story where Jane and Mark fight, Jane has a
 
 \item How robust is the network against a loss of precision?
 
-We tested this by changing the cpts to be less and less precise, and plotted the results in Figure~\ref{kb1a1} - ~\ref{fullp}. We see that as the precision decreases, accuracy decreases, and RMS increases. But this decrease in performance is not drastic, it is not the case that accuracy ever drops below 75\%. 
+We tested this by changing the cpts to be less and less precise, and plotted the results in Figure~\ref{kb1a1} - ~\ref{fullp}. We can see that the results are very drastic. At around a loss of precision of 0.05 (less for the combined network), the accuracy of the predictions drops from around 80\% to 0\%. 
 
-With regards to the effect of loss of precision on the effect of evidence on the posterior, we see that there are two different situations: in network 1 and the combined network, we see that loss of precision has a large effect: evidence seems to not affect the posterior at all, leaving it at 0.0 throughout the entire run. For network 2, we see that loss of precision causes a `jitter' effect - the general shape of the impact of evidence remains the same, only the exact values differ.
+This dramatic is altogether due to entering inconsistent evidence inside the networks. For example, in the rounded to 0.05 network of the first scenario, trying to add `jane\_stabs\_mark\_with\_knife' as being true, results in the network failing. This is not due to the `mark\_dies' node, but instead due to rounding away to 0 and 1 in the cpt table for `jane\_stabs\_mark\_with\_knife' (Table~\ref{stab}). Entering the evidence that Jane did stab Mark is inadmissible according to the CPT, hence the failed state.
 
-This altogether suggests that in some cases, the network is very robust to loss of precision (in the case of network 2). However, in other cases the network, even though it remains at high accuracy, is not very robust, since the effect of evidence on the posterior is very different from the non-disturbed network.
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+ \hline
+ Jane and Mark fight & 1 & 1 &0 & 0 \\
+ \hline
+ Jane has knife & 1 & 0 &1 & 0 \\
+ \hline
+  P(jane\_stabs\_mark\_with\_knife) & 0 & 0 &0 & 0 \\
+  \hline
+\label{stab}
+\end{tabular}
+\caption{CPT of jane\_stabs\_mark\_with\_knife}
+\end{center}
+\end{table}
 
-However, the accuracy values of especially the very low-precision networks can be 
+But what if we do not round to 0 and 1, but round to $\epsilon$ and $1 - \epsilon$. Here $\epsilon$ would be an approximation of 0 and 1, just purely meant to `unblock' the inference in the Bayesian Networks: going from `never possible' to `not impossible'. If it worked, it would be a pragmatic solution. Hence, the rounding algorithm was adapted to use $\epsilon = 0.01$ - all values that were previously rounded to 1 are instead now 0.99 and all 0's become 0.01.
 
+This intervention is successful. Figure~\ref{error} shows the accuracy of networks under lower and lower degrees of precision, but now rounding to $\epsilon$. We see that after an initial small drop in performance in scenario 2 and the combined scenario, the accuracy of the adjusted networks remains constant at around 80\% in all cases. The only effect we see of the lowered precision is the fact that the RMSE increases slightly as the precision lowers.
 
 \begin{figure}[htbp]
 \begin{subfigure}{.5\textwidth}
  \centering
-\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KB1.pdf}
+\includegraphics[width=0.9\linewidth]{images/performance_KB1.pdf}
 \caption{Network 1 accuracy and RMS.}
 \label{kb1a1}
 \end{subfigure}%
@@ -312,7 +327,7 @@ However, the accuracy values of especially the very low-precision networks can b
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KB2.pdf}
+\includegraphics[width=0.9\linewidth]{images/performance_KB2.pdf}
 \caption{Network 2 accuracy and RMS.}
 \label{kb2a1}
 \end{subfigure}%
@@ -325,7 +340,7 @@ However, the accuracy values of especially the very low-precision networks can b
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KBFull.pdf}
+\includegraphics[width=0.9\linewidth]{images/performance_KBFull.pdf}
 \caption{Combined network accuracy and RMS.}
 \label{fulla1}
 \end{subfigure}%
@@ -335,25 +350,58 @@ However, the accuracy values of especially the very low-precision networks can b
 \caption{Combined network posterior.}
 \label{fullp}
 \end{subfigure}
+\end{figure}
 
+\begin{figure}[htbp]
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KB1.pdf}
+\caption{Network 1 accuracy and RMS.}
+\label{kb2a1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+ \centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KB2.pdf}
+\caption{Network 2 accuracy and RMS.}
+\label{kb2p}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{../experiments/VlekNetwork/plots/performance_KB2.pdf}
+\caption{Combined network accuracy and RMS.}
+\label{fulla1}
+\end{subfigure}%
+\caption{Using error terms instead of 1 and 0 in the networks improves performance immensely.}
+\label{error}
 \end{figure}
 
 
 \item Could a human find these probabilities?
-We see in the previous item that the loss of precision only begins to affect the accuracy of the network at a precision of about 0.3, which means that all the values in the cpts in the Bayesian Network are restricted to 0, 0.33, 0.66 and 0.99. 
+
+Using the $\epsilon$-networks with lower precision, like rounding to 0.1, 0.25 or even 0.33, is a promising approach. Especially in cases where a node has multiple parents, being able to fill out probabilities to a lower precision is very useful. This low-precision approach also lends itself well to conversions to a verbal probability scale \citep{renooij1999}.
+
+However, when you round the cpts to a lower precision, you are still rounding based on the original value. If you did not have the original value, would you be able to think of it? The original network has as prior probabilities for the $P(fight) = 0.2$, and $P(knife) = 0.7$. It is unclear how these values would be elicited from experts, if this were a real court case.
+
+For one, how to operationalise these variables? We have it easy in our simulation `Jane has a knife' is true if and only if the reporter for `jane has a knife' is true, which is based on a random number generator. However, in real life, what do we mean? Do we mean all situations where Jane is in possession of a knife? A lot of these situations are not relevant, if Jane is an adult woman, she probably owns a knife in her kitchen, and we would say $P(jane\_has\_knife) = 1 -\epsilon$. If instead we mean that we consider all the situations where Jane has a knife within reach, we know that that that probability is going to be lower than $1-\epsilon$ - but out of all the possible `situations' that Jane can be in, we would consider that probability to be $\epsilon$: if we consider all seconds of your life and consider the proportion of those where you had a knife within reach, that would be a proportion smaller than $\epsilon = 0.01$. This is also not useful. 
+
+If we cannot determine what reference class to take for `Jane has a knife', we might just give up and assign the node a probability of 0.5. This is what we do in the lowest-possible precision level, rounding everything to $\{\epsilon, 0.5 , 1-\epsilon\}$ - the resulting network still has a high accuracy. So in the case of these networks, it might actually be plausible to use Bayesian uncertainty priors.
 
 
 \item Can a human determine the correct independence relations?
+These rounded networks are in-part accurate, because they are using the same structure as the original network. We do not have to derive the structure independently, based on no information. We already have the structural information based on the information from the simulation. Would you be able to derive this structure without using the simulation, or only while having limited information?
 
+In case of scenario 1 and 2, certainly a person would be able to determine the correct independence relations: these scenario is very temporally ordered, and we see clear cause and effect. An additional relation between `jane\_and\_mark\_fight' and `jane\_has\_knife' might be appropriate, since, thinking naively, Jane might be more likely to have a knife if she knows that she and Mark have a history of fighting and/or violence. However, this is not modelled in the original scenario \citep{Vlek2015}, and hence not modelled in the simulation either.
 
+The combined scenario, however, is more complicated. While there is some temporal organisation, since the parents of nodes usually occur before the nodes themselves, there are more arcs between nodes than in either of the two independent scenarios. The temporal organisation is also broken by the nodes `mark\_dies', which might happen after Mark threatening Jane, but is the parent of that node nonetheless (and the rest of that chain of events). A second atemporality occurs between the stabbing and threatening node (see discussion in Comparison below). 
 
+Dependencies between Mark hitting Jane and Mark dying by accident should be irrelevant based on the events that could happen in between (like Jane dropping the knife, and Mark falling on the knife). Looking at the cpt of `mark\_dies\_accidentally', there are a lot of replicated values. It is unclear how the algorithm should be adapted to reduce the amount of unnecessary dependencies.
 
 
 \end{enumerate}
 
 
 \section{Discussion}
-In the discussion, we focus on the comparison of the automatically generated networks to the paper in Vlek, 
+In the discussion, we focus on the comparison of the automatically generated networks to the paper in Vlek, and consider some other issues.
 
 
 \subsection{Comparison to Vlek's Method}
@@ -415,15 +463,6 @@ So our overall conclusion with regards to the quality of the network, is that th
 
 \subsection{Further Discussion}
 
-\subsubsection{High Accuracy does not mean very much}
-The accuracy and RMS values for low precision (like 0.33) might seem high, but that does not mean very much if we want to generalise to different situations. Recall that the accuracy and RMS are calculated on data that comes from the \textbf{exact same} data-generating environment: the parameters of the simulation has not changed. This also means that, in case of scenario 2, the very implausible situation where Mark actually falls on a knife, is not represented many times in the testing data. 
-
-However, if we use the network rounded to precision 0.33, to apply evidence such that Mark falls on a knife, the network breaks: PyAgrum gives an `Joint probability of evidence = 0' error, while Hugin states: `Propagation of inconsistent evidence attempted', making the low-precision-networks effectively useless for cases that are underrepresented in the data-generating environment. Imprecisely said: low-precision networks inadvertently round the probabilities in the cpts in favour of high-frequency world-states.
-
-This means that these low-precision networks are not great at generalising to low-frequency world states (such as cases where Jane threatens Mark with a knife in scenario 2). This means that, for future research, we should either calculate the accuracy over a set of all (possible) world states, instead of a generic test/train sample taken from the simulation/data-generating environment, or we should not trust high-accuracy blindly.
-
-
-
 
 \subsubsection{Are we just outsourcing?}
 
@@ -441,7 +480,7 @@ What are the practical implications of this? On this side, that we need enough d
 
 
 
-\section{Conclusion}
+\subsection{Conclusion}
 Even this very simple `forward chaining' simulation (forward chaining with some probabilities attached), can be used to construct meaningful Bayesian Networks. The Bayesian Networks have generally high accuracy and low RMS error, even when their cpts are disturbed, and reflect the structure of the simulation. 
 
 With this part, I have shown that the pipeline works. We can make a simulation using forward chaining, that generates world-states, and those world states can be translated into Bayesian Networks by means of the K2 algorithm, with reasonable accuracy even under rounding. The K2 manages to replicate constraints and merge two different possible scenarios together. The resulting networks are consistent, complete and plausible. The scenario, sub-scenario and constraint node mechanisms are not necessary for modelling these Bayesian Networks.

@@ -707,6 +707,7 @@ def calculate_accuracy_1(file_name, path):
     otp_pd.to_csv(path+"/stats/runs/"+file_name+".csv", index=False)
 
 
+
 def calculate_world_states_accuracy(file_name, path, output_node):
     network = path + "/BNs/" + file_name + ".net"
     if "param" not in file_name and "map" not in file_name:
@@ -720,14 +721,14 @@ def calculate_world_states_accuracy(file_name, path, output_node):
     df = pd.read_csv(csv_file, sep=r',',
                      skipinitialspace=True)
     ddf = df.drop_duplicates()
-
-
     event_list = list(ddf.head())  # experiment.reporters.relevant_events
-    print(event_list)
-    #random.shuffle(event_list)
-    #ie = gum.LazyPropagation(bn)
-
-    #print(ddf.head())
+    n = file_name.split("_", 2)
+    if len(n) > 1:
+        [name, dist, val] = n
+    else:
+        name = n[0]
+        dist = "none"
+        val = 0
 
     possible_states = []
     impossible_states = []
@@ -750,94 +751,97 @@ def calculate_world_states_accuracy(file_name, path, output_node):
     output_ind = event_list.index(output_node)
     #print(output_ind)
 
-    acc = 0
-    rmq = 0
-    bad_count = 0
-    #print(network)
-    for item in possible_states:
-        #print()
-        ie = gum.LazyPropagation(bn)
-        ie.addAllTargets()
-        #print(item)
 
 
-        for name in load_temporal_evidence(networks[:-4])["events"]:
-            i = event_list.index(name)
-            ie.addAllTargets()
-            if i != output_ind:
+    for state_list in [possible_states]:
+
+        acc = 0
+        rmq = 0
+        bad_count = 0
+        # print(network)
+
+        list_for_rows = []
+        x = ["precision", "names", "state", "posterior", "accuracy", "rmsq"]
+        list_for_rows.append(x)
 
 
-                #print("\t", i, event_list[i], item[i])
-                try:
-                    ie.addEvidence(event_list[i], item[i])
-                    ie.eraseTarget(event_list[i])
-                    ie.evidenceJointImpact(ie.targets(), {event_list[i]})
-                    final_posterior = ie.posterior(event_list[output_ind])[1]
-                    ie.addTarget(event_list[i])
-                    ie.eraseEvidence(event_list[i])
-
-
-
-                    ie.addEvidence(event_list[i], item[i])
-                    #print(ie.posterior(event_list[i]))
-                    #ie.eraseTarget(event_list[i])
-                    #for node in event_list:
-                    #    print(f"\t {ie.posterior(node)[1]}")
-
-                    # go over all the nodes to check for breakage
-
-                    #ie.evidenceJointImpact(ie.targets(), {event_list[i]})
-                    final_posterior = ie.posterior(event_list[output_ind])[1]
-                    #ie.addTarget(event_list[i])
-                    #print(event_list[i])
-
-                    #print(f"posterior prob {event_list[output_ind]}", final_posterior)
-
-
-                except:
-
-                    final_posterior = "NA"
-                    #print(f"network breaks!!  {file_name}")
-                    break
-
-
-        if final_posterior == "NA":
-            #print("bad")
-            acc += 0
-            bad_count += 1
+        if state_list == possible_states:
+            state_name = "possibleStates"
         else:
-            #print("final posterior", final_posterior)
-            #print("actual value", event_list[output_ind], item[output_ind])
-            rmq += abs(int(item[output_ind]) - final_posterior)
+            state_name = "impossibleStates"
+        print(state_name)
+        for item in state_list:
+            #print()
+            ie = gum.LazyPropagation(bn)
+            ie.addAllTargets()
+            #print(item)
 
-            if int(round(final_posterior,0)) == int(item[output_ind]):
-                acc += 1
-                #print("accuracy win")
-            else:
+
+            for name in load_temporal_evidence(networks[:-4])["events"]:
+                i = event_list.index(name)
+                ie.addAllTargets()
+                if i != output_ind:
+
+
+                    #print("\t", i, event_list[i], item[i])
+                    try:
+                        ie.addEvidence(event_list[i], item[i])
+                        ie.eraseTarget(event_list[i])
+                        ie.evidenceJointImpact(ie.targets(), {event_list[i]})
+                        final_posterior = ie.posterior(event_list[output_ind])[1]
+                        ie.addTarget(event_list[i])
+                        ie.eraseEvidence(event_list[i])
+
+                        ie.addEvidence(event_list[i], item[i])
+                        final_posterior = ie.posterior(event_list[output_ind])[1]
+
+                    except:
+
+                        final_posterior = "NA"
+                        #print(f"network breaks!!  {file_name}")
+                        break
+            f = 0
+            if final_posterior == "NA":
+                #print("bad")
                 acc += 0
-                #print("accuracy loss")
+                bad_count += 1
+            else:
+                #print("final posterior", final_posterior)
+                #print("actual value", event_list[output_ind], item[output_ind])
+                rmq += abs(int(item[output_ind]) - final_posterior)
+
+                if int(round(final_posterior,0)) == int(item[output_ind]):
+                    acc += 1
+                    f = 1
+                    #print("accuracy win")
+                else:
+                    acc += 0
+                    f = 0
+                    #print("accuracy loss")
+
+            row = [val, event_list, item, final_posterior, f, abs(int(item[output_ind]) - final_posterior)]
+            list_for_rows.append(row)
+        with open(path + f"/stats/runs/{csv_name}_{state_name}_STATE_run_performance.csv", 'a', newline='') as f:
+            writer = csv.writer(f)
+            for row in list_for_rows:
+                writer.writerow(row)
+
+        print(file_name)
+        print(f"overall accuracy {acc/len(state_list)}")
+        print(f"overall rmsq {rmq/len(state_list)}")
+        print(f"overall inconsistent count {bad_count/len(state_list)}")
 
 
-    #print(file_name)
-    #print(f"overall accuracy {acc/len(possible_states)}")
-    #print(f"overall rmsq {rmq/len(possible_states)}")
-    #print(f"overall inconsistent count {bad_count/len(possible_states)}")
+        row = [name, val, acc/len(state_list), rmq/len(state_list), bad_count/len(state_list)]
 
-    n = file_name.split("_", 2)
-    if len(n) > 1:
-        [name, dist, val] = n
-    else:
-        name = n[0]
-        dist = "none"
-        val = 0
+        with open(path + f"/stats/performance/{csv_name}_{state_name}_STATE_performance.csv", 'a', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(row)
 
-    row = [name, val, acc/len(possible_states), rmq/len(possible_states), bad_count/len(possible_states)]
-
-    with open(path + f"/stats/performance/{csv_name}_STATE_performance.csv", 'a', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(row)
+        print()
 
 
+    print()
 
 
 
@@ -1185,7 +1189,7 @@ def plot_posterior_base_network_only(path, base_network):
 
 def plot_performance(path, base_network):
     fig, axs = plt.subplots(2, sharex='col')
-    df = pd.read_csv(path+f"/stats/performance/{base_network}_STATE_performance.csv", sep=r',',
+    df = pd.read_csv(path+f"/stats/performance/{base_network}_possibleStates_STATE_performance.csv", sep=r',',
                      skipinitialspace=True)
     col = list(df.columns)
     df.plot(kind='line', x=col[1], y={col[2], col[4]}, title="Accuracy",  ax=axs[0])
@@ -1331,8 +1335,8 @@ d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
 for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 1000, d_S),
-                                                        ("StolenLaptopPrivate", 2000, d_S),
-                                                        #("StolenLaptop", 2000, d_S),
+                                                        #("StolenLaptopPrivate", 2000, d_S),
+                                                        ("StolenLaptop", 2000, d_S),
                                                         #("VlekNetwork", 500000, d_V),
                                                         #("GroteMarkt", 2000, d_G),
                                                         #("GroteMarktMaps", 2000, d_G)
@@ -1349,7 +1353,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
     #print(scenario)
 
 
-
+    '''
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
                                param_dict=param_dict)  # we do the simple scenario
     #test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
@@ -1389,7 +1393,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
                     disturb_cpts(path, exp, p[0], train_data[:-4])
 
 
-
+    '''
     for train_data in list_files:
         if "pkl" in train_data:
             continue
@@ -1398,11 +1402,17 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
             writer = csv.writer(f)
             writer.writerow(["experiment", "disturbance", "value", "accuracy", "rmsq"])
 
-        with open(path + f"/stats/performance/{train_data[:-4]}_STATE_performance.csv", 'w', newline='') as f:
+        with open(path + f"/stats/performance/{train_data[:-4]}_possibleStates_STATE_performance.csv", 'w', newline='') as f:
             f.truncate()
             writer = csv.writer(f)
             writer.writerow(["experiment", "disturbance", "accuracy", "rmsq", "failed"])
-            #row = [file_name, acc / len(possible_states), rmq / len(possible_states), bad_count / len(possible_states)]
+
+        with open(path + f"/stats/performance/{train_data[:-4]}_impossibleStates_STATE_performance.csv", 'w',
+                  newline='') as f:
+            f.truncate()
+            writer = csv.writer(f)
+            writer.writerow(["experiment", "disturbance", "accuracy", "rmsq", "failed"])
+        #row = [file_name, acc / len(possible_states), rmq / len(possible_states), bad_count / len(possible_states)]
             
 
 
@@ -1437,7 +1447,8 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         if scenario == "GroteMarktMaps":
             get_cpts(networks[:-4], path)
 
-        print("world state combinations accuracy")
+        print(networks[:-4])
+        #print("world state combinations accuracy")
         calculate_world_states_accuracy(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
         #print("acc 1")
         #print(networks[:-4], path)
@@ -1446,7 +1457,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         #print("acc output")
 
         #calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
-        print("progress")
+        #print("progress")
 
         #progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
@@ -1458,10 +1469,11 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
     print("plots")
     for base_network in list_files:
         if ".DS" not in base_network and 'pkl' not in base_network:
-            plot_performance(path, base_network[:-4])
+            #plot_performance(path, base_network[:-4])
             #plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
-            plot_posterior_base_network_only(path, base_network[:-4])
-            plot_posterior(path, base_network[:-4])
+            #plot_posterior_base_network_only(path, base_network[:-4])
+            #plot_posterior(path, base_network[:-4])
+            pass
 
 
 

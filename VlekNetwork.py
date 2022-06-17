@@ -63,7 +63,7 @@ class VlekNetwork(Model):
         block = {"jane_stabs_mark_with_knife" : "jane_threatens_mark_with_knife",  # mutually exclusive
             "jane_threatens_mark_with_knife" : "jane_stabs_mark_with_knife"}
 
-        for kb in [kb1, kb2]: #kbFull
+        for kb in [kb1]:#, kb2]: #kbFull
             if kb == kbFull:
                 name_x = "KBFull"
             elif kb == kb1:

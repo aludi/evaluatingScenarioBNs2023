@@ -470,6 +470,25 @@ This approach to completeness and plausibility outsources the problem of determi
 
  There is no good answer to this question. A simulation will always be an incomplete reflection of reality. Perhaps the simulation should correspond to some story or idiom. If the scenario contains `intentional' agents, we might find it easier to think about stories and idioms in simulation than we find it to think about stories and idioms with regards to Bayesian Networks. However, this needs to be investigated further.
  
+ \subsubsection{Bayesian Networks as a guide to reasoning}
+ Ideally, we would want a BN to protest when you try to add evidence to it that corresponds to an impossible world state. This should cause conflict between nodes, or at least result in a low accuracy. We calculated accuracy over the set of all possible world states, however, if we take the accuracy over the set of all impossible world states (eg: states that never occur in the simulation), we would want to see a low accuracy. So, calculating the accuracy over the impossible world states instead, shows for the generated $\epsilon$-networks:
+ \begin{table}[htp]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+ \hline
+ Network & Accuracy & Root Mean Square & Inconsistency error\\
+ \hline
+ Scenario 1   & 0.3 &  0.70 & 0   \\
+ Scenario 2 & 0.481 & 0.516 & 0\\
+ Combined & 0.491 & 0.509& 0\\
+\hline
+\end{tabular}
+\caption{Accuracy and Root Mean Square Error for the networks calculated on the impossible states.}
+\end{center}
+\label{tabB}
+\end{table}
+
+Here, the accuracy is remarkably low, and the RMSE is high. This means that if you, by accident, fill in an impossible world state as evidence in your BN, the probability that you predict the output node correctly becomes very low. However, we also see that these $\epsilon$-networks do not break - the number of times that we find an inconsistency error is 0 for all networks. In the best case scenario, we want the network to break if you fill in inconsistent evidence, and not just produce a low accuracy (since you can only calculate accuracy over a data set). 
 
 
 \subsubsection{Resolution and number of runs}

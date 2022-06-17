@@ -94,7 +94,7 @@ See Figure~\ref{laptop}
 \end{figure}
 
 
-\subsection{Evaluation with regards to structural, performance and human-factor criteria}
+\subsubsection{Evaluation with regards to structural, performance and human-factor criteria}
 In this section, the evaluation criteria as set out before are applied to the networks.
 
 \subsubsection{Structural Criteria}
@@ -113,7 +113,7 @@ We know that truly irrelevant nodes are kept out of the main Bayesian Network - 
 
 \item \textbf{Independent events are not connected to each other.}
 
-Evidence is connected to each other. This is because we need to consider dependent evidence as dependent in the network (I know i read this somewhere, there was a good example with cameras, Fenton?? I forgot!! fucl). 
+Evidence is connected to each other. This is because we need to consider dependent evidence as dependent in the network (see \citep{Fenton2012} for explanation of dependent evidence).
 
 \end{enumerate}
 
@@ -124,7 +124,7 @@ We consider the accuracy and root mean square per network, then also look at the
 \begin{enumerate}
 \item \textbf{Accuracy and Root Mean Square error}
 
-The accuracy of the network is 88\% and Root Mean Square error is 0.14. This is comparable to the networks in the previous chapter.
+The accuracy of the network is 87.9\% and Root Mean Square error is 0.14. This is comparable to the networks in the previous chapter.
 
 \item \textbf{Correspondence.}
 
@@ -134,7 +134,7 @@ Once again, compared the probabilities in the network with the frequencies of th
 \centering
 \begin{tabular}{|c|c|c|}
  \hline
- Conclusion & Frequency P(event) & P(event)\\
+ Conclusion & Frequency P(event) & BN P(event)\\
  \hline
 lost\_object   & 0.1985 & 0.1987\\
 curtains & 0.1695 &  0.1697\\
@@ -166,6 +166,8 @@ The effect of turning on evidence on the posterior of the initial network is sho
 
 The scenario that this posterior progression corresponds to is as follows: the duped agent comes home, and finds that their object is gone. Then, it takes a closer look at the door, and sees that the lock is broken. It looks at the disturbed house, and then at the cameras. The camera shows that the other agent was spotted near the house, and later on emerged with the object. Then, we need to look inside the head of the stealing agent, who fled before they saw the duped agent come home - hence, E\_private is 0.
 
+We see the effect of evidence strength in this progression: once we know that the lock is broken, seeing that the house is disturbed does not add anything to our estimation of the posterior of being robbed, and spotting the suspect near the house also does not change the posterior. Only when we see the suspect with the robbed object, the posterior starts to increase again. This corresponds to intuition.
+
 \begin{figure}[htbp]
  \centering
 \includegraphics[width=0.6\linewidth]{../experiments/StolenLaptop/plots/posterior_base_networkStolenLaptop.pdf}
@@ -180,14 +182,11 @@ The scenario that this posterior progression corresponds to is as follows: the d
 \begin{enumerate}
 	\item \textbf{How robust is the network against a loss of precision?}
 
-	We again create networks with lower precision, and use the $\epsilon$ method to create networks that do not saturate with 1 or 0, like in the previous chapter. Then we calculate accuracy and root mean square errors on lower-precision networks (Figure~\ref{dist}). We again see that while the RMSE increases when we lose precision, it does not increase by much - from 0.14 to 0.20. This means that the rounding to $\epsilon$ and $1-\epsilon$ instead of 0 or , leaves the network very robust - the accuracy remains the same. So this method works even for more complex networks that include evidence. 
-
-	The posterior progression is also relatively the same as the original network (Figure~\ref{post}).
-	\item \textbf{Could a human find these probabilities?}
-	\item \textbf{ Can a human determine the correct independence relations?}
-\end{enumerate}
-
-\begin{figure}[htbp]
+	We again create networks with lower precision, and use the $\epsilon$ method to create networks that do not saturate with 1 or 0, like in the previous chapter. Then we calculate accuracy and root mean square errors on lower-precision networks (Figure~\ref{dist}). We again see that while the RMSE increases when we lose precision, it does not increase by much - from 0.14 to 0.20. Rounding to $\epsilon$ and $1-\epsilon$ instead of 0 or 1 results in robust networks that keep the same accuracy even under loss of precision. So this method works even for more complex networks that include evidence. 
+	
+	The posterior progression is also relatively the same as the original network (Figure~\ref{post}), only with some variation: the nuances in evidence strength are flattened-out: we see that for networks with less precision (like those rounded to 0.5 and 0.33), there are only 4 points where the value of the posterior changes, while for more precise networks, like the BN rounded to 0.05, the posterior changes value in 6 places. 
+	
+	\begin{figure}[htbp]
 \begin{center}
 \begin{subfigure}{.5\textwidth}
 \includegraphics[width=0.9\linewidth]{../experiments/StolenLaptop/plots/performance_StolenLaptop.pdf}
@@ -200,55 +199,71 @@ The scenario that this posterior progression corresponds to is as follows: the d
 \label{post}
 \end{subfigure}
 \end{center}
+\caption{Loss of precision in networks.}
 \end{figure}
 
-
+	\item \textbf{Could a human modeller find these probabilities?}
+	Due to the high accuracy and similar posterior progression of the lower-precision networks, it is not essential that a modeller finds precise probabilities.
+	
+	\item \textbf{ Can a human modeller determine the correct independence relations?}
+	This is more difficult - the way that evidence is connected to the hypotheses is complex and confusing. Additionally, there are sibling-nodes (nodes with the same parents), and how these nodes relate to each other temporally cannot be understood from the BN alone (does compromise house come before or after flees startled?). 
+\end{enumerate}
 
 \subsection{Discussion}
+We have shown that we can model spatial simulations with agents and evidence to a reasonable accuracy (88\%) in a Bayesian Network. The network generally fulfils the criteria we set out for it: The generated network is ordered temporally, complete, includes evidence, has a high accuracy, and performs well under lower precision.
 
-The network itself makes sense. The spurious node `raining' is not connected to any other node, because the rain should not affect what happens.
-
-The fact that these networks can be rounded without losing accuracy, means that even with a lack of precision in the ctps of the network, the network is still able to accurately predict outputs - eg, whether a node is going to be true or false given a set of evidence. Changing the precision of the network does not change the network structure itself, this is kept constant - it is generated first, and then the cpts are rounded to arbitrary intervals. 
-
-This shows that even when this network's cpt's only contain probability values, [0, 0.33, 0.66, 0.99], we still get the reflection of the evidence in the network. 
-
-\subsubsection{Network structure}
-
-Problem: the disturbance of the cpts means that we're only disturbing the cpts, and not the structure of the network itself. If we look at the ordering of the non-evidence nodes in the network, then we can see that they are ordered temporally - parent nodes happen before child nodes. However, there are many sibling-nodes (nodes with the same parents), and how these nodes relate to each other temporally cannot be understood from the BN alone (does compromise house come before or after flees startled?). 
-
-Knowing to which parent node some pieces of evidence should connect is also not straightforward: evidence could connect to more or fewer parent nodes than they are now. Due to the limitations of the K2 algorithm, I'm not sure if we can create a rule where evidence only connects to one parent.
-
+ Only the connections of the evidence to the network is confusing and complex. The cpts in the network can become less precise without losing accuracy, which is promising for elicitation. However, lower precision in the network reduces expression and nuance of evidence strength.
+ 
+  \begin{table}[htp]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+ \hline
+ Network & Accuracy & Root Mean Square & Inconsistency error\\
+ \hline
+ Stolen Laptop   & 0.499 &  0.50 & 0   \\
+\hline
+\end{tabular}
+\caption{Accuracy and Root Mean Square Error for the networks calculated on the impossible states.}
+\end{center}
+\label{tabB}
+\end{table}
 
 
 \section{Experiment 2: Investigating Private Knowledge}
 
+This experiment tests the effect of private knowledge on the resulting network and its accuracy and ability to get to a posterior.
+
 \subsection{Introduction}
-The most obvious problem in crime is the distribution of knowledge. The criminal will (usually) know what he did, victims can testify, the police knows something else. Etc. So our ultimate goal is just to collect all the private knowledge of all the people involved, and paint a collective knowledge picture that (ideally) everyone can agree on, and then the judge can decide. Of course, it is not in the interest of everyone to freely share their private knowledge all the time. Police might not want to talk about the limitations of their evidence (or their ways of procuring it), witnesses and victims might not want to talk due to incrimination, guilt/shame or relations to the people involved, and suspects might not want to share their murder plans (obviously). So there's so much private knowledge, and our Bayesian Network assumes that we can just get into the heads of everyone and report on what we find there. So what if we cannot? What if we lose some information - like that of the suspect: that the suspect will flee if it thinks that it is being observed?
+We can think about the process of a criminal investigation and a trial as a systemic way of gathering, sharing and finally agreeing on knowledge. Initially, only the criminal will know the entire story, victims know parts of it, and the police and judges know even less. An ideal trial results in common knowledge of the entire situation.
+
+Of course, it is not in the interest of everyone to freely share their private knowledge all the time. Police might not want to talk about the limitations of their evidence (or their ways of procuring it), witnesses and victims might not want to talk due to incrimination, shame, or relationships to the people involved. Suspects might not want to freely share their murder plans (obviously). There is an abundance of private knowledge.
+
+ The Bayesian Network generated up till now, have not taken this into consideration. We have the full set of nodes - even nodes that a realistic investigation cannot be sure about, like the internal considerations of the criminal agent (who will flee when it sees the other agent). If we were real investigators, we cannot actually know this behaviour and model it in our network before the agent admits to the behaviour in court.
+ 
+ This would imply that we can only create Bayesian Networks after the fact: only when the court case is over, and all the facts and their probabilities have been established, can we start building them. Otherwise, we risk missing out on essential psychological or internal information. This would not be ideal. This leads us to ask the question: do our networks still work if we lose information about the internal intentions of agents?
 
 \subsection{Method}
-Drop column Private knowledge and evidence for it, see the effect on the posterior. See the effect on the disturbances.
-
+We identify the nodes `flees\_startled' and `E\_private' as events that can only be established after the fact. The reporters for these nodes are disabled and not included in the data that is passed to the K2 algorithm. This means that the network-building algorithm does not even know of the existence of these nodes, and will generate an entirely new network based on all the other nodes, except these two. The behaviour of the agents and the simulation remains the same.
 
 \subsection{Results}
+The resulting Bayesian Network is presented in Figure~\ref{privatelaptopN}. The complexity of this network is lower than the initial network because the two nodes are missing. However, even though there is information missing from the network, the accuracy and RMSE of the network, even under lower precision, are comparable to the initial network: 87.5\% and 0.13 (Figure~\ref{privatelaptopA}).
 
+The important difference between this network and the full network is the response of the posterior (Figure~\ref{privatelaptoppost}). In the full network, once all the evidence was entered, we found a posterior probability for `stolen successfully' to be 1, for all precisions. However, in this situation, since essential evidence is missing, the posterior probability for `stolen successfully' is reduced to 80\%, and cannot be increased any further. 
 
-See Figure~\ref{private}
-
-\begin{figure}[h]
+\begin{figure}[htbp]
 \begin{center}
 \begin{subfigure}{.50\textwidth}
 \includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/bnImage/BNIMAGEStolenLaptopPrivate.pdf}
 \caption{network structure for missing private information}
-\label{privatelaptopAcc}
+\label{privatelaptopN}
 \end{subfigure}
 \end{center}
 
 \begin{subfigure}{.45\textwidth}
 \includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/plots/performance_StolenLaptopPrivate.pdf}
 \caption{Accuracy (100\% to 0\%) and Root Mean Square error (1 - 0) for missing private information}
-\label{privatelaptopAcc}
-\end{subfigure}
-
+\label{privatelaptopA}
+\end{subfigure}%
 \begin{subfigure}{.45\textwidth}
 \includegraphics[width=\linewidth]{../experiments/StolenLaptopPrivate/plots/posterior_StolenLaptopPrivate.pdf}
 \caption{posterior private information}
@@ -262,33 +277,45 @@ See Figure~\ref{private}
 
 
 \subsection{Discussion}
+Losing essential evidence from the network does not reduce its accuracy or increase RMSE, even under lower precision. Even though the accuracy of the network remains high when we miss private knowledge, the lack of private knowledge has important implications. We see that the probability of the posterior when all evidence is added is 0.8. It dips below the 0.95\% posterior probability that is seen by \citet{Fenton2019} as the required posterior probability for determining guilt. The initial network did not have this problem. This implies that there is a fundamental uncertainty in the BN (which is true, because we are missing nodes), and we cannot be fully sure that the object was stolen. We are only fully sure when the posterior of `stolen\_successfully' goes to 1.
 
-Seems to be effective, posterior never goes to 1. Lack of private knowledge hence will affect the end results, even if it will not affect the trajectory of the evidence progression. Overall accuracy and rms performs worse as well.
-
-
-\section{Conclusion}
+We are also too charitable with our interpretation of what private knowledge is. We only took `flees startled' and the evidence for it, but in real life there are many things that are private knowledge. Nodes like `target\_object' can only be truly known when we look into the suspect's head, and while we might consider that a suspect must always have a motive, the operationalization of a `motive' node in a real BN would be very difficult, because it is not clear how one would measure that a suspect has a motive.
 
 
-{\color{blue} TLDR: We can build an accurate network for a spatial simulation, even when we disturb the cpts. We can see how the posterior probability of an outcome becomes more likely when we add incriminating evidence. We can change parameters in the simulation (change vision radius of camera) and this effects the network (nodes do not show up). We can remove private knowledge, and this reduces the overall accuracy of the network from 100\% to 80\%, although it does not change the `shape' of the effect of the other evidence on the posterior. This all needs to be worked out.}
 
+\section{Discussion}
 
-Simulating works, accuracy and RMS fine.
-
-Table of accuracies and rms for the three experiments for comparisons.
-
-We run into problems when we use words like `near' in our node names. We're lucky that we know what we mean (because our reporter forces us to make this explicit). We do not just ground the probabilities in our network, but we actually also ground our random variables - we have a measure of exactly what events we are interested in, and which we aren't.
-
-We are in trouble with private knowledge, dropping this column from our table (which means that we don't know it) when we make our BN, we're drastically reducing our uh. Accuracy, and increasing our RMS. This implies that we do seem to need a full picture of everything that's happening, otherwise our BN will be kind of terrible, and be less accurate :(.
-
-Hence, for a simulation to work we 1) need to know exactly what it is that we're measuring since evidence strength depends on it \footnote{explain this more}, and 2) private information is necessary to create the BN because it influences fleeing behaviour. If we don't have this information our BN will be less effective.
-
-\subsection{Forensic, Criminal and Legal interpreters, feasibility}
-% how will a judge interpret this
-If we assume that we can collectively build a network structure like the one that we have now, then there might be a lot of (good) room for legal interpretation. We have shown that this type of Bayesian Network does not have to be very precise. This leaves room for disagreements about probabilities: if we both made a subjective probabilistic estimation, because there's no good data available, and I think something is 20\% likely, and you think it's 30\% likely, we might still be able to agree on 25\%, and this would not result in a large decrease in accuracy of the network. As we've seen, accuracy only starts to decrease at thirds.
+In this chapter, we have shown that we can build and experiment with Bayesian Networks that are generated from spatial multi-agent simulations with evidence. Even at lower precision, the networks perform well, although how evidence should be connected to the hypotheses remains an open question. 
 
 In these networks, we see that the evidence updates the posterior in the right direction - more evidence for stealing leads towards a higher value of `successful-stolen'. We also see the effects of different evidence strengths - knowing that the lock is broken is more important than seeing that the house is disturbed.
 
-Forensic scientists will probably be annoyed by the lack of precision, but in these cases we do have a good operationalisation of what exactly is going on. Because we have this operationalisation, we can be sure that our data collection is correct. In the sci-fi world where police builds Bayesian Networks, I can imagine a situation where someone goes over all the files of all the crimes everyday, and collects statistics on occurances. However, the granularity of these crime files and the operationalisation are essential. Here, we can take them for granted. In real life, we cannot and that's a huge problem. 
+The effect of private knowledge on the generation and accuracy of the network is also more clear: it does not affect accuracy, because we can round. However, we see that we cannot get the posterior for `stealing' as high as with the private evidence.
+
+
+
+
+
+\subsection{Possible Legal Interpretations.}
+% how will a judge interpret this
+We have shown that this type of Bayesian Network does not have to be precise. This leaves room for disagreements about probabilities. We can imagine a trial where two experts have to make a subjective probability estimation. Due to the finding that lower precision does not impede accuracy very much, we now have more room for disagreement. If expert one thinks that some event is 20\% likely, and expert two thinks that the event is 30\% likely, they might still be able to agree on 25\%, and be happy with the resulting cpt for the event. Given this network, this would not reduce the accuracy of the network in predicting the outcome (although it might reduce the RMSE).  
+
+However, we run into trouble when we want to be exact about a threshold for guilt. As we have seen in comparing experiment 1 to experiment 2, we see that we cannot increase the posterior for `stealing' in experiment 2 higher than 0.8, due to the lack of essential but private knowledge. In experiment 1, we can get this posterior to 1 with a lack of precision. We might have grounds to accept guilt in experiment 1, given the set of evidence that we showed, but do we have ground in experiment 2? 
+
+If we take for guilt a probability of 0.99, we do not, but in experiment 2 we can never reach a probability of guilt that is that high, because we miss essential information. It might be the case that if we build a network in which the final output probability can never be higher than 0.8, it could be a sign that we are missing essential information (like the lack of private knowledge), and our BN is not complete. This idea warrants further investigation.
+
+The final and essential problem here is also something discussed in the previous chapter: the operationalisation and reference class of the events. In our simulation, we are taking this for granted, because our reporters work. We have the operationalisation, we know the reference class, and due to this we can automatically generate Bayesian Networks. However, in the real world we would find it difficult to properly operationalise many of these variables. How do we know if an agent is spotted `by a house'? Do we mean `we can see the agent on camera'?, but what if the camera has a large range and can see the other side of the street? How do we define `nearness'? How do we know that our methods for determining the truth or falsity of our events are valid? How do we decide which events we are selecting in the first place? These are all open questions that are not answered by this project.
+
+%Forensic scientists will probably be annoyed by the lack of precision, but in these cases we do have a good operationalisation of what exactly is going on. Because we have this operationalisation, we can be sure that our data collection is correct. In the sci-fi world where police builds Bayesian Networks, I can imagine a situation where someone goes over all the files of all the crimes everyday, and collects statistics on occurances. However, the granularity of these crime files and the operationalisation are essential. Here, we can take them for granted. In real life, we cannot and that's a huge problem. 
+
+
+
+
+%We run into problems when we use words like `near' in our node names. We're lucky that we know what we mean (because our reporter forces us to make this explicit). We do not just ground the probabilities in our network, but we actually also ground our random variables - we have a measure of exactly what events we are interested in, and which we aren't.
+
+%We are in trouble with private knowledge, dropping this column from our table (which means that we don't know it) when we make our BN, we're drastically reducing our uh. Accuracy, and increasing our RMS. This implies that we do seem to need a full picture of everything that's happening, otherwise our BN will be kind of terrible, and be less accurate :(.
+
+%Hence, for a simulation to work we 1) need to know exactly what it is that we're measuring since evidence strength depends on it \footnote{explain this more}, and 2) private information is necessary to create the BN because it influences fleeing behaviour. If we don't have this information our BN will be less effective.
+
 
 
 

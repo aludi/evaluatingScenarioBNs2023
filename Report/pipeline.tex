@@ -63,18 +63,21 @@ Then, we collect these global states over the number of runs that we do for each
 
 \section{Creating a Bayesian Network from a Simulation Automatically}
 
-The output of an experiment is the collection of runs $O$, where each run is the global state $G$ of the simulation, as measured by the random variables $R$. Semantically, it fits that reporters are random variables, as the reporters become the nodes in the Bayesian Network.
+The output of an experiment is the collection of runs $O$, where each run is the global state $G$ of the simulation, as measured by the random variables $R$. The reporters in the simulation are random variables. These reporters become the nodes in the Bayesian Network.
 
-Once we have a collection of states and runs, we can give this to an automated Bayesian Network learner, such as those implemented in pyAgrum. These learners can interpolate a Bayesian Network using algorithms, such as Greedy Hillclimbing and K2. This results in automatic generation of the Bayesian Network which is solely based on the data that is collected in $O$. 
+The Bayesian Network is generated automatically, using the automated BN learner method as implemented in pyAgrum. There are several learners implemented in pyAgrum \footnote{An introduction to structure learning using PyAgrum: \url{http://webia.lip6.fr/~phw/aGrUM/docs/last/notebooks/structuralLearning.ipynb.html}}. The algorithm used in this experiment to structure the Bayesian Network from the simulation data is the K2 algorithm \citep{Cooper1992}. 
 
+The K2 algorithm is a greedy search algorithm that attempts to maximise the posterior probability of the network by correctly connecting parent nodes to child nodes. It takes an ordering on the nodes as input. The first node in the ordering $X_0$ does not have any parents. For two nodes $X_i$ and $X_j$, $X_j$ cannot be the parent node of $X_i$ if $j > i$: a node can only have a parent that is earlier in the ordering. The algorithm processes each node $X_i$ by adding possible parent nodes to $X_i$ (as constrained by the ordering), and maximising the score of the network. The algorithm stops if there are no parents to add, no parents improve the score, or the node has reached the maximal number of parents \citep{Chen2008}.
 
-K2 and temporal restraints.  No restraints on evidence (evidence can connect to each other)
+Due to this ordering constraint, the K2 algorithm is efficient. In other domains, it can be difficult to find one of the correct orderings. However, in the network as created from the simulation, we can automatically add the appropriate ordering by collecting the temporal ordering of hypothesis (non-evidence!) events in the simulation. The evidence nodes are added at the end, to ensure that evidence nodes are never parents to hypothesis nodes. 
+
+For example, in a hypothetical simulation with 3 hypothesis nodes \{`going\_cycling', `cycling\_over\_icy\_patch', `slipped'\} and 2 evidence nodes \{`street\_looks\_shiny', `bruised\_leg'\}, even though the total temporal ordering of events in the simulation would be:  \{`going\_cycling', `street\_looks\_shiny', `cycling\_over\_icy\_patch', `slipped', `bruised\_leg'\}, the ordering as used in our experiments would be: \{`going\_cycling', `cycling\_over\_icy\_patch', `slipped', `street\_looks\_shiny', `bruised\_leg'\}, so that we can keep to the evidence-idiom construction as outlined in \citet{Fenton2012}.
 
 
 
 \section{Evaluating the Bayesian Network}
 
-We want to evaluate different aspects of the Bayesian Network: structural criteria, performance criteria and human criteria.
+Now we know that we can build Bayesian Networks automatically using the K2 algorithm based on data we generated in our simulation, we need to evaluate different aspects of the Bayesian Network: structural criteria, performance criteria and human criteria.
 
 \subsection{Structural Criteria}
 \begin{enumerate}

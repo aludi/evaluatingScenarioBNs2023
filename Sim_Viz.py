@@ -23,7 +23,7 @@ from SimulationClasses.Walkway import Walkway
 from SimulationClasses.House import House
 from SimulationClasses.Vision import Vision
 from SimulationClasses.Goodie import Goodie
-from SimulationClasses.Camera import Camera
+from SimulationClasses.Camera import Camera, SecurityCamera
 
 from CaseModel import CaseModel
 
@@ -193,6 +193,14 @@ def agent_portrayal1(agent):
             portrayal["r"] = 2
         portrayal["opacity"] = 1
 
+    elif type(agent) is SecurityCamera:
+        portrayal["Shape"] = "circle"
+        portrayal["Filled"] = "false"
+        portrayal["Color"] = ["blue"]
+        portrayal["r"] = agent.radius * 2
+        portrayal["Layer"] = 2
+        portrayal["opacity"] = 0.1
+
     elif str(type(agent)) == "<class 'GroteMarkt.Background'>":
         portrayal["Shape"] = str(agent.model.topic)
         portrayal["Color"] = "Blue"
@@ -235,7 +243,7 @@ def agent_portrayal2(agent):
 class Test(TextElement):
     def render(self, model):
         str_ = ""
-        for key in model.reporters.pure_frequency_event_dict.keys():
+        for key in model.reporters.relevant_events:
             str_ = str_ + str(key) + " : " + str(model.reporters.history_dict[model.reporters.run][key]) + ",\t"
         return str_
 

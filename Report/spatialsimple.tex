@@ -44,18 +44,24 @@ The environment of the agents is very simple, just two `houses' (rectangles, rea
 \end{figure}
 
 \subsection{Methods}
-There are four things to be explained here: the agent behaviour, the operationalisation of the random variables, the simulation (meta-)parameters, and the process through which the cpts of the given BN is to be disturbed. The simulation was ran for 2000 times, with 30 epochs max per run.
 
-\subsubsection{Agent behaviour}
-flowchart here.
+We created a simulation of the situation described in the introduction, using the MESA multi-agent framework in Python. There are two agents, who are walking around in a discrete grid. Every simulation was simulated for 30 epochs, because all the possible scenarios could be described within 30 epochs. We performed 2000 iterations. 
 
-\subsubsection{Operationalisation of the RVs}
+The behaviour of the agents is described in Figure~\ref{behaviour}. 
 
-The operationalisation of the random variables is very important. In the table below are all the reporters and how they are defined.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\linewidth]{images/spatialsimpleAgent.pdf}
+\end{center}
+\caption{The behaviour of the agents. The nodes with rounded edges correspond to the nodes in the Bayesian Network.}
+\label{behaviour}
+\end{figure}
+
+The actions of the agents correspond to reporters. The operationalisation of the reporters (random variables) are described below:
 
 \begin{adjustbox}{center}
 \footnotesize
-\centering
+%\centering
 \begin{tabular}{|l|l|}
  \hline
  RV &Operationalization\\
@@ -83,7 +89,7 @@ E\_private&   \\
 
 \subsection{Results}
 
-See Figure~\ref{laptop}
+The generated Bayesian Network is shown in Figure~\ref{laptop}.
 
 \begin{figure}[htbp]
 \begin{center}

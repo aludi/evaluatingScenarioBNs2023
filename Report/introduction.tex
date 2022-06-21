@@ -38,6 +38,16 @@ Let's say that we find some piece of evidence $e$, we want to know how our findi
 
 This is the simplest form of Bayesian reasoning, one piece of evidence, and one hypothesis. But real life is not so simple, and we are constantly reasoning with many pieces of evidence, and `small' hypotheses can serve as stepping stones to greater hypotheses! One way of handling the complexity of interacting pieces of evidence and hypotheses is by using Bayesian Networks.
 
+A Bayesian Network is a directed, acyclic graph that represents the joint probability distribution over a set of events \citep{pearl1988}. BNs have nodes and arcs. Formally, the nodes are random variables that represent events, in case of our Bayesian Networks, these nodes represent hypotheses and pieces of evidence. An arc represent a conditional relationships between two nodes. An example of a Bayesian Network can be seen in Figure~\ref{exampleBN}. The conditional probability is expressed in the conditional probability table (cpt) of every node. A node that is not conditionally dependent on any other node (has no incoming arcs) is independent. In the figure, this is the node `train\_on\_time\_in\_groningen'. Nodes with one or more incoming arcs are conditionally dependent on their parent node(s) (the node `station\_renovation\_zwolle'). The links between the nodes are links of conditional probability, and do not correspond to real-world causality, although they are sometimes interpreted as being causal \citep{Dawid2008}.
+
+\begin{figure}[h]
+\includegraphics[width=\linewidth]{images/bnExample.pdf}
+\label{exampleBN}
+\caption{An example of a Bayesian Network, with and without evidence set.}
+\end{figure}
+
+We can reason with Bayesian Networks by setting evidence on one or more nodes that we can observe. This means that we say whether some observable node is true or false, and use that information to update the network. We can now find a new posterior probability for a node that we cannot observe directly (yet). In Figure~\ref{exampleBN}, this means that when there are station renovations going on at Zwolle, the probability that your train will be late in Groningen increases from a probability of 0.01, to a probability of 0.8.
+
 \section{The New Idea of the Thesis}
 We want to ground our Bayesian crime situations in multi-agent systems, so that we can have total control over whatever is happening, and we collect exactly the frequency information that we need.
 
@@ -48,3 +58,5 @@ Research Questions:
 Chapter 2 represents an overview of the state of the art, Chapter 3 proposes a pipeline for creating simulations and automatic Bayesian Networks, and evaluation criteria. Chapter 4, 5 and 6 are applications of this pipeline in three separate simulations: first a simple, non-spatial simulation based on \citep{Vlek2015}, a simple spatial simulation of a home-robbery, and finally a spatial simulation of a street-robbery. For each of these simulations, some simple experiments are done to investigate several problematic aspects of Bayesian Networks. These simulations are then each evaluated based on the evaluation criteria set out in Chapter 3. Finally, we draw conclusions in Chapter 7. 
 
 You can interact with the simulation in Chapter 6 on \url{https://shielded-journey-34533.herokuapp.com}.
+
+Code for this project can be found at \url{https://github.com/aludi/simulationTest}.

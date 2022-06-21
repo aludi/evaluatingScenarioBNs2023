@@ -1,0 +1,184 @@
+
+net {
+  name = unnamedBN;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node seen_1_0 {
+   states = (0 1 );
+   label = "seen_1_0";
+   ID = "seen_1_0";
+}
+
+node know_valuable_1_0 {
+   states = (0 1 );
+   label = "know_valuable_1_0";
+   ID = "know_valuable_1_0";
+}
+
+node know_vulnerable_1_0 {
+   states = (0 1 );
+   label = "know_vulnerable_1_0";
+   ID = "know_vulnerable_1_0";
+}
+
+node motive_1_0 {
+   states = (0 1 );
+   label = "motive_1_0";
+   ID = "motive_1_0";
+}
+
+node sneak_1_0 {
+   states = (0 1 );
+   label = "sneak_1_0";
+   ID = "sneak_1_0";
+}
+
+node stealing_1_0 {
+   states = (0 1 );
+   label = "stealing_1_0";
+   ID = "stealing_1_0";
+}
+
+node object_dropped_accidentally_0 {
+   states = (0 1 );
+   label = "object_dropped_accidentally_0";
+   ID = "object_dropped_accidentally_0";
+}
+
+node E_psych_report_1_0 {
+   states = (0 1 );
+   label = "E_psych_report_1_0";
+   ID = "E_psych_report_1_0";
+}
+
+node E_camera_1 {
+   states = (0 1 );
+   label = "E_camera_1";
+   ID = "E_camera_1";
+}
+
+node E_camera_sees_object_1_0 {
+   states = (0 1 );
+   label = "E_camera_sees_object_1_0";
+   ID = "E_camera_sees_object_1_0";
+}
+
+node E_object_gone_0 {
+   states = (0 1 );
+   label = "E_object_gone_0";
+   ID = "E_object_gone_0";
+}
+
+potential (seen_1_0) {
+   data = (  0.466023 0.533977);
+}
+
+potential ( know_valuable_1_0 | seen_1_0   ) {
+   data = 
+   ((   0.999643   0.000357398)   % seen_1_0=0   
+   (   0.569245   0.430755));   % seen_1_0=1   
+}
+
+potential ( know_vulnerable_1_0 | seen_1_0   know_valuable_1_0   ) {
+   data = 
+   (((   0.999821   0.000178763)   % know_valuable_1_0=0   seen_1_0=0   
+   (   1   0))   % know_valuable_1_0=1   seen_1_0=0   
+   ((   0.000273973   0.999726)   % know_valuable_1_0=0   seen_1_0=1   
+   (   0.000362056   0.999638)));   % know_valuable_1_0=1   seen_1_0=1   
+}
+
+potential ( motive_1_0 | know_valuable_1_0   seen_1_0   know_vulnerable_1_0   ) {
+   data = 
+   ((((   0.999911   8.93975e-05)   % know_vulnerable_1_0=0   seen_1_0=0   know_valuable_1_0=0   
+   (   1   0))   % know_vulnerable_1_0=1   seen_1_0=0   know_valuable_1_0=0   
+   ((   1   0)   % know_vulnerable_1_0=0   seen_1_0=1   know_valuable_1_0=0   
+   (   0.999863   0.000137024)))   % know_vulnerable_1_0=1   seen_1_0=1   know_valuable_1_0=0   
+   (((   1   0)   % know_vulnerable_1_0=0   seen_1_0=0   know_valuable_1_0=1   
+   (   1   0))   % know_vulnerable_1_0=1   seen_1_0=0   know_valuable_1_0=1   
+   ((   1   0)   % know_vulnerable_1_0=0   seen_1_0=1   know_valuable_1_0=1   
+   (   0.000181094   0.999819))));   % know_vulnerable_1_0=1   seen_1_0=1   know_valuable_1_0=1   
+}
+
+potential ( sneak_1_0 | know_valuable_1_0   motive_1_0   ) {
+   data = 
+   (((   0.999892   0.000108202)   % motive_1_0=0   know_valuable_1_0=0   
+   (   1   0))   % motive_1_0=1   know_valuable_1_0=0   
+   ((   1   0)   % motive_1_0=0   know_valuable_1_0=1   
+   (   0.000362056   0.999638)));   % motive_1_0=1   know_valuable_1_0=1   
+}
+
+potential ( stealing_1_0 | motive_1_0   know_valuable_1_0   ) {
+   data = 
+   (((   0.999892   0.000108202)   % know_valuable_1_0=0   motive_1_0=0   
+   (   1   0))   % know_valuable_1_0=1   motive_1_0=0   
+   ((   1   0)   % know_valuable_1_0=0   motive_1_0=1   
+   (   0.133599   0.866401)));   % know_valuable_1_0=1   motive_1_0=1   
+}
+
+potential ( object_dropped_accidentally_0 | motive_1_0   stealing_1_0   ) {
+   data = 
+   (((   0.810322   0.189678)   % stealing_1_0=0   motive_1_0=0   
+   (   1   0))   % stealing_1_0=1   motive_1_0=0   
+   ((   0.954054   0.0459459)   % stealing_1_0=0   motive_1_0=1   
+   (   0.999582   0.000417711)));   % stealing_1_0=1   motive_1_0=1   
+}
+
+potential ( E_psych_report_1_0 | know_valuable_1_0   sneak_1_0   ) {
+   data = 
+   (((   0.999892   0.000108202)   % sneak_1_0=0   know_valuable_1_0=0   
+   (   1   0))   % sneak_1_0=1   know_valuable_1_0=0   
+   ((   1   0)   % sneak_1_0=0   know_valuable_1_0=1   
+   (   0.20601   0.79399)));   % sneak_1_0=1   know_valuable_1_0=1   
+}
+
+potential (E_camera_1) {
+   data = (  0.000999334 0.999001);
+}
+
+potential ( E_camera_sees_object_1_0 | E_camera_1   stealing_1_0   ) {
+   data = 
+   (((   0.9   0.1)   % stealing_1_0=0   E_camera_1=0   
+   (   1   0))   % stealing_1_0=1   E_camera_1=0   
+   ((   0.999896   0.000104145)   % stealing_1_0=0   E_camera_1=1   
+   (   0.000417711   0.999582)));   % stealing_1_0=1   E_camera_1=1   
+}
+
+potential ( E_object_gone_0 | object_dropped_accidentally_0   E_camera_1   sneak_1_0   stealing_1_0   E_camera_sees_object_1_0   ) {
+   data = 
+   ((((((   0.984848   0.0151515)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=0   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=0   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=0   
+   (   1   0)))   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=0   
+   (((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=0   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=0   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=0   
+   (   1   0))))   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=0   
+   ((((   0.999983   1.67107e-05)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=0   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=0   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=0   
+   (   1   0)))   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=0   
+   (((   0.999645   0.000354862)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=0   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=0   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=0   
+   (   5.22521e-05   0.999948)))))   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=0   
+   (((((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=1   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=1   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=1   
+   (   1   0)))   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=0   E_camera_1=0   object_dropped_accidentally_0=1   
+   (((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=1   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=1   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=1   
+   (   1   0))))   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=1   E_camera_1=0   object_dropped_accidentally_0=1   
+   ((((   7.13369e-05   0.999929)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=1   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=1   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=1   
+   (   1   0)))   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=0   E_camera_1=1   object_dropped_accidentally_0=1   
+   (((   0.00769231   0.992308)   % E_camera_sees_object_1_0=0   stealing_1_0=0   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=1   
+   (   1   0))   % E_camera_sees_object_1_0=1   stealing_1_0=0   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=1   
+   ((   1   0)   % E_camera_sees_object_1_0=0   stealing_1_0=1   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=1   
+   (   1   0))))));   % E_camera_sees_object_1_0=1   stealing_1_0=1   sneak_1_0=1   E_camera_1=1   object_dropped_accidentally_0=1   
+}
+
+

@@ -769,7 +769,9 @@ def calculate_world_states_accuracy(file_name, path, output_node):
             state_name = "possibleStates"
         else:
             state_name = "impossibleStates"
-        print(state_name)
+        #print(state_name)
+
+        #print(event_list)
         for item in state_list:
             #print()
             ie = gum.LazyPropagation(bn)
@@ -1037,8 +1039,17 @@ def load_temporal_evidence(name):
         d["output"] = ["successful_stolen"]
 
     elif "GroteMarkt" in name:
-        d["events"] = ["motive_1_0"]
-        d["values"] = [0]
+        d["events"] = [
+            'E_camera_1',
+            "E_object_gone_0",
+            "E_psych_report_1_0",
+            'E_camera_sees_object_1_0',
+             ]
+        d["values"] = [
+            1,
+            1,
+            1,
+            1]
         d["output"] = ["stealing_1_0"]
 
     else:
@@ -1052,11 +1063,7 @@ def get_cpts(name, path):   # we only use this for GroteMarktMaps checking cpts 
     network_name = path + "/BNs/" + name + ".net"
     bn = gum.loadBN(network_name)
     #ie = gum.LazyPropagation(bn)
-    print(name, bn.cpt("seen_1_0")[0])
-
-
-
-
+    print(name, "P(seen) = 1:  ", bn.cpt("seen_1_0")[1])
 
 
 
@@ -1109,7 +1116,10 @@ def plot_posterior(path, base_network):
     list_files.sort()
     relevant_files = []
 
-    colors = ["#fde725", "#b5de2b", "#6ece58", "#35b779", "#1f9e89", "#26828e", "#31688e", "#3e4989", "#482878", "#440154"]
+    colors = ["#fde725", "#b5de2b", "#6ece58",
+              "#35b779", "#1f9e89", "#26828e",
+              "#31688e", "#3e4989", "#433e85",
+              "#482173", "#440154"]
     for f in list_files:
         if base_network in f:
             relevant_files.append(f)
@@ -1336,10 +1346,10 @@ d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"
 
 for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 1000, d_S),
                                                         #("StolenLaptopPrivate", 2000, d_S),
-                                                        ("StolenLaptop", 2000, d_S),
+                                                        #("StolenLaptop", 2000, d_S),
                                                         #("VlekNetwork", 500000, d_V),
-                                                        #("GroteMarkt", 2000, d_G),
-                                                        #("GroteMarktMaps", 2000, d_G)
+                                                        ("GroteMarkt", 2000, d_G),
+                                                        ("GroteMarktMaps", 1500, d_G)
                                         ]:
 
     os.chdir(org_dir)
@@ -1353,22 +1363,16 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
     #print(scenario)
 
 
-    '''
+
     experiment = Experiment(scenario=scenario, runs=train_runs, train="train",
                                param_dict=param_dict)  # we do the simple scenario
     #test_set = Experiment(scenario=scenario, runs=test_runs, train="test",
     #                      param_dict=param_dict)
 
-
+    print("done with experiment")
     list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
     list_files.sort()
 
-
-    param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
-                [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
-
-    param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
-                [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
 
     param_ar = [[0.001, 'arbit'], [0.01, 'arbit'], [0.025, 'arbit'], [0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
                 [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
@@ -1393,7 +1397,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
                     disturb_cpts(path, exp, p[0], train_data[:-4])
 
 
-    '''
+
     for train_data in list_files:
         if "pkl" in train_data:
             continue
@@ -1441,7 +1445,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
             num = 0
 
 
-        #print("hugin")
+        print("hugin")
         hugin_converter(networks[:-4], path)
 
         if scenario == "GroteMarktMaps":
@@ -1450,242 +1454,18 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         print(networks[:-4])
         #print("world state combinations accuracy")
         calculate_world_states_accuracy(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
-        #print("acc 1")
-        #print(networks[:-4], path)
-
-        #calculate_accuracy_1(networks[:-4], path)
-        #print("acc output")
-
-        #calculate_accuracy_fixed_output(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
-        #print("progress")
-
-        #progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
-
+        print("progress")
+        progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
 
     ## IMAGING
     # making some nice plots of the posterior
-
     print("plots")
     for base_network in list_files:
         if ".DS" not in base_network and 'pkl' not in base_network:
-            #plot_performance(path, base_network[:-4])
-            #plot_performance_fixed_output(path, base_network[:-4], load_temporal_evidence(base_network[:-4]))
-            #plot_posterior_base_network_only(path, base_network[:-4])
-            #plot_posterior(path, base_network[:-4])
+            plot_performance(path, base_network[:-4])
+            plot_posterior_base_network_only(path, base_network[:-4])
+            plot_posterior(path, base_network[:-4])
             pass
 
-
-
 exit()
-if scenario == "CredibilityGame":
-
-    for game in ["basicGame"]: #, "strangeGame"]:
-        experiment = Experiment(scenario="CredibilityGame", runs=runs, train="train", subtype=game)
-        bnDir = experiment.bnDir
-        dataFileName = experiment.csv_file_name
-
-        K2_BN(experiment, dataFileName, "CredBNs/main.net")
-
-        test_set = Experiment(scenario="CredibilityGame", runs=test, train="test",
-                                subtype=game)
-
-        test_setFileName = test_set.csv_file_name
-
-        #####
-        analysis.network_dir = bnDir
-        analysis.outcomes_csv = experiment.csv_file_name
-        analysis.test_csv = test_setFileName
-        analysis.outcome_experiment = experiment
-        analysis.test_experiment = test_set
-
-
-
-        param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
-                    [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
-                    [0.5, 'arbit']]
-
-        gen_file = f'_{game}_collected_tables.tex'
-        experiment_list = []
-        org_BN = "main"
-        for (exp, params) in [("arbitraryRounded", param_ar)]:
-            experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list, test_set, analysis)
-            print(f"done with experiment {exp}")
-
-        csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability", "accuracy", "rms", "Game"]
-        flag = 'w'
-        if game != "basicGame":
-            flag = 'a'
-        with open("cred.csv", flag) as file:
-            writer = csv.writer(file)
-            writer.writerow(csv_cols)
-            for row in experiment_list:
-                row.append(game)
-                writer.writerow(row)
-
-elif scenario == "VlekNetwork":
-
-    list_files = os.listdir(os.getcwd() + "/experiments/" + scenario + "/train")
-    list_files.sort()
-    path = os.getcwd() + "/experiments/" + scenario
-
-    train_runs = 50000
-    test_runs = train_runs/10
-
-
-    experiment = Experiment(scenario="VlekNetwork", runs=train_runs, train="train", subtype=2)  # we do the simple scenario
-    test_set = Experiment(scenario="VlekNetwork", runs=test_runs,train="test",
-                          subtype=2)
-    
-    
-
-    param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
-                [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
-
-    param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
-                [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
-
-    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
-                [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
-                [0.5, 'arbit']]
-
-
-    if ".DS_Store" in list_files:
-        list_files.remove(".DS_Store")
-
-    for train_data in list_files:
-        K2_BN_csv_only(train_data, path)
-
-        for (exp, params) in [("arbit", param_ar)]: #("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
-            for p in params:
-                disturb_cpts(path, exp, p[0], train_data[:-4])
-
-    # now we've generated all the networks even with disturbances
-    # reload the list of files and see how the disturbances affect the rest of the outputs
-    disturbed_list_files = os.listdir(path + "/BNs")
-    disturbed_list_files.sort()
-    if ".DS_Store" in list_files:
-        disturbed_list_files.remove(".DS_Store")
-
-
-    for networks in disturbed_list_files:
-        #
-        k = networks.split("_", 2)
-        if len(k) > 2:
-            [base, dist, num] = k
-            num = num[:-4]
-
-        else:
-            dist = "none"
-            num = 0
-
-        hugin_converter(networks[:-4], path)
-        calculate_accuracy_1(networks[:-4], path)
-        progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
-
-    ## IMAGING
-    # making some nice plots of the posterior
-    for base_network in list_files:
-        plot_posterior(path, base_network[:-4])
-
-
-elif scenario == "GroteMarkt":
-    experiment = Experiment(scenario="GroteMarkt", runs=runs, train="train", subtype=2)  # we do the simple scenario
-    bnDir = experiment.bnDir
-    dataFileName = experiment.csv_file_name
-
-    K2_BN(experiment, dataFileName, "BNGroteMarkt/main.net")
-
-    test_set = Experiment(scenario="GroteMarkt", runs=test, train="test",
-                          subtype=2)
-
-    test_setFileName = test_set.csv_file_name
-
-    #####
-    analysis.network_dir = bnDir
-    analysis.outcomes_csv = experiment.csv_file_name
-    analysis.test_csv = test_setFileName
-    analysis.outcome_experiment = experiment
-    analysis.test_experiment = test_set
-
-
-    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
-                [0.2, 'arbit'], [0.25, 'arbit'], [0.33, 'arbit'],
-                [0.5, 'arbit']]
-
-    gen_file = f'_{scenario}_collected_tables.tex'
-    experiment_list = []
-    org_BN = "main"
-    for (exp, params) in [("arbitraryRounded", param_ar)]:
-        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list, test_set, analysis)
-        print(f"done with experiment {exp}")
-
-    csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability",
-                 "accuracy", "rms", "Scenario"]
-    flag = 'w'
-    if experiment.subtype != "1":
-        flag = 'a'
-    with open("gm.csv", flag) as file:
-        writer = csv.writer(file)
-        writer.writerow(csv_cols)
-        for row in experiment_list:
-            writer.writerow(row)
-
-
-
-elif scenario == "StolenLaptop":
-    experiment = Experiment(scenario="StolenLaptop", runs=runs, train="train")
-    bnDir = experiment.bnDir
-    #dataFileName = experiment.csv_file_name
-
-    K2_BN(experiment, dataFileName, "K2Bns/K2BN.net")
-
-    test_set = Experiment(scenario="StolenLaptop", runs=test, train="test")
-
-    test_setFileName = test_set.csv_file_name
-    #####
-    analysis.network_dir = bnDir
-    analysis.outcomes_csv = experiment.csv_file_name
-    analysis.test_csv = test_setFileName
-    analysis.outcome_experiment = experiment
-    analysis.test_experiment = test_set
-
-    param_no = [[0, 0.001, "Normal (M, sd)"], [0, 0.01, "Normal (M, sd)"], [0, 0.1, "Normal (M, sd)"],
-                       [0, 0.2, "Normal (M, sd)"], [0, 0.3, "Normal (M, sd)"], [0, 0.5, "Normal (M, sd)"]]
-
-    param_ro = [[5, 'decimal places'], [4, 'decimal places'], [3, 'decimal places'],
-                       [2, 'decimal places'], [1, 'decimal places'], [0, 'decimal places']]
-
-    param_ar = [[0.05, 'arbit'], [0.1, 'arbit'], [0.125, 'arbit'],
-                       [0.2, 'arbit'], [0.25, 'arbit'],[0.33, 'arbit'],
-                       [0.5, 'arbit']]
-
-
-    gen_file = '_collected_tables.tex'
-    experiment_list = []
-    org_BN = "K2BN"
-    for (exp, params) in [("rounded", param_ro), ("arbitraryRounded", param_ar), ("normalNoise", param_no)]:
-        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list,test_set, analysis)
-        print(f"done with experiment {exp}")
-
-    csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability", "accuracy", "rms"]
-    with open("expORG.csv", 'w') as file:
-        writer = csv.writer(file)
-        writer.writerow(csv_cols)
-        writer.writerows(experiment_list)
-
-
-
-    #### testing spider BN for hypothesis ####
-    gen_file = '_collected_tables_spider.tex'
-    org_BN = "adaptedK2BN"
-    experiment_list_spider = []
-    for (exp, params) in [("arbitraryRounded", param_ar)]:
-        experiment_general_shape(experiment, exp, org_BN, params, f"texTables/{org_BN}{exp}{gen_file}", experiment_list_spider, test_set, analysis)
-        print(f"done with experiment {exp}")
-
-    csv_cols = ["distortion", "param", "strong", "noise", "evidenceCUMUL", "hypNode", "Probability", "K2Probability", "accuracy", "rms"]
-    with open("expSpider.csv", 'w') as file:
-        writer = csv.writer(file)
-        writer.writerow(csv_cols)
-        writer.writerows(experiment_list_spider)

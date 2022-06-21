@@ -118,9 +118,8 @@ class Experiment():
             if scenario == "GroteMarkt":
                 iterate_experiment = ["groteMarkt.png"]
             else:
-                #iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png",
-                #    0, 5, 10, 25, 50, 75]
-                iterate_experiment = ["academy.png"]
+                iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png","kattediep.png", "wall.png",
+                    0, 5, 10, 25, 50, 75]
 
             for map in iterate_experiment:
                 if type(map) == str:
@@ -148,8 +147,14 @@ class Experiment():
                 self.n = 2
 
                 n = self.n
-                self.scenario = 2
-                base_rel_events = ["seen", "know_valuable", "know_vulnerable", "able_to_steal", "motive", "sneak", "stealing"]
+                self.scenario = 2       # we are only experimenting with scenario 2!!!!
+                base_rel_events = ["seen", "know_valuable", "know_vulnerable", "motive", "sneak", "stealing",
+                                   "object_dropped_accidentally",
+                           "E_psych_report",
+                            "E_camera",
+                            #"E_camera_seen_stealing",
+                            "E_camera_sees_object",
+                           "E_object_gone"]
 
                 # create reporters automatically
                 rel_events = []
@@ -158,21 +163,22 @@ class Experiment():
                 for i in range(1, n):
                     for k in range(0, 1):
                         for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
-                            if i != k:
-                                str1 = f"{j}_{str(i)}_{str(k)}"
-                                # str2 = i + "_credibility"
+                            if j in ["object_dropped_accidentally", "E_object_gone"]:
+                                str1 = f"{j}_{str(i-1)}"
                                 rel_events.append(str1)
-                '''
-                for i in range(1, n):
-                    for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
-                        str1 = f"{j}_{str(i)}_0"
-                        # str2 = i + "_credibility"
-                        rel_events.append(str1)
-                '''
+                            elif j in ["E_camera"]:
+                                str1 = f"{j}_{str(i)}"
+                                rel_events.append(str1)
+                            else:
+                                if i != k:
+                                    str1 = f"{j}_{str(i)}_{str(k)}"
+                                    # str2 = i + "_credibility"
+                                    rel_events.append(str1)
+
                 y = 20
                 C = CreateMap(map_name, coverage, y)
                 x = int(y * C.rel)
-                #print(rel_events)
+                print(rel_events)
                 self.reporters = Reporters(relevant_events=rel_events)
                 for i in range(0, self.runs-1):
                     #print(self.scenario)
@@ -197,10 +203,6 @@ class Experiment():
                     if train == "train":
                         self.pickle_relevant(scenario, train, f"{scenario}_map_{str(map)}")  # pickles temporal dict, event dict and evidence list
 
-
-
-
-            #self.print_frequencies()
 
 
     def pickle_relevant(self, scenario, train, name):

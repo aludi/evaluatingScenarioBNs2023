@@ -149,13 +149,13 @@ The accuracy and rmse are shown in Table~\ref{tabA}.
 \hline
 \end{tabular}
 \caption{Accuracy and Root Mean Square Error for the networks}
-\end{center}
 \label{tabA}
+\end{center}
 \end{table}
 
 \item \textbf{Correspondence.}
 
-In this case, we know exactly the frequencies of events given their premises in the rule base, because we have set them explicitly in our probabilistic-forward-chaining engine. These frequencies are represented in Table~\ref{test} as the `True P(event)' column. The `P(event)' column is the result of the prediction of the Bayesian Network. As shown in the tables, the Bayesian Network \textbf{usually} estimates the probability of the event within ±1\% uncertainty. There are a few exceptions to the general behaviour of less than ±1\% uncertainty in the network - the network generally overestimates small probabilities. Whether an uncertainty of `generally less than ±1\%' is good or bad depends on the precision that the network requires - since we do not have any evidence that really depends on high-precision data or networks (eg: a change of 0.01 in one node results in a different conclusion - see sensitivity analysis and precision reduction), the Bayesian Networks seems satisfactory. 
+In this case, we know exactly the frequencies of events given their premises in the rule base, because we have set them explicitly in our probabilistic-forward-chaining engine. These frequencies are represented in Table~4.5 as the `True P(event)' column. The `P(event)' column is the result of the prediction of the Bayesian Network. As shown in the tables, the Bayesian Network \textbf{usually} estimates the probability of the event within ±1\% uncertainty. There are a few exceptions to the general behaviour of less than ±1\% uncertainty in the network - the network generally overestimates small probabilities. Whether an uncertainty of `generally less than ±1\%' is good or bad depends on the precision that the network requires - since we do not have any evidence that really depends on high-precision data or networks (eg: a change of 0.01 in one node results in a different conclusion - see sensitivity analysis and precision reduction), the Bayesian Networks seems satisfactory. 
 
 
 \begin{table}
@@ -203,45 +203,37 @@ In this case, we know exactly the frequencies of events given their premises in 
  Mark dies (premise: Jane stabs Mark) & 70 & 68.68 \\ 
   Mark dies (premise: Mark dies by accident)& 100 & 98.77 \\ 
 \hline
-\label{test}
 \end{tabular}
+\label{test}
 \caption{For combined scenarios}
 \end{center}
 \end{table}
 
 
 
-\item \textbf{Sensitivity analysis shows that no simulation-irrelevant event influences some output \footnote{rephrase}}
+\item \textbf{Sensitivity analysis} (Figure~\ref{sa1}, ~\ref{sa2}, ~\ref{sa3}) shows that no irrelevant event influences some output, as well as being robust, as the largest sensitivity values remain smaller than 1. The sensitivity values for the second scenario in the full network are almost insignificantly small, showing that they have very little influence over the `mark\_dies' node.
 
-kb1
-
-fight 0.01
-knife 3.12e-3
-stab 0.4
-dies 1
-
-
-kb2
-jane\_and\_mark\_fight	9.5E-4	
-jane\_has\_knife	2.8E-4	
-jane\_threatens\_mark\_with\_knife	0.018
-mark\_hits\_jane	0.036
-jane\_drops\_knife	0.07
-mark\_falls\_on\_knife	0.66	
-mark\_dies\_by\_accident	1	
-mark\_dies	0.0
-
-
-full
-jane\_and\_mark\_fight 	4.6E-4	
-jane\_has\_knife	1.3E-4	
-jane\_stabs\_mark\_with\_knife	3.0E-4	
-mark\_dies 0.12	
-jane\_threatens\_mark\_with\_knife	0.002
-mark\_hits\_jane	0.003
-jane\_drops\_knife	0.002
-mark\_falls\_on\_knife	0.013
-mark\_dies\_by\_accident	1
+\begin{figure}[htbp]
+\begin{center}
+\begin{subfigure}{.33\textwidth}
+\includegraphics[width=0.9\linewidth]{images/sensitivityKB1.png}
+\caption{Sensitivity values for scenario 1 network.}
+\label{sa1}
+\end{subfigure}%
+\begin{subfigure}{.33\textwidth}
+\includegraphics[width=0.9\linewidth]{images/sensitivityKB1.png}
+\caption{ Sensitivity values for scenario 2 network.}
+\label{sa2}
+\end{subfigure}%
+\begin{subfigure}{.33\textwidth}
+\includegraphics[width=0.9\linewidth]{images/sensitivityKBFull.png}
+\caption{Sensitivity values for combined network.}
+\label{sa3}
+\end{subfigure}
+\end{center}
+\caption{Sensitivity Analysis}
+\label{sa}
+\end{figure}
 
 From these values we can see that a parameter chance in most nodes will not affect the output probability very much. The parent nodes of the output node are, of course, the most influential. 
 
@@ -303,9 +295,9 @@ This dramatic is altogether due to entering inconsistent evidence inside the net
  \hline
   P(jane\_stabs\_mark\_with\_knife) & 0 & 0 &0 & 0 \\
   \hline
-\label{stab}
 \end{tabular}
 \caption{CPT of jane\_stabs\_mark\_with\_knife}
+\label{stab}
 \end{center}
 \end{table}
 
@@ -471,7 +463,7 @@ This approach to completeness and plausibility outsources the problem of determi
  There is no good answer to this question. A simulation will always be an incomplete reflection of reality. Perhaps the simulation should correspond to some story or idiom. If the scenario contains `intentional' agents, we might find it easier to think about stories and idioms in simulation than we find it to think about stories and idioms with regards to Bayesian Networks. However, this needs to be investigated further.
  
  \subsubsection{Bayesian Networks as a guide to reasoning}
- Ideally, we would want a BN to protest when you try to add evidence to it that corresponds to an impossible world state. This should cause conflict between nodes, or at least result in a low accuracy. We calculated accuracy over the set of all possible world states, however, if we take the accuracy over the set of all impossible world states (eg: states that never occur in the simulation), we would want to see a low accuracy. So, calculating the accuracy over the impossible world states instead, shows for the generated $\epsilon$-networks:
+ Ideally, we would want a BN to protest when you try to add evidence to it that corresponds to an impossible world state. This should cause conflict between nodes, or at least result in a low accuracy. We calculated accuracy over the set of all possible world states, however, if we take the accuracy over the set of all impossible world states (eg: states that never occur in the simulation), we would want to see a low accuracy. So, the accuracy over the impossible world states is shown in Table~\ref{tabVlekNetworkimpossible} , shows for the generated $\epsilon$-networks.
  \begin{table}[htp]
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
@@ -484,8 +476,8 @@ This approach to completeness and plausibility outsources the problem of determi
 \hline
 \end{tabular}
 \caption{Accuracy and Root Mean Square Error for the networks calculated on the impossible states.}
+\label{tabVlekNetworkimpossible}
 \end{center}
-\label{tabB}
 \end{table}
 
 Here, the accuracy is remarkably low, and the RMSE is high. This means that if you, by accident, fill in an impossible world state as evidence in your BN, the probability that you predict the output node correctly becomes very low. However, we also see that these $\epsilon$-networks do not break - the number of times that we find an inconsistency error is 0 for all networks. In the best case scenario, we want the network to break if you fill in inconsistent evidence, and not just produce a low accuracy (since you can only calculate accuracy over a data set). 

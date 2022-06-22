@@ -25,7 +25,7 @@ For the first experiment, a very simple crime case will be modelled in a multi-a
 
 \subsection{Introduction}
 
-The scenario that the agents play out goes as follows. There are two agents. They are neighbors. One day, the agent who lives in the house on the right ($R$), walks past the house of the other agent ($L$). $R$ looks inside, if it can. Sometimes it cannot look inside, because $L$ has drawn the curtains. However, if $R$ can look inside, it might see a goodie in the house. It also might not see a goodie, if $L$ has lost the goodie - in that case, the goodie has been lost. However, if the goodie is there, $R$ will know that the goodie is there. Then, because $R$ is a rational agent, it will try to calculate the worth of the object, and if it might want to steal it. It can decide to target the object. If $R$ knows and targets the object, $R$ has a motive. Then, $R$ attempts to break into the house by breaking the lock on the door, grabbing the goodie, and running away to its own house.  Meanwhile, $L$ is returning home. If $R$ thinks that $L$ might have seen it stealing, $R$ will flee home, with or without the goodie. $L$ has also hung up security cameras on the outside corner of its house, that might serve as evidence against $R$.
+The scenario that the agents play out goes as follows. There are two agents. They are neighbors. One day, the agent who lives in the house on the right (the thief), walks past the house of the other agent (the victim) \footnote{It is not legally correct to talk about thief and victim at this point in the simulation, because nothing has been stolen yet. However, it's convenient!}. The thief looks inside, if it can. Sometimes it cannot look inside, because the victim has drawn the curtains. However, if the thief can look inside, it might see a goodie in the house. It also might not see a goodie, if the victim has lost the goodie - in that case, the goodie has been lost. However, if the goodie is there, the thief will know that the goodie is there. Then, because the thief is a rational agent, it will try to calculate the worth of the object, and if it might want to steal it. It can decide to target the object. If the thief knows and targets the object, the thief has a motive. Then, the thief attempts to break into the house by breaking the lock on the door, grabbing the goodie, and running away to its own house. The thief has a breaking-and-entering skill (random, 0, 10), meaning that it can fair to break the lock, and also a detail-oriented skill (random, 0, 10), meaning that it can disturb the house while robbing (leaving evidence). Meanwhile, the victim is returning home. If the thief thinks that the victim might have seen it stealing, the thief will flee home, with or without the goodie. The victim has also hung up security cameras on the outside corner of its house, that might serve as evidence against the thief.
 
 With regards to the end, there can be three outcomes: either the goodie is lost, the goodie is not lost but was stolen successfully, or the goodie is not lost and wasn't stolen successfully. %({\color{red}does this mean that there was always a stealing attempt? check in jup}). 
 The environment of the agents is very simple, just two `houses' (rectangles, really). The environment and the agents (with their vision parameter) are shown in Figure~\ref{env}.
@@ -59,33 +59,24 @@ The behaviour of the agents is described in Figure~\ref{behaviour}.
 
 The actions of the agents correspond to reporters. The operationalisation of the reporters (random variables) are described below:
 
-\begin{adjustbox}{center}
-\footnotesize
-%\centering
-\begin{tabular}{|l|l|}
- \hline
- RV &Operationalization\\
- \hline
-lost\_object   & A random number generator (0, 1) generates a number. If the number $\leq 0.2$, the object is lost.\\
-curtains & A random number generator (0, 1) generates a number. If the number $\leq 0.8$, the house has no curtains.  \\
-raining & A random number generator (0, 1) generates a number. If the number $\leq 0.5$, it is raining.   \\
-know\_object & if we see an object in our vision that is not our own, and we are not already targeting some`
-thing else  \\
-target\_object & if we know the object exists, and we consider the value of the object higher than our risk threshold.  \\
-motive & if we have a target \\
-compromise\_house & if we are adjacent to the target's house's door, and we have a breaking and entering skill of greater than 5. \\
-flees\_startled & if we see another agent and we haven't been observed yet  \\
-successful\_stolen & if we're not in someone's house anymore and we have the object in our possession \\ 
-E\_s\_spotted\_by\_house&  {\color{red} todo fill in}. \\ 
-E\_disturbed\_house&   \\ 
-E\_object\_is\_gone&   \\ 
-E\_broken\_lock&   \\ 
-E\_s\_spotted\_with\_goodie&   \\ 
-E\_private&   \\ 
-\hline
-\end{tabular}
-\end{adjustbox}
+\begin{description}
+\item[lost\_object  ] a random number generator (0, 1) generates a number. If the number $\leq 0.2$, the object is lost.
+\item[curtains] a random number generator (0, 1) generates a number. If the number $\leq 0.8$, the house has no curtains. 
+\item[raining]  a random number generator (0, 1) generates a number. If the number $\leq 0.5$, it is raining. 
+\item[know\_object]  if the thief sees an object in our vision that is not our own, and the thief is not already targeting something else.
+\item[target\_object]   if the thief know the object exists, and it considers the value of the object higher than its risk threshold - where the range is (random, 0, 1000).
+\item[motive]  if the thief has a target.
+\item[compromise\_house]  if we are adjacent to the target's house's door, and we have a breaking and entering skill of greater than 5.
+\item[flees\_startled]  if there is another agent in the thief's vision when we have a motive.
+\item[successful\_stolen] if the thief is outside with the object and has not fled.
+\item[E\_s\_spotted\_by\_house]  if the thief is within the visual radius of the camera belonging to the victim's house.
+\item[E\_disturbed\_house]  if the thief is inside the house, and the thief's detail-oriented skill is smaller than 8. 
+\item[E\_object\_is\_gone]  if the object is not in its original location when the victim agent comes home.
+\item[E\_broken\_lock]  if the house is compromised.
+\item[E\_s\_spotted\_with\_goodie]  if the thief is within visual range of the camera and it has the object.
+\item[E\_private]  if the thief sees another agent in its visual range.
 
+\end{description}
 
 \subsection{Results}
 
@@ -134,7 +125,7 @@ The accuracy of the network is 87.9\% and Root Mean Square error is 0.14. This i
 
 \item \textbf{Correspondence.}
 
-Once again, compared the probabilities in the network with the frequencies of the events in the simulation (maybe run again, larger training set but don't actually train on it). We see the same pattern (Table~\ref{test}) as before, it is accurate within ±0.005. 
+Once again, compared the probabilities in the network with the frequencies of the events in the simulation (maybe run again, larger training set but don't actually train on it). We see the same pattern (Table~\ref{testCorSimple}) as before, it is accurate within ±0.005. 
 
 \begin{table}
 \centering
@@ -158,13 +149,24 @@ E\_broken\_lock&  0.0925 &  0.0924\\
 E\_s\_spotted\_with\_goodie& 0.083  & 0.0813 \\ 
 E\_private&  0.1655 & 0.1653\\ 
 \hline
-\label{test}
 \end{tabular}
 \caption{Correspondences}
+\label{testCorSimple}
+
 \end{table}
 
 
 \item \textbf{Sensitivity analysis values}
+
+The sensitivity analysis shows (Figure~\ref{sensitivitySL}) that a shift in the parameters for `compromise\_house' has the largest effect on the output node `successful\_stolen', but all the sensitivity values are low, meaning that a small shift in the parameters of the nodes do not result in a greater shift in the ultimate node - hence, the network is robust.
+
+\begin{figure}[htbp]
+ \centering
+\includegraphics[width=0.6\linewidth]{images/sensitivitySL.png}
+\caption{The maximum sensitivity values for every node as it relates to `successful\_stolen' as presented in Hugin.}
+\label{sensitivitySL}
+\end{figure}%
+
 
 \item \textbf{Effect of evidence on the posterior.}
 

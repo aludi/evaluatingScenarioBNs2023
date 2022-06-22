@@ -424,4 +424,95 @@ LaTeX Font Info:    ... okay on input line 48.
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
 * driver: pdftex
-* 
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(73.71613pt, 430.00462pt, 110.57425pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=1.44614pt
+* \evensidemargin=38.30426pt
+* \topmargin=-8.74641pt
+* \headheight=12.0pt
+* \headsep=19.8738pt
+* \topskip=11.0pt
+* \footskip=27.46295pt
+* \marginparwidth=116.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count284
+\scratchdimen=\dimen179
+\scratchbox=\box52
+\nofMPsegments=\count285
+\nofMParguments=\count286
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count287
+\MPscratchDim=\dimen180
+\MPnumerator=\count288
+\makeMPintoPDFobject=\count289
+\everyMPtoPDFconversion=\toks28
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\AtBeginShipoutBox=\box53
+Package hyperref Info: Link coloring ON on input line 48.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/local/texlive/2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count290
+)
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+LaTeX Info: Redefining \nameref on input line 48.
+ (./mainMastersProject.out)
+Runaway argument?
+{General inform 
+./mainMastersProject.tex:48: File ended while scanning use of \@@BOOKMARK.
+<inserted text> 
+                \par 
+l.48 \begin{document}
+                     
+? 
+./mainMastersProject.tex:48: Emergency stop.
+<inserted text> 
+                \par 
+l.48 \begin{document}
+                     
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 9737 strings out of 480608
+ 147683 string characters out of 5903630
+ 421332 words of memory out of 5000000
+ 25485 multiletter control sequences out of 15000+600000
+ 532638 words of font info for 25 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 48i,1n,46p,826b,72s stack positions out of 5000i,500n,10000p,200000b,80000s
+./mainMastersProject.tex:48:  ==> Fatal error occurred, no output PDF file prod
+uced!

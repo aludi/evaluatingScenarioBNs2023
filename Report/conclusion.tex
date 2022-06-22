@@ -6,56 +6,57 @@
 \chapter[Conclusion]{Conclusion}
 
 
-\section{Good things}
+Our research questions, and answers:
 
-We can have reasonable accuracy and rms in the bayesian networks in the simulation. This is due to reporters.
+\begin{itemize}
+\item \textbf{Can we create Bayesian Networks that correctly reflect multi-agent simulations of crimes?}
+
+We can create Bayesian Networks that correctly reflect multi-agent simulations of crimes. For different types of simulations, the Bayesian Networks that were generated using the pipeline had high accuracy, low RMSE, generally fulfilled the structural criteria we set out. The probabilities in these networks reflected the probabilities we found in the simulation. 
+
+The networks were even robust under imprecision, which means that even though experts might disagree on elicited probability values, or there are imprecisions in the measuring tools, the performance of the network and the conclusion that it gets to in the end, might remain correct. 
+
+We can also show how we should update our posterior probability of an event given a set of evidence and hence show that different pieces of evidence have different strengths. The effect of evidence on the posterior lines up with the evidence as reported in the simulation, as well as with modeller's intuition about the evidence. The visualisation of the posterior probability of the outcome node is a useful interpretative tool for reasoning. Different sets of evidence can also be compared with each other, so that we could compare the effect of different evidence and different scenarios on the posterior probability of the ultimate output node.
 
 
-\section{Fundamental Problems with Bayesian Networks}
+However, the networks that we generated using the pipelines did have some features that are hard on modellers, some nodes had too many parents to easily fill a cpt. We might want to trade-off high network scores for user ease, and restrict the number of parents that a node can have. Additionally, the probabilities that were used in the network would be difficult for a human modeller to elicit or discover. However, since we have our robustness to imprecision, this might not be a large practical problem. Additionally, the temporal ordering of the nodes is not correct when two alternative scenarios are represented within one network.
 
-There are some fundamental problems with BNs as used for scenario-like whole legal Bayesian Networks.
 
-Robustness is not the problem, even if we round to arbitrary intervals, losing a lot of precision, we have networks with a reasonable accuracy/rms error, that generally reach the right (enough) conclusion and respond correctly to evidence. Granularity is also whatever. The real problem is with the translation from human language to mathematical language. A random variable maps a sample world to a value, according to a certain procedure that is described in natural language. This means that for every node in the BN, we need to describe a procedure through which we can know whether or not it is true. This should be explicit, and everyone in court should agree with this - there can be no `personal interpretation' of this, no `probably close enough to count', because then we have shifted from one RV to a different one. This is not necessarily problematic, perhaps the robustness of BNs does not just hold for estimating a probability for a given reporter, but also holds for estimating a probability over an estimated set of reporters. However, we have to make this explicit - if we change reporters (RVs) without communicating about it, we're in trouble. 
+\item \textbf{If we can, under what assumptions do these networks function?}
 
-However, in court this would imply that we would have a discussion about every measuring procedure for every node of every BN, and there would be no `idiom database', because as soom as we try to app
-\subsection{Reporters, Reference Classes and Random Variables.}
+The assumptions under which the networks are correct, are too strict for this approach to be applied one-on-one to the real world. There are three problems that were identified in this work. These are the meaning of the reporters, private knowledge, and implicit conditioning. These problems are all abundantly present in the real world and it is not clear how to we should fix them. This means that Bayesian Networks might remain a good tool for seeing how evidence affects hypotheses, but might not be ready for the real world.
 
-Fundamentally, the problem is that the nodes in Bayesian Networks have a specific meaning. They are not pragmatic/dialogical/argumentation sentences, but have intricate statistical meaning \footnote{secret fourth good sherlock episode.} They are random variables, and a random variable implies an observation procedure (a mapping from a world state to a number). This means, that a node implies that we know how to measure if it is true or not in the real world.
 
- In our simulation, this is really not a problem. We have an observation procedure: if a certain state occurs, we have the reporter in the same place as when the state change occurs, and the reporter reports exactly and only that. In experiment XXX we saw what happens when this goes wrong: if we have an imprecise/contradictory/smaller/larger reporters, we see that the probabilities can change a lot, might even change the structure of the network. 
+\subsubsection{Reporters and random variables}
+
+Fundamentally, the problem is that the nodes in Bayesian Networks are random variables. They are not pragmatic, dialogical, argumentation, or logical sentences, but mathematical objects. They are random variables, and a random variable implies an observation procedure that maps a world state to a truth value. This means, that a node implies that we know how to measure if it is true or not in the real world.
+
+In our simulation, this is really not a problem. We have an observation procedure: if a certain state occurs, we have the reporter in the same place as when the state change occurs, and the reporter reports exactly and only that. Hence, Bayesian Networks might work for subsections of reality that have a clear observation procedure. For example, reasoning with DNA evidence or other valid forensic evidence. In these cases, we know exactly what it means for the node to be true, since we know the measurement associated with the random variable.
  
-Hence, BNs might work for subsections of reality that have a clear observation procedure (eg reasoning with DNA evidence or other forensic stuff). We know exactly what it means for the node to be true (eg: we know the measurement associated with the random variable). However, for many of the node events that we encounter in scenario BNs/argumentation BNs, we do not know how we are determining that the node is true or not. So either we spell out exactly when a node is true or not, and by exactly I mean exactly, and we lose all generality/chance at DBs. Or we do not spell it out, interpret BN nodes not as random variables but as some sort of fuzzy conditional logic operation, but then that's fine, but we're not really building Bayesian Networks, we're doing something else.
+However, for many of the events that we encounter in our simulation, or in Bayesian Networks in the state of the art, we do not know how we are determining that the node is true or not. We do not know which operationalisation is used to determine the truth value, and if that operationalisation is correct or not. This information has to be included with the networks, otherwise we cannot interpret what a node actually means. 
 
-Experiment outcomes: best possible case would be that the structure of the BN becomes different (not just the probabilities) based on different reporters used.
-
-- I want one random variable that is a `wide' interpretation: a combination of all possible reporters for some thing.
-- I want some random variables that are the most narrow possible interpretation.
-- alternative.
-
----------------------------------------------------------------------
-
-This is not the same as the problem of the reference class, but it is related. The problem of the reference class is the discussion which definition/reporter is appropriate for a given situation. This problem is the step before that, which is - how do we specify what reference class we are talking about? This is not described in the scenario-like BNs I've discussed in my introduction. The forensic BNs come closer, because there we at least know what method is used to determine if an event happened or not...
-
-\subsection{Dependence on implicit parameters and background knowledge.}
-
-Put the exact same agents with the same behavioural loops on a different map, and the probabilities for events change (see XXX). This is not a problem - this means that environment/world knowledge/context, which is not a node explicitly in the Bayesian Network, affects the output of networks. This can be remedied in a sense, by adding a context node. So what's the problem? That if we see a BN and we do not know exactly what the context was in which it was created, we cannot assume that it generalises to a different environment. We cannot take parts of that network (with probabilities) and put it in a different one, because implicitly it is only defined over the environment for which it was originally created.
-
-The networks are also dependent on implicit parameters, like the radius of the vision of the camera. It's neat that changing this parameter will influence the evidential strength of it. Not necessarily a flaw but it does mean that its like. We have the nodes in the networks are we need to specify exactly what we mean, over all relevant parameters. And we don't know what these parameters are.
-
-\subsection{Private knowledge}
-
-Here we run into a paradox: in our simulation we know exactly when something is true, even when that thing is private knowledge. If we leave out the private knowledge (drop from our table, basically), we have a problem and the accuracy of the network drops. This means that we can only generate a BN that uses private knowledge if we have all knowledge, requiring everyone in the process to help along. Feasible? No.
-
-\subsection{Effect of evidence on posterior}
-
-We presented a way of showing how a set of evidence can influence the posterior probability of the output event. This representation of `converging' on a final posterior probability of 1 is a good way of visually showing the evidence strength of pieces of evidence. Different sets of evidence can also be compared with each other, so that we could compare the effect of different evidence and different scenarios on the posterior probability of the ultimate output node.
+\subsubsection{Private knowledge}
+This problem is very clear: in our simulation, we know when private information is true or false, even if we have no way of knowing this private knowledge in real life. If we remove this knowledge from our network, we find that this effects the posterior probability of the outcome node to such an extent that we fall below a `comfortable' threshold of guilt. This implies that we can only generate a network that correctly and legally reasons about evidence if everyone in the process would help. This is not feasible.
 
 
-\section{Conclusion}
-Bayesian Networks are a good tool if you know exactly what you want to investigate and have methods for it as well. This is the case in simulation, obviously.
+\subsubsection{Conditioning on implicit parameters}
+We find that if we change the parameters of the simulations, such as using a different map, the probabilities for events change. It means that there is outside influence - things that are not nodes, can influence the cpt's of the network, as if there is an invisible `environment' node that is the parent of all the nodes in the network. This means that if we see a Bayesian Network and we do not know exactly the context in which it was created, we cannot assume that it generalises to a different environment, even if on the face of it, the nodes would be the same. We cannot take parts of that network (with probabilities) and put it in a different one, because the Bayesian Network is implicitly defined over the environment for which it was originally created, and not any other.
+
+\end{itemize}
+
+
+
 
 
 \section{Future Work}
-Testing or generating Bayesian Network idioms from simulations. The dream is to get ``plug and play'' Bayesian Network idioms - preconnected structures (perhaps even with some probabilities attached) that you can add evidence to and adapt and combine if necessary. Using simulations, we can test the granularity of these possible idioms, to simulate a crime at larger and smaller resolution (more or fewer events) to see how well the idioms can capture it.
+It is difficult to assess the human criteria for Bayesian Networks. We need formal methods to investigate whether a person could really `think' of a dependence relationship between two nodes, or estimate the correct probabilities. The ad-hoc, subjective way that the human criteria were assessed in this thesis are not very satisfactory. New standards need to be invented that correspond to objective facts about people's ability to estimate probability and investigate conditional relations between nodes.
 
-Investigate the effect of granularity, expecially in relation to the complexity of the network. Size, num of arrows, etc. 
+The simulations as tested here are still very simplified - they are only appropriate as a baseline for testing Bayesian Networks, and for nothing else. Testing Bayesian Networks on more complex simulations would likely result in a reduced accuracy due to inherent and irreducible uncertainty, and lay bare many more problems that do not emerge from these simple simulations. Hence, testing on more complex models is necessary to fully understand the limitations of Bayesian Networks.
+
+The values of $\epsilon$ can be reduced from 0.01 to smaller probabilities, to discover how this would influence accuracy and precision of networks, especially in situations that are more complex than the simulations we used here. If there are inherent features to the simulation that makes the frequency of some event smaller than 0.01, it is important to know how that would interact with an $\epsilon$ of 0.01. Hence, this should be investigated further.
+
+As the K2 algorithm used depends on a given node ordering, the node-ordering algorithm used in this project resulted generally in successfully replicating the temporal structure of scenarios, however the merging of scenarios caused problems, and resulted in a missing temporal structure. This can be fixed relatively easily, by taking the average time-step at which an event occurs into account, instead of only the ordering relative to other events.
+
+While we discussed the problem of operationalisation in the discussion sections of these chapters, this was not investigated directly. This makes it unclear how big the effect of inefficient, insufficient or invalid operationalisation on the structural, performance and human criteria of the network would be. This problem can be investigated in simulation in simple ways - for instance, by changing the accuracy of reporting, such that a reporter might sometimes report an event wrongly. Alternative operationalisations for the `same' random variables or events should also be investigated. Investigating the effects of non-ideal operationalisation is essential for knowing if we can generalise our Bayesian Networks beyond the bounds of simulation.
+
+Testing or generating Bayesian Network idioms from simulations. The dream is to get ``plug and play'' Bayesian Network idioms - preconnected structures, perhaps even with some probabilities attached that you can add evidence to and adapt and combine if necessary. Using simulations, we can test the granularity of these possible idioms, to simulate a crime at larger and smaller resolution (more or fewer events) to see how well the idioms can capture it.
+

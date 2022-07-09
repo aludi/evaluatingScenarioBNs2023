@@ -112,6 +112,7 @@ class MoneyAgent(Agent):
 
 
 
+
     def step(self):
         if self.pos == self.goal:
             self.state = "GOAL"
@@ -121,13 +122,74 @@ class MoneyAgent(Agent):
 
 
         else:
+
             # at every step, you have a very very very small probability of dropping your object
-            if self.steal_state != "LOSER" and self.unique_id != 1: #we don't care if the thief drops object
+            if self.steal_state != "LOSER" and self.unique_id != 1:  # we don't care if the thief drops object
                 x = np.random.randint(0, 100000)
                 if x >= 99500:
                     self.model.reporters.set_evidence_straight(f"object_dropped_accidentally_{str(self.unique_id)}", 1)
                     self.value_of_good = -1
                     self.model.reporters.set_evidence_straight(f"E_object_gone_{str(self.unique_id)}", 1)
+
+            if self.steal_state == "SUCCESS":
+                self.steal_state = "N"
+
+            if self.steal_state == "STEALING":
+                self.state = "FAST MOVE TO GOAL"
+                print("stealing")
+                if self.target is not None:
+                    if self.target.steal_state == "DONE":
+                        self.target = None
+                        self.steal_state = "N"
+
+                    if self.target is not None:
+                        if self.target.value_of_good >= self.risk_threshold: # the agent might have been robbed before you got there
+                            self.model.reporters.set_evidence_straight(f"stealing_{str(self.unique_id)}_0", 1)
+                            self.model.reporters.set_evidence_straight(f"E_object_gone_0", 1)
+                            self.value_of_good += self.target.value_of_good
+                            self.target.value_of_good = 0
+                            self.target.steal_state = "LOSER"
+                            self.steal_state = "SUCCESS"
+                        else:
+                            self.steal_state = "N"
+
+            if self.steal_state == "SNEAK":
+                self.model.reporters.set_evidence_straight(f"sneak_{str(self.unique_id)}_0", 1)
+                self.model.reporters.set_evidence_straight(f"E_sneak_{str(self.unique_id)}_0", 1)
+
+                self.state = "FAST MOVE TO GOAL"
+                #print("sneaking")
+                if self.target is not None:
+                    if self.target.steal_state == "DONE":
+                        self.target = None
+                        self.steal_state = "N"
+
+                if self.target is not None:
+                    if self.pos == self.target.pos:
+                        #print("I'm in the same place as my target")
+                        self.steal_state = "STEALING"
+
+            if self.steal_state == "MOTIVE":
+                self.model.reporters.set_evidence_straight(f"motive_{str(self.unique_id)}_0", 1)
+                self.model.reporters.set_evidence_straight(f"E_psych_report_{str(self.unique_id)}_0",
+                                                           self.calculate_psych_report(self.target.value_of_good, self.target.age,
+                                                                                       self.risk_threshold,
+                                                                                       self.age_threshold))
+
+                self.state = "FAST MOVE TO GOAL"
+                # print("I want to steal")
+                if self.target.steal_state == "DONE":
+                    self.target = None
+                    self.steal_state = "N"
+
+                if self.target.pos != self.pos:
+                    self.steal_state = "SNEAK"
+
+
+                else:
+                    self.steal_state = "STEALING"
+
+
 
             # check the neighbors for their values
 
@@ -156,10 +218,14 @@ class MoneyAgent(Agent):
 
                         if agent.value_of_good > self.risk_threshold:
                             self.model.reporters.set_evidence_straight(f"know_valuable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+                            self.model.reporters.set_evidence_straight(
+                                    f"E_valuable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
 
 
                         if agent.age > self.age_threshold:
                             self.model.reporters.set_evidence_straight(f"know_vulnerable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+                            self.model.reporters.set_evidence_straight(f"E_vulnerable_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
+
 
                         #if self.steal_state == "N" or self.steal_state == "LOSER":
                         #    self.model.reporters.set_evidence_straight(f"able_to_steal_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
@@ -172,58 +238,12 @@ class MoneyAgent(Agent):
                             self.temp_goal = agent.pos
                             self.state = "FAST MOVE TO GOAL"
 
-                if self.steal_state == "MOTIVE":
-                    self.model.reporters.set_evidence_straight(f"motive_{str(self.unique_id)}_0", 1)
-                    self.model.reporters.set_evidence_straight(f"E_psych_report_{str(self.unique_id)}_0",
-                                                               self.calculate_psych_report(agent.value_of_good, agent.age, self.risk_threshold, self.age_threshold))
 
 
 
-                    self.state = "FAST MOVE TO GOAL"
-                    #print("I want to steal")
-                    if self.target.steal_state == "DONE":
-                        self.target = None
-                        self.steal_state = "N"
-
-                    if self.target.pos != self.pos:
-                        self.steal_state = "SNEAK"
-
-                    else:
-                        self.steal_state = "STEALING"
 
 
-            if self.steal_state == "SNEAK":
-                self.model.reporters. set_evidence_straight(f"sneak_{str(self.unique_id)}_0", 1)
-                self.state = "FAST MOVE TO GOAL"
-                #print("sneaking")
-                if self.target is not None:
-                    if self.target.steal_state == "DONE":
-                        self.target = None
-                        self.steal_state = "N"
 
-                if self.target is not None:
-                    if self.pos == self.target.pos:
-                        #print("I'm in the same place as my target")
-                        self.steal_state = "STEALING"
-
-            if self.steal_state == "STEALING":
-                self.state = "FAST MOVE TO GOAL"
-                #print("stealing")
-                if self.target is not None:
-                    if self.target.steal_state == "DONE":
-                        self.target = None
-                        self.steal_state = "N"
-
-                    if self.target is not None:
-                        if self.target.value_of_good >= self.risk_threshold: # the agent might have been robbed before you got there
-                            self.model.reporters.set_evidence_straight(f"stealing_{str(self.unique_id)}_0", 1)
-                            self.model.reporters.set_evidence_straight(f"E_object_gone_0", 1)
-                            self.value_of_good += self.target.value_of_good
-                            self.target.value_of_good = 0
-                            self.target.steal_state = "LOSER"
-                            self.steal_state = "N"
-                        else:
-                            self.steal_state = "N"
 
 
 
@@ -417,7 +437,6 @@ class BN(Agent):
 
 
 
-
 class MoneyModel(Model):
     """A model with some number of agents."""
 
@@ -466,8 +485,8 @@ class MoneyModel(Model):
         # place the security cameras scattered throughout the simulation
         #print(self.schedule.get_agent_count())
 
-        for i in range(0, 8):
-            a = SecurityCamera(self.num_agents + 10 + i, model=self, radius=15, position=(self.initial_xy()))
+        for i in range(0, 5):
+            a = SecurityCamera(self.num_agents + 10 + i, model=self, radius=8, position=(self.initial_xy()))
 
 
 
@@ -495,36 +514,41 @@ class MoneyModel(Model):
             self.num_agents = 6
 
         n = self.num_agents
-        base_rel_events = ["seen", "know_valuable", "know_vulnerable", "motive", "sneak", "stealing", "object_dropped_accidentally",
-                          "E_psych_report", "E_camera",
-                           "E_object_gone", "E_camera_sees_object"]
 
+        base_rel_events = ["seen",
+                           "know_valuable",
+                           "know_vulnerable",
+                           "motive",
+                           "sneak",
+                           "stealing",
+                           "object_dropped_accidentally",
+                           "E_valuable",
+                           "E_vulnerable",
+                           "E_psych_report",
+                           "E_camera",
+                           "E_sneak",
+                           "E_camera_seen_stealing",
+                           "E_camera_sees_object",
+                           "E_object_gone"]
 
         # create reporters automatically
         rel_events = []
+        n = 2
 
-        if self.scenario == 1 or self.scenario == 2:
-            for i in range(0, n):
-                for k in range(0, n):
-                    for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
-                        if j in ["object_dropped_accidentally", "E_object_gone"]:
-                            str1 = f"{j}_{str(i)}"
-                            if str1 not in rel_events:
-                                rel_events.append(str1)
-                        else:
-                            if i != k:
-                                str1 = f"{j}_{str(i)}_{str(k)}"
-                                # str2 = i + "_credibility"
-                                rel_events.append(str1)
-        else:
-            for i in range(1, n):   # agent 0 is the old agent who never steals and is always stolen from
+        for i in range(1, n):
+            for k in range(0, 1):
                 for j in base_rel_events:  # "motive, sneak and stealing are 2 place predicates
-                        str1 = f"{j}_{str(i)}_0"
-                        # str2 = i + "_credibility"
+                    if j in ["object_dropped_accidentally", "E_object_gone"]:
+                        str1 = f"{j}_{str(i - 1)}"
                         rel_events.append(str1)
-
-        #print(rel_events)
-
+                    elif j in ["E_camera"]:
+                        str1 = f"{j}_{str(i)}"
+                        rel_events.append(str1)
+                    else:
+                        if i != k:
+                            str1 = f"{j}_{str(i)}_{str(k)}"
+                            # str2 = i + "_credibility"
+                            rel_events.append(str1)
         return Reporters(rel_events)
 
     def create_agents(self, scenario):
@@ -592,8 +616,8 @@ class MoneyModel(Model):
         self.schedule.add(a)
         x, y = self.initial_xy()
         self.grid.place_agent(a, (x, y))
-        a.age = 80  # old agent
-        a.value_of_good = 1000  # super tempting target
+        a.age = random.randint(60, 90)  # old agent
+        a.value_of_good = random.randint(500, 1000)  # super tempting target
         a.risk_threshold = 5000  # will never steal risky
         a.age_threshold = 100  # will never steal even from old people (redundant)
         a.role = "victim"
@@ -608,7 +632,7 @@ class MoneyModel(Model):
         a.age = 25  # young agent
         a.value_of_good = 0  # not tempting target
         a.risk_threshold = random.randint(800, 1200)  # steals sometimes
-        a.age_threshold = 0  # will steal from a baby
+        a.age_threshold = random.randint(50, 100)  # would steal from anyone older than 50
         a.role = "thief"
 
     def make_thief_near_old_agent(self, old_agent):

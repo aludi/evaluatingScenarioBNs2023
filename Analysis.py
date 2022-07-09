@@ -1039,18 +1039,56 @@ def load_temporal_evidence(name):
         d["output"] = ["successful_stolen"]
 
     elif "GroteMarkt" in name:
+
+        if "Private" in name:
+            d["events"] = [
+                'E_camera_1',
+                "E_object_gone_0",
+                'E_camera_seen_stealing_1_0',
+                "E_psych_report_1_0",
+            ]
+            d["values"] = [
+                1,
+                1,
+                1,
+                1
+                ]
+            d["output"] = ["stealing_1_0"]
+
+        else:
+            d["events"] = [
+                "E_valuable_1_0",
+                "E_vulnerable_1_0",
+                'E_camera_1',
+                "E_sneak_1_0",
+                "E_object_gone_0",
+                'E_camera_seen_stealing_1_0',
+                "E_psych_report_1_0",
+                 ]
+            d["values"] = [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1]
+            d["output"] = ["stealing_1_0"]
+
+    elif "WalkThrough" in name:
         d["events"] = [
-            'E_camera_1',
-            "E_object_gone_0",
-            "E_psych_report_1_0",
-            'E_camera_sees_object_1_0',
-             ]
+            "E_neighbor",
+            "E_prints",
+            "E_stab_wounds",
+            "E_forensic"
+        ]
         d["values"] = [
             1,
             1,
             1,
-            1]
-        d["output"] = ["stealing_1_0"]
+            1,
+            ]
+        d["output"] = ["mark_dies"]
 
     else:
         print("temporal evidence not implemented yet ")
@@ -1216,7 +1254,7 @@ def plot_performance(path, base_network):
     axs[1].legend(bbox_to_anchor=(1.04, 1), loc="upper left")
 
     plt.savefig(file_name)
-    plt.show()
+    #plt.show()
     plt.close()
 
 def plot_performance_fixed_output(path, base_network, temporal_evidence):
@@ -1348,8 +1386,10 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
                                                         #("StolenLaptopPrivate", 2000, d_S),
                                                         #("StolenLaptop", 2000, d_S),
                                                         #("VlekNetwork", 500000, d_V),
-                                                        ("GroteMarkt", 2000, d_G),
-                                                        ("GroteMarktMaps", 1500, d_G)
+                                                        #("GroteMarkt", 200, d_G),
+                                                        #("GroteMarktPrivate", 500, d_G),
+                                                        #("GroteMarktMaps", 1500, d_G),
+                                                        ("WalkThrough", 500, d_G)
                                         ]:
 
     os.chdir(org_dir)
@@ -1467,5 +1507,9 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
             plot_posterior_base_network_only(path, base_network[:-4])
             plot_posterior(path, base_network[:-4])
             pass
+
+
+
+
 
 exit()

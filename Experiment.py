@@ -17,6 +17,7 @@ import csv
 from CredibilityGame import CredibilityGame
 from GroteMarkt import MoneyModel
 from VlekNetwork import VlekNetwork
+from WalkThrough import WalkThrough
 
 from CreateMap import CreateMap
 
@@ -93,6 +94,8 @@ class Experiment():
                 self.print_frequencies()
                 #self.print_frequencies_latex()
 
+
+
         if scenario == "CredibilityGame":
             self.n = 4
             n = self.n
@@ -112,10 +115,44 @@ class Experiment():
             self.generate_csv_report(f"experiments/{scenario}/{self.train}")
             self.print_frequencies()
 
+        if scenario == "WalkThrough":
+            rel_events = ["jane_and_mark_fight",
+                          "jane_has_knife",
+                          "jane_stabs_mark_with_knife",
+                          "mark_dies",
+                          "E_neighbor",
+                          "E_prints",
+                          "E_stab_wounds",
+                          "E_forensic"]
 
-        if scenario == "GroteMarkt" or scenario == "GroteMarktMaps":
+            self.reporters = Reporters(relevant_events=rel_events)
+            for i in range(0, self.runs - 1):
+                # print(self.scenario)
+                print("i", i)
 
-            if scenario == "GroteMarkt":
+                model = WalkThrough(N=2, width=8, height=2, reporters=self.reporters, torus=True)
+
+                for j in range(100):
+                    a = model.step()
+                    if a == 'x':
+                        break
+                    #print(a)
+                self.reporters.increase_run()
+                ### save temporal data to file
+
+            # print(self.reporters.history_dict)
+
+            print(self.reporters.pure_frequency_event_dict)
+
+            self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
+            self.pickle_relevant(scenario, train,
+                                 scenario)  # pickles temporal dict, event dict and evidence list
+
+
+
+        if scenario == "GroteMarkt" or scenario == "GroteMarktMaps" or scenario == "GroteMarktPrivate":
+
+            if scenario == "GroteMarkt" or "GroteMarktPrivate":
                 iterate_experiment = ["groteMarkt.png"]
             else:
                 iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png","kattediep.png", "wall.png",
@@ -148,11 +185,21 @@ class Experiment():
 
                 n = self.n
                 self.scenario = 2       # we are only experimenting with scenario 2!!!!
-                base_rel_events = ["seen", "know_valuable", "know_vulnerable", "motive", "sneak", "stealing",
+
+
+                base_rel_events = ["seen",
+                                   "know_valuable",
+                                   "know_vulnerable",
+                                   "motive",
+                                   "sneak",
+                                   "stealing",
                                    "object_dropped_accidentally",
+                                   "E_valuable",
+                                   "E_vulnerable",
                            "E_psych_report",
                             "E_camera",
-                            #"E_camera_seen_stealing",
+                                   "E_sneak",
+                                   "E_camera_seen_stealing",
                             "E_camera_sees_object",
                            "E_object_gone"]
 
@@ -178,12 +225,13 @@ class Experiment():
                 y = 20
                 C = CreateMap(map_name, coverage, y)
                 x = int(y * C.rel)
-                print(rel_events)
+                #print(rel_events)
                 self.reporters = Reporters(relevant_events=rel_events)
                 for i in range(0, self.runs-1):
                     #print(self.scenario)
                     #print("i", i)
                     model = MoneyModel(N=n, width=x, height=y, topic=map_name, reporters=self.reporters, scenario=self.scenario, output_file = f"experiments/{scenario}/{self.train}", torus=False)
+
                     for j in range(100):
                         model.step()
                     self.reporters.increase_run()
@@ -193,7 +241,7 @@ class Experiment():
                 #print(self.reporters.history_dict)
 
                 #print(self.reporters.pure_frequency_event_dict)
-                if scenario == "GroteMarkt":
+                if scenario == "GroteMarkt" or scenario == "GroteMarktPrivate":
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
                     if train == "train":
                         self.pickle_relevant(scenario, train, scenario)  # pickles temporal dict, event dict and evidence list
@@ -230,6 +278,23 @@ class Experiment():
         if "StolenLaptopPrivate" in file_path:
             csv_columns.remove("flees_startled")
             csv_columns.remove("E_private")
+
+        if "GroteMarkt" in file_path:
+            csv_columns.remove("E_camera_sees_object_1_0")
+            if "GroteMarktPrivate" in file_path:
+                csv_columns.remove("E_valuable_1_0")
+                csv_columns.remove("E_vulnerable_1_0")
+                csv_columns.remove("E_sneak_1_0")
+
+                csv_columns.remove("know_valuable_1_0")
+                csv_columns.remove("know_vulnerable_1_0")
+
+                csv_columns.remove("seen_1_0")
+
+
+
+
+
         #print(csv_columns)
 
         csv_file = file_path

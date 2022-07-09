@@ -169,7 +169,7 @@ def get_temporal_ordering_nodes_path(training_data, path):
     temporal_dict = unpickle_dict(temporal_dict_path)
     relevant_dict = unpickle_dict(relevant_dict_path)
     evidence_list = unpickle_dict(evidence_list_path)
-
+    print(evidence_list)
 
     for key in temporal_dict.keys():
         if len(key) == len(relevant_dict) - len(evidence_list):
@@ -178,22 +178,51 @@ def get_temporal_ordering_nodes_path(training_data, path):
                 max_score = temporal_dict[key]
                 flag = "cust"
     best_ordering_in_col_numbers_list = []
-    #print(best_temporal_ordering)
+    print(best_temporal_ordering)
     if len(list(header)) == len(relevant_dict):
         if flag == "cust":
             for item in best_temporal_ordering:
-                best_ordering_in_col_numbers_list.append(header.index(item))
+                print(item)
+                try:
+                    if item[0] == "E":
+                        print('evidence node in wrong list?')
+                        evidence_list.append(item)
+                    else:
+                        best_ordering_in_col_numbers_list.append(header.index(item))
+                except ValueError:
+                    print("removed private item not in ordering")
+            #print(best_ordering_in_col_numbers_list)
+
+            for key in relevant_dict:
+
+                if header.index(key) not in best_ordering_in_col_numbers_list and key[0] != "E":
+                    try:
+                        best_ordering_in_col_numbers_list.append(header.index(key))
+                    except ValueError:
+                        print("removed private item not in ordering")
             for item in evidence_list:
-                best_ordering_in_col_numbers_list.append(header.index(item))
+                print(item)
+                try:
+                    best_ordering_in_col_numbers_list.append(header.index(item))
+                except ValueError:
+                    print("removed private evidence not in ordering")
+            print(best_ordering_in_col_numbers_list)
         else:
             best_ordering_in_col_numbers_list = best_temporal_ordering
     else:
-        flag = "def"
+        flag = "ev def"
+        nl = []
         for item in header:
-            best_ordering_in_col_numbers_list.append(header.index(item))
+            if item[0] == "E":
+                nl.append(header.index(item))
+            else:
+                best_ordering_in_col_numbers_list.append(header.index(item))
 
-    #print(flag)
-    #print(best_ordering_in_col_numbers_list)
+        for item in nl:
+            best_ordering_in_col_numbers_list.append(item)
+
+    print(flag)
+    print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 
 def evidence_cannot_be_connected_to_each_other_path(training_data, path, temporal_ordering):
@@ -217,6 +246,8 @@ def evidence_cannot_be_connected_to_each_other_path(training_data, path, tempora
             forbidden_pairs.append((evidence[i], evidence[j+i]))
             forbidden_pairs.append((evidence[j+i], evidence[i]))
     return forbidden_pairs
+
+
 
 def export_picture(training_data, path):
     #print("in here, exporting picture")

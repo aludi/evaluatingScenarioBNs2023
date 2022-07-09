@@ -58,22 +58,26 @@ class SecurityCamera(Agent):
                     thief = object
                     old_location_thief = object.pos
                     if object.value_of_good > 0:    # the thief has stolen
+                        pass
                         # sometimes the thief is stupid and we can see that they stole the thing on camera
-                        if random.randrange(0, 100000) > 9980:
+                        #if random.randrange(0, 100000) > 9980:
                             #self.model.reporters.increase_evidence_counter_once(
                             #    f"E_camera_sees_object_0_1")
-                            self.model.reporters.increase_evidence_counter_once(
-                                f"E_camera_sees_object_1_0")
+                            #self.model.reporters.increase_evidence_counter_once(
+                                #f"E_camera_sees_object_1_0")
         if seen_victim and seen_thief:
             # the thief and victim were within the same camera range
             #self.model.reporters.increase_evidence_counter_once(f"E_camera_{str(victim.unique_id)}_{str(thief.unique_id)}")
+            #print(self.model.reporters.relevant_events)
             self.model.reporters.increase_evidence_counter_once(f"E_camera_{str(thief.unique_id)}")
 
 
             # we might see the thief steal
-            #if thief.steal_state == "STEALING":
-            #    self.model.reporters.increase_evidence_counter_once(
-            #        f"E_camera_seen_stealing_{str(thief.unique_id)}_{str(victim.unique_id)}")
+            #print(thief.steal_state)
+            if thief.steal_state == "STEALING":
+                #print("stealing")
+                self.model.reporters.increase_evidence_counter_once(
+                    f"E_camera_seen_stealing_{str(thief.unique_id)}_{str(victim.unique_id)}")
 
 
 

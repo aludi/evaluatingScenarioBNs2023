@@ -51,7 +51,7 @@ class WalkAgent(Agent):
         if self.name == "jane" and y > 10:
             self.anger = 2
             self.target = knife
-        if self.name == "mark" and y > 25:
+        if self.name == "mark" and y > 35:
             self.anger = 2
             self.target = knife
         if self.name == "jane" and y > 17:
@@ -115,7 +115,7 @@ class WalkAgent(Agent):
 
                 elif type(self.target) == WalkAgent and self.knife and self.anger > 2:
                     #print(self.pos, self.target.pos)
-                    print(f"{self.name} stabbed {self.target.name}")
+                    #print(f"{self.name} stabbed {self.target.name}")
                     self.model.reporters.set_evidence_straight("jane_stabs_mark_with_knife", 1)
                     self.model.reporters.set_evidence_straight("E_stab_wounds", 1)
 
@@ -264,7 +264,9 @@ def agent_portrayal(agent):
                          "Filled": "true",
                          "Layer": 0,
                          "Color": colors[agent.anger],
-                         "r": 0.5}
+                         "r": 0.5,
+                         "text": agent.name,
+                         "text_color": "black"}
 
 
     elif type(agent) == Knife:
@@ -276,13 +278,13 @@ def agent_portrayal(agent):
                      }
     return portrayal
 
-
-'''reporters = set_reporters()
+'''
+reporters = set_reporters()
 print(reporters.relevant_events)
 grid = CanvasGrid(agent_portrayal, 8, 3, 500, 250)
 server = ModularServer(WalkThrough,
                        [grid],
                        "My Model",
-                       {'N': 2, 'width':8, 'height':3, 'reporters':reporters})
-server.launch()'''
-
+                       {'N': 2, 'width':8, 'height':3, 'reporters':reporters, 'torus':True})
+server.launch()
+'''

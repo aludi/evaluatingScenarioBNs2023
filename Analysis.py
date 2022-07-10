@@ -1042,10 +1042,10 @@ def load_temporal_evidence(name):
 
         if "Private" in name:
             d["events"] = [
-                'E_camera_1',
-                "E_object_gone_0",
-                'E_camera_seen_stealing_1_0',
                 "E_psych_report_1_0",
+                "E_camera_1",
+                "E_camera_seen_stealing_1_0",
+                "E_object_gone_0"
             ]
             d["values"] = [
                 1,
@@ -1059,12 +1059,11 @@ def load_temporal_evidence(name):
             d["events"] = [
                 "E_valuable_1_0",
                 "E_vulnerable_1_0",
-                'E_camera_1',
-                "E_sneak_1_0",
-                "E_object_gone_0",
-                'E_camera_seen_stealing_1_0',
                 "E_psych_report_1_0",
-                 ]
+                "E_camera_1",
+                "E_sneak_1_0",
+                "E_camera_seen_stealing_1_0",
+                "E_object_gone_0"]
             d["values"] = [
                 1,
                 1,
@@ -1334,10 +1333,101 @@ def plot_performance_fixed_output(path, base_network, temporal_evidence):
     plt.close()
 
 
+def progress_evidence(path, network_name, temporal_evidence):
+    bn = gum.loadBN(path + "/BNs/" + network_name+".net")
+    ie = gum.LazyPropagation(bn)
+
+    x = []
+    y = []
+    posterior_name = []
+
+    event = temporal_evidence["events"]
+    val = temporal_evidence["values"]
+    output = temporal_evidence["output"][0]
+    x.append("No evidence")
+    y.append(round(ie.posterior(output)[1], 2))
+    posterior_name.append(output)
+
+    i = 0
+    for i in range(0, len(event)):
+        ie.addEvidence(event[i], val[i])
+        x.append(str((event[i], val[i])))
+        posterior_name.append(output)
+
+        try:
+            y.append(round(ie.posterior(output)[1], 2))
+        except Exception:
+            y.append("NA")
+
+    otp = {}
+    otp["evidence"] = x
+    otp["posterior"] = y
+    otp["posterior_name"] = posterior_name
+    otp_pd = pd.DataFrame.from_dict(otp)
+    return otp_pd
 
 
+def plot_evidence_posterior_base_network_only(path, base_network, temporal_evidence, it):
+    df = progress_evidence(path, base_network, temporal_evidence)
+    flag = 0
+    colors = ["#2037ba", "#b62a2a"]
+    if it < 5:
+        color_id = 0
+    else:
+        pass
+        #color_id = 1
+    file = base_network
+    param = file.split("_", 2)
+    ax = plt.gca()
+
+    if len(param) > 2:
+        [base, dis, num] = param
+        num = num[:-4]
+        flag = 0
+    else:
+        base = file
+        num = "network"
+        flag = 1
+    if flag == 1:
+        df.rename(columns={"posterior": str(num)}, inplace=True)
+        col = list(df.columns)
+        df.plot(kind='line', x=col[0], y=col[1], color=colors[color_id], legend=False, title=base, ax=ax)
+        plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation='vertical')
+        # Tweak spacing to prevent clipping of tick-labels
+        plt.subplots_adjust(right=0.8, bottom=0.5)
+        #ax.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
+        plt.xlabel("Evidence added")
+        plt.ylabel("Posterior of " + df["posterior_name"][0])
+        plt.title("The effect of evidence on the posterior")
+
+        file_name = path + "/plots/evidence_progress_" + base_network + "_" + str(it) + ".pdf"
+        print(file_name)
+        plt.savefig(file_name)
+        # plt.show()
+        plt.close()
 
 
+def experiment_different_evidence(path, scn):
+    #print(path)
+    #print(scn)
+    nw = f"{path}/BNs/{scn}.net"
+    d = load_temporal_evidence(nw)
+    i = 1
+    if "Walk" in scn:
+        values_list = [[1, 1, 1, 1], [1,1,0,0], [1, 0, 0, 0], [1, 1, 1, 0], [1,0,0,1], [1,0,1,0], [0,0,1,0]]
+    if "GroteMarkt" in scn:
+        if "Private" in scn:
+            values_list = [[0,1,0,0], [0,1,0,1], [0,0,0,0], [1,1,1,1]]
+        else:
+            values_list = [[0,1,0,1,0,0,0], [1,1,1,1,1,1,1],[0,0,0,1,0,0,0], [0,0,0,1,0,0,1]]
+
+
+    for l in values_list:
+
+        d["values"] = l
+        temporal_evidence = d
+        plot_evidence_posterior_base_network_only(path, scn, temporal_evidence, i)
+        i += 1
 
 
 
@@ -1386,10 +1476,10 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
                                                         #("StolenLaptopPrivate", 2000, d_S),
                                                         #("StolenLaptop", 2000, d_S),
                                                         #("VlekNetwork", 500000, d_V),
-                                                        #("GroteMarkt", 200, d_G),
-                                                        #("GroteMarktPrivate", 500, d_G),
+                                                        ("GroteMarkt", 500, d_G),
+                                                        ("GroteMarktPrivate", 500, d_G),
                                                         #("GroteMarktMaps", 1500, d_G),
-                                                        ("WalkThrough", 500, d_G)
+                                                        #("WalkThrough", 1000, d_G)
                                         ]:
 
     os.chdir(org_dir)
@@ -1429,7 +1519,7 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
             continue
         K2_BN_csv_only(train_data, path)
 
-        if scenario != "StolenLaptopVision" and scenario != "GroteMarktMaps":    # for some experiments we don't want to generate disturbances
+        if scenario != "StolenLaptopVision" and scenario != "GroteMarktMaps" and scenario != "WalkThrough":    # for some experiments we don't want to generate disturbances
             for (exp, params) in [
                 ("arbit", param_ar)]:  # ("rounded", param_ro), ("arbit", param_ar), ("normalNoise", param_no)]:
                 for p in params:
@@ -1495,6 +1585,8 @@ for (scenario, train_runs, param_dict) in [             #("StolenLaptopVision", 
         #print("world state combinations accuracy")
         calculate_world_states_accuracy(networks[:-4], path, load_temporal_evidence(networks[:-4])["output"][0])
         print("progress")
+        experiment_different_evidence(path, networks[:-4])
+
         progress(networks[:-4], path, load_temporal_evidence(networks[:-4]), [dist, num])
 
 

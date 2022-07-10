@@ -128,7 +128,7 @@ class Experiment():
             self.reporters = Reporters(relevant_events=rel_events)
             for i in range(0, self.runs - 1):
                 # print(self.scenario)
-                print("i", i)
+                #print("i", i)
 
                 model = WalkThrough(N=2, width=8, height=2, reporters=self.reporters, torus=True)
 

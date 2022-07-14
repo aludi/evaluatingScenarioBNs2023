@@ -287,12 +287,14 @@ def K2_BN_csv_only(training_data, path):
         # print(x)
         # print(i, i.todict(), type(name), name)
         while (not i.end()):
-            # print(i, "todict", i.todict(), type(i.todict()))
+            #print(i, x[i.todict()])
             if 0.5 == x[i.todict()]:  # fix the never occurring situations -> maybe add an extra check for this TODO
-                if i.todict()[name] == 0:
-                    bn.cpt(name)[i.todict()] = 1
-                elif i.todict()[name] == 1:
-                    bn.cpt(name)[i.todict()] = 0
+                pass
+                #print(i.todict()[name])
+                #if i.todict()[name] == 0:
+                #    bn.cpt(name)[i.todict()] = 1
+                #elif i.todict()[name] == 1:
+                #    bn.cpt(name)[i.todict()] = 0
             i.inc()
         bn.cpt(name)
     #print("current dir", os.getcwd())

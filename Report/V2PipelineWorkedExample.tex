@@ -25,7 +25,7 @@ This four-step process will be explained in this chapter, and illustrated with a
 %\label{pipeline}
 %\end{figure}
 
-\section{A Scenario}
+\section{Scenario}
 We start our process with one or more written scenarios. These scenarios can, in the first instance, be obtained from (abridged) court case descriptions. The scenarios should contain all and only those hypothesised events, and the evidence for such events, that are relevant to the case. Both the prosecution and the defence should be able to select relevant events and their evidence. 
 
 
@@ -33,7 +33,7 @@ We start our process with one or more written scenarios. These scenarios can, in
 Here we will introduce our running example, loosely based on the first scenario in \citep{Vlek2015}: Mark and Jane live together. One day, a neighbour overhears that they've started to fight in the kitchen. Jane grabs a knife, and stabs Mark. Mark dies of the stab wounds, as confirmed by the forensic scientist at the scene. Jane's fingerprints are on the knife.
 \end{example}
 
-\section{An Agent-based Simulation}
+\section{Simulation}
 
 
 We need a way to transform the written text descriptions of the events in the scenario to observable events in the simulation. First we identify all relevant actors, objects and places in the scenario. Then, we divide all all events into three classes: either an event is `evidence', a `hypothesis', or an ultimate `outcome'. The `outcome' is what we are ultimately interested in, it represents the central fact of the case. Apart from it being the node of ultimate interest, it otherwise functions the same as a `hypothesis' node.
@@ -123,7 +123,7 @@ Then, we collect these global states over the number of runs that we do for each
 
 
 
-\section{Creating a Bayesian Network from a Simulation Automatically}
+\section{Creating a Bayesian Network}
 
 The output of an experiment is the collection of runs $O$, where each run is the global state $G$ of the simulation, as measured by the random variables $R$. The reporters in the simulation are random variables. These reporters become the nodes in the Bayesian Network.
 
@@ -175,7 +175,7 @@ We give the collection of global states $O$ from our example to K2, as well as t
 After the network is generated, we need to manually change a thing about it. The algorithm does not know how to handle impossible states, which are cases where combinations of valuations for parent nodes are impossible. For example, in Figure~\ref{genepool}, the value of `E\_forensic'. `E\_forensic' has two parents: `mark\_dies', as well as `E\_neighbour'. In the simulation, it can never be the case that Mark dies, but the neighbour does not hear and report on fighting, or the combination of events $`mark\_dies' \rightarrow 1 \land `E\_neighbour' \rightarrow 1$ .  However, the event for the thief stealing the object, can have both `motive' and `knowing about object' as parent nodes. The algorithm does not know how to deal with these situations and the resulting network will crash. This is why the probability for `stealing' given the impossible combination of the parent state values, will be manually set to 0. 
 
 
-\section{Evaluating the Bayesian Network}
+\section{Evaluation}
 
 Now we know that we can build Bayesian Networks automatically using the K2 algorithm based on data we generated in our simulation, we need to evaluate different aspects of the Bayesian Network: numerical, structural and performance criteria.
 

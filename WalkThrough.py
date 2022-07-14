@@ -118,6 +118,9 @@ class WalkAgent(Agent):
                     #print(f"{self.name} stabbed {self.target.name}")
                     self.model.reporters.set_evidence_straight("jane_stabs_mark_with_knife", 1)
                     self.model.reporters.set_evidence_straight("E_stab_wounds", 1)
+                    #if random.randrange(0, 10) <= 7:
+                    #    self.model.reporters.set_evidence_straight("E_testimony", 1)
+
 
                     self.model.stab = True
 

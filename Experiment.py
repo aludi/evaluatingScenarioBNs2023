@@ -155,10 +155,11 @@ class Experiment():
             if scenario == "GroteMarkt" or "GroteMarktPrivate":
                 iterate_experiment = ["groteMarkt.png"]
             else:
-                iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png","kattediep.png", "wall.png",
-                    0, 5, 10, 25, 50, 75]
-
+                iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png","kattediep.png", "wall.png"]
+            #iterate_experiment = ["groteMarkt.png", "Selwerd.png", "zuidCentrum.png", "kattediep.png", "wall.png"]
+            print(scenario, iterate_experiment)
             for map in iterate_experiment:
+                print(map)
                 if type(map) == str:
                     map_name = os.getcwd()+f"/experiments/{scenario}/maps/" + map
                     coverage = None
@@ -187,7 +188,8 @@ class Experiment():
                 self.scenario = 2       # we are only experimenting with scenario 2!!!!
 
 
-                base_rel_events = ["seen",
+                base_rel_events = [
+                "seen",
                                    "know_valuable",
                                    "know_vulnerable",
                                    "motive",
@@ -247,6 +249,7 @@ class Experiment():
                         self.pickle_relevant(scenario, train, scenario)  # pickles temporal dict, event dict and evidence list
 
                 else:
+                    print("in fucking here?")
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}_map_{str(map)}.csv")
                     if train == "train":
                         self.pickle_relevant(scenario, train, f"{scenario}_map_{str(map)}")  # pickles temporal dict, event dict and evidence list
@@ -268,20 +271,26 @@ class Experiment():
 
     def generate_csv_report(self, file_path): # drop columns here
         history_list = []
-        #print(file_path)
+        print(file_path)
         #print("history dict", self.reporters.history_dict)
         for key in self.reporters.history_dict.keys():
             history_list.append(self.reporters.history_dict[key])
 
 
         csv_columns = self.reporters.relevant_events
+        print(csv_columns)
         if "StolenLaptopPrivate" in file_path:
             csv_columns.remove("flees_startled")
             csv_columns.remove("E_private")
 
         if "GroteMarkt" in file_path:
             csv_columns.remove("E_camera_sees_object_1_0")
-            if "GroteMarktPrivate" in file_path:
+            print(file_path)
+
+            if file_path == "experiments/GroteMarkt/train/GroteMarkt.csv":
+                pass
+            elif "GroteMarktPrivate" or "GroteMarktMaps" in file_path:
+                print("in here")
                 csv_columns.remove("E_valuable_1_0")
                 csv_columns.remove("E_vulnerable_1_0")
                 csv_columns.remove("E_sneak_1_0")

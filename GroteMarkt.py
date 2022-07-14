@@ -81,9 +81,14 @@ class MoneyAgent(Agent):
         '''
         est_risk_threshold = np.random.normal(victim_val, 100)
         est_age_threshold = np.random.normal(victim_ag, 20)
+        #print(est_risk_threshold, self_val)
+        #print(est_age_threshold, self_age)
         if est_risk_threshold > self_val and self_age < est_age_threshold:
+            #print("\t\t correct")
             return 1    # psych correctly estimated who the suspect wants to rob
         else:
+            #print("\t\t not correct")
+
             return 0 # incorrect assessment0
 
     def witness_valuable(self):
@@ -136,7 +141,7 @@ class MoneyAgent(Agent):
 
             if self.steal_state == "STEALING":
                 self.state = "FAST MOVE TO GOAL"
-                print("stealing")
+                #print("stealing")
                 if self.target is not None:
                     if self.target.steal_state == "DONE":
                         self.target = None
@@ -178,11 +183,13 @@ class MoneyAgent(Agent):
 
                 self.state = "FAST MOVE TO GOAL"
                 # print("I want to steal")
+
+
                 if self.target.steal_state == "DONE":
                     self.target = None
                     self.steal_state = "N"
 
-                if self.target.pos != self.pos:
+                elif self.target.pos != self.pos:
                     self.steal_state = "SNEAK"
 
 
@@ -563,8 +570,8 @@ class MoneyModel(Model):
         elif scenario == 2:   # one old agent, and one thief
             # old agent
             old_agent = self.make_old_agent()
-            self.make_thief()
-            #self.make_thief_near_old_agent(old_agent) # make thief near old agent
+            #self.make_thief()
+            self.make_thief_near_old_agent(old_agent) # make thief near old agent
 
         elif scenario == 3: # one thief, many innocents, but how do you know?
             old_agent = self.make_old_agent()
@@ -636,7 +643,7 @@ class MoneyModel(Model):
         a.role = "thief"
 
     def make_thief_near_old_agent(self, old_agent):
-        all_neighbors = old_agent.model.grid.get_neighborhood(pos=old_agent.pos, moore=True, radius=6)
+        all_neighbors = old_agent.model.grid.get_neighborhood(pos=old_agent.pos, moore=True, radius=10)
         neighbors = []
         for i in all_neighbors:
             if old_agent.model.extended_grid[i] == "OPEN":
@@ -650,7 +657,7 @@ class MoneyModel(Model):
         a.age = 25  # young agent
         a.value_of_good = 0  # not tempting target
         a.risk_threshold = random.randint(800, 1200)  # steals sometimes
-        a.age_threshold = 0 # will steal from a baby
+        a.age_threshold = random.randint(50, 100)  # would steal from anyone older than 50
         a.role = "thief"
 
 

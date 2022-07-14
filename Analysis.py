@@ -385,10 +385,10 @@ def progress_evidence(path, network_name, temporal_evidence):
 
     otp = {}
     otp["evidence"] = x
-    otp["stealing_1_0"] = y_0
-    otp["accidental_drop"] = y_1
-    otp["freq_stealing_1_0"] = d_0
-    otp["freq_accidental_drop"] = d_1
+    otp[output_0] = y_0
+    otp[output_1] = y_1
+    otp[f"freq_{output_0}"] = d_0
+    otp[f"freq_{output_1}"] = d_1
     otp["acc_0"] = abs(y_0[-1] - d_0[-1])
     otp["acc_1"] = abs(y_1[-1] - d_1[-1])
     otp["count"] = count[-1]/init_df_len
@@ -451,6 +451,14 @@ def plot_evidence_posterior_base_network_only(path, base_network, df):
 
     return df['acc_0'][0], df['acc_1'][0], df["count"][0], df["evidence"]
 
+def generate_dict(df, events):
+    x = df[events]
+    dict_output = x.iloc[len(x.index) - 1].to_dict()
+    sum1 = 0
+    for key in dict_output.keys():
+        sum1 += dict_output[key]
+    dict_output["neither"] = 1 - sum1
+    return dict_output
 
 def experiment_different_evidence(path, scn):
 
@@ -469,13 +477,17 @@ def experiment_different_evidence(path, scn):
     i = 1
     df = pd.read_csv(path + "/test/" + scn + ".csv")
 
-    x = df[d["events"]]
     values_list = df[d["events"]].drop_duplicates().values.tolist() # select all unique evidence states states
 
     a0 = []
     a1 = []
     c = []
     vl = []
+    dict_val = {}
+    dict_fre = {}
+    dict_freq_val = {}
+
+    freq = ["freq_stealing_1_0", "freq_object_dropped_accidentally_0"]
 
     for l in values_list:
 
@@ -483,6 +495,13 @@ def experiment_different_evidence(path, scn):
         temporal_evidence = d
 
         df = progress_evidence(path, scn, temporal_evidence)
+
+        dict_output = generate_dict(df, d["output"])
+        dict_freq = generate_dict(df, freq)
+
+        #print(dict_output)
+
+
         ac0, ac1, count, e = plot_evidence_posterior_base_network_only(path, scn, df)
         #print(e)
         #print(count)
@@ -491,23 +510,45 @@ def experiment_different_evidence(path, scn):
         c.append(count)
         i += 1
         vl.append(str(l))
+        dict_val[tuple(l)] = dict_output
+        dict_freq_val[tuple(l)] = dict_freq
+
+
+    print_latex_table_from_dict(dict_val)
+    print_latex_table_from_dict(dict_freq_val)
+
 
     file_name = path + "/plots/freqStates.pdf"
     plt.bar(vl, c, color="#2037ba")
-    plt.xticks(rotation=33)
+    plt.xticks(rotation=20)
     plt.ylabel('frequency')
     plt.xlabel('number of runs')
     plt.title("Frequency of evidence states in simulation")
-
     #plt.show()
     plt.savefig(file_name)
     plt.close()
-
-
     return round(1 - sum(a0)/len(a0), 3), round(1 - sum(a1)/len(a1), 3)
 
 
-
+def print_latex_table_from_dict(dict_k):
+    print(dict_k.keys())
+    print("\\begin{table}")
+    str_tabular_formatting = "\\begin{tabular}{l"
+    for i in range(0, 3):
+        str_tabular_formatting = str_tabular_formatting + "|c"
+    str_tabular_formatting = str_tabular_formatting + "}"
+    print(str_tabular_formatting)
+    print("evidence & stealing\_1\_0 & object\_dropped\_accidentally\_0 & neither \\\\")
+    for key in dict_k.keys():
+        print(key, end='&')
+        for k in dict_k[key].keys():
+            if dict_k[key][k] >= 0:
+                print("{val:.2f}".format(val=dict_k[key][k]), end='&')
+            else:
+                print("\\cellcolor{red} {val:.2f}".format(red="{RedOrange}", val=dict_k[key][k]), end='&')
+        print("\\\\")
+    print("\\end{tabular}")
+    print("\\end{table}")
 
 
 
@@ -553,7 +594,7 @@ d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
 runs = [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000]
-
+runs = [150]
 for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
                                             ("GroteMarktPrivate", runs, d_G)
                                             ]:
@@ -632,6 +673,8 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
 
     file_name = path + "/plots/accuracy.pdf"
 
+    ax = plt.gca()
+
     plt.plot(train_runs, a_sto, color="#2037ba", marker="o")
     plt.plot(train_runs, a_acc, color="#b62a2a", marker="o")
 
@@ -639,8 +682,8 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
     plt.xlabel('number of runs')
     plt.title("Accuracy of network")
 
-    plt.show()
-    plt.savefig(file_name)
+    #plt.savefig(file_name)
+    #plt.show()
     plt.close()
 
 

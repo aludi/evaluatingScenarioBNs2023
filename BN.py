@@ -8,7 +8,6 @@ import csv
 import pandas as pd
 import pickle
 
-
 import math
 import pyAgrum.lib.image as gim
 
@@ -300,9 +299,16 @@ def K2_BN_csv_only(training_data, path):
     #print("current dir", os.getcwd())
     # print(file_name)
     gum.saveBN(bn, file_name)
-    export_picture(training_data, path)
+    try:
+        export_picture(training_data, path)
+        return 0
+    except:
+        print("not wide enough data")
+        print("rerunning training ")
+        return 1
+
     # print(f"saved bn as {file_name}")
-    return bn
+    #return bn
 
 def evidence_cannot_be_connected_to_each_other(experiment, temporal_ordering):
     #we know evidence is always added at the end

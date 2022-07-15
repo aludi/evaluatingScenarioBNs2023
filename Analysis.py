@@ -314,11 +314,12 @@ def progress_evidence(path, network_name, temporal_evidence):
     df_a = df.query(f"{output_1} == {1}")
     df_r = df.query(f"{output_0} == {0} & {output_1} == {0}")
     #print(df.shape[0])
+    '''
     if df.shape[0] > 0:
         print(df_s.shape[0] / df.shape[0], df_a.shape[0] / df.shape[0], df_r.shape[0] / df.shape[0], df.shape[0])
     else:
         print("state does not occur")
-
+    '''
     x.append("No evidence")
     y_0.append(round(ie.posterior(output_0)[1], 2))
     y_1.append(round(ie.posterior(output_1)[1], 2))
@@ -421,6 +422,12 @@ def plot_evidence_posterior_base_network_only(path, base_network, df):
         flag = 1
     if flag == 1:
         df.rename(columns={"posterior": str(num)}, inplace=True)
+        df.rename(columns={"freq_stealing_1_0": "F(steal)"}, inplace=True)
+        df.rename(columns={"freq_object_dropped_accidentally_0":"F(dropped)"}, inplace=True)
+        df.rename(columns={"stealing_1_0":"P(steal)"}, inplace=True)
+        df.rename(columns={"object_dropped_accidentally_0":"P(dropped)"}, inplace=True)
+
+
         col = list(df.columns)
 
         N = 2
@@ -512,10 +519,8 @@ def experiment_different_evidence(path, scn):
         vl.append(str(l))
         dict_val[tuple(l)] = dict_output
         dict_freq_val[tuple(l)] = dict_freq
-
-
-    print_latex_table_from_dict(dict_val)
-    print_latex_table_from_dict(dict_freq_val)
+    print_table_preference_ordering(dict_val)
+    print_table_preference_ordering(dict_freq_val)
 
 
     file_name = path + "/plots/freqStates.pdf"
@@ -529,6 +534,55 @@ def experiment_different_evidence(path, scn):
     plt.close()
     return round(1 - sum(a0)/len(a0), 3), round(1 - sum(a1)/len(a1), 3)
 
+def print_table_preference_ordering(dict_k):
+
+    replaced_names = {}
+    replaced_names["freq_stealing_1_0"] = "F(steal)"
+    replaced_names["freq_object_dropped_accidentally_0"] = "F(dropped)"
+    replaced_names["stealing_1_0"] = "P(steal)"
+    replaced_names["object_dropped_accidentally_0"] = "P(dropped)"
+    for k in dict_k.keys():
+        if "freq_stealing_1_0" in list(dict_k[k].keys()):
+            replaced_names["neither"] = "F(neither)"
+            break
+        else:
+            replaced_names["neither"] = "P(neither)"
+
+
+
+
+    print("\\begin{table}")
+    print("\\begin{center}")
+    str_tabular_formatting = "\\begin{tabular}{|l|c|c|c|}"
+    print(str_tabular_formatting)
+    print("\\hline")
+    print("evidence & H1 & H2 & H3 \\\\")
+    print("\\hline")
+    for key in dict_k.keys():
+        print(key, end="&")
+        x = dict(sorted(dict_k[key].items(), key=lambda item:item[1], reverse=True))
+        #print(x)
+
+        val_order = 0
+        for k in x.keys():
+            print("{k} ({v:.2f})".format(k=replaced_names[k], v=x[k]), end=" ")
+            #print(k, "("+ x[k] +")", end="  ")
+            if k != list(x.keys())[-1]:
+                if x[k] > val_order:
+                    print("&", end= " ")
+                    #print(" $>$ ", end=" ")
+                else:
+                    print("&", end=" ")
+                    #print(" ~ ", end=" ")
+                val_order = x[k]
+            else:
+                print("\\\\")
+    print("\\hline")
+    print("\\end{tabular}")
+    print("\\end{center}")
+    print("\\caption{ }")
+    print("\\label{ }")
+    print("\\end{table}")
 
 def print_latex_table_from_dict(dict_k):
     print(dict_k.keys())
@@ -594,7 +648,6 @@ d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
 runs = [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000]
-runs = [150]
 for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
                                             ("GroteMarktPrivate", runs, d_G)
                                             ]:
@@ -616,19 +669,23 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
             experiment = Experiment(scenario=scenario, runs=num_runs, train="train",
                                        param_dict=param_dict)  # we do the simple scenario
 
-            print("done with experiment")
+            #print("done with experiment")
             list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
             list_files.sort()
 
             if ".DS_Store" in list_files:
                 list_files.remove(".DS_Store")
 
-            print("List files", list_files)
+            #print("List files", list_files)
             for train_data in list_files:
                 if "pkl" in train_data:
                     continue
                 flag = K2_BN_csv_only(train_data, path)
             it += 1
+
+        print()
+        print()
+        print("TABLES FOR NUM RUNS    ", num_runs)
 
         if it >= 10 and flag == 1:
             a_acc.append(0)
@@ -682,7 +739,7 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
     plt.xlabel('number of runs')
     plt.title("Accuracy of network")
 
-    #plt.savefig(file_name)
+    plt.savefig(file_name)
     #plt.show()
     plt.close()
 

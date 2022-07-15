@@ -168,7 +168,7 @@ def get_temporal_ordering_nodes_path(training_data, path):
     temporal_dict = unpickle_dict(temporal_dict_path)
     relevant_dict = unpickle_dict(relevant_dict_path)
     evidence_list = unpickle_dict(evidence_list_path)
-    print(evidence_list)
+    #print(evidence_list)
 
     for key in temporal_dict.keys():
         if len(key) == len(relevant_dict) - len(evidence_list):
@@ -177,11 +177,11 @@ def get_temporal_ordering_nodes_path(training_data, path):
                 max_score = temporal_dict[key]
                 flag = "cust"
     best_ordering_in_col_numbers_list = []
-    print(best_temporal_ordering)
+    #print(best_temporal_ordering)
     if len(list(header)) == len(relevant_dict):
         if flag == "cust":
             for item in best_temporal_ordering:
-                print(item)
+                #print(item)
                 try:
                     if item[0] == "E":
                         print('evidence node in wrong list?')
@@ -200,12 +200,12 @@ def get_temporal_ordering_nodes_path(training_data, path):
                     except ValueError:
                         print("removed private item not in ordering")
             for item in evidence_list:
-                print(item)
+                #print(item)
                 try:
                     best_ordering_in_col_numbers_list.append(header.index(item))
                 except ValueError:
                     print("removed private evidence not in ordering")
-            print(best_ordering_in_col_numbers_list)
+            #print(best_ordering_in_col_numbers_list)
         else:
             best_ordering_in_col_numbers_list = best_temporal_ordering
     else:
@@ -220,7 +220,7 @@ def get_temporal_ordering_nodes_path(training_data, path):
         for item in nl:
             best_ordering_in_col_numbers_list.append(item)
 
-    print(flag)
+    #print(flag)
     print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 

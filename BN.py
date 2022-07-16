@@ -103,6 +103,7 @@ def fill_cpts_random(bn):
     return bn
 
 def get_temporal_ordering_nodes(experiment, global_state_csv):
+    print("best temporal ordering!")
     # determine the temporal order
     # consider only all temporal orders that include all events!
     max_score = 0
@@ -119,7 +120,7 @@ def get_temporal_ordering_nodes(experiment, global_state_csv):
                 max_score = experiment.reporters.temporal_dict[key]
                 flag = "cust"
     best_ordering_in_col_numbers_list = []
-    #print(best_temporal_ordering)
+    print(best_temporal_ordering)
     if len(list(header)) == len(experiment.reporters.relevant_events):
         if flag == "cust":
             for item in best_temporal_ordering:
@@ -149,7 +150,10 @@ def get_temporal_ordering_nodes_path(training_data, path):
     header = next(csv.reader(open(path + "/train/" + training_data)))
     best_temporal_ordering = []
 
+    #print("TEMPORAL ORDERING")
+
     for i in range(0, len(header)):
+        #print(header[i])
         best_temporal_ordering.append(i)  # default ordering is just [0, 1, ...]
         flag = "def"
 
@@ -177,7 +181,7 @@ def get_temporal_ordering_nodes_path(training_data, path):
                 max_score = temporal_dict[key]
                 flag = "cust"
     best_ordering_in_col_numbers_list = []
-    #print(best_temporal_ordering)
+    print(best_temporal_ordering)
     if len(list(header)) == len(relevant_dict):
         if flag == "cust":
             for item in best_temporal_ordering:
@@ -193,7 +197,7 @@ def get_temporal_ordering_nodes_path(training_data, path):
             #print(best_ordering_in_col_numbers_list)
 
             for key in relevant_dict:
-
+                print(key)
                 if header.index(key) not in best_ordering_in_col_numbers_list and key[0] != "E":
                     try:
                         best_ordering_in_col_numbers_list.append(header.index(key))
@@ -220,7 +224,7 @@ def get_temporal_ordering_nodes_path(training_data, path):
         for item in nl:
             best_ordering_in_col_numbers_list.append(item)
 
-    #print(flag)
+    print(flag)
     print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 

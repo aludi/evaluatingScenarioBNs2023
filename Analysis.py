@@ -519,8 +519,31 @@ def experiment_different_evidence(path, scn):
         vl.append(str(l))
         dict_val[tuple(l)] = dict_output
         dict_freq_val[tuple(l)] = dict_freq
-    print_table_preference_ordering(dict_val)
-    print_table_preference_ordering(dict_freq_val)
+    ordered_list_P = print_table_preference_ordering(dict_val)
+    ordered_list_F = print_table_preference_ordering(dict_freq_val)
+
+    #calculate accuracy preference ordering
+
+    count_acc = 0
+    for i in range(0, len(ordered_list_F)):
+        #print(ordered_list_P[i])
+        #print(ordered_list_F[i])
+
+
+        for idx in range(0, len(ordered_list_F[i])):
+
+            #print(ordered_list_P[i][idx][1:])
+            #print(ordered_list_F[i][idx][1:])
+            flag = 0
+
+            if ordered_list_F[i][idx][1:] != ordered_list_P[i][idx][1:]:
+                flag = 1
+
+        if flag == 0:
+            count_acc += 1
+        #print(count_acc)
+    #print(count_acc/len(ordered_list_P))
+
 
 
     file_name = path + "/plots/freqStates.pdf"
@@ -532,7 +555,7 @@ def experiment_different_evidence(path, scn):
     #plt.show()
     plt.savefig(file_name)
     plt.close()
-    return round(1 - sum(a0)/len(a0), 3), round(1 - sum(a1)/len(a1), 3)
+    return round(1 - sum(a0)/len(a0), 3), round(1 - sum(a1)/len(a1), 3), count_acc/len(ordered_list_P)
 
 def print_table_preference_ordering(dict_k):
 
@@ -549,6 +572,7 @@ def print_table_preference_ordering(dict_k):
             replaced_names["neither"] = "P(neither)"
 
 
+    list_of_ordering = []
 
 
     print("\\begin{table}")
@@ -564,8 +588,10 @@ def print_table_preference_ordering(dict_k):
         #print(x)
 
         val_order = 0
+        order = []
         for k in x.keys():
             print("{k} ({v:.2f})".format(k=replaced_names[k], v=x[k]), end=" ")
+            order.append(replaced_names[k])
             #print(k, "("+ x[k] +")", end="  ")
             if k != list(x.keys())[-1]:
                 if x[k] > val_order:
@@ -577,12 +603,16 @@ def print_table_preference_ordering(dict_k):
                 val_order = x[k]
             else:
                 print("\\\\")
+        list_of_ordering.append(order)
     print("\\hline")
     print("\\end{tabular}")
     print("\\end{center}")
     print("\\caption{ }")
     print("\\label{ }")
     print("\\end{table}")
+    return list_of_ordering
+
+
 
 def print_latex_table_from_dict(dict_k):
     print(dict_k.keys())
@@ -647,13 +677,15 @@ d_S = {"camera_vision":2}
 d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
-runs = [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000]
+runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
+runs = [100]
 for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
                                             ("GroteMarktPrivate", runs, d_G)
                                             ]:
 
     a_acc = []
     a_sto = []
+    a_PO = []
     for num_runs in train_runs:
         os.chdir(org_dir)
         path = org_dir + "/experiments/" + scenario
@@ -690,6 +722,7 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
         if it >= 10 and flag == 1:
             a_acc.append(0)
             a_sto.append(0)
+            a_PO.append(0)
 
         else:
 
@@ -722,25 +755,27 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
                 #print(networks[:-4])
 
                 #print("progress")
-                acc, stolen = experiment_different_evidence(path, networks[:-4])
+                acc, stolen, PO = experiment_different_evidence(path, networks[:-4])
                 a_acc.append(acc)
                 a_sto.append(stolen)
+                a_PO.append(PO)
 
 
 
     file_name = path + "/plots/accuracy.pdf"
 
     ax = plt.gca()
-
-    plt.plot(train_runs, a_sto, color="#2037ba", marker="o")
-    plt.plot(train_runs, a_acc, color="#b62a2a", marker="o")
-
+    plt.plot(train_runs, a_sto, color="#2037ba", label="stealing_1_0", marker="o")
+    plt.plot(train_runs, a_acc, color="#b62a2a",label="object_dropped_accidentally_0", marker="o")
+    plt.plot(train_runs, a_PO, color="#35b779", label="preference ordering", marker="o")
+    leg = plt.legend()
     plt.ylabel('accuracy')
     plt.xlabel('number of runs')
     plt.title("Accuracy of network")
 
-    plt.savefig(file_name)
-    #plt.show()
+    if len(runs) > 3:
+        plt.savefig(file_name)
+    plt.show()
     plt.close()
 
 

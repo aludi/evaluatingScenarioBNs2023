@@ -402,10 +402,12 @@ def progress_evidence(path, network_name, temporal_evidence):
     return otp_pd
 
 
-def plot_evidence_posterior_base_network_only(path, base_network, df):
+def plot_evidence_posterior_base_network_only(path, base_network, df, run_num):
 
     flag = 0
-    colors = ["#2037ba", "#b62a2a"]
+    colors1 = [	'#0072BD', '#A2142F']
+
+    colors2 = ["#2037ba", '#D95319']
     color_id = 0
 
     file = base_network
@@ -434,21 +436,21 @@ def plot_evidence_posterior_base_network_only(path, base_network, df):
         ind = np.arange(N)  # the x locations for the groups
         width = 0.27
 
-        df.plot(kind='bar', x = col[0], y=col[1:3], width=-0.2, align='edge', legend=True, title=base, ax=ax, stacked=True)
-        df.plot(kind='bar', x = col[0], y=col[3:5], width=0.2, color=colors, align='edge', legend=True, title=base, ax=ax, stacked=True)
+        df.plot(kind='bar', x = col[0], y=col[1:3], width=-0.2, color=colors1, align='edge', legend=True, title=base, ax=ax, stacked=True)
+        df.plot(kind='bar', x = col[0], y=col[3:5], width=0.2, color=colors2, align='edge', legend=True, title=base, ax=ax, stacked=True)
 
         plt.axhline(y=1, color='black', linestyle='-')
-        plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation='vertical')
+        plt.xticks(range(0, len(df["evidence"])), df["evidence"], rotation=15, ha="right") # rotation used to be 'vertical'
         # Tweak spacing to prevent clipping of tick-labels
-        plt.subplots_adjust(right=0.8, bottom=0.5)
+        plt.subplots_adjust(bottom=0.25)
         ax.legend(loc="best")
         plt.xlabel("Evidence added")
         plt.ylabel("Posterior probability")
         val = float(df["count"][0])
         #str_num = "{:.4f}".format(val*100)
-        plt.title("The effect of evidence on the posterior ({val:.2f} % of runs)".format(val=val*100))
+        plt.title("The effect of evidence on the posterior ({val:.2f} % of {num} runs)".format(val=val*100, num=run_num))
 
-        file_name = path + "/plots/freq/evidence_progress_" + base_network + "_{val:.4f}".format(val=val*100) + ".pdf"
+        file_name = path + "/plots/freq/evidence_progress_" + base_network + "_"+str(run_num)+"_{val:.4f}".format(val=val*100) + ".pdf"
         #print(file_name)
         plt.savefig(file_name)
         #plt.show()
@@ -467,17 +469,10 @@ def generate_dict(df, events):
     dict_output["neither"] = 1 - sum1
     return dict_output
 
-def experiment_different_evidence(path, scn):
+def experiment_different_evidence(path, scn, run_num):
 
     nw = f"{path}/BNs/{scn}.net"
 
-    folder_path = f"{path}/plots/freq/"
-    for file_object in os.listdir(folder_path):
-        file_object_path = os.path.join(folder_path, file_object)
-        if os.path.isfile(file_object_path) or os.path.islink(file_object_path):
-            os.unlink(file_object_path)
-        else:
-            shutil.rmtree(file_object_path)
 
 
     d = load_temporal_evidence(nw)
@@ -509,7 +504,7 @@ def experiment_different_evidence(path, scn):
         #print(dict_output)
 
 
-        ac0, ac1, count, e = plot_evidence_posterior_base_network_only(path, scn, df)
+        ac0, ac1, count, e = plot_evidence_posterior_base_network_only(path, scn, df, run_num)
         #print(e)
         #print(count)
         a0.append(ac0)
@@ -677,8 +672,18 @@ d_S = {"camera_vision":2}
 d_V = {}
 d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
+
 runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
-runs = [100]
+
+folder_path = org_dir + "/experiments/GroteMarktPrivate/plots/freq/"
+for file_object in os.listdir(folder_path):
+    file_object_path = os.path.join(folder_path, file_object)
+    if os.path.isfile(file_object_path) or os.path.islink(file_object_path):
+        os.unlink(file_object_path)
+    else:
+        shutil.rmtree(file_object_path)
+
+
 for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
                                             ("GroteMarktPrivate", runs, d_G)
                                             ]:
@@ -755,7 +760,7 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
                 #print(networks[:-4])
 
                 #print("progress")
-                acc, stolen, PO = experiment_different_evidence(path, networks[:-4])
+                acc, stolen, PO = experiment_different_evidence(path, networks[:-4], num_runs)
                 a_acc.append(acc)
                 a_sto.append(stolen)
                 a_PO.append(PO)
@@ -773,8 +778,8 @@ for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
     plt.xlabel('number of runs')
     plt.title("Accuracy of network")
 
-    if len(runs) > 3:
-        plt.savefig(file_name)
+    #if len(runs) > 3:
+        #plt.savefig(file_name)
     plt.show()
     plt.close()
 

@@ -1,39 +1,43 @@
-\documentclass[11pt]{article}
+\documentclass[12pt, letterpaper, twoside]{article}
+
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
-%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage[parfill]{parskip} 
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{natbib}
 \usepackage{subcaption}
-
-\usepackage{epstopdf}
+%\usepackage{epstopdf}
 \usepackage{amsmath,amsthm,amsfonts}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{colortbl}
 \usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, 
             citecolor=blue, urlcolor=blue]{hyperref}
+
+
+\usepackage[nottoc]{tocbibind}
+\renewcommand{\refname}{Bibliography}
             
- \makeatletter
-\newcommand*{\centerfloat}{%
-  \parindent \z@
-  \leftskip \z@ \@plus 1fil \@minus \textwidth
-  \rightskip\leftskip
-  \parfillskip \z@skip}
-\makeatother
-            
-\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+%\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \title{Evaluating Bayesian Networks as a Tool for Reasoning with Evidence using Agent-Based Simulations}
 \author{Ludi van Leeuwen}
 \date{}                                           % Activate to display a given date or no date
 
+
+
 \begin{document}
 \maketitle
+\newpage
 
 \abstract{The existing methods for evaluating Bayesian Networks on full court cases are not sufficient, since the subjective probability assigned to the nodes might be overfitted on the world in which all pieces of evidence are true. This would result in incorrect outcomes for BNs where the state of the evidence turns out to be different. A systemic way of evaluating the response of a BN on all possible valuations of cumulative evidence is proposed in this paper, and illustrated by means of a simple agent-based simulation of a robbery.  This method works correctly in the simulation, but is implausible to be generalisable to the real world due to combinatorial explosion of possible evidence states, the subjectivity in establishing a ground truth without using simulations, and the imprecision in node definitions in the BN in the first place.}
+
+\newpage
+
+\tableofcontents
+\addtocontents{toc}{~\hfill\textbf{Page}\par}
+\newpage
 
 \section{Introduction}
 When we find evidence for a hypothesis that we have held in the back of our minds, our belief in that hypothesis increases. This is the essence of reasoning with evidence. Our goal in reasoning with evidence is to find a method that will lead us to believe as many true hypotheses as we can, given the evidence that we have.
@@ -55,6 +59,7 @@ These evaluation criteria, however, do do not always sufficiently safeguard agai
 
 The cause of the bias of this BN towards the guilty verdict is due to the modeller's inability to rationally consider all possible evidence states. The aim of this project is to define a method for the modeller to evaluate the BN over all possible evidence states, by grounding the BN in an agent-simulation of a crime. We can model crime cases using simulations to a level of realism we desire, measure the frequencies of events that emerge out of this simulation by running the simulation multiple times. In the agent-based system, we have full control over and full knowledge of the world that we are reasoning about, hence we can create a grounding that can be used to evaluate the BN. We can test whether our method of evaluating all possible evidence states works by comparing the predicted output of the BN with the frequency information about the output from the simulation. Then, we will discuss whether it is plausible that this method of evaluation generalises to real life\footnote{The simulation can be interacted with at \url{https://shielded-journey-34533.herokuapp.com} \\ Code for this project can be found at \url{https://github.com/aludi/simulationTest}}.
 
+\newpage
 
 \section{Background}
 
@@ -107,7 +112,7 @@ Hence, we can exactly specify how our belief in a hypothetical event changes giv
 
 We can outsource the Bayesian calculation to the BN, however, the network itself has to be constructed in some way. This can be done by hand by modellers, in (proprietary) software with a GUI like AgenaRisk or Hugin. They can also be built, by hand, or automatically constructed from datasets in PyAgrum, \citep{pyagrum2020}, a free Python software package. In this project, PyAgrum was used.
 
-\subsubsection{Evaluating Bayesian Networks}
+\subsection{Evaluating Bayesian Networks}
 
 There is a precedent for building Bayesian Networks to model reasoning with evidence in criminal cases, although these methods have not been used in court. However, even though there are methods for building BNs, it is unclear how we should validate and evaluate them. 
 
@@ -144,27 +149,91 @@ We are using agent-based simulations to investigate methods for evaluating Bayes
 
 Agent-based modelling is useful for simulating criminal behaviour in spatially explicit ways. The actions of a thief and victim are constrained by geography and local knowledge (a thief can't move through buildings like a ghost, or steal from someone they have not seen). Due to specific interactions that arise out of the circumstances in each run of the simulation, we can collect frequency information about all the relevant events in our modelled scenario that would be hard to estimate with subjective probabilities or with mathematical (non-spatially explicit) models. Since we have full knowledge of the frequency of events in the simulation, we can use it as a `grounding', or baseline. In a sense, the simulation is a data-generating environment for criminal cases. If we look at the taxonomy of agent-based model levels in \citep{gilbert2005}, where level 3 is a simulation that really reflects the real world, and level 0 is a `caricature of reality, as established with simple graphical devices', the simulation in this paper is definitely at level 0, to reduce complexity. In this project, the simulations will be programmed in Python using the MESA framework  \citep{mesa2020}.
 
+\newpage
+
 \section{Method}
+
+
 
 Our goal is to establish a method for evaluating BNs by preventing overfitting on one evidence state. We can consider an approach in four stages.
 
 \begin{enumerate}
-\item We need a set of alternative scenarios that are to be modelled. These scenarios are written description of crime scenarios that contain the hypothetical events and evidence for these events, as postulated by the prosecution and defence. 
+\item \emph{Scenarios} We need a set of alternative scenarios that are to be modelled. These scenarios are written description of crime scenarios that contain the hypothetical events and evidence for these events, as postulated by the prosecution and defence. 
 
-\item Based on this written description of the scenario(s) to be modelled, an agent-based simulation is created, by first identifying and operationalising all relevant agents, objects and environments, and secondly identifying and operationalising all relevant events. Depending on the goal and complexity of the scenarios to be modelled, the granularity and overall level of the simulation should be considered. The simulation should be repeated until we find the limiting frequency of all events. These frequencies are collected.
+\item  \emph{Simulation} Based on this written description of the scenario(s) to be modelled, an agent-based simulation is created, by first identifying and operationalising all relevant agents, objects and environments, and secondly identifying and operationalising all relevant events. Depending on the goal and complexity of the scenarios to be modelled, the granularity and overall level of the simulation should be considered. The simulation should be repeated until we find the limiting frequency of all events. These frequencies are collected.
 
-\item The collected frequencies are used by the K2 algorithm to automatically build a Bayesian Network of the simulation. 
+\item  \emph{Building the Network} The collected frequencies are used by the K2 algorithm to automatically build a Bayesian Network of the simulation. 
 
-\item The generated Bayesian Network is evaluated on all possible states of the evidence.
+\item  \emph{Evaluating all Outcomes} The generated Bayesian Network is evaluated on all possible states of the evidence.
 
 \end{enumerate}
 
-This method is illustrated in this paper on a (toy) case study of a robbery at the Grote Markt in Groningen.
+\subsection{Scenarios}
+We start our process with one or more written scenarios. These scenarios can be obtained from abridged or simplified court case descriptions of the crime, or they can be wholly fictional (such as in this paper). The scenarios should contain all and only those hypotheses and evidence that are relevant to the case. Both the prosecution and the defence should be able to select relevant events and their evidence. 
 
+\subsection{Simulation}
+We can think of the simulation as having two parts: a model of reality, and a way of observing the model by observing variables that the modellers deem interesting. In this paper, the model of reality is an agent-based simulation, and the observation procedure are random variables (or, reporters), which become nodes in the BN.
+
+The agent-based simulation is a simulation that should include the possibilities for all the scenarios as outlined in step 1. It should contain agents, objects and an environment. The level of detail or real-world validation at which agents, objects and environments are modelled depend on the purposes of the environment.
+
+
+In the simulation, certain events can be brought about. Any one of the above-mentioned events can happen. We need a way to observe these states: this is where reporters come in. A reporter is a random variable that is reports the outcome of a relevant event in the simulation and is embedded in the code. If an event happens (or does not happen), the reporter reports that the event is true (or false). In essence, the reporter ($R$) is a random variable (RV). In short, a random variable is a function that maps an event ($e$) to a truth value:
+
+\[ R : e \rightarrow \{0, 1\} \]
+No matter how many reporters we define, we can combine all reporters at the end of one run of the simulation into a global state $G$.
+
+\[ G = (e_0 \rightarrow \{0, 1\} \times e_1 \rightarrow \{0, 1\} \times ... \times e_n \rightarrow \{0, 1\})\]
+ or, for $n$ reporters:
+ 
+\[ G = R_1 \times R_2 \times... \times R_n\]
+
+We collect these global states over the number of runs that we do for each experiment, which results in the output $O$ of this stage of the method, is a series of global states, one for each run:
+
+\[ O = (G_0, G_1, ... G_{runs})\]
+
+
+\subsection{Building the Network}
+The output of this method is the collection of runs $O$, where each run is the global state $G$ of the simulation, as measured by the random variables $R$. These random variables become the nodes in the Bayesian Network.
+
+The Bayesian Network is generated automatically, using the automated BN learner method as implemented in pyAgrum. There are several learners implemented in pyAgrum.\footnote{An introduction to structure learning using PyAgrum: \url{http://webia.lip6.fr/~phw/aGrUM/docs/last/notebooks/structuralLearning.ipynb.html}} The algorithm used in this experiment to structure the Bayesian Network from the simulation data is the K2 algorithm \citep{Cooper1992}. 
+
+The K2 algorithm is a greedy search algorithm that attempts to maximise the posterior probability of the network by correctly connecting parent nodes to child nodes. It takes an ordering on the nodes as input. The first node in the ordering $X_0$ does not have any parents. For two nodes $X_i$ and $X_j$, $X_j$ cannot be the parent node of $X_i$ if $j > i$: a node can only have a parent that is earlier in the ordering. The algorithm processes each node $X_i$ by adding possible parent nodes to $X_i$ (as constrained by the ordering), and maximising the score of the network. The algorithm stops if there are no parents to add, no parents improve the score, or the node has reached the maximal number of parents \citep{Chen2008}.
+
+Due to this ordering constraint, the K2 algorithm is efficient. However, finding the ordering of the nodes as input for the network is not trivial. The ordering should be meaningful, to reflect causal or temporal information present in the domain. By adding the nodes to the simulation in the relevant order, we can ensure that the order is temporal. The useful temporal ordering as presented to the algorithm is the the same order as the RVs are described throughout this paper. 
+
+
+
+\subsection{Evaluating all Outcomes}
+
+We can evaluate the response of the Bayesian Network using the effect of cumulative evidence on the posterior probability of the output nodes. This means that we order the evidence nodes chronologically, then instantiate every evidence node to a truth value (either T or F) in order. Then, we measure the posterior probability of all output nodes. This results in a diagram or table where we can see the evidence strength of each piece of true or false evidence reflected. We propose a method for evaluating Bayesian Networks over all possible global evidence states in this paper. This method is described here.
+
+\begin{enumerate}
+\item Select all evidence nodes (a total of $e$ states).
+\item Order the evidence nodes chronologically.
+\item Select all possible evidence states. An evidence state is a valuation of evidence, where for every evidence node, a truth value is specified. For this simulation, an evidence state could look like (1, 0, 0, 1), which would correspond to finding that the psychological report is true, the agent was seen on camera, but not seen stealing, and the object was lost.
+
+If there is enough data available, as is the case in our simulation, we can extract these automatically. If we do not have enough data, we need to manually consider each evidence state (start with $2^e$ states, ask an elicitor to delete states that are not possible).
+\item For each possible evidence state, create a total probability distribution over all possible output states. Speaking generically about two alternative, non-mutually exclusive outcomes scenario 1 (scn1) and scenario 2 (scn2), we need to find a probability distribution over $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$ that is constrained by $P(scn1) + P(\neg scn1 \land scn2) + P(\neg scn1 \land \neg scn2) = 1$. Or, a weaker version, we create a preference ordering on $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$, without specifying probabilities. 
+
+In our simulation, or in data-rich environments, we can automatically create this total probability distribution, since we can count the conditional frequencies that occur in simulation. In real life, a preference ordering or probability distribution over the possible outcomes would need to be elicited by modellers from experts.
+\item Create a BN.
+\item For every possible evidence state, turn the relevant nodes in the BN on in order. At each step, record the posterior probability over the output nodes. Automatically convert the probability distribution over the outcomes into a preference ordering.
+\item Compare the BN prediction of output nodes given evidence to the prediction establishes in step 4). Once all evidence is added, we can calculate the divergence of the BN prediction and the actual frequency in the simulation by \[|P(output|E) - F(output|E)|\], where $E$ is the total set of evidence in a given state.
+\item Calculate the total accuracy per output node by \[\frac{\sum_{i=0}^{e}|P(output | E_i) - F(output| E_i)|}{e}\] For the preference ordering, we do the same, only we calculate a counting score: when the preference ordering extracted from the BN is the same as the one from the simulation, we give a point, otherwise we do not, then average this over all sets of evidence.
+\end{enumerate}
+
+
+\newpage
+
+
+\section{Case Study: Robbery at Grote Markt}
+We illustrate the method by means of applying it to a case study of a robbery at the Grote Markt, the central square in Groningen.
+
+\subsection{Experimental Set-up}
+BNs were created and evaluated based on different number of runs, to evaluate how the accuracy of the BN depends on the data available to it. The different number of runs of the simulation were [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000~] for creating the BNs.
 
 \subsection{Scenarios}
 
-We start our process with one or more written scenarios. These scenarios can be obtained from abridged or simplified court case descriptions of the crime, or they can be wholly fictional (such as in this paper). The scenarios should contain all and only those hypotheses and evidence that are relevant to the case. Both the prosecution and the defence should be able to select relevant events and their evidence. 
 
 We have established three different scenarios. In all scenarios, there are two people walking around the Grote Markt. One person is young, and the other person is old and carries a valuable object. 
 
@@ -182,22 +251,56 @@ For our evidence, we have a psychological assessment of the young person, that a
 %Additionally, outside the described scenario, we also have access to the `mental' state of the potential thief, so we know whether they actually consider the old agent vulnerable, and whether they find the object itself valuable. We also know if the thief is actually intending to sneak up on the other agent.
 
 
-
 \subsection{Simulation}
 
-Now we need a way to transform the natural language descriptions of the events in the scenarios to observable events in the simulation.
-
-\begin{enumerate}
-\item \textbf{We identify all relevant actors, objects and environments in the scenario, and operationalise them in a simulation}
-
-\textbf{Agents:} There are two relevant actors in the simulation: a potential thief, and a potential victim. Every agent has an age, to determine whether they are vulnerable or not: old people are considered more vulnerable. Every agent also has an object of a certain value, the thief's object has a value of -1, and the other agent's object has a value of 1000, to make it a tempting target. An agent decides if it wants to steal something by making a very simple risk-calculation based on their risk threshold: if the object is more expensive than their risk threshold, they will attempt to steal it (contributing to `motive'). Every agent also has a goal state, this is a location at the edge of the map. When they enter their goal state, they are essentially removed from the simulation, as they leave the relevant area. Agents are placed randomly on the map.  By placing agents in a `real' spatial environment, they are constrained by geography in some manner - they cannot see through buildings and cannot move through them. The behaviour of the agents is depicted in Figure~\ref{behaviourGM}.
+Now we need a way to transform the natural language descriptions of the events in the scenarios to observable events in the simulation. First, we identify all relevant actors, objects and environments in the scenario and operationalise them in a simulation.
 
 
-\textbf{Objects:} There are two types of objects in the simulations, which are the valuable object, and the cameras. 
+
+\subsubsection{Agents} 
+
+Agents are relevant pieces of code in a simulation. They can interact with other agents and with their environment. Every agent has features, functions and roles associated with them.
+
+Based on the scenario above, we want to create one older, vulnerable agent, and one younger potential thief. In principle, the simulation is flexible enough that any agent can be a thief, as motive is determined by a risk-trade-off and not something inherent to the agents themselves. However, since we wanted to avoid problems with identity and follow the scenarios, we made sure that only one agent would be the thief, by having it have an object that was not valuable and an age that was not vulnerable.
+
+
+All agents have the following:
+\begin{description}
+\item [object] The thief has an object with a value of 0, the old agent's object has a value drawn from a uniform distribution between 500 and 900. 
+\item [goal location]
+\item [age] The thief's age was 25, the old agent's age was drawn from a uniform distribution between 60 and 90.
+\item [risk threshold]
+\item [age threshold]
+\item [steal-mind-state]
+\end{description}
+
+All agents can do the following:
+
+\begin{description}
+\item [mill around]
+\item [walk]
+\item [see]
+\item [decide valuable]
+\item [decide vulnerable]
+\item [perform risk calculation]
+\item [sneak]
+\item [steal]
+\end{description}
+
+
+
+ Every agent has an age, to determine whether they are vulnerable or not: old people are considered more vulnerable. Every agent also has an object of a certain value, the thief's object has a value of -1, and the other agent's object has a value of 1000, to make it a tempting target. An agent decides if it wants to steal something by making a very simple risk-calculation based on their risk threshold: if the object is more expensive than their risk threshold, they will attempt to steal it (contributing to `motive'). Every agent also has a goal state, this is a location at the edge of the map. When they enter their goal state, they are essentially removed from the simulation, as they leave the relevant area. Agents are placed randomly on the map.  By placing agents in a `real' spatial environment, they are constrained by geography in some manner - they cannot see through buildings and cannot move through them. The behaviour of the agents is depicted in Figure~\ref{behaviourGM}.
+
+
+\subsubsection{Objects} 
+
+There are two types of objects in the simulations, which are the valuable object, and the cameras. 
 There is only one object in the simulation, which is the object that the agent might want to steal. This object is just an object and is represented as a feature of the agents itself.
 There are 5 cameras placed randomly on the `accessible' cells on the map, each with a visual radius of 8. 
 
-\textbf{Environment:} The environment for the agents was created by converting a map image of the Grote Markt into an agent-readable world. This was done by writing a method to convert screenshots of maps into an agent-readable environment. The map was screenshotted from \url{http://maps.stamen.com/terrain/#18/53.21618/6.57225} and converted into greyscale. A grid was overlaid on the image. On the greyscale map, the color of the buildings was in the range of (189, 199) - cells within this range were coded as `inaccessible', since agents cannot walk through buildings. All other cells were `accessible'. This resulted in a map shared by all agents that constrained their movements. The map constrains both vision and movement of the agent: we used this map to calculate the sight lines of both cameras and agents. An agent or a camera cannot see another agent if there is an `inaccessible' grid cell on the sight line between the two. The environment is shown in Figure~\ref{groteMarkt}.
+\subsubsection{Environment}
+
+ The environment for the agents was created by converting a map image of the Grote Markt into an agent-readable world. This was done by writing a method to convert screenshots of maps into an agent-readable environment. The map was screenshotted from \url{http://maps.stamen.com/terrain/#18/53.21618/6.57225} and converted into greyscale. A grid was overlaid on the image. On the greyscale map, the color of the buildings was in the range of (189, 199) - cells within this range were coded as `inaccessible', since agents cannot walk through buildings. All other cells were `accessible'. This resulted in a map shared by all agents that constrained their movements. The map constrains both vision and movement of the agent: we used this map to calculate the sight lines of both cameras and agents. An agent or a camera cannot see another agent if there is an `inaccessible' grid cell on the sight line between the two. The environment is shown in Figure~\ref{groteMarkt}.
 
 
 \item \textbf{We select all relevant events from the written description and attempt to operationalise them in the simulation.}
@@ -218,9 +321,6 @@ The operationalisation of the random variables is described below.
 \item[(E) E\_camera\_seen\_stealing\_1\_0 ]  if any camera sees the thief during the state in which it is stealing.
 \item[(E) E\_object\_gone\_0 ] if the object is dropped accidentally, or if the object has been stolen.
 \end{description}
-
-\end{enumerate}
-
 
 In the simulation, certain events can be brought about. Any one of the above-mentioned events can happen. We need a way to observe these states: this is where reporters come in. A reporter is a random variable that is reports the outcome of a relevant event in the simulation and is embedded in the code. If an event happens (or does not happen), the reporter reports that the event is true (or false). In essence, the reporter ($R$) is a random variable (RV). In short, a random variable is a function that maps an event ($e$) to a truth value:
 
@@ -272,39 +372,20 @@ We collect these global states over the number of runs that we do for each exper
 
 
 
-Every simulation was run for 100 steps, or until both agents were in their target states. To find the limiting frequencies of events in the simulation, the simulation was run 10,000 times. BNs were created and evaluated based on different number of runs, to evaluate how the accuracy of the BN depends on the data available to it. The different number of runs of the simulation were [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000~] for creating the BNs.
-
+Every simulation was run for 100 steps, or until both agents were in their target states. To find the limiting frequencies of events in the simulation, the simulation was run 10,000 times. 
 
 
 \subsection{Automatically building the network}
 
-The output of this method is the collection of runs $O$, where each run is the global state $G$ of the simulation, as measured by the random variables $R$. These random variables become the nodes in the Bayesian Network.
 
-The Bayesian Network is generated automatically, using the automated BN learner method as implemented in pyAgrum. There are several learners implemented in pyAgrum.\footnote{An introduction to structure learning using PyAgrum: \url{http://webia.lip6.fr/~phw/aGrUM/docs/last/notebooks/structuralLearning.ipynb.html}} The algorithm used in this experiment to structure the Bayesian Network from the simulation data is the K2 algorithm \citep{Cooper1992}. 
-
-The K2 algorithm is a greedy search algorithm that attempts to maximise the posterior probability of the network by correctly connecting parent nodes to child nodes. It takes an ordering on the nodes as input. The first node in the ordering $X_0$ does not have any parents. For two nodes $X_i$ and $X_j$, $X_j$ cannot be the parent node of $X_i$ if $j > i$: a node can only have a parent that is earlier in the ordering. The algorithm processes each node $X_i$ by adding possible parent nodes to $X_i$ (as constrained by the ordering), and maximising the score of the network. The algorithm stops if there are no parents to add, no parents improve the score, or the node has reached the maximal number of parents \citep{Chen2008}.
-
-Due to this ordering constraint, the K2 algorithm is efficient. However, finding the ordering of the nodes as input for the network is not trivial. The ordering should be meaningful, to reflect causal or temporal information present in the domain. By adding the nodes to the simulation in the relevant order, we can ensure that the order is temporal. The useful temporal ordering as presented to the algorithm is the the same order as the RVs are described throughout this paper. 
 
 \subsection{Evaluating the network}
+Automatically done in code
 
-We can evaluate the response of the Bayesian Network using the effect of cumulative evidence on the posterior probability of the output nodes. This means that we order the evidence nodes chronologically, then instantiate every evidence node to a truth value (either T or F) in order. Then, we measure the posterior probability of all output nodes. This results in a diagram or table where we can see the evidence strength of each piece of true or false evidence reflected. We propose a method for evaluating Bayesian Networks over all possible global evidence states in this paper. This method is described here.
 
-\begin{enumerate}
-\item Select all evidence nodes (a total of $e$ states).
-\item Order the evidence nodes chronologically.
-\item Select all possible evidence states. An evidence state is a valuation of evidence, where for every evidence node, a truth value is specified. For this simulation, an evidence state could look like (1, 0, 0, 1), which would correspond to finding that the psychological report is true, the agent was seen on camera, but not seen stealing, and the object was lost.
 
-If there is enough data available, as is the case in our simulation, we can extract these automatically. If we do not have enough data, we need to manually consider each evidence state (start with $2^e$ states, ask an elicitor to delete states that are not possible).
-\item For each possible evidence state, create a total probability distribution over all possible output states. Speaking generically about two alternative, non-mutually exclusive outcomes scenario 1 (scn1) and scenario 2 (scn2), we need to find a probability distribution over $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$ that is constrained by $P(scn1) + P(\neg scn1 \land scn2) + P(\neg scn1 \land \neg scn2) = 1$. Or, a weaker version, we create a preference ordering on $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$, without specifying probabilities. 
 
-In our simulation, or in data-rich environments, we can automatically create this total probability distribution, since we can count the conditional frequencies that occur in simulation. In real life, a preference ordering or probability distribution over the possible outcomes would need to be elicited by modellers from experts.
-\item Create a BN.
-\item For every possible evidence state, turn the relevant nodes in the BN on in order. At each step, record the posterior probability over the output nodes. Automatically convert the probability distribution over the outcomes into a preference ordering.
-\item Compare the BN prediction of output nodes given evidence to the prediction establishes in step 4). Once all evidence is added, we can calculate the divergence of the BN prediction and the actual frequency in the simulation by \[|P(output|E) - F(output|E)|\], where $E$ is the total set of evidence in a given state.
-\item Calculate the total accuracy per output node by \[\frac{\sum_{i=0}^{e}|P(output | E_i) - F(output| E_i)|}{e}\] For the preference ordering, we do the same, only we calculate a counting score: when the preference ordering extracted from the BN is the same as the one from the simulation, we give a point, otherwise we do not, then average this over all sets of evidence.
-\end{enumerate}
-
+\newpage
 
 \section{Results}
 
@@ -344,16 +425,16 @@ In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probabilit
 \begin{center}
 \begin{subfigure}{\textwidth}
 \makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{../experiments/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate_10_1.1100.pdf}
-\includegraphics[width=0.7\textwidth]{../experiments/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate_1000_1.1100.pdf}}
+\includegraphics[width=0.7\textwidth]{images/relevantPlots/freq/evidence_progress_GroteMarktPrivate_10_1.1100.pdf}
+\includegraphics[width=0.7\textwidth]{images/relevantPlots/freq/evidence_progress_GroteMarktPrivate_1000_1.1100.pdf}}
 \caption{Cumulative evidence on the most relevant state on 10 and 1000 runs}
 \label{nobody}
 \end{subfigure}
 
 \begin{subfigure}{\textwidth}
 \makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{../experiments/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate_10_70.9400.pdf}
-\includegraphics[width=0.7\textwidth]{../experiments/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate_1000_70.9400.pdf}}
+\includegraphics[width=0.7\textwidth]{images/relevantPlots/freq/evidence_progress_GroteMarktPrivate_10_70.9400.pdf}
+\includegraphics[width=0.7\textwidth]{images/relevantPlots/freq/evidence_progress_GroteMarktPrivate_1000_70.9400.pdf}}
 \caption{Cumulative evidence on the most frequent state on 10 and 1000 runs }
 \label{whirl}
 \end{subfigure}
@@ -429,6 +510,7 @@ evidence & H1 & H2 & H3 \\
 \label{heretic}
 \end{table}
 
+\newpage
 
 
 
@@ -436,7 +518,7 @@ evidence & H1 & H2 & H3 \\
 In this section we discuss the success of the method, its generalisability, and future research.
 
 
-\subsection{Can we use testing over all possible cumulative evidence as a way to evaluate Bayesian Networks?}
+\subsection{Evaluating BNs over all possible evidence states using simulations}
 With this method, we can show that we can create BNs that predict output probabilities that correspond to the limiting frequencies of events in the simulation. We see that both the preference ordering as well as the probabilities in the output nodes in Table~\ref{somebody} are near identical to those in Table~\ref{heretic}. This means that the best BN reflects the frequencies in the simulation well, not just on one set of cumulative evidence, but on nearly all sets of cumulative evidence. 
 
 The only evidence set where the BN does not reflect the ground truth, is for the evidence set of (0, 1, 1, 0). This is a situation where the agent is seen stealing, but the object is not gone. In the test data of 10,000 entries, there is never an entry where both stealing and dropping are true. Hence, we find that the BN does not predict the output correctly in this case. 
@@ -449,7 +531,13 @@ This method also allows us to see when the BN is assigning probability values to
 This method of evaluating a BN over all states of cumulative evidence can distinguish between better and worse BNs, shows when a BN goes wrong and gives us insight in why that happens. Modellers of data-poor BNs are might think about creating an expected preference ordering on all possible evidence states, before starting to build and test the BN, in order to check whether their BN aligns with their common-sense predictions. If the BN is wrong, this is a sign that either the modeller's estimation is wrong, or that the probabilities as entered in the BN are not correctly representing your actual beliefs.
 
 
-\subsection{Limitations of this approach - Plausibility of generalisability}
+\subsection{Evaluating BNs over all possible evidence states in real life }
+
+\subsubsection{Literature}
+Jurix, Simonshaven, Anjum
+
+
+\subsubsection{Problems}
 
 There are three main problems with this approach that limit its generalisability. These problems are the combinatorial explosion of the evidence states, the implausibilities of finding proper grounding, and the imprecision of the BN definitions of the random variables in real life.
 
@@ -467,6 +555,13 @@ There are three main problems with this approach that limit its generalisability
 \end{enumerate}
 \end{enumerate}
 
+
+\subsection{Are agent-based simulations a useful tool?}
+Risk calculation cannot be done in real life, we know in simulation, but we cannot know in real life.
+
+\subsection{Conclusion}
+
+\subsubsection{Summary}
  
 \subsubsection{Future Research}
 

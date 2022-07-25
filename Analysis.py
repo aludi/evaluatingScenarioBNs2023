@@ -668,120 +668,121 @@ analysis = Analysis(scenario, [], os.getcwd(), None, train_test_split, None, Non
 org_dir = os.getcwd()
 csv_file_name = None
 
-d_S = {"camera_vision":2}
-d_V = {}
-d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
+for HL_scenario in ["GroteMarktPrivate"]:
+
+    d_S = {"camera_vision":2}
+    d_V = {}
+    d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
 
-runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
+    runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
 
-folder_path = org_dir + "/experiments/GroteMarktPrivate/plots/freq/"
-for file_object in os.listdir(folder_path):
-    file_object_path = os.path.join(folder_path, file_object)
-    if os.path.isfile(file_object_path) or os.path.islink(file_object_path):
-        os.unlink(file_object_path)
-    else:
-        shutil.rmtree(file_object_path)
-
-
-for (scenario, train_runs, param_dict) in [ #("GroteMarkt", runs , d_G),
-                                            ("GroteMarktPrivate", runs, d_G)
-                                            ]:
-
-    a_acc = []
-    a_sto = []
-    a_PO = []
-    for num_runs in train_runs:
-        os.chdir(org_dir)
-        path = org_dir + "/experiments/" + scenario
+    folder_path = org_dir + f"/experiments/{HL_scenario}/plots/freq/"
+    for file_object in os.listdir(folder_path):
+        file_object_path = os.path.join(folder_path, file_object)
+        if os.path.isfile(file_object_path) or os.path.islink(file_object_path):
+            os.unlink(file_object_path)
+        else:
+            shutil.rmtree(file_object_path)
 
 
-        list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
-        list_files.sort()
+    for (scenario, train_runs, param_dict) in [(HL_scenario, runs, d_G)]:
 
-        flag = 1
-        it = 0
-        while flag == 1 and it < 10:
 
-            experiment = Experiment(scenario=scenario, runs=num_runs, train="train",
-                                       param_dict=param_dict)  # we do the simple scenario
+        a_acc = []
+        a_sto = []
+        a_PO = []
+        for num_runs in train_runs:
+            os.chdir(org_dir)
+            path = org_dir + "/experiments/" + scenario
 
-            #print("done with experiment")
+
             list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
             list_files.sort()
 
-            if ".DS_Store" in list_files:
-                list_files.remove(".DS_Store")
+            flag = 1
+            it = 0
+            while flag == 1 and it < 10:
 
-            #print("List files", list_files)
-            for train_data in list_files:
-                if "pkl" in train_data:
-                    continue
-                flag = K2_BN_csv_only(train_data, path)
-            it += 1
+                experiment = Experiment(scenario=scenario, runs=num_runs, train="train",
+                                           param_dict=param_dict)  # we do the simple scenario
 
-        print()
-        print()
-        print("TABLES FOR NUM RUNS    ", num_runs)
+                #print("done with experiment")
+                list_files = os.listdir(org_dir + "/experiments/" + scenario + "/train")
+                list_files.sort()
 
-        if it >= 10 and flag == 1:
-            a_acc.append(0)
-            a_sto.append(0)
-            a_PO.append(0)
+                if ".DS_Store" in list_files:
+                    list_files.remove(".DS_Store")
 
-        else:
+                #print("List files", list_files)
+                for train_data in list_files:
+                    if "pkl" in train_data:
+                        continue
+                    flag = K2_BN_csv_only(train_data, path)
+                it += 1
 
+            print()
+            print()
+            print("TABLES FOR NUM RUNS    ", num_runs)
 
-            disturbed_list_files = os.listdir(path + "/BNs")
-            disturbed_list_files.sort()
-            if ".DS_Store" in list_files:
-                disturbed_list_files.remove(".DS_Store")
-            disturbed_list_files = [scenario + ".net"]
-            #print("disturbed files", disturbed_list_files)
-            for networks in disturbed_list_files:
-                if networks == ".DS_Store":
-                    continue
+            if it >= 10 and flag == 1:
+                a_acc.append(0)
+                a_sto.append(0)
+                a_PO.append(0)
 
-                #print(networks)
-                #
-                k = networks.split("_", 2)
-                if len(k) > 2:
-                    [base, dist, num] = k
-                    num = num[:-4]
-
-                else:
-                    dist = "none"
-                    num = 0
+            else:
 
 
-                #print("hugin")
-                #hugin_converter(networks[:-4], path)
+                disturbed_list_files = os.listdir(path + "/BNs")
+                disturbed_list_files.sort()
+                if ".DS_Store" in list_files:
+                    disturbed_list_files.remove(".DS_Store")
+                disturbed_list_files = [scenario + ".net"]
+                #print("disturbed files", disturbed_list_files)
+                for networks in disturbed_list_files:
+                    if networks == ".DS_Store":
+                        continue
 
-                #print(networks[:-4])
+                    #print(networks)
+                    #
+                    k = networks.split("_", 2)
+                    if len(k) > 2:
+                        [base, dist, num] = k
+                        num = num[:-4]
 
-                #print("progress")
-                acc, stolen, PO = experiment_different_evidence(path, networks[:-4], num_runs)
-                a_acc.append(acc)
-                a_sto.append(stolen)
-                a_PO.append(PO)
+                    else:
+                        dist = "none"
+                        num = 0
+
+
+                    #print("hugin")
+                    #hugin_converter(networks[:-4], path)
+
+                    #print(networks[:-4])
+
+                    #print("progress")
+                    acc, stolen, PO = experiment_different_evidence(path, networks[:-4], num_runs)
+                    a_acc.append(acc)
+                    a_sto.append(stolen)
+                    a_PO.append(PO)
 
 
 
-    file_name = path + "/plots/accuracy.pdf"
+        file_name = path + "/plots/accuracy.pdf"
 
-    ax = plt.gca()
-    plt.plot(train_runs, a_sto, color="#2037ba", label="stealing_1_0", marker="o")
-    plt.plot(train_runs, a_acc, color="#b62a2a",label="object_dropped_accidentally_0", marker="o")
-    plt.plot(train_runs, a_PO, color="#35b779", label="preference ordering", marker="o")
-    leg = plt.legend()
-    plt.ylabel('accuracy')
-    plt.xlabel('number of runs')
-    plt.title("Accuracy of network")
+        ax = plt.gca()
+        plt.plot(train_runs, a_sto, color="#2037ba", label="stealing_1_0", marker="o")
+        plt.plot(train_runs, a_acc, color="#b62a2a",label="object_dropped_accidentally_0", marker="o")
+        plt.plot(train_runs, a_PO, color="#35b779", label="preference ordering", marker="o")
+        leg = plt.legend()
+        plt.ylabel('accuracy')
+        plt.xlabel('number of runs')
+        plt.title("Accuracy of network")
 
-    #if len(runs) > 3:
-        #plt.savefig(file_name)
-    plt.show()
-    plt.close()
+        #if len(runs) > 3:
+            #plt.savefig(file_name)
+        plt.show()
+        plt.close()
 
 
 

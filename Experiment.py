@@ -224,9 +224,10 @@ class Experiment():
                                     # str2 = i + "_credibility"
                                     rel_events.append(str1)
 
-                y = 20
+                y = 50
                 C = CreateMap(map_name, coverage, y)
                 x = int(y * C.rel)
+                print("x value", x, "y value", y)
                 #print(rel_events)
                 self.reporters = Reporters(relevant_events=rel_events)
                 for i in range(0, self.runs-1):

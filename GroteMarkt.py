@@ -201,7 +201,7 @@ class MoneyAgent(Agent):
             # check the neighbors for their values
 
             all_neighbors = self.model.grid.get_neighbors(pos=self.pos, moore=True,
-                                                          radius=5)  # agents see around them with radius 3
+                                                          radius=10)  # agents see around them with radius 5
             neighbors = []
             for i in all_neighbors:
                 if self.model.extended_grid[i.pos] == "OPEN":
@@ -265,7 +265,7 @@ class MoneyAgent(Agent):
             elif self.state == "ESCAPE":
                 self.hang_around()
             else:
-                self.move_to_goal(radius=2)
+                self.move_to_goal(radius=1)
 
 
 
@@ -493,7 +493,7 @@ class MoneyModel(Model):
         #print(self.schedule.get_agent_count())
 
         for i in range(0, 5):
-            a = SecurityCamera(self.num_agents + 10 + i, model=self, radius=8, position=(self.initial_xy()))
+            SecurityCamera(self.num_agents + 10 + i, model=self, radius=5, position=(self.initial_xy()))
 
 
 

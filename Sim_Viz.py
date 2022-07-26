@@ -291,7 +291,7 @@ elif sim == 1:
 
 
 
-    y = 50
+    y = 20
     coverage = None
     topic_gen = os.getcwd() + "/experiments/GroteMarkt/maps/groteMarkt.png"
     C = CreateMap(topic_gen, coverage, y)

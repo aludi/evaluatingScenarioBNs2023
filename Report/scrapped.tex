@@ -1,0 +1,57 @@
+
+\section{Experiment 3: Reporters, random variables and the reference class problem}
+{\color{red} todo properly}
+\subsection{Introduction}
+A reporter is a random variable. A random variable maps a sample space to value. Let's make the random variable problematic. What sort of events are we talking about in our sample space? There can be many instantiations of random variables from one natural language string. Here I don't want to talk about the reference class, which is the problem of selecting which sample space we're actually interested in. Instead, it's the awareness that a natural language string (like a node name) by itself does not offer sufficient information to know what events we are actually interested in. We need to select a subset of all the events in the world, that we're actually interested in, and this is underspecified in most bayesian networks.
+
+Some simple \& clear problems
+
+\begin{enumerate}
+\item Vlek thesis ``often''. 
+\item Fenton simonshaven.
+\end{enumerate}
+
+What counts as a relevant event?
+
+For some things its not a problem because in those cases its clear what exactly we're measuring - think DNA evidence, forensic whatever, the node names there are not just natural language strings but they're RVs, a mathematical beast, with an associated method for selecting which events, and the method of knowing whether they're true. We can argue about reference classes and Pardo's barns and Nigerian Smuggler's all day long, but there we have actually established our terms. Here we're talking the step before that. Making the class of interesting events \& the way of knowing that they're true, explicit. They just don't do that in the old research!!! Why not!!!
+
+This has deep implications because if we want BNs to be accepted, everyone relevant in the discussion has to agree exactly on 1) what we're using the nodes `natural language' to mean in RV language, 2) how we're measuring whether an RV is true or not, and then 3) the probability of the RV. I agree with Fenton that subjectivity or slight imprecision in the CPTs in part 3) is ok, fine, as long as everyone knows which parts are subjective. But the greater problems (or at least implicit problems, are 1) and 2), and those need to be made explicit as well.
+
+\subsection{Methods}
+I'm going to create many reporters that can all point back to the same natural language meaning. The easiest version is with something inherently subjective like `near', or different definitions of `motive'.
+
+\subsection{Results}
+
+\subsection{Discussion}
+
+
+
+\section{Experiment 4: Investigating the island prior - Fenton.}
+\subsection{maybe scrap this}
+\section{Take aways - Conclusion}
+
+\section{Fundamental Problems with Bayesian Networks}
+
+There are some fundamental problems with BNs as used for scenario-like whole legal Bayesian Networks.
+
+Robustness is not the problem, even if we round to arbitrary intervals, losing a lot of precision, we have networks with a reasonable accuracy/rms error, that generally reach the right (enough) conclusion and respond correctly to evidence. Granularity is also whatever. The real problem is with the translation from human language to mathematical language. A random variable maps a sample world to a value, according to a certain procedure that is described in natural language. This means that for every node in the BN, we need to describe a procedure through which we can know whether or not it is true. This should be explicit, and everyone in court should agree with this - there can be no `personal interpretation' of this, no `probably close enough to count', because then we have shifted from one RV to a different one. This is not necessarily problematic, perhaps the robustness of BNs does not just hold for estimating a probability for a given reporter, but also holds for estimating a probability over an estimated set of reporters. However, we have to make this explicit - if we change reporters (RVs) without communicating about it, we're in trouble. 
+
+However, in court this would imply that we would have a discussion about every measuring procedure for every node of every BN, and there would be no `idiom database', because as soom as we try to app
+\subsection{Reporters, Reference Classes and Random Variables.}
+
+Fundamentally, the problem is that the nodes in Bayesian Networks have a specific meaning. They are not pragmatic/dialogical/argumentation sentences, but have intricate statistical meaning \footnote{secret fourth good sherlock episode.} They are random variables, and a random variable implies an observation procedure (a mapping from a world state to a number). This means, that a node implies that we know how to measure if it is true or not in the real world.
+
+ In our simulation, this is really not a problem. We have an observation procedure: if a certain state occurs, we have the reporter in the same place as when the state change occurs, and the reporter reports exactly and only that. In experiment XXX we saw what happens when this goes wrong: if we have an imprecise/contradictory/smaller/larger reporters, we see that the probabilities can change a lot, might even change the structure of the network. 
+ 
+Hence, BNs might work for subsections of reality that have a clear observation procedure (eg reasoning with DNA evidence or other forensic stuff). We know exactly what it means for the node to be true (eg: we know the measurement associated with the random variable). However, for many of the node events that we encounter in scenario BNs/argumentation BNs, we do not know how we are determining that the node is true or not. So either we spell out exactly when a node is true or not, and by exactly I mean exactly, and we lose all generality/chance at DBs. Or we do not spell it out, interpret BN nodes not as random variables but as some sort of fuzzy conditional logic operation, but then that's fine, but we're not really building Bayesian Networks, we're doing something else.
+
+Experiment outcomes: best possible case would be that the structure of the BN becomes different (not just the probabilities) based on different reporters used.
+
+- I want one random variable that is a `wide' interpretation: a combination of all possible reporters for some thing.
+- I want some random variables that are the most narrow possible interpretation.
+- alternative.
+
+---------------------------------------------------------------------
+
+This is not the same as the problem of the reference class, but it is related. The problem of the reference class is the discussion which definition/reporter is appropriate for a given situation. This problem is the step before that, which is - how do we specify what reference class we are talking about? This is not described in the scenario-like BNs I've discussed in my introduction. The forensic BNs come closer, because there we at least know what method is used to determine if an event happened or not...
+

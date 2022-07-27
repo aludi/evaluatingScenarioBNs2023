@@ -1,0 +1,31 @@
+\BOOKMARK [0][-]{chapter*.1}{Abstract}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 2
+\BOOKMARK [0][-]{chapter.2}{Background}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Reasoning with evidence}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Bayes and Bayesian Networks}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.2.1}{Evaluating Bayesian Networks}{section.2.2}% 6
+\BOOKMARK [1][-]{section.2.3}{Agent simulations}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.4}{Conclusion}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{Method}{}% 9
+\BOOKMARK [1][-]{section.3.1}{Scenario}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.2}{Simulation}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.3}{Creating a Bayesian Network}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.4}{Evaluation}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.4.1}{Numbers}{section.3.4}% 14
+\BOOKMARK [2][-]{subsection.3.4.2}{Structural}{section.3.4}% 15
+\BOOKMARK [2][-]{subsection.3.4.3}{Predictive}{section.3.4}% 16
+\BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 17
+\BOOKMARK [0][-]{chapter.4}{Simulation of Grote Markt}{}% 18
+\BOOKMARK [1][-]{section.4.1}{Scenario}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.2}{Simulation}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.3}{Creating the Bayesian Network}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.4}{Evaluation}{chapter.4}% 22
+\BOOKMARK [2][-]{subsection.4.4.1}{Numbers}{section.4.4}% 23
+\BOOKMARK [2][-]{subsection.4.4.2}{Structural}{section.4.4}% 24
+\BOOKMARK [2][-]{subsection.4.4.3}{Predictive}{section.4.4}% 25
+\BOOKMARK [1][-]{section.4.5}{Discussion}{chapter.4}% 26
+\BOOKMARK [2][-]{subsection.4.5.1}{Limitations of the simulation.}{section.4.5}% 27
+\BOOKMARK [2][-]{subsection.4.5.2}{Problems}{section.4.5}% 28
+\BOOKMARK [2][-]{subsection.4.5.3}{Possible Legal Interpretations.}{section.4.5}% 29
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 30
+\BOOKMARK [1][-]{section.5.1}{Future Work}{chapter.5}% 31

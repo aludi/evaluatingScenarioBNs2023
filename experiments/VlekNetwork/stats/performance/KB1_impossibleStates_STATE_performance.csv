@@ -1,0 +1,12 @@
+experiment,disturbance,accuracy,rmsq,failed
+jane_stabs_mark_with_knife,0,0.3,0.6999997994190945,0.0
+jane_stabs_mark_with_knife,0.001,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.01,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.025,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.05,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.1,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.125,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.2,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.25,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.33,0.3,0.69600000012666,0.0
+jane_stabs_mark_with_knife,0.5,0.3,0.69600000012666,0.0

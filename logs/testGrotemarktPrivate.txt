@@ -1,0 +1,714 @@
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+
+
+TABLES FOR NUM RUNS     1
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+
+
+TABLES FOR NUM RUNS     5
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     10
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (0.97) & P(dropped) (0.02) & P(steal) (0.01) \\
+(0, 1, 0, 1)&P(dropped) (0.96) & P(neither) (0.03) & P(steal) (0.01) \\
+(0, 0, 0, 0)&P(neither) (0.97) & P(dropped) (0.02) & P(steal) (0.01) \\
+(0, 0, 0, 1)&P(dropped) (0.96) & P(neither) (0.03) & P(steal) (0.01) \\
+(0, 1, 1, 1)&P(dropped) (0.96) & P(steal) (0.12) & P(neither) (-0.08) \\
+(1, 1, 1, 1)&P(steal) (0.96) & P(dropped) (0.21) & P(neither) (-0.17) \\
+(1, 0, 0, 1)&P(steal) (0.59) & P(dropped) (0.21) & P(neither) (0.20) \\
+(1, 1, 0, 1)&P(steal) (0.59) & P(dropped) (0.21) & P(neither) (0.20) \\
+(0, 1, 1, 0)&P(neither) (0.86) & P(steal) (0.12) & P(dropped) (0.02) \\
+(1, 1, 0, 0)&P(dropped) (0.70) & P(steal) (0.59) & P(neither) (-0.29) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     20
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (0.98) & P(steal) (0.01) & P(dropped) (0.01) \\
+(0, 1, 0, 1)&P(dropped) (0.93) & P(neither) (0.04) & P(steal) (0.03) \\
+(0, 0, 0, 0)&P(neither) (0.98) & P(steal) (0.01) & P(dropped) (0.01) \\
+(0, 0, 0, 1)&P(dropped) (0.93) & P(neither) (0.04) & P(steal) (0.03) \\
+(0, 1, 1, 1)&P(steal) (0.96) & P(dropped) (0.19) & P(neither) (-0.15) \\
+(1, 1, 1, 1)&P(steal) (0.97) & P(dropped) (0.17) & P(neither) (-0.14) \\
+(1, 0, 0, 1)&P(dropped) (0.61) & P(steal) (0.29) & P(neither) (0.10) \\
+(1, 1, 0, 1)&P(dropped) (0.61) & P(steal) (0.29) & P(neither) (0.10) \\
+(0, 1, 1, 0)&P(steal) (0.77) & P(dropped) (0.49) & P(neither) (-0.26) \\
+(1, 1, 0, 0)&P(neither) (0.91) & P(dropped) (0.05) & P(steal) (0.04) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+not wide enough data
+rerunning training 
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     40
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 0, 1)&P(dropped) (0.95) & P(neither) (0.04) & P(steal) (0.01) \\
+(0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.95) & P(neither) (0.04) & P(steal) (0.01) \\
+(0, 1, 1, 1)&P(steal) (0.81) & P(dropped) (0.30) & P(neither) (-0.11) \\
+(1, 1, 1, 1)&P(steal) (0.98) & P(dropped) (0.11) & P(neither) (-0.09) \\
+(1, 0, 0, 1)&P(steal) (0.71) & P(dropped) (0.19) & P(neither) (0.10) \\
+(1, 1, 0, 1)&P(steal) (0.71) & P(dropped) (0.19) & P(neither) (0.10) \\
+(0, 1, 1, 0)&P(neither) (0.67) & P(steal) (0.28) & P(dropped) (0.05) \\
+(1, 1, 0, 0)&P(neither) (0.67) & P(steal) (0.22) & P(dropped) (0.11) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     60
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 0, 1)&P(dropped) (0.98) & P(neither) (0.01) & P(steal) (0.01) \\
+(0, 0, 0, 0)&P(neither) (0.98) & P(steal) (0.01) & P(dropped) (0.01) \\
+(0, 0, 0, 1)&P(dropped) (0.88) & P(steal) (0.13) & P(neither) (-0.01) \\
+(0, 1, 1, 1)&P(steal) (0.98) & P(dropped) (0.13) & P(neither) (-0.11) \\
+(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.12) & P(neither) (-0.12) \\
+(1, 0, 0, 1)&P(steal) (0.88) & P(dropped) (0.13) & P(neither) (-0.01) \\
+(1, 1, 0, 1)&P(neither) (0.50) & P(steal) (0.32) & P(dropped) (0.18) \\
+(0, 1, 1, 0)&P(steal) (0.74) & P(dropped) (0.52) & P(neither) (-0.26) \\
+(1, 1, 0, 0)&P(neither) (0.68) & P(dropped) (0.24) & P(steal) (0.08) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     100
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 0, 1)&P(dropped) (0.96) & P(steal) (0.04) & P(neither) (0.00) \\
+(0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.96) & P(steal) (0.04) & P(neither) (0.00) \\
+(0, 1, 1, 1)&P(steal) (0.97) & P(dropped) (0.16) & P(neither) (-0.13) \\
+(1, 1, 1, 1)&P(steal) (0.94) & P(dropped) (0.14) & P(neither) (-0.08) \\
+(1, 0, 0, 1)&P(steal) (0.62) & P(neither) (0.21) & P(dropped) (0.17) \\
+(1, 1, 0, 1)&P(steal) (0.62) & P(neither) (0.21) & P(dropped) (0.17) \\
+(0, 1, 1, 0)&P(steal) (0.64) & P(dropped) (0.47) & P(neither) (-0.11) \\
+(1, 1, 0, 0)&P(neither) (0.41) & P(dropped) (0.33) & P(steal) (0.26) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     200
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 0, 1)&P(dropped) (0.99) & P(steal) (0.01) & P(neither) (0.00) \\
+(0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.99) & P(steal) (0.01) & P(neither) (0.00) \\
+(0, 1, 1, 1)&P(steal) (0.95) & P(dropped) (0.16) & P(neither) (-0.11) \\
+(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.11) & P(neither) (-0.11) \\
+(1, 0, 0, 1)&P(steal) (0.67) & P(dropped) (0.40) & P(neither) (-0.07) \\
+(1, 1, 0, 1)&P(steal) (0.67) & P(dropped) (0.40) & P(neither) (-0.07) \\
+(0, 1, 1, 0)&P(steal) (0.39) & P(neither) (0.32) & P(dropped) (0.29) \\
+(1, 1, 0, 0)&P(neither) (0.88) & P(steal) (0.07) & P(dropped) (0.05) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     500
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 0, 1)&P(dropped) (0.96) & P(steal) (0.04) & P(neither) (0.00) \\
+(0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.96) & P(steal) (0.04) & P(neither) (0.00) \\
+(0, 1, 1, 1)&P(steal) (0.94) & P(neither) (0.04) & P(dropped) (0.02) \\
+(1, 1, 1, 1)&P(steal) (0.98) & P(neither) (0.01) & P(dropped) (0.01) \\
+(1, 0, 0, 1)&P(steal) (0.99) & P(dropped) (0.02) & P(neither) (-0.01) \\
+(1, 1, 0, 1)&P(steal) (0.99) & P(dropped) (0.02) & P(neither) (-0.01) \\
+(0, 1, 1, 0)&P(steal) (0.40) & P(neither) (0.38) & P(dropped) (0.22) \\
+(1, 1, 0, 0)&P(steal) (0.46) & P(neither) (0.31) & P(dropped) (0.23) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+experiment scenario GroteMarktPrivate
+GroteMarktPrivate ['groteMarkt.png']
+groteMarkt.png
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+['seen_1_0', 'know_valuable_1_0', 'know_vulnerable_1_0', 'motive_1_0', 'sneak_1_0', 'stealing_1_0', 'object_dropped_accidentally_0', 'E_valuable_1_0', 'E_vulnerable_1_0', 'E_psych_report_1_0', 'E_camera_1', 'E_sneak_1_0', 'E_camera_seen_stealing_1_0', 'E_camera_sees_object_1_0', 'E_object_gone_0']
+experiments/GroteMarktPrivate/train/GroteMarktPrivate.csv
+in here
+GroteMarktPrivate
+[0, 1, 2, 3, 4, 5, 6, 7]
+
+
+TABLES FOR NUM RUNS     1000
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 0, 1)&P(dropped) (0.98) & P(steal) (0.02) & P(neither) (0.00) \\
+(0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.93) & P(steal) (0.06) & P(neither) (0.01) \\
+(0, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.01) & P(neither) (-0.01) \\
+(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
+(1, 0, 0, 1)&P(steal) (0.99) & P(dropped) (0.01) & P(neither) (0.00) \\
+(1, 1, 0, 1)&P(steal) (0.96) & P(dropped) (0.05) & P(neither) (-0.01) \\
+(0, 1, 1, 0)&P(steal) (0.52) & P(dropped) (0.27) & P(neither) (0.21) \\
+(1, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ }
+\label{ }
+\end{table}

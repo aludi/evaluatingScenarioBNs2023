@@ -1,0 +1,88 @@
+
+net {
+  name = unnamedBN;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node motive_1_0 {
+   states = (0 );
+   label = "motive_1_0";
+   ID = "motive_1_0";
+}
+
+node sneak_1_0 {
+   states = (0 );
+   label = "sneak_1_0";
+   ID = "sneak_1_0";
+}
+
+node stealing_1_0 {
+   states = (0 );
+   label = "stealing_1_0";
+   ID = "stealing_1_0";
+}
+
+node object_dropped_accidentally_0 {
+   states = (0 );
+   label = "object_dropped_accidentally_0";
+   ID = "object_dropped_accidentally_0";
+}
+
+node E_psych_report_1_0 {
+   states = (0 );
+   label = "E_psych_report_1_0";
+   ID = "E_psych_report_1_0";
+}
+
+node E_camera_1 {
+   states = (0 );
+   label = "E_camera_1";
+   ID = "E_camera_1";
+}
+
+node E_camera_seen_stealing_1_0 {
+   states = (0 );
+   label = "E_camera_seen_stealing_1_0";
+   ID = "E_camera_seen_stealing_1_0";
+}
+
+node E_object_gone_0 {
+   states = (0 );
+   label = "E_object_gone_0";
+   ID = "E_object_gone_0";
+}
+
+potential (motive_1_0) {
+   data = (  1);
+}
+
+potential (sneak_1_0) {
+   data = (  1);
+}
+
+potential (stealing_1_0) {
+   data = (  1);
+}
+
+potential (object_dropped_accidentally_0) {
+   data = (  1);
+}
+
+potential (E_psych_report_1_0) {
+   data = (  1);
+}
+
+potential (E_camera_1) {
+   data = (  1);
+}
+
+potential (E_camera_seen_stealing_1_0) {
+   data = (  1);
+}
+
+potential (E_object_gone_0) {
+   data = (  1);
+}
+
+

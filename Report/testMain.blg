@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: testMain.aux
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: stateoftheart.aux
+A level-1 auxiliary file: pipeline.aux
+A level-1 auxiliary file: nonspatial.aux
+A level-1 auxiliary file: spatialsimple.aux
+A level-1 auxiliary file: islandprior.aux
+A level-1 auxiliary file: conclusion.aux
+A level-1 auxiliary file: Appendix.aux
+The style file: apalike.bst
+Database file #1: masterThesisCitations.bib
+Warning--empty title in Pennington1993
+Warning--empty booktitle in Pennington1993
+You've used 34 entries,
+            1935 wiz_defined-function locations,
+            698 strings with 9572 characters,
+and the built_in function-call counts, 12708 in all, are:
+= -- 1236
+> -- 480
+< -- 25
++ -- 167
+- -- 155
+* -- 1032
+:= -- 2223
+add.period$ -- 102
+call.type$ -- 34
+change.case$ -- 237
+chr.to.int$ -- 34
+cite$ -- 36
+duplicate$ -- 522
+empty$ -- 929
+format.name$ -- 203
+if$ -- 2489
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 36
+newline$ -- 170
+num.names$ -- 104
+pop$ -- 243
+preamble$ -- 1
+purify$ -- 245
+quote$ -- 0
+skip$ -- 376
+stack$ -- 0
+substring$ -- 836
+swap$ -- 61
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 194
+warning$ -- 2
+while$ -- 102
+width$ -- 0
+write$ -- 429
+(There were 2 warnings)

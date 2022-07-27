@@ -1,0 +1,208 @@
+
+net {
+  name = noiseBN.net;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node lost_object {
+   states = (0 1 );
+   label = "lost_object";
+   ID = "lost_object";
+}
+
+node know_object {
+   states = (0 1 );
+   label = "know_object";
+   ID = "know_object";
+}
+
+node target_object {
+   states = (0 1 );
+   label = "target_object";
+   ID = "target_object";
+}
+
+node motive {
+   states = (0 1 );
+   label = "motive";
+   ID = "motive";
+}
+
+node compromise_house {
+   states = (0 1 );
+   label = "compromise_house";
+   ID = "compromise_house";
+}
+
+node flees_startled {
+   states = (0 1 );
+   label = "flees_startled";
+   ID = "flees_startled";
+}
+
+node successful_stolen {
+   states = (0 1 );
+   label = "successful_stolen";
+   ID = "successful_stolen";
+}
+
+node raining {
+   states = (0 1 );
+   label = "raining";
+   ID = "raining";
+}
+
+node curtains {
+   states = (0 1 );
+   label = "curtains";
+   ID = "curtains";
+}
+
+node E_object_is_gone {
+   states = (0 1 );
+   label = "E_object_is_gone";
+   ID = "E_object_is_gone";
+}
+
+node E_broken_lock {
+   states = (0 1 );
+   label = "E_broken_lock";
+   ID = "E_broken_lock";
+}
+
+node E_disturbed_house {
+   states = (0 1 );
+   label = "E_disturbed_house";
+   ID = "E_disturbed_house";
+}
+
+node E_s_spotted_by_house {
+   states = (0 1 );
+   label = "E_s_spotted_by_house";
+   ID = "E_s_spotted_by_house";
+}
+
+node E_s_spotted_with_goodie {
+   states = (0 1 );
+   label = "E_s_spotted_with_goodie";
+   ID = "E_s_spotted_with_goodie";
+}
+
+node E_private {
+   states = (0 1 );
+   label = "E_private";
+   ID = "E_private";
+}
+
+potential (lost_object) {
+   data = (  0.780445 0.219555);
+}
+
+potential ( know_object | curtains   lost_object   ) {
+   data = 
+   (((   0.184598   0.815403)   % lost_object=0   curtains=0   
+   (   1   0))   % lost_object=1   curtains=0   
+   ((   1   0)   % lost_object=0   curtains=1   
+   (   1   0)));   % lost_object=1   curtains=1   
+}
+
+potential ( target_object | know_object   ) {
+   data = 
+   ((   0.906045   0.0939551)   % know_object=0   
+   (   0.424061   0.575939));   % know_object=1   
+}
+
+potential ( motive | curtains   target_object   ) {
+   data = 
+   (((   1   0)   % target_object=0   curtains=0   
+   (   0.0795752   0.920425))   % target_object=1   curtains=0   
+   ((   1   0)   % target_object=0   curtains=1   
+   (   1   0)));   % target_object=1   curtains=1   
+}
+
+potential ( compromise_house | target_object   motive   ) {
+   data = 
+   (((   0.679577   0.320423)   % motive=0   target_object=0   
+   (   0.679757   0.320243))   % motive=1   target_object=0   
+   ((   0.679757   0.320243)   % motive=0   target_object=1   
+   (   0.378941   0.621059)));   % motive=1   target_object=1   
+}
+
+potential ( flees_startled | motive   target_object   ) {
+   data = 
+   (((   1   0)   % target_object=0   motive=0   
+   (   1   0))   % target_object=1   motive=0   
+   ((   1   0)   % target_object=0   motive=1   
+   (   0.716131   0.283869)));   % target_object=1   motive=1   
+}
+
+potential ( successful_stolen | flees_startled   compromise_house   ) {
+   data = 
+   (((   0.925795   0.0742053)   % compromise_house=0   flees_startled=0   
+   (   0   1))   % compromise_house=1   flees_startled=0   
+   ((   0.924785   0.0752149)   % compromise_house=0   flees_startled=1   
+   (   0.922992   0.077008)));   % compromise_house=1   flees_startled=1   
+}
+
+potential (raining) {
+   data = (  0.250612 0.749388);
+}
+
+potential (curtains) {
+   data = (  0.818618 0.181382);
+}
+
+potential ( E_object_is_gone | successful_stolen   compromise_house   lost_object   ) {
+   data = 
+   ((((   0.914952   0.0850479)   % lost_object=0   compromise_house=0   successful_stolen=0   
+   (   0   1))   % lost_object=1   compromise_house=0   successful_stolen=0   
+   ((   0.320085   0.679915)   % lost_object=0   compromise_house=1   successful_stolen=0   
+   (   0.91504   0.0849599)))   % lost_object=1   compromise_house=1   successful_stolen=0   
+   (((   0.91504   0.0849599)   % lost_object=0   compromise_house=0   successful_stolen=1   
+   (   0.91504   0.0849599))   % lost_object=1   compromise_house=0   successful_stolen=1   
+   ((   0   1)   % lost_object=0   compromise_house=1   successful_stolen=1   
+   (   0.91504   0.0849599))));   % lost_object=1   compromise_house=1   successful_stolen=1   
+}
+
+potential ( E_broken_lock | successful_stolen   compromise_house   ) {
+   data = 
+   (((   0.94763   0.0523701)   % compromise_house=0   successful_stolen=0   
+   (   0   1))   % compromise_house=1   successful_stolen=0   
+   ((   0.947767   0.0522326)   % compromise_house=0   successful_stolen=1   
+   (   0   1)));   % compromise_house=1   successful_stolen=1   
+}
+
+potential ( E_disturbed_house | successful_stolen   compromise_house   ) {
+   data = 
+   (((   1   0)   % compromise_house=0   successful_stolen=0   
+   (   0.316941   0.683058))   % compromise_house=1   successful_stolen=0   
+   ((   1   0)   % compromise_house=0   successful_stolen=1   
+   (   0.31647   0.683529)));   % compromise_house=1   successful_stolen=1   
+}
+
+potential ( E_s_spotted_by_house | curtains   target_object   ) {
+   data = 
+   (((   0   1)   % target_object=0   curtains=0   
+   (   0   1))   % target_object=1   curtains=0   
+   ((   0   1)   % target_object=0   curtains=1   
+   (   0.769958   0.230042)));   % target_object=1   curtains=1   
+}
+
+potential ( E_s_spotted_with_goodie | successful_stolen   compromise_house   ) {
+   data = 
+   (((   1   0)   % compromise_house=0   successful_stolen=0   
+   (   0.530899   0.469101))   % compromise_house=1   successful_stolen=0   
+   ((   1   0)   % compromise_house=0   successful_stolen=1   
+   (   0.128062   0.871938)));   % compromise_house=1   successful_stolen=1   
+}
+
+potential ( E_private | flees_startled   successful_stolen   ) {
+   data = 
+   (((   0.845193   0.154807)   % successful_stolen=0   flees_startled=0   
+   (   0.842861   0.157139))   % successful_stolen=1   flees_startled=0   
+   ((   0   1)   % successful_stolen=0   flees_startled=1   
+   (   0.845349   0.154651)));   % successful_stolen=1   flees_startled=1   
+}
+
+

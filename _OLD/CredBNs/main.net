@@ -1,0 +1,66 @@
+
+net {
+  name = unnamedBN;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node agent_steals {
+   states = (0 1 );
+   label = "agent_steals";
+   ID = "agent_steals";
+}
+
+node E_0_says_stolen {
+   states = (0 1 );
+   label = "E_0_says_stolen";
+   ID = "E_0_says_stolen";
+}
+
+node E_1_says_stolen {
+   states = (0 1 );
+   label = "E_1_says_stolen";
+   ID = "E_1_says_stolen";
+}
+
+node E_2_says_stolen {
+   states = (0 1 );
+   label = "E_2_says_stolen";
+   ID = "E_2_says_stolen";
+}
+
+node E_3_says_stolen {
+   states = (0 1 );
+   label = "E_3_says_stolen";
+   ID = "E_3_says_stolen";
+}
+
+potential (agent_steals) {
+   data = (  0.420792 0.579208);
+}
+
+potential ( E_0_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.288235   0.711765)   % agent_steals=0   
+   (   0.858974   0.141026));   % agent_steals=1   
+}
+
+potential ( E_1_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.876471   0.123529)   % agent_steals=0   
+   (   0.192308   0.807692));   % agent_steals=1   
+}
+
+potential ( E_2_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.782353   0.217647)   % agent_steals=0   
+   (   0.260684   0.739316));   % agent_steals=1   
+}
+
+potential ( E_3_says_stolen | agent_steals   ) {
+   data = 
+   ((   0.311765   0.688235)   % agent_steals=0   
+   (   0.858974   0.141026));   % agent_steals=1   
+}
+
+

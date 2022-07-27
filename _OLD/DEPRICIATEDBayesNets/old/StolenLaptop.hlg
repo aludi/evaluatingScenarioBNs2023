@@ -1,0 +1,170 @@
+Wed Dec 15 01:40:27 2021
+
+
+Moral links:
+
+
+
+Triangulating prime component with 5 members:
+    observed, compromise_house, target_object, seen_object, stealing
+This component is a clique of cost 48
+
+
+Total cost of triangulation for all prime components is 48
+
+
+Elimination sequence:
+
+    stealing
+    seen_object
+    target_object
+    compromise_house
+    observed
+
+
+Cliques:
+
+Clique 1, 5 members, table size = 48:
+    observed, compromise_house, target_object, seen_object, stealing
+
+Total clique table size: 48
+
+
+The junction forest:
+
+Creating junction tree with clique 1 as root ...
+
+
+Assignment of potentials to cliques:
+
+    Node observed assigned to clique 1
+    Node compromise_house assigned to clique 1
+    Node target_object assigned to clique 1
+    Node seen_object assigned to clique 1
+    Node stealing assigned to clique 1
+
+
+Checking conditional probability potentials:
+
+Warning: Conditional distributions for observed sum to different values:
+    min = 1
+    max = 48
+
+Warning: Conditional distributions for compromise_house sum to different values:
+    min = 102
+    max = 2412
+
+Warning: Conditional distributions for target_object sum to different values:
+    min = 327
+    max = 4673
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    observed:
+	true       0.246743
+	false      0.753257
+
+    compromise_house:
+	true       0.141661
+	false      0.858339
+
+    target_object:
+	true       0.482606
+	false      0.517394
+
+    seen_object:
+	true       0.935
+	false      0.065
+
+    stealing:
+	successful 0.103884
+	unsuccessful 0.378722
+	no_stealing 0.517394
+Thu Dec 23 16:10:35 2021
+
+
+Moral links:
+
+
+
+Triangulating prime component with 5 members:
+    observed, compromise_house, target_object, seen_object, stealing
+This component is a clique of cost 48
+
+
+Total cost of triangulation for all prime components is 48
+
+
+Elimination sequence:
+
+    stealing
+    seen_object
+    target_object
+    compromise_house
+    observed
+
+
+Cliques:
+
+Clique 1, 5 members, table size = 48:
+    observed, compromise_house, target_object, seen_object, stealing
+
+Total clique table size: 48
+
+
+The junction forest:
+
+Creating junction tree with clique 1 as root ...
+
+
+Assignment of potentials to cliques:
+
+    Node observed assigned to clique 1
+    Node compromise_house assigned to clique 1
+    Node target_object assigned to clique 1
+    Node seen_object assigned to clique 1
+    Node stealing assigned to clique 1
+
+
+Checking conditional probability potentials:
+
+Warning: Conditional distributions for observed sum to different values:
+    min = 1
+    max = 48
+
+Warning: Conditional distributions for compromise_house sum to different values:
+    min = 102
+    max = 2412
+
+Warning: Conditional distributions for target_object sum to different values:
+    min = 327
+    max = 4673
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    observed:
+	true       0.246743
+	false      0.753257
+
+    compromise_house:
+	true       0.141661
+	false      0.858339
+
+    target_object:
+	true       0.482606
+	false      0.517394
+
+    seen_object:
+	true       0.935
+	false      0.065
+
+    stealing:
+	successful 0.103884
+	unsuccessful 0.378722
+	no_stealing 0.517394

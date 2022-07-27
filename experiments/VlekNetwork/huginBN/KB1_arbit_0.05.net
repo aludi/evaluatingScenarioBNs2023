@@ -1,0 +1,51 @@
+
+net {
+}
+
+node jane_and_mark_fight {
+states = ("0" "1");
+   label = "jane_and_mark_fight";
+   ID = "jane_and_mark_fight";
+}
+
+node jane_has_knife {
+states = ("0" "1");
+   label = "jane_has_knife";
+   ID = "jane_has_knife";
+}
+
+node jane_stabs_mark_with_knife {
+states = ("0" "1");
+   label = "jane_stabs_mark_with_knife";
+   ID = "jane_stabs_mark_with_knife";
+}
+
+node mark_dies {
+states = ("0" "1");
+   label = "mark_dies";
+   ID = "mark_dies";
+}
+
+potential (jane_and_mark_fight) {
+   data = (  0.8 0.2);
+}
+
+potential (jane_has_knife) {
+   data = (  0.3 0.7);
+}
+
+potential ( jane_stabs_mark_with_knife | jane_has_knife   jane_and_mark_fight   ) {
+   data = 
+   (((   0.99   0.01)   % jane_and_mark_fight=0   jane_has_knife=0   
+   (   0.99   0.01))   % jane_and_mark_fight=1   jane_has_knife=0   
+   ((   0.99   0.01)   % jane_and_mark_fight=0   jane_has_knife=1   
+   (   0.99   0.01)));   % jane_and_mark_fight=1   jane_has_knife=1   
+}
+
+potential ( mark_dies | jane_stabs_mark_with_knife   ) {
+   data = 
+   ((   0.99   0.01)   % jane_stabs_mark_with_knife=0   
+   (   0.3   0.7));   % jane_stabs_mark_with_knife=1   
+}
+
+

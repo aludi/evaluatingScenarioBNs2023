@@ -1,0 +1,31 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Reasoning with evidence}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Bayesian Networks}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Probability Elicitation}{subsection.2.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Evaluating Bayesian Networks}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.4}{Simulation}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Method}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Scenarios}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Simulation}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Building the Network}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.4}{Evaluating all Outcomes}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Case Study: Robbery at Grote Markt}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Experimental Set-up}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Scenarios}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{Simulation}{section.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Agents}{subsection.4.3}% 17
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Objects}{subsection.4.3}% 18
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Environment}{subsection.4.3}% 19
+\BOOKMARK [2][-]{subsection.4.4}{Automatically building the network}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.5}{Evaluating the network}{section.4}% 21
+\BOOKMARK [1][-]{section.5}{Results}{}% 22
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 23
+\BOOKMARK [2][-]{subsection.6.1}{Evaluating BNs over all possible evidence states using simulations}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.2}{Evaluating BNs over all possible evidence states in real life }{section.6}% 25
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Literature}{subsection.6.2}% 26
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Problems}{subsection.6.2}% 27
+\BOOKMARK [2][-]{subsection.6.3}{People and BNs, a good idea?}{section.6}% 28
+\BOOKMARK [2][-]{subsection.6.4}{Conclusion}{section.6}% 29
+\BOOKMARK [3][-]{subsubsection.6.4.1}{Summary}{subsection.6.4}% 30
+\BOOKMARK [3][-]{subsubsection.6.4.2}{Future Research}{subsection.6.4}% 31

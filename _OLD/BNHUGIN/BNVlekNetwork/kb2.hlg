@@ -1,0 +1,131 @@
+Wed May  4 10:32:07 2022
+
+
+Moral links:
+
+    Marrying jane_has_knife and jane_and_mark_fight
+
+
+Triangulating prime component with 3 members:
+    jane_and_mark_fight, jane_has_knife, jane_threatens_mark_with_knife
+This component is a clique of cost 8
+
+Triangulating prime component with 2 members:
+    jane_threatens_mark_with_knife, mark_hits_jane
+This component is a clique of cost 4
+
+Triangulating prime component with 2 members:
+    mark_hits_jane, jane_drops_knife
+This component is a clique of cost 4
+
+Triangulating prime component with 2 members:
+    jane_drops_knife, mark_falls_on_knife
+This component is a clique of cost 4
+
+Triangulating prime component with 3 members:
+    mark_falls_on_knife, mark_dies_by_accident, mark_dies
+This component is a clique of cost 8
+
+
+Total cost of triangulation for all prime components is 28
+
+
+Elimination sequence:
+
+    mark_dies
+    mark_dies_by_accident
+    jane_has_knife
+    jane_and_mark_fight
+    jane_threatens_mark_with_knife
+    mark_hits_jane
+    mark_falls_on_knife
+    jane_drops_knife
+
+
+Cliques:
+
+Clique 5, 2 members, table size = 4:
+    jane_drops_knife, mark_falls_on_knife
+
+Clique 4, 2 members, table size = 4:
+    jane_drops_knife, mark_hits_jane
+
+Clique 3, 2 members, table size = 4:
+    mark_hits_jane, jane_threatens_mark_with_knife
+
+Clique 2, 3 members, table size = 8:
+    jane_threatens_mark_with_knife, jane_and_mark_fight, jane_has_knife
+
+Clique 1, 3 members, table size = 8:
+    mark_falls_on_knife, mark_dies_by_accident, mark_dies
+
+Total clique table size: 28
+
+
+The junction forest:
+
+Creating junction tree with clique 5 as root ...
+
+Cliques 4 and 5 linked, separator has 1 member and table size = 2:
+    jane_drops_knife
+
+Cliques 3 and 4 linked, separator has 1 member and table size = 2:
+    mark_hits_jane
+
+Cliques 2 and 3 linked, separator has 1 member and table size = 2:
+    jane_threatens_mark_with_knife
+
+Cliques 1 and 5 linked, separator has 1 member and table size = 2:
+    mark_falls_on_knife
+
+
+Assignment of potentials to cliques:
+
+    Node jane_and_mark_fight assigned to clique 2
+    Node jane_has_knife assigned to clique 2
+    Node jane_threatens_mark_with_knife assigned to clique 2
+    Node mark_hits_jane assigned to clique 3
+    Node jane_drops_knife assigned to clique 4
+    Node mark_falls_on_knife assigned to clique 5
+    Node mark_dies_by_accident assigned to clique 1
+    Node mark_dies assigned to clique 1
+
+
+Checking conditional probability potentials:
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    jane_and_mark_fight:
+	0          0.792418
+	1          0.207582
+
+    jane_has_knife:
+	0          0.297141
+	1          0.702859
+
+    jane_threatens_mark_with_knife:
+	0          0.994344
+	1          0.00565603
+
+    mark_hits_jane:
+	0          0.994898
+	1          0.00510249
+
+    jane_drops_knife:
+	0          0.997444
+	1          0.002556
+
+    mark_falls_on_knife:
+	0          0.999715
+	1          0.000284779
+
+    mark_dies_by_accident:
+	0          0.999825
+	1          0.000174671
+
+    mark_dies:
+	0          0.999825
+	1          0.000174546

@@ -1,0 +1,55 @@
+paper notes
+
+\section{Evett}
+
+Interpretation of evidence is not possible unless one considers at least two competing propositions (the defendant is guilty vs some unknown person is guilty) - this is the highest level of proposition (Offence level). Outside the competence of expert witness. 
+
+Activity level: the defendant smashed the window vs the defendant has never been at the scene. This needs a framework, a body of information. Issues of transfer and persistance (how likely is is that we will find glass shards on the defendant's t-shirt). When we don't have enough information we go to the source level.
+
+Source level: the glass on the clothing came from the window vs some other source. It is about the source rather than the activity. There might also be sub-level 1: the DNA is of the suspect vs from someone else.
+
+Sensitivity Analysis: 
+is far more effective to carry out simulations and this is not possible within this version of the program. Consequently, we have implemented the network in MATLAB 5.0 (Mathworks, Inc.) using the Bayes Net Toolbox 2.0 developed by K. Murphy (http://www.cs.berkeley.edu/􏰧mur- phyk/). This implementation leads to the same output as Hugin but it is more versatile.
+Using this program, it is possible to carry out large number of pre-assessments, using values of a, b, and p generated at random from the Beta probability distributions shown in Fig. 4. This is done by means of an appropriately programmed random number generator: for each simulation, a value of a is generated from the probability distribution in Fig. 4(a) and by analogy for b and p. One thousand simulated pre-assessments were carried out in this way, computing at each iteration the probabilities for each outcome given S and S􏰥. The results are two probability distributions for the LR, one given that the prosecution proposition is true (S), the other giventhatthedefensepropositionistrue(S􏰥).Thesedistributions are shown in Fig. 5 and summarized in Table 5.
+
+Sensitivity analysis using credal networks in pyagrum. Check the Vlek Network first.
+
+There is a problem converting from the LR of the sub-source level to the activity level propositions.
+
+\section{Fenton - general structure for using legal arguments about evidence using bayesian networks}
+We can build legal argument in BNs in a consistent and repeatable way - building up from a small number of basic causal structures.
+Use open standards :(
+Hypothesis and evidence. Ultimate hypothesis. 
+Probabilities are inevitable when our information about a statement is incomplete. Subjective probabilities are also ok, since we have different information available to us.
+
+The coin trick really is a coin trick, because you're moving from a well-defined scenario (coin flip) to an undefined-scenario (murder/guilt) without acknowledging it.
+
+The idea is that we can combine complex causal dependencies in evidence and hypotheses, and put them all into a nice network.
+
+Idioms:
+ cause-consequence idiom (chronologically). 
+measurement: uncertainty about the accuracy of some measurement.
+definitional idiom
+induction
+reconciliation
+
+Walton argument scheme can yield evaluations that are contrary to the laws of probability?? Cool.
+
+Using BNs for stuff like blood matching/DNA should be ok.
+
+``The hypothesis about which we start with an unconditional prior belief before observing evidence to update that belief" -> but there's implicit conditioning that is not represented in the network, but outside of it.
+
+Fenton defines opportunity differently from me - defines it as being present near a given location. But instead I consider ``opportunity'' to be about location and knowledge.
+
+Evidence that is conditional on each other becomes less strong. If evidence is dependent, it should be modelled as such.
+
+
+
+
+
+
+
+\section{Todo}
+Sensitivity analysis by credal networks (figure out what the fuck is going on there) in jupyter notebooks.
+Evaluate if the automatically generated BNs seem to fit into the idiom structure
+

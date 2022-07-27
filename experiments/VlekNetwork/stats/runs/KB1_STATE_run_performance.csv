@@ -1,0 +1,154 @@
+precision,names,state,posterior,accuracy,rmsq
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.7071110010147095,1,0.2928889989852905
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.7071110010147095,0,0.7071110010147095
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",5.014522636857867e-07,1,5.014522636857867e-07
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",5.014522636857867e-07,1,5.014522636857867e-07
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",5.014522636857866e-07,1,5.014522636857866e-07
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",5.014522636857867e-07,1,5.014522636857867e-07
+precision,names,state,posterior,accuracy,rmsq
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.7069999960958959,1,0.2930000039041041
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.706999996095896,0,0.706999996095896
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+precision,names,state,posterior,accuracy,rmsq
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.7099999997019767,1,0.2900000002980233
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.7099999997019767,0,0.7099999997019767
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.6999999880790712,1,0.30000001192092884
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.6999999880790712,0,0.6999999880790712
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.699999988079071,1,0.30000001192092896
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.699999988079071,0,0.699999988079071
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.699999988079071,1,0.30000001192092896
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.699999988079071,0,0.699999988079071
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.75,1,0.25
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.75,0,0.75
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.8,1,0.19999999999999996
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.8,0,0.8
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+precision,names,state,posterior,accuracy,rmsq
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.75,1,0.25
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.75,0,0.75
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.6666666666666666,1,0.33333333333333337
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.6666666666666666,0,0.6666666666666666
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.00999999968335033,1,0.00999999968335033
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.5,0,0.5
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.5,1,0.5
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+precision,names,state,posterior,accuracy,rmsq
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.7071110010147095,1,0.2928889989852905
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.7071110010147095,0,0.7071110010147095
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",5.014522636857867e-07,1,5.014522636857867e-07
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",5.014522636857867e-07,1,5.014522636857867e-07
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",5.014522636857867e-07,1,5.014522636857867e-07
+0,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",5.014522636857867e-07,1,5.014522636857867e-07
+precision,names,state,posterior,accuracy,rmsq
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.7069999960958959,1,0.2930000039041041
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.7069999960958959,0,0.7069999960958959
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.001,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+precision,names,state,posterior,accuracy,rmsq
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.7099999997019767,1,0.2900000002980233
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.7099999997019767,0,0.7099999997019767
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.01,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.6999999880790712,1,0.30000001192092884
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.6999999880790712,0,0.6999999880790712
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.025,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+precision,names,state,posterior,accuracy,rmsq
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.699999988079071,1,0.30000001192092896
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.699999988079071,0,0.699999988079071
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.05,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.6999999880790713,1,0.30000001192092873
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.6999999880790713,0,0.6999999880790713
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.1,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.75,1,0.25
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.75,0,0.75
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.125,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.8,1,0.19999999999999996
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.8,0,0.8
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.2,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+precision,names,state,posterior,accuracy,rmsq
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.75,1,0.25
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.75,0,0.75
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.25,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350328,1,0.009999999683350328
+precision,names,state,posterior,accuracy,rmsq
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.6666666666666666,1,0.33333333333333337
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.6666666666666666,0,0.6666666666666666
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.00999999968335033,1,0.00999999968335033
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350328,1,0.009999999683350328
+0.33,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.00999999968335033,1,0.00999999968335033
+precision,names,state,posterior,accuracy,rmsq
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 1)",0.5000000000000002,1,0.4999999999999998
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 1, 0)",0.5000000000000002,0,0.5000000000000002
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(1, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 1, 0, 0)",0.009999999683350327,1,0.009999999683350327
+0.5,"['jane_and_mark_fight', 'jane_has_knife', 'jane_stabs_mark_with_knife', 'mark_dies']","(0, 0, 0, 0)",0.009999999683350327,1,0.009999999683350327

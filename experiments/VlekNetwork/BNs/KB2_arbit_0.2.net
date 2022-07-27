@@ -1,0 +1,104 @@
+
+net {
+  name = unnamedBN;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node jane_and_mark_fight {
+   states = (0 1 );
+   label = "jane_and_mark_fight";
+   ID = "jane_and_mark_fight";
+}
+
+node jane_has_knife {
+   states = (0 1 );
+   label = "jane_has_knife";
+   ID = "jane_has_knife";
+}
+
+node jane_threatens_mark_with_knife {
+   states = (0 1 );
+   label = "jane_threatens_mark_with_knife";
+   ID = "jane_threatens_mark_with_knife";
+}
+
+node mark_hits_jane {
+   states = (0 1 );
+   label = "mark_hits_jane";
+   ID = "mark_hits_jane";
+}
+
+node jane_drops_knife {
+   states = (0 1 );
+   label = "jane_drops_knife";
+   ID = "jane_drops_knife";
+}
+
+node mark_falls_on_knife {
+   states = (0 1 );
+   label = "mark_falls_on_knife";
+   ID = "mark_falls_on_knife";
+}
+
+node mark_dies_by_accident {
+   states = (0 1 );
+   label = "mark_dies_by_accident";
+   ID = "mark_dies_by_accident";
+}
+
+node mark_dies {
+   states = (0 1 );
+   label = "mark_dies";
+   ID = "mark_dies";
+}
+
+potential (jane_and_mark_fight) {
+   data = (  0.8 0.2);
+}
+
+potential (jane_has_knife) {
+   data = (  0.2 0.8);
+}
+
+potential ( jane_threatens_mark_with_knife | jane_has_knife   jane_and_mark_fight   ) {
+   data = 
+   (((   0.99   0.01)   % jane_and_mark_fight=0   jane_has_knife=0   
+   (   0.99   0.01))   % jane_and_mark_fight=1   jane_has_knife=0   
+   ((   0.99   0.01)   % jane_and_mark_fight=0   jane_has_knife=1   
+   (   0.99   0.01)));   % jane_and_mark_fight=1   jane_has_knife=1   
+}
+
+potential ( mark_hits_jane | jane_threatens_mark_with_knife   ) {
+   data = 
+   ((   0.99   0.01)   % jane_threatens_mark_with_knife=0   
+   (   0.01   0.99));   % jane_threatens_mark_with_knife=1   
+}
+
+potential ( jane_drops_knife | mark_hits_jane   ) {
+   data = 
+   ((   0.99   0.01)   % mark_hits_jane=0   
+   (   0.6   0.4));   % mark_hits_jane=1   
+}
+
+potential ( mark_falls_on_knife | jane_drops_knife   ) {
+   data = 
+   ((   0.99   0.01)   % jane_drops_knife=0   
+   (   0.8   0.2));   % jane_drops_knife=1   
+}
+
+potential ( mark_dies_by_accident | mark_falls_on_knife   ) {
+   data = 
+   ((   0.99   0.01)   % mark_falls_on_knife=0   
+   (   0.4   0.6));   % mark_falls_on_knife=1   
+}
+
+potential ( mark_dies | mark_falls_on_knife   mark_dies_by_accident   ) {
+   data = 
+   (((   0.99   0.01)   % mark_dies_by_accident=0   mark_falls_on_knife=0   
+   (   0.99   0.01))   % mark_dies_by_accident=1   mark_falls_on_knife=0   
+   ((   0.99   0.01)   % mark_dies_by_accident=0   mark_falls_on_knife=1   
+   (   0.01   0.99)));   % mark_dies_by_accident=1   mark_falls_on_knife=1   
+}
+
+

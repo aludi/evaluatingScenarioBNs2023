@@ -1,0 +1,44 @@
+
+net {
+  name = unnamedBN;
+  software = "aGrUM 0.22.5";
+  node_size = (50 50);
+}
+
+node motive_1_0 {
+   states = (0 1 );
+   label = "motive_1_0";
+   ID = "motive_1_0";
+}
+
+node sneak_1_0 {
+   states = (0 1 );
+   label = "sneak_1_0";
+   ID = "sneak_1_0";
+}
+
+node stealing_1_0 {
+   states = (0 1 );
+   label = "stealing_1_0";
+   ID = "stealing_1_0";
+}
+
+potential (motive_1_0) {
+   data = (  0.583983 0.416017);
+}
+
+potential ( sneak_1_0 | motive_1_0   ) {
+   data = 
+   ((   0.999914   8.56018e-05)   % motive_1_0=0   
+   (   0.000120163   0.99988));   % motive_1_0=1   
+}
+
+potential ( stealing_1_0 | motive_1_0   sneak_1_0   ) {
+   data = 
+   (((   0.999957   4.28046e-05)   % sneak_1_0=0   motive_1_0=0   
+   (   1   0))   % sneak_1_0=1   motive_1_0=0   
+   ((   1   0)   % sneak_1_0=0   motive_1_0=1   
+   (   0.0264992   0.973501)));   % sneak_1_0=1   motive_1_0=1   
+}
+
+

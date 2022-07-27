@@ -1,0 +1,34 @@
+\contentsline {chapter}{Abstract}{iii}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Background}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Reasoning with evidence}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Bayes and Bayesian Networks}{5}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Evaluating Bayesian Networks}{7}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Agent simulations}{8}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Conclusion}{9}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Method}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Scenario}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Simulation}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Creating a Bayesian Network}{15}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Evaluation}{18}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Numbers}{18}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Structural}{20}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Predictive}{22}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Conclusion}{22}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Simulation of Grote Markt}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Scenario}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Simulation}{26}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Creating the Bayesian Network}{27}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Evaluation}{27}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Numbers}{27}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Structural}{31}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Predictive}{32}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Discussion}{34}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Limitations of the simulation.}{34}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Problems}{35}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Possible Legal Interpretations.}{40}{subsection.4.5.3}%
+\contentsline {chapter}{\numberline {5}Conclusion}{43}{chapter.5}%
+\contentsline {subsubsection}{Reporters and random variables}{44}{section*.21}%
+\contentsline {subsubsection}{Private knowledge}{44}{section*.22}%
+\contentsline {subsubsection}{Conditioning on implicit parameters}{45}{section*.23}%
+\contentsline {section}{\numberline {5.1}Future Work}{45}{section.5.1}%

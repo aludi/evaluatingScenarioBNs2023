@@ -1,0 +1,164 @@
+Wed Jun 22 10:37:48 2022
+
+
+Moral links:
+
+    Marrying E_camera_1 and stealing_1_0
+    Marrying E_camera_sees_object_1_0 and object_dropped_accidentally_0
+
+
+Triangulating prime component with 3 members:
+    know_valuable_1_0, sneak_1_0, E_psych_report_1_0
+This component is a clique of cost 8
+
+Triangulating prime component with 3 members:
+    know_valuable_1_0, motive_1_0, sneak_1_0
+This component is a clique of cost 8
+
+Triangulating prime component with 8 members:
+    seen_1_0, know_valuable_1_0, know_vulnerable_1_0, motive_1_0, stealing_1_0,
+    object_dropped_accidentally_0, E_camera_1, E_camera_sees_object_1_0
+
+    Using the best greedy heuristic for triangulation
+
+
+Triangulating prime component with 4 members:
+    stealing_1_0, object_dropped_accidentally_0, E_camera_sees_object_1_0,
+    E_object_gone_0
+This component is a clique of cost 16
+
+
+Total cost of triangulation for all prime components is 112
+
+
+Elimination sequence:
+
+    know_vulnerable_1_0
+    seen_1_0
+    E_object_gone_0
+    object_dropped_accidentally_0
+    E_camera_sees_object_1_0
+    E_camera_1
+    stealing_1_0
+    E_psych_report_1_0
+    sneak_1_0
+    know_valuable_1_0
+    motive_1_0
+
+
+Cliques:
+
+Clique 7, 3 members, table size = 8:
+    motive_1_0, know_valuable_1_0, sneak_1_0
+
+Clique 6, 3 members, table size = 8:
+    know_valuable_1_0, sneak_1_0, E_psych_report_1_0
+
+Clique 5, 4 members, table size = 16:
+    motive_1_0, know_valuable_1_0, stealing_1_0, E_camera_1
+
+Clique 4, 4 members, table size = 16:
+    motive_1_0, stealing_1_0, E_camera_1, E_camera_sees_object_1_0
+
+Clique 3, 4 members, table size = 16:
+    motive_1_0, stealing_1_0, E_camera_sees_object_1_0,
+    object_dropped_accidentally_0
+
+Clique 2, 4 members, table size = 16:
+    stealing_1_0, E_camera_sees_object_1_0, object_dropped_accidentally_0,
+    E_object_gone_0
+
+Clique 1, 5 members, table size = 32:
+    motive_1_0, know_valuable_1_0, E_camera_1, seen_1_0, know_vulnerable_1_0
+
+Total clique table size: 112
+
+
+The junction forest:
+
+Creating junction tree with clique 7 as root ...
+
+Cliques 6 and 7 linked, separator has 2 members and table size = 4:
+    know_valuable_1_0, sneak_1_0
+
+Cliques 5 and 7 linked, separator has 2 members and table size = 4:
+    motive_1_0, know_valuable_1_0
+
+Cliques 4 and 5 linked, separator has 3 members and table size = 8:
+    motive_1_0, stealing_1_0, E_camera_1
+
+Cliques 3 and 4 linked, separator has 3 members and table size = 8:
+    motive_1_0, stealing_1_0, E_camera_sees_object_1_0
+
+Cliques 2 and 3 linked, separator has 3 members and table size = 8:
+    stealing_1_0, E_camera_sees_object_1_0, object_dropped_accidentally_0
+
+Cliques 1 and 5 linked, separator has 3 members and table size = 8:
+    motive_1_0, know_valuable_1_0, E_camera_1
+
+
+Assignment of potentials to cliques:
+
+    Node seen_1_0 assigned to clique 1
+    Node know_valuable_1_0 assigned to clique 1
+    Node know_vulnerable_1_0 assigned to clique 1
+    Node motive_1_0 assigned to clique 1
+    Node sneak_1_0 assigned to clique 7
+    Node stealing_1_0 assigned to clique 5
+    Node object_dropped_accidentally_0 assigned to clique 3
+    Node E_psych_report_1_0 assigned to clique 6
+    Node E_camera_1 assigned to clique 1
+    Node E_camera_sees_object_1_0 assigned to clique 4
+    Node E_object_gone_0 assigned to clique 2
+
+
+Checking conditional probability potentials:
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    seen_1_0:
+	0          0.458521
+	1          0.541479
+
+    know_valuable_1_0:
+	0          0.771364
+	1          0.228636
+
+    know_vulnerable_1_0:
+	0          0.458583
+	1          0.541417
+
+    motive_1_0:
+	0          0.771521
+	1          0.228479
+
+    sneak_1_0:
+	0          0.771583
+	1          0.228417
+
+    stealing_1_0:
+	0          0.810048
+	1          0.189952
+
+    object_dropped_accidentally_0:
+	0          0.848347
+	1          0.151653
+
+    E_psych_report_1_0:
+	0          0.81859
+	1          0.18141
+
+    E_camera_1:
+	0          0.00131199
+	1          0.998688
+
+    E_camera_sees_object_1_0:
+	0          0.810498
+	1          0.189502
+
+    E_object_gone_0:
+	0          0.658609
+	1          0.341391

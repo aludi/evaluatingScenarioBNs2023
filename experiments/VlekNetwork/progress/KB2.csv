@@ -1,0 +1,9 @@
+evidence,posterior,posterior_name,param_num,param_name
+No evidence,0.0,mark_dies,none,0
+"('jane_and_mark_fight', 1)",0.0,mark_dies,none,0
+"('jane_has_knife', 1)",0.0,mark_dies,none,0
+"('jane_threatens_mark_with_knife', 1)",0.03,mark_dies,none,0
+"('mark_hits_jane', 1)",0.04,mark_dies,none,0
+"('jane_drops_knife', 1)",0.08,mark_dies,none,0
+"('mark_falls_on_knife', 1)",0.65,mark_dies,none,0
+"('mark_dies_by_accident', 0)",0.0,mark_dies,none,0

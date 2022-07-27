@@ -1,0 +1,182 @@
+Tue Apr 26 11:38:21 2022
+
+
+Moral links:
+
+    Marrying jane_has_knife and jane_and_mark_fight
+
+
+Triangulating prime component with 3 members:
+    jane_and_mark_fight, jane_has_knife, jane_stabs_mark_with_knife
+This component is a clique of cost 8
+
+Triangulating prime component with 2 members:
+    jane_stabs_mark_with_knife, mark_dies
+This component is a clique of cost 4
+
+
+Total cost of triangulation for all prime components is 12
+
+
+Elimination sequence:
+
+    jane_has_knife
+    jane_and_mark_fight
+    mark_dies
+    jane_stabs_mark_with_knife
+
+
+Cliques:
+
+Clique 2, 2 members, table size = 4:
+    jane_stabs_mark_with_knife, mark_dies
+
+Clique 1, 3 members, table size = 8:
+    jane_stabs_mark_with_knife, jane_and_mark_fight, jane_has_knife
+
+Total clique table size: 12
+
+
+The junction forest:
+
+Creating junction tree with clique 2 as root ...
+
+Cliques 1 and 2 linked, separator has 1 member and table size = 2:
+    jane_stabs_mark_with_knife
+
+
+Assignment of potentials to cliques:
+
+    Node jane_and_mark_fight assigned to clique 1
+    Node jane_has_knife assigned to clique 1
+    Node jane_stabs_mark_with_knife assigned to clique 1
+    Node mark_dies assigned to clique 2
+
+
+Checking conditional probability potentials:
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    jane_and_mark_fight:
+	0          0.791307
+	1          0.208693
+
+    jane_has_knife:
+	0          0.297722
+	1          0.702278
+
+    jane_stabs_mark_with_knife:
+	0          0.996998
+	1          0.00300213
+
+    mark_dies:
+	0          0.997732
+	1          0.00226792
+Fri May 13 13:13:38 2022
+
+
+Moral links:
+
+    Marrying a and b
+    Marrying jane_has_knife and jane_and_mark_fight
+
+
+Triangulating prime component with 3 members:
+    c, b, a
+This component is a clique of cost 8
+
+Triangulating prime component with 3 members:
+    jane_and_mark_fight, jane_has_knife, jane_stabs_mark_with_knife
+This component is a clique of cost 8
+
+Triangulating prime component with 2 members:
+    jane_stabs_mark_with_knife, mark_dies
+This component is a clique of cost 4
+
+
+Total cost of triangulation for all prime components is 20
+
+
+Elimination sequence:
+
+    a
+    b
+    c
+    jane_has_knife
+    jane_and_mark_fight
+    mark_dies
+    jane_stabs_mark_with_knife
+
+
+Cliques:
+
+Clique 3, 2 members, table size = 4:
+    jane_stabs_mark_with_knife, mark_dies
+
+Clique 2, 3 members, table size = 8:
+    jane_stabs_mark_with_knife, jane_and_mark_fight, jane_has_knife
+
+Clique 1, 3 members, table size = 8:
+    c, b, a
+
+Total clique table size: 20
+
+
+The junction forest:
+
+Creating junction tree with clique 3 as root ...
+
+Cliques 2 and 3 linked, separator has 1 member and table size = 2:
+    jane_stabs_mark_with_knife
+
+Creating junction tree with clique 1 as root ...
+
+
+Assignment of potentials to cliques:
+
+    Node c assigned to clique 1
+    Node b assigned to clique 1
+    Node a assigned to clique 1
+    Node jane_and_mark_fight assigned to clique 2
+    Node jane_has_knife assigned to clique 2
+    Node jane_stabs_mark_with_knife assigned to clique 2
+    Node mark_dies assigned to clique 3
+
+
+Checking conditional probability potentials:
+
+    No errors found
+
+
+Beliefs for chance nodes:
+
+    c:
+	0          0.998462
+	1          0.00153846
+
+    b:
+	0          0.230769
+	1          0.769231
+
+    a:
+	0          0.8
+	1          0.2
+
+    jane_and_mark_fight:
+	0          0.791307
+	1          0.208693
+
+    jane_has_knife:
+	0          0.297722
+	1          0.702278
+
+    jane_stabs_mark_with_knife:
+	0          0.996998
+	1          0.00300213
+
+    mark_dies:
+	0          0.997732
+	1          0.00226792

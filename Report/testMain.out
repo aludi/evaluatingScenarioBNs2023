@@ -1,0 +1,57 @@
+\BOOKMARK [0][-]{chapter*.1}{Abstract}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 2
+\BOOKMARK [0][-]{chapter.2}{State of the Art}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Reasoning with evidence}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Bayes and Bayesian Networks}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.2.1}{Evaluating Bayesian Networks}{section.2.2}% 6
+\BOOKMARK [1][-]{section.2.3}{Agent simulations}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.4}{Conclusion}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{Simulations to Evaluate Bayesian Networks.}{}% 9
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.2}{Setting-up an Experiment}{chapter.3}% 11
+\BOOKMARK [2][-]{subsection.3.2.1}{Simulation}{section.3.2}% 12
+\BOOKMARK [2][-]{subsection.3.2.2}{Reporters \(as Random Variables\)}{section.3.2}% 13
+\BOOKMARK [1][-]{section.3.3}{Creating a Bayesian Network from a Simulation Automatically}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{Evaluating the Bayesian Network}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.4.1}{Structural Criteria}{section.3.4}% 16
+\BOOKMARK [2][-]{subsection.3.4.2}{Performance Criteria}{section.3.4}% 17
+\BOOKMARK [2][-]{subsection.3.4.3}{Human Criteria}{section.3.4}% 18
+\BOOKMARK [0][-]{chapter.4}{Simple Non-Spatial Simulations}{}% 19
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{Method}{chapter.4}% 21
+\BOOKMARK [2][-]{subsection.4.2.1}{Behavioural rules for the simulation}{section.4.2}% 22
+\BOOKMARK [1][-]{section.4.3}{Results}{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.4.3.1}{Evaluation with regards to structural, performance and human-factor criteria}{section.4.3}% 24
+\BOOKMARK [1][-]{section.4.4}{Discussion}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.4.1}{Comparison to Vlek's Method}{section.4.4}% 26
+\BOOKMARK [2][-]{subsection.4.4.2}{Further Discussion}{section.4.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.3}{Conclusion}{section.4.4}% 28
+\BOOKMARK [0][-]{chapter.5}{Simple Spatial Simulations}{}% 29
+\BOOKMARK [1][-]{section.5.1}{Experiment 1: Generating BNs and lowering precision}{chapter.5}% 30
+\BOOKMARK [2][-]{subsection.5.1.1}{Introduction}{section.5.1}% 31
+\BOOKMARK [2][-]{subsection.5.1.2}{Methods}{section.5.1}% 32
+\BOOKMARK [2][-]{subsection.5.1.3}{Results}{section.5.1}% 33
+\BOOKMARK [2][-]{subsection.5.1.4}{Discussion}{section.5.1}% 34
+\BOOKMARK [1][-]{section.5.2}{Experiment 2: Investigating Private Knowledge}{chapter.5}% 35
+\BOOKMARK [2][-]{subsection.5.2.1}{Introduction}{section.5.2}% 36
+\BOOKMARK [2][-]{subsection.5.2.2}{Method}{section.5.2}% 37
+\BOOKMARK [2][-]{subsection.5.2.3}{Results}{section.5.2}% 38
+\BOOKMARK [2][-]{subsection.5.2.4}{Discussion}{section.5.2}% 39
+\BOOKMARK [1][-]{section.5.3}{Discussion}{chapter.5}% 40
+\BOOKMARK [2][-]{subsection.5.3.1}{Possible Legal Interpretations.}{section.5.3}% 41
+\BOOKMARK [0][-]{chapter.6}{Robberies in ``real'' locations}{}% 42
+\BOOKMARK [1][-]{section.6.1}{Introduction}{chapter.6}% 43
+\BOOKMARK [1][-]{section.6.2}{Methods}{chapter.6}% 44
+\BOOKMARK [1][-]{section.6.3}{Results}{chapter.6}% 45
+\BOOKMARK [2][-]{subsection.6.3.1}{Structural Criteria}{section.6.3}% 46
+\BOOKMARK [2][-]{subsection.6.3.2}{Performance Criteria}{section.6.3}% 47
+\BOOKMARK [2][-]{subsection.6.3.3}{Human Criteria}{section.6.3}% 48
+\BOOKMARK [1][-]{section.6.4}{Discussion}{chapter.6}% 49
+\BOOKMARK [2][-]{subsection.6.4.1}{Limitations of the simulation.}{section.6.4}% 50
+\BOOKMARK [2][-]{subsection.6.4.2}{The problem of identity}{section.6.4}% 51
+\BOOKMARK [2][-]{subsection.6.4.3}{Implicit conditioning on environment}{section.6.4}% 52
+\BOOKMARK [2][-]{subsection.6.4.4}{Possible Legal Interpretations.}{section.6.4}% 53
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 54
+\BOOKMARK [1][-]{section.7.1}{Future Work}{chapter.7}% 55
+\BOOKMARK [0][-]{chapter.8}{Appendix}{}% 56
+\BOOKMARK [1][-]{section.8.1}{Background on probabilities - the meaning of random variables}{chapter.8}% 57

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
+    <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="second final first draft">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -150,13 +150,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637857692698</updated>
-    </task>
-    <task id="LOCAL-00018" summary="blegh">
-      <created>1648502164967</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1648502164967</updated>
     </task>
     <task id="LOCAL-00019" summary="added light accuracy metric, kinda disspaointed that its usually around 85% ish. but thats expected? should really get these in a separate file as well (next to test results) so that they can be analysed.">
       <created>1648726040245</created>
@@ -494,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658963869263</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="second final first draft">
+      <created>1658966313236</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1658966313236</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -549,13 +549,13 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655572982224" />
-    <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2" timestamp="1658963868457">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="143" y="23" width="709" height="892" key="CommitChangelistDialog2" timestamp="1658966327793">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="667" y="159" key="CommitChangelistDialog2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935097600" />
     <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1658963868457" />
     <state x="0" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653733801421" />
-    <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1658155410258" />
+    <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1658966327793" />
     <state width="1259" height="285" key="GridCell.Tab.0.bottom" timestamp="1658965485878">
       <screen x="30" y="23" width="1250" height="777" />
     </state>
@@ -645,12 +645,12 @@
     </state>
     <state x="468" y="178" key="SettingsEditor/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655386151908" />
     <state x="468" y="178" key="SettingsEditor/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1657882465794" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1658963874224">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="453" y="221" key="Vcs.Push.Dialog.v2" timestamp="1658966322326">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935104507" />
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1658963874224" />
-    <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1658155417445" />
+    <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1658966322326" />
     <state x="386" y="229" key="com.intellij.ide.util.TipDialog" timestamp="1657646221756">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -662,10 +662,11 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="825" y="175" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655373202888" />
-    <state x="846" y="346" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1657410440369">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="581" y="260" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1658966306726">
+      <screen x="30" y="23" width="1250" height="777" />
     </state>
     <state x="846" y="346" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1657410440369" />
+    <state x="581" y="260" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/30.23.1250.777@30.23.1250.777" timestamp="1658966306726" />
     <state x="0" y="158" width="1363" height="749" key="dock-window-1" timestamp="1657584047409">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

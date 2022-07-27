@@ -1,0 +1,165 @@
+\begin{thebibliography}{}
+
+\bibitem[Allen and Pardo, 2007]{Allan2007}
+Allen, R. and Pardo, M. (2007).
+\newblock The problematic value of mathematical models of evidence.
+\newblock {\em The Journal of Legal Studies}, 36(1):107--140.
+
+\bibitem[Bex, 2010]{Bex2010}
+Bex, F. (2010).
+\newblock {\em Arguments, Stories and Criminal Evidence}.
+\newblock Springer Science and Business Media LLC.
+
+\bibitem[Bosse and Gerritsen, 2008]{Gerritsen2008}
+Bosse, T. and Gerritsen, C. (2008).
+\newblock Agent-based simulation of the spatial dynamics of crime: On the
+  interplay between criminal hot spots and reputation.
+\newblock In {\em Proc. of the 7th Int. Conf. on Autonomous Agents and
+  Multiagent Systems}.
+
+\bibitem[Chen et~al., 2008]{Chen2008}
+Chen, X.-W., Anantha, G., and Lin, X. (2008).
+\newblock Improving bayesian network structure learning with mutual
+  information-based node ordering in the k2 algorithm.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering},
+  20(5):628--640.
+
+\bibitem[Colyvan, 2013]{colyvan2013}
+Colyvan, M. (2013).
+\newblock Idealisations in normative models.
+\newblock {\em Synthese}, 190(8):1337--1350.
+
+\bibitem[Colyvan et~al., 2001]{colyvan2001}
+Colyvan, M., Regan, H.~M., and Ferson, S. (2001).
+\newblock Is it a crime to belong to a reference class.
+\newblock {\em Journal of Political Philosophy}, 9(2):168--181.
+
+\bibitem[Cooper and Herskovits, 1992]{Cooper1992}
+Cooper, G. and Herskovits, E. (1992).
+\newblock A bayesian method for the induction of probabilistic networks from
+  data.
+\newblock {\em Machine Learning}, 9:309--347.
+
+\bibitem[Dahlman, 2020]{dahlman2020}
+Dahlman, C. (2020).
+\newblock De-biasing legal fact-finders with bayesian thinking.
+\newblock {\em Topics in Cognitive Science}, 12(4):1115--1131.
+
+\bibitem[Dawid, 2008]{Dawid2008}
+Dawid, A.~P. (2008).
+\newblock Beware of the dag!
+\newblock In {\em JMLR: Workshop and Conference Proceedings 6: 59--86}.
+
+\bibitem[de~Koeijer et~al., 2020]{deKoeijer2020}
+de~Koeijer, J.~A., Sjerps, M.~J., Vergeer, P., and Berger, C.~E. (2020).
+\newblock Combining evidence in complex cases-a practical approach to
+  interdisciplinary casework.
+\newblock {\em Science \& Justice}, 60(1):20--29.
+
+\bibitem[Druzdzel and van~der Gaag, 2000]{Druzdzel2000}
+Druzdzel, M.~J. and van~der Gaag, L.~C. (2000).
+\newblock Building probabilistic networks: awhere do the numbers come from?
+\newblock {\em IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING}.
+
+\bibitem[Ducamp et~al., 2020]{pyagrum2020}
+Ducamp, G., Gonzales, C., and Wuillemin, P.-H. (2020).
+\newblock {aGrUM/pyAgrum : a Toolbox to Build Models and Algorithms for
+  Probabilistic Graphical Models in Python}.
+\newblock In {\em {10th International Conference on Probabilistic Graphical
+  Models}}, volume 138 of {\em Proceedings of Machine Learning Research}, pages
+  609--612, Sk{{\o}}rping, Denmark.
+
+\bibitem[Fenton et~al., 2012]{Fenton2012}
+Fenton, N., Neil, M., and Lagnado, D.~A. (2012).
+\newblock A general structure for legal arguments about evidence using bayesian
+  networks.
+\newblock {\em Cognitive Science}, 37(1):61--102.
+
+\bibitem[Fenton et~al., 2019]{Fenton2019}
+Fenton, N., Neil, M., Yet, B., and Lagnado, D. (2019).
+\newblock Analyzing the simonshaven case using bayesian networks.
+\newblock {\em Topics in Cognitive Science}, 12(4):1092--1114.
+
+\bibitem[Gerritsen, 2015]{Gerritsen2015}
+Gerritsen, C. (2015).
+\newblock Agent-based modelling as a research tool for criminological research.
+\newblock {\em Crime Science}, 4(1).
+
+\bibitem[Haojie~Zhu, 2021]{Zhu2021}
+Haojie~Zhu, F.~W. (2021).
+\newblock An agent-based model for simulating urban crime with improved daily
+  routines.
+\newblock {\em Computers, Environment and Urban Systems}.
+
+\bibitem[J~Kadane, 1996]{Kadane1996}
+J~Kadane, D.~S. (1996).
+\newblock {\em A Probabilistic Analysis of the Sacco and Vanzetti Evidence}.
+\newblock John Wiley and Sons.
+
+\bibitem[Kazil et~al., 2020]{mesa2020}
+Kazil, J., Masad, D., and Crooks, A. (2020).
+\newblock Utilizing python for agent-based modeling: The mesa framework.
+\newblock In Thomson, R., Bisgin, H., Dancy, C., Hyder, A., and Hussain, M.,
+  editors, {\em Social, Cultural, and Behavioral Modeling}, pages 308--317,
+  Cham. Springer International Publishing.
+
+\bibitem[Oni{\'s}ko and Druzdzel, 2013]{Druzdzel2013}
+Oni{\'s}ko, A. and Druzdzel, M.~J. (2013).
+\newblock Impact of precision of bayesian network parameters on accuracy of
+  medical diagnostic systems.
+\newblock {\em Artificial Intelligence in Medicine}.
+
+\bibitem[Pearl, 1988]{pearl1988}
+Pearl, J. (1988).
+\newblock {\em Probabilistic reasoning in intelligent systems: networks of
+  plausible inference}.
+\newblock Morgan kaufmann.
+
+\bibitem[Pennington and Hastie, 1993]{Pennington1993}
+Pennington, N. and Hastie, R. (1993).
+
+\bibitem[Renooij, 2001]{renooij2001}
+Renooij, S. (2001).
+\newblock Probability elicitation for belief networks: issues to consider.
+\newblock {\em The Knowledge Engineering Review}, 16(3):255--269.
+
+\bibitem[Ronald~Meester, 2021]{Meester2021}
+Ronald~Meester, K.~S. (2021).
+\newblock {\em Probability and Forensic Evidence}.
+\newblock Cambridge University Press.
+
+\bibitem[Timmer, 2016]{Timmer2016}
+Timmer, S. (2016).
+\newblock {\em Designing and Understanding Forensic Bayesian Networks using
+  Argumentation}.
+\newblock PhD thesis, University of Utrecht.
+
+\bibitem[van Leeuwen, 2019]{vanLeeuwen2019}
+van Leeuwen, L. (2019).
+\newblock A comparison of two hybrid methods for analysing evidential
+  reasoning.
+\newblock In {\em JURIX}.
+
+\bibitem[Verheij et~al., 2015]{Verheij2015}
+Verheij, B., Bex, F., Timmer, S.~T., Vlek, C.~S., Meyer, J.-J.~C., Renooij, S.,
+  and Prakken, H. (2015).
+\newblock Arguments, scenarios and probabilities: connections between three
+  normative frameworks for evidential reasoning.
+\newblock {\em Law, Probability and Risk}, 15(1):35--70.
+
+\bibitem[Vlek, 2016]{Vlek2016}
+Vlek, C. (2016).
+\newblock {\em When stories and numbers meet in court}.
+\newblock PhD thesis, University of Groningen.
+
+\bibitem[Vlek et~al., 2015]{Vlek2015}
+Vlek, C.~S., Prakken, H., Renooij, S., and Verheij, B. (2015).
+\newblock Representing the quality of crime scenarios in a bayesian network.
+\newblock In {\em JURIX}. JURIX.
+
+\bibitem[Wagenaar et~al., 1993]{wagenaar1993}
+Wagenaar, W.~A., Van~Koppen, P.~J., and Crombag, H.~F. (1993).
+\newblock {\em Anchored narratives: The psychology of criminal evidence.}
+\newblock St Martin's Press.
+
+\end{thebibliography}

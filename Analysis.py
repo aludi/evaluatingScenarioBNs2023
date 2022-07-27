@@ -676,7 +676,7 @@ for HL_scenario in ["GroteMarktPrivate"]:
 
 
     runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
-
+    runs = [200]
     folder_path = org_dir + f"/experiments/{HL_scenario}/plots/freq/"
     for file_object in os.listdir(folder_path):
         file_object_path = os.path.join(folder_path, file_object)

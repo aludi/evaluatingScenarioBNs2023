@@ -6,7 +6,7 @@ also define some global probabily stuff here, later
 TODO
 
 '''
-from itertools import product
+from itertools import product, combinations
 import re
 import os
 import pickle
@@ -20,6 +20,7 @@ from VlekNetwork import VlekNetwork
 from WalkThrough import WalkThrough
 
 from CreateMap import CreateMap
+import pandas as pd
 
 
 class Experiment():
@@ -246,6 +247,8 @@ class Experiment():
                 #print(self.reporters.pure_frequency_event_dict)
                 if scenario == "GroteMarkt" or scenario == "GroteMarktPrivate":
                     self.generate_csv_report(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
+                    self.find_minimal_set(file_path=f"experiments/{scenario}/{train}/{scenario}.csv")
+
                     if train == "train":
                         self.pickle_relevant(scenario, train, scenario)  # pickles temporal dict, event dict and evidence list
 
@@ -295,17 +298,9 @@ class Experiment():
                 csv_columns.remove("E_valuable_1_0")
                 csv_columns.remove("E_vulnerable_1_0")
                 csv_columns.remove("E_sneak_1_0")
-
                 csv_columns.remove("know_valuable_1_0")
                 csv_columns.remove("know_vulnerable_1_0")
-
                 csv_columns.remove("seen_1_0")
-
-
-
-
-
-        #print(csv_columns)
 
         csv_file = file_path
         #csv_file = os.getcwd() + self.path + f"{self.train}/{file_name}.csv"
@@ -318,6 +313,35 @@ class Experiment():
                     writer.writerow(data)
         except IOError:
             print("I/O error line 170 experiment")
+
+    def find_minimal_set(self, file_path):
+        df = pd.read_csv(file_path)
+        all_ev = ["E_psych_report_1_0","E_camera_1","E_camera_seen_stealing_1_0","E_object_gone_0"]
+        com = [["E_psych_report_1_0"],["E_camera_1"],["E_camera_seen_stealing_1_0"],["E_object_gone_0"]]
+        for i in range(2, len(all_ev) + 1):
+            for item in combinations(all_ev, i):
+                com.append(list(item))
+
+        for x in com:
+            val = list(product([0, 1], repeat=len(x)))
+            for t in val:
+                s = f""
+                for i in range(0, len(x)):
+                    # create query
+                    s += f"{x[i]} == {t[i]} &"
+                #print(s)
+                y = df.query(s[:-1])    # remove trailing &
+                steal = y["stealing_1_0"].mean()
+                drop = y["object_dropped_accidentally_0"].mean()
+
+
+                if steal == 1:
+                    print("\t minimal set steal : ", s[:-1])
+                if drop == 1:
+                    print("\t minimal set drop : ", s[:-1])
+                if steal == 0 and drop == 0:
+                    print("\t minimal set nothing : ", s[:-1])
+
 
 
     def generate_empty_tables(self, parents, child):

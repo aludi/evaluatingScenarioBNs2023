@@ -181,7 +181,7 @@ def get_temporal_ordering_nodes_path(training_data, path):
                 max_score = temporal_dict[key]
                 flag = "cust"
     best_ordering_in_col_numbers_list = []
-    print(best_temporal_ordering)
+    #print(best_temporal_ordering)
     if len(list(header)) == len(relevant_dict):
         if flag == "cust":
             for item in best_temporal_ordering:
@@ -224,8 +224,8 @@ def get_temporal_ordering_nodes_path(training_data, path):
         for item in nl:
             best_ordering_in_col_numbers_list.append(item)
 
-    print(flag)
-    print(best_ordering_in_col_numbers_list)
+    #print(flag)
+    #print(best_ordering_in_col_numbers_list)
     return best_ordering_in_col_numbers_list
 
 def evidence_cannot_be_connected_to_each_other_path(training_data, path, temporal_ordering):
@@ -252,19 +252,19 @@ def evidence_cannot_be_connected_to_each_other_path(training_data, path, tempora
 
 
 
-def export_picture(training_data, path):
+def export_picture(training_data, path, runs):
     #print("in here, exporting picture")
-    bn = gum.loadBN(path + "/BNs/"+training_data[:-4]+".net")
+    bn = gum.loadBN(path + "/BNs/"+training_data[:-4]+f"{runs}.net")
     ie = gum.LazyPropagation(bn)
-    gim.exportInference(model=bn, filename=path + "/bnImage/BNIMAGE" + training_data[:-4]+".pdf", engine=ie, evs={})
+    gim.exportInference(model=bn, filename=path + "/bnImage/BNIMAGE" + training_data[:-4]+f"{runs}.pdf", engine=ie, evs={})
 
 
-def K2_BN_csv_only(training_data, path):
+def K2_BN_csv_only(training_data, path, runs):
     #print(path)
     #print("training data", training_data)
 
     learner = gum.BNLearner(path + "/train/"+training_data)  # using bn as template for variables and labels
-    file_name = path + "/BNs/"+training_data[:-4]+".net"
+    file_name = path + "/BNs/"+training_data[:-4]+f"{runs}.net"
     header = next(csv.reader(open(path + "/train/"+training_data)))
 
     best_temporal_ordering = get_temporal_ordering_nodes_path(training_data, path)
@@ -304,11 +304,10 @@ def K2_BN_csv_only(training_data, path):
     # print(file_name)
     gum.saveBN(bn, file_name)
     try:
-        export_picture(training_data, path)
+        export_picture(training_data, path, runs)
         return 0
     except:
-        print("not wide enough data")
-        print("rerunning training ")
+        print("not wide enough data -> rerunning training ")
         return 1
 
     # print(f"saved bn as {file_name}")

@@ -193,10 +193,10 @@ class Experiment():
                 "seen",
                                    "know_valuable",
                                    "know_vulnerable",
-                                   "motive",
+                    "object_dropped_accidentally",
+                    "motive",
                                    "sneak",
                                    "stealing",
-                                   "object_dropped_accidentally",
                                    "E_valuable",
                                    "E_vulnerable",
                            "E_psych_report",
@@ -228,7 +228,7 @@ class Experiment():
                 y = 50
                 C = CreateMap(map_name, coverage, y)
                 x = int(y * C.rel)
-                print("x value", x, "y value", y)
+                #print("x value", x, "y value", y)
                 #print(rel_events)
                 self.reporters = Reporters(relevant_events=rel_events)
                 for i in range(0, self.runs-1):
@@ -314,33 +314,50 @@ class Experiment():
         except IOError:
             print("I/O error line 170 experiment")
 
-    def find_minimal_set(self, file_path):
+    def calc_minimal_set(self, scn, file_path):
+
         df = pd.read_csv(file_path)
-        all_ev = ["E_psych_report_1_0","E_camera_1","E_camera_seen_stealing_1_0","E_object_gone_0"]
-        com = [["E_psych_report_1_0"],["E_camera_1"],["E_camera_seen_stealing_1_0"],["E_object_gone_0"]]
+        all_ev = ["E_psych_report_1_0", "E_camera_1", "E_camera_seen_stealing_1_0", "E_object_gone_0"]
+        com = [["E_psych_report_1_0"], ["E_camera_1"], ["E_camera_seen_stealing_1_0"], ["E_object_gone_0"]]
         for i in range(2, len(all_ev) + 1):
             for item in combinations(all_ev, i):
                 com.append(list(item))
 
+        min_set = -1
+
         for x in com:
+            # print(x)
             val = list(product([0, 1], repeat=len(x)))
             for t in val:
                 s = f""
                 for i in range(0, len(x)):
                     # create query
                     s += f"{x[i]} == {t[i]} &"
-                #print(s)
-                y = df.query(s[:-1])    # remove trailing &
+                y = df.query(s[:-1])  # remove trailing &
                 steal = y["stealing_1_0"].mean()
                 drop = y["object_dropped_accidentally_0"].mean()
-
-
-                if steal == 1:
+                # print(steal)
+                # print(drop)
+                if steal == 1 and scn == "steal":
                     print("\t minimal set steal : ", s[:-1])
-                if drop == 1:
+                    min_set = s[:-1]
+                if drop == 1 and scn == "drop":
                     print("\t minimal set drop : ", s[:-1])
-                if steal == 0 and drop == 0:
+                    min_set = s[:-1]
+                if steal == 0 and drop == 0 and scn == "nothing":
                     print("\t minimal set nothing : ", s[:-1])
+                    min_set = s[:-1]
+
+                if min_set != -1:
+                    return min_set
+
+
+
+    def find_minimal_set(self, file_path):
+        dict_r = {}
+        #for scn in ["steal", "drop", "nothing"]:
+        #    dict_r[scn] = self.calc_minimal_set(scn, file_path)
+        return dict_r
 
 
 

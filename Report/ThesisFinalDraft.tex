@@ -46,18 +46,12 @@ We can consider three main approaches for reasoning about hypotheses using evide
 
 However, creating and using BNs is far from straightforward for both the builder and the interpreter. From \citet{deKoeijer2020}: it is complex, time-consuming, hard to explain, and, the ``repeatability [...] leaves much to be desired. Node definitions and model structures are often directed by personal habits, resulting in different models for the same problem, depending on the expert''. This subjectivity is pervasive throughout the Bayesian Network: the events selected, arcs drawn, and numbers elicited are subjective and seem empirically untestable in the data-poor environment of AI and law. These problems might be mitigated in part by evaluation criteria. 
 
-These evaluation criteria, however, do do not always sufficiently safeguard against an incorrect network, which is a network that predicts the `wrong' outcome based on some set of evidence. One example of this is seen in Figure~\ref{love}, which is a network taken from \citet{vanLeeuwen2019}. This network is unfairly biased towards the scenario that the suspect is guilty. In the original paper, we entered the evidence that was found during the trial, and the response of the network seemed sensible. However, in that same network, we are now entering a different evidence: there is no body, no signs of violence, no car with bloodstains, no evidence of existing conflict. The only evidence that the prosecution has, are some phone calls, and  testimony of the suspect about amnesia that does not match medical reality. The outcome of the network is that the suspect is guilty (P(scn1 = `yes') = 100\%). But the evidence that is entered into this network, would not reasonably support this conclusion. No reasonable arguer would argue that this state of evidence is sufficient for a guilty verdict.
-
-\begin{figure}[htbp]
-\includegraphics[width=\linewidth]{images/oldnetwork.pdf}
-\caption{Example of subjective probability estimation resulting in a guilty verdict for insufficient evidence}
-\label{love}
-\end{figure}%
-
-
-In general, it is hard for modellers to rationally consider all possible evidence states. This might lead to the bias demonstrated in the network. Though the network might respond well to situations where all evidence as presented in the trial is present. This brings up questions about the use of BNs in general: do we really need to consider these states where the evidence is different from the evidence as presented in the trial? Since specifying the joint probability distribution is necessary in BNs, we have to specify all of these numbers. Anyway, if we want to take BNs seriously, they need to be correct over all possible evidence states.
+These evaluation criteria, however, do do not always sufficiently safeguard against an incorrect network, which is a network that predicts the `wrong' outcome based on some set of evidence. A BN for crimes should be accurate across all possible evidence states, since, if we want to use BNs in court and not model court cases afterwards, we do not know at the start what the state of the evidence will be. However, in general, it is hard for modellers to rationally consider all possible evidence states. A network might respond well to situations where all evidence as presented in the trial is present, but predict the wrong outcome when one evidence node is turned to a different value. This brings up questions about the use of BNs in general: do we really need to consider these states where the evidence is different from the evidence as presented in the trial? Since specifying the joint probability distribution is necessary in BNs, we have to specify all of these numbers. Anyway, if we want to take BNs seriously, they need to be correct over all possible evidence states.
 
  The aim of this project is to define a method for the modeller to evaluate the BN over all possible evidence states, by grounding the BN in an agent-simulation of a crime. We can model crime cases using simulations to a level of realism we desire, measure the frequencies of events that emerge out of this simulation by running the simulation multiple times. In the agent-based system, we have full control over and full knowledge of the world that we are reasoning about, hence we can create a grounding that can be used to evaluate the BN. We can test whether our method of evaluating all possible evidence states works by comparing the predicted output of the BN with the frequency information about the output from the simulation. Then, we will discuss whether it is plausible that this method of evaluation generalises to real life\footnote{The simulation can be interacted with at \url{https://shielded-journey-34533.herokuapp.com} \\ Code for this project can be found at \url{https://github.com/aludi/simulationTest}}.
+ 
+ 
+ \textcolor{red} {something more general here about using simulations to test for BNS}
 
 \newpage
 
@@ -82,6 +76,8 @@ The third direction is via probabilistic approaches, where hypotheses and eviden
 \subsection{Bayesian Networks}
 
 A Bayesian Network (BN) is a directed acyclic graph that represents the joint probability distribution over a set of events \citep{pearl1988b}. BNs consists of nodes, arcs and conditional probability tables. A node is a random variable that represents an events. An arc represent a conditional relationships between two events, linking two nodes together. The two nodes are the parent and the child node, the probabilities in the child node are conditioned on the value that the parent node takes. The specification of these conditional probabilities is done in the conditional probability tables (CPT) of each node.
+
+ \textcolor{red} {under construction}
 
 
 The combination of all nodes in the BN results in a full joint probability distribution over all nodes, which is 
@@ -223,6 +219,9 @@ We start our process with one or more written scenarios. These scenarios can be 
 We can think of the simulation as having two parts: a model of reality, and a way of observing the model by observing variables that the modellers deem interesting. In this paper, the model of reality is an agent-based simulation, and the observation procedure are random variables (or, reporters), which become nodes in the BN.
 
 The agent-based simulation is a simulation that should include the possibilities for all the scenarios as outlined in step 1. It should contain agents, objects and an environment. The level of detail or real-world validation at which agents, objects and environments are modelled depend on the purposes of the environment.
+
+ \textcolor{red} {go into more detail about constructing simulation here, use the BG}
+
 
 
 In the simulation, certain events can be brought about. Any one of the above-mentioned events can happen. We need a way to observe these states: this is where reporters come in. A reporter is a random variable that is reports the outcome of a relevant event in the simulation and is embedded in the code. If an event happens (or does not happen), the reporter reports that the event is true (or false). In essence, the reporter ($R$) is a random variable (RV). In short, a random variable is a function that maps an event ($e$) to a truth value:
@@ -413,27 +412,37 @@ A global state where the thief stole the object and all the evidence pointed in 
 
 
 \subsection{Construction}
-K2 algorithm,  all are binary random variables. Ordering here.
+The baseline was created by running the simulation for 10,000 runs. Then, to test to what extent the number of runs (=the amount of data available to the K2 algorithm) influences the accuracy of the network, for each of [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000~] runs, the collection of runs $O$ was passed to the K2 algorithm, that generated a network.
 
-
+The K2 algorithm requires an ordering on the nodes. In all number of runs, this ordering was 
+[object dropped, motive, sneak, stealing, psych report, camera, cameraStealing, object gone]. This ordering was determined by considering the hypothesis-nodes first, and all evidence at the end. This is because evidence nodes are usually children of the hypothesis nodes. The hypothesis nodes belong to two different scenarios: scenario 1 is the motive-sneak-steal scenario, and scenario 2 is the object-dropped scenario. Placing object-dropped/scn 2 first, instead of 'motive'/scn1 is not arbitrary, there is a causality at play: if the agent drops the object, the thief cannot have a motive to steal the object, yet, having a motive does not `cause' or `condition' the object to drop. Hence, this results in 
 
 \subsection{Evaluation}
-Automatically done in code
 
-Reasoning using LazyPropagation (exact inference) in Pyagrum.
+The evidence nodes of the network are the nodes marked with an `E'
 
+ \textcolor{red} {Reasoning using LazyPropagation (exact inference) in Pyagrum. Replicability}
 
-
-
-\newpage
 
 \section{Results}
 
 
+ \textcolor{red} {TO BE UPDATED and EXPLAINED}
 
 We have a final Bayesian Network (Figure~\ref{bullet}), that was created from the K2 algorithm that contains all the nodes specified. The arcs between nodes are not causal but conditional. 
 
 We have passed the structure of the network to the K2 algorithm (not automatically). 
+
+ This results in networks like this.
+ 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\linewidth]{GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate1000.pdf}
+\caption{The final network (1000 runs)}
+\label{bullet}
+\end{center}
+\end{figure}
+
 
 
 We have a plot of the overall accuracy over all evidence sets of the network for both the `stealing\_1\_0' node and the `object\_dropped\_accidentally\_0' node (Figure~\ref{girl}). For a low number of runs, the network could not be created, hence the accuracy of 0. At around 10 runs, a network could be created, with an accuracy on all cumulative evidence states of around 0.75 for both nodes. Increasing the number of runs, hence, the data available to K2 to create the network, results in a higher accuracy. We have a frequency distribution over the possible states (Figure~\ref{fifteen}), where we see that most possible states occur infrequently, while one possible state [0, 1, 0, 0] occurs 70\% of the time. 
@@ -442,13 +451,7 @@ In Figures~\ref{nobody}, ~\ref{whirl}, we show cumulative evidence plots on both
 
 In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probability and preference ordering for the output nodes as the worst (10 runs) and best (1000 runs) BN predicted them. In Table~\ref{heretic}, we show the frequency of the output for each possible evidence state, as well as the preference ordering, for the ground truth as found in the simulation.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=\linewidth]{GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate.pdf}
-\caption{The final network (1000 runs)}
-\label{bullet}
-\end{center}
-\end{figure}
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -470,15 +473,15 @@ In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probabilit
 \begin{center}
 \begin{subfigure}{\textwidth}
 \makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate_10_1.1100.pdf}
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate_1000_1.1100.pdf}}
+\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.2700.pdf}
+\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.2700.pdf}}
 \caption{Most relevant }
 \label{te}
 \end{subfigure}
 \begin{subfigure}{\textwidth}
 \makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate_10_70.9400.pdf}
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate_1000_70.9400.pdf}}
+\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_52.6300.pdf}
+\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.6300.pdf}}
 \caption{Most frequent}
 \label{sfb}
 \end{subfigure}
@@ -493,20 +496,19 @@ In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probabilit
 \hline
 evidence & H1 & H2 & H3 \\
 \hline
-(0, 1, 0, 0)&P(neither) (0.97) & P(dropped) (0.02) & P(steal) (0.01) \\
-(0, 1, 0, 1)&P(dropped) (0.96) & P(neither) (0.03) & P(steal) (0.01) \\
-(0, 0, 0, 0)&P(neither) (0.97) & P(dropped) (0.02) & P(steal) (0.01) \\
-(0, 0, 0, 1)&P(dropped) (0.96) & P(neither) (0.03) & P(steal) (0.01) \\
-(0, 1, 1, 1)&P(dropped) (0.96) & P(steal) (0.12) & P(neither) (-0.08) \\
-(1, 1, 1, 1)&P(steal) (0.96) & P(dropped) (0.21) & P(neither) (-0.17) \\
-(1, 0, 0, 1)&P(steal) (0.59) & P(dropped) (0.21) & P(neither) (0.20) \\
-(1, 1, 0, 1)&P(steal) (0.59) & P(dropped) (0.21) & P(neither) (0.20) \\
-(0, 1, 1, 0)&P(neither) (0.86) & P(steal) (0.12) & P(dropped) (0.02) \\
-(1, 1, 0, 0)&P(dropped) (0.70) & P(steal) (0.59) & P(neither) (-0.29) \\
+(0, 0, 0, 0)&P(neither) (0.98) & P(steal) (0.01) & P(dropped) (0.01) \\
+(0, 1, 0, 1)&P(dropped) (0.99) & P(steal) (0.01) & P(neither) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.91) & P(steal) (0.10) & P(neither) (-0.01) \\
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(1, 0, 0, 1)&P(steal) (0.88) & P(dropped) (0.21) & P(neither) (-0.09) \\
+(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.19) & P(neither) (-0.19) \\
+(1, 1, 0, 1)&P(neither) (0.42) & P(steal) (0.31) & P(dropped) (0.27) \\
+(0, 1, 1, 1)&P(steal) (0.87) & P(dropped) (0.29) & P(neither) (-0.16) \\
+(1, 0, 0, 0)&P(steal) (0.65) & P(dropped) (0.58) & P(neither) (-0.23) \\
 \hline
 \end{tabular}
 \end{center}
-\caption{ Low number of runs, probability estimates for all cumulative evidence sets for runs =  10}
+\caption{ Low number of runs, probability estimates for all cumulative evidence sets for runs =  50}
 \label{journal}
 \end{table}
 
@@ -516,16 +518,15 @@ evidence & H1 & H2 & H3 \\
 \hline
 evidence & H1 & H2 & H3 \\
 \hline
-(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
-(0, 1, 0, 1)&P(dropped) (0.99) & P(steal) (0.01) & P(neither) (0.00) \\
 (0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
-(0, 0, 0, 1)&P(dropped) (0.95) & P(steal) (0.05) & P(neither) (0.00) \\
-(0, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.01) & P(neither) (-0.01) \\
+(0, 1, 0, 1)&P(dropped) (0.96) & P(steal) (0.04) & P(neither) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.93) & P(steal) (0.07) & P(neither) (0.00) \\
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(1, 0, 0, 1)&P(steal) (0.96) & P(dropped) (0.04) & P(neither) (0.00) \\
 (1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
-(1, 0, 0, 1)&P(steal) (1.00) & P(dropped) (0.01) & P(neither) (-0.01) \\
-(1, 1, 0, 1)&P(steal) (0.98) & P(dropped) (0.02) & P(neither) (0.00) \\
-(0, 1, 1, 0)&P(steal) (0.41) & P(neither) (0.37) & P(dropped) (0.22) \\
-(1, 1, 0, 0)&P(neither) (0.97) & P(steal) (0.02) & P(dropped) (0.01) \\
+(1, 1, 0, 1)&P(steal) (0.93) & P(dropped) (0.07) & P(neither) (0.00) \\
+(0, 1, 1, 1)&P(steal) (0.97) & P(dropped) (0.03) & P(neither) (0.00) \\
+(1, 0, 0, 0)&P(neither) (0.91) & P(steal) (0.06) & P(dropped) (0.03) \\
 \hline
 \end{tabular}
 \end{center}
@@ -538,20 +539,19 @@ evidence & H1 & H2 & H3 \\
 \hline
 evidence & H1 & H2 & H3 \\
 \hline
-(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
-(0, 1, 0, 1)&F(dropped) (0.98) & F(steal) (0.02) & F(neither) (0.00) \\
 (0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
-(0, 0, 0, 1)&F(dropped) (0.94) & F(steal) (0.06) & F(neither) (0.00) \\
-(0, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
-(1, 1, 1, 1)&F(steal) (0.99) & F(dropped) (0.01) & F(neither) (0.00) \\
-(1, 0, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.93) & F(steal) (0.07) & F(neither) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.95) & F(steal) (0.05) & F(neither) (0.00) \\
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 0, 0, 1)&F(steal) (0.96) & F(dropped) (0.04) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
 (1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
-(0, 1, 1, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
-(1, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
 \hline
 \end{tabular}
 \end{center}
-\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10000}
+\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
 \label{heretic}
 \end{table}
 
@@ -578,28 +578,110 @@ This method of evaluating a BN over all states of cumulative evidence can distin
 
 
 \subsection{Can a modeller do this?}
-Two questions:
 
-Could a person/modeller find these probabilities as found in the network?
-think about expert elicitation as discussed in the introduction, could a person do this?
-Look at all the nodes
-We cannot know this, since the simulation is so far removed from human intuition that subjective probability elicitation will not result in anything useful. 
+ \textcolor{red} {restructure and rewrite for language}
 
 
+We have shown that we can generate Bayesian Networks and evaluate them over all possible evidences states automatically, if we use the data as generated by the simulation. However, the real problem is, if a modeller could actually attempt to create a BN by hand without access to the underlying frequencies from the simulation. If we have a manually-crafted BN, but we also have the underlying true joint probability distribution over all variables in the simulation, we can test if this method of evaluation can show problems with a manually constructed Bayesian Network.
 
-A user would not be able to say that P(motive) = 0.3 just from the description of the variables in the case study. However, people might be able to guess the CPTs for some nodes (just based on the simulation descriptions). perhaps if the user had the chance to interact with the simulation, they might be able to estimate some frequencies at which events happen. This is something for further research. 
+In order to do this, we created a network manually. This was done by ordering the network 
+ 
+ Creating a network manually:
+ 
+ Method for creating the BN
+ 
+ 
+ 
+ \begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\linewidth]{../notebooks/manualNetwork.pdf}
+\caption{Manual network}
+\label{ }
+\end{center}
+\end{figure}
 
-A lighter case: could a person/police/forensic investigators, model something using simulations?
-Yes, simulations are a nicer modelling primitive than straight BNs. Could use a true simulation to generate data and cases and train a BN on that, and use decision making based on BN data. A simulation like programmed now is nice as a data-generator, but not so much as a reasoning thing. However, it is unclear unknown difficult to know in what detail one should model for a real case, instead of just a test-case.
+\newpage
 
 
-Simulations are nice because you do not have to deal with calculating the probabilities yourself. For instance, calculating the probability of motive, means that we need to calculate vulnerable and valuable. This can be done, given that the guy has a target: valuable = (2/5)*(1/2)*(1/2) = 0.1, while vulnerable = (1/5)+(3/5)(1/2) = 0.5. Hence, motive = 0.05, or 5\%, just by bare probability calculations, which matches the probability as found in the network and the training dataset. However, tthis was relatively easy because these were straightforward uniform distributions. This calculation is going to be more complex if we're dealing with either more complex distributions (normals, etc.), or if we do not have a good idea about the underlying distributions. However, doing this using simulations makes it a lot easier, the numbers `just' emerge without any calculation. We even encounter this in the simulation right now: the probability that the camera sees the stealing is very difficult to calculate analytically. Simulations are a more natural way to think about this.The simulation can also easily become more relevant (more like a level 1 or 2 simulation in the taxonomy), by creating more realistic agent motivation models and behaviour. On the other hand, debugging simulation results is really annoying.
+\begin{table}
+\centering
+\small
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 0, 1)&P(dropped) (1.00) & P(steal) (0.00) & P(neither) (0.00) \\
+(0, 0, 0, 1)&P(dropped) (0.51) & P(steal) (0.49) & P(neither) (0.00) \\
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(1, 0, 0, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
+(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
+(1, 1, 0, 1)&P(neither) (3.00) & P(steal) (-1.00) & P(dropped) (-1.00) \\
+(0, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
+(1, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+\hline
+\end{tabular}
+\caption{ Preference ordering with numbers for manual network}
+\label{ wife}
+\end{table}%
+\begin{table}
+\centering
+\small
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.93) & F(steal) (0.07) & F(neither) (0.00) \\
+(0, 0, 0, 1)&F(dropped) (0.95) & F(steal) (0.05) & F(neither) (0.00) \\
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 0, 0, 1)&F(steal) (0.96) & F(dropped) (0.04) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(0, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+\hline
+\end{tabular}
+\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
+\label{heretic}
+\end{table}
+
+\newpage
 
 
+Diagnosing problems:
+- overall accuracy: This network is about as accurate as the K2 network based on 100 runs, which is not the best but also not bad. Pretty good accuracy over all states for a network that was subjectively estimated and connected. Overall accuracy of network is 
+acc dropped:  0.717
+acc stolen 0.828
+acc PO 0.8888888888888888
+
+- When we compare the performance of this network to the actual frequencies from the simulation, we see that this handcrafted network performs well. In all cases except 1 (which we'll get to later), the manual network  predicts the same preference ordering over the outcomes as they happen in the grounded evidence states.
+- The manual network does not predict the exact probabilities from the grounded frequencies. Sometimes it is overconfident (such as in (0101) (1001)), other times it is underconfident (0001)). Analysis why here.
+- One big problem: 1101 state: modelled in network as if impossible (hence, -1 -1 probabilities). The simulation itself says that it is always stealing. weird. It means that the agent steals but is not shown on camera.
+
+Conclusion:
+The manual network is quite good. We can identify problems with the network. Method works! 
+ 
+
+Problems:
+
+-  validity of the manual network: these probabilities in the network were subjectively estimator by the person who created the simulation. The probabilities were `subjectively' estimated, which means that I did not look at, or calculated, probabilities to put in the network. However, I've been working on this project for 3/4 year so it is likely that I have a pretty good feel for what the probabilities in the network should approximate, and I know the causal structure of the simulation. Therefore, it is likely that people who just have access to the simulation output, will create `worse' networks. However, this can be detected by the evaluation method, hence, the evaluation network works. Perhaps if the user had the chance to interact with the simulation, they might be able to estimate some frequencies at which events happen. 
+
+- if the simulation was more difficult, the automated versions would continue to do well, but the manual approach would flouder. Size complexity
+
+Hence modellers could estimate probabilites and create nice networks but probably not in real complex life.
 
 
 
 \subsection{Evaluating BNs over all possible evidence states using real life}
+
+ \textcolor{red} {rewrite for language}
+ 
+ \subsection{de Zoete so-called}
+ Evaluating that the network has a weird output.
+ 
+ \subsection{van Leeuwen 2019}
+
 
 We applied this method to the network presented in \citet{vanLeeuwen2019}, shown in Figure~\ref{love}.  This network models a crime case where a suspect P murdered a tenant, then fled by car, and later called his parents to confess the crime, which is modelled as scenario 1 (scn1). In his own testimony, P states that he has amnesia and does not remember the day of the murder, and also that he was kidnapped, which is modelled as scenario 2 (scn2). The two scenarios are mutually exclusive and exhaustive. Evidence node names are shortened in table for convenience: `testimony\_amnesia' (TA), `Medical\_investigation\_found\_no\_amnesia' (MA), `testimony\_kidnapping' (TK), `no\_concrete\_evidence\_for\_kidnapping' (NK), `phonecall\_parents' (PP),  `car\_with\_bloodstains\_found' (CB), `body\_found' (BF), `signs\_of\_violence' (SV), `phonecall\_with\_friend'(PF), `testimony\_conflict' (TC), `weapon\_found' (WF).
 
@@ -649,15 +731,15 @@ We do not have an automated baseline for this network so that means that if we w
 
 Even without using a simulation, this method can be used to gain insight in whether the BN conforms to our expectations. We can identify cases where it seems to work correctly, such as case 1) and case 3). In case 1), the output conforms to the one datapoint that we have (given all evidence, the suspect is guilty), the BN makes the same decision as the court. In case 4), we find that the network, in this circumstance, responds sensibly to a change in evidence. However, in case 2), 3) and 5), we find the performance of the network not convincing. In case 2), there is insufficient evidence for scenario 1, yet the network chooses scenario 1. In case 3), there is insufficient evidence for scenario 2, yet the network chooses scenario 2. In case 5), there is support for both scenarios, but the posterior probability for scenario 1 seems (subjectively) too low. Furthermore, we now also know which states are deemed impossible (example: case 6). However, since we do not have a simulation or real-life test-cases, we do not have a way of `objectively' checking whether the network performs correctly or not, and to objectively identify combinations of evidence for which the network is performing badly. We can only do spot-checks and manually search through the output to see if we found anything interesting. Also, if we found a case for which the network performs incorrectly, it is also not clear what we should do with that: how should we change the probabilities in the CPT in order to increase `accuracy'?
 
-It is possible to apply this method to other networks (given that they are produced in an open-access format), to non-systematically check the performance of these networks over all possible evidence valuations. In the networks as considered in the Anjum case study in \citet{vlek2016}, or the Simonshaven case in \citet{Fenton2019}, the evidence nodes are distinguished from the hypothesis nodes. Even without considering the temporality of evidence, we can set the cumulative evidence all at once. However, since we do not have simulations for grounding, or data for grounding, we cannot actually evaluate the networks based on `objective' measures. Manually considering all evidence sets will be even more problematic than before. Instead of 11 nodes, the Simonshaven network has 13 evidence nodes, and the Anjum network has 20 evidence nodes. If we assume that calculating 1 case will take around 0.0037 seconds (as calculated from 7.66 seconds for 2048 entries, this does not hold entirely because it also depends on the number of hypothesis nodes), producing all possible Simonshaven states and posteriors should take $2^{13} = 30$ seconds, which is still reasonable, but the Anjum network would take 64 minutes. That is only considering the automatic calculation of the posteriors, and does not consider the time-complexity of creating a manual or automatic baseline. 
+It is possible to apply this method of evaluation to other networks (given that they are produced in an open-access format), to non-systematically check the performance of these networks over all possible evidence valuations. In the networks as considered in the Anjum case study in \citet{vlek2016}, or the Simonshaven case in \citet{Fenton2019}, the evidence nodes are distinguished from the hypothesis nodes. Even without considering the temporality of evidence, we can set the cumulative evidence all at once. However, since we do not have simulations for grounding, or data for grounding, we cannot actually evaluate the networks based on `objective' measures. Manually considering all evidence sets will be even more problematic than before. Instead of 11 nodes, the Simonshaven network has 13 evidence nodes, and the Anjum network has 20 evidence nodes. If we assume that calculating 1 case will take around 0.0037 seconds (as calculated from 7.66 seconds for 2048 entries, this does not hold entirely because it also depends on the number of hypothesis nodes), producing all possible Simonshaven states and posteriors should take $2^{13} = 30$ seconds, which is still reasonable, but the Anjum network would take 64 minutes. That is only considering the automatic calculation of the posteriors, and does not consider the time-complexity of creating a manual or automatic baseline. 
 
-
+ \textcolor{red} {add non-binary nodes in fenton make complexity worse}
 
 
 
 \subsection{Problems}
 
-There are three main problems with this approach that limit its generalisability. These problems are the combinatorial explosion of the evidence states, the implausibilities of finding proper grounding, specifying more than we actually need, and the imprecision of the BN definitions of the random variables in real life.
+There are three main problems with this approach that limit its generalisability. These problems are the combinatorial explosion of the evidence states, the implausibilities of finding proper grounding, even in simulation, specifying more than we actually need, and the imprecision of the BN definitions of the random variables in real life.
 
 \begin{enumerate}
 
@@ -669,7 +751,15 @@ There's also the combinatorial explosion, where you would need to define many mo
 
 As we saw when we applied the method to the network without a simulation, it is not plausible to create a manual baseline, as this would be mind-numbingly boring and consume too much time.  Creating a simulation would mean that the simulation should go beyond one room, and instead model an entire city, all places that the suspect can be all the time. This requires a lot more data and attention than is possible now, and it is also unclear how we would test the validity of the simulation, which would result in all our problems just being shifted up a step (to the simulation level, instead of in the BN). This means that simulations might be a good tool to investigate the methods of BNs, but are not suitable for actually investigating real-life crimes (although they might be usable as a tool for predicting situations - stuff where we have frequency data about.
 
-\item Too much data: in the court case, we are only considering the evidence that we believe is true. We do not have to consider these counterfactual states of evidence, all 895 of them. In a BN, these other 895 cases are 1) specified and 2) must be correct. Isn't this asking too much? Other approaches to reasoning, scenario-based, argumentative or hybrid do not need to fill out the CPTs, there they only need to consider the evidence by itself.
+Yes, simulations are a nicer modelling primitive than straight BNs. Could use a true simulation to generate data and cases and train a BN on that, and use decision making based on BN data. A simulation like programmed now is nice as a data-generator, but not so much as a reasoning thing. However, it is unclear unknown difficult to know in what detail one should model for a real case, instead of just a test-case.
+
+Simulations are nice because you do not have to deal with calculating the probabilities yourself. For instance, calculating the probability of motive, means that we need to calculate vulnerable and valuable. This can be done, given that the guy has a target: valuable = (2/5)*(1/2)*(1/2) = 0.1, while vulnerable = (1/5)+(3/5)(1/2) = 0.5. Hence, motive = 0.05, or 5\%, just by bare probability calculations, which matches the probability as found in the network and the training dataset. However, this was relatively easy because these were straightforward uniform distributions. This calculation is going to be more complex if we're dealing with either more complex distributions (normals, etc.), or if we do not have a good idea about the underlying distributions. However, doing this using simulations makes it a lot easier, the numbers `just' emerge without any calculation. We even encounter this in the simulation right now: the probability that the camera sees the stealing is very difficult to calculate analytically. Simulations are a more natural way to think about this.The simulation can also easily become more relevant (more like a level 1 or 2 simulation in the taxonomy), by creating more realistic agent motivation models and behaviour. On the other hand, debugging simulation results is really annoying.
+
+
+
+
+\item Too much data: in the court case, we are only considering the evidence that we believe is true. We do not have to consider these counterfactual states of evidence, all 895 of them. In a BN, these other 895 cases are 1) specified and 2) must be correct. Isn't this asking too much? Other approaches to reasoning, scenario-based, argumentative or hybrid do not need to fill out the CPTs, there they only need to consider the evidence by itself.  \textcolor{red} {explain}
+
 
 
 \item More generally, a problem with BNs is that a random variable, which is a function that maps a set of events to a `measurable space'. Informally, in this case, the RV maps an event to either T or F. There are two problems: how we define the set of events that we are mapping (domain), and the validity of the `mapping' function.
@@ -682,13 +772,20 @@ As we saw when we applied the method to the network without a simulation, it is 
 
 
 
-\subsection{Conclusion}
+\section{Conclusion}
 
 \subsubsection{Summary}
+We have shown that simulations can be used to ground Bayesian Networks and we created an evaluation method for them. Bayesian Networks can be created from the simulation automatically, and these Bayesian Networks can be evaluated for goodness systematically. We know that these networks are accurate because 1) the predicted prior probabilities of events in the network correspond exactly to the frequency of events in the simulation and 2) adding all possible states of evidence to the Bayesian Network results in the same output prediction as given by the simulation. Accuracy increases the more data is available to automatically construct the network, hence we find that some networks are better than others, and we can make a real evaluation.
+
+ However, this method of evaluation is not suitable for 1) real-life criminal cases and 2) networks with $> 25$ evidence nodes. In real-life criminal cases, we do not have the grounding necessary to check whether the network is accurate automatically. Creating this checking-dataset by hand means that we have to specify for all possible evidence states what our prediction of the output nodes is, which takes too long and we do not have a good grounding to prefer one set of evidence states over the other. Additionally, in real life we do not have to reason over all sets of possible evidence, we just need to reason with the set of evidence that we found. There need to be fewer than $25$ evidence nodes in the network (given personal-computer constraints), as runtime increases exponentially with the number of nodes.
+
  
 \subsubsection{Future Research}
 
 The simulation in this paper is not complex, and does not model reality in any realistic way. The purpose of this simulation was just to generate data, and did not need to reflect any specific facts about the world. However, agent-based modelling can be useful for investigating different aspects of Bayesian Networks, or reasoning with evidence more generally. Increasing the level of the simulation from level 0 to something that reflects reality is useful to investigate problems such as the Opportunity Prior as presented in \citet{Fenton2017}. 
+
+
+Letting people estimate probabilities on simulations to investigate elicitation accuracy.
 
 \newpage
 \bibliographystyle{apalike}
@@ -697,919 +794,17 @@ The simulation in this paper is not complex, and does not model reality in any r
 \newpage
 \section*{Appendix}
 
-This table shows the output of the Jurix network on the states that are possible for it. For 56\% of input, the network says that the evidence entered together is not possible, which would represent impossible states. However, this leaves us with too many possible states lol.
+This appendix contains:
 
-'testimony\_amnesia' (TA), 'Medical\_investigation\_found\_no\_amnesia' (MA), 'testimony\_kidnapping' (TK), 'no\_concrete\_evidence\_for\_kidnapping' (NK), 'car\_with\_bloodstains\_found' (CB), 'phonecall\_parents' (PP), 'body\_found' (BF), 'signs\_of\_violence' (SV), 'phonecall\_with\_friend'(PF), 'testimony\_conflict' (TC), 'weapon\_found' (WF).
+The probability distribution and preference ordering over outcomes for all possible evidence for the automated networks on the simulation.
 
-%\end{document}
-%\begin{document}
+The probability distribution and preference ordering over outcomes for all possible evidence for the Jurix 2019 network.
 
-\begin{longtable}{|l|l|c|c|} 
- \hline 
- case & evidence & scn1 & scn2  \\ 
- \hline 
+\newpage
+\subsection{Tables accuracy automated network}
+\input{tableAutomatic.tex}
 
-1 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-2 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-3 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-4 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-5 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-6 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-7 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-8 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-9 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-10 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-11 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-12 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-13 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-14 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-15 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-16 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-17 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-18 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-19 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-20 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-21 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-22 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-23 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-24 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-25 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-26 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-27 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-28 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-29 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-30 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-31 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-32 & $\neg$TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-33 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-34 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-35 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-36 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-37 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-38 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-39 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-40 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-41 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-42 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-43 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-44 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-45 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-46 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-47 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-48 & $\neg$TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-49 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-50 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-51 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-52 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-53 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-54 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-55 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-56 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-57 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-58 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-59 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-60 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-61 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-62 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-63 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-64 & $\neg$TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-65 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-66 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-67 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-68 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-69 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-70 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-71 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-72 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-73 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-74 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-75 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-76 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-77 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-78 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-79 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-80 & $\neg$TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-81 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-82 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-83 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-84 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-85 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-86 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-87 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-88 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-89 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-90 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-91 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-92 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-93 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-94 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-95 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-96 & $\neg$TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-97 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-98 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-99 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-100 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-101 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-102 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-103 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-104 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-105 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-106 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-107 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-108 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-109 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-110 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-111 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-112 & $\neg$TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-113 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-114 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-115 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-116 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-117 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-118 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-119 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-120 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-121 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-122 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-123 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-124 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-125 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-126 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-127 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-128 & $\neg$TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-129 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-130 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-131 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-132 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-133 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-134 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-135 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-136 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-137 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-138 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-139 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-140 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-141 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-142 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-143 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-144 & $\neg$TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-145 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-146 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-147 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-148 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-149 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-150 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-151 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-152 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-153 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-154 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-155 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-156 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-157 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-158 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-159 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-160 & $\neg$TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-161 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-162 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-163 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-164 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-165 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-166 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-167 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-168 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-169 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-170 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-171 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-172 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-173 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-174 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-175 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-176 & $\neg$TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-177 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-178 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-179 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-180 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-181 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-182 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-183 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-184 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-185 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-186 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-187 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-188 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-189 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-190 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-191 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-192 & $\neg$TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-193 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-194 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-195 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-196 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-197 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-198 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-199 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-200 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-201 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-202 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-203 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-204 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-205 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-206 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-207 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-208 & $\neg$TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-209 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-210 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-211 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-212 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-213 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-214 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-215 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-216 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-217 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-218 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-219 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-220 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-221 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-222 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-223 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-224 & $\neg$TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-225 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-226 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-227 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-228 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-229 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-230 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-231 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-232 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-233 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-234 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-235 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-236 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-237 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-238 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-239 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-240 & $\neg$TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-241 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-242 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-243 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-244 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-245 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-246 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-247 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-248 & $\neg$TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-249 & $\neg$TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-250 & $\neg$TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-251 & $\neg$TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-252 & $\neg$TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-253 & $\neg$TA, MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-254 & $\neg$TA, MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-255 & $\neg$TA, MA, TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-256 & $\neg$TA, MA, TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-257 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-258 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-259 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-260 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-261 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-262 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-263 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-264 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-265 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-266 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-267 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-268 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-269 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-270 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-271 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-272 & TA, $\neg$MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-273 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-274 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-275 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-276 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-277 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-278 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-279 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-280 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-281 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-282 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-283 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-284 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-285 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-286 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-287 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-288 & TA, $\neg$MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-289 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-290 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-291 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-292 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-293 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-294 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-295 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-296 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-297 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-298 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-299 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-300 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-301 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-302 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-303 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-304 & TA, $\neg$MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-305 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-306 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-307 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-308 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-309 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-310 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-311 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-312 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-313 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-314 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-315 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-316 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-317 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-318 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-319 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-320 & TA, $\neg$MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-321 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-322 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-323 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-324 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-325 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-326 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-327 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-328 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-329 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-330 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-331 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-332 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-333 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-334 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-335 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-336 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-337 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-338 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-339 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-340 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-341 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-342 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-343 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-344 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-345 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-346 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-347 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-348 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-349 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-350 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-351 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-352 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-353 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-354 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-355 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-356 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-357 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-358 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-359 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-360 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-361 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-362 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-363 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-364 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-365 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-366 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.01) & scn2 (0.99)\\
-367 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-368 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.01) & scn2 (0.99)\\
-369 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-370 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-371 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-372 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-373 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-374 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.04) & scn2 (0.96)\\
-375 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-376 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.07) & scn2 (0.93)\\
-377 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-378 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-379 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-380 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-381 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-382 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.13) & scn2 (0.87)\\
-383 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-384 & TA, $\neg$MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (0.13) & scn2 (0.87)\\
-385 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-386 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-387 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-388 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-389 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-390 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-391 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-392 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-393 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-394 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-395 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-396 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-397 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-398 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-399 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-400 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-401 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-402 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-403 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-404 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-405 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-406 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-407 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-408 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-409 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-410 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-411 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-412 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-413 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-414 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-415 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-416 & TA, $\neg$MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-417 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-418 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-419 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-420 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-421 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-422 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.01) & scn2 (0.99)\\
-423 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-424 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.01) & scn2 (0.99)\\
-425 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-426 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-427 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-428 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-429 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-430 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.26) & scn2 (0.74)\\
-431 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-432 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.35) & scn2 (0.65)\\
-433 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-434 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-435 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-436 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-437 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-438 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.48) & scn2 (0.52)\\
-439 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-440 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.50) & scn2 (0.50)\\
-441 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-442 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-443 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-444 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-445 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.06) & scn2 (0.94)\\
-446 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.53) & scn2 (0.47)\\
-447 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.22) & scn2 (0.78)\\
-448 & TA, $\neg$MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (0.53) & scn2 (0.47)\\
-449 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-450 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-451 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-452 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-453 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-454 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-455 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-456 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-457 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-458 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-459 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-460 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-461 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-462 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-463 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-464 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-465 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-466 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-467 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-468 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-469 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-470 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-471 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-472 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-473 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-474 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-475 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-476 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-477 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-478 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-479 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-480 & TA, $\neg$MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-481 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-482 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-483 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-484 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-485 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-486 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-487 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-488 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.01) & scn2 (0.99)\\
-489 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-490 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-491 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-492 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-493 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-494 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.18) & scn2 (0.82)\\
-495 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-496 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.30) & scn2 (0.70)\\
-497 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-498 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-499 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-500 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-501 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-502 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.63) & scn2 (0.37)\\
-503 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-504 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.72) & scn2 (0.28)\\
-505 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-506 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-507 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-508 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-509 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.03) & scn2 (0.97)\\
-510 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.84) & scn2 (0.16)\\
-511 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.14) & scn2 (0.86)\\
-512 & TA, $\neg$MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (0.84) & scn2 (0.16)\\
-513 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-514 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-515 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-516 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-517 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-518 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-519 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-520 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-521 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-522 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-523 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-524 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-525 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-526 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-527 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-528 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-529 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-530 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-531 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-532 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-533 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-534 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-535 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-536 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-537 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-538 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-539 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-540 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-541 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-542 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-543 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-544 & TA, $\neg$MA, TK, NK, CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-545 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-546 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-547 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-548 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-549 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-550 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.18) & scn2 (0.82)\\
-551 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-552 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.31) & scn2 (0.69)\\
-553 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-554 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-555 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-556 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-557 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-558 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.93) & scn2 (0.07)\\
-559 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.02) & scn2 (0.98)\\
-560 & TA, $\neg$MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.95) & scn2 (0.05)\\
-561 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-562 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-563 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-564 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-565 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.03) & scn2 (0.97)\\
-566 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.97) & scn2 (0.03)\\
-567 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.14) & scn2 (0.86)\\
-568 & TA, $\neg$MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.97) & scn2 (0.03)\\
-569 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-570 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-571 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-572 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-573 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.71) & scn2 (0.29)\\
-574 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.98) & scn2 (0.02)\\
-575 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.91) & scn2 (0.09)\\
-576 & TA, $\neg$MA, TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (0.98) & scn2 (0.02)\\
-577 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-578 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-579 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-580 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-581 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-582 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-583 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-584 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-585 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-586 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-587 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-588 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-589 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-590 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-591 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-592 & TA, MA, $\neg$TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-593 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-594 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-595 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-596 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-597 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-598 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-599 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-600 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-601 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-602 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-603 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-604 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-605 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-606 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-607 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-608 & TA, MA, $\neg$TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-609 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-610 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-611 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-612 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-613 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-614 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-615 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-616 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-617 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-618 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-619 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-620 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-621 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-622 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-623 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-624 & TA, MA, $\neg$TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-625 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-626 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-627 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-628 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-629 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-630 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-631 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-632 & TA, MA, $\neg$TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-633 & TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-634 & TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-635 & TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-636 & TA, MA, $\neg$TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-637 & TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-638 & TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-639 & TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-640 & TA, MA, $\neg$TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-641 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-642 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-643 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-644 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-645 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-646 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-647 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-648 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-649 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-650 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-651 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-652 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-653 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-654 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-655 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-656 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-657 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-658 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-659 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-660 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-661 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-662 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-663 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-664 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-665 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-666 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-667 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-668 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-669 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-670 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-671 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-672 & TA, MA, TK, $\neg$NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-673 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-674 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-675 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-676 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-677 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-678 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-679 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-680 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-681 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-682 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-683 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-684 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-685 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-686 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.11) & scn2 (0.89)\\
-687 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-688 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.20) & scn2 (0.80)\\
-689 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-690 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-691 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-692 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-693 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-694 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.49) & scn2 (0.51)\\
-695 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-696 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.60) & scn2 (0.40)\\
-697 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-698 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-699 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-700 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-701 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.02) & scn2 (0.98)\\
-702 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.75) & scn2 (0.25)\\
-703 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.09) & scn2 (0.91)\\
-704 & TA, MA, TK, $\neg$NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (0.75) & scn2 (0.25)\\
-705 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-706 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-707 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-708 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-709 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-710 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-711 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-712 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-713 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-714 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-715 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-716 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-717 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-718 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-719 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-720 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-721 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-722 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-723 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-724 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-725 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-726 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-727 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-728 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-729 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-730 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-731 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-732 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-733 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-734 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-735 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-736 & TA, MA, TK, $\neg$NK, CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-737 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-738 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-739 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-740 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-741 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-742 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.12) & scn2 (0.88)\\
-743 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-744 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.21) & scn2 (0.79)\\
-745 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-746 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-747 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-748 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-749 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-750 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.88) & scn2 (0.12)\\
-751 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.01) & scn2 (0.99)\\
-752 & TA, MA, TK, $\neg$NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.92) & scn2 (0.08)\\
-753 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-754 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-755 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-756 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-757 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.02) & scn2 (0.98)\\
-758 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.95) & scn2 (0.05)\\
-759 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.09) & scn2 (0.91)\\
-760 & TA, MA, TK, $\neg$NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.96) & scn2 (0.04)\\
-761 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-762 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-763 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-764 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-765 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.59) & scn2 (0.41)\\
-766 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.96) & scn2 (0.04)\\
-767 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.86) & scn2 (0.14)\\
-768 & TA, MA, TK, $\neg$NK, CB, PP, BF, SV, PF, TC, WF & scn1 (0.96) & scn2 (0.04)\\
-769 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-770 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-771 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-772 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-773 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-774 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-775 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-776 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-777 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-778 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-779 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-780 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-781 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-782 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-783 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-784 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-785 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-786 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-787 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-788 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-789 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-790 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-791 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-792 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-793 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-794 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-795 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-796 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-797 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-798 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-799 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-800 & TA, MA, TK, NK, $\neg$CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-801 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-802 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-803 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-804 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-805 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-806 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.05) & scn2 (0.95)\\
-807 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-808 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.11) & scn2 (0.89)\\
-809 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-810 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-811 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-812 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-813 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-814 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.82) & scn2 (0.18)\\
-815 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-816 & TA, MA, TK, NK, $\neg$CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.90) & scn2 (0.10)\\
-817 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-818 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-819 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-820 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-821 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.01) & scn2 (0.99)\\
-822 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.97) & scn2 (0.03)\\
-823 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.04) & scn2 (0.96)\\
-824 & TA, MA, TK, NK, $\neg$CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.98) & scn2 (0.02)\\
-825 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-826 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-827 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-828 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-829 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.40) & scn2 (0.60)\\
-830 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.99) & scn2 (0.01)\\
-831 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.77) & scn2 (0.23)\\
-832 & TA, MA, TK, NK, $\neg$CB, PP, BF, SV, PF, TC, WF & scn1 (0.99) & scn2 (0.01)\\
-833 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-834 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-835 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-836 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-837 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-838 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-839 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-840 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-841 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-842 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-843 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-844 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-845 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-846 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-847 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-848 & TA, MA, TK, NK, CB, $\neg$PP, $\neg$BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-849 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-850 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-851 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-852 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-853 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-854 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-855 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-856 & TA, MA, TK, NK, CB, $\neg$PP, BF, $\neg$SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-857 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-858 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-859 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-860 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-861 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-862 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-863 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-864 & TA, MA, TK, NK, CB, $\neg$PP, BF, SV, PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-865 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-866 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-867 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-868 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-869 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-870 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (0.82) & scn2 (0.18)\\
-871 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-872 & TA, MA, TK, NK, CB, PP, $\neg$BF, $\neg$SV, PF, TC, WF & scn1 (0.91) & scn2 (0.09)\\
-873 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-874 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-875 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-876 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-877 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.06) & scn2 (0.94)\\
-878 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-879 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, $\neg$WF & scn1 (0.24) & scn2 (0.76)\\
-880 & TA, MA, TK, NK, CB, PP, $\neg$BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-881 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-882 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-883 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-884 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-885 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, $\neg$WF & scn1 (0.40) & scn2 (0.60)\\
-886 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-887 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, $\neg$WF & scn1 (0.78) & scn2 (0.22)\\
-888 & TA, MA, TK, NK, CB, PP, BF, $\neg$SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-889 & TA, MA, TK, NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-890 & TA, MA, TK, NK, CB, PP, BF, SV, $\neg$PF, $\neg$TC, WF & scn1 (0.00) & scn2 (1.00)\\
-891 & TA, MA, TK, NK, CB, PP, BF, SV, $\neg$PF, TC, $\neg$WF & scn1 (0.00) & scn2 (1.00)\\
-892 & TA, MA, TK, NK, CB, PP, BF, SV, $\neg$PF, TC, WF & scn1 (0.00) & scn2 (1.00)\\
-893 & TA, MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, $\neg$WF & scn1 (0.98) & scn2 (0.02)\\
-894 & TA, MA, TK, NK, CB, PP, BF, SV, PF, $\neg$TC, WF & scn1 (1.00) & scn2 (0.00)\\
-895 & TA, MA, TK, NK, CB, PP, BF, SV, PF, TC, $\neg$WF & scn1 (1.00) & scn2 (0.00)\\
-896 & TA, MA, TK, NK, CB, PP, BF, SV, PF, TC, WF & scn1 (1.00) & scn2 (0.00)\\
-\hline 
-\caption{} 
-\label{} 
-\end{longtable}
-
-
+\subsection{Table of all evidence states Jurix}
+\input{tableOrder.tex}
 
 \end{document}  

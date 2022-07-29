@@ -283,7 +283,10 @@ def load_temporal_evidence(name):
 
 
 
-def progress_evidence(path, network_name, temporal_evidence):
+def progress_evidence(path, network_name, test_set, temporal_evidence):
+    #print("metowrk ", network_name)
+    if ".net" in network_name:
+        network_name = network_name[:-4]
     bn = gum.loadBN(path + "/BNs/" + network_name+".net")
     ie = gum.LazyPropagation(bn)
 
@@ -302,7 +305,7 @@ def progress_evidence(path, network_name, temporal_evidence):
     output_0 = temporal_evidence["output"][0]
     output_1 = temporal_evidence["output"][1]
 
-    df = pd.read_csv(path + "/test/" + network_name + ".csv")
+    df = pd.read_csv(path + "/test/" + test_set + ".csv")
 
     #print(event)
     #print(list(df.columns))
@@ -456,7 +459,7 @@ def plot_evidence_posterior_base_network_only(path, base_network, df, run_num):
         #plt.show()
         plt.close()
 
-    #print(df['acc_0'][0], df['acc_1'][0])
+    print(df['acc_0'][0], df['acc_1'][0])
 
     return df['acc_0'][0], df['acc_1'][0], df["count"][0], df["evidence"]
 
@@ -469,15 +472,13 @@ def generate_dict(df, events):
     dict_output["neither"] = 1 - sum1
     return dict_output
 
-def experiment_different_evidence(path, scn, run_num):
-
-    nw = f"{path}/BNs/{scn}.net"
-
-
-
+def experiment_different_evidence(path, network, test_data, run_num):
+    #scn1 = scn
+    #scn1 = "manualNetwork.net"
+    nw = f"{path}/BNs/{network}.net"
     d = load_temporal_evidence(nw)
     i = 1
-    df = pd.read_csv(path + "/test/" + scn + ".csv")
+    df = pd.read_csv(path + "/test/" + test_data + ".csv")
 
     values_list = df[d["events"]].drop_duplicates().values.tolist() # select all unique evidence states states
 
@@ -495,16 +496,14 @@ def experiment_different_evidence(path, scn, run_num):
 
         d["values"] = l
         temporal_evidence = d
-
-        df = progress_evidence(path, scn, temporal_evidence)
-
+        df = progress_evidence(path, network, test_data, temporal_evidence)
         dict_output = generate_dict(df, d["output"])
         dict_freq = generate_dict(df, freq)
 
         #print(dict_output)
 
 
-        ac0, ac1, count, e = plot_evidence_posterior_base_network_only(path, scn, df, run_num)
+        ac0, ac1, count, e = plot_evidence_posterior_base_network_only(path, network, df, run_num)
         #print(e)
         #print(count)
         a0.append(ac0)
@@ -521,19 +520,10 @@ def experiment_different_evidence(path, scn, run_num):
 
     count_acc = 0
     for i in range(0, len(ordered_list_F)):
-        #print(ordered_list_P[i])
-        #print(ordered_list_F[i])
-
-
         for idx in range(0, len(ordered_list_F[i])):
-
-            #print(ordered_list_P[i][idx][1:])
-            #print(ordered_list_F[i][idx][1:])
             flag = 0
-
             if ordered_list_F[i][idx][1:] != ordered_list_P[i][idx][1:]:
                 flag = 1
-
         if flag == 0:
             count_acc += 1
         #print(count_acc)
@@ -676,7 +666,9 @@ for HL_scenario in ["GroteMarktPrivate"]:
 
 
     runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
-    runs = [200]
+    #runs = [100, 150]
+
+    #runs = [100]
     folder_path = org_dir + f"/experiments/{HL_scenario}/plots/freq/"
     for file_object in os.listdir(folder_path):
         file_object_path = os.path.join(folder_path, file_object)
@@ -718,7 +710,7 @@ for HL_scenario in ["GroteMarktPrivate"]:
                 for train_data in list_files:
                     if "pkl" in train_data:
                         continue
-                    flag = K2_BN_csv_only(train_data, path)
+                    flag = K2_BN_csv_only(train_data, path, num_runs)
                 it += 1
 
             print()
@@ -732,13 +724,9 @@ for HL_scenario in ["GroteMarktPrivate"]:
 
             else:
 
+                disturbed_list_files = [scenario+str(num_runs)+ ".net"]
 
-                disturbed_list_files = os.listdir(path + "/BNs")
-                disturbed_list_files.sort()
-                if ".DS_Store" in list_files:
-                    disturbed_list_files.remove(".DS_Store")
-                disturbed_list_files = [scenario + ".net"]
-                #print("disturbed files", disturbed_list_files)
+                print("disturbed files", disturbed_list_files)
                 for networks in disturbed_list_files:
                     if networks == ".DS_Store":
                         continue
@@ -761,7 +749,11 @@ for HL_scenario in ["GroteMarktPrivate"]:
                     #print(networks[:-4])
 
                     #print("progress")
-                    acc, stolen, PO = experiment_different_evidence(path, networks[:-4], num_runs)
+                    acc, stolen, PO = experiment_different_evidence(path, networks[:-4], scenario, num_runs)
+                    print(num_runs)
+                    print("acc dropped: ", acc)
+                    print("acc stolen", stolen)
+                    print("acc PO", PO)
                     a_acc.append(acc)
                     a_sto.append(stolen)
                     a_PO.append(PO)

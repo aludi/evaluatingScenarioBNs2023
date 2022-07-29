@@ -5,6 +5,12 @@ net {
   node_size = (50 50);
 }
 
+node object_dropped_accidentally_0 {
+   states = (0 1 );
+   label = "object_dropped_accidentally_0";
+   ID = "object_dropped_accidentally_0";
+}
+
 node motive_1_0 {
    states = (0 1 );
    label = "motive_1_0";
@@ -21,12 +27,6 @@ node stealing_1_0 {
    states = (0 1 );
    label = "stealing_1_0";
    ID = "stealing_1_0";
-}
-
-node object_dropped_accidentally_0 {
-   states = (0 1 );
-   label = "object_dropped_accidentally_0";
-   ID = "object_dropped_accidentally_0";
 }
 
 node E_psych_report_1_0 {
@@ -53,84 +53,112 @@ node E_object_gone_0 {
    ID = "E_object_gone_0";
 }
 
-potential (motive_1_0) {
-   data = (  0.932836 0.0671642);
+potential (object_dropped_accidentally_0) {
+   data = (  0.693613 0.306387);
+}
+
+potential ( motive_1_0 | object_dropped_accidentally_0   ) {
+   data = 
+   ((   0.947482   0.052518)   % object_dropped_accidentally_0=0   
+   (   0.998371   0.00162866));   % object_dropped_accidentally_0=1   
 }
 
 potential ( sneak_1_0 | motive_1_0   ) {
    data = 
-   ((   0.998667   0.00133333)   % motive_1_0=0   
-   (   0.0185185   0.981481));   % motive_1_0=1   
+   ((   0.999482   0.000518135)   % motive_1_0=0   
+   (   0.0135135   0.986486));   % motive_1_0=1   
 }
 
 potential ( stealing_1_0 | motive_1_0   sneak_1_0   ) {
    data = 
-   (((   0.999332   0.000667557)   % sneak_1_0=0   motive_1_0=0   
+   (((   0.999741   0.000259202)   % sneak_1_0=0   motive_1_0=0   
    (   0.5   0.5))   % sneak_1_0=1   motive_1_0=0   
    ((   0.5   0.5)   % sneak_1_0=0   motive_1_0=1   
-   (   0.00943396   0.990566)));   % sneak_1_0=1   motive_1_0=1   
+   (   0.00684932   0.993151)));   % sneak_1_0=1   motive_1_0=1   
 }
 
-potential ( object_dropped_accidentally_0 | sneak_1_0   ) {
+potential ( E_psych_report_1_0 | motive_1_0   stealing_1_0   ) {
    data = 
-   ((   0.646667   0.353333)   % sneak_1_0=0   
-   (   0.981481   0.0185185));   % sneak_1_0=1   
-}
-
-potential ( E_psych_report_1_0 | sneak_1_0   stealing_1_0   ) {
-   data = 
-   (((   0.999332   0.000667557)   % stealing_1_0=0   sneak_1_0=0   
-   (   0.5   0.5))   % stealing_1_0=1   sneak_1_0=0   
-   ((   0.5   0.5)   % stealing_1_0=0   sneak_1_0=1   
-   (   0.462264   0.537736)));   % stealing_1_0=1   sneak_1_0=1   
+   (((   0.999741   0.000259202)   % stealing_1_0=0   motive_1_0=0   
+   (   0.5   0.5))   % stealing_1_0=1   motive_1_0=0   
+   ((   0.5   0.5)   % stealing_1_0=0   motive_1_0=1   
+   (   0.609589   0.390411)));   % stealing_1_0=1   motive_1_0=1   
 }
 
 potential (E_camera_1) {
-   data = (  0.868159 0.131841);
+   data = (  0.861277 0.138723);
 }
 
-potential ( E_camera_seen_stealing_1_0 | E_psych_report_1_0   E_camera_1   ) {
+potential ( E_camera_seen_stealing_1_0 | E_psych_report_1_0   sneak_1_0   E_camera_1   stealing_1_0   motive_1_0   ) {
    data = 
-   (((   0.999261   0.000738552)   % E_camera_1=0   E_psych_report_1_0=0   
-   (   0.994845   0.00515464))   % E_camera_1=1   E_psych_report_1_0=0   
-   ((   0.97619   0.0238095)   % E_camera_1=0   E_psych_report_1_0=1   
-   (   0.5   0.5)));   % E_camera_1=1   E_psych_report_1_0=1   
+   ((((((   0.999962   3.76478e-05)   % motive_1_0=0   stealing_1_0=0   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=0   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=0   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=0   
+   (   0.5   0.5)))   % motive_1_0=1   stealing_1_0=1   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=0   
+   (((   0.999767   0.0002331)   % motive_1_0=0   stealing_1_0=0   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=0   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=0   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=0   
+   (   0.5   0.5))))   % motive_1_0=1   stealing_1_0=1   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=0   
+   ((((   0.5   0.5)   % motive_1_0=0   stealing_1_0=0   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=0   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=0   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=0   
+   (   0.998442   0.00155763)))   % motive_1_0=1   stealing_1_0=1   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=0   
+   (((   0.5   0.5)   % motive_1_0=0   stealing_1_0=0   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=0   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=0   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=0   
+   (   0.0151515   0.984848)))))   % motive_1_0=1   stealing_1_0=1   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=0   
+   (((((   0.5   0.5)   % motive_1_0=0   stealing_1_0=0   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=1   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=1   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=1   
+   (   0.5   0.5)))   % motive_1_0=1   stealing_1_0=1   E_camera_1=0   sneak_1_0=0   E_psych_report_1_0=1   
+   (((   0.5   0.5)   % motive_1_0=0   stealing_1_0=0   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=1   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=1   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=1   
+   (   0.5   0.5))))   % motive_1_0=1   stealing_1_0=1   E_camera_1=1   sneak_1_0=0   E_psych_report_1_0=1   
+   ((((   0.5   0.5)   % motive_1_0=0   stealing_1_0=0   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=1   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=1   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=1   
+   (   0.997409   0.00259067)))   % motive_1_0=1   stealing_1_0=1   E_camera_1=0   sneak_1_0=1   E_psych_report_1_0=1   
+   (((   0.5   0.5)   % motive_1_0=0   stealing_1_0=0   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=1   
+   (   0.5   0.5))   % motive_1_0=1   stealing_1_0=0   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=1   
+   ((   0.5   0.5)   % motive_1_0=0   stealing_1_0=1   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=1   
+   (   0.984848   0.0151515))))));   % motive_1_0=1   stealing_1_0=1   E_camera_1=1   sneak_1_0=1   E_psych_report_1_0=1   
 }
 
-potential ( E_object_gone_0 | sneak_1_0   object_dropped_accidentally_0   stealing_1_0   motive_1_0   E_camera_seen_stealing_1_0   ) {
+potential ( E_object_gone_0 | stealing_1_0   motive_1_0   sneak_1_0   object_dropped_accidentally_0   E_camera_seen_stealing_1_0   ) {
    data = 
-   ((((((   0.999871   0.000129099)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   
-   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   
-   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   
-   (((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   
-   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   
-   (   0.5   0.5))))   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   
-   ((((   0.00023663   0.999763)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   
-   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   
-   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   
-   (((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   
-   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   
-   (   0.5   0.5)))))   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   
-   (((((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   
-   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   
-   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   
-   (((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   
-   ((   0.0012987   0.998701)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   
-   (   0.0151515   0.984848))))   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   
-   ((((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   
-   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   
-   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   
-   (((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   
-   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   motive_1_0=0   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   
-   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   
-   (   0.5   0.5))))));   % E_camera_seen_stealing_1_0=1   motive_1_0=1   stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   
+   ((((((   0.999953   4.74879e-05)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=0   stealing_1_0=0   
+   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=0   stealing_1_0=0   
+   ((   0.000102103   0.999898)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=0   stealing_1_0=0   
+   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=0   stealing_1_0=0   
+   (((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=0   stealing_1_0=0   
+   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=0   stealing_1_0=0   
+   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=0   stealing_1_0=0   
+   (   0.5   0.5))))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=0   stealing_1_0=0   
+   ((((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=1   stealing_1_0=0   
+   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=1   stealing_1_0=0   
+   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=1   stealing_1_0=0   
+   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=1   stealing_1_0=0   
+   (((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=1   stealing_1_0=0   
+   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=1   stealing_1_0=0   
+   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=1   stealing_1_0=0   
+   (   0.5   0.5)))))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=1   stealing_1_0=0   
+   (((((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=0   stealing_1_0=1   
+   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=0   stealing_1_0=1   
+   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=0   stealing_1_0=1   
+   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=0   stealing_1_0=1   
+   (((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=0   stealing_1_0=1   
+   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=0   stealing_1_0=1   
+   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=0   stealing_1_0=1   
+   (   0.5   0.5))))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=0   stealing_1_0=1   
+   ((((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=1   stealing_1_0=1   
+   (   0.5   0.5))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=0   motive_1_0=1   stealing_1_0=1   
+   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=1   stealing_1_0=1   
+   (   0.5   0.5)))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=0   motive_1_0=1   stealing_1_0=1   
+   (((   0.000917431   0.999083)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=1   stealing_1_0=1   
+   (   0.0151515   0.984848))   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=0   sneak_1_0=1   motive_1_0=1   stealing_1_0=1   
+   ((   0.5   0.5)   % E_camera_seen_stealing_1_0=0   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=1   stealing_1_0=1   
+   (   0.5   0.5))))));   % E_camera_seen_stealing_1_0=1   object_dropped_accidentally_0=1   sneak_1_0=1   motive_1_0=1   stealing_1_0=1   
 }
 
 

@@ -12,45 +12,45 @@ Repeated entry---line 1229 of file masterThesisCitations.bib
  :               ,
 I'm skipping whatever remains of this entry
 Warning--empty journal in wieten2019
-You've used 32 entries,
+You've used 33 entries,
             1935 wiz_defined-function locations,
-            685 strings with 9305 characters,
-and the built_in function-call counts, 12662 in all, are:
-= -- 1233
-> -- 503
-< -- 24
-+ -- 177
-- -- 163
-* -- 1047
-:= -- 2196
-add.period$ -- 99
-call.type$ -- 32
-change.case$ -- 228
-chr.to.int$ -- 32
-cite$ -- 33
-duplicate$ -- 507
-empty$ -- 913
-format.name$ -- 213
-if$ -- 2500
+            691 strings with 9433 characters,
+and the built_in function-call counts, 12982 in all, are:
+= -- 1263
+> -- 516
+< -- 25
++ -- 181
+- -- 167
+* -- 1071
+:= -- 2254
+add.period$ -- 102
+call.type$ -- 33
+change.case$ -- 234
+chr.to.int$ -- 33
+cite$ -- 34
+duplicate$ -- 521
+empty$ -- 936
+format.name$ -- 220
+if$ -- 2563
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 36
-newline$ -- 162
-num.names$ -- 100
-pop$ -- 223
+missing$ -- 38
+newline$ -- 167
+num.names$ -- 103
+pop$ -- 231
 preamble$ -- 1
-purify$ -- 236
+purify$ -- 243
 quote$ -- 0
-skip$ -- 371
+skip$ -- 381
 stack$ -- 0
-substring$ -- 857
-swap$ -- 69
+substring$ -- 869
+swap$ -- 70
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 180
+type$ -- 184
 warning$ -- 1
-while$ -- 103
+while$ -- 105
 width$ -- 0
-write$ -- 417
+write$ -- 430
 (There were 2 error messages)

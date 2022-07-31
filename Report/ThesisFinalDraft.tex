@@ -48,10 +48,9 @@ However, creating and using BNs is far from straightforward for both the builder
 
 These evaluation criteria, however, do do not always sufficiently safeguard against an incorrect network, which is a network that predicts the `wrong' outcome based on some set of evidence. A BN for crimes should be accurate across all possible evidence states, since, if we want to use BNs in court and not model court cases afterwards, we do not know at the start what the state of the evidence will be. However, in general, it is hard for modellers to rationally consider all possible evidence states. A network might respond well to situations where all evidence as presented in the trial is present, but predict the wrong outcome when one evidence node is turned to a different value. This brings up questions about the use of BNs in general: do we really need to consider these states where the evidence is different from the evidence as presented in the trial? Since specifying the joint probability distribution is necessary in BNs, we have to specify all of these numbers. Anyway, if we want to take BNs seriously, they need to be correct over all possible evidence states.
 
- The aim of this project is to define a method for the modeller to evaluate the BN over all possible evidence states, by grounding the BN in an agent-simulation of a crime. We can model crime cases using simulations to a level of realism we desire, measure the frequencies of events that emerge out of this simulation by running the simulation multiple times. In the agent-based system, we have full control over and full knowledge of the world that we are reasoning about, hence we can create a grounding that can be used to evaluate the BN. We can test whether our method of evaluating all possible evidence states works by comparing the predicted output of the BN with the frequency information about the output from the simulation. Then, we will discuss whether it is plausible that this method of evaluation generalises to real life\footnote{The simulation can be interacted with at \url{https://shielded-journey-34533.herokuapp.com} \\ Code for this project can be found at \url{https://github.com/aludi/simulationTest}}.
+ The aim of this project is to define a method for the modeller to evaluate the BN over all possible evidence states, by grounding the BN in an agent-simulation of a crime. We can model crime cases using simulations to a level of realism we desire, measure the frequencies of events that emerge out of this simulation by running the simulation multiple times. In the agent-based system, we have full control over and full knowledge of the world that we are reasoning about, hence we can create a grounding that can be used to evaluate the BN. We can test whether our method of evaluating all possible evidence states works by comparing the predicted output of the BN with the frequency information about the output from the simulation. Then, we will discuss whether it is plausible that this method of evaluation generalises to real life\footnote{The simulation can be interacted with at \url{https://shielded-journey-34533.herokuapp.com} \\ Code for this project can be found at \url{https://github.com/aludi/simulationTest}}. More generally, we want to investigate to what extent simulations can be useful as a tool to investigate Bayesian Networks. We can choose to investigate Bayesian Network methods, such as idiom-structure, the accuracy and use of elicitation, or we can choose to investigate whether simulations are a good modelling primitive for investigating reasoning with evidence in criminal cases. This thesis discusses both of these aspects.
  
  
- \textcolor{red} {something more general here about using simulations to test for BNS}
 
 \newpage
 
@@ -75,7 +74,7 @@ The third direction is via probabilistic approaches, where hypotheses and eviden
 
 \subsection{Bayesian Networks}
 
-A Bayesian Network (BN) is a directed acyclic graph that represents the joint probability distribution over a set of events \citep{pearl1988b}. BNs consists of nodes, arcs and conditional probability tables. A node is a random variable that represents an events. An arc represent a conditional relationships between two events, linking two nodes together. The two nodes are the parent and the child node, the probabilities in the child node are conditioned on the value that the parent node takes. The specification of these conditional probabilities is done in the conditional probability tables (CPT) of each node.
+A Bayesian Network (BN) is a directed acyclic graph that represents the joint probability distribution over a set of events \citep{pearl1988b}. BNs consists of nodes, arcs and conditional probability tables. A node is a random variable that represents an events. An arc represent a conditional relationships between two events, linking two nodes together. The two nodes are the parent and the child node, the probabilities in the child node are conditioned on the value that the parent node takes. The specification of these conditional probabilities is done in the conditional probability tables (CPT) of each node. As described in \citep{russellNorvig2010}:
 
  \textcolor{red} {under construction}
 
@@ -147,14 +146,14 @@ To update to our network let us say that we found $B$, so there are bullet casin
 So now we have found the posterior of $S$, our belief in $S$ has increased from its prior probability of $0.05$, to its posterior probability of $0.808$, given evidence $B$. On the other hand, if we do not find bullet casings on the ground, our belief that the suspect shot the victim decreases from 00.5 to 0.012. 
 
 
-Hence, we can exactly specify how our belief in a hypothetical event changes given all possible values of the evidence.This is the simplest form of Bayesian reasoning, with one piece of evidence, and one hypothesis. The general form of the update is more complicated (see ....).
+Hence, we can exactly specify how our belief in a hypothetical event changes given all possible values of the evidence.This is the simplest form of Bayesian reasoning, with one piece of evidence, and one hypothesis. The general form of the update is more complicated and has high complexity (see ....). We can use exact inference or approximate inference.
 
 
 In real-life situations, we are constantly reasoning with many pieces of evidence that might be conditioned on more than one parent node, resulting in tedious and error-prone calculations if we would do them manually. This is where Bayesian Networks are useful. 
 
 
 
-We can outsource the Bayesian calculation to the BN, however, the network itself has to be constructed in some way. This can be done by hand by modellers, in (proprietary) software with a GUI like AgenaRisk or Hugin. They can also be built, by hand, or automatically constructed from datasets in PyAgrum, \citep{pyagrum2020}, a free Python software package. In this project, PyAgrum was used.
+We can outsource the Bayesian calculation to the BN, however, the network itself has to be constructed in some way. This can be done by hand by modellers, in (proprietary) software with a GUI like AgenaRisk or Hugin. They can also be built, by hand, or automatically constructed from datasets in PyAgrum, \citep{pyagrum2020}, a free Python software package. In this project, PyAgrum was used, using the LazyPropagation algorithm, which uses exact inference.
 
 
 
@@ -172,7 +171,7 @@ There are other ways of evaluating BNs than accuracy. The evaluation methods use
 
 \item \textbf{Sensitivity analysis}
 
-Sensitivity analysis tests the effect of small parameter changes in the CPTs of nodes on the outcome of the network. This is useful if the outcome of the network hinges on elicited or subjectively estimated probabilities. A sensitivity value of near 0 means that at the point of the CPT, a `small' change in the parameter would result in an infinitesimally small change in the output probability. That the CPT is not sensitive at all and a misestimation might not matter so much. However, a large sensitivity value means that the value is very sensitive to change : a small change in CPT might result in a meaningfully different output.  Since Bayesian Networks have many parameters per node, it is not trivial to perform a sensitivity analysis that takes into account all the nodes in the network, and interpret the results in a meaningful way - this would be an $n$-way sensitivity analysis \citep{gaag2007}.  
+Sensitivity analysis tests which (parent) nodes have the greatest effect on a given target node. With sensitivity analysis, we can describe how much the target node will change if we make small changes in the conditional probability tables of those parent nodes \citep{fentonNeil2013}. This is useful if the outcome of the network hinges on elicited or subjectively estimated probabilities, since we cannot apply methods like accuracy to a subjectively estimated probability, as we are usually working with extremely limited data. Hence, sensitivity analysis can be used to `sanity-check' elicited probabilities. If the target node is influenced by nodes that are unexpected given the causal relations that we are modelling, something probably has gone wrong. Since Bayesian Networks have many parameters per node, it is not trivial to perform a sensitivity analysis that takes into account all the nodes in the network and interpret the results in a meaningful way - this would be an $n$-way sensitivity analysis \citep{gaag2007}. We can also only define sensitivity analysis only for a given value of evidence: change the state of the evidence, and we might find different sensitivity values \citep{fentonNeil2013}. Various forms of sensitivity analysis are implemented in AgenaRisk and Hugin.
 
 In \citet{vlek2016}, sensitivity analysis is mentioned, but not applied. On the other hand, in \citet{Fenton2019}, each individual hypothesis node is subjected to sensitivity analysis, to find out for how each of the parameters in the nodes need to change in order to result in a 0.95 or a 0.99 posterior for guilt. There are only a few ways that individual nodes can change that would result in a high probability of guilt, from which the authors interpret that the constructed BN is robust to small inaccuracies in subjectively elicited CPTs. However, in the paper, this is only shown for one evidence state. It is not clear how the BN would respond to `counterfactual' pieces of evidence.
 
@@ -216,13 +215,15 @@ Our goal is to establish a method for evaluating BNs by preventing overfitting o
 We start our process with one or more written scenarios. These scenarios can be obtained from abridged or simplified court case descriptions of the crime, or they can be wholly fictional (such as in this paper). The scenarios should contain all and only those hypotheses and evidence that are relevant to the case. Both the prosecution and the defence should be able to select relevant events and their evidence. 
 
 \subsection{Simulation}
-We can think of the simulation as having two parts: a model of reality, and a way of observing the model by observing variables that the modellers deem interesting. In this paper, the model of reality is an agent-based simulation, and the observation procedure are random variables (or, reporters), which become nodes in the BN.
+We can think of the simulation as having two parts: a model of reality, and a way of observing the model by observing variables that the modellers deem interesting. In this paper, the model of reality is an agent-based simulation, and the observation procedure are random variables (or, reporters), which become nodes in the BN. Specifics about the model are explained in the next section.
 
-The agent-based simulation is a simulation that should include the possibilities for all the scenarios as outlined in step 1. It should contain agents, objects and an environment. The level of detail or real-world validation at which agents, objects and environments are modelled depend on the purposes of the environment.
+\subsubsection{Model}
 
- \textcolor{red} {go into more detail about constructing simulation here, use the BG}
+The agent-based simulation is a simulation that should include the possibilities for all the scenarios as outlined in step 1. It should contain agents, objects and an environment. The agents should traverse the environment, interacting with each other and using objects to be able to do certain interactions (think about stealing an object, or opening a door with a key).
 
+The level of detail or real-world validation at which agents, objects and environments are modelled depend on the purposes of the simulation. We can build a simulation in which agents behave according to a certain criminological theory (such as in \citep{Zhu2021}), in order to investigate how well the outcomes of this simulation line up with data as gathered in reality. However, in this paper, we are focussing on using simulations as a grounding to investigate Bayesian Networks. The detail of the simulation should be kept to the smallest complexity that is possible: it should be complex enough that Bayesian Networks can be usefully applied to it (eg: there should be uncertainty, conditional probabilities, and different states). The focus should be on modelling those nodes, and only those nodes, that are relevant for the Bayesian Network method aspect that is under investigation (for example, creating a simulation to ground a network about the opportunity prior \citep{Fenton2017} or the scenario-idiom \citep{vlek2016}, in this thesis `reasoning with evidence' in general and evaluating BNs over all possible evidence states specifically). The simulation should not be made more complicated than necessary to limit debugging time and complexity.
 
+\subsubsection{Reporters}
 
 In the simulation, certain events can be brought about. Any one of the above-mentioned events can happen. We need a way to observe these states: this is where reporters come in. A reporter is a random variable that is reports the outcome of a relevant event in the simulation and is embedded in the code. If an event happens (or does not happen), the reporter reports that the event is true (or false). In essence, the reporter ($R$) is a random variable (RV). In short, a random variable is a function that maps an event ($e$) to a truth value:
 
@@ -255,18 +256,15 @@ Due to this ordering constraint, the K2 algorithm is efficient. However, finding
 We can evaluate the response of the Bayesian Network using the effect of cumulative evidence on the posterior probability of the output nodes. This means that we order the evidence nodes chronologically, then instantiate every evidence node to a truth value (either T or F) in order. Then, we measure the posterior probability of all output nodes. This results in a diagram or table where we can see the evidence strength of each piece of true or false evidence reflected. We propose a method for evaluating Bayesian Networks over all possible global evidence states in this paper. This method is described here.
 
 \begin{enumerate}
-\item Select all evidence nodes (a total of $e$ states).
-\item Order the evidence nodes chronologically.
-\item Create a baseline 1) Select all possible evidence states. An evidence state is a valuation of evidence, where for every evidence node, a truth value is specified. For this simulation, an evidence state could look like (1, 0, 0, 1), which would correspond to finding that the psychological report is true, the agent was seen on camera, but not seen stealing, and the object was lost.
-
-If there is enough data available, as is the case in our simulation, we can extract all possible evidence states automatically. If we do not have enough data, we need to manually consider each evidence state (start with $2^e$ states, ask an elicitor to delete states that are not possible).
-\item Create a baseline 2). For each possible evidence state, create a total probability distribution over all possible output states. Speaking generically about two alternative, non-mutually exclusive outcomes scenario 1 (scn1) and scenario 2 (scn2), we need to find a probability distribution over $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$ that is constrained by $P(scn1) + P(\neg scn1 \land scn2) + P(\neg scn1 \land \neg scn2) = 1$. Or, a weaker version, we create a preference ordering on $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$, without specifying probabilities. 
-
-In our simulation, or in data-rich environments, we can automatically create this total probability distribution, since we can count the conditional frequencies that occur in simulation. In real life, a preference ordering or probability distribution over the possible outcomes would need to be elicited by modellers from experts.
-
-\item For every possible evidence state, turn the relevant nodes in the BN on in order. At each step, record the posterior probability over the output nodes. Automatically convert the probability distribution over the outcomes into a preference ordering.
-\item Compare the BN prediction of output nodes given evidence to the prediction establishes in step 4). Once all evidence is added, we can calculate the divergence of the BN prediction and the actual frequency in the simulation by \[|P(output|E) - F(output|E)|\], where $E$ is the total set of evidence in a given state.
-\item Calculate the total accuracy per output node by \[\frac{\sum_{i=0}^{e}|P(output | E_i) - F(output| E_i)|}{e}\] For the preference ordering, we do the same, only we calculate a counting score: when the preference ordering extracted from the BN is the same as the one from the simulation, we give a point, otherwise we do not, then average this over all sets of evidence.
+\item \textbf{Selection} Select all evidence nodes (a total of $e$) and the relevant outputs $O$.
+\item \textbf{Order} Order the evidence nodes. The order can be chronological, or can be the order that the evidence was presented in a court case. Ordering is not necessary for the calculating the posterior on all evidence, but consistency makes comparing figures like ~\ref{} and ~\ref{} possible.
+\item \textbf{Collect} Collect all evidence states. This is the set of $2^e$ combinations of evidence. An evidence state is a valuation of evidence, where for every evidence node, a truth value is specified. 
+\item \textbf{Subset} From the previous step, select only the possible evidence states. We can extract the possible evidence states automatically from a simulation: we run it many times, and select the states that occur at least once in the outcome. The possible evidence states can also be elicited from experts by asking them to manually consider each evidence state.
+\item \textbf{Frequencies} For every possible evidence state, calculate the frequency distribution of the relevant outputs $O$ by finding the frequency at which every outcome occurs, for every evidence state. Speaking generically about two alternative, non-mutually exclusive outcomes scenario 1 (scn1) and scenario 2 (scn2), we need to find a probability distribution over $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$ that is constrained by $P(scn1) + P(\neg scn1 \land scn2) + P(\neg scn1 \land \neg scn2) = 1$. Or, a weaker version, we create a preference ordering on $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$, without specifying probabilities. 
+We can automatically create the frequency distribution over outcomes for all states of evidence from the data gathered in the simulation. If we do not have access to frequency data, then subjective frequencies (or a preference ordering over the output) need to be elicited from experts.
+\item \textbf{Setting} For every possible evidence state, turn the relevant nodes in the BN on in order. At each step, record the posterior probability over the outputs. Automatically convert the probability distribution over the outcomes into a preference ordering.
+\item \textbf{Comparison} Compare the BN prediction of output nodes given evidence to the frequency distribution as established in step 5). Once all evidence is added, we can calculate the divergence of the BN prediction and the actual frequency given the cumulative evidence $E$ in the simulation by \[|P(output|E) - F(output|E)|\]
+\item \textbf{Accuracy} Calculate the total accuracy per output node by \[\frac{\sum_{i=0}^{e}|P(output | E_i) - F(output| E_i)|}{e}\] For the preference ordering, we do the same, only we calculate a counting score: when the preference ordering extracted from the BN is the same as the one from the simulation, we give a point, otherwise we do not, then average this over all sets of evidence.
 \end{enumerate}
 
 
@@ -279,7 +277,7 @@ We illustrate the method by means of applying it to a case study of a robbery at
 \subsection{Experimental Set-up}
 BNs were created and evaluated based on different number of runs, to evaluate how the accuracy of the BN depends on the data available to it. 
 
-We want to create both a ground truth, that are the frequencies that we're interested in, and then the probabilities that are going to approximate it so that we can check the accuracy of the network. To find the ground truth, we need to find the limiting frequencies of the events in the simulation, the simulation was run 10,000 times. One thing we want to find out is the necessity of precision on the outcome of the networks. This was done by changing the number of runs that the BN was created on. The different number of runs of the simulation were [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000~] for creating the BNs.
+We want to create both a ground truth, that are the frequencies that we're interested in, and then the probabilities that are going to approximate it so that we can check the accuracy of the network. To find the ground truth, we need to find the limiting frequencies of the events in the simulation, the simulation was run 10,000 times. One thing we want to find out is the necessity of precision on the outcome of the networks. This was done by changing the number of runs that the BN was created on. The different number of runs of the simulation were [1, 50, 100, 300, 500, 750, 1000~] for creating the BNs.
 
 
 Every simulation was run for 100 steps, or until both agents were in their target states. 
@@ -310,7 +308,7 @@ Now we need a way to transform the natural language descriptions of the events i
 
 
 
-\subsubsection{Agents} 
+\subsubsection{Model} 
 
 
 Agents can interact with other agents and with their environment. Every agent has features, functions and roles associated with them. The agents in this simulation are created from the MESA agent class. These are goal-based agents.
@@ -327,7 +325,16 @@ All agents have the following \textbf{attributes}:
 \item [age] The thief's age was 25, the victimt's age was drawn from a uniform distribution between 60 and 90.
 \item [risk threshold] The risk threshold for the victim agent was set to 5000, such that it is never worth for it to steal, the risk threshold for the thief is randomly drawn from a uniform distribution between 800 and 1200.
 \item [age threshold] The age threshold signifies at what age an agent considers another agent vulnerable: older agents are more vulnerable than younger agents. The victim's age threshold is set to 100, it will only steal from agents that are 100 years or older. The thief's threshold is randomly drawn from a uniform distribution between 50 and 100.
-\item [steal state] The possible steal states are: MOTIVE, SNEAK, STEALING, SUCCESS, N, DONE, LOSER.
+\item [steal state] The possible steal states are described as follows:
+	\begin{description}
+	\item[N] Initial state and state that the agent returns to if they fail to perform the task assigned by their state
+	\item [MOTIVE] Agent has selected a target (target is vulnerable and object is valuable)
+	\item [SNEAK] Agent moves towards target's position
+	\item[STEALING] Agent is near target and attempts to steal
+	\item[SUCCESS] Agent has successfully stolen object
+	\item[DONE] Agent has reached their goal location
+	\item[LOSER] Agent has been stolen from
+	\end{description}
 \end{description}
 
 All agents have the following \textbf{actions}:
@@ -346,15 +353,11 @@ All agents have the following \textbf{actions}:
 
 
 
-
-
-\subsubsection{Environment}
-
 The environment is a discrete grid of size $x=75$, $y = 50$ that represents the geography of the Grote Markt. The real area of interest is approximately 425m x 280m, as estimated by the distance tool on Google Maps. This means that one cell in the simulation is equivalent to a square of 5.6m x 5.6m in real life. An agent can move 1 cell per time-step, which means that, given an average human walking speed of 1.4m/s \footnote{\url{https://en.wikipedia.org/wiki/Preferred_walking_speed}}, one time-step is equivalent to 4 seconds in real life. For the purposes of this simulation, this spatial and time resolution is high enough.
 
 To simulate which parts of the Grote Markt were accessible to the agents, we had to convert a map image of the Grote Markt into an agent-readable world. This was done by writing a method to convert screenshots of maps into an agent-readable environment. The map was screenshotted from \url{http://maps.stamen.com/terrain/#18/53.21618/6.57225} and converted into greyscale. A grid was overlaid on the image. On the greyscale map, the color of the buildings was in the range of (189, 199): cells within this range were coded as `inaccessible', since agents cannot walk through buildings. All other cells were `accessible'. This resulted in a map shared by all agents that constrained their movements. The map constrains both vision and movement of the agent: we used this map to calculate the sight lines of both cameras and agents. An agent or a camera can only see another agent if there are no `inaccessible' grid cell on the sight line between the two, and the other agent is within their visual range. The environment is shown in Figure~\ref{groteMarkt}.
  
- \subsubsection{Objects} 
+
  There are two types of objects in the simulations, which are the valuable object, and the cameras. 
 
  In the scenario, an object is described as being in the possession of agents, or lost accidentally. In this simulation, the object was operationalized as being a feature of the agent, and not as an individual thing by itself.
@@ -376,7 +379,7 @@ The operationalisation of the random variables is described below.
 \item[(O) stealing\_1\_0 ] agent 1's steal state is STEALING.
 \item[(O) object\_dropped\_accidentally\_0 ] At every epoch, there is a 1/500 probability that the victim agent will drop the object by accident. If the object is dropped, this reporter is turned on.
 \item[(E) E\_camera\_1 ] agent 1 is seen on any one of the cameras.
-\item[(E) E\_psych\_report\_1\_0 ] if the thief has a motive, we draw an estimated risk threshold and an estimated age threshold from two normal distributions (mean = victim age, sd = 20), (mean = value good, sd = 100). If the victim is older than the thief's minimal age threshold, and the object more valuable, we estimate that the psych profile states that the victim fits the thief's profile, else not. This is not represented spatially in the simulation itself.
+\item[(E) E\_psych\_report\_1\_0 ] indicates a `psychological profile' for the thief, to establish whether they would be able to steal the object or not. If the thief does not have a motive, there is no chance that it is picked (in-simulation), hence no psych report is established, the reporter remains 0. If the thief has a motive, there is a 0.9 probability that the psych report indicated that the thief is capable of stealing, and 0.1 probability that the thief could not have stolen the object. In this second case, the psych report is incorrect. This reporter is not represented spatially in the simulation.
 \item[(E) E\_camera\_seen\_stealing\_1\_0 ]  if any camera sees agent 1 when agent 1's steal state is STEALING.
 \item[(E) E\_object\_gone\_0 ] if the object is dropped accidentally, or if the object has been stolen.
 \end{description}
@@ -411,35 +414,50 @@ A global state where the thief stole the object and all the evidence pointed in 
 
 
 \subsection{Construction}
-The baseline was created by running the simulation for 10,000 runs. Then, to test to what extent the number of runs (=the amount of data available to the K2 algorithm) influences the accuracy of the network, for each of [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000~] runs, the collection of runs $O$ was passed to the K2 algorithm, that generated a network.
+The baseline was created by running the simulation for 10,000 runs. Then, to test to what extent the number of runs (=the amount of data available to the K2 algorithm) influences the accuracy of the network, for each of [1, 50, 100, 300, 500, 750, 1000~] runs, the collection of runs $O$ was passed to the K2 algorithm, that generated a network.
 
 The K2 algorithm requires an ordering on the nodes. In all number of runs, this ordering was 
-[object dropped, motive, sneak, stealing, psych report, camera, cameraStealing, object gone]. This ordering was determined by considering the hypothesis-nodes first, and all evidence at the end. This is because evidence nodes are usually children of the hypothesis nodes. The hypothesis nodes belong to two different scenarios: scenario 1 is the motive-sneak-steal scenario, and scenario 2 is the object-dropped scenario. Placing object-dropped/scn 2 first, instead of 'motive'/scn1 is not arbitrary, there is a causality at play: if the agent drops the object, the thief cannot have a motive to steal the object, yet, having a motive does not `cause' or `condition' the object to drop. Hence, the `accidental drop' could be the parent node (if we're taking a causal interpretation).
+[object\_dropped\_accidentally\_0, motive\_1\_0, sneak\_1\_0, stealing\_1\_0, E\_psych report\_1\_0, E\_camera\_1, E\_camera\_seen\_stealing\_1\_0, E\_object\_gone\_0]. This ordering was determined by considering the hypothesis-nodes first, and all evidence at the end. We want evidence nodes to be the children of hypotheses nodes, to follow the hypothesis-evidence idiom as established by Fenton. This means that we have to add them the latest in the ordering, so that they will not be parent nodes to hypothesis nodes. The hypothesis nodes belong to two different scenarios: scenario 1 is the motive-sneak-steal scenario, and scenario 2 is the accidental-object-dropped scenario (scn2). Placing scn2 before scn1 in the ordering is not arbitrary. We have to invoke causality in order to establish that this is a sensible ordering: if the agent drops the object, the thief cannot have a motive to steal the object, yet, having a motive does not `cause' or `condition' the object to drop. Hence, the `object\_dropped\_accidentally\_0' should be the parent node, if we're taking a causal interpretation. We are not required to place scn2 before scn1 in the ordering if we are only using conditional probabilities as constraint.
  
 
 
 \subsection{Evaluation}
 \begin{enumerate}
 \item The evidence nodes of the network are the 4 (binary) nodes marked with an `E', which are [E\_camera\_1, E\_camera\_seen\_stealing\_1\_0, E\_object\_gone\_0, E\_psych\_report\_1\_0].
-\item The chronological order of this according to the simulation is:  [E\_camera\_1, E\_psych\_report\_1\_0, E\_camera\_seen\_stealing\_1\_0, E\_object\_gone\_0,]
-\item We create a baseline by running the simulation 10,000 times. We assume that events have reached their limited frequency at this point and that all possible states have occurred. In essence, there are $2^4 = 16$ possible states, but we can eliminate $7$ of them, because they never occur in simulation. 
+\item We order of this according to the simulation is:  [E\_psych\_report\_1\_0, E\_camera\_1,  E\_camera\_seen\_stealing\_1\_0, E\_object\_gone\_0,]
+\item For this simulation, an evidence state could look like (1, 0, 0, 1), which would correspond to finding that the psychological report is true, the agent was seen on camera, but not seen stealing, and the object was lost.
 
-0000 ok
-0001 ok
-0010 no
-0011 no
-0100 ok
-0101 ok
-0110 no
-0111 ok
-1000 ok
-1001 ok
-1010 no
-1011 no
-1100 no
-1101 ok
-1110 no
-1111 ok
+\item We create a baseline by running the simulation 10,000 times. We assume that events have reached their limited frequency at this point and that all possible states have occurred. In essence, there are $2^4 = 16$ possible states, but we can eliminate $7$ of them, because they never occur in simulation. In Table~\ref{wake}, we present an overview of all possible states, the number of times they occur, and, if they do not occur at all, why they are impossible.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+state & remarks \\
+\hline
+(0, 0, 0, 0)  & ok\\
+(0, 0, 0, 1) & ok\\
+(0, 0, 1, 0) & we cannot have stealing on camera if the agent was not seen on camera\\
+(0, 0, 1, 1) & we cannot have stealing on camera if the agent was not seen on camera\\
+(0, 1, 0, 0) & ok\\
+(0, 1, 0, 1) & ok \\
+(0, 1, 1, 0) & we cannot have stealing on camera without the object being gone\\
+(0, 1, 1, 1) & ok\\
+(1, 0, 0, 0) & ok\\
+(1, 0, 0, 1) & ok\\
+(1, 0, 1, 0) & we cannot have stealing on camera without the object being gone\\
+(1, 0, 1, 1) & we cannot have stealing on camera if the agent was not seen on camera\\
+(1, 1, 0, 0) & we cannot have both psychological report, agent on camera, and not have stealing \\
+(1, 1, 0, 1) & ok\\
+(1, 1, 1, 0) & we cannot have stealing on camera without the object being gone\\
+(1, 1, 1, 1) & ok\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
+\label{wake}
+\end{table}
+
 
 \item We create the baseline by running the simulation. Baseline in Table~\ref{heretic}.
 
@@ -534,28 +552,28 @@ In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probabilit
 
 
 \begin{table}[htbp]
-\small
+\footnotesize
 \centering
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	runs				&	\multicolumn{2}{|c|}{50}  &	\multicolumn{2}{|c|}{100}	&	\multicolumn{2}{|c|}{300} &	\multicolumn{2}{|c|}{500}	&	\multicolumn{2}{|c|}{750}&	\multicolumn{2}{|c|}{1000}	\\
+	runs				&	\multicolumn{2}{|c|}{50}  &	\multicolumn{2}{|c|}{100}	&	\multicolumn{2}{|c|}{300} &	\multicolumn{2}{|c|}{500}	&	\multicolumn{2}{|c|}{750}&	\multicolumn{2}{|c|}{1000}	 & 	av	\\
 \hline
-	evidence						&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	\\
+	evidence						&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	&		\\
 \hline
-(0, 	0, 	0, 	1) 				& 	0.99 & 1.00&	1.00 & 1.00	&	0.99 & 0.99	& 	0.98 & 0.98	& 	0.99 & 0.99	& 	0.99 & 0.99	\\
-(0, 	0, 	0, 	0) 				& 	1.00 & 1.00&	1.00 & 1.00	&	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	\\
-(0, 	1, 	0, 	1) 				& 	0.98 & 0.98&	0.99 & 0.99	&	0.99 & 1.00	& 	0.98 & 0.98	& 	0.99 & 0.99	& 	0.92 & 0.92	\\
-(1, 	0, 	0, 	1) 				& 	0.47 & 0.21&	0.66 & 0.64	&	0.98 & 0.97	& 	0.95 & 0.95	& 	0.94 & 0.94	& 	0.96 & 0.96	\\
-(0, 	1, 	0, 	0) 				& 	0.89 & 0.85&	1.00 & 1.00	&	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	\\
-(1, 	1, 	0, 	1) 				& 	0.97 & 0.86&	0.20 & 0.20	&	0.75 & 0.75	& 	0.95 & 0.95	& 	0.94 & 0.94	& 	0.94 & 0.94	\\
-(1, 	1, 	1, 	1) 				& 	0.96 & 0.87&	0.95 & 0.98	&	0.95 & 0.96	& 	0.93 & 0.93	& 	0.95 & 0.95	& 	0.96 & 0.96	\\
-(1, 	0, 	0, 	0) 				& 	0.78 & 0.79&	0.56 & 0.80	&	0.88 & 0.96	& 	0.62 & 0.89	& 	0.93 & 0.98	& 	0.75 & 0.92	\\
-(0, 	1, 	1, 	1) 				& 	0.88 & 0.73&	0.53 & 0.42	&	0.87 & 0.84	& 	0.03 & 0.03	& 	0.71 & 0.70	& 	0.96 & 0.96	\\
+(0, 	0, 	0, 	1) 				& 	0.99 & 1.00&	1.00 & 1.00	&	0.99 & 0.99	& 	0.98 & 0.98	& 	0.99 & 0.99	& 	0.99 & 0.99 & 0.99	\\
+(0, 	0, 	0, 	0) 				& 	1.00 & 1.00&	1.00 & 1.00	&	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00& 1.00	\\
+(0, 	1, 	0, 	1) 				& 	0.98 & 0.98&	0.99 & 0.99	&	0.99 & 1.00	& 	0.98 & 0.98	& 	0.99 & 0.99	& 	0.92 & 0.92& 0.98	\\
+(1, 	0, 	0, 	1) 				& 	0.47 & 0.21&	0.66 & 0.64	&	0.98 & 0.97	& 	0.95 & 0.95	& 	0.94 & 0.94	& 	0.96 & 0.96& 0.80	\\
+(0, 	1, 	0, 	0) 				& 	0.89 & 0.85&	1.00 & 1.00	&	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00& 0.98	\\
+(1, 	1, 	0, 	1) 				& 	0.97 & 0.86&	0.20 & 0.20	&	0.75 & 0.75	& 	0.95 & 0.95	& 	0.94 & 0.94	& 	0.94 & 0.94& 0.78	\\
+(1, 	1, 	1, 	1) 				& 	0.96 & 0.87&	0.95 & 0.98	&	0.95 & 0.96	& 	0.93 & 0.93	& 	0.95 & 0.95	& 	0.96 & 0.96& 0.95	\\
+(1, 	0, 	0, 	0) 				& 	0.78 & 0.79&	0.56 & 0.80	&	0.88 & 0.96	& 	0.62 & 0.89	& 	0.93 & 0.98	& 	0.75 & 0.92& 0.82	\\
+(0, 	1, 	1, 	1) 				& 	0.88 & 0.73&	0.53 & 0.42	&	0.87 & 0.84	& 	0.03 & 0.03	& 	0.71 & 0.70	& 	0.96 & 0.96& 0.64	\\
 \hline
-total    						& 	0.88 &  0.81 & 0.766 &  0.781 &    0.934 &  0.941   &     0.827 &  0.857 &    0.939 &  0.943 &     0.942 &  0.961 \\
+total    						& 	0.88 &  0.81 & 0.766 &  0.781 &    0.934 &  0.941   &     0.827 &  0.857 &    0.939 &  0.943 &     0.942 &  0.961   & 0.88 \\
 \hline
 \end{tabular}
-\caption{ accuracy per state}
+\caption{Accuracy per state}
 \label{eye}
 \end{table}
 
@@ -575,7 +593,7 @@ The only evidence set where the BN does not reflect the ground truth, is for the
 
 When less data is available to the K2 algorithm, such as the case where the simulation was run for 10 times (Table~\ref{journal}), we find that the accuracy of the network decreases. This means that the network is less able to predict the right outcome across all possible evidence states.
 
-This method also allows us to see when the BN is assigning probability values to mutually exclusive nodes that violate probabilistic constraints. The joint probability over all three states (steal, drop, neither) can never be greater than 1, which means that none of the probability values of steal, drop, and neither, can be smaller than 0. However, in both Table~\ref{journal}, and Table~\ref{somebody}, we find that P(`neither') can sometimes be smaller than 0. This is also visible in the cumulative probability plots (see Figure~\ref{nobody} where for E\_camera\_seen\_stealing\_1\_0, the joint probability of outcomes $>$ 1). This shows that the mutually exclusive relation between stealing and dropping is not learned correctly in the network. This improves (but is not gone), when the K2 algorithm has access to more data.
+This method also allows us to see when the BN is assigning probability values to mutually exclusive nodes that violate probabilistic constraints. The joint probability over all three scenarios can never be greater than 1, which means that none of the probability values of `stealing\_1\_0', `object\_dropped\_accidentally\_0', and neither, can be smaller than 0. However, in both Table~\ref{journal}, and Table~\ref{somebody}, we find that P(`neither') can sometimes be smaller than 0. This is also visible in the cumulative probability plots (see Figure~\ref{nobody} where for E\_camera\_seen\_stealing\_1\_0, the joint probability of outcomes $>$ 1). This shows that the mutually exclusive relation between stealing and dropping is not learned correctly in the network. This improves (but is not gone), when the K2 algorithm has access to more data.
 
 
 This method of evaluating a BN over all states of cumulative evidence can distinguish between better and worse BNs, shows when a BN goes wrong and gives us insight in why that happens. Modellers of data-poor BNs are might think about creating an expected preference ordering on all possible evidence states, before starting to build and test the BN, in order to check whether their BN aligns with their common-sense predictions. If the BN is wrong, this is a sign that either the modeller's estimation is wrong, or that the probabilities as entered in the BN are not correctly representing your actual beliefs.
@@ -597,10 +615,11 @@ In order to do this, we created a network manually.
  
  \begin{enumerate} 
  
-\item structure of the scenarios: The other scenarios are 2: [object dropped], and 1: [motive, sneak, stealing]. Within scenarios, we create temporal connections, hence we only identify [motive $\rightarrow$ sneak $\rightarrow$ stealing] for now.
-\item) structure between scenarios. Using the causality thing identified earlier, we place `object dropped' scn2 before scn1. Resulting in the network [object dropped $\rightarrow$ motive $\rightarrow$ sneak $\rightarrow$ stealing]
-\item Adding the evidence nodes. For each node, we consider causality. Psych report relates to motive only, object gone to both stealing and dropped, then camera sees stealing only directed  to stealing node, with as parent `thief seen on camera'.  These reflect the causality in the situation.
-\item For each node, create CPTs. To simulate the idea that we do not have exact probabilities (from the simulation), we place restrictions on the probabilities that we can add to the CPTs. We can use [1, 0, 0.99, 0.01, 0.25, 0.75] only in the CPT. These correspond to: Totally sure, direct causal relation (1, 0), pretty sure but there might be some reason why not (0.99, 0.01), and we are not sure but it's leaning in a certain direction (0.25, 0.75).
+\item structure of the scenarios: The other scenarios are 2: [object\_dropped\_accidentally\_0], and 1: [motive\_1\_0, sneak\_1\_0, stealing\_1\_0]. Within scenarios, we create temporal connections, hence we only identify [motive $\rightarrow$ sneak $\rightarrow$ stealing] for now.
+\item) structure between scenarios. Using the causality thing identified earlier, we place `object\_dropped\_accidentally\_0' scn2 before scn1. Resulting in the network
+ \[object\_dropped\_accidentally\_0 \rightarrow motive\_1\_0 \rightarrow sneak\_1\_0 \rightarrow stealing\_1\_0\]
+\item Adding the evidence nodes. For each node, we consider causality. `E\_psych\_report\_1\_0' relates to motive only, `E\_object\_gone\_0' to both stealing and dropped, then `E\_camera\_seen\_stealing\_1\_0' only directed to stealing node, with as parent `E\_camera\_1'.  These reflect the causality in the situation.
+\item For each node, create CPTs. To simulate the idea that we do not have exact probabilities (from the simulation), we place restrictions on the probabilities that we can add to the CPTs. We can only use [1, 0, 0.99, 0.01, 0.5, 0.25, 0.75] in the CPT. These correspond to: Totally sure, direct causal relation (1, 0), pretty sure but there might be some reason why not (0.99, 0.01), and we are not sure but it's leaning in a certain direction (0.25, 0.75).
  
  \end{enumerate}
  
@@ -836,6 +855,7 @@ Yes, simulations are a nicer modelling primitive than straight BNs. Could use a 
 
 Simulations are nice because you do not have to deal with calculating the probabilities yourself. For instance, calculating the probability of motive, means that we need to calculate vulnerable and valuable. This can be done, given that the guy has a target: valuable = (2/5)*(1/2)*(1/2) = 0.1, while vulnerable = (1/5)+(3/5)(1/2) = 0.5. Hence, motive = 0.05, or 5\%, just by bare probability calculations, which matches the probability as found in the network and the training dataset. However, this was relatively easy because these were straightforward uniform distributions. This calculation is going to be more complex if we're dealing with either more complex distributions (normals, etc.), or if we do not have a good idea about the underlying distributions. However, doing this using simulations makes it a lot easier, the numbers `just' emerge without any calculation. We even encounter this in the simulation right now: the probability that the camera sees the stealing is very difficult to calculate analytically. Simulations are a more natural way to think about this.The simulation can also easily become more relevant (more like a level 1 or 2 simulation in the taxonomy), by creating more realistic agent motivation models and behaviour. On the other hand, debugging simulation results is really annoying.
 
+Creating the simulation and finding the proper limiting frequency is also difficult. We ran the simulation 10,000 times, however, the simulation did not allow a state that should have been possible, which is the state where the thief was seen by cameras, the psychological report states that he is guilty, but he was not seen stealing, and the object was not gone. In real life, this state is possible. However, the combination of (psychological report = 1, camera = 1), has 118 entries (happens 118 times). Out of all those entries, in the simulation it is always the case that the object is gone. However, in theory, it should be possible that the agent has a psychological report that indicates he will steal, that he's seen on camera, yet does not steal. This is a limitation in the number of runs performed.
 
 
 
@@ -855,13 +875,13 @@ Simulations are nice because you do not have to deal with calculating the probab
 
 \section{Conclusion}
 
-\subsubsection{Summary}
+\subsection{Summary}
 We have shown that simulations can be used to ground Bayesian Networks and we created an evaluation method for them. Bayesian Networks can be created from the simulation automatically, and these Bayesian Networks can be evaluated for goodness systematically. We know that these networks are accurate because 1) the predicted prior probabilities of events in the network correspond exactly to the frequency of events in the simulation and 2) adding all possible states of evidence to the Bayesian Network results in the same output prediction as given by the simulation. Accuracy increases the more data is available to automatically construct the network, hence we find that some networks are better than others, and we can make a real evaluation.
 
  However, this method of evaluation is not suitable for 1) real-life criminal cases and 2) networks with $> 25$ evidence nodes. In real-life criminal cases, we do not have the grounding necessary to check whether the network is accurate automatically. Creating this checking-dataset by hand means that we have to specify for all possible evidence states what our prediction of the output nodes is, which takes too long and we do not have a good grounding to prefer one set of evidence states over the other. Additionally, in real life we do not have to reason over all sets of possible evidence, we just need to reason with the set of evidence that we found. There need to be fewer than $25$ evidence nodes in the network (given personal-computer constraints), as runtime increases exponentially with the number of nodes.
 
  
-\subsubsection{Future Research}
+\subsection{Future Research}
 
 The simulation in this paper is not complex, and does not model reality in any realistic way. The purpose of this simulation was just to generate data, and did not need to reflect any specific facts about the world. However, agent-based modelling can be useful for investigating different aspects of Bayesian Networks, or reasoning with evidence more generally. Increasing the level of the simulation from level 0 to something that reflects reality is useful to investigate problems such as the Opportunity Prior as presented in \citet{Fenton2017}. 
 
@@ -873,7 +893,9 @@ Letting people estimate probabilities on simulations to investigate elicitation 
 \bibliography{masterThesisCitations}
 
 \newpage
-\section*{Appendix}
+
+
+\section{Appendix}
 
 This appendix contains:
 

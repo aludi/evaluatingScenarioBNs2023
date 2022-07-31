@@ -42,7 +42,7 @@ node E_camera_1 {
 }
 
 node E_camera_seen_stealing_1_0 {
-   states = (0 );
+   states = (0 1 );
    label = "E_camera_seen_stealing_1_0";
    ID = "E_camera_seen_stealing_1_0";
 }
@@ -54,7 +54,7 @@ node E_object_gone_0 {
 }
 
 potential (object_dropped_accidentally_0) {
-   data = (  0.676471 0.323529);
+   data = (  0.598039 0.401961);
 }
 
 potential (motive_1_0) {
@@ -83,27 +83,27 @@ potential ( E_psych_report_1_0 | stealing_1_0   sneak_1_0   ) {
    (   0.1   0.9)));   % sneak_1_0=1   stealing_1_0=1   
 }
 
-potential (E_camera_1) {
-   data = (  0.833333 0.166667);
+potential ( E_camera_1 | stealing_1_0   object_dropped_accidentally_0   ) {
+   data = 
+   (((   0.995726   0.0042735)   % object_dropped_accidentally_0=0   stealing_1_0=0   
+   (   0.895062   0.104938))   % object_dropped_accidentally_0=1   stealing_1_0=0   
+   ((   0.1   0.9)   % object_dropped_accidentally_0=0   stealing_1_0=1   
+   (   0.5   0.5)));   % object_dropped_accidentally_0=1   stealing_1_0=1   
 }
 
-potential ( E_camera_seen_stealing_1_0 | E_camera_1   object_dropped_accidentally_0   E_psych_report_1_0   ) {
+potential ( E_camera_seen_stealing_1_0 | sneak_1_0   motive_1_0   ) {
    data = 
-   ((((   1)   % E_psych_report_1_0=0   object_dropped_accidentally_0=0   E_camera_1=0   
-   (   1))   % E_psych_report_1_0=1   object_dropped_accidentally_0=0   E_camera_1=0   
-   ((   1)   % E_psych_report_1_0=0   object_dropped_accidentally_0=1   E_camera_1=0   
-   (   1)))   % E_psych_report_1_0=1   object_dropped_accidentally_0=1   E_camera_1=0   
-   (((   1)   % E_psych_report_1_0=0   object_dropped_accidentally_0=0   E_camera_1=1   
-   (   1))   % E_psych_report_1_0=1   object_dropped_accidentally_0=0   E_camera_1=1   
-   ((   1)   % E_psych_report_1_0=0   object_dropped_accidentally_0=1   E_camera_1=1   
-   (   1))));   % E_psych_report_1_0=1   object_dropped_accidentally_0=1   E_camera_1=1   
+   (((   0.997462   0.00253807)   % motive_1_0=0   sneak_1_0=0   
+   (   0.5   0.5))   % motive_1_0=1   sneak_1_0=0   
+   ((   0.5   0.5)   % motive_1_0=0   sneak_1_0=1   
+   (   0.1   0.9)));   % motive_1_0=1   sneak_1_0=1   
 }
 
 potential ( E_object_gone_0 | object_dropped_accidentally_0   stealing_1_0   ) {
    data = 
-   (((   0.996241   0.0037594)   % stealing_1_0=0   object_dropped_accidentally_0=0   
+   (((   0.995726   0.0042735)   % stealing_1_0=0   object_dropped_accidentally_0=0   
    (   0.1   0.9))   % stealing_1_0=1   object_dropped_accidentally_0=0   
-   ((   0.00769231   0.992308)   % stealing_1_0=0   object_dropped_accidentally_0=1   
+   ((   0.00617284   0.993827)   % stealing_1_0=0   object_dropped_accidentally_0=1   
    (   0.5   0.5)));   % stealing_1_0=1   object_dropped_accidentally_0=1   
 }
 

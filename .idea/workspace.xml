@@ -2,305 +2,223 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate100.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate1000.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate10000.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate300.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate50.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate500.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate750.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/manualNetwork.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate100.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate1000.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate10000.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate300.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate50.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate750.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/pickleJar/GroteMarktPrivate_temporal.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.4200.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.7600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_10.3500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_27.6100.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_3.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_4.8500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.4200.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.7600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_10.3500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_27.6100.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_3.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_4.8500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_52.7700.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.4200.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.7600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_10.3500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_27.6100.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_3.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_4.8500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_52.7700.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.4200.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.7600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_10.3500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_27.6100.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_3.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_4.8500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_52.7700.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.4200.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.7600.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_10.3500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_27.6100.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_3.0900.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_4.8500.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_52.7700.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freqStates.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/test/GroteMarktPrivate.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/train/GroteMarktPrivate.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate1.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate10.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate150.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate25.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate5.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate150.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate.hlg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.001.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.01.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.025.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.05.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.1.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.125.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.2.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.25.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.33.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/huginBN/GroteMarktPrivate_arbit_0.5.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/maps/Selwerd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/maps/Selwerd.png.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/maps/groteMarkt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/maps/groteMarkt.png.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/maps/random_0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/maps/zuidCentrum.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/maps/zuidCentrum.png.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/pickleJar/GroteMarktPrivate_evidenceList.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/pickleJar/GroteMarktPrivate_relevantEvents.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/accuracy.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_0.05.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_0.15.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_0.20.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_0.75.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_1.15.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_1.75.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_1.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_10.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_11.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_12.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_15.85.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_2.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_3.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_4.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_5.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_6.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_7.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_71.45.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_8.50.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_8.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/evidence_progress_GroteMarktPrivate_9.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/performance_GroteMarktPrivate.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/posterior_GroteMarktPrivate.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/posterior_base_networkGroteMarktPrivate.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.001.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.01.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.025.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.05.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.125.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.25.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.33.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/progress/GroteMarktPrivate_arbit_0.5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/stats/performance/GroteMarktPrivate_impossibleStates_STATE_performance.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/stats/performance/GroteMarktPrivate_performance.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/stats/performance/GroteMarktPrivate_possibleStates_STATE_performance.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/stats/runs/GroteMarktPrivate_possibleStates_STATE_run_performance.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/test/GroteMarktPrivateOld.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/test/GroteMarktPrivateOld1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/test/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/experiments/GroteMarktPrivate/BNs/manualNetworkOld.net" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/experiments/GroteMarktPrivate/test/GroteMarktPrivateOld2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manualNetwork.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.0600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.4200.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.7600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_10.3500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_27.6100.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_3.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_4.8500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate50_50_52.7700.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate1.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate10.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate100.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate1000.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate10000.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate150.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate25.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate300.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate5.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate50.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate500.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/GroteMarktPrivate750.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/manualNetwork.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/BNs/manualNetworkOld.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate100.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate1000.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate10000.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate150.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate300.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate50.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/bnImage/BNIMAGEGroteMarktPrivate750.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate.hlg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.001.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.01.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.025.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.05.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.1.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.125.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.2.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.25.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.33.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/huginBN/GroteMarktPrivate_arbit_0.5.net" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/maps/Selwerd.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/maps/Selwerd.png.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/maps/groteMarkt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/maps/groteMarkt.png.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/maps/random_0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/maps/zuidCentrum.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/maps/zuidCentrum.png.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/pickleJar/GroteMarktPrivate_evidenceList.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/pickleJar/GroteMarktPrivate_relevantEvents.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/pickleJar/GroteMarktPrivate_temporal.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/accuracy.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_0.05.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_0.15.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_0.20.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_0.75.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_1.15.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_1.75.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_1.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_10.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_11.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_12.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_15.85.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_4.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_5.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_6.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_7.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_71.45.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_8.50.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_8.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/evidence_progress_GroteMarktPrivate_9.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.4200.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.7600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_10.3500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_27.6100.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_3.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_4.8500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.4200.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.7600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_10.3500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_27.6100.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_3.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_4.8500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate100_100_52.7700.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.4200.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.7600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_10.3500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_27.6100.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_3.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_4.8500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate300_300_52.7700.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.4200.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.7600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_10.3500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_27.6100.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_3.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_4.8500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate500_500_52.7700.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.4200.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.7600.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_10.3500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_27.6100.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_3.0900.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_4.8500.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freq/evidence_progress_GroteMarktPrivate750_750_52.7700.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/freqStates.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/performance_GroteMarktPrivate.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/posterior_GroteMarktPrivate.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/plots/posterior_base_networkGroteMarktPrivate.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.001.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.01.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.025.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.05.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.125.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.25.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.33.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/progress/GroteMarktPrivate_arbit_0.5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/stats/performance/GroteMarktPrivate_impossibleStates_STATE_performance.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/stats/performance/GroteMarktPrivate_performance.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/stats/performance/GroteMarktPrivate_possibleStates_STATE_performance.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/stats/runs/GroteMarktPrivate_possibleStates_STATE_run_performance.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/test/GroteMarktPrivate.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/test/GroteMarktPrivateOld.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/test/GroteMarktPrivateOld1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/test/GroteMarktPrivateOld2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/test/test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateOLd/train/GroteMarktPrivate.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroteMarkt.py" beforeDir="false" afterPath="$PROJECT_DIR$/GroteMarkt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate1.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate10.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate10.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate100.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate100.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate1000.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate1000.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate150.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate150.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate25.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate25.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate300.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate300.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate5.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate50.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate50.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate500.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate500.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/GroteMarktPrivate750.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/GroteMarktPrivate750.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/BNs/manualNetwork.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/manualNetworkOld.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate100.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate1000.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate1000.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate150.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate150.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate300.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate50.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate750.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/bnImage/BNIMAGEGroteMarktPrivate750.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate.hlg" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate.hlg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.001.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.001.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.01.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.01.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.025.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.025.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.05.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.05.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.1.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.1.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.125.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.125.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.2.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.2.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.25.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.25.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.33.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.33.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/huginBN/GroteMarktPrivate_arbit_0.5.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/huginBN/GroteMarktPrivate_arbit_0.5.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/maps/Selwerd.png" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/maps/Selwerd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/maps/Selwerd.png.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/maps/Selwerd.png.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/maps/groteMarkt.png" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/maps/groteMarkt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/maps/groteMarkt.png.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/maps/groteMarkt.png.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/maps/random_0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/maps/random_0.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/maps/zuidCentrum.png" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/maps/zuidCentrum.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/maps/zuidCentrum.png.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/maps/zuidCentrum.png.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/pickleJar/GroteMarktPrivate_evidenceList.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/pickleJar/GroteMarktPrivate_evidenceList.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/pickleJar/GroteMarktPrivate_relevantEvents.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/pickleJar/GroteMarktPrivate_relevantEvents.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/pickleJar/GroteMarktPrivate_temporal.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/pickleJar/GroteMarktPrivate_temporal.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/accuracy.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/accuracy.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_0.05.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_0.05.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_0.15.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_0.15.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_0.20.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_0.20.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_0.75.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_0.75.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_1.15.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_1.15.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_1.75.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_1.75.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_1.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_10.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_10.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_11.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_11.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_12.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_12.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_15.85.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_15.85.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_2.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_3.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_3.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_4.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_4.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_5.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_5.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_6.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_6.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_7.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_7.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_71.45.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_71.45.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_8.50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_8.50.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_8.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_8.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/evidence_progress_GroteMarktPrivate_9.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/evidence_progress_GroteMarktPrivate_9.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.1700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.1700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.2700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.2700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.3800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.3800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_1.9500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_1.9500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_10.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_10.0900.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_29.1800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_29.1800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_5.2800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_5.2800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.6300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.6300.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.1700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.1700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.2700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.2700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.3800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.3800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_1.9500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_1.9500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_10.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_10.0900.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_29.1800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_29.1800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_5.2800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_5.2800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate100_100_52.6300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate100_100_52.6300.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.1700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.1700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.2700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.2700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.3800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.3800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_1.9500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_1.9500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_10.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_10.0900.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_29.1800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_29.1800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_5.2800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_5.2800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate300_300_52.6300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate300_300_52.6300.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.1700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.1700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.2700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.2700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.3800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.3800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_1.9500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_1.9500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_10.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_10.0900.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_29.1800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_29.1800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_5.2800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_5.2800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate500_500_52.6300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate500_500_52.6300.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.0500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.0500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.1700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.1700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.2700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.2700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.3800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.3800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_1.9500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_1.9500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_10.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_10.0900.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_29.1800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_29.1800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_5.2800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_5.2800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_52.6300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate50_50_52.6300.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.1700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.1700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.2700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.2700.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.3800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.3800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_1.9500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_1.9500.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_10.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_10.0900.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_29.1800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_29.1800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_5.2800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_5.2800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate750_750_52.6300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freq/evidence_progress_GroteMarktPrivate750_750_52.6300.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/freqStates.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/plots/freqStates.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/performance_GroteMarktPrivate.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/performance_GroteMarktPrivate.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/posterior_GroteMarktPrivate.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/posterior_GroteMarktPrivate.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/plots/posterior_base_networkGroteMarktPrivate.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/posterior_base_networkGroteMarktPrivate.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.001.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.001.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.01.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.01.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.025.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.025.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.05.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.05.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.125.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.125.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.25.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.33.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.33.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/progress/GroteMarktPrivate_arbit_0.5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/progress/GroteMarktPrivate_arbit_0.5.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/stats/performance/GroteMarktPrivate_impossibleStates_STATE_performance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/stats/performance/GroteMarktPrivate_impossibleStates_STATE_performance.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/stats/performance/GroteMarktPrivate_performance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/stats/performance/GroteMarktPrivate_performance.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/stats/performance/GroteMarktPrivate_possibleStates_STATE_performance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/stats/performance/GroteMarktPrivate_possibleStates_STATE_performance.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/stats/runs/GroteMarktPrivate_possibleStates_STATE_run_performance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/stats/runs/GroteMarktPrivate_possibleStates_STATE_run_performance.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/test/GroteMarktPrivate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/test/GroteMarktPrivateOld2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/test/GroteMarktPrivateOld.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/test/GroteMarktPrivateOld.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/test/GroteMarktPrivateOld1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/test/GroteMarktPrivateOld1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/test/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/test/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivateEND/train/GroteMarktPrivate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/train/GroteMarktPrivate.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate100.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate100.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate1000.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate1000.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate300.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate300.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate50.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate50.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate500.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate500.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate750.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/BNs/GroteMarktPrivate750.net" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate100.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate1000.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate1000.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate300.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate300.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate50.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate50.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate750.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate750.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/pickleJar/GroteMarktPrivate_temporal.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/pickleJar/GroteMarktPrivate_temporal.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.4200.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.4200.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.7600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.7600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_10.3500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_10.3500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_27.6100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_27.6100.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_3.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_3.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_4.8500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_4.8500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.4200.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.4200.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.7600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_0.7600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_10.3500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_10.3500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_27.6100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_27.6100.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_3.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_3.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_4.8500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_4.8500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_52.7700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate100_100_52.7700.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.4200.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.4200.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.7600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_0.7600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_10.3500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_10.3500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_27.6100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_27.6100.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_3.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_3.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_4.8500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_4.8500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_52.7700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate300_300_52.7700.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.4200.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.4200.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.7600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_0.7600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_10.3500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_10.3500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_27.6100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_27.6100.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_3.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_3.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_4.8500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_4.8500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_52.7700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate500_500_52.7700.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.4200.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.4200.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.7600.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_0.7600.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_10.3500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_10.3500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_27.6100.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_27.6100.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_3.0900.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_3.0900.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_4.8500.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_4.8500.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_52.7700.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate750_750_52.7700.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freqStates.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/plots/freqStates.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/GroteMarktPrivate/train/GroteMarktPrivate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivate/train/GroteMarktPrivate.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.bbl" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.bbl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.blg" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.blg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.log" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.out" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.toc" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/imagesMasterThesis.key" beforeDir="false" afterPath="$PROJECT_DIR$/Report/imagesMasterThesis.key" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/GroteMarktPrivate/BNs/manualNetwork.net" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/BNs/manualNetwork.net" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/GroteMarktPrivate/pickleJar/GroteMarktPrivate_temporal.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/GroteMarktPrivate/pickleJar/GroteMarktPrivate_temporal.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/GroteMarktPrivate/plots/freqStates.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/GroteMarktPrivate/plots/freqStates.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/GroteMarktPrivate/test/GroteMarktPrivate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Report/GroteMarktPrivateEND2/test/GroteMarktPrivate.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/testBNlimitations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testBNlimitations.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -448,13 +366,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637857692698</updated>
-    </task>
-    <task id="LOCAL-00021" summary="fixed index">
-      <created>1648747033108</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1648747033108</updated>
     </task>
     <task id="LOCAL-00022" summary="commit after sick">
       <created>1649702508433</created>
@@ -792,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659130334841</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="forth final first draft">
+      <created>1659275465415</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1659275465415</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -809,7 +727,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="progression plots in progress..." />
     <MESSAGE value="added structure to report" />
     <MESSAGE value="reorganized direectory partially" />
     <MESSAGE value="added vision range for camera - doesn't seem to work very well but i have to adapt the plots..." />
@@ -834,7 +751,8 @@
     <MESSAGE value="final first draft" />
     <MESSAGE value="second final first draft" />
     <MESSAGE value="thuird final first draft" />
-    <option name="LAST_COMMIT_MESSAGE" value="thuird final first draft" />
+    <MESSAGE value="forth final first draft" />
+    <option name="LAST_COMMIT_MESSAGE" value="forth final first draft" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1657883840812">
@@ -847,12 +765,13 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655572982224" />
-    <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2" timestamp="1659130333411">
+    <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2" timestamp="1659275463827">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="667" y="159" key="CommitChangelistDialog2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935097600" />
     <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659130333411" />
     <state x="0" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653733801421" />
+    <state x="667" y="159" key="CommitChangelistDialog2/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659275463827" />
     <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1658966360924" />
     <state width="1605" height="248" key="GridCell.Tab.0.bottom" timestamp="1659274111101">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -947,11 +866,12 @@
     </state>
     <state x="468" y="178" key="SettingsEditor/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655386151908" />
     <state x="468" y="178" key="SettingsEditor/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1657882465794" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1659130387203">
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1659275471149">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935104507" />
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659130387203" />
+    <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659275471149" />
     <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1658966375351" />
     <state x="247" y="138" width="1426" height="744" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1659274003656">
       <screen x="0" y="23" width="1920" height="1057" />

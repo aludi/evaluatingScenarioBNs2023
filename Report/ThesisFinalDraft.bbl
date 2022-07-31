@@ -131,6 +131,11 @@ Prakken, H., Wyner, A., Bench-Capon, T. J.~M., and Atkinson, K. (2013).
   reasoning in {ASPIC+}.
 \newblock {\em Journal of Logic and Computation}, 25(5):1141--1166.
 
+\bibitem[Russell and Norvig, 2010]{russellNorvig2010}
+Russell, S. and Norvig, P. (2010).
+\newblock {\em Artificial Intelligence: A Modern Approach. Third Edition}.
+\newblock Pearson, Boston (Massachusetts).
+
 \bibitem[Schum and Martin, 1982]{schum1982}
 Schum, D.~A. and Martin, A.~W. (1982).
 \newblock Formal and empirical research on cascaded inference in jurisprudence.

@@ -257,10 +257,10 @@ We can evaluate the response of the Bayesian Network using the effect of cumulat
 \begin{enumerate}
 \item Select all evidence nodes (a total of $e$ states).
 \item Order the evidence nodes chronologically.
-\item Select all possible evidence states. An evidence state is a valuation of evidence, where for every evidence node, a truth value is specified. For this simulation, an evidence state could look like (1, 0, 0, 1), which would correspond to finding that the psychological report is true, the agent was seen on camera, but not seen stealing, and the object was lost.
+\item Create a baseline 1) Select all possible evidence states. An evidence state is a valuation of evidence, where for every evidence node, a truth value is specified. For this simulation, an evidence state could look like (1, 0, 0, 1), which would correspond to finding that the psychological report is true, the agent was seen on camera, but not seen stealing, and the object was lost.
 
 If there is enough data available, as is the case in our simulation, we can extract all possible evidence states automatically. If we do not have enough data, we need to manually consider each evidence state (start with $2^e$ states, ask an elicitor to delete states that are not possible).
-\item Create a baseline. For each possible evidence state, create a total probability distribution over all possible output states. Speaking generically about two alternative, non-mutually exclusive outcomes scenario 1 (scn1) and scenario 2 (scn2), we need to find a probability distribution over $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$ that is constrained by $P(scn1) + P(\neg scn1 \land scn2) + P(\neg scn1 \land \neg scn2) = 1$. Or, a weaker version, we create a preference ordering on $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$, without specifying probabilities. 
+\item Create a baseline 2). For each possible evidence state, create a total probability distribution over all possible output states. Speaking generically about two alternative, non-mutually exclusive outcomes scenario 1 (scn1) and scenario 2 (scn2), we need to find a probability distribution over $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$ that is constrained by $P(scn1) + P(\neg scn1 \land scn2) + P(\neg scn1 \land \neg scn2) = 1$. Or, a weaker version, we create a preference ordering on $scn1, \neg scn1 \land scn2, \neg scn1 \land \neg scn2$, without specifying probabilities. 
 
 In our simulation, or in data-rich environments, we can automatically create this total probability distribution, since we can count the conditional frequencies that occur in simulation. In real life, a preference ordering or probability distribution over the possible outcomes would need to be elicited by modellers from experts.
 
@@ -377,7 +377,6 @@ The operationalisation of the random variables is described below.
 \item[(O) object\_dropped\_accidentally\_0 ] At every epoch, there is a 1/500 probability that the victim agent will drop the object by accident. If the object is dropped, this reporter is turned on.
 \item[(E) E\_camera\_1 ] agent 1 is seen on any one of the cameras.
 \item[(E) E\_psych\_report\_1\_0 ] if the thief has a motive, we draw an estimated risk threshold and an estimated age threshold from two normal distributions (mean = victim age, sd = 20), (mean = value good, sd = 100). If the victim is older than the thief's minimal age threshold, and the object more valuable, we estimate that the psych profile states that the victim fits the thief's profile, else not. This is not represented spatially in the simulation itself.
-\item[(E) E\_camera\_1 ] agent 1 is seen on any one of the cameras.
 \item[(E) E\_camera\_seen\_stealing\_1\_0 ]  if any camera sees agent 1 when agent 1's steal state is STEALING.
 \item[(E) E\_object\_gone\_0 ] if the object is dropped accidentally, or if the object has been stolen.
 \end{description}
@@ -415,13 +414,64 @@ A global state where the thief stole the object and all the evidence pointed in 
 The baseline was created by running the simulation for 10,000 runs. Then, to test to what extent the number of runs (=the amount of data available to the K2 algorithm) influences the accuracy of the network, for each of [1, 5, 10, 20, 40, 60, 100, 200, 500, 1000~] runs, the collection of runs $O$ was passed to the K2 algorithm, that generated a network.
 
 The K2 algorithm requires an ordering on the nodes. In all number of runs, this ordering was 
-[object dropped, motive, sneak, stealing, psych report, camera, cameraStealing, object gone]. This ordering was determined by considering the hypothesis-nodes first, and all evidence at the end. This is because evidence nodes are usually children of the hypothesis nodes. The hypothesis nodes belong to two different scenarios: scenario 1 is the motive-sneak-steal scenario, and scenario 2 is the object-dropped scenario. Placing object-dropped/scn 2 first, instead of 'motive'/scn1 is not arbitrary, there is a causality at play: if the agent drops the object, the thief cannot have a motive to steal the object, yet, having a motive does not `cause' or `condition' the object to drop. Hence, this results in 
+[object dropped, motive, sneak, stealing, psych report, camera, cameraStealing, object gone]. This ordering was determined by considering the hypothesis-nodes first, and all evidence at the end. This is because evidence nodes are usually children of the hypothesis nodes. The hypothesis nodes belong to two different scenarios: scenario 1 is the motive-sneak-steal scenario, and scenario 2 is the object-dropped scenario. Placing object-dropped/scn 2 first, instead of 'motive'/scn1 is not arbitrary, there is a causality at play: if the agent drops the object, the thief cannot have a motive to steal the object, yet, having a motive does not `cause' or `condition' the object to drop. Hence, the `accidental drop' could be the parent node (if we're taking a causal interpretation).
+ 
+
 
 \subsection{Evaluation}
+\begin{enumerate}
+\item The evidence nodes of the network are the 4 (binary) nodes marked with an `E', which are [E\_camera\_1, E\_camera\_seen\_stealing\_1\_0, E\_object\_gone\_0, E\_psych\_report\_1\_0].
+\item The chronological order of this according to the simulation is:  [E\_camera\_1, E\_psych\_report\_1\_0, E\_camera\_seen\_stealing\_1\_0, E\_object\_gone\_0,]
+\item We create a baseline by running the simulation 10,000 times. We assume that events have reached their limited frequency at this point and that all possible states have occurred. In essence, there are $2^4 = 16$ possible states, but we can eliminate $7$ of them, because they never occur in simulation. 
 
-The evidence nodes of the network are the nodes marked with an `E'
+0000 ok
+0001 ok
+0010 no
+0011 no
+0100 ok
+0101 ok
+0110 no
+0111 ok
+1000 ok
+1001 ok
+1010 no
+1011 no
+1100 no
+1101 ok
+1110 no
+1111 ok
 
- \textcolor{red} {Reasoning using LazyPropagation (exact inference) in Pyagrum. Replicability}
+\item We create the baseline by running the simulation. Baseline in Table~\ref{heretic}.
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & H1 & H2 & H3 \\
+\hline
+(0, 0, 0, 1)&F(dropped) (0.99) & F(steal) (0.01) & F(neither) (0.00) \\
+(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.99) & F(steal) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (0.93) & F(dropped) (0.07) & F(neither) (0.00) \\
+(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(1, 1, 0, 1)&F(steal) (0.93) & F(dropped) (0.07) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
+(1, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
+\label{heretic}
+\end{table}
+
+\item For every evidence state, the nodes were turned to those valuations in update. We used the LazyPropagation (exacy inference) inference engine in Pyagrum.
+
+\item Tables and averages in the Results section.
+
+\end{enumerate}
+
 
 
 \section{Results}
@@ -437,7 +487,7 @@ We have passed the structure of the network to the K2 algorithm (not automatical
  
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=\linewidth]{GroteMarktPrivateEND/bnImage/BNIMAGEGroteMarktPrivate1000.pdf}
+\includegraphics[width=\linewidth]{GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate1000.pdf}
 \caption{The final network (1000 runs)}
 \label{bullet}
 \end{center}
@@ -455,16 +505,9 @@ In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probabilit
 
 \begin{figure}[htbp]
 \begin{center}
-\begin{subfigure}{0.6\textwidth}
-\includegraphics[width=\linewidth]{GroteMarktPrivateEND/plots/accuracy.pdf}
+\includegraphics[]{../../FINALACCURACY.pdf}
 \caption{Accuracy of network based on the number of training runs}
 \label{girl}
-\end{subfigure}%
-\begin{subfigure}{0.6\textwidth}
-\includegraphics[width=\linewidth]{GroteMarktPrivateEND/plots/freqStates.pdf}
-\caption{Frequency of states}
-\label{fifteen}
-\end{subfigure}
 \end{center}
 \end{figure}
 
@@ -473,15 +516,13 @@ In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probabilit
 \begin{center}
 \begin{subfigure}{\textwidth}
 \makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_0.2700.pdf}
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_0.2700.pdf}}
+\includegraphics[width=0.7\textwidth]{GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf}}
 \caption{Most relevant }
 \label{te}
 \end{subfigure}
 \begin{subfigure}{\textwidth}
 \makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate50_50_52.6300.pdf}
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivateEND/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.6300.pdf}}
+\includegraphics[width=0.7\textwidth]{GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf}}
 \caption{Most frequent}
 \label{sfb}
 \end{subfigure}
@@ -490,69 +531,32 @@ In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probabilit
 
 
 
-\begin{table}
-\begin{center}
-\begin{tabular}{|l|c|c|c|}
-\hline
-evidence & H1 & H2 & H3 \\
-\hline
-(0, 0, 0, 0)&P(neither) (0.98) & P(steal) (0.01) & P(dropped) (0.01) \\
-(0, 1, 0, 1)&P(dropped) (0.99) & P(steal) (0.01) & P(neither) (0.00) \\
-(0, 0, 0, 1)&P(dropped) (0.91) & P(steal) (0.10) & P(neither) (-0.01) \\
-(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
-(1, 0, 0, 1)&P(steal) (0.88) & P(dropped) (0.21) & P(neither) (-0.09) \\
-(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.19) & P(neither) (-0.19) \\
-(1, 1, 0, 1)&P(neither) (0.42) & P(steal) (0.31) & P(dropped) (0.27) \\
-(0, 1, 1, 1)&P(steal) (0.87) & P(dropped) (0.29) & P(neither) (-0.16) \\
-(1, 0, 0, 0)&P(steal) (0.65) & P(dropped) (0.58) & P(neither) (-0.23) \\
-\hline
-\end{tabular}
-\end{center}
-\caption{ Low number of runs, probability estimates for all cumulative evidence sets for runs =  50}
-\label{journal}
-\end{table}
+
 
 \begin{table}[htbp]
-\begin{center}
-\begin{tabular}{|l|c|c|c|}
+\small
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-evidence & H1 & H2 & H3 \\
+	runs				&	\multicolumn{2}{|c|}{50}  &	\multicolumn{2}{|c|}{100}	&	\multicolumn{2}{|c|}{300} &	\multicolumn{2}{|c|}{500}	&	\multicolumn{2}{|c|}{750}&	\multicolumn{2}{|c|}{1000}	\\
 \hline
-(0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
-(0, 1, 0, 1)&P(dropped) (0.96) & P(steal) (0.04) & P(neither) (0.00) \\
-(0, 0, 0, 1)&P(dropped) (0.93) & P(steal) (0.07) & P(neither) (0.00) \\
-(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
-(1, 0, 0, 1)&P(steal) (0.96) & P(dropped) (0.04) & P(neither) (0.00) \\
-(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
-(1, 1, 0, 1)&P(steal) (0.93) & P(dropped) (0.07) & P(neither) (0.00) \\
-(0, 1, 1, 1)&P(steal) (0.97) & P(dropped) (0.03) & P(neither) (0.00) \\
-(1, 0, 0, 0)&P(neither) (0.91) & P(steal) (0.06) & P(dropped) (0.03) \\
+	evidence						&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	&	S	&	D	\\
 \hline
-\end{tabular}
-\end{center}
-\caption{ Preference ordering with numbers on Bayesian Network prediction for all evidence states (runs 1000)}
-\label{somebody}
-\end{table}
-\begin{table}[htbp]
-\begin{center}
-\begin{tabular}{|l|c|c|c|}
+(0, 	0, 	0, 	1) 				& 	0.99 & 1.00&	1.00 & 1.00	&	0.99 & 0.99	& 	0.98 & 0.98	& 	0.99 & 0.99	& 	0.99 & 0.99	\\
+(0, 	0, 	0, 	0) 				& 	1.00 & 1.00&	1.00 & 1.00	&	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	\\
+(0, 	1, 	0, 	1) 				& 	0.98 & 0.98&	0.99 & 0.99	&	0.99 & 1.00	& 	0.98 & 0.98	& 	0.99 & 0.99	& 	0.92 & 0.92	\\
+(1, 	0, 	0, 	1) 				& 	0.47 & 0.21&	0.66 & 0.64	&	0.98 & 0.97	& 	0.95 & 0.95	& 	0.94 & 0.94	& 	0.96 & 0.96	\\
+(0, 	1, 	0, 	0) 				& 	0.89 & 0.85&	1.00 & 1.00	&	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	& 	1.00 & 1.00	\\
+(1, 	1, 	0, 	1) 				& 	0.97 & 0.86&	0.20 & 0.20	&	0.75 & 0.75	& 	0.95 & 0.95	& 	0.94 & 0.94	& 	0.94 & 0.94	\\
+(1, 	1, 	1, 	1) 				& 	0.96 & 0.87&	0.95 & 0.98	&	0.95 & 0.96	& 	0.93 & 0.93	& 	0.95 & 0.95	& 	0.96 & 0.96	\\
+(1, 	0, 	0, 	0) 				& 	0.78 & 0.79&	0.56 & 0.80	&	0.88 & 0.96	& 	0.62 & 0.89	& 	0.93 & 0.98	& 	0.75 & 0.92	\\
+(0, 	1, 	1, 	1) 				& 	0.88 & 0.73&	0.53 & 0.42	&	0.87 & 0.84	& 	0.03 & 0.03	& 	0.71 & 0.70	& 	0.96 & 0.96	\\
 \hline
-evidence & H1 & H2 & H3 \\
-\hline
-(0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
-(0, 1, 0, 1)&F(dropped) (0.93) & F(steal) (0.07) & F(neither) (0.00) \\
-(0, 0, 0, 1)&F(dropped) (0.95) & F(steal) (0.05) & F(neither) (0.00) \\
-(0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
-(1, 0, 0, 1)&F(steal) (0.96) & F(dropped) (0.04) & F(neither) (0.00) \\
-(1, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
-(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
-(0, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
-(1, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+total    						& 	0.88 &  0.81 & 0.766 &  0.781 &    0.934 &  0.941   &     0.827 &  0.857 &    0.939 &  0.943 &     0.942 &  0.961 \\
 \hline
 \end{tabular}
-\end{center}
-\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
-\label{heretic}
+\caption{ accuracy per state}
+\label{eye}
 \end{table}
 
 
@@ -579,28 +583,58 @@ This method of evaluating a BN over all states of cumulative evidence can distin
 
 \subsection{Can a modeller do this?}
 
+
+
  \textcolor{red} {restructure and rewrite for language}
 
 
 We have shown that we can generate Bayesian Networks and evaluate them over all possible evidences states automatically, if we use the data as generated by the simulation. However, the real problem is, if a modeller could actually attempt to create a BN by hand without access to the underlying frequencies from the simulation. If we have a manually-crafted BN, but we also have the underlying true joint probability distribution over all variables in the simulation, we can test if this method of evaluation can show problems with a manually constructed Bayesian Network.
 
-In order to do this, we created a network manually. This was done by ordering the network 
- 
- Creating a network manually:
- 
+In order to do this, we created a network manually.  
  Method for creating the BN
  
+ We considered the three different scenarios: 1) the object was stolen, 2) the object was dropped, 3) neither happened. Since we use the same nodes as in the simulation, we do not have a separate node for scenario 3, or a constraint node. Scenario 3 is represented by both other scenarios having low probabilities.
  
+ \begin{enumerate} 
+ 
+\item structure of the scenarios: The other scenarios are 2: [object dropped], and 1: [motive, sneak, stealing]. Within scenarios, we create temporal connections, hence we only identify [motive $\rightarrow$ sneak $\rightarrow$ stealing] for now.
+\item) structure between scenarios. Using the causality thing identified earlier, we place `object dropped' scn2 before scn1. Resulting in the network [object dropped $\rightarrow$ motive $\rightarrow$ sneak $\rightarrow$ stealing]
+\item Adding the evidence nodes. For each node, we consider causality. Psych report relates to motive only, object gone to both stealing and dropped, then camera sees stealing only directed  to stealing node, with as parent `thief seen on camera'.  These reflect the causality in the situation.
+\item For each node, create CPTs. To simulate the idea that we do not have exact probabilities (from the simulation), we place restrictions on the probabilities that we can add to the CPTs. We can use [1, 0, 0.99, 0.01, 0.25, 0.75] only in the CPT. These correspond to: Totally sure, direct causal relation (1, 0), pretty sure but there might be some reason why not (0.99, 0.01), and we are not sure but it's leaning in a certain direction (0.25, 0.75).
+ 
+ \end{enumerate}
  
  \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.7\linewidth]{../notebooks/manualNetwork.pdf}
+\includegraphics[width=0.7\linewidth]{images/manualNetwork.pdf}
 \caption{Manual network}
 \label{ }
 \end{center}
 \end{figure}
 
-\newpage
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+evidence & accuracy steal & accuracy dropped & \\
+\hline
+(0, 0, 0, 1) & 0.46 & 0.46 & 0.33 \\
+(0, 0, 0, 0) & 1.00 & 1.00 &  1\\
+(0, 1, 0, 1) & 0.99 & 0.99 &  1\\
+(1, 0, 0, 1) & 0.93 & 0.93 &  1\\
+(0, 1, 0, 0) & 1.00 & 1.00 &  1\\
+(1, 1, 0, 1) & -0.93 & -0.07 &  0\\
+(1, 1, 1, 1) & 0.95 & 0.95 &  1\\
+(1, 0, 0, 0) & 1.00 & 1.00 &  1\\
+(0, 1, 1, 1) & 1.00 & 0.99 &  1\\
+\hline
+total & 0.711 &  0.806 & 0.815 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ Accuracy in table}
+\label{now}
+\end{table}
 
 
 \begin{table}
@@ -610,15 +644,15 @@ In order to do this, we created a network manually. This was done by ordering th
 \hline
 evidence & H1 & H2 & H3 \\
 \hline
+(0, 0, 0, 1)&P(steal) (0.55) & P(dropped) (0.45) & P(neither) (0.00) \\
 (0, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
 (0, 1, 0, 1)&P(dropped) (1.00) & P(steal) (0.00) & P(neither) (0.00) \\
-(0, 0, 0, 1)&P(dropped) (0.51) & P(steal) (0.49) & P(neither) (0.00) \\
-(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
 (1, 0, 0, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
-(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
+(0, 1, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
 (1, 1, 0, 1)&P(neither) (3.00) & P(steal) (-1.00) & P(dropped) (-1.00) \\
-(0, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
+(1, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.00) & P(neither) (0.00) \\
 (1, 0, 0, 0)&P(neither) (1.00) & P(steal) (0.00) & P(dropped) (0.00) \\
+(0, 1, 1, 1)&P(steal) (1.00) & P(dropped) (0.01) & P(neither) (-0.01) \\
 \hline
 \end{tabular}
 \caption{ Preference ordering with numbers for manual network}
@@ -631,15 +665,15 @@ evidence & H1 & H2 & H3 \\
 \hline
 evidence & H1 & H2 & H3 \\
 \hline
+(0, 0, 0, 1)&F(dropped) (0.99) & F(steal) (0.01) & F(neither) (0.00) \\
 (0, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
-(0, 1, 0, 1)&F(dropped) (0.93) & F(steal) (0.07) & F(neither) (0.00) \\
-(0, 0, 0, 1)&F(dropped) (0.95) & F(steal) (0.05) & F(neither) (0.00) \\
+(0, 1, 0, 1)&F(dropped) (0.99) & F(steal) (0.01) & F(neither) (0.00) \\
+(1, 0, 0, 1)&F(steal) (0.93) & F(dropped) (0.07) & F(neither) (0.00) \\
 (0, 1, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
-(1, 0, 0, 1)&F(steal) (0.96) & F(dropped) (0.04) & F(neither) (0.00) \\
-(1, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
-(1, 1, 0, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
-(0, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
+(1, 1, 0, 1)&F(steal) (0.93) & F(dropped) (0.07) & F(neither) (0.00) \\
+(1, 1, 1, 1)&F(steal) (0.95) & F(dropped) (0.05) & F(neither) (0.00) \\
 (1, 0, 0, 0)&F(neither) (1.00) & F(steal) (0.00) & F(dropped) (0.00) \\
+(0, 1, 1, 1)&F(steal) (1.00) & F(dropped) (0.00) & F(neither) (0.00) \\
 \hline
 \end{tabular}
 \caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
@@ -650,18 +684,20 @@ evidence & H1 & H2 & H3 \\
 
 
 Diagnosing problems:
-- overall accuracy: This network is about as accurate as the K2 network based on 100 runs, which is not the best but also not bad. Pretty good accuracy over all states for a network that was subjectively estimated and connected. Overall accuracy of network is 
-acc dropped:  0.717
-acc stolen 0.828
-acc PO 0.8888888888888888
+- overall accuracy: This network is about as accurate as the K2 network based on 100 runs, which is not the best but also not bad. Pretty good accuracy over all states for a network that was subjectively estimated and connected. Overall accuracy of network is
+
+
+which is worse overall than the worst automatic network, however, it is about similar in performance? Seems reasonable.
 
 - When we compare the performance of this network to the actual frequencies from the simulation, we see that this handcrafted network performs well. In all cases except 1 (which we'll get to later), the manual network  predicts the same preference ordering over the outcomes as they happen in the grounded evidence states.
-- The manual network does not predict the exact probabilities from the grounded frequencies. Sometimes it is overconfident (such as in (0101) (1001)), other times it is underconfident (0001)). Analysis why here.
+- The manual network does not predict the exact probabilities from the grounded frequencies. Sometimes it is overconfident (such as in (0101) (1001)), other times it is underconfident (0001)). Analysis why here. (0, 0, 0, 1)
 - One big problem: 1101 state: modelled in network as if impossible (hence, -1 -1 probabilities). The simulation itself says that it is always stealing. weird. It means that the agent steals but is not shown on camera.
 
 Conclusion:
 The manual network is quite good. We can identify problems with the network. Method works! 
- 
+
+Implications, plausibility:
+- Even with a low degree of precision, if we have a conditional structure and a clear idea of what happens, the network is ok. However, in real life, this is not as obvious.  The conditional structure that we can find here in the network makes it easy to elicit and use probabilities, but if we would try to apply this to a more complicated situation with more unknowns, we might not be able to find the probabilities. The events in the simulation are observable and clearly defined, in real life, we do not have the clear definition: we might not know what causes something else. 
 
 Problems:
 
@@ -673,14 +709,61 @@ Hence modellers could estimate probabilites and create nice networks but probabl
 
 
 
-\subsection{Evaluating BNs over all possible evidence states using real life}
+\subsection{Evaluating BNs over all possible evidence states in real life}
 
+In this section we evaluate two Bayesian Networks with the method outlined before. 
  \textcolor{red} {rewrite for language}
  
- \subsection{de Zoete so-called}
- Evaluating that the network has a weird output.
+ \subsubsection{de Zoete so-called}
  
- \subsection{van Leeuwen 2019}
+ 
+ The first is a network by de Zoete et all, about child abuse. This is from a paper about probabilistic paradoxes in legal reasoning. IT considers a case where we want to know if a child is abused. We have a certain behaviour that is associated with abuse, but some study shows that this behaviour occurs about as frequently in children who are not abused. Only when the behaviour occurs together with an additional, different behaviour, there's a strong probability of abuse. It has been proposed that the combination of two evidence pieces is difficult to model - however, de Zoete at all find a way to model it, using the  Bayesian Network presented in Figure~\ref{}. In this network, they divide the potential children into three groups: 1) a child who is abused, who must have both the behaviour and the additional characteristic, 2) a child who is not abused, who has the behaviour but can never have the additional characteristic, and 3) a child who is not abused, who does not have the behaviour, and also does not have the additional characteristic.
+ 
+ 
+ 
+ 
+ \begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\linewidth]{images/manualNetwork.pdf}
+\caption{Manual network}
+\label{ }
+\end{center}
+\end{figure}
+
+
+In the paper, they present a table with some possible outcomes, to show that this `both things must be true' thing is correct. However, using the method in this paper, we can evaluate over all evidence states. Here, we have two pieces of evidence, exhibiting behaviour (B) and additional characteristics (C). We consider all combinations of evidence in Table~\ref{ipad}. The network performs well in 3 cases (4 if you count the `no evidence'). In case of both pieces of evidence are true, the posterior of abuse is 1. If one of the pieces of evidence is false, the posterior for abuse drops compared to its prior.  
+
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{|l|c|c|c|}
+\hline
+Evidence  & P(abused) & p(nonAbusedBehaviour) & p(nonAbusednotBehaviour)  \\
+\hline
+no evidence set & 0.40 & 0.50 & 0.10 \\
+B and C & 1.00 & 0 & 0 \\
+B and $\neg$C & 0.375 & 0.625 & 0 \\
+$\neg$B and $C$ & 0.25 & 0 & 0.75 \\
+$\neg$B and $\neg$C & 0.4286 & 0.4762 & 0.0952 \\
+\hline
+\end{tabular}
+\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
+\label{ipad}
+\end{table}
+
+
+
+ \begin{figure}[htbp]
+\begin{center}
+\includegraphics[]{../notebooks/FentonAbuse.pdf}
+\caption{Manual network}
+\label{ }
+\end{center}
+\end{figure}
+
+ 
+ \subsubsection{van Leeuwen 2019}
 
 
 We applied this method to the network presented in \citet{vanLeeuwen2019}, shown in Figure~\ref{love}.  This network models a crime case where a suspect P murdered a tenant, then fled by car, and later called his parents to confess the crime, which is modelled as scenario 1 (scn1). In his own testimony, P states that he has amnesia and does not remember the day of the murder, and also that he was kidnapped, which is modelled as scenario 2 (scn2). The two scenarios are mutually exclusive and exhaustive. Evidence node names are shortened in table for convenience: `testimony\_amnesia' (TA), `Medical\_investigation\_found\_no\_amnesia' (MA), `testimony\_kidnapping' (TK), `no\_concrete\_evidence\_for\_kidnapping' (NK), `phonecall\_parents' (PP),  `car\_with\_bloodstains\_found' (CB), `body\_found' (BF), `signs\_of\_violence' (SV), `phonecall\_with\_friend'(PF), `testimony\_conflict' (TC), `weapon\_found' (WF).
@@ -731,9 +814,7 @@ We do not have an automated baseline for this network so that means that if we w
 
 Even without using a simulation, this method can be used to gain insight in whether the BN conforms to our expectations. We can identify cases where it seems to work correctly, such as case 1) and case 3). In case 1), the output conforms to the one datapoint that we have (given all evidence, the suspect is guilty), the BN makes the same decision as the court. In case 4), we find that the network, in this circumstance, responds sensibly to a change in evidence. However, in case 2), 3) and 5), we find the performance of the network not convincing. In case 2), there is insufficient evidence for scenario 1, yet the network chooses scenario 1. In case 3), there is insufficient evidence for scenario 2, yet the network chooses scenario 2. In case 5), there is support for both scenarios, but the posterior probability for scenario 1 seems (subjectively) too low. Furthermore, we now also know which states are deemed impossible (example: case 6). However, since we do not have a simulation or real-life test-cases, we do not have a way of `objectively' checking whether the network performs correctly or not, and to objectively identify combinations of evidence for which the network is performing badly. We can only do spot-checks and manually search through the output to see if we found anything interesting. Also, if we found a case for which the network performs incorrectly, it is also not clear what we should do with that: how should we change the probabilities in the CPT in order to increase `accuracy'?
 
-It is possible to apply this method of evaluation to other networks (given that they are produced in an open-access format), to non-systematically check the performance of these networks over all possible evidence valuations. In the networks as considered in the Anjum case study in \citet{vlek2016}, or the Simonshaven case in \citet{Fenton2019}, the evidence nodes are distinguished from the hypothesis nodes. Even without considering the temporality of evidence, we can set the cumulative evidence all at once. However, since we do not have simulations for grounding, or data for grounding, we cannot actually evaluate the networks based on `objective' measures. Manually considering all evidence sets will be even more problematic than before. Instead of 11 nodes, the Simonshaven network has 13 evidence nodes, and the Anjum network has 20 evidence nodes. If we assume that calculating 1 case will take around 0.0037 seconds (as calculated from 7.66 seconds for 2048 entries, this does not hold entirely because it also depends on the number of hypothesis nodes), producing all possible Simonshaven states and posteriors should take $2^{13} = 30$ seconds, which is still reasonable, but the Anjum network would take 64 minutes. That is only considering the automatic calculation of the posteriors, and does not consider the time-complexity of creating a manual or automatic baseline. 
-
- \textcolor{red} {add non-binary nodes in fenton make complexity worse}
+It is possible to apply this method of evaluation to other networks (given that they are produced in an open-access format), to non-systematically check the performance of these networks over all possible evidence valuations. In the networks as considered in the Anjum case study in \citet{vlek2016}, or the Simonshaven case in \citet{Fenton2019}, the evidence nodes are distinguished from the hypothesis nodes. Even without considering the temporality of evidence, we can set the cumulative evidence all at once. However, since we do not have simulations for grounding, or data for grounding, we cannot actually evaluate the networks based on `objective' measures. Manually considering all evidence sets will be even more problematic than before. Instead of 11 nodes, the Simonshaven network has 13 evidence nodes, and the Anjum network has 20 evidence nodes. If we assume that calculating 1 case will take around 0.0037 seconds (as calculated from 7.66 seconds for 2048 entries, this does not hold entirely because it also depends on the number of hypothesis nodes), producing all possible Simonshaven states and posteriors should take $2^{13} = 30$ seconds, which is still reasonable, but the Anjum network would take 64 minutes. That is only considering the automatic calculation of the posteriors, and does not consider the time-complexity of creating a manual or automatic baseline. Additionally, some of the nodes in the Simonshaven are not binary nodes, resulting in a higher complexity as well.
 
 
 
@@ -802,9 +883,16 @@ The probability distribution and preference ordering over outcomes for all possi
 
 \newpage
 \subsection{Tables accuracy automated network}
-\input{tableAutomatic.tex}
+%\input{tableAutomatic.tex}
+\newpage
 
-\subsection{Table of all evidence states Jurix}
-\input{tableOrder.tex}
+
+
+\subsection{Jurix}
+\subsubsection{Network}
+\input{cptManual.tex}
+
+\subsubsection{Table}
+%\input{tableOrder.tex}
 
 \end{document}  

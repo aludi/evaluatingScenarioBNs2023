@@ -1,0 +1,6 @@
+evidence,posterior,posterior_name,param_num,param_name
+No evidence,0.02,stealing_1_0,arbit,0.2
+"('E_psych_report_1_0', 1)",0.24,stealing_1_0,arbit,0.2
+"('E_camera_1', 1)",0.24,stealing_1_0,arbit,0.2
+"('E_camera_seen_stealing_1_0', 1)",0.77,stealing_1_0,arbit,0.2
+"('E_object_gone_0', 1)",0.94,stealing_1_0,arbit,0.2

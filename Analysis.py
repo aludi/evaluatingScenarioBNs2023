@@ -304,6 +304,8 @@ def progress_evidence(path, network_name, test_set, temporal_evidence):
     val = temporal_evidence["values"]
     output_0 = temporal_evidence["output"][0]
     output_1 = temporal_evidence["output"][1]
+    #print(output_0, output_1)
+
 
     df = pd.read_csv(path + "/test/" + test_set + ".csv")
 
@@ -393,8 +395,8 @@ def progress_evidence(path, network_name, test_set, temporal_evidence):
     otp[output_1] = y_1
     otp[f"freq_{output_0}"] = d_0
     otp[f"freq_{output_1}"] = d_1
-    otp["acc_0"] = abs(y_0[-1] - d_0[-1])
-    otp["acc_1"] = abs(y_1[-1] - d_1[-1])
+    otp["acc_0"] = 1 - abs(y_0[-1] - d_0[-1])
+    otp["acc_1"] = 1 - abs(y_1[-1] - d_1[-1])
     otp["count"] = count[-1]/init_df_len
 
     #print(y_0)
@@ -459,7 +461,10 @@ def plot_evidence_posterior_base_network_only(path, base_network, df, run_num):
         #plt.show()
         plt.close()
 
-    print(df['acc_0'][0], df['acc_1'][0])
+    #print(df.to_string())
+    #print(df["evidence"])
+    #print()
+    #print(df['acc_0'][0], df['acc_1'][0])
 
     return df['acc_0'][0], df['acc_1'][0], df["count"][0], df["evidence"]
 
@@ -474,7 +479,7 @@ def generate_dict(df, events):
 
 def experiment_different_evidence(path, network, test_data, run_num):
     #scn1 = scn
-    #scn1 = "manualNetwork.net"
+    #network = "manualNetwork.net"
     nw = f"{path}/BNs/{network}.net"
     d = load_temporal_evidence(nw)
     i = 1
@@ -504,6 +509,8 @@ def experiment_different_evidence(path, network, test_data, run_num):
 
 
         ac0, ac1, count, e = plot_evidence_posterior_base_network_only(path, network, df, run_num)
+
+        print(f"{temporal_evidence['values']} & {ac0:.2f} & {ac1:.2f} \\\\")
         #print(e)
         #print(count)
         a0.append(ac0)
@@ -540,7 +547,8 @@ def experiment_different_evidence(path, network, test_data, run_num):
     #plt.show()
     plt.savefig(file_name)
     plt.close()
-    return round(1 - sum(a0)/len(a0), 3), round(1 - sum(a1)/len(a1), 3), count_acc/len(ordered_list_P)
+    print(f"total & {round(sum(a0) / len(a0), 3)} &  {round(sum(a1) / len(a1), 3)} \\\\")
+    return round(sum(a0)/len(a0), 3), round(sum(a1)/len(a1), 3), count_acc/len(ordered_list_P)
 
 def print_table_preference_ordering(dict_k):
 
@@ -667,6 +675,10 @@ for HL_scenario in ["GroteMarktPrivate"]:
 
     runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
     #runs = [100, 150]
+    runs = [1, 50, 100, 300, 500, 750, 1000]
+    #runs = [100]
+
+
 
     #runs = [100]
     folder_path = org_dir + f"/experiments/{HL_scenario}/plots/freq/"
@@ -747,6 +759,7 @@ for HL_scenario in ["GroteMarktPrivate"]:
                     #hugin_converter(networks[:-4], path)
 
                     #print(networks[:-4])
+
 
                     #print("progress")
                     acc, stolen, PO = experiment_different_evidence(path, networks[:-4], scenario, num_runs)

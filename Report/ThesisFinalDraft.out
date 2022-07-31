@@ -23,12 +23,14 @@
 \BOOKMARK [1][-]{section.6}{Discussion}{}% 23
 \BOOKMARK [2][-]{subsection.6.1}{Evaluating BNs over all possible evidence states using simulations}{section.6}% 24
 \BOOKMARK [2][-]{subsection.6.2}{Can a modeller do this?}{section.6}% 25
-\BOOKMARK [2][-]{subsection.6.3}{Evaluating BNs over all possible evidence states using real life}{section.6}% 26
-\BOOKMARK [2][-]{subsection.6.4}{de Zoete so-called}{section.6}% 27
-\BOOKMARK [2][-]{subsection.6.5}{van Leeuwen 2019}{section.6}% 28
-\BOOKMARK [2][-]{subsection.6.6}{Problems}{section.6}% 29
+\BOOKMARK [2][-]{subsection.6.3}{Evaluating BNs over all possible evidence states in real life}{section.6}% 26
+\BOOKMARK [3][-]{subsubsection.6.3.1}{de Zoete so-called}{subsection.6.3}% 27
+\BOOKMARK [3][-]{subsubsection.6.3.2}{van Leeuwen 2019}{subsection.6.3}% 28
+\BOOKMARK [2][-]{subsection.6.4}{Problems}{section.6}% 29
 \BOOKMARK [1][-]{section.7}{Conclusion}{}% 30
 \BOOKMARK [2][-]{subsubsection.7.0.1}{Summary}{section.7}% 31
 \BOOKMARK [3][-]{subsubsection.7.0.2}{Future Research}{subsubsection.7.0.1}% 32
 \BOOKMARK [2][-]{subsection.7.1}{Tables accuracy automated network}{section.7}% 33
-\BOOKMARK [2][-]{subsection.7.2}{Table of all evidence states Jurix}{section.7}% 34
+\BOOKMARK [2][-]{subsection.7.2}{Jurix}{section.7}% 34
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Network}{subsection.7.2}% 35
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Table}{subsection.7.2}% 36

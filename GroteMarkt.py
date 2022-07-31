@@ -79,17 +79,24 @@ class MoneyAgent(Agent):
         is for the suspect. If the drawn value is below the actual value, the psych
         report has estimated wrongly
         '''
-        est_risk_threshold = np.random.normal(victim_val, 100)
+
+        if random.randint(0, 9) > 8:
+            return 0
+        else:
+            return 1
+        '''est_risk_threshold = np.random.normal(victim_val, 100)
         est_age_threshold = np.random.normal(victim_ag, 20)
         #print(est_risk_threshold, self_val)
         #print(est_age_threshold, self_age)
+
+        
         if est_risk_threshold > self_val and self_age < est_age_threshold:
             #print("\t\t correct")
             return 1    # psych correctly estimated who the suspect wants to rob
         else:
             #print("\t\t not correct")
 
-            return 0 # incorrect assessment0
+            return 0 # incorrect assessment0'''
 
     def witness_valuable(self):
         '''

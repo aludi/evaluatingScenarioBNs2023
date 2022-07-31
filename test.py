@@ -3,6 +3,13 @@ import pandas as pd
 from itertools import combinations, product
 
 
+import os
+import pyAgrum as gum
+#import pyAgrum.lib.notebook as gnb
+#import pyAgrum.lib.image as gim
+import pandas as pd
+
+
 '''count = 0
 max = 1000000
 for i in range(0, max):
@@ -53,5 +60,9 @@ def calc_minimal_set(scn):
             if min_set != -1:
                 return min_set
 
-for scn in ["steal", "drop", "nothing"]:
-    calc_minimal_set(scn)
+
+#bn=gum.loadBN("/Users/ludivanleeuwen/simulationTest/experiments/GroteMarktPrivate/BNs/manualNetwork.net")
+
+
+#for scn in ["steal", "drop", "nothing"]:
+#    calc_minimal_set(scn)

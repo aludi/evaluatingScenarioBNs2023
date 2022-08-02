@@ -39,6 +39,12 @@ de~Koeijer, J.~A., Sjerps, M.~J., Vergeer, P., and Berger, C.~E. (2020).
   interdisciplinary casework.
 \newblock {\em Science \& Justice}, 60(1):20--29.
 
+\bibitem[{de Zoete} et~al., 2019]{deZoete2019}
+{de Zoete}, J., Fenton, N., Noguchi, T., and Lagnado, D. (2019).
+\newblock Resolving the so-called “probabilistic paradoxes in legal
+  reasoning” with bayesian networks.
+\newblock {\em Science \& Justice}, 59(4):367--379.
+
 \bibitem[Di~Bello and Verheij, 2018]{diBelloVerheij2018}
 Di~Bello, M. and Verheij, B. (2018).
 \newblock Evidential reasoning.
@@ -77,6 +83,12 @@ Fenton, N., Neil, M., Yet, B., and Lagnado, D. (2019).
 \newblock Analyzing the simonshaven case using bayesian networks.
 \newblock {\em Topics in Cognitive Science}, 12(4):1092--1114.
 
+\bibitem[Fenton and Neil, 2013]{fentonNeil2013}
+Fenton, N.~E. and Neil, M.~D. (2013).
+\newblock {\em Risk Assessment and Decision Analysis With {B}ayesian
+  {N}etworks}.
+\newblock CRC Press, Boca Raton.
+
 \bibitem[Gerritsen, 2015]{Gerritsen2015}
 Gerritsen, C. (2015).
 \newblock Agent-based modelling as a research tool for criminological research.
@@ -96,6 +108,12 @@ Gilbert, N. and Troitzsch, K. (2005).
 Hamilton, C.~S. and Pollino, C. (2012).
 \newblock Good practice in bayesian network modelling.
 \newblock {\em Environmental Modelling and Software}, 37:134--145.
+
+\bibitem[Haojie~Zhu, 2021]{Zhu2021}
+Haojie~Zhu, F.~W. (2021).
+\newblock An agent-based model for simulating urban crime with improved daily
+  routines.
+\newblock {\em Computers, Environment and Urban Systems}.
 
 \bibitem[Kadane and Schum, 1996]{kadaneSchum1996}
 Kadane, J.~B. and Schum, D.~A. (1996).

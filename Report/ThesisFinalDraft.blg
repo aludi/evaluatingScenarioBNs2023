@@ -1,56 +1,62 @@
 This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ThesisFinalDraft.aux
+Case mismatch error between cite keys Vlek2016 and vlek2016
+---line 112 of file ThesisFinalDraft.aux
+ : \citation{Vlek2016
+ :                   }
+I'm skipping whatever remains of this command
 The style file: apalike.bst
 Database file #1: masterThesisCitations.bib
-Repeated entry---line 627 of file masterThesisCitations.bib
+Repeated entry---line 641 of file masterThesisCitations.bib
  : @book{vlek2016
  :               ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1229 of file masterThesisCitations.bib
+Repeated entry---line 1243 of file masterThesisCitations.bib
  : @book{vlek2016
  :               ,
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for ""
 Warning--empty journal in wieten2019
-You've used 33 entries,
+You've used 36 entries,
             1935 wiz_defined-function locations,
-            691 strings with 9433 characters,
-and the built_in function-call counts, 12982 in all, are:
-= -- 1263
-> -- 516
-< -- 25
-+ -- 181
-- -- 167
-* -- 1071
-:= -- 2254
-add.period$ -- 102
-call.type$ -- 33
-change.case$ -- 234
-chr.to.int$ -- 33
-cite$ -- 34
-duplicate$ -- 521
-empty$ -- 936
-format.name$ -- 220
-if$ -- 2563
+            708 strings with 9921 characters,
+and the built_in function-call counts, 14026 in all, are:
+= -- 1361
+> -- 559
+< -- 27
++ -- 197
+- -- 181
+* -- 1156
+:= -- 2443
+add.period$ -- 111
+call.type$ -- 36
+change.case$ -- 255
+chr.to.int$ -- 36
+cite$ -- 37
+duplicate$ -- 562
+empty$ -- 1009
+format.name$ -- 239
+if$ -- 2764
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 38
-newline$ -- 167
-num.names$ -- 103
-pop$ -- 231
+missing$ -- 42
+newline$ -- 182
+num.names$ -- 112
+pop$ -- 251
 preamble$ -- 1
-purify$ -- 243
+purify$ -- 265
 quote$ -- 0
-skip$ -- 381
+skip$ -- 412
 stack$ -- 0
-substring$ -- 869
-swap$ -- 70
+substring$ -- 928
+swap$ -- 73
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 184
+type$ -- 200
 warning$ -- 1
-while$ -- 105
+while$ -- 112
 width$ -- 0
-write$ -- 430
-(There were 2 error messages)
+write$ -- 468
+(There were 3 error messages)

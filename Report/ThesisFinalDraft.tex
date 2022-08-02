@@ -46,7 +46,7 @@ We can consider three main approaches for reasoning about hypotheses using evide
 
 However, creating and using BNs is far from straightforward for both the builder and the interpreter. From \citet{deKoeijer2020}: it is complex, time-consuming, hard to explain, and, the ``repeatability [...] leaves much to be desired. Node definitions and model structures are often directed by personal habits, resulting in different models for the same problem, depending on the expert''. This subjectivity is pervasive throughout the Bayesian Network: the events selected, arcs drawn, and numbers elicited are subjective and seem empirically untestable in the data-poor environment of AI and law. These problems might be mitigated in part by evaluation criteria. 
 
-These evaluation criteria, however, do do not always sufficiently safeguard against an incorrect network, which is a network that predicts the `wrong' outcome based on some set of evidence. A BN for crimes should be accurate across all possible evidence states, since, if we want to use BNs in court and not model court cases afterwards, we do not know at the start what the state of the evidence will be. However, in general, it is hard for modellers to rationally consider all possible evidence states. A network might respond well to situations where all evidence as presented in the trial is present, but predict the wrong outcome when one evidence node is turned to a different value. This brings up questions about the use of BNs in general: do we really need to consider these states where the evidence is different from the evidence as presented in the trial? Since specifying the joint probability distribution is necessary in BNs, we have to specify all of these numbers. Anyway, if we want to take BNs seriously, they need to be correct over all possible evidence states.
+These evaluation criteria, however, do not always sufficiently safeguard against an incorrect network, which is a network that predicts the `wrong' outcome based on some set of evidence. A BN for crimes should be accurate across all possible evidence states, since, if we want to use BNs in court and not model court cases afterwards, we do not know at the start what the state of the evidence will be. However, in general, it is hard for modellers to rationally consider all possible evidence states. A network might respond well to situations where all evidence as presented in the trial is present, but predict the wrong outcome when one evidence node is turned to a different value. This brings up questions about the use of BNs in general: do we really need to consider these states where the evidence is different from the evidence as presented in the trial? Since specifying the joint probability distribution is necessary in BNs, we have to specify all of these numbers. Anyway, if we want to take BNs seriously, they need to be correct over all possible evidence states.
 
  The aim of this project is to define a method for the modeller to evaluate the BN over all possible evidence states, by grounding the BN in an agent-simulation of a crime. We can model crime cases using simulations to a level of realism we desire, measure the frequencies of events that emerge out of this simulation by running the simulation multiple times. In the agent-based system, we have full control over and full knowledge of the world that we are reasoning about, hence we can create a grounding that can be used to evaluate the BN. We can test whether our method of evaluating all possible evidence states works by comparing the predicted output of the BN with the frequency information about the output from the simulation. Then, we will discuss whether it is plausible that this method of evaluation generalises to real life\footnote{The simulation can be interacted with at \url{https://shielded-journey-34533.herokuapp.com} \\ Code for this project can be found at \url{https://github.com/aludi/simulationTest}}. More generally, we want to investigate to what extent simulations can be useful as a tool to investigate Bayesian Networks. We can choose to investigate Bayesian Network methods, such as idiom-structure, the accuracy and use of elicitation, or we can choose to investigate whether simulations are a good modelling primitive for investigating reasoning with evidence in criminal cases. This thesis discusses both of these aspects.
  
@@ -76,7 +76,7 @@ The third direction is via probabilistic approaches, where hypotheses and eviden
 
 A Bayesian Network (BN) is a directed acyclic graph that represents the joint probability distribution over a set of events \citep{pearl1988b}. BNs consists of nodes, arcs and conditional probability tables. A node is a random variable that represents an events. An arc represent a conditional relationships between two events, linking two nodes together. The two nodes are the parent and the child node, the probabilities in the child node are conditioned on the value that the parent node takes. The specification of these conditional probabilities is done in the conditional probability tables (CPT) of each node. As described in \citep{russellNorvig2010}:
 
- \textcolor{red} {under construction}
+ %\textcolor{red} {under construction}
 
 
 The combination of all nodes in the BN results in a full joint probability distribution over all nodes, which is 
@@ -146,7 +146,7 @@ To update to our network let us say that we found $B$, so there are bullet casin
 So now we have found the posterior of $S$, our belief in $S$ has increased from its prior probability of $0.05$, to its posterior probability of $0.808$, given evidence $B$. On the other hand, if we do not find bullet casings on the ground, our belief that the suspect shot the victim decreases from 00.5 to 0.012. 
 
 
-Hence, we can exactly specify how our belief in a hypothetical event changes given all possible values of the evidence.This is the simplest form of Bayesian reasoning, with one piece of evidence, and one hypothesis. The general form of the update is more complicated and has high complexity (see ....). We can use exact inference or approximate inference.
+Hence, we can exactly specify how our belief in a hypothetical event changes given all possible values of the evidence.This is the simplest form of Bayesian reasoning, with one piece of evidence, and one hypothesis. The general form of the update is more complicated and has high complexity (see \citep{russellNorvig2010} for an introduction to updating algorithms). We can use exact inference or approximate inference.
 
 
 In real-life situations, we are constantly reasoning with many pieces of evidence that might be conditioned on more than one parent node, resulting in tedious and error-prone calculations if we would do them manually. This is where Bayesian Networks are useful. 
@@ -173,12 +173,14 @@ There are other ways of evaluating BNs than accuracy. The evaluation methods use
 
 Sensitivity analysis tests which (parent) nodes have the greatest effect on a given target node. With sensitivity analysis, we can describe how much the target node will change if we make small changes in the conditional probability tables of those parent nodes \citep{fentonNeil2013}. This is useful if the outcome of the network hinges on elicited or subjectively estimated probabilities, since we cannot apply methods like accuracy to a subjectively estimated probability, as we are usually working with extremely limited data. Hence, sensitivity analysis can be used to `sanity-check' elicited probabilities. If the target node is influenced by nodes that are unexpected given the causal relations that we are modelling, something probably has gone wrong. Since Bayesian Networks have many parameters per node, it is not trivial to perform a sensitivity analysis that takes into account all the nodes in the network and interpret the results in a meaningful way - this would be an $n$-way sensitivity analysis \citep{gaag2007}. We can also only define sensitivity analysis only for a given value of evidence: change the state of the evidence, and we might find different sensitivity values \citep{fentonNeil2013}. Various forms of sensitivity analysis are implemented in AgenaRisk and Hugin.
 
-In \citet{vlek2016}, sensitivity analysis is mentioned, but not applied. On the other hand, in \citet{Fenton2019}, each individual hypothesis node is subjected to sensitivity analysis, to find out for how each of the parameters in the nodes need to change in order to result in a 0.95 or a 0.99 posterior for guilt. There are only a few ways that individual nodes can change that would result in a high probability of guilt, from which the authors interpret that the constructed BN is robust to small inaccuracies in subjectively elicited CPTs. However, in the paper, this is only shown for one evidence state. It is not clear how the BN would respond to `counterfactual' pieces of evidence.
+In \citet{vlek2016}, sensitivity analysis is mentioned, but not applied. On the other hand, in \citet{Fenton2019}, each individual hypothesis node is subjected to sensitivity analysis, to find out how every parameter in the nodes needs to change in order to result in a 0.95 or a 0.99 posterior for guilt. There are only a few ways that individual nodes can change that would result in a high probability of guilt, from which the authors interpret that the constructed BN is robust to small inaccuracies in subjectively elicited CPTs. However, in the paper, this is only shown for one evidence state. It is not clear how the BN would respond to `counterfactual' pieces of evidence.
 
 
 \item \textbf{Cumulative evidence}
 
-Another way of evaluating the response of the BN, is by seeing its response to cumulatively setting evidence. This way, we can see how much each piece of evidence (from the defence or the prosecution) changes our belief in the posterior of the output node(s). We could subjectively assess if it makes sense that a certain piece of evidence has a large, or small, effect on the posterior. In both \citep{Fenton2019} and \citep{vlek2016} this cumulative approach shows that, in general, the evidence from the defence decreases our belief that the suspect is guilty, and evidence from the prosecution increases our belief that the suspect is guilty. However, in both cases, the BN is only evaluated on one state of evidence. Both cases only test the cumulative probability of the output node by turning the evidence nodes to values that correspond to the findings of the court. However, this is a risky move, since this might lead to overfitting the probabilities in the CPTs, so that the network seems to reflect the right `evidence strength' on the court-found state of evidence, but is actually misrepresenting other combinations of evidence, without a way of checking if this is the case.
+Another way of evaluating the response of the BN, is by seeing its response to cumulatively setting evidence. This way, we can see how much each piece of evidence (from the defence or the prosecution) changes our belief in the posterior of the output node(s). We could subjectively assess if it makes sense that a certain piece of evidence has a large, or small, effect on the posterior. In both \citep{Fenton2019} and \citep{vlek2016} this cumulative approach shows that, in general, the evidence from the defence decreases our belief that the suspect is guilty, and evidence from the prosecution increases our belief that the suspect is guilty. However, in both cases, the BN is only evaluated on one state of evidence. Both cases only test the cumulative probability of the output node by turning the evidence nodes to values that correspond to the findings of the court. 
+
+However, this is a \textbf{red}{risky} move, since this might lead to \textbf{red}{overfitting} the probabilities in the CPTs, so that the network seems to reflect the right `evidence strength' on the court-found state of evidence, but is actually misrepresenting other combinations of evidence, without a way of checking if this is the case.
 
 
 
@@ -186,7 +188,7 @@ Another way of evaluating the response of the BN, is by seeing its response to c
 \end{enumerate}
 
 
-Our findings in Figure~\ref{love} show that it is necessary to consider all possible combinations of evidence. If we have tunnel vision and only focus on the state of evidence that is found in court, we might create a network that overfits on one state of evidence. This means that if there was a re-trial and the court would decide that some pieces of evidence are not admissible after all, the BNs might show the unreasonable behaviour. Additionally, if we are building the BN before or during the court case, we cannot know yet which state we are in, as none of the evidence has been established yet. Therefore, the network should work correctly over all possible evidence states. If we want to take the premise behind BNs seriously, we have to create a network that gives sensible results for all possible combinations of evidence, not just the valuation of the evidence that is initially established in court.
+\textbf{red}{Our findings in Figure~\ref{love} show that it is necessary to consider all possible combinations of evidence.} If we have tunnel vision and only focus on the state of evidence that is found in court, we might create a network that overfits on one state of evidence. This means that if there was a re-trial and the court would decide that some pieces of evidence are not admissible after all, the BNs might show the unreasonable behaviour. Additionally, if we are building the BN before or during the court case, we cannot know yet which state we are in, as none of the evidence has been established yet. Therefore, the network should work correctly over all possible evidence states. If we want to take the premise behind BNs seriously, we have to create a network that gives sensible results for all possible combinations of evidence, not just the valuation of the evidence that is initially established in court.
 
 \subsection{Simulation}
 
@@ -370,7 +372,7 @@ To simulate which parts of the Grote Markt were accessible to the agents, we had
 \subsubsection{Reporters}
 We divide all all events into three classes: either an event is `evidence' (E), a `hypothesis' (H), or an ultimate `outcome' (O). 
 
-The process of operationalisation is very subjective and depends entirely on the modeller's assumptions and their time, knowledge or skill constraints. The behaviour of agents, as reflections of actual people, can be modelled in a way that reflect real sociological theories of behaviour (such as in \citet{Gerritsen2015}), or with simple behavioural rules and a random number generator (such as here). The environment of the simulation can reflect a real-world geography with different affordances, or can be simplified. 
+The process of operationalisation is very subjective and depends entirely on the modeller's assumptions and their time, knowledge or skill constraints. The behaviour of agents, as reflections of actual people, can be modelled in a way that reflect real sociological theories of behaviour (such as in \citet{Gerritsen2015}), or with simple behavioural rules and a random number generator, as in this approach. The environment of the simulation can reflect a real-world geography with different affordances, or can be simplified. 
 
 The operationalisation of the random variables is described below. 
 \begin{description}
@@ -454,12 +456,12 @@ state & remarks \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
+\caption{Possible and impossible states}
 \label{wake}
 \end{table}
 
 
-\item We create the baseline by running the simulation. Baseline in Table~\ref{heretic}.
+\item We create the baseline by running the simulation for 10,000 iterations. In Table~\ref{heretic} we present the frequencies of the three outcomes, as well as their preference ordering.
 
 
 \begin{table}[htbp]
@@ -480,13 +482,13 @@ evidence & H1 & H2 & H3 \\
 \hline
 \end{tabular}
 \end{center}
-\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
+\caption{Preference ordering with numbers for all evidence states on `ground truth' for (10,000 runs)}
 \label{heretic}
 \end{table}
 
-\item For every evidence state, the nodes were turned to those valuations in update. We used the LazyPropagation (exacy inference) inference engine in Pyagrum.
+\item For every evidence state, the nodes were turned to those valuations in update. We used the LazyPropagation (exact inference) inference engine in PyAgrum to propagate the evidence through the network.
 
-\item Tables and averages in the Results section.
+\item The accuracy of the networks compared to the ground truth is presented in the next section.
 
 \end{enumerate}
 
@@ -495,61 +497,46 @@ evidence & H1 & H2 & H3 \\
 \section{Results}
 
 
- \textcolor{red} {TO BE UPDATED and EXPLAINED}
+We have the final Bayesian Networks (Figure~\ref{bullet}) as created by the K2 algorithm to the runs from the simulation, except when we run the simulation 1 time. If we run the simulation 1 time, the network cannot be produced, as there is not enough data available to the algorithm. In Figure~\ref{bullet}, we can see that the structure of the network is not stable: the parents of the nodes depend on the number of runs that were available to the K2 algorithm.
 
-We have a final Bayesian Network (Figure~\ref{bullet}), that was created from the K2 algorithm that contains all the nodes specified. The arcs between nodes are not causal but conditional. 
-
-We have passed the structure of the network to the K2 algorithm (not automatically). 
-
- This results in networks like this.
+However, despite the variability in network structure, all networks have some important commonalities. In all networks, we see that the evidence `E\_object\_gone\_0' has the parents `stealing\_1\_0' and `object\_dropped\_accidentally\_0', which correctly reflects the two events under which the object can be done. We also find that generally, `motive\_1\_0' is a parent node of `stealing\_1\_0', which reflects the underlying causality that the agent cannot steal without having a motive.
  
 \begin{figure}[htbp]
 \begin{center}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\linewidth]{GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate50.pdf}
+\caption{The final network (50 runs)}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\linewidth]{GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate100.pdf}
+\caption{The final network (100 runs)}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\linewidth]{GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate300.pdf}
+\caption{The final network (300 runs)}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\linewidth]{GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate500.pdf}
+\caption{The final network (500 runs)}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\linewidth]{GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate750.pdf}
+\caption{The final network (750 runs)}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
 \includegraphics[width=\linewidth]{GroteMarktPrivate/bnImage/BNIMAGEGroteMarktPrivate1000.pdf}
 \caption{The final network (1000 runs)}
+\end{subfigure}
+\caption{All final networks}
 \label{bullet}
 \end{center}
 \end{figure}
 
+For each of these networks, we set the possible evidence states as outlined in the case study. This means that, for every possible combination of evidence, we find the posterior probability of every output node. This results in a joint probability distribution over all three possible outputs. These are found for all evidence states, for every number of runs~\footnote{Excluding 1, as this did not result in a network}, in Tables~\ref{T50} -~\ref{T1000}. We can already see here that there are networks that produce inconsistent results. For example, see the evidence state of (1, 0, 0, 1) in Table~\ref{T50}. In this state, we find that P(neither) $= -0.26$. This shows that this network cannot represent accurately the mutual exclusive and exhaustive relationship of the three output nodes. As the dataset from which the networks are built increases in size, these inconsistencies decrease.
 
+\input{tableAutomatic.tex}
 
-We have a plot of the overall accuracy over all evidence sets of the network for both the `stealing\_1\_0' node and the `object\_dropped\_accidentally\_0' node (Figure~\ref{girl}). For a low number of runs, the network could not be created, hence the accuracy of 0. At around 10 runs, a network could be created, with an accuracy on all cumulative evidence states of around 0.75 for both nodes. Increasing the number of runs, hence, the data available to K2 to create the network, results in a higher accuracy. We have a frequency distribution over the possible states (Figure~\ref{fifteen}), where we see that most possible states occur infrequently, while one possible state [0, 1, 0, 0] occurs 70\% of the time. 
-
-In Figures~\ref{nobody}, ~\ref{whirl}, we show cumulative evidence plots on both output nodes for two sets of evidence, on both a BN that was created from 10 runs, and on a BN that was created from 1000 runs of the simulation. Every plot shows the BN predicted output (bar on the left side), next to the actual frequencies in the simulation (bar on the right side).
-
-In Tables~\ref{journal}, \ref{somebody}, we show the final cumulative probability and preference ordering for the output nodes as the worst (10 runs) and best (1000 runs) BN predicted them. In Table~\ref{heretic}, we show the frequency of the output for each possible evidence state, as well as the preference ordering, for the ground truth as found in the simulation.
-
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[]{../../FINALACCURACY.pdf}
-\caption{Accuracy of network based on the number of training runs}
-\label{girl}
-\end{center}
-\end{figure}
-
-
-\begin{figure}[htbp]
-\begin{center}
-\begin{subfigure}{\textwidth}
-\makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf}}
-\caption{Most relevant }
-\label{te}
-\end{subfigure}
-\begin{subfigure}{\textwidth}
-\makebox[\textwidth][c]{
-\includegraphics[width=0.7\textwidth]{GroteMarktPrivate/plots/freq/evidence_progress_GroteMarktPrivate1000_1000_52.7700.pdf}}
-\caption{Most frequent}
-\label{sfb}
-\end{subfigure}
-\end{center}
-\end{figure}
-
-
-
-
+Now that we have the posterior probabilities for all outputs for all evidence states, we present the accuracy of the network, by comparing the posterior output of every BN to the `ground truth' frequency-output of the simulation. The accuracy per output node, for every state of evidence, is presented in Table~\ref{eye}. Overall, the networks have an accuracy of 0.88. Networks that are created from a larger dataset, have higher accuracies than networks generated from smaller accuracies.
 
 \begin{table}[htbp]
 \footnotesize
@@ -577,16 +564,41 @@ total    						& 	0.88 &  0.81 & 0.766 &  0.781 &    0.934 &  0.941   &     0.82
 \label{eye}
 \end{table}
 
+In Figure~\ref{girl}, we average over all possible evidence states and show the average accuracy of the output nodes `stealing\_1\_0' and `object\_dropped\_accidentally\_0', per number of runs, as well as the accuracy of the preference ordering. 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.6\linewidth]{../../FINALACCURACY.pdf}
+\caption{Accuracy of network based on the number of training runs}
+\label{girl}
+\end{center}
+\end{figure}
+
+
+
 
 \newpage
 
 
 
 \section{Discussion}
-In this section we discuss the success of the method, its generalisability, and future research.
+The aim of this discussion section is to critically examine both Bayesian Networks and this method for evaluating them. We discuss the results, then, we take two steps that increasingly loosen the assumption of abundant data that we can use to ground our Bayesian Network, to discuss the level of realism and generalisability of using the method of evaluating all evidence states as a way of evaluating Bayesian Networks. Finally, we discuss the use of simulations for investigating Bayesian Networks and for modelling criminal cases.
+
+\begin{itemize}
+\item First, we consider the limitations that we find when applying the method to our case study, as outlined in the previous two sections. 
+\item Second, we move one step away from this idealised situation, and attempt to construct a Bayesian Network for the situation in the case study manually, hence, not using the automatic BN constructor algorithm, but instead relying on causal knowledge and subjective probability estimates by the modeller. The purpose of this is to evaluate if 1) a modeller can construct a network of similar accuracy to the automatically constructed networks. 
+\item Third, we discuss the use of this method of evaluation for investigating existing Bayesian Networks. We investigate whether we can evaluate modelling primitives or idioms for Bayesian Networks, such as those in \citep{deZoete2019}. Additionally, we investigate whether this method of evaluation would be suitable for a Bayesian Network of a criminal case, as modelled in \citep{vanLeeuwen2019}. This leads to a discussion of the problem of combinatorial explosion in the number of evidence nodes.
+\item Fourth, we discuss the use of simulations as a modelling primitive with a focus on operationalisation of nodes.
+
+\end{itemize}
 
 
 \subsection{Evaluating BNs over all possible evidence states using simulations}
+
+There is a high variability between runs: if we were to run this experiment twice, we would find a different network structure for all networks, as well as different probabilities predicted. However, the average trend in increasing accuracy with a higher number of states remains.
+
+
+
 With this method, we can show that we can create BNs that predict output probabilities that correspond to the limiting frequencies of events in the simulation. We see that both the preference ordering as well as the probabilities in the output nodes in Table~\ref{somebody} are near identical to those in Table~\ref{heretic}. This means that the best BN reflects the frequencies in the simulation well, not just on one set of cumulative evidence, but on nearly all sets of cumulative evidence. 
 
 The only evidence set where the BN does not reflect the ground truth, is for the evidence set of (0, 1, 1, 0). This is a situation where the agent is seen stealing, but the object is not gone. In the test data of 10,000 entries, there is never an entry where both stealing and dropping are true. Hence, we find that the BN does not predict the output correctly in this case. 
@@ -599,61 +611,59 @@ This method also allows us to see when the BN is assigning probability values to
 This method of evaluating a BN over all states of cumulative evidence can distinguish between better and worse BNs, shows when a BN goes wrong and gives us insight in why that happens. Modellers of data-poor BNs are might think about creating an expected preference ordering on all possible evidence states, before starting to build and test the BN, in order to check whether their BN aligns with their common-sense predictions. If the BN is wrong, this is a sign that either the modeller's estimation is wrong, or that the probabilities as entered in the BN are not correctly representing your actual beliefs.
 
 
+Creating the simulation and finding the proper limiting frequency is also difficult. We ran the simulation 10,000 times, however, the simulation did not allow a state that should have been possible, which is the state where the thief was seen by cameras, the psychological report states that he is guilty, but he was not seen stealing, and the object was not gone. In real life, this state is possible. However, the combination of (psychological report = 1, camera = 1), has 118 entries (happens 118 times). Out of all those entries, in the simulation it is always the case that the object is gone. However, in theory, it should be possible that the agent has a psychological report that indicates he will steal, that he's seen on camera, yet does not steal. This is a limitation in the number of runs performed.
+
+
+
+
 \subsection{Can a modeller do this?}
 
 
+We have shown that we can generate Bayesian Networks and evaluate them over all possible evidences states automatically, if we use the data as generated in training runs by the simulation. However, the real problem is, if a modeller could actually attempt to create a BN by hand without access to the underlying frequencies from the simulation. If we have a manually-crafted BN, but we also have the underlying true joint probability distribution over all variables in the simulation, we can test if this method of evaluation can show problems with a manually constructed Bayesian Network. 
 
- \textcolor{red} {restructure and rewrite for language}
+In this section, we manually create a Bayesian Network for the scenarios as given in the case study: a (potential) robbery at the Grote Markt. This was done by imagining how a modeller would manually create a BN if they only had access to the simulation. Instead of looking at the source code of the simulation, the modeller would have access to the visual of the simulation, and would be able to run the simulation multiple times. The reporters that are used, are given, and are the same nodes (reporters)  that are outlined in the case study. However, the modeller should construct the structure of the BN, and fill the CPTs of the nodes, using their subjective estimation of causality and frequency of events in simulation. This was done to discuss the influence that the real lack of data, time and control would have on a modeller in a real criminal case.  
 
 
-We have shown that we can generate Bayesian Networks and evaluate them over all possible evidences states automatically, if we use the data as generated by the simulation. However, the real problem is, if a modeller could actually attempt to create a BN by hand without access to the underlying frequencies from the simulation. If we have a manually-crafted BN, but we also have the underlying true joint probability distribution over all variables in the simulation, we can test if this method of evaluation can show problems with a manually constructed Bayesian Network.
 
-In order to do this, we created a network manually.  
- Method for creating the BN
- 
- We considered the three different scenarios: 1) the object was stolen, 2) the object was dropped, 3) neither happened. Since we use the same nodes as in the simulation, we do not have a separate node for scenario 3, or a constraint node. Scenario 3 is represented by both other scenarios having low probabilities.
+
+
+\subsubsection{Constructing the Manual Network}
+
+We followed the construction methods as outlined in \citep{Vlek2016} and \citep{vanLeeuwen2019}. We considered the three different scenarios: 1) the object was stolen, 2) the object was dropped, 3) neither happened. Since we use the same nodes as in the simulation, we do not have a separate node for scenario 3, or a constraint node. Scenario 3 is represented by both other scenarios having low probabilities.
  
  \begin{enumerate} 
  
-\item structure of the scenarios: The other scenarios are 2: [object\_dropped\_accidentally\_0], and 1: [motive\_1\_0, sneak\_1\_0, stealing\_1\_0]. Within scenarios, we create temporal connections, hence we only identify [motive $\rightarrow$ sneak $\rightarrow$ stealing] for now.
-\item) structure between scenarios. Using the causality thing identified earlier, we place `object\_dropped\_accidentally\_0' scn2 before scn1. Resulting in the network
- \[object\_dropped\_accidentally\_0 \rightarrow motive\_1\_0 \rightarrow sneak\_1\_0 \rightarrow stealing\_1\_0\]
-\item Adding the evidence nodes. For each node, we consider causality. `E\_psych\_report\_1\_0' relates to motive only, `E\_object\_gone\_0' to both stealing and dropped, then `E\_camera\_seen\_stealing\_1\_0' only directed to stealing node, with as parent `E\_camera\_1'.  These reflect the causality in the situation.
-\item For each node, create CPTs. To simulate the idea that we do not have exact probabilities (from the simulation), we place restrictions on the probabilities that we can add to the CPTs. We can only use [1, 0, 0.99, 0.01, 0.5, 0.25, 0.75] in the CPT. These correspond to: Totally sure, direct causal relation (1, 0), pretty sure but there might be some reason why not (0.99, 0.01), and we are not sure but it's leaning in a certain direction (0.25, 0.75).
+\item Structure within scenarios: The hypothesis nodes of the two scenarios represented explicitly in the networks are: 1: [motive\_1\_0, sneak\_1\_0, stealing\_1\_0], and 2: [object\_dropped\_accidentally\_0]. Within every scenario, we are creating temporal arcs between the hypothesis nodes. For scenario 2, this is easy, since it consists of only 1 node and we do not need to add arcs. For scenario 1, we observe in the simulation that a motive comes before sneaking, which comes before stealing. Hence we identify [motive $\rightarrow$ sneak $\rightarrow$ stealing] as the structure of scenario 1.
+
+\item Structure between scenarios. We need to know which scenario is the parent of the other scenario. Using the causality as described in Section 4.4, we place `object\_dropped\_accidentally\_0' before the first node of scenario 1. This results in the BN \[object\_dropped\_accidentally\_0 \rightarrow motive\_1\_0 \rightarrow sneak\_1\_0 \rightarrow stealing\_1\_0\]
+
+\item Evidence nodes. For each node, we consider causality. `E\_psych\_report\_1\_0' relates to `motive\_1\_0' only, `E\_object\_gone\_0' to both `stealing\_1\_0' and `object\_dropped\_accidentally\_0', then `E\_camera\_seen\_stealing\_1\_0' only directed to `stealing\_1\_0', with as parent `E\_camera\_1'. 
+
+\item For each node, create subjectively estimated conditional probability tables. To simulate the idea that we do not have exact probabilities (from the simulation), we place restrictions on the probabilities that we can add to the CPTs. We can only use [1, 0, 0.99, 0.01, 0.5, 0.25, 0.75] in the CPT. These correspond to: \textbf{red}{Totally sure, direct causal relation (1, 0), pretty sure but there might be some reason why not (0.99, 0.01), and we are not sure but it's leaning in a certain direction (0.25, 0.75)}. The network is presented in Figure~\ref{hebben}. The CPTs for the nodes are presented in the Appendix ???.
  
  \end{enumerate}
  
- \begin{figure}[htbp]
+ 
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.7\linewidth]{images/manualNetwork.pdf}
 \caption{Manual network}
-\label{ }
+\label{hebben}
 \end{center}
 \end{figure}
 
-\begin{table}[htbp]
-\begin{center}
-\begin{tabular}{|l|c|c|c|}
-\hline
-evidence & accuracy steal & accuracy dropped & \\
-\hline
-(0, 0, 0, 1) & 0.46 & 0.46 & 0.33 \\
-(0, 0, 0, 0) & 1.00 & 1.00 &  1\\
-(0, 1, 0, 1) & 0.99 & 0.99 &  1\\
-(1, 0, 0, 1) & 0.93 & 0.93 &  1\\
-(0, 1, 0, 0) & 1.00 & 1.00 &  1\\
-(1, 1, 0, 1) & -0.93 & -0.07 &  0\\
-(1, 1, 1, 1) & 0.95 & 0.95 &  1\\
-(1, 0, 0, 0) & 1.00 & 1.00 &  1\\
-(0, 1, 1, 1) & 1.00 & 0.99 &  1\\
-\hline
-total & 0.711 &  0.806 & 0.815 \\
-\hline
-\end{tabular}
-\end{center}
-\caption{ Accuracy in table}
-\label{now}
-\end{table}
+
+\subsubsection{Evaluating the Manual Network}
+ 
+We use the same method as outlined in the case study section and compare the output posteriors of the network (Table~\ref{wife}) to the output frequencies over 10,000 runs of the simulation (Table~\ref{heretic}), as well as calculating the accuracy for each evidence state (Table~\ref{now}).
+
+We find that, in total, the accuracy for this manual network is 0.71 for the `stealing\_1\_0' node, and 0.81 for the `object\_dropped\_accidentally\_0' node, with an average accuracy of 0.76. This means that the accuracy of the manual network is slightly worse than the average of the automatically constructed networks (0.88). We see that there are only two cases where the manual network predicts the wrong output: the evidence set (0, 0, 0, 1), and the evidence set (1, 1, 0, 1). We treat these in turn.
+
+\begin{itemize}
+\item (0, 0, 0, 1): if the object is gone, but there is no other evidence, the manual network predicts that the object is stolen (0.55) rather than dropped (0.45), so about equally likely. The prior probability of the `object\_dropped\_accidentally\_0' node is 0.01, which corresponds to a subjective estimate of `not likely, but can happen'. Apparently, we have underestimated the amount of times that an object was dropped, rather than stolen (given that all other evidence is 0): in the simulation, if there is no further evidence, it is much more probable that the object was dropped than stolen.
+\item (1, 1, 0, 1): if the psychological report is true, the potential thief was seen on camera, but was not seen stealing, and the object is gone, the network should predict that the agent has stolen. However, instead, the manual network breaks (hence, the probability assignments of -1). This combination of evidence is impossible in the network, but it should be allowed, as it is a possible state in the simulation.
+\end{itemize}
+
 
 
 \begin{table}
@@ -675,7 +685,7 @@ evidence & H1 & H2 & H3 \\
 \hline
 \end{tabular}
 \caption{ Preference ordering with numbers for manual network}
-\label{ wife}
+\label{wife}
 \end{table}%
 \begin{table}
 \centering
@@ -699,59 +709,69 @@ evidence & H1 & H2 & H3 \\
 \label{heretic}
 \end{table}
 
-\newpage
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+evidence & steal & dropped  \\
+\hline
+(0, 0, 0, 1) & 0.46 & 0.46  \\
+(0, 0, 0, 0) & 1.00 & 1.00 \\
+(0, 1, 0, 1) & 0.99 & 0.99 \\
+(1, 0, 0, 1) & 0.93 & 0.93 \\
+(0, 1, 0, 0) & 1.00 & 1.00 \\
+(1, 1, 0, 1) & -0.93 & -0.07\\
+(1, 1, 1, 1) & 0.95 & 0.95\\
+(1, 0, 0, 0) & 1.00 & 1.00 \\
+(0, 1, 1, 1) & 1.00 & 0.99\\
+\hline
+total & 0.711 &  0.806  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Accuracy per evidence state per output node}
+\label{now}
+\end{table}
 
+ \subsubsection{Discussing the Manual Network}
+ 
+We find that the manual network performs well, with a 0.76 accuracy, which is only slightly worse than the automated networks. It is not the case that the accuracy per evidence state is low, instead, the performance is very accurate over most evidence states, with only two evidence states that cause the lower accuracy. This means that it would be possible to improve the network by focussing on what goes wrong in these two states and adapting it, instead of trying to increase the performance of the network over all possible evidence states. Therefore, it seems possible that we can manually construct accurate BNs for crime cases, even with subjective probabilities. We can also use the method postulated in Section 3 as a way of evaluating the network to find where we might have over- or under-estimated probabilities in the CPTs, using the grounded frequencies generated from the simulation. Hence, a modeller might be able to construct a BN based on simple scenarios by hand. However, there are some limitations, both in how this network was created, as well as the evaluation method.
 
-Diagnosing problems:
-- overall accuracy: This network is about as accurate as the K2 network based on 100 runs, which is not the best but also not bad. Pretty good accuracy over all states for a network that was subjectively estimated and connected. Overall accuracy of network is
+To address the main limitation first, ideally, this manual crafting of the BN should be done by someone who was not involved in creating the simulation. Involvement with the crafting of the simulation gives the modeller an unfair advantage compared to an `new' modeller in estimating probabilities and understanding the causal structures, as they know how the simulation works. Additionally, in real life, we do not have access to the source code of the universe either, but we still have to build a network. Hence, the manual network should not be constructed by the modeller who created the simulation. However, due to time constraints, only the modeller of the simulation was available to build the manual BN. This might have improved the accuracy of the manual network.
 
-
-which is worse overall than the worst automatic network, however, it is about similar in performance? Seems reasonable.
-
-- When we compare the performance of this network to the actual frequencies from the simulation, we see that this handcrafted network performs well. In all cases except 1 (which we'll get to later), the manual network  predicts the same preference ordering over the outcomes as they happen in the grounded evidence states.
-- The manual network does not predict the exact probabilities from the grounded frequencies. Sometimes it is overconfident (such as in (0101) (1001)), other times it is underconfident (0001)). Analysis why here. (0, 0, 0, 1)
-- One big problem: 1101 state: modelled in network as if impossible (hence, -1 -1 probabilities). The simulation itself says that it is always stealing. weird. It means that the agent steals but is not shown on camera.
-
-Conclusion:
-The manual network is quite good. We can identify problems with the network. Method works! 
-
-Implications, plausibility:
-- Even with a low degree of precision, if we have a conditional structure and a clear idea of what happens, the network is ok. However, in real life, this is not as obvious.  The conditional structure that we can find here in the network makes it easy to elicit and use probabilities, but if we would try to apply this to a more complicated situation with more unknowns, we might not be able to find the probabilities. The events in the simulation are observable and clearly defined, in real life, we do not have the clear definition: we might not know what causes something else. 
-
-Problems:
-
--  validity of the manual network: these probabilities in the network were subjectively estimator by the person who created the simulation. The probabilities were `subjectively' estimated, which means that I did not look at, or calculated, probabilities to put in the network. However, I've been working on this project for 3/4 year so it is likely that I have a pretty good feel for what the probabilities in the network should approximate, and I know the causal structure of the simulation. Therefore, it is likely that people who just have access to the simulation output, will create `worse' networks. However, this can be detected by the evaluation method, hence, the evaluation network works. Perhaps if the user had the chance to interact with the simulation, they might be able to estimate some frequencies at which events happen. 
-
-- if the simulation was more difficult, the automated versions would continue to do well, but the manual approach would flouder. Size complexity
-
-Hence modellers could estimate probabilites and create nice networks but probably not in real complex life.
-
+Additionally, there are three limitations regarding the evaluation method. First of all, we can only use the method to find an evidence state with a low accuracy, but we do not have a way of resolving the low accuracy. The method does not tell you which CPTs need to be changed in what way. Secondly, we can only use the accuracy measure when we have a grounding data, in this case from the simulation. In real life, modellers of criminal cases do not have this grounding data. Finally, we find a problem in the selection of the possible states. In the simulation, some evidence states are not allowed, they have a frequency of 0. For most of these states, the manual network results in an error if these states are entered, as it should. This is where BNs guide the reasoning about evidence of the modeller. However, the manual network allows one state of evidence that is not allowed in the simulation, which is the state of (1, 1, 0, 0). This is the state where the `thief' has a psychological report stating that they could steal, they were seen on camera, but they were not seen stealing, and, most crucially, the object is not gone. This is a case where human intuition and what should happen, clashes with the frequencies of what actually happens in the simulation.
 
 
 \subsection{Evaluating BNs over all possible evidence states in real life}
 
 In this section we evaluate two Bayesian Networks with the method outlined before. 
- \textcolor{red} {rewrite for language}
+
+ \subsubsection{de Zoete 2019}
  
- \subsubsection{de Zoete so-called}
+The first is a network by de Zoete et all, about child abuse. This is from a paper about probabilistic paradoxes in legal reasoning \citep{deZoete2019}. The paper considers a case where we want to know if a child is abused. We have a certain behaviour that is associated with abuse, but some study shows that this behaviour occurs about as frequently in children who are not abused. Only when the behaviour $EB$ occurs together with an additional characteristic $AC$, there's a strong probability of abuse. It has been proposed that the combination of two evidence pieces is difficult to model - however, de Zoete at all find a way to model it, using the Bayesian Network presented in Figure~\ref{pity}. In this network, they divide the potential children into three groups: 1) a child who is abused, who must exhibit both the behaviour and the additional characteristic, 2) a child who is not abused, who has the behaviour but can never have the additional characteristic, and 3) a child who is not abused, who does not have the behaviour, and also does not have the additional characteristic.
  
- 
- The first is a network by de Zoete et all, about child abuse. This is from a paper about probabilistic paradoxes in legal reasoning. IT considers a case where we want to know if a child is abused. We have a certain behaviour that is associated with abuse, but some study shows that this behaviour occurs about as frequently in children who are not abused. Only when the behaviour occurs together with an additional, different behaviour, there's a strong probability of abuse. It has been proposed that the combination of two evidence pieces is difficult to model - however, de Zoete at all find a way to model it, using the  Bayesian Network presented in Figure~\ref{}. In this network, they divide the potential children into three groups: 1) a child who is abused, who must have both the behaviour and the additional characteristic, 2) a child who is not abused, who has the behaviour but can never have the additional characteristic, and 3) a child who is not abused, who does not have the behaviour, and also does not have the additional characteristic.
- 
- 
- 
- 
+
  \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.7\linewidth]{images/manualNetwork.pdf}
-\caption{Manual network}
-\label{ }
+\includegraphics[width=\linewidth]{images/abusedNetworkImage.pdf}
+\caption{Abuse Network, replicated from \citep{deZoete2019}}
+\label{pity}
 \end{center}
 \end{figure}
 
+In the paper, a table is presented with the possible outcomes of the network to show that network models the apparent paradox correctly. Turning either one of the nodes $EB$ or $AC$ on (and leaving the other unspecified) does not affect the probability of the child being abused. This was 0.4, and remains 0.4. However, if we set both $EB$ and $AC$ to `true', results in a posterior probability of abuse of 1, as expected.
 
-In the paper, they present a table with some possible outcomes, to show that this `both things must be true' thing is correct. However, using the method in this paper, we can evaluate over all evidence states. Here, we have two pieces of evidence, exhibiting behaviour (B) and additional characteristics (C). We consider all combinations of evidence in Table~\ref{ipad}. The network performs well in 3 cases (4 if you count the `no evidence'). In case of both pieces of evidence are true, the posterior of abuse is 1. If one of the pieces of evidence is false, the posterior for abuse drops compared to its prior.  
+Now, we apply the method of evaluating the network over all possible evidence states. We do this to the two pieces of evidence we have: `exhibiting behaviour' ($EB$) and `additional characteristic' ($AC$). The result of this evaluation is found in Table~\ref{ipad}. We see that the network performs as expected in 3 out of 4 cases. If we do not set any evidence, we just have the prior probability. Setting either one of the pieces of evidence to `false' reduces our belief in the posterior that the child has been abused (from 0.40 to 0.375 and from 0.40 to 0.25). This lines up with common sense: the evidence is negative, hence we reduce our belief in the posterior.
 
+However, there we identify one strange case, presented in Figure~\ref{cowboy}, which is the case of both pieces of evidence being negative. So the child does not perform the behaviour and also does not have the additional characteristic. We would expect the probability that the child is abused to drop from 0.4 to something lower (perhaps not 0, but something lower). However, instead we find that the posterior of `abused' increases to 0.42. This does not seem like a conclusion that we want to draw. Unfortunately, it is unclear what is wrong with this network so we do not know why it produces a higher posterior belief in abuse if there is a total absence of evidence. We do not know how the CPTs should be changed in order to produce a network that conforms to our intuitions about the evidence. Hence, our method can only tell us that something is weird, but not how we should change it.
+
+ \begin{figure}[htbp]
+\begin{center}
+\includegraphics[]{../notebooks/FentonAbuse.pdf}
+\caption{Posterior probability for abuse is higher than prior given that evidence is false}
+\label{cowboy}
+\end{center}
+\end{figure}
 
 \begin{table}
 \centering
@@ -761,30 +781,22 @@ In the paper, they present a table with some possible outcomes, to show that thi
 Evidence  & P(abused) & p(nonAbusedBehaviour) & p(nonAbusednotBehaviour)  \\
 \hline
 no evidence set & 0.40 & 0.50 & 0.10 \\
-B and C & 1.00 & 0 & 0 \\
-B and $\neg$C & 0.375 & 0.625 & 0 \\
-$\neg$B and $C$ & 0.25 & 0 & 0.75 \\
-$\neg$B and $\neg$C & 0.4286 & 0.4762 & 0.0952 \\
+$EB$ and $AC$ & 1.00 & 0 & 0 \\
+$EB$ and $\neg AC$ & 0.375 & 0.625 & 0 \\
+$\neg EB$ and $AC$ & 0.25 & 0 & 0.75 \\
+$\neg EB$ and $\neg AC$ & 0.4286 & 0.4762 & 0.0952 \\
 \hline
 \end{tabular}
-\caption{ Preference ordering with numbers for all evidence states on `ground truth' for runs=10,000}
+\caption{Posterior belief in either of the three hypotheses given evidence states}
 \label{ipad}
 \end{table}
 
 
 
- \begin{figure}[htbp]
-\begin{center}
-\includegraphics[]{../notebooks/FentonAbuse.pdf}
-\caption{Manual network}
-\label{ }
-\end{center}
-\end{figure}
+
 
  
  \subsubsection{van Leeuwen 2019}
-
-
 We applied this method to the network presented in \citet{vanLeeuwen2019}, shown in Figure~\ref{love}.  This network models a crime case where a suspect P murdered a tenant, then fled by car, and later called his parents to confess the crime, which is modelled as scenario 1 (scn1). In his own testimony, P states that he has amnesia and does not remember the day of the murder, and also that he was kidnapped, which is modelled as scenario 2 (scn2). The two scenarios are mutually exclusive and exhaustive. Evidence node names are shortened in table for convenience: `testimony\_amnesia' (TA), `Medical\_investigation\_found\_no\_amnesia' (MA), `testimony\_kidnapping' (TK), `no\_concrete\_evidence\_for\_kidnapping' (NK), `phonecall\_parents' (PP),  `car\_with\_bloodstains\_found' (CB), `body\_found' (BF), `signs\_of\_violence' (SV), `phonecall\_with\_friend'(PF), `testimony\_conflict' (TC), `weapon\_found' (WF).
 
 
@@ -823,31 +835,40 @@ We do not have an automated baseline for this network so that means that if we w
 
 
 \begin{enumerate}
-\item We find that, if all evidence nodes are true, which is the situation as found in the court case, the network shows that scenario 1 is the case, and that the suspect is guilty, with a probability of 1. This is the expected output, and corresponds to the outcome of \citet{vanLeeuwen2019}.
-\item There is no body, no signs of violence, no car with bloodstains, no evidence of existing conflict. The only evidence that the prosecution has, are two phone calls. The outcome of the network is that the suspect is guilty (P(scn1 = `yes') = 100\%). But the evidence that is entered into this network, would not reasonably support this conclusion. No reasonable arguer would argue that this state of evidence is sufficient for a guilty verdict.
-\item Here we fully believe scenario 2, so that the suspect is not guilty. However, all evidence that we have learned about scenario 2 shows that scenario 2 is not true: we have testimony for amnesia, but no medical record of it. We have testimony for kidnapping, but no concrete evidence for kidnapping. This should mean that our posterior belief in scenario 2 should decrease. We also have a little evidence on the side of scenario 1: two phone calls, and a car with bloodstains. This would not be enough for a conviction, but it should be enough that our belief in scenario 1 is not 0.
-\item The same case as evidence state in case 3, but now we change our evidence. From not having a body found, we add that we find the body, and we see that our belief in scenario 1 increases, from 0 to 0.40. This is a change of our belief in a reasonable direction given new evidence. The size of the belief-change, from 0 to 0.40, is difficult to assess without a realistic baseline.
-\item Here we find that the suspect says that he has amnesia and also that he was kidnapped, and this is supported by the other evidence. This adds support for scenario 2. However, we also find a lot of support for scenario 1: a body, a testimony of conflict, the phone calls, weapon found. Just not the car, and no signs of violence on the scene. Here, my subjective probability estimation machine thinks that, even though scenario 2 has some good evidence going for it, I believe that scenario 1 is more likely than 0.07. Hence, the output does not line up with my expectation.
-\item This is a special case: if all evidence nodes are false, the inference engine shows the result that the evidence is altogether incompatible. Since both scenarios are mutually exclusive and exhaustive, this result is sensible and shows that the BN can indeed structure our reasoning.
+\item In row 1, we find that, if all evidence nodes are true, which is the situation as found in the court case, the network shows that scenario 1 is the case, and that the suspect is guilty, with a probability of 1. This is the expected output, and corresponds to the outcome of \citet{vanLeeuwen2019}.
+\item In row 2, we find that there is no body, no signs of violence, no car with bloodstains, no evidence of existing conflict. The only evidence that the prosecution has, are two phone calls. The outcome of the network is that the suspect is guilty (P(scn1 = `yes') = 100\%). But the evidence that is entered into this network, would not reasonably support this conclusion. No reasonable arguer would argue that this state of evidence is sufficient for a guilty verdict.
+\item In row 3, we fully believe scenario 2, so that the suspect is not guilty. However, all evidence that we have learned about scenario 2 shows that scenario 2 is not true: we have testimony for amnesia, but no medical record of it. We have testimony for kidnapping, but no concrete evidence for kidnapping. This should mean that our posterior belief in scenario 2 should decrease. We also have a little evidence on the side of scenario 1: two phone calls, and a car with bloodstains. This would not be enough for a conviction, but it should be enough that our belief in scenario 1 is not 0.
+\item In row 4, we believe the same case as evidence state in case 3, but now we change our evidence. From not having a body found, we add that we find the body, and we see that our belief in scenario 1 increases, from 0 to 0.40. This is a change of our belief in a reasonable direction given new evidence. The size of the belief-change, from 0 to 0.40, is difficult to assess without a realistic baseline.
+\item In row 5, we find that the suspect says that he has amnesia and also that he was kidnapped, and this is supported by the other evidence. This adds support for scenario 2. However, we also find a lot of support for scenario 1: a body, a testimony of conflict, the phone calls, weapon found. Just not the car, and no signs of violence on the scene. Here, my subjective probability estimation machine thinks that, even though scenario 2 has some good evidence going for it, I believe that scenario 1 is more likely than 0.07. Hence, the output does not line up with my expectation.
+\item In row 6, we present a a special case: if all evidence nodes are false, the inference engine shows the result that the evidence is altogether incompatible. Since both scenarios are mutually exclusive and exhaustive, this result is sensible and shows that the BN can indeed structure our reasoning.
 \end{enumerate}
 
 Even without using a simulation, this method can be used to gain insight in whether the BN conforms to our expectations. We can identify cases where it seems to work correctly, such as case 1) and case 3). In case 1), the output conforms to the one datapoint that we have (given all evidence, the suspect is guilty), the BN makes the same decision as the court. In case 4), we find that the network, in this circumstance, responds sensibly to a change in evidence. However, in case 2), 3) and 5), we find the performance of the network not convincing. In case 2), there is insufficient evidence for scenario 1, yet the network chooses scenario 1. In case 3), there is insufficient evidence for scenario 2, yet the network chooses scenario 2. In case 5), there is support for both scenarios, but the posterior probability for scenario 1 seems (subjectively) too low. Furthermore, we now also know which states are deemed impossible (example: case 6). However, since we do not have a simulation or real-life test-cases, we do not have a way of `objectively' checking whether the network performs correctly or not, and to objectively identify combinations of evidence for which the network is performing badly. We can only do spot-checks and manually search through the output to see if we found anything interesting. Also, if we found a case for which the network performs incorrectly, it is also not clear what we should do with that: how should we change the probabilities in the CPT in order to increase `accuracy'?
 
-It is possible to apply this method of evaluation to other networks (given that they are produced in an open-access format), to non-systematically check the performance of these networks over all possible evidence valuations. In the networks as considered in the Anjum case study in \citet{vlek2016}, or the Simonshaven case in \citet{Fenton2019}, the evidence nodes are distinguished from the hypothesis nodes. Even without considering the temporality of evidence, we can set the cumulative evidence all at once. However, since we do not have simulations for grounding, or data for grounding, we cannot actually evaluate the networks based on `objective' measures. Manually considering all evidence sets will be even more problematic than before. Instead of 11 nodes, the Simonshaven network has 13 evidence nodes, and the Anjum network has 20 evidence nodes. If we assume that calculating 1 case will take around 0.0037 seconds (as calculated from 7.66 seconds for 2048 entries, this does not hold entirely because it also depends on the number of hypothesis nodes), producing all possible Simonshaven states and posteriors should take $2^{13} = 30$ seconds, which is still reasonable, but the Anjum network would take 64 minutes. That is only considering the automatic calculation of the posteriors, and does not consider the time-complexity of creating a manual or automatic baseline. Additionally, some of the nodes in the Simonshaven are not binary nodes, resulting in a higher complexity as well.
+It is possible to apply this method of evaluation to other networks (given that they are produced in an open-access format), to non-systematically check the performance of these networks over all possible evidence valuations. In the networks as considered in the Anjum case study in \citet{vlek2016}, or the Simonshaven case in \citet{Fenton2019}, the evidence nodes are distinguished from the hypothesis nodes. Even without considering the temporality of evidence, we can set the cumulative evidence all at once. However, since we do not have simulations for grounding, or data for grounding, we cannot actually evaluate the networks based on `objective' measures. Manually considering all evidence sets will be even more problematic than before. Instead of 11 nodes, the Simonshaven network has 13 evidence nodes, and the Anjum network has 20 evidence nodes. If we assume that calculating 1 case will take around 0.0037 seconds (as calculated from 7.66 seconds for 2048 entries, this does not hold entirely because it also depends on the number of hypothesis nodes), producing all possible Simonshaven states and posteriors should take $2^{13} = 30$ seconds, which is still reasonable, but the Anjum network would take 64 minutes. That is only considering the automatic calculation of the posteriors, and does not consider the time-complexity of creating a manual or automatic baseline. Additionally, some of the nodes in the Simonshaven are not binary nodes, resulting in a higher complexity as well. 
 
 
 
-\subsection{Problems}
 
-There are three main problems with this approach that limit its generalisability. These problems are the combinatorial explosion of the evidence states, the implausibilities of finding proper grounding, even in simulation, specifying more than we actually need, and the imprecision of the BN definitions of the random variables in real life.
+\subsubsection{Implications}
+
+Evaluating the networks without simulations has shown that we might be able to use our method for examining BNs for all possible evidence states works well when we are investigating modelling primitives or BN methods (such as investigating idioms), as in the case of ~\citep{deZoete2019}. We can assess whether the chosen probabilities make sense. 
+However, the method of evaluation does not work well when we are examining actual Bayesian Networks for crimes, because of the implausibility of finding proper grounding, and combinatorial explosions.
+
+We lack the proper grounding for these networks, because we are not using simulations to obtain the `true' underlying frequency information, which means that we cannot use this as a baseline to assess the accuracy of the BNs. This means that we cannot know for which evidence states the network is correct. Even if manual networks are correct, as we have shown in the previous section, we cannot be sure that this holds for a network that is as complex as this one. Additionally, even though we might be able to find some statistics about criminal behaviour, due to the lack of clear operationalisation, it is unclear to what extent those statistics would generalise towards probabilities in the network. For example, we might be able to estimate the proportion of Dutch people who own a gun. However, this information by itself hardly seems relevant when we look at the facts of the case as described in the case~\footnote{Case number: ECLI:NL:RBUTR:2004:AO3150}: the suspect was ex-military and might have killed someone with the same weapon before. Using a general statistic about gun-ownership in the Netherlands does not fit the case, hence, low generalisation: the statistics that we might use to `ground' the network might be irrelevant.
+
+This method of evaluation has shortcomings with regards to the time-complexity of the evidence states. In the worst case, if we have $e$ evidence states, this means that we have $e^2$ possible evidence states. We would have to define a preference ordering or probability distribution on the output nodes in $2^e$ cases. This is plausible in a network with 4 evidence nodes. However, as we saw in the discussion of the literature, this becomes implausible when there are many evidence nodes. 
+This necessarily puts an upper bound on the level of granularity one can model in their network. If our network becomes more detailed in how evidence is represented, the higher the probability that considering all possible evidence states becomes improbable. A rough estimation shows that a 20-evidence-node network will take about an hour, but 20 pieces of evidence are not much in a complex case. Due to exponentiality, a network with 25 evidence nodes would result in 2.3 months of calculations.
+
+There's also the combinatorial explosion, where you would need to define many more cases of evidence than you are actually reasoning with. This is a problem with using Bayesian Networks for criminal cases in general. In the court cases, we are only considering evidence that we believe is true: we do not have to reason about what we would conclude if we had found the evidence in a different state. Rather, we can ask whether something is sufficient evidence, but that would be defined in Bayesian Network as sensitivity: how much does a change in the value of the evidence node influence a change in the posterior of some outcome, and is this correct? But asking about sensitivity is different from asking about counterfactuals: `if this evidence is not true...'. In BNs, we are implicitly defining the joint probability distribution over all possible evidence states: in this network, all 895 other evidence states, and for all these evidence states, the network must be correct. This is a very high bar to clear.
+
+                                                                                                                                                                      
+\subsection{Using Simulations}
+
 
 \begin{enumerate}
 
-\item For this approach, we need to consider all possible evidence states. In the worst case, if we have $e$ evidence states, this means that we have $e^2$ possible evidence states. We would have to define a preference ordering or probability distribution on the output nodes in $2^e$ cases. This is plausible in a network with 4 evidence nodes. However, as we saw in the discussion of the literature, this becomes implausible when there are many evidence nodes. 
-This necessarily puts an upper bound on the level of granularity one can model in their network. If our network becomes more detailed in how evidence is represented, the higher the probability that considering all possible evidence states becomes improbable. A rough estimation shows that a 20-evidence-node network will take about an hour, but 20 pieces of evidence are not much in a complex case. Due to exponentiality, a network with 25 evidence nodes would result in 2.3 months of calculations.
-There's also the combinatorial explosion, where you would need to define many more cases of evidence than you are actually reasoning with. However, we are already doing this implicitly by using a Bayesian Network for reasoning in the first place. 
-
-\item Due to the simulation approach in this paper, we can establish a statistical ground truth in step 4) of our method. We can create both a joint probability distribution and a preference ordering automatically from the simulation. In real life, this would have to be elicited in some way. Even if we assume that we are not in a combinatorial explosion, we would still need to define either a subjective probability distribution over all possible outcomes, or a preference ordering, and use this as a baseline to test the predictions of our BN against. This involves subjectivity twice: first in defining the preference ordering or probability distribution over outcomes, and second the probabilities that are inputted in the CPTs. Future research might establish how successful people are in estimating preference orderings or probability distributions over output nodes, so that we can use these subjective orderings as a baseline, instead of an ordering generated by frequency data from the simulation. 
+\item Due to the simulation approach in this paper, we can establish a statistical ground truth in step 4) of our method. We can create both a joint probability distribution and a preference ordering automatically from the simulation. In real life, this would have to be elicited in some way. Even if we assume that we are not in a combinatorial explosion, we would still need to define either a subjective probability distribution over all possible outcomes, or a preference ordering, and use this as a baseline to test the predictions of our BN against. This involves subjectivity twice: first in defining the preference ordering or probability distribution over outcomes, and second the probabilities that are inputted in the CPTs. Future research might establish how successful people are in estimating preference orderings or probability distributions over output nodes, so that we can use these subjective orderings as a baseline, instead of an ordering generated by frequency data from the simulation.
 
 As we saw when we applied the method to the network without a simulation, it is not plausible to create a manual baseline, as this would be mind-numbingly boring and consume too much time.  Creating a simulation would mean that the simulation should go beyond one room, and instead model an entire city, all places that the suspect can be all the time. This requires a lot more data and attention than is possible now, and it is also unclear how we would test the validity of the simulation, which would result in all our problems just being shifted up a step (to the simulation level, instead of in the BN). This means that simulations might be a good tool to investigate the methods of BNs, but are not suitable for actually investigating real-life crimes (although they might be usable as a tool for predicting situations - stuff where we have frequency data about.
 
@@ -855,11 +876,6 @@ Yes, simulations are a nicer modelling primitive than straight BNs. Could use a 
 
 Simulations are nice because you do not have to deal with calculating the probabilities yourself. For instance, calculating the probability of motive, means that we need to calculate vulnerable and valuable. This can be done, given that the guy has a target: valuable = (2/5)*(1/2)*(1/2) = 0.1, while vulnerable = (1/5)+(3/5)(1/2) = 0.5. Hence, motive = 0.05, or 5\%, just by bare probability calculations, which matches the probability as found in the network and the training dataset. However, this was relatively easy because these were straightforward uniform distributions. This calculation is going to be more complex if we're dealing with either more complex distributions (normals, etc.), or if we do not have a good idea about the underlying distributions. However, doing this using simulations makes it a lot easier, the numbers `just' emerge without any calculation. We even encounter this in the simulation right now: the probability that the camera sees the stealing is very difficult to calculate analytically. Simulations are a more natural way to think about this.The simulation can also easily become more relevant (more like a level 1 or 2 simulation in the taxonomy), by creating more realistic agent motivation models and behaviour. On the other hand, debugging simulation results is really annoying.
 
-Creating the simulation and finding the proper limiting frequency is also difficult. We ran the simulation 10,000 times, however, the simulation did not allow a state that should have been possible, which is the state where the thief was seen by cameras, the psychological report states that he is guilty, but he was not seen stealing, and the object was not gone. In real life, this state is possible. However, the combination of (psychological report = 1, camera = 1), has 118 entries (happens 118 times). Out of all those entries, in the simulation it is always the case that the object is gone. However, in theory, it should be possible that the agent has a psychological report that indicates he will steal, that he's seen on camera, yet does not steal. This is a limitation in the number of runs performed.
-
-
-
-\item Too much data: in the court case, we are only considering the evidence that we believe is true. We do not have to consider these counterfactual states of evidence, all 895 of them. In a BN, these other 895 cases are 1) specified and 2) must be correct. Isn't this asking too much? Other approaches to reasoning, scenario-based, argumentative or hybrid do not need to fill out the CPTs, there they only need to consider the evidence by itself.  \textcolor{red} {explain}
 
 
 
@@ -873,12 +889,13 @@ Creating the simulation and finding the proper limiting frequency is also diffic
 
 
 
+
 \section{Conclusion}
 
 \subsection{Summary}
-We have shown that simulations can be used to ground Bayesian Networks and we created an evaluation method for them. Bayesian Networks can be created from the simulation automatically, and these Bayesian Networks can be evaluated for goodness systematically. We know that these networks are accurate because 1) the predicted prior probabilities of events in the network correspond exactly to the frequency of events in the simulation and 2) adding all possible states of evidence to the Bayesian Network results in the same output prediction as given by the simulation. Accuracy increases the more data is available to automatically construct the network, hence we find that some networks are better than others, and we can make a real evaluation.
+We have shown that simulations can be used to ground Bayesian Networks and we created an evaluation method for them. Bayesian Networks can be created from the simulation automatically, and these Bayesian Networks can be evaluated for accuracy over all evidence states systematically. We know that these networks are accurate because 1) the predicted prior probabilities of events in the network correspond exactly to the frequency of events in the simulation and 2) adding all possible states of evidence to the Bayesian Network results in the same output prediction as given by the simulation. Accuracy increases the more data is available to automatically construct the network, hence we find that some networks are better than others, and we can make a real evaluation.
 
- However, this method of evaluation is not suitable for 1) real-life criminal cases and 2) networks with $> 25$ evidence nodes. In real-life criminal cases, we do not have the grounding necessary to check whether the network is accurate automatically. Creating this checking-dataset by hand means that we have to specify for all possible evidence states what our prediction of the output nodes is, which takes too long and we do not have a good grounding to prefer one set of evidence states over the other. Additionally, in real life we do not have to reason over all sets of possible evidence, we just need to reason with the set of evidence that we found. There need to be fewer than $25$ evidence nodes in the network (given personal-computer constraints), as runtime increases exponentially with the number of nodes.
+ \textbf{However, this method of evaluation is not suitable for 1) real-life criminal cases and 2) networks with $> 25$ evidence nodes. In real-life criminal cases, we do not have the grounding necessary to check whether the network is accurate automatically. Creating this checking-dataset by hand means that we have to specify for all possible evidence states what our prediction of the output nodes is, which takes too long and we do not have a good grounding to prefer one set of evidence states over the other. Additionally, in real life we do not have to reason over all sets of possible evidence, we just need to reason with the set of evidence that we found. There need to be fewer than $25$ evidence nodes in the network (given personal-computer constraints), as runtime increases exponentially with the number of nodes.}
 
  
 \subsection{Future Research}
@@ -886,13 +903,11 @@ We have shown that simulations can be used to ground Bayesian Networks and we cr
 The simulation in this paper is not complex, and does not model reality in any realistic way. The purpose of this simulation was just to generate data, and did not need to reflect any specific facts about the world. However, agent-based modelling can be useful for investigating different aspects of Bayesian Networks, or reasoning with evidence more generally. Increasing the level of the simulation from level 0 to something that reflects reality is useful to investigate problems such as the Opportunity Prior as presented in \citet{Fenton2017}. 
 
 
-Letting people estimate probabilities on simulations to investigate elicitation accuracy.
+\textbf{Letting people estimate probabilities on simulations to investigate elicitation accuracy.}
 
-\newpage
+
 \bibliographystyle{apalike}
 \bibliography{masterThesisCitations}
-
-\newpage
 
 
 \section{Appendix}
@@ -906,14 +921,9 @@ The probability distribution and preference ordering over outcomes for all possi
 \newpage
 \subsection{Tables accuracy automated network}
 %\input{tableAutomatic.tex}
-\newpage
-
-
-
-\subsection{Jurix}
+\subsection{Discussion}
 \subsubsection{Network}
-\input{cptManual.tex}
-
+%\input{cptManual.tex}
 \subsubsection{Table}
 %\input{tableOrder.tex}
 

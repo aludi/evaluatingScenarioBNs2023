@@ -19,23 +19,22 @@
 \contentsline {subsubsection}{\numberline {4.3.2}Reporters}{24}{subsubsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.4}Construction}{28}{subsection.4.4}%
 \contentsline {subsection}{\numberline {4.5}Evaluation}{28}{subsection.4.5}%
-\contentsline {section}{\numberline {5}Results}{29}{section.5}%
-\contentsline {section}{\numberline {6}Discussion}{35}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Evaluating BNs over all possible evidence states using simulations}{35}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Can a modeller do this?}{37}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Constructing the Manual Network}{37}{subsubsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Evaluating the Manual Network}{38}{subsubsection.6.2.2}%
-\contentsline {subsubsection}{\numberline {6.2.3}Discussing the Manual Network}{40}{subsubsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.3}Evaluating BNs over all possible evidence states in real life}{43}{subsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}de Zoete 2019}{43}{subsubsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}van Leeuwen 2019}{45}{subsubsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}Implications}{49}{subsubsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.4}Using Simulations}{50}{subsection.6.4}%
-\contentsline {section}{\numberline {7}Conclusion}{52}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Summary}{52}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Future Research}{53}{subsection.7.2}%
-\contentsline {section}{\numberline {8}Appendix}{56}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Tables accuracy automated network}{57}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Discussion}{57}{subsection.8.2}%
-\contentsline {subsubsection}{\numberline {8.2.1}Network}{57}{subsubsection.8.2.1}%
-\contentsline {subsubsection}{\numberline {8.2.2}Table}{57}{subsubsection.8.2.2}%
+\contentsline {section}{\numberline {5}Results}{30}{section.5}%
+\contentsline {section}{\numberline {6}Discussion}{36}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Evaluating BNs over all possible evidence states using simulations}{36}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Can a modeller do this?}{38}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Constructing the Manual Network}{38}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Evaluating the Manual Network}{39}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Discussing the Manual Network}{42}{subsubsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.3}Evaluating BNs over all possible evidence states in real life}{44}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}de Zoete 2019}{44}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}van Leeuwen 2019}{47}{subsubsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.4}Implications}{51}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Using Simulations}{52}{subsection.6.5}%
+\contentsline {section}{\numberline {7}Conclusion}{54}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Summary}{54}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Future Research}{55}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Appendix}{58}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Discussion}{59}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Network}{59}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Table}{60}{subsubsection.8.1.2}%

@@ -4,7 +4,6 @@
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.bbl" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.bbl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.blg" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.blg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.log" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.out" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.out" afterDir="false" />
@@ -12,8 +11,6 @@
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.toc" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/imagesMasterThesis.key" beforeDir="false" afterPath="$PROJECT_DIR$/Report/imagesMasterThesis.key" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/masterThesisCitations.bib" beforeDir="false" afterPath="$PROJECT_DIR$/Report/masterThesisCitations.bib" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,13 +158,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637857692698</updated>
-    </task>
-    <task id="LOCAL-00023" summary="created nicer csv for accuracy">
-      <created>1649711880908</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1649711880908</updated>
     </task>
     <task id="LOCAL-00024" summary="bare structure report">
       <created>1649761648200</created>
@@ -505,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659308717186</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="updated results">
+      <created>1659441264333</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1659441264335</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -522,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="reorganized direectory partially" />
     <MESSAGE value="added vision range for camera - doesn't seem to work very well but i have to adapt the plots..." />
     <MESSAGE value="added experiment support (maps, private knowledge, camera vision range) to the system." />
     <MESSAGE value="file structure" />
@@ -547,7 +543,8 @@
     <MESSAGE value="thuird final first draft" />
     <MESSAGE value="forth final first draft" />
     <MESSAGE value="fifth final first draft" />
-    <option name="LAST_COMMIT_MESSAGE" value="fifth final first draft" />
+    <MESSAGE value="updated results" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated results" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1657883840812">
@@ -560,13 +557,14 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655572982224" />
-    <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2" timestamp="1659308715074">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="464" y="123" width="480" height="656" key="CommitChangelistDialog2" timestamp="1659441263443">
+      <screen x="29" y="23" width="1251" height="777" />
     </state>
     <state x="667" y="159" key="CommitChangelistDialog2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935097600" />
     <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659130333411" />
     <state x="0" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653733801421" />
     <state x="667" y="159" key="CommitChangelistDialog2/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659308715074" />
+    <state x="464" y="123" width="480" height="656" key="CommitChangelistDialog2/29.23.1251.777@29.23.1251.777" timestamp="1659441263443" />
     <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1658966360924" />
     <state width="1605" height="248" key="GridCell.Tab.0.bottom" timestamp="1659274111101">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -661,12 +659,13 @@
     </state>
     <state x="468" y="178" key="SettingsEditor/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655386151908" />
     <state x="468" y="178" key="SettingsEditor/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1657882465794" />
-    <state x="649" y="293" key="Vcs.Push.Dialog.v2" timestamp="1659308723115">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="452" y="221" key="Vcs.Push.Dialog.v2" timestamp="1659441272882">
+      <screen x="29" y="23" width="1251" height="777" />
     </state>
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935104507" />
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659130387203" />
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659308723115" />
+    <state x="452" y="221" key="Vcs.Push.Dialog.v2/29.23.1251.777@29.23.1251.777" timestamp="1659441272882" />
     <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1658966375351" />
     <state x="247" y="138" width="1426" height="744" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1659274003656">
       <screen x="0" y="23" width="1920" height="1057" />

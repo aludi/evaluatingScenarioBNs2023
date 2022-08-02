@@ -1,61 +1,46 @@
 This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ThesisFinalDraft.aux
-Case mismatch error between cite keys Vlek2016 and vlek2016
----line 121 of file ThesisFinalDraft.aux
- : \citation{Vlek2016
- :                   }
-I'm skipping whatever remains of this command
 The style file: apalike.bst
 Database file #1: masterThesisCitations.bib
-Repeated entry---line 641 of file masterThesisCitations.bib
- : @book{vlek2016
- :               ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 1243 of file masterThesisCitations.bib
- : @book{vlek2016
- :               ,
-I'm skipping whatever remains of this entry
-Warning--empty journal in wieten2019
 You've used 36 entries,
             1935 wiz_defined-function locations,
-            708 strings with 9921 characters,
-and the built_in function-call counts, 14026 in all, are:
-= -- 1361
-> -- 559
-< -- 27
-+ -- 197
-- -- 181
-* -- 1156
-:= -- 2443
-add.period$ -- 111
+            723 strings with 10570 characters,
+and the built_in function-call counts, 14876 in all, are:
+= -- 1455
+> -- 590
+< -- 33
++ -- 194
+- -- 190
+* -- 1223
+:= -- 2539
+add.period$ -- 115
 call.type$ -- 36
-change.case$ -- 255
+change.case$ -- 256
 chr.to.int$ -- 36
-cite$ -- 37
-duplicate$ -- 562
-empty$ -- 1009
-format.name$ -- 239
-if$ -- 2764
+cite$ -- 36
+duplicate$ -- 604
+empty$ -- 1083
+format.name$ -- 252
+if$ -- 2995
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 42
-newline$ -- 182
-num.names$ -- 112
-pop$ -- 251
+missing$ -- 47
+newline$ -- 183
+num.names$ -- 116
+pop$ -- 259
 preamble$ -- 1
-purify$ -- 265
+purify$ -- 267
 quote$ -- 0
-skip$ -- 412
+skip$ -- 451
 stack$ -- 0
-substring$ -- 928
-swap$ -- 73
-text.length$ -- 5
+substring$ -- 998
+swap$ -- 107
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 200
-warning$ -- 1
-while$ -- 112
+type$ -- 194
+warning$ -- 0
+while$ -- 124
 width$ -- 0
-write$ -- 468
-(There were 3 error messages)
+write$ -- 480

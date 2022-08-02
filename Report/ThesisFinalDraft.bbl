@@ -2,47 +2,50 @@
 
 \bibitem[Bench-Capon, 2019]{benchcapon2019}
 Bench-Capon, T. (2019).
-\newblock Before and after dung: Argumentation in ai and law.
+\newblock {Before} and {After} {Dung}: {Argumentation} in {AI} and {Law}.
 \newblock {\em Argument and Computation}, 11:1--18.
 
 \bibitem[Chen et~al., 2008]{Chen2008}
 Chen, X.-W., Anantha, G., and Lin, X. (2008).
-\newblock Improving bayesian network structure learning with mutual
-  information-based node ordering in the k2 algorithm.
+\newblock Improving {Bayesian} {Network} {Structure} {Learning} with {Mutual
+  Information-Based Node Ordering} in the {K2} algorithm.
 \newblock {\em IEEE Transactions on Knowledge and Data Engineering},
   20(5):628--640.
 
 \bibitem[Colyvan et~al., 2001]{colyvan2001}
 Colyvan, M., Regan, H.~M., and Ferson, S. (2001).
-\newblock Is it a crime to belong to a reference class.
+\newblock {Is it a Crime to Belong to a Reference Class?}
 \newblock {\em Journal of Political Philosophy}, 9(2):168--181.
 
 \bibitem[Cooper and Herskovits, 1992]{Cooper1992}
 Cooper, G. and Herskovits, E. (1992).
-\newblock A bayesian method for the induction of probabilistic networks from
-  data.
+\newblock {A Bayesian Method for the Induction of Probabilistic Networks from
+  Data}.
 \newblock {\em Machine Learning}, 9:309--347.
 
 \bibitem[Dahlman, 2020]{dahlman2020}
 Dahlman, C. (2020).
-\newblock De-biasing legal fact-finders with bayesian thinking.
+\newblock {De-Biasing Legal Fact-Finders With Bayesian Thinking}.
 \newblock {\em Topics in Cognitive Science}, 12(4):1115--1131.
 
-\bibitem[Dawid, 2008]{Dawid2008}
-Dawid, A.~P. (2008).
-\newblock Beware of the dag!
-\newblock In {\em JMLR: Workshop and Conference Proceedings 6: 59--86}.
+\bibitem[Dawid, 2010]{Dawid2008}
+Dawid, A.~P. (2010).
+\newblock {Beware of the DAG!}
+\newblock In Guyon, I., Janzing, D., and Schölkopf, B., editors, {\em
+  Proceedings of Workshop on Causality: Objectives and Assessment at NIPS
+  2008}, volume~6 of {\em Proceedings of Machine Learning Research}, pages
+  59--86. PMLR, Whistler, Canada.
 
 \bibitem[de~Koeijer et~al., 2020]{deKoeijer2020}
 de~Koeijer, J.~A., Sjerps, M.~J., Vergeer, P., and Berger, C.~E. (2020).
-\newblock Combining evidence in complex cases-a practical approach to
-  interdisciplinary casework.
+\newblock {Combining Evidence in Complex Cases - a Practical Approach to
+  Interdisciplinary Casework}.
 \newblock {\em Science \& Justice}, 60(1):20--29.
 
 \bibitem[{de Zoete} et~al., 2019]{deZoete2019}
 {de Zoete}, J., Fenton, N., Noguchi, T., and Lagnado, D. (2019).
-\newblock Resolving the so-called “probabilistic paradoxes in legal
-  reasoning” with bayesian networks.
+\newblock {Resolving the So-Called “Probabilistic Paradoxes in Legal
+  Reasoning” with Bayesian Networks}.
 \newblock {\em Science \& Justice}, 59(4):367--379.
 
 \bibitem[Di~Bello and Verheij, 2018]{diBelloVerheij2018}
@@ -62,58 +65,53 @@ Ducamp, G., Gonzales, C., and Wuillemin, P.-H. (2020).
 
 \bibitem[Dung, 1995]{dung1995}
 Dung, P.~M. (1995).
-\newblock On the acceptability of arguments and its fundamental role in
-  nonmonotonic reasoning, logic programming and n-person games.
+\newblock {On the Acceptability of Arguments and its Fundamental Role in
+  Nonmonotonic Reasoning, Logic Programming and N-Person Games}.
 \newblock {\em Artificial Intelligence}, 77:321--357.
 
 \bibitem[Fenton et~al., 2017]{Fenton2017}
 Fenton, N., Lagnado, D., Dahlman, C., and Neil, M. (2017).
-\newblock The opportunity prior: A simple and practical solution to the prior
-  probability problem for legal cases.
+\newblock {The Opportunity Prior: A Simple and Practical Solution to the Prior
+  Probability Problem for Legal Cases}.
 \newblock In {\em ICAIL '17}. ICAIL.
 
 \bibitem[Fenton et~al., 2012]{Fenton2012}
 Fenton, N., Neil, M., and Lagnado, D.~A. (2012).
-\newblock A general structure for legal arguments about evidence using bayesian
-  networks.
+\newblock {A General Structure for Legal Arguments About Evidence Using
+  Bayesian Networks}.
 \newblock {\em Cognitive Science}, 37(1):61--102.
 
 \bibitem[Fenton et~al., 2019]{Fenton2019}
 Fenton, N., Neil, M., Yet, B., and Lagnado, D. (2019).
-\newblock Analyzing the simonshaven case using bayesian networks.
+\newblock {Analyzing the Simonshaven Case Using Bayesian Networks}.
 \newblock {\em Topics in Cognitive Science}, 12(4):1092--1114.
 
 \bibitem[Fenton and Neil, 2013]{fentonNeil2013}
-Fenton, N.~E. and Neil, M.~D. (2013).
+Fenton, N. and Neil, M.~D. (2013).
 \newblock {\em Risk Assessment and Decision Analysis With {B}ayesian
   {N}etworks}.
 \newblock CRC Press, Boca Raton.
 
 \bibitem[Gerritsen, 2015]{Gerritsen2015}
 Gerritsen, C. (2015).
-\newblock Agent-based modelling as a research tool for criminological research.
+\newblock {Agent-Based Modelling as a Research Tool for Criminological
+  Research}.
 \newblock {\em Crime Science}, 4(1).
 
 \bibitem[Gilbert and Terna, 2000]{gilbert2000}
 Gilbert, N. and Terna, P. (2000).
-\newblock How to build and use agent-based models in social science.
+\newblock {How to Build and Use Agent-Based Models in Social Science}.
 \newblock {\em Mind \& Society}, 1(1):57--72.
 
 \bibitem[Gilbert and Troitzsch, 2005]{gilbert2005}
 Gilbert, N. and Troitzsch, K. (2005).
-\newblock {\em Simulation for the social scientist}.
+\newblock {\em {Simulation for the Social Scientist}}.
 \newblock McGraw-Hill Education (UK).
 
 \bibitem[Hamilton and Pollino, 2012]{chen2012}
 Hamilton, C.~S. and Pollino, C. (2012).
-\newblock Good practice in bayesian network modelling.
+\newblock {Good Practice in Bayesian Network Modelling}.
 \newblock {\em Environmental Modelling and Software}, 37:134--145.
-
-\bibitem[Haojie~Zhu, 2021]{Zhu2021}
-Haojie~Zhu, F.~W. (2021).
-\newblock An agent-based model for simulating urban crime with improved daily
-  routines.
-\newblock {\em Computers, Environment and Urban Systems}.
 
 \bibitem[Kadane and Schum, 1996]{kadaneSchum1996}
 Kadane, J.~B. and Schum, D.~A. (1996).
@@ -122,10 +120,10 @@ Kadane, J.~B. and Schum, D.~A. (1996).
 
 \bibitem[Kazil et~al., 2020]{mesa2020}
 Kazil, J., Masad, D., and Crooks, A. (2020).
-\newblock Utilizing python for agent-based modeling: The mesa framework.
+\newblock {Utilizing Python for Agent-Based Modeling: The Mesa Framework}.
 \newblock In Thomson, R., Bisgin, H., Dancy, C., Hyder, A., and Hussain, M.,
-  editors, {\em Social, Cultural, and Behavioral Modeling}, pages 308--317,
-  Cham. Springer International Publishing.
+  editors, {\em Social, Cultural, and Behavioral Modeling}, pages 308--317.
+  Springer International Publishing, Cham.
 
 \bibitem[Meester and Slooten, 2021]{Meester2021}
 Meester, R. and Slooten, K. (2021).
@@ -140,13 +138,14 @@ Pearl, J. (1988).
 
 \bibitem[Pennington and Hastie, 1993]{penningtonHastie1993}
 Pennington, N. and Hastie, R. (1993).
-\newblock Reasoning in explanation-based decision making.
-\newblock {\em Cognition}, 49(1--2):123--163.
+\newblock {\em Inside the Juror}, chapter {The Story Model for Juror Decision
+  Making}, pages 192--221.
+\newblock Cambridge University Press, Cambridge.
 
 \bibitem[Prakken et~al., 2013]{prakkenEtal2013}
 Prakken, H., Wyner, A., Bench-Capon, T. J.~M., and Atkinson, K. (2013).
-\newblock A formalization of argumentation schemes for legal case-based
-  reasoning in {ASPIC+}.
+\newblock {A Formalization of Argumentation Schemes for Legal Case-Based
+  Reasoning} in {ASPIC+}.
 \newblock {\em Journal of Logic and Computation}, 25(5):1141--1166.
 
 \bibitem[Russell and Norvig, 2010]{russellNorvig2010}
@@ -156,47 +155,54 @@ Russell, S. and Norvig, P. (2010).
 
 \bibitem[Schum and Martin, 1982]{schum1982}
 Schum, D.~A. and Martin, A.~W. (1982).
-\newblock Formal and empirical research on cascaded inference in jurisprudence.
-\newblock {\em Law \& Soc'y Rev.}, 17:105.
+\newblock {Formal and Empirical Research on Cascaded Inference in
+  Jurisprudence}.
+\newblock {\em Law \& Society Rev.}, 17:105.
 
-\bibitem[Timmer, 2016]{timmer2016}
-Timmer, S. (2016).
-\newblock {\em Designing and Understanding Forensic Bayesian Networks using
-  Argumentation}.
-\newblock PhD thesis, University of Utrecht.
+\bibitem[Timmer, 2017]{timmer2017}
+Timmer, S.~T. (2017).
+\newblock {\em Designing and Understanding Forensic {B}ayesian {N}etworks using
+  Argumentation. {D}issertation}.
+\newblock Utrecht University, Utrecht.
 
-\bibitem[Van Der~Gaag et~al., 2007]{gaag2007}
-Van Der~Gaag, L.~C., Renooij, S., and Coup{\'e}, V.~M. (2007).
-\newblock Sensitivity analysis of probabilistic networks.
-\newblock In {\em Advances in probabilistic graphical models}, pages 103--124.
-  Springer.
+\bibitem[van~der Gaag et~al., 2007]{gaag2007}
+van~der Gaag, L.~C., Renooij, S., and Coup{\'e}, V.~M. (2007).
+\newblock {Sensitivity Analysis of Probabilistic Networks}.
+\newblock In {\em Advances in Probabilistic Graphical Models}, pages 103--124.
+  Springer, Berlin, Heidelberg.
 
-\bibitem[van Leeuwen, 2019]{vanLeeuwen2019}
-van Leeuwen, L. (2019).
-\newblock A comparison of two hybrid methods for analysing evidential
-  reasoning.
-\newblock In {\em JURIX}.
+\bibitem[van Leeuwen and Verheij, 2019]{vanLeeuwen2019}
+van Leeuwen, L. and Verheij, B. (2019).
+\newblock {A Comparison of Two Hybrid Methods for Analysing Evidential
+  Reasoning}.
+\newblock In Araszkiewicz, M. and Rodríguez-Doncel, V., editors, {\em Legal
+  Knowledge and Information Systems: {JURIX} 2019: The Thirty-second Annual
+  Conference}, pages 53--62. IOS Press.
 
 \bibitem[Verheij et~al., 2015]{Verheij2015}
 Verheij, B., Bex, F., Timmer, S.~T., Vlek, C.~S., Meyer, J.-J.~C., Renooij, S.,
   and Prakken, H. (2015).
-\newblock Arguments, scenarios and probabilities: connections between three
-  normative frameworks for evidential reasoning.
+\newblock {Arguments, Scenarios and Probabilities: Connections Between Three
+  Normative Frameworks for Evidential Reasoning}.
 \newblock {\em Law, Probability and Risk}, 15(1):35--70.
 
 \bibitem[Vlek, 2016]{vlek2016}
-Vlek, C. (2016).
-\newblock {\em When stories and numbers meet in court}.
-\newblock PhD thesis, University of Groningen.
+Vlek, C.~S. (2016).
+\newblock {\em When Stories and Numbers Meet in Court. Constructing and
+  Explaining {B}ayesian {N}etworks for Criminal Cases with Scenarios.
+  {D}issertation}.
+\newblock University of Groningen, Groningen.
 
-\bibitem[Wagenaar et~al., 1993]{wagenaar1993}
-Wagenaar, W.~A., Van~Koppen, P.~J., and Crombag, H.~F. (1993).
-\newblock {\em Anchored narratives: The psychology of criminal evidence.}
-\newblock St Martin's Press.
+\bibitem[Wagenaar et~al., 1993]{wagenaarEtal1993}
+Wagenaar, W.~A., van Koppen, P.~J., and Crombag, H. F.~M. (1993).
+\newblock {\em {Anchored Narratives. The Psychology of Criminal Evidence}}.
+\newblock Harvester Wheatsheaf, London.
 
 \bibitem[Wieten et~al., 2019]{wieten2019}
 Wieten, R., Bex, F., Renooij, S., and Prakken, H. (2019).
-\newblock Constructing bayesian network graphs from labeled arguments.
+\newblock {Constructing Bayesian Network Graphs from Labeled Arguments}.
+\newblock In {\em European Conference on Symbolic and Quantitative Approaches
+  with Uncertainty}, pages 99--110. Springer, Cham.
 
 \bibitem[Wigmore, 1931]{wigmore1931}
 Wigmore, J.~H. (1931).
@@ -204,5 +210,11 @@ Wigmore, J.~H. (1931).
   Given by Logic, Psychology, and General Experience, and Illustrated in
   Judicial Trials, 2nd ed}.
 \newblock Little, Brown and Company, Boston (Massachusetts).
+
+\bibitem[Zhu and Wang, 2021]{Zhu2021}
+Zhu, H. and Wang, F. (2021).
+\newblock {An Agent-Based Model for Simulating Urban Crime with Improved Daily
+  Routines}.
+\newblock {\em Computers, Environment and Urban Systems}.
 
 \end{thebibliography}

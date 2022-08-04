@@ -1,22 +1,13 @@
 import pyAgrum as gum
-import copy as copy
 from Experiment import Experiment
-from BN import K2_BN, K2_BN_csv_only
-import csv
+from BN import K2_BN_csv_only
 import pandas as pd
-import math
 import numpy as np
-from collections import defaultdict
 import csv
-import random
 import os
 import matplotlib.pyplot as plt
 import itertools
 import shutil
-from colour import Color
-from CredibilityGame import CredibilityGame
-from VlekNetwork import VlekNetwork
-
 
 
 def hugin_converter(bnfilename, path):  # make the network handable in hugin with some cheats
@@ -650,11 +641,8 @@ class Analysis():
 
 
 
-### intentions
-#scenario = "CredibilityGame"
-#scenario = "GroteMarkt"
-#scenario = "StolenLaptop"
-scenario = "VlekNetwork"
+
+scenario = "GroteMarktPrivate"
 tr = 100
 train_test_split = [tr, int(tr/10)]
 
@@ -673,10 +661,10 @@ for HL_scenario in ["GroteMarktPrivate"]:
     d_G = {"subtype":2, "map": org_dir+"/experiments/GroteMarkt/maps/groteMarkt.png"}
 
 
-    runs = [1, 5, 10, 25, 50, 100, 300, 500, 750, 1000]
-    #runs = [100, 150]
-    runs = [1, 50, 100, 300, 500, 750, 1000]
-    #runs = [100]
+
+    # runs = [1, 50, 100, 300, 500, 750, 1000]
+    runs = [300, 500] # test runs
+
 
 
 

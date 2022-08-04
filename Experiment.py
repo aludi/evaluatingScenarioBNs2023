@@ -14,10 +14,10 @@ import pickle
 from Reporters import Reporters
 from SimulationTest import StolenLaptop
 import csv
-from CredibilityGame import CredibilityGame
+#from CredibilityGame import CredibilityGame
 from GroteMarkt import MoneyModel
-from VlekNetwork import VlekNetwork
-from WalkThrough import WalkThrough
+#from VlekNetwork import VlekNetwork
+#from WalkThrough import WalkThrough
 
 from CreateMap import CreateMap
 import pandas as pd

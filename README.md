@@ -9,3 +9,8 @@ Structure: Analysis.py is the main class, which can call Experiment.py, Experime
 Simulation-related: Simulation Classes, for implementing agents and such in the simulation. Also: GroteMarkt.py. CreateMap.py creates the simulation environment. Reporters.py creates the reporters.
 
 BN are created in BN.py. Manually created networks in manualBNs.
+
+Runtime instructions:
+python3 Analysis.py
+
+Automatically runs simulations of the experiment discussed in the thesis.

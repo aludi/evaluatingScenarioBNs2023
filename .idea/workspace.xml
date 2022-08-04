@@ -4,15 +4,12 @@
     <list default="true" id="98a180fb-788b-446f-9850-d8b0dc64138a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.bbl" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.bbl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.blg" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.blg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.log" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.out" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Report/ThesisFinalDraft.toc" beforeDir="false" afterPath="$PROJECT_DIR$/Report/ThesisFinalDraft.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report/masterThesisCitations.bib" beforeDir="false" afterPath="$PROJECT_DIR$/Report/masterThesisCitations.bib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report/imagesMasterThesis.key" beforeDir="false" afterPath="$PROJECT_DIR$/Report/imagesMasterThesis.key" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,13 +157,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637857692698</updated>
-    </task>
-    <task id="LOCAL-00025" summary="report updata">
-      <created>1649782215976</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1649782215976</updated>
     </task>
     <task id="LOCAL-00026" summary="report updata">
       <created>1649782322305</created>
@@ -504,7 +494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659451403692</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="updated bibliography">
+      <created>1659480423948</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1659480423949</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -521,7 +518,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added experiment support (maps, private knowledge, camera vision range) to the system." />
     <MESSAGE value="file structure" />
     <MESSAGE value="plot fiexed" />
     <MESSAGE value="added some fixed temporal and evidence node stuff" />
@@ -546,7 +542,8 @@
     <MESSAGE value="fifth final first draft" />
     <MESSAGE value="updated results" />
     <MESSAGE value="disucssion update" />
-    <option name="LAST_COMMIT_MESSAGE" value="disucssion update" />
+    <MESSAGE value="updated bibliography" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated bibliography" />
   </component>
   <component name="WindowStateProjectService">
     <state x="424" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1657883840812">
@@ -559,12 +556,12 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="728" y="333" key="#com.intellij.fileTypes.FileTypeChooser/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655572982224" />
-    <state x="464" y="123" width="480" height="656" key="CommitChangelistDialog2" timestamp="1659451402960">
-      <screen x="29" y="23" width="1251" height="777" />
+    <state x="0" y="23" width="480" height="656" key="CommitChangelistDialog2" timestamp="1659480423309">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="667" y="159" key="CommitChangelistDialog2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935097600" />
     <state x="667" y="159" width="709" height="892" key="CommitChangelistDialog2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659130333411" />
-    <state x="0" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1653733801421" />
+    <state x="0" y="23" key="CommitChangelistDialog2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659480423309" />
     <state x="667" y="159" key="CommitChangelistDialog2/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659308715074" />
     <state x="464" y="123" width="480" height="656" key="CommitChangelistDialog2/29.23.1251.777@29.23.1251.777" timestamp="1659451402960" />
     <state x="143" y="23" width="752" height="777" key="CommitChangelistDialog2/30.23.1250.777@30.23.1250.777" timestamp="1658966360924" />
@@ -661,11 +658,12 @@
     </state>
     <state x="468" y="178" key="SettingsEditor/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655386151908" />
     <state x="468" y="178" key="SettingsEditor/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1657882465794" />
-    <state x="452" y="221" key="Vcs.Push.Dialog.v2" timestamp="1659451409903">
-      <screen x="29" y="23" width="1251" height="777" />
+    <state x="649" y="292" key="Vcs.Push.Dialog.v2" timestamp="1659480434653">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1247.224.1247.777/0.23.1920.1057@0.23.1920.1057" timestamp="1655935104507" />
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1250.224.1250.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659130387203" />
+    <state x="649" y="292" key="Vcs.Push.Dialog.v2/-1251.224.1251.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659480434653" />
     <state x="649" y="293" key="Vcs.Push.Dialog.v2/-1252.224.1252.777/0.23.1920.1057@0.23.1920.1057" timestamp="1659308723115" />
     <state x="452" y="221" key="Vcs.Push.Dialog.v2/29.23.1251.777@29.23.1251.777" timestamp="1659451409903" />
     <state x="453" y="221" key="Vcs.Push.Dialog.v2/30.23.1250.777@30.23.1250.777" timestamp="1658966375351" />

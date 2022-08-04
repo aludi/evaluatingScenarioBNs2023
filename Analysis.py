@@ -662,8 +662,8 @@ for HL_scenario in ["GroteMarktPrivate"]:
 
 
 
-    # runs = [1, 50, 100, 300, 500, 750, 1000]
-    runs = [300, 500] # test runs
+    runs = [1, 50, 100, 300, 500, 750, 1000]
+
 
 
 

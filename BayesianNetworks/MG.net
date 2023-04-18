@@ -1,0 +1,249 @@
+net
+{
+    node_size = (80 40);
+    HR_realname_scn1 = "scn1";
+    HR_realname_scn2 = "scn2";
+    HR_realname_scn3 = "scn3";
+    HR_realname_constraint = "constraint";
+    HR_realname_motive_1_0 = "motive_1_0";
+    HR_realname_sneak_1_0 = "sneak_1_0";
+    HR_realname_stealing_1_0 = "stealing_1_0";
+    HR_realname_object_dropped_accidentally_0 = "object_dropped_accidentally_0";
+    HR_realname_E_psych_report_1_0 = "E_psych_report_1_0";
+    HR_realname_E_camera_1 = "E_camera_1";
+    HR_realname_E_camera_seen_stealing_1_0 = "E_camera_seen_stealing_1_0";
+    HR_realname_E_object_gone_0 = "E_object_gone_0";
+    HR_DBN_Num_Slices = "5";
+    HR_Desc = "";
+    HR_OOBN_CheckConsistency = "1";
+    HR_OOBN_FitExpand = "1";
+    HR_Zoom_ZoomFactor = "100";
+    HR_Groups_GroupColors = "";
+    HR_Groups_GroupNames = "";
+    HR_Groups_UserGroupsNo = "0";
+    HR_Utility_Link = "63";
+    HR_Probabilistic_Link = "63";
+    HR_Functional_Link = "63";
+    HR_Binding_Link = "63";
+    HR_Information_Arc = "63";
+    HR_Color_Interface = "21";
+    HR_Color_Instance = "0";
+    HR_Color_DiscreteFunction = "5";
+    HR_Color_Function = "4";
+    HR_Color_Utility = "36";
+    HR_Color_Decision = "17";
+    HR_Color_ContinuousChance = "48";
+    HR_Color_DiscreteChance = "16";
+    HR_Monitor_InitSD = "2";
+    HR_Monitor_Utility_Arrange = "0";
+    HR_Monitor_Mean_Variance = "1";
+    HR_Monitor_Chance_Utility = "1";
+    HR_Monitor_InitStates = "5";
+    HR_Monitor_OpenGraph = "0";
+    HR_Monitor_GraphPrecision = "100";
+    HR_Monitor_AutoUpdGraph = "0";
+    HR_Compile_MaxMinimalSeparators = "100000";
+    HR_Compile_ApproxEpsilon = "1.0E-5";
+    HR_Compile_Approximate = "0";
+    HR_Compile_SaveToMemory = "0";
+    HR_Compile_Compress = "0";
+    HR_Compile_TriangMethod = "0";
+    HR_Propagate_AutoNormal = "1";
+    HR_Propagate_AutoSum = "1";
+    HR_Propagate_Auto = "1";
+    HR_Font_Italic = "0";
+    HR_Font_Weight = "400";
+    HR_Font_Size = "-12";
+    HR_Font_Name = "com.apple.laf.AquaFonts$DerivedUIResourceFont[family=Lucida Grande,name=Lucida Grande,style=plain,size=13]";
+    HR_Grid_GridShow = "0";
+    HR_Grid_GridSnap = "0";
+    HR_Grid_Y = "40";
+    HR_Grid_X = "40";
+}
+
+node E_object_gone_0
+{
+    position = (352 40);
+    states = ("0" "1");
+}
+
+node E_camera_seen_stealing_1_0
+{
+    position = (252 40);
+    states = ("0" "1");
+}
+
+node E_camera_1
+{
+    position = (102 140);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[E_camera_seen_stealing_1_0:0]";
+    HR_LinkMode = "[E_camera_seen_stealing_1_0:0]";
+}
+
+node E_psych_report_1_0
+{
+    position = (542 182);
+    states = ("0" "1");
+}
+
+node object_dropped_accidentally_0
+{
+    position = (189 220);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[E_object_gone_0:0]";
+    HR_LinkMode = "[E_object_gone_0:0]";
+}
+
+node stealing_1_0
+{
+    position = (335 195);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[E_camera_seen_stealing_1_0:0][E_object_gone_0:0]";
+    HR_LinkMode = "[E_camera_seen_stealing_1_0:0][E_object_gone_0:0]";
+}
+
+node sneak_1_0
+{
+    position = (451 220);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[stealing_1_0:0]";
+    HR_LinkMode = "[stealing_1_0:0]";
+}
+
+node motive_1_0
+{
+    position = (521 285);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[sneak_1_0:0][E_psych_report_1_0:0]";
+    HR_LinkMode = "[sneak_1_0:0][E_psych_report_1_0:0]";
+}
+
+node constraint
+{
+    position = (103 340);
+    states = ("scn1" "scn2" "scn3" "NA");
+    HR_NodeSize = "(105, 39)";
+}
+
+node scn3
+{
+    position = (92 439);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[constraint:0]";
+    HR_LinkMode = "[constraint:0]";
+}
+
+node scn2
+{
+    position = (225 427);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[constraint:0][object_dropped_accidentally_0:0]";
+    HR_LinkMode = "[constraint:0][object_dropped_accidentally_0:0]";
+}
+
+node scn1
+{
+    position = (406 433);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[constraint:0][motive_1_0:0][sneak_1_0:0][stealing_1_0:0]";
+    HR_LinkMode = "[constraint:0][motive_1_0:0][sneak_1_0:0][stealing_1_0:0]";
+}
+
+potential (E_object_gone_0 | object_dropped_accidentally_0 stealing_1_0)
+{
+    data
+     = ((( 1 0 )	%  object_dropped_accidentally_0=0  stealing_1_0=0
+	 ( 0 1 ))	%  object_dropped_accidentally_0=0  stealing_1_0=1
+	(( 0 1 )	%  object_dropped_accidentally_0=1  stealing_1_0=0
+	 ( 0.5 0.5 )));	%  object_dropped_accidentally_0=1  stealing_1_0=1
+}
+
+potential (E_camera_seen_stealing_1_0 | E_camera_1 stealing_1_0)
+{
+    data
+     = ((( 1 0 )	%  E_camera_1=0  stealing_1_0=0
+	 ( 1 0 ))	%  E_camera_1=0  stealing_1_0=1
+	(( 1 0 )	%  E_camera_1=1  stealing_1_0=0
+	 ( 0.538461 0.461539 )));	%  E_camera_1=1  stealing_1_0=1
+}
+
+potential (E_camera_1)
+{
+    data = ( 0.8396 0.1604 );
+}
+
+potential (E_psych_report_1_0 | motive_1_0)
+{
+    data
+     = (( 1 0 )	%  motive_1_0=0
+	( 0.0985916 0.901408 ));	%  motive_1_0=1
+}
+
+potential (object_dropped_accidentally_0 | scn2)
+{
+    data
+     = (( 1 0 )	%  scn2=0
+	( 0 1 ));	%  scn2=1
+}
+
+potential (stealing_1_0 | sneak_1_0 scn1)
+{
+    data
+     = ((( 0.999579 0.000420743 )	%  sneak_1_0=0  scn1=0
+	 ( 0.5 0.5 ))	%  sneak_1_0=0  scn1=1
+	(( 1 0 )	%  sneak_1_0=1  scn1=0
+	 ( 0 1 )));	%  sneak_1_0=1  scn1=1
+}
+
+potential (sneak_1_0 | motive_1_0 scn1)
+{
+    data
+     = ((( 1 0 )	%  motive_1_0=0  scn1=0
+	 ( 0.5 0.5 ))	%  motive_1_0=0  scn1=1
+	(( 0.0833333 0.916667 )	%  motive_1_0=1  scn1=0
+	 ( 0 1 )));	%  motive_1_0=1  scn1=1
+}
+
+potential (motive_1_0 | scn1)
+{
+    data
+     = (( 0.994974 0.00502565 )	%  scn1=0
+	( 0 1 ));	%  scn1=1
+}
+
+potential (constraint | scn3 scn2 scn1)
+{
+    data
+     = (((( 0 0 0 1 )	%  scn3=0  scn2=0  scn1=0
+	  ( 1 0 0 0 ))	%  scn3=0  scn2=0  scn1=1
+	 (( 0 1 0 0 )	%  scn3=0  scn2=1  scn1=0
+	  ( 0 0 0 1 )))	%  scn3=0  scn2=1  scn1=1
+	((( 0 0 1 0 )	%  scn3=1  scn2=0  scn1=0
+	  ( 0 0 0 1 ))	%  scn3=1  scn2=0  scn1=1
+	 (( 0 0 0 1 )	%  scn3=1  scn2=1  scn1=0
+	  ( 0 0 0 1 ))));	%  scn3=1  scn2=1  scn1=1
+}
+
+potential (scn3)
+{
+    data = ( 0.3697 0.6303 );
+}
+
+potential (scn2)
+{
+    data = ( 0.6752 0.3248 );
+}
+
+potential (scn1)
+{
+    data = ( 0.9551 0.0449 );
+}

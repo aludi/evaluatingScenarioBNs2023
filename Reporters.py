@@ -9,7 +9,6 @@ Print these reporters on the webpage later as well.
 class Reporters():
 
     def __init__(self, relevant_events):
-        print(relevant_events)
         self.pure_frequency_event_dict = {}
         self.history_dict = {}
         self.run = 0

@@ -1,0 +1,179 @@
+net
+{
+    node_size = (80 40);
+    HR_realname_E_object_gone_0 = "E_object_gone_0";
+    HR_realname_E_camera_seen_stealing_1_0 = "E_camera_seen_stealing_1_0";
+    HR_realname_E_camera_1 = "E_camera_1";
+    HR_realname_E_psych_report_1_0 = "E_psych_report_1_0";
+    HR_realname_stealing_1_0 = "stealing_1_0";
+    HR_realname_sneak_1_0 = "sneak_1_0";
+    HR_realname_motive_1_0 = "motive_1_0";
+    HR_realname_object_dropped_accidentally_0 = "object_dropped_accidentally_0";
+    HR_DBN_Num_Slices = "5";
+    HR_Desc = "";
+    HR_OOBN_CheckConsistency = "1";
+    HR_OOBN_FitExpand = "1";
+    HR_Zoom_ZoomFactor = "100";
+    HR_Groups_GroupColors = "";
+    HR_Groups_GroupNames = "";
+    HR_Groups_UserGroupsNo = "0";
+    HR_Utility_Link = "63";
+    HR_Probabilistic_Link = "63";
+    HR_Functional_Link = "63";
+    HR_Binding_Link = "63";
+    HR_Information_Arc = "63";
+    HR_Color_Interface = "21";
+    HR_Color_Instance = "0";
+    HR_Color_DiscreteFunction = "5";
+    HR_Color_Function = "4";
+    HR_Color_Utility = "36";
+    HR_Color_Decision = "17";
+    HR_Color_ContinuousChance = "48";
+    HR_Color_DiscreteChance = "16";
+    HR_Monitor_InitSD = "2";
+    HR_Monitor_Utility_Arrange = "0";
+    HR_Monitor_Mean_Variance = "1";
+    HR_Monitor_Chance_Utility = "1";
+    HR_Monitor_InitStates = "5";
+    HR_Monitor_OpenGraph = "0";
+    HR_Monitor_GraphPrecision = "100";
+    HR_Monitor_AutoUpdGraph = "0";
+    HR_Compile_MaxMinimalSeparators = "100000";
+    HR_Compile_ApproxEpsilon = "1.0E-5";
+    HR_Compile_Approximate = "0";
+    HR_Compile_SaveToMemory = "0";
+    HR_Compile_Compress = "0";
+    HR_Compile_TriangMethod = "0";
+    HR_Propagate_AutoNormal = "1";
+    HR_Propagate_AutoSum = "1";
+    HR_Propagate_Auto = "1";
+    HR_Font_Italic = "0";
+    HR_Font_Weight = "400";
+    HR_Font_Size = "-12";
+    HR_Font_Name = "com.apple.laf.AquaFonts$DerivedUIResourceFont[family=Lucida Grande,name=Lucida Grande,style=plain,size=13]";
+    HR_Grid_GridShow = "0";
+    HR_Grid_GridSnap = "0";
+    HR_Grid_Y = "40";
+    HR_Grid_X = "40";
+}
+
+node object_dropped_accidentally_0
+{
+    position = (250 140);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[E_object_gone_0:0]";
+    HR_LinkMode = "[E_object_gone_0:0]";
+}
+
+node motive_1_0
+{
+    position = (200 340);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[E_psych_report_1_0:0][stealing_1_0:0][sneak_1_0:0]";
+    HR_LinkMode = "[E_psych_report_1_0:0][stealing_1_0:0][sneak_1_0:0]";
+}
+
+node sneak_1_0
+{
+    position = (300 240);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[object_dropped_accidentally_0:0]";
+    HR_LinkMode = "[object_dropped_accidentally_0:0]";
+}
+
+node stealing_1_0
+{
+    position = (200 240);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[E_object_gone_0:0][E_camera_seen_stealing_1_0:0][object_dropped_accidentally_0:0]";
+    HR_LinkMode = "[E_object_gone_0:0][E_camera_seen_stealing_1_0:0][object_dropped_accidentally_0:0]";
+}
+
+node E_psych_report_1_0
+{
+    position = (100 240);
+    states = ("0" "1");
+}
+
+node E_camera_1
+{
+    position = (150 40);
+    states = ("0" "1");
+}
+
+node E_camera_seen_stealing_1_0
+{
+    position = (150 140);
+    states = ("0" "1");
+    HR_LinkControlPoints = "";
+    HR_LinkGroup = "[E_camera_1:0]";
+    HR_LinkMode = "[E_camera_1:0]";
+}
+
+node E_object_gone_0
+{
+    position = (250 40);
+    states = ("0" "1");
+}
+
+potential (object_dropped_accidentally_0 | sneak_1_0 stealing_1_0)
+{
+    data
+     = ((( 0.663095 0.336905 )	%  sneak_1_0=0  stealing_1_0=0
+	 ( 1 0 ))	%  sneak_1_0=0  stealing_1_0=1
+	(( 0.389873 0.610127 )	%  sneak_1_0=1  stealing_1_0=0
+	 ( 1 0 )));	%  sneak_1_0=1  stealing_1_0=1
+}
+
+potential (motive_1_0)
+{
+    data = ( 0.95189 0.04811 );
+}
+
+potential (sneak_1_0 | motive_1_0)
+{
+    data
+     = (( 1 0 )	%  motive_1_0=0
+	( 0.00519643 0.994804 ));	%  motive_1_0=1
+}
+
+potential (stealing_1_0 | motive_1_0)
+{
+    data
+     = (( 1 0 )	%  motive_1_0=0
+	( 0.0823114 0.917689 ));	%  motive_1_0=1
+}
+
+potential (E_psych_report_1_0 | motive_1_0)
+{
+    data
+     = (( 1 0 )	%  motive_1_0=0
+	( 0.104344 0.895656 ));	%  motive_1_0=1
+}
+
+potential (E_camera_1 | E_camera_seen_stealing_1_0)
+{
+    data
+     = (( 0.841984 0.158016 )	%  E_camera_seen_stealing_1_0=0
+	( 0 1 ));	%  E_camera_seen_stealing_1_0=1
+}
+
+potential (E_camera_seen_stealing_1_0 | stealing_1_0)
+{
+    data
+     = (( 1 0 )	%  stealing_1_0=0
+	( 0.885844 0.114156 ));	%  stealing_1_0=1
+}
+
+potential (E_object_gone_0 | object_dropped_accidentally_0 stealing_1_0)
+{
+    data
+     = ((( 1 0 )	%  object_dropped_accidentally_0=0  stealing_1_0=0
+	 ( 0 1 ))	%  object_dropped_accidentally_0=0  stealing_1_0=1
+	(( 0 1 )	%  object_dropped_accidentally_0=1  stealing_1_0=0
+	 ( 0.5 0.5 )));	%  object_dropped_accidentally_0=1  stealing_1_0=1
+}

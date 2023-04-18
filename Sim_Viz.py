@@ -1,5 +1,5 @@
 from SimulationTest import *
-from GroteMarkt import MoneyModel
+from GroteMarkt import GroteMarktModel
 from CreateMap import CreateMap
 
 import pyAgrum as gum
@@ -25,7 +25,6 @@ from SimulationClasses.Vision import Vision
 from SimulationClasses.Goodie import Goodie
 from SimulationClasses.Camera import Camera, SecurityCamera
 
-from CaseModel import CaseModel
 
 from Reporters import Reporters
 
@@ -251,84 +250,42 @@ class ScenarioDescription(TextElement):
     def render(self, model):
         return model.model_description
 
-class ViewCaseModel(TextElement):
-    def render(self, model):
-        c = CaseModel(model.output_file)
-        return c.get_case_model()
 
 
 
 
 
-sim =1
-if sim == 0:
-    rel_events = ["lost_object", "know_object", "target_object", "motive", "compromise_house",
-                                        "flees_startled", "successful_stolen", "raining", "curtains",
-                                        "E_object_is_gone",
-                                        "E_broken_lock",
-                                        "E_disturbed_house",
-                                        "E_s_spotted_by_house",
-                                        "E_s_spotted_with_goodie",
-                                        "E_private"]
+# params from map making
+# y = 45
+# x = int(y*1.5)
+rel_events = []
+n = 5
+y = 20
+coverage = None
+topic_gen = os.getcwd() + "/groteMarkt.png"
+C = CreateMap(topic_gen, coverage, y)
+x = int(y*C.rel)
 
-    grid = CanvasGrid(agent_portrayal, 16, 9, 400*1.7, 400)
-    text = Test()
-    cm = ViewCaseModel()
-    new_reporters = Reporters(rel_events)
-    server = ModularServer(StolenLaptop,
-                           [grid, text],
-                           "Stolen Laptop",
-                           {"N_agents":2, "N_houses":2, "width":16, "height":9,"camera_vision": 2, "reporters":new_reporters, "output_file":"StolenLaptopOutcomes.csv"})
-elif sim == 1:
+grid = WorkaroundCanvas(agent_portrayal1, x, y, int((C.rel)*500), 500)
+model_params = {"N": n,
+    "scenario" : UserSettableParameter(
+        "slider",
+        "Scenario",
+        2,  # actual value
+        1,  # min value
+        4,  # max value
+        1,  # step size
+      description="what scenario do you want to investigate?",
 
+    ),
 
+    "width": x, "height": y, "topic":topic_gen, "reporters": None, "output_file":"GroteMarktOutcomes.csv", "torus":False}
 
-    # params from map making
-    # y = 45
-    # x = int(y*1.5)
-    rel_events = []
-    n = 5
+text = Test()
+model_text = ScenarioDescription()
 
-
-
-    y = 20
-    coverage = None
-    topic_gen = os.getcwd() + "/experiments/GroteMarkt/maps/groteMarkt.png"
-    C = CreateMap(topic_gen, coverage, y)
-    x = int(y*C.rel)
-    cm = ViewCaseModel()
-
-    grid = WorkaroundCanvas(agent_portrayal1, x, y, int((C.rel)*500), 500)
-    model_params = {"N": n,
-        "scenario" : UserSettableParameter(
-            "slider",
-            "Scenario",
-            2,  # actual value
-            1,  # min value
-            4,  # max value
-            1,  # step size
-          description="what scenario do you want to investigate?",
-
-        ),
-
-        "width": x, "height": y, "topic":topic_gen, "reporters": None, "output_file":"GroteMarktOutcomes.csv", "torus":False}
-
-
-
-
-    text = Test()
-    #cm = ViewCaseModel()
-    model_text = ScenarioDescription()
-
-
-    #bnPic = Image("imgBNGroteMarkt.png", 250, 500, 250, 500)
-    server = ModularServer(MoneyModel, [model_text, grid, text], "Grote Markt", model_params)   #we're making a case model from previous data!!
-
-    # todo: case model does not change with scenario!! This is because cm is generated from the csv source file
-    # which is not the same as the scenario that is run online. So generate different csvs for each subscenario
-    # so that we can have the right case model per subscenario.
-
-
+#bnPic = Image("imgBNGroteMarkt.png", 250, 500, 250, 500)
+server = ModularServer(GroteMarktModel, [model_text, grid, text], "Grote Markt", model_params)   #we're making a case model from previous data!!
 
 
 

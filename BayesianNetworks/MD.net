@@ -1,0 +1,156 @@
+
+net {
+node_size = (80 40);
+}
+
+node E_object_gone_0 {
+states = ("0" "1");
+   label = "E_object_gone_0";
+   ID = "E_object_gone_0";
+}
+
+node E_camera_seen_stealing_1_0 {
+states = ("0" "1");
+   label = "E_camera_seen_stealing_1_0";
+   ID = "E_camera_seen_stealing_1_0";
+}
+
+node E_camera_1 {
+states = ("0" "1");
+   label = "E_camera_1";
+   ID = "E_camera_1";
+}
+
+node E_psych_report_1_0 {
+states = ("0" "1");
+   label = "E_psych_report_1_0";
+   ID = "E_psych_report_1_0";
+}
+
+node object_dropped_accidentally_0 {
+states = ("0" "1");
+   label = "object_dropped_accidentally_0";
+   ID = "object_dropped_accidentally_0";
+}
+
+node stealing_1_0 {
+states = ("0" "1");
+   label = "stealing_1_0";
+   ID = "stealing_1_0";
+}
+
+node sneak_1_0 {
+states = ("0" "1");
+   label = "sneak_1_0";
+   ID = "sneak_1_0";
+}
+
+node motive_1_0 {
+states = ("0" "1");
+   label = "motive_1_0";
+   ID = "motive_1_0";
+}
+
+node constraint {
+   states = ("scn1" "scn2" "scn3" "NA" );
+   label = "constraint";
+   ID = "constraint";
+}
+
+node scn3 {
+states = ("0" "1");
+   label = "scn3";
+   ID = "scn3";
+}
+
+node scn2 {
+states = ("0" "1");
+   label = "scn2";
+   ID = "scn2";
+}
+
+node scn1 {
+states = ("0" "1");
+   label = "scn1";
+   ID = "scn1";
+}
+
+potential ( E_object_gone_0 | stealing_1_0   object_dropped_accidentally_0   ) {
+   data = 
+   (((   1   0)   % object_dropped_accidentally_0=0   stealing_1_0=0   
+   (   0   1))   % object_dropped_accidentally_0=1   stealing_1_0=0   
+   ((   0   1)   % object_dropped_accidentally_0=0   stealing_1_0=1   
+   (   0.5   0.5)));   % object_dropped_accidentally_0=1   stealing_1_0=1   
+}
+
+potential ( E_camera_seen_stealing_1_0 | stealing_1_0   E_camera_1   ) {
+   data = 
+   (((   1   0)   % E_camera_1=0   stealing_1_0=0   
+   (   1   0))   % E_camera_1=1   stealing_1_0=0   
+   ((   1   0)   % E_camera_1=0   stealing_1_0=1   
+   (   0.5   0.5)));   % E_camera_1=1   stealing_1_0=1   
+}
+
+potential (E_camera_1) {
+   data = (  0.75 0.25);
+}
+
+potential ( E_psych_report_1_0 | motive_1_0   ) {
+   data = 
+   ((   1   0)   % motive_1_0=0   
+   (   0.01   0.99));   % motive_1_0=1   
+}
+
+potential ( object_dropped_accidentally_0 | scn2   ) {
+   data = 
+   ((   1   0)   % scn2=0   
+   (   0   1));   % scn2=1   
+}
+
+potential ( stealing_1_0 | scn1   sneak_1_0   ) {
+   data = 
+   (((   1   0)   % sneak_1_0=0   scn1=0   
+   (   1   0))   % sneak_1_0=1   scn1=0   
+   ((   0.5   0.5)   % sneak_1_0=0   scn1=1   
+   (   0   1)));   % sneak_1_0=1   scn1=1   
+}
+
+potential ( sneak_1_0 | scn1   motive_1_0   ) {
+   data = 
+   (((   1   0)   % motive_1_0=0   scn1=0   
+   (   0.01   0.99))   % motive_1_0=1   scn1=0   
+   ((   0.5   0.5)   % motive_1_0=0   scn1=1   
+   (   0   1)));   % motive_1_0=1   scn1=1   
+}
+
+potential ( motive_1_0 | scn1   ) {
+   data = 
+   ((   0.99   0.01)   % scn1=0   
+   (   0   1));   % scn1=1   
+}
+
+potential ( constraint | scn1   scn2   scn3   ) {
+   data = 
+   ((((   0   0   0   1)   % scn3=0   scn2=0   scn1=0   
+   (   0   0   1   0))   % scn3=1   scn2=0   scn1=0   
+   ((   0   1   0   0)   % scn3=0   scn2=1   scn1=0   
+   (   0   0   0   1)))   % scn3=1   scn2=1   scn1=0   
+   (((   1   0   0   0)   % scn3=0   scn2=0   scn1=1   
+   (   0   0   0   1))   % scn3=1   scn2=0   scn1=1   
+   ((   0   0   0   1)   % scn3=0   scn2=1   scn1=1   
+   (   0   0   0   1))));   % scn3=1   scn2=1   scn1=1   
+}
+
+potential (scn3) {
+   data = (  0.25 0.75);
+}
+
+potential (scn2) {
+   data = (  0.75 0.25);
+}
+
+potential (scn1) {
+   data = (  0.99 0.01);
+}
+
+

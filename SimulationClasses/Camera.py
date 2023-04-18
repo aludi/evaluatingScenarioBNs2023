@@ -74,7 +74,7 @@ class SecurityCamera(Agent):
 
             # we might see the thief steal
             #print(thief.steal_state)
-            if thief.steal_state == "STEALING" and victim.state != "GOAL":
+            if thief.steal_state == "STEALING" and victim.state != "GOAL" and victim.value_of_good != -1:
                 #print("stealing")
                 self.model.reporters.increase_evidence_counter_once(
                     f"E_camera_seen_stealing_{str(thief.unique_id)}_{str(victim.unique_id)}")

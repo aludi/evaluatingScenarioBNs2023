@@ -150,9 +150,12 @@ class MoneyAgent(Agent):
                 self.state = "FAST MOVE TO GOAL"
                 #print("stealing")
                 if self.target is not None:
-                    if self.target.steal_state == "DONE":
+                    if self.target.steal_state == "DONE" or self.target.value_of_good == -1:
+                        if self.target.value_of_good != -1:
+                            self.model.reporters.set_evidence_straight(f"E_object_gone_0", 0)
                         self.target = None
                         self.steal_state = "N"
+                        self.model.reporters.set_evidence_straight(f"E_camera_seen_stealing_1_0", 0)  # catching fail condition
 
                     if self.target is not None:
                         if self.target.value_of_good >= self.risk_threshold: # the agent might have been robbed before you got there
@@ -164,6 +167,10 @@ class MoneyAgent(Agent):
                             self.steal_state = "SUCCESS"
                         else:
                             self.steal_state = "N"
+                            self.model.reporters.set_evidence_straight(f"E_object_gone_0", 0)
+                            self.model.reporters.set_evidence_straight(f"E_camera_seen_stealing_1_0", 0) # catching fail condition
+
+
 
             if self.steal_state == "SNEAK":
                 self.model.reporters.set_evidence_straight(f"sneak_{str(self.unique_id)}_0", 1)
@@ -226,7 +233,8 @@ class MoneyAgent(Agent):
                     if self.unique_id == 1:
                         if self.calculate_line_of_sight(agent) == "UNSEEN":
                             continue
-
+                        print(self.model.reporters)
+                        print(self.model.reporters.pure_frequency_event_dict)
 
                         self.model.reporters.set_evidence_straight(f"seen_{str(self.unique_id)}_{str(agent.unique_id)}", 1)
 
@@ -451,13 +459,13 @@ class BN(Agent):
 
 
 
-class MoneyModel(Model):
+class GroteMarktModel(Model):
     """A model with some number of agents."""
 
     def __init__(self, N, width, height, topic, reporters, scenario, output_file, torus=False):
         self.current_id = 0
         scenario = 2
-        self.num_agents = N
+        self.num_agents = N  # hardcoded with scenario
         self.topic = topic
         self.grid = MultiGrid(width, height, torus)
         self.extended_grid, self.accessible_list = self.make_extended_grid(width, height)
@@ -467,7 +475,6 @@ class MoneyModel(Model):
         self.model_description = self.set_model_text_explanation()
         self.output_file = output_file
         #print("num agents", N)
-
         # Create agents
         self.create_agents(self.scenario)
 

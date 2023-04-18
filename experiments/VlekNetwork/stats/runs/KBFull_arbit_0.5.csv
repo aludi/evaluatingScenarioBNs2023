@@ -1,6 +1,0 @@
-jane_stabs_mark_with_knife,mark_falls_on_knife,mark_hits_jane,mark_dies_by_accident,mark_dies,jane_drops_knife,jane_has_knife,jane_threatens_mark_with_knife,jane_and_mark_fight,nameoutput,output,network_output,matching,RMS,prediction
-0,0,0,0,0,0,1,0,0,jane_threatens_mark_with_knife,0,0.0,1,0.0,0.0
-0,0,0,0,0,0,0,0,0,mark_dies_by_accident,0,0.0,1,0.0,0.0
-0,0,0,0,0,0,0,0,0,mark_hits_jane,0,0.0,1,0.0,0.0
-0,0,0,0,0,0,1,0,0,jane_threatens_mark_with_knife,0,0.0,1,0.0,0.0
-0,0,0,0,0,0,1,0,0,mark_dies_by_accident,0,0.0,1,0.0,0.0

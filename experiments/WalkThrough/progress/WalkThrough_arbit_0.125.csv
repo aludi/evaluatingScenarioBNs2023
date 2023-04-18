@@ -1,6 +1,0 @@
-evidence,posterior,posterior_name,param_num,param_name
-No evidence,0.24,mark_dies,arbit,0.125
-"('E_neighbor', 1)",0.26,mark_dies,arbit,0.125
-"('E_prints', 1)",0.37,mark_dies,arbit,0.125
-"('E_stab_wounds', 1)",0.37,mark_dies,arbit,0.125
-"('E_forensic', 1)",0.98,mark_dies,arbit,0.125

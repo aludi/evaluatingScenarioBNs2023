@@ -1,9 +1,0 @@
-evidence,posterior,posterior_name,param_num,param_name
-No evidence,0.04,stealing_1_0,arbit,0.125
-"('E_valuable_1_0', 1)",0.38,stealing_1_0,arbit,0.125
-"('E_vulnerable_1_0', 1)",0.81,stealing_1_0,arbit,0.125
-"('E_psych_report_1_0', 1)",0.81,stealing_1_0,arbit,0.125
-"('E_camera_1', 1)",0.81,stealing_1_0,arbit,0.125
-"('E_sneak_1_0', 1)",1.0,stealing_1_0,arbit,0.125
-"('E_camera_seen_stealing_1_0', 1)",1.0,stealing_1_0,arbit,0.125
-"('E_object_gone_0', 1)",1.0,stealing_1_0,arbit,0.125

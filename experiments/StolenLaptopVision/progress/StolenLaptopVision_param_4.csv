@@ -1,8 +1,0 @@
-evidence,posterior,posterior_name,param_num,param_name
-No evidence,0.05,successful_stolen,param,4
-"('E_object_is_gone', 1)",0.18,successful_stolen,param,4
-"('E_broken_lock', 1)",0.55,successful_stolen,param,4
-"('E_disturbed_house', 1)",0.55,successful_stolen,param,4
-"('E_s_spotted_by_house', 1)",0.55,successful_stolen,param,4
-"('E_s_spotted_with_goodie', 1)",0.61,successful_stolen,param,4
-"('E_private', 0)",1.0,successful_stolen,param,4

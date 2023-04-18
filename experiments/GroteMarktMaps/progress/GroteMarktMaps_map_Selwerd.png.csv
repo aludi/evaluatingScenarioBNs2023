@@ -1,6 +1,0 @@
-evidence,posterior,posterior_name,param_num,param_name
-No evidence,0.17,stealing_1_0,map,Selwerd.png
-"('E_camera_1', 1)",0.18,stealing_1_0,map,Selwerd.png
-"('E_object_gone_0', 1)",0.56,stealing_1_0,map,Selwerd.png
-"('E_psych_report_1_0', 1)",0.97,stealing_1_0,map,Selwerd.png
-"('E_camera_sees_object_1_0', 1)",1.0,stealing_1_0,map,Selwerd.png

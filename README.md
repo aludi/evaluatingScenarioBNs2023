@@ -3,7 +3,7 @@
 
 
 
-# the simulation #
+# The simulation #
 
 Simulation Classes, for implementing agents and such in the simulation. Read MESA documentation for more information about the classes and functions.  Main model: GroteMarkt.py. CreateMap.py creates the simulation environment. Reporters.py creates the reporters.
 
